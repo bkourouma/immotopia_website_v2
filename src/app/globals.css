@@ -1,26 +1,137 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-bricolage), var(--font-inter), ui-sans-serif, sans-serif;
+
+  --color-ink-950: #05070f;
+  --color-ink-900: #0a0e1c;
+  --color-ink-800: #111729;
+  --color-ink-700: #1b2238;
+  --color-ink-600: #2a3350;
+
+  --color-brand-300: #b3b3ff;
+  --color-brand-400: #8b8bff;
+  --color-brand-500: #5b5bf7;
+  --color-brand-600: #4338e0;
+
+  --color-sun-400: #ffa665;
+  --color-sun-500: #ff8a3d;
+  --color-mint-400: #2ee6a8;
+
+  --color-paper: #f7f7fb;
+
+  --animate-marquee: marquee 38s linear infinite;
+  --animate-spin-slow: spin 6s linear infinite;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+@keyframes marquee {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-50%, 0, 0); }
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 88px;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-paper);
+  color: var(--color-ink-900);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--color-brand-500);
+  color: white;
+}
+
+/* Reflet qui balaie un bouton au survol */
+.shine {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.shine::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(110deg, transparent 30%, rgba(255, 255, 255, 0.45) 50%, transparent 70%);
+  transform: translateX(-120%);
+  transition: transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.shine:hover::after {
+  transform: translateX(120%);
+}
+
+/* Carte avec halo lumineux qui suit la souris (variables --mx / --my posées en JS) */
+.spotlight {
+  position: relative;
+  isolation: isolate;
+}
+.spotlight::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.35s;
+  background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), var(--spot, rgba(91, 91, 247, 0.18)), transparent 60%);
+}
+.spotlight:hover::before {
+  opacity: 1;
+}
+
+.mask-fade-x {
+  mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
+}
+
+.grid-lines {
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+.text-gradient {
+  background: linear-gradient(100deg, #fff 10%, var(--color-brand-300) 55%, var(--color-sun-400) 95%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.text-gradient-dark {
+  background: linear-gradient(100deg, var(--color-brand-600) 0%, var(--color-brand-500) 45%, var(--color-sun-500) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Bordure animée de l'offre recommandée */
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+.glow-border {
+  background:
+    linear-gradient(var(--color-ink-900), var(--color-ink-900)) padding-box,
+    conic-gradient(from var(--angle), var(--color-brand-500), var(--color-sun-500), var(--color-mint-400), var(--color-brand-500)) border-box;
+  border: 1.5px solid transparent;
+  animation: rotate-angle 5s linear infinite;
+}
+@keyframes rotate-angle {
+  to { --angle: 360deg; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
 }
