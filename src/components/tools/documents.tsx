@@ -81,7 +81,7 @@ export function ReceiptGenerator() {
   return (
     <Layout
       doc={{ filename: `quittance-${slug(tenant)}-${period}.pdf`, blocks }}
-      upsell="Avec ImmoTopia, chaque paiement Mobile Money génère et envoie la quittance automatiquement."
+      upsell="Avec ImmoTopia, quittances et reçus sont générés depuis vos propres modèles et numérotés automatiquement."
       form={
         <>
           <Card title="Les parties">
@@ -193,7 +193,7 @@ export function ResidentialLeaseGenerator() {
   return (
     <Layout
       doc={{ filename: `bail-habitation-${slug(tenant)}.pdf`, blocks }}
-      upsell="Dans ImmoTopia, le bail est généré, signé numériquement et relié aux loyers, quittances et relances."
+      upsell="Dans ImmoTopia, chaque bail génère son échéancier, ses rappels de loyer et ses documents."
       form={
         <>
           <Card title="Les parties">
@@ -301,7 +301,7 @@ export function CommercialLeaseGenerator() {
   return (
     <Layout
       doc={{ filename: `bail-commercial-${slug(tenant)}.pdf`, blocks }}
-      upsell="Gérez vos baux commerciaux, révisions triennales et échéances dans ImmoTopia, avec alertes automatiques."
+      upsell="Suivez vos baux et leurs échéances dans ImmoTopia, avec un rappel automatique avant leur terme."
       form={
         <>
           <Card title="Les parties">

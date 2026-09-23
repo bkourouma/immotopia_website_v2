@@ -1,4 +1,5 @@
 // Tout le texte du site est centralisé ici pour pouvoir être modifié sans toucher aux composants.
+// Règle éditoriale : n'annoncer que des fonctions disponibles en production.
 
 export type MockupKind =
   | "payments"
@@ -26,22 +27,22 @@ export type HeroCard = {
 export const heroCards: HeroCard[] = [
   {
     id: "payments",
-    eyebrow: "Encaissements automatisés",
-    title: "Laissez les loyers venir à vous.",
+    eyebrow: "Loyers et encaissements",
+    title: "Chaque loyer suivi, du rappel à la quittance.",
     description:
-      "Finies les saisies manuelles. ImmoTopia intègre le Mobile Money (Wave, CinetPay) et rapproche chaque versement au bon dossier en temps réel.",
-    cta: "Découvrir le rapprochement",
-    href: "#ecosysteme",
+      "Échéances générées depuis le bail, paiements enregistrés par moyen de règlement (espèces, virement, Wave, Orange Money, MTN, Moov) et déclarations des locataires validées en un clic.",
+    cta: "Découvrir la gestion locative",
+    href: "#roles-comptable",
     image: "/images/hero/paiements.jpg",
     imageAlt: "Jeune femme souriante réglant son loyer sur smartphone, sur un balcon d'Abidjan",
     accent: "#2EE6A8",
   },
   {
     id: "owners",
-    eyebrow: "Gestion des mandants",
+    eyebrow: "Relation propriétaires",
     title: "Une transparence qui fidélise vos propriétaires.",
     description:
-      "Générez vos relevés de gérance sans ouvrir Excel. L'ERP calcule automatiquement vos commissions et prépare le net à reverser.",
+      "Relevés de gérance par période et portail propriétaire : loyers encaissés, revenus, dépôts de garantie et tickets en cours, consultables à tout moment.",
     cta: "Voir l'espace propriétaire",
     href: "#roles-directeur",
     image: "/images/hero/proprietaires.jpg",
@@ -50,14 +51,14 @@ export const heroCards: HeroCard[] = [
   },
   {
     id: "accounting",
-    eyebrow: "Contrôle financier & OHADA",
-    title: "Sécurisez votre trésorerie, certifiez vos comptes.",
+    eyebrow: "Pilotage",
+    title: "Toute votre activité, d'un coup d'œil.",
     description:
-      "Maîtrisez vos flux grâce aux clôtures de caisse physiques. Séparez les fonds de tiers pour une comptabilité conforme.",
-    cta: "Explorer la comptabilité",
-    href: "#roles-comptable",
+      "Impayés, encaissements du mois face à l'objectif, taux d'occupation et file « À traiter aujourd'hui » : chaque rôle voit l'essentiel dès la connexion.",
+    cta: "Découvrir le tableau de bord",
+    href: "#roles-directeur",
     image: "/images/hero/comptabilite.jpg",
-    imageAlt: "Comptable travaillant devant un double écran de tableaux de bord",
+    imageAlt: "Collaboratrice analysant les tableaux de bord de l'agence sur deux écrans",
     accent: "#38BDF8",
   },
   {
@@ -65,7 +66,7 @@ export const heroCards: HeroCard[] = [
     eyebrow: "L'ERP tout-en-un",
     title: "Toute votre agence sur un seul écran.",
     description:
-      "Centralisez l'intégralité de votre activité sur une plateforme rapide, fluide et accessible de n'importe où.",
+      "Biens, baux, encaissements, CRM, syndic, maintenance et communication sur une plateforme rapide, accessible depuis un navigateur, sur ordinateur comme sur mobile.",
     cta: "Découvrir la suite complète",
     href: "#ecosysteme",
     image: "/images/hero/tout-en-un.jpg",
@@ -77,7 +78,7 @@ export const heroCards: HeroCard[] = [
     eyebrow: "CRM & relation client",
     title: "Convertissez chaque contact en opportunité.",
     description:
-      "Centralisez vos prospects et organisez vos visites. Ne ratez aucune affaire grâce au pipeline commercial visuel.",
+      "Centralisez vos prospects et organisez vos visites. Ne ratez aucune affaire grâce au pipeline commercial visuel et au rapprochement entre besoins et biens disponibles.",
     cta: "Explorer le CRM",
     href: "#roles-agent",
     image: "/images/hero/crm.jpg",
@@ -90,7 +91,7 @@ export const heroCards: HeroCard[] = [
     eyebrow: "Gestion de syndic",
     title: "La copropriété gérée d'une main de maître.",
     description:
-      "Automatisez la répartition des charges, suivez les tickets d'intervention et gérez votre comptabilité en partie double.",
+      "Budgets et appels de charges par lot selon les tantièmes, relances des impayés, assemblées générales avec votes et quorum, comptabilité de copropriété.",
     cta: "Découvrir le module Syndic",
     href: "#tarifs",
     image: "/images/hero/syndic.jpg",
@@ -100,28 +101,29 @@ export const heroCards: HeroCard[] = [
   },
   {
     id: "commissions",
-    eyebrow: "Répartition des commissions",
-    title: "Une rémunération transparente pour des équipes motivées.",
+    eyebrow: "E-mail & WhatsApp",
+    title: "Des rappels qui partent tout seuls.",
     description:
-      "Paramétrez vos règles de partage entre l'agence et vos apporteurs d'affaires, et laissez l'ERP calculer les primes en temps réel.",
-    cta: "Voir le calcul des commissions",
-    href: "#roles-directeur",
+      "Rappels d'échéance, confirmations de paiement, baux arrivant à terme : locataires et propriétaires sont prévenus par e-mail ou WhatsApp, selon leurs préférences.",
+    cta: "Voir les rappels automatiques",
+    href: "#ecosysteme",
     image: "/images/hero/commissions.jpg",
-    imageAlt: "Équipe commerciale célébrant la signature d'un contrat",
+    imageAlt: "Équipe d'agence souriante, libérée des relances manuelles",
     imageClass: "object-bottom",
     accent: "#A78BFA",
   },
 ];
 
+// Bandeau : moyens de paiement suivis dans l'application et canaux réellement intégrés
 export const partners = [
   { name: "Wave", color: "#1DC8FF" },
-  { name: "CinetPay", color: "#20C997" },
   { name: "Orange Money", color: "#FF7900" },
   { name: "MTN MoMo", color: "#FFCB05" },
-  { name: "Conforme SYSCOHADA", color: "#5B5BF7", badge: true },
-  { name: "WhatsApp Business", color: "#25D366" },
-  { name: "Droit OHADA", color: "#2EE6A8", badge: true },
-  { name: "API & Webhooks", color: "#A78BFA", badge: true },
+  { name: "Moov Money", color: "#0066B3" },
+  { name: "WhatsApp", color: "#25D366" },
+  { name: "Portails propriétaire & locataire", color: "#5B5BF7", badge: true },
+  { name: "Newsletter & e-mail", color: "#FF8A3D", badge: true },
+  { name: "Rôles & journal d'audit", color: "#2EE6A8", badge: true },
 ];
 
 export type RoleId = "directeur" | "comptable" | "agent";
@@ -138,23 +140,23 @@ export const roles: {
     label: "Directeur d'agence",
     headline: "Pilotez la croissance, même à distance.",
     pitch:
-      "Tableaux de bord en temps réel, validation des clôtures de caisse depuis votre téléphone et calcul automatique des commissions pour motiver vos équipes.",
+      "Un tableau de bord qui va à l'essentiel : impayés, encaissements du mois face à l'objectif, taux d'occupation et file de travail du jour. Des droits par rôle et un journal d'audit pour garder le contrôle.",
     features: [
-      { title: "Validation à distance", text: "Approuvez clôtures et décaissements en un geste." },
-      { title: "Commissions automatiques", text: "Règles agence / agents / apporteurs paramétrables." },
-      { title: "Relevés propriétaires", text: "Net à reverser calculé et prêt à envoyer." },
+      { title: "Tableau de bord", text: "Impayés, encaissé du mois, occupation, en un écran." },
+      { title: "Rôles et permissions", text: "Chacun voit uniquement ce qui le concerne." },
+      { title: "Journal d'audit", text: "Qui a fait quoi, quand, sur quelle donnée." },
     ],
   },
   {
     id: "comptable",
     label: "Comptable",
-    headline: "Des comptes justes, sans ressaisie.",
+    headline: "Des loyers suivis sans ressaisie.",
     pitch:
-      "Chaque encaissement génère ses écritures. Les fonds de tiers restent strictement séparés et vos exports sont conformes SYSCOHADA.",
+      "Les échéances sont générées depuis les baux, chaque paiement est affecté à ses échéances, les pénalités de retard se calculent seules et chaque dépôt de garantie est tracé. Côté syndic, une comptabilité de copropriété complète.",
     features: [
-      { title: "Écritures automatiques", text: "Journal alimenté à chaque paiement Mobile Money." },
-      { title: "Fonds de tiers séparés", text: "Comptes mandants isolés de la trésorerie agence." },
-      { title: "Exports OHADA", text: "Balance, grand livre et journaux en un clic." },
+      { title: "Échéances et paiements", text: "Statut, reste à encaisser, historique par locataire." },
+      { title: "Pénalités automatiques", text: "Montant fixe ou pourcentage, avec délai de grâce." },
+      { title: "Comptabilité syndic", text: "Journaux, grand livre et balance de copropriété." },
     ],
   },
   {
@@ -162,10 +164,10 @@ export const roles: {
     label: "Agent commercial",
     headline: "Toute l'agence dans votre poche.",
     pitch:
-      "Pipeline CRM, agenda des visites, baux signés numériquement et relances WhatsApp automatiques : l'outil pensé pour le terrain.",
+      "Pipeline CRM, agenda des visites, contrats générés depuis vos modèles et rappels automatiques par e-mail ou WhatsApp : l'outil pensé pour le terrain, utilisable sur mobile.",
     features: [
-      { title: "Baux numériques", text: "Rédaction, signature et archivage sans papier." },
-      { title: "Relances WhatsApp", text: "Rappels de loyer envoyés automatiquement." },
+      { title: "Contrats générés", text: "Baux, avenants et quittances depuis vos modèles Word." },
+      { title: "Rappels WhatsApp", text: "Échéances rappelées automatiquement aux locataires." },
       { title: "Visites organisées", text: "Agenda partagé et fiche prospect sur mobile." },
     ],
   },

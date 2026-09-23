@@ -20,6 +20,7 @@ export default function MentionsLegalesPage() {
       <ul>
         <li>RCCM : {legal.rccm}</li>
         <li>Compte contribuable (CC) : {legal.taxId}</li>
+        <li>Directeur de la publication : {legal.publicationDirector}</li>
         <li>Téléphone : {contact.phone}</li>
         <li>
           E-mail : <a href={`mailto:${contact.email}`}>{contact.email}</a>
@@ -39,8 +40,8 @@ export default function MentionsLegalesPage() {
       <p>
         L&apos;ensemble des contenus du site (textes, visuels, logo, interfaces, code) est la propriété de {legal.publisher} ou fait
         l&apos;objet d&apos;une autorisation d&apos;utilisation. Toute reproduction ou représentation, totale ou partielle, sans
-        autorisation écrite préalable est interdite. Les noms Wave, CinetPay, Orange Money, MTN MoMo et WhatsApp sont des marques de
-        leurs propriétaires respectifs, cités pour décrire les intégrations proposées.
+        autorisation écrite préalable est interdite. Les noms Wave, Orange Money, MTN MoMo, Moov Money et WhatsApp sont des marques de
+        leurs propriétaires respectifs, cités pour décrire les moyens de paiement suivis et les canaux de communication.
       </p>
 
       <h2>Outils gratuits et modèles de documents</h2>

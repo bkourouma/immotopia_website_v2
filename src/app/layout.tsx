@@ -17,11 +17,11 @@ export const metadata: Metadata = {
   alternates: { canonical: "/" },
   title: "ImmoTopia — L'ERP immobilier le plus complet de Côte d'Ivoire",
   description:
-    "Gestion locative, syndic de copropriété, promotion immobilière, Mobile Money (Wave, CinetPay), CRM et finance : ImmoTopia réunit tous les métiers de l'immobilier sur une plateforme, à Abidjan.",
+    "Gestion locative, syndic de copropriété, CRM, portails propriétaire et locataire, rappels e-mail et WhatsApp : ImmoTopia réunit votre agence sur une seule plateforme, à Abidjan.",
   openGraph: {
     title: "ImmoTopia — L'ERP immobilier le plus complet",
     description:
-      "Encaissements Mobile Money automatisés, relevés propriétaires, clôtures de caisse, CRM et syndic sur une seule plateforme.",
+      "Loyers et échéances, relevés de gérance, portails clients, CRM et syndic sur une seule plateforme. Premier mois offert.",
     locale: "fr_CI",
     type: "website",
     siteName: "ImmoTopia",

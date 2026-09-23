@@ -9,6 +9,12 @@ Règles de lecture pour l'assistant :
 - La section « Limites connues et points à ne pas promettre » prime sur toute autre formulation, y compris sur les accroches commerciales du site.
 - Les prix officiels sont fournis séparément (grille tarifaire). Ce document n'en donne que les règles.
 
+## Disponibilité en production (vérifiée le 23 septembre 2026 — prime sur tout le reste)
+
+- Disponible et commercialisé : module Agence (biens, annonces, CRM, baux, échéances, paiements, pénalités, dépôts, documents, relevés de gérance, portails propriétaire et locataire), module Syndic, maintenance, communication e-mail / WhatsApp / newsletter, patrimoine, tableaux de bord, rôles et audit. Packs vendus : **Agence** et **Syndic** (combinables avec 10 % de remise sur le moins cher).
+- Non disponible dans la version en production, donc non proposé : le module Promoteur (chantiers, stock de matériaux, personnel, tâcherons, foncier, associations), la finance opérationnelle (fournisseurs, pièces de caisse, file de validation, balances clients et fournisseurs, import Excel), ainsi que les packs **Promoteur** et **Opérateur intégré**. Ne pas les proposer, ne pas donner leur prix, ne pas évoquer de date : dire simplement qu'ils ne sont pas proposés actuellement et proposer d'en parler avec l'équipe.
+- Les fonctions listées dans « Fonctions en cours de développement » et « Limites » ne sont pas annoncées.
+
 ---
 
 ## ImmoTopia en bref
@@ -356,12 +362,11 @@ Les montants exacts des packs, capacités incluses, extensions et frais de mise 
 ### Principes
 
 - Prix mensuels en FCFA, hors taxes applicables.
-- Quatre packs : Agence, Syndic, Promoteur, Opérateur intégré, chacun avec une capacité incluse (logements sous mandat, copropriétés et lots, chantiers et lots de programme) et un prix d'extension au-delà.
+- Deux packs commercialisés : Agence et Syndic, chacun avec une capacité incluse (logements sous mandat ; copropriétés et lots) et un prix d'extension au-delà. Les packs Promoteur et Opérateur intégré prévus par la proposition commerciale ne sont pas commercialisés actuellement.
 - Le mensuel est payé d'avance.
 - Offre de lancement : le premier mois d'abonnement est offert sur tous les packs, sans engagement (résiliable à tout moment). La mise en route accompagnée, si elle est choisie, reste facturée.
-- L'annuel payé d'avance coûte 11 mensualités, soit 12 mois pour le prix de 11 (environ 8,3 % de remise). Exemple : Opérateur intégré à 249 900 FCFA par mois, soit 2 748 900 FCFA par an, hors mise en route et consommation.
-- Packs combinables : un client qui exerce deux métiers achète les deux packs, avec 10 % de remise sur le moins cher des deux abonnements, et conserve les capacités incluses de chaque pack. S'il utilise les trois modules métier, on compare son total au pack Opérateur intégré et on applique le tarif le moins cher à périmètre équivalent.
-- Dans le pack Opérateur intégré, un même appartement ne compte qu'une fois dans les lots, même s'il passe du chantier au patrimoine puis en location ou en copropriété. Chantiers et copropriétés restent comptés séparément.
+- L'annuel payé d'avance coûte 11 mensualités, soit 12 mois pour le prix de 11 (environ 8,3 % de remise). Exemple : Agence à 29 900 FCFA par mois, soit 328 900 FCFA par an, hors mise en route et consommation.
+- Packs combinables : un client qui fait à la fois de la gestion locative et du syndic achète les deux packs, avec 10 % de remise sur le moins cher des deux abonnements, et conserve les capacités incluses de chaque pack.
 - Au-delà des capacités (grand réseau), devis sur mesure avec périmètre, accompagnement et niveau de service écrits.
 
 ### Ce qui n'est pas facturé ou est facturé à part
@@ -378,8 +383,6 @@ Les montants exacts des packs, capacités incluses, extensions et frais de mise 
 - Agence avec 180 logements gérés : 29 900 + 80 × 150 = 41 900 FCFA par mois.
 - Syndic avec 2 copropriétés et 140 lots : 49 900 + 40 × 150 = 55 900 FCFA par mois.
 - Cabinet réunissant ces deux activités : 41 900 + 55 900 − 10 % × 41 900 = 93 610 FCFA par mois.
-- Promoteur avec 3 chantiers et 120 lots : 149 900 + 40 000 = 189 900 FCFA par mois.
-- Opérateur avec 3 chantiers, 3 copropriétés et 300 lots distincts : forfait intégré, 249 900 FCFA par mois.
 
 ### Statut des prix
 

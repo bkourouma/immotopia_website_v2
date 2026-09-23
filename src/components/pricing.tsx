@@ -9,6 +9,7 @@ import {
   ANNUAL_MONTHS,
   comboPrice,
   coverage,
+  activePacks,
   integrePrice,
   packs,
   promoteurPrice,
@@ -57,8 +58,8 @@ export function Pricing() {
           </ul>
         </Reveal>
 
-        <div className="mt-14 grid items-stretch gap-5 md:grid-cols-2 lg:grid-cols-4">
-          {packs.map((p, i) => (
+        <div className={`mx-auto mt-14 grid items-stretch gap-5 md:grid-cols-2 ${activePacks.length > 2 ? "lg:grid-cols-4" : "max-w-4xl"}`}>
+          {activePacks.map((p, i) => (
             <Reveal key={p.id} delay={i * 0.08} className="h-full">
               <PackCard pack={p} billing={billing} onCta={open} />
             </Reveal>
@@ -206,7 +207,7 @@ function Comparison() {
                 <thead>
                   <tr className="border-b border-ink-900/[0.07] text-left">
                     <th className="p-4 font-medium text-ink-900/50">Domaine fonctionnel</th>
-                    {packs.map((p) => (
+                    {activePacks.map((p) => (
                       <th key={p.id} className={`p-4 text-center font-display font-bold ${p.featured ? "text-brand-600" : ""}`}>
                         {p.name}
                       </th>
@@ -218,7 +219,7 @@ function Comparison() {
                     <tr key={label} className="border-b border-ink-900/[0.05] last:border-0 hover:bg-brand-500/[0.03]">
                       <td className="p-4 text-ink-900/75">{label}</td>
                       {cells.map((ok, i) => (
-                        <td key={i} className={`p-4 text-center ${i === 3 ? "bg-brand-500/[0.04]" : ""}`}>
+                        <td key={i} className={`p-4 text-center ${activePacks[i]?.featured ? "bg-brand-500/[0.04]" : ""}`}>
                           {ok ? (
                             <Check className="mx-auto size-4.5 text-emerald-600" strokeWidth={3} aria-label="Inclus" />
                           ) : (
@@ -250,6 +251,7 @@ function Simulator({ billing }: { billing: Billing }) {
   const [sites, setSites] = useState(3);
   const [programLots, setProgramLots] = useState(120);
 
+  const sellable = (t: Trade) => packs.find((p) => p.id === t)?.available ?? false;
   const toggle = (t: Trade) => setTrades((ts) => (ts.includes(t) ? (ts.length > 1 ? ts.filter((x) => x !== t) : ts) : [...ts, t]));
   const has = (t: Trade) => trades.includes(t);
 
@@ -260,7 +262,8 @@ function Simulator({ billing }: { billing: Billing }) {
   const combo = comboPrice(lines.map(([, p]) => p));
 
   // Avec les trois métiers, on compare au forfait intégré (lots comptés sans dédoublonnage : estimation haute)
-  const integrated = trades.length === 3 ? integrePrice(sites, copros, units + coproLots + programLots) : null;
+  const integreSold = packs.find((p) => p.id === "integre")?.available ?? false;
+  const integrated = integreSold && trades.length === 3 ? integrePrice(sites, copros, units + coproLots + programLots) : null;
   const useIntegrated = integrated !== null && integrated < combo.total;
   const monthly = useIntegrated ? integrated! : combo.total;
   const shown = billing === "monthly" ? monthly : monthly * ANNUAL_MONTHS;
@@ -282,7 +285,9 @@ function Simulator({ billing }: { billing: Billing }) {
                 ["syndic", "Syndic"],
                 ["promoteur", "Promotion"],
               ] as const
-            ).map(([id, label]) => (
+            )
+              .filter(([id]) => sellable(id))
+              .map(([id, label]) => (
               <button
                 key={id}
                 onClick={() => toggle(id)}

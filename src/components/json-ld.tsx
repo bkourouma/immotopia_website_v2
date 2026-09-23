@@ -1,4 +1,4 @@
-import { packs } from "@/lib/pricing";
+import { activePacks } from "@/lib/pricing";
 import { contact, legal, SITE_URL } from "@/lib/site";
 
 // Données structurées schema.org : aident Google à comprendre qui édite le site et ce qui est vendu.
@@ -69,9 +69,9 @@ export function SoftwareJsonLd() {
         operatingSystem: "Web",
         url: SITE_URL,
         description:
-          "ERP immobilier pour la Côte d'Ivoire : gestion locative, syndic de copropriété, promotion immobilière, paiements Mobile Money, CRM et comptabilité.",
+          "ERP immobilier pour la Côte d'Ivoire : gestion locative, syndic de copropriété, CRM, portails propriétaire et locataire, maintenance et rappels e-mail / WhatsApp.",
         publisher: { "@id": `${SITE_URL}/#organization` },
-        offers: packs.map((p) => ({
+        offers: activePacks.map((p) => ({
           "@type": "Offer",
           name: `Pack ${p.name}`,
           description: `${p.audience}. Inclus : ${p.included}. Premier mois offert, sans engagement.`,

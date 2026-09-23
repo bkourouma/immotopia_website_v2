@@ -91,7 +91,7 @@ export function CautionCalculator() {
               l&apos;avance à deux mois de loyer chacune.
             </Warning>
           )}
-          <UpsellCta text="ImmoTopia suit chaque caution encaissée, la place en fonds de tiers et prépare sa restitution." />
+          <UpsellCta text="Dans ImmoTopia, chaque dépôt de garantie est tracé : constitution, retenues et restitution." />
         </>
       }
     />
@@ -153,7 +153,7 @@ export function YieldCalculator() {
               <Line label="Retour sur investissement" value={Number.isFinite(payback) ? `${payback.toFixed(1).replace(".", ",")} ans` : "—"} />
             </div>
           </div>
-          <UpsellCta text="Suivez le rendement réel de chaque bien, mois après mois, directement depuis ImmoTopia." />
+          <UpsellCta text="Suivez valeur, loyers et rendement de chaque bien dans la vue patrimoine d'ImmoTopia." />
         </>
       }
     />
@@ -231,7 +231,7 @@ export function CommissionCalculator() {
               <Line label="Net reversé au bailleur" value={fcfa(net)} strong />
             </div>
           </div>
-          <UpsellCta text="ImmoTopia calcule ces commissions automatiquement et génère les relevés de gérance de tous vos propriétaires." />
+          <UpsellCta text="ImmoTopia prépare les relevés de gérance de vos propriétaires, période par période." />
         </>
       }
     />
@@ -329,7 +329,7 @@ export function ChargesCalculator() {
             })}
           </div>
           <p className="px-1 text-xs text-ink-900/45">Appel de fonds trimestriel = montant mensuel × 3. Quote-part annuelle = montant mensuel × 12.</p>
-          <UpsellCta text="Avec le module Syndic, les appels de fonds partent automatiquement et chaque paiement est rapproché du bon lot." />
+          <UpsellCta text="Avec le module Syndic, les appels de charges sont générés par lot depuis le budget, selon les tantièmes." />
         </>
       }
     />

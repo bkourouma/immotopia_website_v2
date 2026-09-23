@@ -13,6 +13,8 @@ export type Pack = {
   setup: number; // mise en route accompagnée (facultative)
   highlights: string[];
   featured?: boolean;
+  /** false = pack non commercialisé pour l'instant (fonctions pas encore en production) : masqué sur le site et pour l'assistant */
+  available: boolean;
 };
 
 export const ANNUAL_MONTHS = 11; // l'annuel payé d'avance = 11 mensualités (12 mois pour 11)
@@ -29,13 +31,14 @@ export const packs: Pack[] = [
     included: "100 logements sous mandat de gestion",
     extension: "+150 FCFA/logement du 101e au 300e, puis +75 FCFA",
     setup: 100_000,
+    available: true,
     highlights: [
       "CRM, mandats, annonces et visites",
-      "Baux, échéances, paiements, pénalités et dépôts",
+      "Baux, échéances, paiements et dépôts de garantie",
+      "Pénalités de retard calculées automatiquement",
       "Portails propriétaire et locataire",
-      "Caisse, validations et finance opérationnelle",
-      "Patrimoine : valorisation et rendement",
-      "Relances e-mail et WhatsApp",
+      "Quittances et contrats générés depuis vos modèles",
+      "Rappels e-mail et WhatsApp, maintenance, patrimoine",
     ],
   },
   {
@@ -46,13 +49,14 @@ export const packs: Pack[] = [
     included: "2 copropriétés actives et 100 lots principaux",
     extension: "+10 000 FCFA/copropriété ; +150 FCFA/lot au-delà de 100",
     setup: 150_000,
+    available: true,
     highlights: [
-      "Copropriétés, tantièmes et répartition des charges",
-      "Appels de fonds, impayés et assemblées générales",
-      "Comptabilité de copropriété et budgets",
-      "Maintenance et tickets d'intervention",
-      "Caisse, validations et finance opérationnelle",
-      "Communication avec les copropriétaires",
+      "Copropriétés, lots et tantièmes",
+      "Budgets et appels de charges par lot",
+      "Recouvrement, relances et pénalités de retard",
+      "Assemblées générales : votes, pouvoirs et quorum",
+      "Comptabilité de copropriété : journaux, grand livre, balance",
+      "Maintenance, incidents et prestataires",
     ],
   },
   {
@@ -63,6 +67,7 @@ export const packs: Pack[] = [
     included: "2 chantiers actifs et 150 lots de programme",
     extension: "+40 000 FCFA/chantier ; +100 FCFA/lot au-delà de 150",
     setup: 450_000,
+    available: false,
     highlights: [
       "Chantiers : budgets, coûts, achats et avancement",
       "Matériaux, stock, personnel et tâcherons",
@@ -81,6 +86,7 @@ export const packs: Pack[] = [
     extension: "+35 000 FCFA/chantier ; +10 000 FCFA/copropriété ; +100 FCFA/lot",
     setup: 650_000,
     featured: true,
+    available: false,
     highlights: [
       "Tous les modules : Agence, Syndic et Promoteur",
       "Un même lot compté une seule fois, du chantier à la gestion",
@@ -91,21 +97,34 @@ export const packs: Pack[] = [
   },
 ];
 
-/** Tableau de couverture fonctionnelle : [domaine, agence, syndic, promoteur, intégré] */
-export const coverage: [string, boolean, boolean, boolean, boolean][] = [
-  ["Socle : biens, contacts, documents, rôles, audit, tableaux de bord", true, true, true, true],
-  ["CRM, mandats, annonces, visites et suivi commercial", true, false, true, true],
-  ["Baux, échéances, paiements, pénalités, dépôts", true, false, false, true],
-  ["Portails propriétaire et locataire", true, false, false, true],
-  ["Maintenance et interventions", true, true, true, true],
-  ["Syndic : copropriétés, tantièmes, charges, impayés, AG", false, true, false, true],
-  ["Comptabilité de copropriété et budgets", false, true, false, true],
-  ["Chantiers : budgets, coûts, achats, avancement, lots, clôture", false, false, true, true],
-  ["BTP : matériaux et stock, personnel, tâcherons, terrain", false, false, true, true],
-  ["Finance opérationnelle : tiers, fournisseurs, caisse, validations", true, true, true, true],
-  ["Patrimoine : valorisation, rendement, emprunts, travaux", true, false, true, true],
-  ["Communication : e-mail, modèles, relances, WhatsApp", true, true, true, true],
+/** Packs actuellement commercialisés (affichés sur le site et connus de l'assistant) */
+export const activePacks = packs.filter((p) => p.available);
+
+/**
+ * Couverture fonctionnelle : [domaine, agence, syndic, promoteur, intégré].
+ * « live: false » = domaine pas encore en production, jamais affiché.
+ */
+const coverageAll: { label: string; cells: [boolean, boolean, boolean, boolean]; live: boolean }[] = [
+  { label: "Socle : biens, contacts, documents, rôles, audit, tableaux de bord", cells: [true, true, true, true], live: true },
+  { label: "CRM, mandats, annonces, visites et suivi commercial", cells: [true, false, true, true], live: true },
+  { label: "Baux, échéances, paiements, pénalités, dépôts de garantie", cells: [true, false, false, true], live: true },
+  { label: "Portails propriétaire et locataire", cells: [true, false, false, true], live: true },
+  { label: "Maintenance et interventions", cells: [true, true, true, true], live: true },
+  { label: "Syndic : copropriétés, tantièmes, charges, impayés, AG", cells: [false, true, false, true], live: true },
+  { label: "Comptabilité de copropriété et budgets", cells: [false, true, false, true], live: true },
+  { label: "Chantiers : budgets, coûts, achats, avancement, lots, clôture", cells: [false, false, true, true], live: false },
+  { label: "BTP : matériaux et stock, personnel, tâcherons, terrain", cells: [false, false, true, true], live: false },
+  { label: "Finance opérationnelle : fournisseurs, caisse, validations", cells: [true, true, true, true], live: false },
+  { label: "Patrimoine : valorisation, rendement, emprunts, travaux", cells: [true, false, true, true], live: true },
+  { label: "Communication : e-mail, modèles, rappels, WhatsApp, newsletter", cells: [true, true, true, true], live: true },
 ];
+
+const activeIdx = packs.map((p, i) => (p.available ? i : -1)).filter((i) => i >= 0);
+
+/** Lignes du tableau comparatif, limitées aux domaines en production et aux packs commercialisés */
+export const coverage: [string, ...boolean[]][] = coverageAll
+  .filter((r) => r.live)
+  .map((r) => [r.label, ...activeIdx.map((i) => r.cells[i])]);
 
 /* ------------------------------------------------------------------ calcul des prix */
 

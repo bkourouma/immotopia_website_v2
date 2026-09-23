@@ -113,7 +113,7 @@ function RoleVisual({ id }: { id: RoleId }) {
           {[
             ["Loyers encaissés", "48,2 M", "+12 %"],
             ["Taux d'occupation", "94 %", "+3 pts"],
-            ["Honoraires", "5,1 M", "+18 %"],
+            ["Encaissé du mois", "48,2 M", "88 % obj."],
           ].map(([k, v, t]) => (
             <div key={k} className="rounded-2xl bg-white p-3 shadow-sm ring-1 ring-ink-900/5">
               <p className="text-[11px] text-ink-900/65">{k}</p>
@@ -145,10 +145,10 @@ function RoleVisual({ id }: { id: RoleId }) {
             <Bell className="size-5" />
           </span>
           <div className="min-w-0 flex-1 text-sm">
-            <p className="font-semibold">Clôture de caisse · Agence Cocody</p>
-            <p className="truncate text-xs text-white/60">Écart 0 FCFA · en attente de votre validation</p>
+            <p className="font-semibold">Déclaration de paiement · Wave</p>
+            <p className="truncate text-xs text-white/60">Studio 3, Angré · 150 000 FCFA · à valider</p>
           </div>
-          <button className="shine cursor-pointer rounded-full bg-mint-400 px-4 py-2 text-xs font-bold text-ink-950">Approuver</button>
+          <button className="shine cursor-pointer rounded-full bg-mint-400 px-4 py-2 text-xs font-bold text-ink-950">Valider</button>
         </motion.div>
       </Panel>
     );
@@ -156,26 +156,32 @@ function RoleVisual({ id }: { id: RoleId }) {
 
   if (id === "comptable") {
     const rows = [
-      ["571", "Caisse", "Loyer sept. · Studio 3", "150 000", ""],
-      ["411", "Locataires", "Loyer sept. · Studio 3", "", "150 000"],
-      ["467", "Propriétaires mandants", "Net à reverser · M. Konan", "", "135 000"],
-      ["706", "Honoraires de gestion", "Commission 10 %", "", "15 000"],
+      ["05/09", "Loyer sept. · Studio 3, Angré", "150 000", "Payé"],
+      ["05/09", "Loyer sept. · Villa 7, Marcory", "450 000", "Partiel"],
+      ["15/09", "Pénalité de retard · Villa 7", "22 500", "Calculée"],
+      ["05/10", "Loyer oct. · Studio 3, Angré", "150 000", "À échoir"],
     ];
+    const tone: Record<string, string> = {
+      Payé: "bg-emerald-50 text-emerald-700",
+      Partiel: "bg-amber-50 text-amber-700",
+      Calculée: "bg-rose-50 text-rose-700",
+      "À échoir": "bg-slate-100 text-slate-600",
+    };
     return (
       <Panel>
         <div className="overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-ink-900/5">
           <div className="flex items-center justify-between border-b border-ink-900/5 px-4 py-3">
-            <p className="text-sm font-semibold">Journal des opérations</p>
-            <span className="rounded-full bg-emerald-50 px-2.5 py-1 text-[11px] font-semibold text-emerald-700">Équilibré ✓</span>
+            <p className="text-sm font-semibold">Échéancier · septembre</p>
+            <span className="rounded-full bg-amber-50 px-2.5 py-1 text-[11px] font-semibold text-amber-700">Reste à encaisser : 247 500</span>
           </div>
           <div className="overflow-x-auto">
             <table className="w-full min-w-[440px] text-left text-xs">
               <thead className="text-ink-900/45">
                 <tr>
-                  <th className="px-4 py-2 font-medium">Compte</th>
+                  <th className="px-4 py-2 font-medium">Échéance</th>
                   <th className="px-2 py-2 font-medium">Libellé</th>
-                  <th className="px-2 py-2 text-right font-medium">Débit</th>
-                  <th className="px-4 py-2 text-right font-medium">Crédit</th>
+                  <th className="px-2 py-2 text-right font-medium">Montant</th>
+                  <th className="px-4 py-2 text-right font-medium">Statut</th>
                 </tr>
               </thead>
               <tbody>
@@ -187,13 +193,12 @@ function RoleVisual({ id }: { id: RoleId }) {
                     transition={{ delay: 0.15 + i * 0.1 }}
                     className="border-t border-ink-900/5"
                   >
-                    <td className="px-4 py-2.5">
-                      <span className="font-mono font-semibold text-brand-600">{r[0]}</span>
-                      <span className="ml-2 text-ink-900/60">{r[1]}</span>
+                    <td className="px-4 py-2.5 font-mono font-semibold text-brand-600">{r[0]}</td>
+                    <td className="px-2 py-2.5 text-ink-900/70">{r[1]}</td>
+                    <td className="px-2 py-2.5 text-right tabular-nums">{r[2]}</td>
+                    <td className="px-4 py-2.5 text-right">
+                      <span className={`rounded-full px-2 py-0.5 text-[11px] font-semibold ${tone[r[3]]}`}>{r[3]}</span>
                     </td>
-                    <td className="px-2 py-2.5 text-ink-900/70">{r[2]}</td>
-                    <td className="px-2 py-2.5 text-right tabular-nums">{r[3]}</td>
-                    <td className="px-4 py-2.5 text-right tabular-nums">{r[4]}</td>
                   </motion.tr>
                 ))}
               </tbody>
@@ -202,8 +207,8 @@ function RoleVisual({ id }: { id: RoleId }) {
         </div>
         <div className="mt-3 grid grid-cols-2 gap-3">
           {[
-            [FileSpreadsheet, "Export OHADA", "Balance · Grand livre"],
-            [Download, "Fonds de tiers", "Relevé compte mandants"],
+            [FileSpreadsheet, "Quittance", "Générée depuis votre modèle Word"],
+            [Download, "Relevé de compte", "Historique du locataire"],
           ].map(([Icon, t, s]) => {
             const I = Icon as typeof Download;
             return (
@@ -249,7 +254,7 @@ function RoleVisual({ id }: { id: RoleId }) {
               className="max-w-[88%] rounded-xl rounded-tl-sm bg-[#202c33] p-2.5 text-white/90"
             >
               Bonjour Mme Kouassi 👋 Votre loyer de septembre (250 000 FCFA) arrive à échéance le 05/10.
-              <span className="mt-1.5 block rounded-lg bg-[#1DC8FF]/15 px-2 py-1.5 font-semibold text-[#6fdcff]">Payer avec Wave →</span>
+              <span className="mt-1.5 block rounded-lg bg-[#1DC8FF]/15 px-2 py-1.5 font-semibold text-[#6fdcff]">Déclarer mon paiement sur mon portail →</span>
             </motion.div>
             <motion.div
               initial={{ opacity: 0, y: 10 }}
@@ -268,7 +273,7 @@ function RoleVisual({ id }: { id: RoleId }) {
               transition={{ delay: 1.4 }}
               className="mx-auto w-fit rounded-full bg-emerald-400/15 px-3 py-1 text-[10px] font-semibold text-emerald-300"
             >
-              ✓ Paiement rapproché · quittance envoyée
+              ✓ Déclaration reçue · validation par l&apos;agence
             </motion.div>
           </div>
         </div>

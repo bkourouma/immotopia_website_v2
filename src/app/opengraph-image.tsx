@@ -43,11 +43,11 @@ export default function OpengraphImage() {
             le plus complet de Côte d&apos;Ivoire.
           </div>
           <div style={{ marginTop: 28, fontSize: 30, color: "rgba(255,255,255,0.65)" }}>
-            Gestion locative · Syndic · Promotion · Mobile Money · CRM
+            Gestion locative · Syndic · CRM · Portails clients
           </div>
         </div>
         <div style={{ display: "flex", gap: 14 }}>
-          {["Wave", "CinetPay", "Orange Money", "MTN MoMo", "SYSCOHADA"].map((t) => (
+          {["Loyers & échéances", "Syndic", "CRM", "WhatsApp", "1er mois offert"].map((t) => (
             <div
               key={t}
               style={{

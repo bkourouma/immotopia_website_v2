@@ -7,8 +7,6 @@ import {
   Check,
   CircleDollarSign,
   FileText,
-  Lock,
-  ShieldCheck,
   Sparkles,
   Trophy,
   Users,
@@ -93,7 +91,7 @@ function PaymentsMockup({ active }: { active: boolean }) {
   const total = useCountUp(paid ? 1750000 : 1600000, active, 1);
 
   return (
-    <Window title="Encaissements · Septembre" badge={<Pill tone="green">● Temps réel</Pill>}>
+    <Window title="Encaissements · Septembre" badge={<Pill tone="green">Portail locataire</Pill>}>
       <div className="mb-3 grid grid-cols-2 gap-2">
         <div className="rounded-xl bg-white/[0.04] p-3 ring-1 ring-white/[0.06]">
           <p className="text-[10px] text-white/50">Encaissé ce mois</p>
@@ -160,8 +158,8 @@ function PaymentsMockup({ active }: { active: boolean }) {
               <ArrowDownLeft className="size-5" />
             </span>
             <div className="text-xs">
-              <p className="font-semibold text-white">Wave · 150 000 FCFA reçu</p>
-              <p className="text-white/55">Rapproché automatiquement : Studio 3, Angré</p>
+              <p className="font-semibold text-white">Déclaration de paiement · Wave</p>
+              <p className="text-white/55">Grâce N&apos;Guessan · 150 000 FCFA · à valider par l&apos;agence</p>
             </div>
           </motion.div>
         )}
@@ -173,10 +171,9 @@ function PaymentsMockup({ active }: { active: boolean }) {
 /* ---------------------------------------------------------------- 2. Propriétaires */
 
 const ownerSlices = [
-  { label: "Net à reverser", value: 76, color: "#5B5BF7" },
-  { label: "Commission agence", value: 10, color: "#FF8A3D" },
-  { label: "Charges & travaux", value: 9, color: "#2EE6A8" },
-  { label: "Impôts retenus", value: 5, color: "#F472B6" },
+  { label: "Encaissé", value: 86, color: "#5B5BF7" },
+  { label: "À échoir", value: 9, color: "#2EE6A8" },
+  { label: "En retard", value: 5, color: "#F472B6" },
 ];
 
 export function Donut({
@@ -224,9 +221,9 @@ export function Donut({
 }
 
 function OwnersMockup({ active }: { active: boolean }) {
-  const net = useCountUp(1245000, active);
+  const net = useCountUp(1640000, active);
   return (
-    <Window title="Relevé de gérance · M. Konan Yao" badge={<Pill tone="violet">Août 2026</Pill>}>
+    <Window title="Portail propriétaire · M. Konan Yao" badge={<Pill tone="violet">Août 2026</Pill>}>
       <div className="flex items-center gap-4">
         <Donut slices={ownerSlices} active={active}>
           <div>
@@ -257,85 +254,85 @@ function OwnersMockup({ active }: { active: boolean }) {
       </div>
       <div className="mt-3 flex items-center justify-between rounded-xl bg-gradient-to-r from-brand-500/25 to-brand-500/5 px-3 py-2.5 ring-1 ring-brand-400/30">
         <div>
-          <p className="text-[10px] text-brand-300">Net à reverser</p>
+          <p className="text-[10px] text-brand-300">Relevé de gérance · loyers encaissés</p>
           <p className="font-display text-lg font-bold text-white tabular-nums">{formatFcfa(net)}</p>
         </div>
         <span className="inline-flex items-center gap-1 rounded-full bg-white px-3 py-1.5 text-[10px] font-bold text-ink-900">
-          <FileText className="size-3" /> PDF envoyé
+          <FileText className="size-3" /> Relevé envoyé
         </span>
       </div>
     </Window>
   );
 }
 
-/* ---------------------------------------------------------------- 3. Comptabilité */
+/* ---------------------------------------------------------------- 3. Tableau de bord */
 
-const approvals = ["Caissière", "Comptable", "Directeur"];
+const todo = [
+  { icon: "late", label: "Échéance en retard · Villa 7, Marcory", tag: "Impayé" },
+  { icon: "ticket", label: "Ticket urgent · Fuite colonne d'eau, Bât. B", tag: "Maintenance" },
+  { icon: "decl", label: "Déclaration de paiement · Studio 3, Angré", tag: "À valider" },
+] as const;
 
 function AccountingMockup({ active }: { active: boolean }) {
-  // étapes 0..3 : nombre de validations, 4 : clôture certifiée
-  const step = useLoop(active, 6, 1100);
+  // les tâches du jour sont traitées une à une, puis la boucle recommence
+  const step = useLoop(active, 5, 1200);
   const done = Math.min(step, 3);
+  const cashed = useCountUp(48_200_000, active, 1.6);
   return (
-    <Window title="Clôture de caisse · Agence Plateau" badge={<Pill tone="blue">Session #0921</Pill>}>
+    <Window title="Tableau de bord · Agence Plateau" badge={<Pill tone="blue">Septembre 2026</Pill>}>
       <div className="grid grid-cols-3 gap-2 text-[10px]">
-        {[
-          ["Espèces", "412 500"],
-          ["Wave", "1 150 000"],
-          ["Orange Money", "680 000"],
-        ].map(([k, v]) => (
-          <div key={k} className="rounded-xl bg-white/[0.04] p-2.5 ring-1 ring-white/[0.06]">
-            <p className="text-white/50">{k}</p>
-            <p className="mt-0.5 text-xs font-bold text-white tabular-nums">{v}</p>
-          </div>
-        ))}
-      </div>
-      <div className="mt-3 space-y-1.5 rounded-xl bg-white/[0.03] p-3 text-[11px] ring-1 ring-white/[0.05]">
-        <div className="flex justify-between text-white/65">
-          <span>Solde théorique</span>
-          <span className="tabular-nums">2 242 500 FCFA</span>
+        <div className="rounded-xl bg-white/[0.04] p-2.5 ring-1 ring-white/[0.06]">
+          <p className="text-white/50">Impayés</p>
+          <p className="mt-0.5 text-xs font-bold text-rose-300 tabular-nums">1 240 000</p>
+          <p className="text-white/40">8 échéances</p>
         </div>
-        <div className="flex justify-between text-white/65">
-          <span>Solde compté</span>
-          <span className="tabular-nums">2 242 500 FCFA</span>
+        <div className="rounded-xl bg-white/[0.04] p-2.5 ring-1 ring-white/[0.06]">
+          <p className="text-white/50">À encaisser sous 7 j</p>
+          <p className="mt-0.5 text-xs font-bold text-white tabular-nums">3 450 000</p>
+          <p className="text-white/40">21 échéances</p>
         </div>
-        <div className="flex justify-between border-t border-white/10 pt-1.5 font-semibold">
-          <span className="text-white">Écart</span>
-          <span className="text-emerald-300">0 FCFA ✓</span>
-        </div>
-        <div className="flex items-center gap-1.5 pt-1 text-[10px] text-sky-300">
-          <Lock className="size-3" /> Fonds de tiers isolés : 1 830 000 FCFA (compte mandants)
+        <div className="rounded-xl bg-white/[0.04] p-2.5 ring-1 ring-white/[0.06]">
+          <p className="text-white/50">Occupation</p>
+          <p className="mt-0.5 text-xs font-bold text-emerald-300 tabular-nums">94 %</p>
+          <p className="text-white/40">112 biens</p>
         </div>
       </div>
-      <div className="mt-3 flex items-center gap-2">
-        {approvals.map((a, i) => (
-          <div key={a} className="flex flex-1 items-center gap-2">
+      <div className="mt-3 rounded-xl bg-white/[0.03] p-3 ring-1 ring-white/[0.05]">
+        <div className="flex justify-between text-[11px]">
+          <span className="text-white/65">Encaissé du mois</span>
+          <span className="font-semibold text-white tabular-nums">{formatFcfa(cashed)}</span>
+        </div>
+        <div className="mt-2 h-2 overflow-hidden rounded-full bg-white/10">
+          <motion.div
+            className="h-full rounded-full bg-gradient-to-r from-brand-500 to-mint-400"
+            initial={false}
+            animate={{ width: active ? "88%" : "40%" }}
+            transition={{ duration: 1.6, ease: [0.16, 1, 0.3, 1] }}
+          />
+        </div>
+        <p className="mt-1.5 text-[10px] text-white/45">Objectif mensuel : 55 000 000 FCFA</p>
+      </div>
+      <p className="mt-3 mb-1.5 text-[10px] font-semibold tracking-wide text-white/45 uppercase">À traiter aujourd&apos;hui</p>
+      <div className="space-y-1.5">
+        {todo.map((t, i) => (
+          <motion.div
+            key={t.label}
+            animate={{ opacity: i < done ? 0.45 : 1 }}
+            className="flex items-center gap-2 rounded-lg bg-white/[0.03] px-3 py-2 text-[11px] ring-1 ring-white/[0.05]"
+          >
             <motion.span
-              animate={{
-                backgroundColor: i < done ? "rgba(46,230,168,1)" : "rgba(255,255,255,0.08)",
-                scale: i === done - 1 ? [1, 1.25, 1] : 1,
-              }}
-              transition={{ duration: 0.4 }}
-              className="grid size-6 shrink-0 place-items-center rounded-full text-ink-950"
+              animate={{ backgroundColor: i < done ? "rgba(46,230,168,1)" : "rgba(255,255,255,0.08)" }}
+              className="grid size-4 shrink-0 place-items-center rounded-full text-ink-950"
             >
-              {i < done ? <Check className="size-3.5" strokeWidth={3} /> : <span className="text-[9px] text-white/50">{i + 1}</span>}
+              {i < done && <Check className="size-3" strokeWidth={3} />}
             </motion.span>
-            <span className={`truncate text-[10px] ${i < done ? "text-white" : "text-white/45"}`}>{a}</span>
-          </div>
+            <span className={`truncate ${i < done ? "text-white/50 line-through" : "text-white/85"}`}>{t.label}</span>
+            <span className="ml-auto">
+              <Pill tone={t.icon === "late" ? "amber" : t.icon === "ticket" ? "violet" : "blue"}>{t.tag}</Pill>
+            </span>
+          </motion.div>
         ))}
       </div>
-      <motion.div
-        animate={step >= 4 ? { backgroundColor: "#2EE6A8", color: "#05070f" } : { backgroundColor: "#5B5BF7", color: "#ffffff" }}
-        className="mt-3 flex items-center justify-center gap-2 rounded-xl py-2.5 text-xs font-bold"
-      >
-        {step >= 4 ? (
-          <>
-            <ShieldCheck className="size-4" /> Clôture certifiée · écritures SYSCOHADA générées
-          </>
-        ) : (
-          <>Valider la clôture ({done}/3)</>
-        )}
-      </motion.div>
     </Window>
   );
 }
@@ -347,7 +344,7 @@ const modules = [
   { icon: Building2, label: "Biens" },
   { icon: Users, label: "CRM" },
   { icon: FileText, label: "Baux" },
-  { icon: CircleDollarSign, label: "Compta" },
+  { icon: CircleDollarSign, label: "Relevés" },
   { icon: Wrench, label: "Syndic" },
 ];
 
@@ -508,70 +505,51 @@ function SyndicMockup({ active }: { active: boolean }) {
   );
 }
 
-/* ---------------------------------------------------------------- 7. Commissions */
+/* ---------------------------------------------------------------- 7. Rappels e-mail & WhatsApp */
+
+const reminders = [
+  { channel: "WhatsApp", color: "#25D366", title: "Rappel d'échéance · J-5", text: "Aya Kouassi · loyer de 250 000 FCFA dû le 05/10" },
+  { channel: "E-mail", color: "#FF8A3D", title: "Paiement reçu", text: "Moussa Traoré · confirmation envoyée, agence en copie" },
+  { channel: "WhatsApp", color: "#25D366", title: "Ticket mis à jour", text: "Fuite Bât. B · prestataire affecté, locataire prévenu" },
+  { channel: "E-mail", color: "#FF8A3D", title: "Bail arrivant à terme", text: "Bureau 4A, Plateau · fin du bail dans 30 jours" },
+];
 
 function CommissionsMockup({ active }: { active: boolean }) {
-  const pct = useCountUp(active ? 87 : 60, active, 1.6);
-  const r = 40;
-  const arc = Math.PI * r; // demi-cercle
+  // les notifications apparaissent une à une, comme dans l'historique des communications
+  const step = useLoop(active, reminders.length + 2, 1100);
+  const shown = active ? Math.min(step + 1, reminders.length) : reminders.length;
   return (
-    <Window title="Performance · Mariam Koné" badge={<Pill tone="green">Objectif T3</Pill>}>
-      <div className="flex flex-col items-center">
-        <div className="relative h-[92px] w-[184px]">
-          <svg viewBox="0 0 100 52" className="size-full">
-            <defs>
-              <linearGradient id="gauge" x1="0" x2="1">
-                <stop offset="0" stopColor="#5B5BF7" />
-                <stop offset="1" stopColor="#2EE6A8" />
-              </linearGradient>
-            </defs>
-            <path d="M10 50 A40 40 0 0 1 90 50" fill="none" stroke="rgba(255,255,255,0.08)" strokeWidth="9" strokeLinecap="round" />
-            <path
-              d="M10 50 A40 40 0 0 1 90 50"
-              fill="none"
-              stroke="url(#gauge)"
-              strokeWidth="9"
-              strokeLinecap="round"
-              strokeDasharray={`${arc} ${arc}`}
-              strokeDashoffset={arc * (1 - pct / 100)}
-            />
-          </svg>
-          <div className="absolute inset-x-0 bottom-0 text-center">
-            <p className="font-display text-2xl font-bold text-white tabular-nums">{Math.round(pct)} %</p>
-            <p className="text-[9px] text-white/50">de l&apos;objectif atteint</p>
-          </div>
-        </div>
-      </div>
-      <div className="mt-4 rounded-xl bg-white/[0.03] p-3 ring-1 ring-white/[0.05]">
-        <div className="mb-2 flex justify-between text-[10px] text-white/55">
-          <span>Commission · Vente Duplex Riviera</span>
-          <span className="font-semibold text-white">4 250 000 FCFA</span>
-        </div>
-        <div className="flex h-7 overflow-hidden rounded-lg text-[10px] font-bold">
-          <motion.div
-            initial={false}
-            animate={{ width: active ? "60%" : "50%" }}
-            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-            className="flex items-center justify-center bg-brand-500 text-white"
-          >
-            Agence 60 %
-          </motion.div>
-          <motion.div
-            initial={false}
-            animate={{ width: active ? "40%" : "50%" }}
-            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-            className="flex items-center justify-center bg-mint-400 text-ink-950"
-          >
-            Agent 40 %
-          </motion.div>
-        </div>
-        <div className="mt-2 flex justify-between text-[11px]">
-          <span className="text-white/70 tabular-nums">2 550 000 FCFA</span>
-          <span className="font-semibold text-emerald-300 tabular-nums">1 700 000 FCFA</span>
-        </div>
+    <Window title="Communications · Historique" badge={<Pill tone="green">Automatique</Pill>}>
+      <div className="space-y-2">
+        <AnimatePresence initial={false}>
+          {reminders.slice(0, shown).map((r) => (
+            <motion.div
+              key={r.title}
+              layout
+              initial={{ opacity: 0, y: 12, scale: 0.97 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ type: "spring", stiffness: 320, damping: 26 }}
+              className="flex items-start gap-3 rounded-xl bg-white/[0.04] p-3 ring-1 ring-white/[0.06]"
+            >
+              <span className="mt-0.5 grid size-8 shrink-0 place-items-center rounded-lg text-[10px] font-bold text-ink-950" style={{ background: r.color }}>
+                {r.channel === "WhatsApp" ? "WA" : "@"}
+              </span>
+              <div className="min-w-0 flex-1 text-[11px]">
+                <p className="flex items-center gap-2 font-semibold text-white">
+                  {r.title}
+                  <span className="ml-auto flex items-center gap-1 text-[10px] font-medium text-emerald-300">
+                    <Check className="size-3" /> Envoyé
+                  </span>
+                </p>
+                <p className="truncate text-white/55">{r.text}</p>
+              </div>
+            </motion.div>
+          ))}
+        </AnimatePresence>
       </div>
       <div className="mt-3 flex items-center gap-2 rounded-xl bg-sun-500/10 px-3 py-2 text-[11px] text-sun-400 ring-1 ring-sun-500/25">
-        <Sparkles className="size-3.5" /> Prime calculée en temps réel, versée à la clôture du mois
+        <Sparkles className="size-3.5" /> Selon les préférences et le consentement de chaque destinataire
       </div>
     </Window>
   );

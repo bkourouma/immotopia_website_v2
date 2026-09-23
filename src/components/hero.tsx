@@ -106,7 +106,7 @@ export function Hero() {
           ))}
         </h1>
         <p className="hero-fade mx-auto mt-5 max-w-2xl text-base text-white/65 md:text-lg" style={{ animationDelay: "350ms" }}>
-          Gestion locative, syndic, promotion immobilière, Mobile Money et CRM réunis dans une plateforme pensée pour les
+          Gestion locative, syndic de copropriété, CRM et portails clients réunis dans une plateforme pensée pour les
           professionnels de l&apos;immobilier à Abidjan.
         </p>
       </div>

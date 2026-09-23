@@ -11,14 +11,14 @@ gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 // Nœuds du circuit, en coordonnées du viewBox 600 × 340
 const inputs = [
-  { label: "Wave", color: "#1DC8FF", x: 70, y: 60 },
-  { label: "CinetPay", color: "#20C997", x: 70, y: 170 },
-  { label: "Orange Money", color: "#FF7900", x: 70, y: 280 },
+  { label: "Locataires", color: "#2EE6A8", x: 70, y: 60 },
+  { label: "Propriétaires", color: "#8B8BFF", x: 70, y: 170 },
+  { label: "Prestataires", color: "#FACC15", x: 70, y: 280 },
 ];
 const outputs = [
   { label: "WhatsApp", color: "#25D366", x: 530, y: 60 },
-  { label: "SMS", color: "#A78BFA", x: 530, y: 170 },
-  { label: "n8n · Airtable", color: "#FF6D5A", x: 530, y: 280 },
+  { label: "E-mail", color: "#FF8A3D", x: 530, y: 170 },
+  { label: "Site vitrine", color: "#38BDF8", x: 530, y: 280 },
 ];
 const C = { x: 300, y: 170 };
 
@@ -90,15 +90,14 @@ export function Ecosystem() {
             Vos outils parlent enfin <span className="text-gradient">le même langage.</span>
           </h2>
           <p className="mt-5 text-lg text-white/60">
-            Webhooks temps réel, API ouverte et automatisations : chaque paiement, chaque lead, chaque relance circule sans
-            ressaisie.
+            Portails, e-mail, WhatsApp et API d&apos;annonces : chaque échange passe par la même plateforme, sans ressaisie.
           </p>
         </div>
 
         <div className="mt-14 grid auto-rows-[minmax(200px,auto)] gap-4 md:grid-cols-6">
           {/* Grande carte : le circuit */}
           <Bento className="md:col-span-6 lg:col-span-4 lg:row-span-2" spot="rgba(91,91,247,0.25)">
-            <CardHead icon={<Webhook className="size-5" />} title="Webhooks temps réel" text="Un paiement reçu déclenche instantanément rapprochement, quittance et notification." />
+            <CardHead icon={<Webhook className="size-5" />} title="Toutes les parties connectées" text="Locataires, propriétaires et prestataires échangent avec l'agence via leurs portails ; chacun est prévenu par e-mail ou WhatsApp." />
             <div data-circuit className="relative mt-6 aspect-[600/340] w-full">
               <svg viewBox="0 0 600 340" className="absolute inset-0 size-full" fill="none" aria-hidden>
                 <defs>
@@ -136,21 +135,21 @@ export function Ecosystem() {
           </Bento>
 
           <Bento className="md:col-span-3 lg:col-span-2" spot="rgba(46,230,168,0.2)">
-            <CardHead icon={<KeyRound className="size-5" />} title="API ouverte" text="Connectez votre site, votre ERP comptable ou vos outils internes." />
+            <CardHead icon={<KeyRound className="size-5" />} title="API d'annonces" text="Alimentez le site vitrine de votre agence avec vos biens publiés." />
             <pre className="mt-5 overflow-hidden rounded-xl bg-black/40 p-3 font-mono text-[11px] leading-relaxed text-white/70 ring-1 ring-white/10">
-              <span className="text-mint-400">POST</span> /webhooks/immotopia{"\n"}
+              <span className="text-mint-400">GET</span> /annonces{"\n"}
               {"{"}{"\n"}
-              {"  "}<span className="text-brand-300">&quot;event&quot;</span>: <span className="text-sun-400">&quot;payment.reconciled&quot;</span>,{"\n"}
-              {"  "}<span className="text-brand-300">&quot;amount&quot;</span>: 150000,{"\n"}
-              {"  "}<span className="text-brand-300">&quot;channel&quot;</span>: <span className="text-sun-400">&quot;wave&quot;</span>{"\n"}
+              {"  "}<span className="text-brand-300">&quot;titre&quot;</span>: <span className="text-sun-400">&quot;Villa 5 pièces, Cocody&quot;</span>,{"\n"}
+              {"  "}<span className="text-brand-300">&quot;mode&quot;</span>: <span className="text-sun-400">&quot;location&quot;</span>,{"\n"}
+              {"  "}<span className="text-brand-300">&quot;loyer&quot;</span>: 450000{"\n"}
               {"}"}
             </pre>
           </Bento>
 
           <Bento className="md:col-span-3 lg:col-span-2" spot="rgba(37,211,102,0.2)">
-            <CardHead icon={<MessageSquareText className="size-5" />} title="Relances WhatsApp & SMS" text="Des scénarios automatiques avant et après chaque échéance." />
+            <CardHead icon={<MessageSquareText className="size-5" />} title="Rappels e-mail & WhatsApp" text="Rappels d'échéance planifiés, confirmations de paiement et alertes de fin de bail." />
             <div className="mt-5 flex items-center justify-between">
-              {["J-5", "J0", "J+3", "J+7"].map((j, i) => (
+              {["J-5", "J-1", "J0", "Retard"].map((j, i) => (
                 <div key={j} className="flex flex-1 items-center">
                   <span className={`grid size-10 place-items-center rounded-full text-xs font-bold ${i < 2 ? "bg-[#25D366] text-ink-950" : "bg-white/10 text-white/70"}`}>
                     {j}
@@ -162,9 +161,9 @@ export function Ecosystem() {
           </Bento>
 
           <Bento className="md:col-span-2" spot="rgba(255,138,61,0.2)">
-            <CardHead icon={<Globe className="size-5" />} title="Capture de leads" text="Formulaires web et réseaux sociaux créent directement la fiche prospect dans le CRM." />
+            <CardHead icon={<Globe className="size-5" />} title="Newsletter" text="Listes de diffusion, campagnes programmées, double confirmation et désinscription en un clic." />
             <div className="mt-5 flex flex-wrap gap-2">
-              {["Site web", "Facebook", "Formulaire", "→ CRM"].map((t, i) => (
+              {["Listes", "Modèles", "Campagnes", "Statistiques"].map((t, i) => (
                 <span key={t} className={`rounded-full px-3 py-1.5 text-xs font-semibold ${i === 3 ? "bg-sun-500 text-ink-950" : "bg-white/10 text-white/80"}`}>
                   {t}
                 </span>
@@ -173,18 +172,18 @@ export function Ecosystem() {
           </Bento>
 
           <Bento className="md:col-span-2" spot="rgba(29,200,255,0.2)">
-            <CardHead icon={<Smartphone className="size-5" />} title="Mobile Money natif" text="Wave, CinetPay, Orange Money, MTN MoMo : chaque versement retrouve son dossier." />
+            <CardHead icon={<Smartphone className="size-5" />} title="Mobile Money suivi" text="Paiements enregistrés par opérateur (Wave, Orange Money, MTN, Moov), déclarations des locataires validées par l'agence." />
             <div className="mt-5 flex -space-x-2">
-              {["#1DC8FF", "#20C997", "#FF7900", "#FFCB05"].map((c) => (
+              {["#1DC8FF", "#FF7900", "#FFCB05", "#0066B3"].map((c) => (
                 <span key={c} className="size-9 rounded-full border-2 border-ink-900" style={{ background: c }} />
               ))}
             </div>
           </Bento>
 
           <Bento className="md:col-span-2" spot="rgba(167,139,250,0.22)">
-            <CardHead icon={<BellRing className="size-5" />} title="Validation hiérarchique" text="Clôtures, décaissements et remises validés par les bonnes personnes, avec traçabilité." />
+            <CardHead icon={<BellRing className="size-5" />} title="Rôles & journal d'audit" text="Permissions fines par rôle et trace des actions sensibles : qui, quoi, quand." />
             <div className="mt-5 flex gap-2 text-xs">
-              {["Caisse", "Compta", "Direction"].map((s) => (
+              {["Admin", "Manager", "Agent", "Comptable"].map((s) => (
                 <span key={s} className="flex-1 rounded-lg bg-white/[0.06] py-2 text-center font-semibold text-white/80 ring-1 ring-white/10">
                   ✓ {s}
                 </span>
