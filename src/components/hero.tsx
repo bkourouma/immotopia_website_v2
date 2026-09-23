@@ -28,6 +28,18 @@ export function Hero() {
 
   const go = useCallback((dir: number) => setActive((a) => (a + dir + N) % N), []);
 
+  // Les écrans animés démarrent une fois le navigateur au repos : le premier affichage reste léger
+  const [animated, setAnimated] = useState(false);
+  useEffect(() => {
+    const start = () => setAnimated(true);
+    if ("requestIdleCallback" in window) {
+      const id = window.requestIdleCallback(start, { timeout: 2500 });
+      return () => window.cancelIdleCallback(id);
+    }
+    const id = setTimeout(start, 1200);
+    return () => clearTimeout(id);
+  }, []);
+
   // Lecture automatique, en pause au survol ou quand l'onglet est caché
   useEffect(() => {
     if (paused) return;
@@ -138,7 +150,7 @@ export function Hero() {
                 }}
                 aria-hidden={d !== 0}
               >
-                <Card card={card} active={d === 0} near={abs <= 1} />
+                <Card card={card} active={d === 0} near={animated && abs <= 1} />
                 {/* Calque d'assombrissement des cartes latérales */}
                 <motion.div
                   className="pointer-events-none absolute inset-0 rounded-[28px] bg-ink-950"

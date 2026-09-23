@@ -8,7 +8,7 @@ export const contact = {
   phoneHref: "tel:+2250101510136",
   whatsapp: "https://wa.me/2250101510136",
   whatsappMessage: "Bonjour ImmoTopia, je souhaite en savoir plus sur votre ERP immobilier.",
-  email: "agent@immo-annonces.fr",
+  email: "immotopia@allianceconsultants.net",
   city: "Abidjan, Côte d'Ivoire",
 };
 

@@ -3,6 +3,7 @@ import { FinalCta } from "@/components/final-cta";
 import { Navbar } from "@/components/navbar";
 import { PageHero } from "@/components/page-hero";
 import { Pricing } from "@/components/pricing";
+import { SoftwareJsonLd } from "@/components/json-ld";
 
 export const metadata: Metadata = {
   title: "Tarifs — Packs Agence, Syndic, Promoteur et Opérateur intégré | ImmoTopia",
@@ -15,6 +16,7 @@ export default function TarifsPage() {
   return (
     <>
       <Navbar />
+      <SoftwareJsonLd />
       <main>
         <PageHero eyebrow="Tarifs" title="Des tarifs clairs, en FCFA.">
           Choisissez le pack de votre métier, estimez votre abonnement en quelques secondes, et réservez une démonstration.
