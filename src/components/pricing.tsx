@@ -1,7 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import { BadgePercent, Calculator, Check, ChevronDown, Gift, Minus, Sparkles, Users, Wallet } from "lucide-react";
+import { BadgePercent, CalendarRange, Calculator, Check, ChevronDown, Gift, Minus, Sparkles, Users, Wallet } from "lucide-react";
 import { useState, type ReactNode } from "react";
 import { fcfa } from "@/lib/format";
 import {
@@ -13,6 +13,7 @@ import {
   packs,
   promoteurPrice,
   syndicPrice,
+  TRIAL_TEXT,
   type Pack,
 } from "@/lib/pricing";
 import { useDemo } from "./providers";
@@ -23,7 +24,8 @@ type Billing = "monthly" | "annual";
 const perks = [
   { icon: Wallet, text: "Aucune commission sur vos loyers" },
   { icon: Users, text: "Propriétaires, locataires et collaborateurs non facturés" },
-  { icon: Gift, text: "Annuel : 1 mois offert" },
+  { icon: Gift, text: "Premier mois offert, sans engagement" },
+  { icon: CalendarRange, text: "Annuel : 12 mois pour le prix de 11" },
   { icon: BadgePercent, text: "Packs combinables : −10 %" },
 ];
 
@@ -64,7 +66,7 @@ export function Pricing() {
         </div>
 
         <p className="mt-6 text-center text-xs text-ink-900/60">
-          Prix hors taxes. Mise en route facultative si vous préparez et saisissez vos données vous-même. WhatsApp facturé à la
+          Prix hors taxes. Premier mois d&apos;abonnement offert sur tous les packs, résiliable à tout moment. Mise en route facultative si vous préparez et saisissez vos données vous-même. WhatsApp facturé à la
           consommation. Au-delà des capacités indiquées, devis sur mesure.
         </p>
 
@@ -94,7 +96,7 @@ function BillingToggle({ value, onChange }: { value: Billing; onChange: (b: Bill
           {value === id && <motion.span layoutId="billing-pill" className="absolute inset-0 rounded-full bg-ink-900" transition={{ type: "spring", stiffness: 380, damping: 32 }} />}
           <span className="relative flex items-center gap-2">
             {label}
-            {id === "annual" && <span className="rounded-full bg-mint-400 px-2 py-0.5 text-[10px] font-bold text-ink-950">1 MOIS OFFERT</span>}
+            {id === "annual" && <span className="rounded-full bg-mint-400 px-2 py-0.5 text-[10px] font-bold text-ink-950">12 MOIS POUR 11</span>}
           </span>
         </button>
       ))}
@@ -142,6 +144,9 @@ function PackCard({ pack, billing, onCta }: { pack: Pack; billing: Billing; onCt
           <p className={`mt-1.5 text-sm ${dark ? "text-white/60" : "text-ink-900/55"}`}>{pack.audience}</p>
         </div>
         <Price monthly={pack.monthly} billing={billing} dark={dark} />
+        <p className={`mt-3 inline-flex w-fit items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-semibold ${dark ? "bg-mint-400/15 text-mint-400" : "bg-emerald-50 text-emerald-700"}`}>
+          <Gift className="size-3.5" /> {TRIAL_TEXT}
+        </p>
         <div className={`mt-4 rounded-xl p-3 text-xs ${dark ? "bg-white/[0.06] text-white/75" : "bg-brand-500/[0.06] text-ink-900/70"}`}>
           <p className="font-semibold">Inclus : {pack.included}</p>
           <p className="mt-1 opacity-80">{pack.extension}</p>
@@ -312,7 +317,8 @@ function Simulator({ billing }: { billing: Billing }) {
             <motion.p key={`${shown}-${billing}`} initial={{ opacity: 0.3, y: 6 }} animate={{ opacity: 1, y: 0 }} className="mt-1 font-display text-5xl font-bold tracking-tight tabular-nums">
               {fcfa(shown).replace(" FCFA", "")}
             </motion.p>
-            <p className="mt-1 text-sm text-white/55">FCFA HT / {billing === "monthly" ? "mois" : "an (1 mois offert)"}</p>
+            <p className="mt-1 text-sm text-white/55">FCFA HT / {billing === "monthly" ? "mois" : "an (12 mois pour 11)"}</p>
+            <p className="mt-2 inline-flex items-center gap-1.5 text-sm font-semibold text-mint-400"><Gift className="size-4" /> {TRIAL_TEXT}</p>
 
             <div className="mt-6 space-y-2 text-sm">
               {lines.map(([label, price]) => (

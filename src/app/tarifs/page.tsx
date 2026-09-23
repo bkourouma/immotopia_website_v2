@@ -8,7 +8,7 @@ import { SoftwareJsonLd } from "@/components/json-ld";
 export const metadata: Metadata = {
   title: "Tarifs — Packs Agence, Syndic, Promoteur et Opérateur intégré | ImmoTopia",
   description:
-    "Tarifs ImmoTopia en FCFA : pack Agence dès 29 900 FCFA HT/mois, Syndic, Promoteur et Opérateur intégré. Aucune commission sur les loyers, 1 mois offert en annuel.",
+    "Tarifs ImmoTopia en FCFA : pack Agence dès 29 900 FCFA HT/mois, Syndic, Promoteur et Opérateur intégré. Premier mois offert, sans engagement. Aucune commission sur les loyers.",
   alternates: { canonical: "/tarifs" },
 };
 

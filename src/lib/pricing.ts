@@ -15,7 +15,9 @@ export type Pack = {
   featured?: boolean;
 };
 
-export const ANNUAL_MONTHS = 11; // l'annuel payé d'avance = 11 mensualités (1 mois offert)
+export const ANNUAL_MONTHS = 11; // l'annuel payé d'avance = 11 mensualités (12 mois pour 11)
+export const FREE_TRIAL_MONTHS = 1; // premier mois offert sur tous les packs, sans engagement
+export const TRIAL_TEXT = "Premier mois offert, sans engagement";
 export const COMBO_DISCOUNT = 0.1; // 10 % sur le moins cher des packs combinés
 
 export const packs: Pack[] = [

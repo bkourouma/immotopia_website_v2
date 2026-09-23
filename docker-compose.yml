@@ -11,6 +11,9 @@ services:
       - "127.0.0.1:3023:3000"
     environment:
       N8N_WEBHOOK_URL: ${N8N_WEBHOOK_URL:-}
+      # Assistant immotopIA (clé à placer dans /var/www/immotopia-site/.env, jamais dans le code)
+      OPENROUTER_API_KEY: ${OPENROUTER_API_KEY:-}
+      OPENROUTER_MODEL: ${OPENROUTER_MODEL:-deepseek/deepseek-v4.1-flash}
     healthcheck:
       test: ["CMD", "wget", "-qO-", "http://127.0.0.1:3000/robots.txt"]
       interval: 30s

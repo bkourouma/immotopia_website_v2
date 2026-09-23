@@ -66,7 +66,7 @@ export function SoftwareJsonLd() {
         offers: packs.map((p) => ({
           "@type": "Offer",
           name: `Pack ${p.name}`,
-          description: `${p.audience}. Inclus : ${p.included}.`,
+          description: `${p.audience}. Inclus : ${p.included}. Premier mois offert, sans engagement.`,
           price: p.monthly,
           priceCurrency: "XOF",
           priceSpecification: {

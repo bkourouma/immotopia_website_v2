@@ -27,12 +27,25 @@ export default function ConfidentialitePage() {
           e-mail et téléphone.
         </li>
         <li>
+          <strong>Assistant immotopIA</strong> : les questions que vous posez à l&apos;assistant du site et l&apos;historique de la
+          conversation en cours.
+        </li>
+        <li>
           <strong>Échanges par WhatsApp, téléphone ou e-mail</strong> : les informations que vous choisissez de nous transmettre.
         </li>
       </ul>
       <p>
         Les <strong>outils gratuits</strong> (quittances, baux, calculateurs) fonctionnent entièrement dans votre navigateur : les
         informations que vous y saisissez ne nous sont jamais transmises.
+      </p>
+
+      <h2>Assistant immotopIA</h2>
+      <p>
+        Les réponses de l&apos;assistant sont générées par un modèle d&apos;intelligence artificielle (DeepSeek), via le service
+        OpenRouter. Vos messages leur sont transmis pour produire la réponse, et peuvent être traités hors de Côte d&apos;Ivoire. Nous
+        ne conservons pas le contenu des conversations sur nos serveurs ; l&apos;historique reste dans votre navigateur le temps de la
+        visite. N&apos;y saisissez pas d&apos;informations personnelles sensibles. Les réponses peuvent contenir des erreurs : seuls le
+        devis et le contrat font foi.
       </p>
 
       <h2>Finalités</h2>
@@ -46,7 +59,7 @@ export default function ConfidentialitePage() {
       <h2>Destinataires et sous-traitants</h2>
       <p>
         Les données sont destinées à l&apos;équipe commerciale d&apos;ImmoTopia. Elles peuvent être traitées, pour notre compte, par
-        des prestataires techniques : Calendly (prise de rendez-vous), notre hébergeur {legal.host}, et nos outils internes de suivi
+        des prestataires techniques : Calendly (prise de rendez-vous), OpenRouter et DeepSeek (assistant immotopIA), notre hébergeur {legal.host}, et nos outils internes de suivi
         des demandes. Certains de ces prestataires peuvent être situés hors de Côte d&apos;Ivoire.
       </p>
 

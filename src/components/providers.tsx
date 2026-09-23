@@ -3,6 +3,7 @@
 import { MotionConfig } from "framer-motion";
 import { createContext, useCallback, useContext, useState, type ReactNode } from "react";
 import { DemoModal } from "./demo-modal";
+import { ChatWidget } from "./chat/chat-widget";
 import { WhatsAppButton } from "./whatsapp-button";
 
 type DemoCtx = { open: () => void; close: () => void; isOpen: boolean };
@@ -26,6 +27,7 @@ export function Providers({ children }: { children: ReactNode }) {
         {children}
         <DemoModal open={isOpen} onClose={close} />
         <WhatsAppButton />
+        <ChatWidget />
       </DemoContext.Provider>
     </MotionConfig>
   );
