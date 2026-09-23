@@ -15,7 +15,7 @@ export function FinalCta() {
       <Reveal>
         <div className="relative isolate overflow-hidden rounded-[36px] bg-ink-950 px-6 py-20 text-center text-white md:py-28">
           <div className="grid-lines absolute inset-0 -z-10 [mask-image:radial-gradient(ellipse_at_50%_50%,black,transparent_70%)]" />
-          <div aria-hidden className="absolute top-1/2 left-1/2 -z-10 h-[360px] w-[720px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-r from-brand-500/50 to-sun-500/40 blur-[120px]" />
+          <div aria-hidden className="absolute top-1/2 left-1/2 -z-10 h-[720px] w-[1200px] -translate-x-1/2 -translate-y-1/2" style={{ background: "radial-gradient(closest-side, rgba(91,91,247,0.45), rgba(255,138,61,0.22) 55%, transparent)" }} />
           <h2 className="mx-auto max-w-3xl font-display text-4xl leading-[1.05] font-bold tracking-tight text-balance md:text-6xl">
             Prêt à faire entrer votre agence <span className="text-gradient">dans une autre ère ?</span>
           </h2>
@@ -34,7 +34,7 @@ export function FinalCta() {
       <footer className="mx-auto max-w-6xl px-5 pt-14 pb-10 text-sm text-ink-900/60">
         <div className="grid gap-10 md:grid-cols-[1.3fr_1fr_1fr_1.2fr]">
           <div>
-            <Logo className="text-ink-900" />
+            <Logo className="text-ink-900" onLight />
             <p className="mt-4 max-w-xs">L&apos;ERP immobilier le plus complet de Côte d&apos;Ivoire : gestion locative, syndic, promotion et Mobile Money.</p>
           </div>
           <FooterCol title="Produit">
@@ -70,7 +70,7 @@ export function FinalCta() {
             </span>
           </FooterCol>
         </div>
-        <p className="mt-12 border-t border-ink-900/[0.07] pt-6 text-xs text-ink-900/45">
+        <p className="mt-12 border-t border-ink-900/[0.07] pt-6 text-xs text-ink-900/60">
           © {new Date().getFullYear()} ImmoTopia · Une solution {legal.publisher}
         </p>
       </footer>
@@ -81,7 +81,7 @@ export function FinalCta() {
 function FooterCol({ title, children }: { title: string; children: ReactNode }) {
   return (
     <div>
-      <p className="mb-4 text-xs font-semibold tracking-[0.14em] text-ink-900/40 uppercase">{title}</p>
+      <p className="mb-4 text-xs font-semibold tracking-[0.14em] text-ink-900/60 uppercase">{title}</p>
       <div className="flex flex-col items-start gap-2.5">{children}</div>
     </div>
   );

@@ -47,6 +47,7 @@ const legacyRedirects: [string, string][] = [
 
 const nextConfig: NextConfig = {
   output: "standalone",
+  poweredByHeader: false,
   async redirects() {
     return legacyRedirects.map(([source, destination]) => ({ source, destination, statusCode: 301 as const }));
   },

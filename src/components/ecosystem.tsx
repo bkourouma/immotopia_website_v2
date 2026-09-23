@@ -81,7 +81,7 @@ export function Ecosystem() {
   return (
     <section ref={root} id="ecosysteme" className="relative overflow-hidden bg-ink-950 py-24 text-white md:py-32">
       <div className="grid-lines absolute inset-0 [mask-image:radial-gradient(ellipse_at_50%_0%,black,transparent_65%)]" />
-      <div aria-hidden className="absolute top-0 left-1/2 h-[400px] w-[800px] -translate-x-1/2 rounded-full bg-brand-500/20 blur-[140px]" />
+      <div aria-hidden className="absolute -top-60 left-1/2 h-[800px] w-[1300px] -translate-x-1/2" style={{ background: "radial-gradient(closest-side, rgba(91,91,247,0.22), transparent)" }} />
 
       <div className="relative mx-auto max-w-6xl px-5">
         <div className="mx-auto max-w-3xl text-center">

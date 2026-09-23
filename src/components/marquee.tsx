@@ -23,7 +23,7 @@ function Item({ p }: { p: (typeof partners)[number] }) {
 export function Marquee() {
   return (
     <section aria-label="Partenaires et conformité" className="border-y border-ink-900/5 bg-white py-10">
-      <p className="mb-6 text-center text-xs font-semibold tracking-[0.18em] text-ink-900/45 uppercase">
+      <p className="mb-6 text-center text-xs font-semibold tracking-[0.18em] text-ink-900/60 uppercase">
         Paiements, messagerie et conformité intégrés nativement
       </p>
       <div className="mask-fade-x group flex overflow-hidden">

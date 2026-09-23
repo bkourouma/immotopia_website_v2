@@ -116,9 +116,9 @@ function RoleVisual({ id }: { id: RoleId }) {
             ["Honoraires", "5,1 M", "+18 %"],
           ].map(([k, v, t]) => (
             <div key={k} className="rounded-2xl bg-white p-3 shadow-sm ring-1 ring-ink-900/5">
-              <p className="text-[11px] text-ink-900/50">{k}</p>
+              <p className="text-[11px] text-ink-900/65">{k}</p>
               <p className="mt-1 font-display text-xl font-bold">{v}</p>
-              <p className="flex items-center gap-1 text-[11px] font-semibold text-emerald-600">
+              <p className="flex items-center gap-1 text-[11px] font-semibold text-emerald-700">
                 <TrendingUp className="size-3" /> {t}
               </p>
             </div>

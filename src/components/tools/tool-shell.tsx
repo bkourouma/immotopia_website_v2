@@ -15,7 +15,7 @@ export function ToolShell({ tool, children, about }: { tool: ToolMeta; children:
       <main className="bg-paper">
         <section className="relative isolate overflow-hidden bg-ink-950 pt-32 pb-16 text-white">
           <div className="grid-lines absolute inset-0 -z-10 [mask-image:radial-gradient(ellipse_at_50%_0%,black,transparent_70%)]" />
-          <div aria-hidden className="absolute -top-24 left-1/2 -z-10 h-[360px] w-[720px] -translate-x-1/2 rounded-full opacity-35 blur-[120px]" style={{ background: tool.accent }} />
+          <div aria-hidden className="absolute -top-60 left-1/2 -z-10 h-[720px] w-[1200px] -translate-x-1/2" style={{ background: `radial-gradient(closest-side, ${tool.accent}59, transparent)` }} />
           <div className="mx-auto max-w-6xl px-5">
             <nav aria-label="Fil d'Ariane" className="flex items-center gap-1.5 text-sm text-white/50">
               <Link href="/" className="hover:text-white">

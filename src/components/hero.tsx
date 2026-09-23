@@ -1,8 +1,6 @@
 "use client";
 
 import { AnimatePresence, motion, type PanInfo } from "framer-motion";
-import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
 import Image from "next/image";
 import { ArrowRight, ChevronLeft, ChevronRight, Play } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
@@ -43,21 +41,6 @@ export function Hero() {
     return () => document.removeEventListener("visibilitychange", onVis);
   }, []);
 
-  // Apparition d'entrée orchestrée avec GSAP
-  useGSAP(
-    () => {
-      const mm = gsap.matchMedia();
-      mm.add("(prefers-reduced-motion: no-preference)", () => {
-        gsap
-          .timeline({ defaults: { ease: "expo.out" } })
-          .from("[data-hero-word]", { yPercent: 110, opacity: 0, duration: 1.1, stagger: 0.06 })
-          .from("[data-hero-fade]", { y: 20, opacity: 0, duration: 0.9, stagger: 0.1 }, "-=0.8")
-          .from("[data-hero-stage]", { y: 80, opacity: 0, scale: 0.94, duration: 1.4 }, "-=0.9");
-      });
-    },
-    { scope: root },
-  );
-
   function onDragEnd(_: unknown, info: PanInfo) {
     const swipe = info.offset.x + info.velocity.x * 0.2;
     if (swipe < -70) go(1);
@@ -80,30 +63,37 @@ export function Hero() {
     >
       {/* Fond : grille + halos qui prennent la couleur de la carte active */}
       <div className="grid-lines absolute inset-0 -z-10 [mask-image:radial-gradient(ellipse_at_50%_30%,black,transparent_70%)]" />
-      <motion.div
-        aria-hidden
-        className="absolute top-[30%] left-1/2 -z-10 h-[520px] w-[900px] -translate-x-1/2 rounded-full opacity-40 blur-[120px]"
-        animate={{ backgroundColor: accent }}
-        transition={{ duration: 1.2 }}
-      />
-      <div aria-hidden className="absolute -top-40 -left-40 -z-10 size-[520px] rounded-full bg-brand-500/30 blur-[140px]" />
-      <div aria-hidden className="absolute -top-20 right-[-10%] -z-10 size-[420px] rounded-full bg-sun-500/15 blur-[140px]" />
+      {/* Halos en dégradés radiaux (bien plus légers qu'un flou CSS sur mobile) */}
+      <AnimatePresence initial={false}>
+        <motion.div
+          key={accent}
+          aria-hidden
+          className="absolute top-[22%] left-1/2 -z-10 h-[760px] w-[1300px] -translate-x-1/2"
+          style={{ background: `radial-gradient(closest-side, ${accent}59, transparent)` }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 1.2 }}
+        />
+      </AnimatePresence>
+      <div aria-hidden className="absolute -top-72 -left-72 -z-10 size-[900px]" style={{ background: "radial-gradient(closest-side, rgba(91,91,247,0.3), transparent)" }} />
+      <div aria-hidden className="absolute -top-60 right-[-25%] -z-10 size-[760px]" style={{ background: "radial-gradient(closest-side, rgba(255,138,61,0.14), transparent)" }} />
 
       <div className="mx-auto max-w-5xl px-5 text-center">
-        <div data-hero-fade className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs text-white/75 backdrop-blur-md">
+        <div className="hero-fade inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs text-white/75 backdrop-blur-md">
           <span className="rounded-full bg-mint-400 px-2 py-0.5 text-[10px] font-bold text-ink-950">NOUVEAU</span>
           Module Syndic de copropriété disponible
         </div>
         <h1 className="mt-6 font-display text-[2.35rem] leading-[1.02] font-bold tracking-tight text-balance sm:text-6xl md:text-7xl">
           {title.split(" ").map((w, i) => (
             <span key={i} className="inline-block overflow-hidden pb-1 align-bottom">
-              <span data-hero-word className={`inline-block ${i >= 4 ? "text-gradient" : ""}`}>
+              <span className={`hero-word inline-block ${i >= 4 ? "text-gradient" : ""}`} style={{ animationDelay: `${i * 60}ms` }}>
                 {w}&nbsp;
               </span>
             </span>
           ))}
         </h1>
-        <p data-hero-fade className="mx-auto mt-5 max-w-2xl text-base text-white/65 md:text-lg">
+        <p className="hero-fade mx-auto mt-5 max-w-2xl text-base text-white/65 md:text-lg" style={{ animationDelay: "350ms" }}>
           Gestion locative, syndic, promotion immobilière, Mobile Money et CRM réunis dans une plateforme pensée pour les
           professionnels de l&apos;immobilier à Abidjan.
         </p>
@@ -111,8 +101,7 @@ export function Hero() {
 
       {/* Scène Coverflow 3D */}
       <div
-        data-hero-stage
-        className="relative mx-auto mt-12 h-[680px] w-full [perspective:1800px] sm:h-[600px] md:mt-14 md:h-[540px]"
+        className="hero-stage relative mx-auto mt-12 h-[680px] w-full [perspective:1800px] sm:h-[600px] md:mt-14 md:h-[540px]"
         onMouseEnter={() => setPaused(true)}
         onMouseLeave={() => setPaused(false)}
         role="region"
@@ -149,7 +138,7 @@ export function Hero() {
                 }}
                 aria-hidden={d !== 0}
               >
-                <Card card={card} active={d === 0} />
+                <Card card={card} active={d === 0} near={abs <= 1} />
                 {/* Calque d'assombrissement des cartes latérales */}
                 <motion.div
                   className="pointer-events-none absolute inset-0 rounded-[28px] bg-ink-950"
@@ -164,21 +153,22 @@ export function Hero() {
       </div>
 
       {/* Contrôles */}
-      <div data-hero-fade className="mx-auto mt-8 flex max-w-5xl flex-col items-center gap-5 px-5">
+      <div className="hero-fade mx-auto mt-8 flex max-w-5xl flex-col items-center gap-5 px-5" style={{ animationDelay: "700ms" }}>
         <div className="flex items-center gap-3">
           <NavButton label="Carte précédente" onClick={() => go(-1)}>
             <ChevronLeft className="size-5" />
           </NavButton>
-          <div className="flex items-center gap-1.5">
+          <div className="flex items-center">
             {heroCards.map((c, i) => (
               <button
                 key={c.id}
                 onClick={() => setActive(i)}
                 aria-label={c.eyebrow}
                 aria-current={i === active}
-                className="group relative h-2 cursor-pointer overflow-hidden rounded-full bg-white/15 transition-all duration-500"
-                style={{ width: i === active ? 56 : 8 }}
+                className="group relative flex h-6 cursor-pointer items-center transition-all duration-500"
+                style={{ width: i === active ? 56 : 24 }}
               >
+                <span className={`absolute h-2 overflow-hidden rounded-full bg-white/15 ${i === active ? "inset-x-0" : "inset-x-2"}`}>
                 {i === active && (
                   <motion.span
                     key={`${active}-${paused}`}
@@ -189,6 +179,7 @@ export function Hero() {
                     transition={{ duration: paused ? 0 : AUTOPLAY_MS / 1000, ease: "linear" }}
                   />
                 )}
+                </span>
               </button>
             ))}
           </div>
@@ -232,7 +223,7 @@ function NavButton({ children, label, onClick }: { children: React.ReactNode; la
   );
 }
 
-function Card({ card, active }: { card: HeroCard; active: boolean }) {
+function Card({ card, active, near }: { card: HeroCard; active: boolean; near: boolean }) {
   return (
     <article
       className="relative flex h-full flex-col overflow-hidden rounded-[28px] border border-white/10 bg-ink-900 shadow-[0_40px_120px_-30px_rgba(0,0,0,0.9)] md:flex-row"
@@ -282,11 +273,12 @@ function Card({ card, active }: { card: HeroCard; active: boolean }) {
       <div className="relative h-[300px] shrink-0 overflow-hidden bg-[linear-gradient(160deg,#111729,#05070f)] p-4 sm:h-[280px] md:h-auto md:flex-[0.54] md:p-8">
         <div
           aria-hidden
-          className="absolute -right-20 -bottom-20 size-72 rounded-full opacity-30 blur-3xl"
-          style={{ background: card.accent }}
+          className="absolute -right-40 -bottom-40 size-[28rem]"
+          style={{ background: `radial-gradient(closest-side, ${card.accent}4d, transparent)` }}
         />
         <div className="relative flex h-full items-center justify-center">
-          <Mockup kind={card.id} active={active} />
+          {/* Les écrans animés ne sont montés que pour la carte active et ses voisines */}
+          {near ? <Mockup kind={card.id} active={active} /> : <div className="size-full rounded-2xl border border-white/10 bg-ink-900/60" />}
         </div>
       </div>
     </article>

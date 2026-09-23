@@ -85,7 +85,7 @@ export function Eyebrow({ children, dark = false }: { children: ReactNode; dark?
   );
 }
 
-export function Logo({ className = "" }: { className?: string }) {
+export function Logo({ className = "", onLight = false }: { className?: string; onLight?: boolean }) {
   return (
     <span className={`inline-flex items-center gap-2.5 ${className}`}>
       <svg viewBox="0 0 32 32" className="size-8" aria-hidden>
@@ -100,7 +100,7 @@ export function Logo({ className = "" }: { className?: string }) {
         <rect x="14.2" y="15" width="3.6" height="9" rx="1.8" fill="#fff" />
       </svg>
       <span className="font-display text-xl font-bold tracking-tight">
-        Immo<span className="text-sun-500">Topia</span>
+        Immo<span className={onLight ? "text-[#c2410c]" : "text-sun-500"}>Topia</span>
       </span>
     </span>
   );

@@ -63,7 +63,7 @@ export function Pricing() {
           ))}
         </div>
 
-        <p className="mt-6 text-center text-xs text-ink-900/45">
+        <p className="mt-6 text-center text-xs text-ink-900/60">
           Prix hors taxes. Mise en route facultative si vous préparez et saisissez vos données vous-même. WhatsApp facturé à la
           consommation. Au-delà des capacités indiquées, devis sur mesure.
         </p>
@@ -330,7 +330,7 @@ function Simulator({ billing }: { billing: Billing }) {
                 </div>
               )}
             </div>
-            <p className="mt-6 text-xs text-white/40">Hors taxes, mise en route et messages WhatsApp consommés. Estimation indicative, devis sur demande.</p>
+            <p className="mt-6 text-xs text-white/60">Hors taxes, mise en route et messages WhatsApp consommés. Estimation indicative, devis sur demande.</p>
           </div>
         </div>
       </div>

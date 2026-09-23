@@ -5,7 +5,7 @@ export function PageHero({ eyebrow, title, children }: { eyebrow: string; title:
   return (
     <section className="relative isolate overflow-hidden bg-ink-950 pt-36 pb-16 text-center text-white md:pb-20">
       <div className="grid-lines absolute inset-0 -z-10 [mask-image:radial-gradient(ellipse_at_50%_20%,black,transparent_70%)]" />
-      <div aria-hidden className="absolute top-10 left-1/2 -z-10 h-[360px] w-[760px] -translate-x-1/2 rounded-full bg-gradient-to-r from-brand-500/40 to-sun-500/25 blur-[130px]" />
+      <div aria-hidden className="absolute -top-40 left-1/2 -z-10 h-[720px] w-[1200px] -translate-x-1/2" style={{ background: "radial-gradient(closest-side, rgba(91,91,247,0.3), rgba(255,138,61,0.1) 55%, transparent)" }} />
       <div className="mx-auto max-w-4xl px-5">
         <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3.5 py-1.5 text-xs font-semibold tracking-[0.14em] text-white/80 uppercase backdrop-blur-md">
           <span className="size-1.5 rounded-full bg-mint-400" /> {eyebrow}
