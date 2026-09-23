@@ -11,9 +11,9 @@ Règles de lecture pour l'assistant :
 
 ## Disponibilité (vérifiée le 23 septembre 2026 — prime sur tout le reste)
 
-- Disponible et commercialisé : module Agence (biens, annonces, CRM, baux, échéances, paiements, pénalités, dépôts, documents, relevés de gérance, portails propriétaire et locataire), module Syndic, maintenance, communication e-mail / WhatsApp / newsletter, patrimoine, tableaux de bord, rôles et audit. Packs vendus : **Agence** et **Syndic** (combinables avec 10 % de remise sur le moins cher).
+- Disponible et commercialisé : module Agence (biens, annonces, CRM, baux, échéances, paiements, pénalités, dépôts, documents, relevés de gérance, portails propriétaire et locataire), module Syndic, maintenance, communication e-mail / WhatsApp / newsletter, patrimoine, tableaux de bord, rôles et audit. Packs vendus : **Agence**, **Syndic**, **Promoteur** et **Opérateur intégré** (combinables avec 10 % de remise sur le moins cher).
 - En cours de développement, et présentables comme tels : le module Promoteur (chantiers, stock de matériaux, personnel, tâcherons, foncier, associations), la finance opérationnelle (fournisseurs, pièces de caisse, file de validation, balances clients et fournisseurs, import Excel) et les fonctions listées dans « Fonctions en cours de développement ». Toujours préciser qu'elles sont en cours de développement ou de déploiement, ne jamais donner de date, et proposer de vérifier leur disponibilité avec l'équipe.
-- Les packs **Promoteur** et **Opérateur intégré** ne sont pas encore commercialisés : ne pas donner leur prix.
+- Les packs **Promoteur** et **Opérateur intégré** sont affichés avec leur prix ; leurs fonctions de chantier, de BTP et de finance opérationnelle sont en cours de déploiement : le préciser, sans date.
 - Les points de la section « Limites » (fonctions non établies) ne sont pas annoncés.
 
 ---
@@ -363,7 +363,7 @@ Les montants exacts des packs, capacités incluses, extensions et frais de mise 
 ### Principes
 
 - Prix mensuels en FCFA, hors taxes applicables.
-- Deux packs commercialisés : Agence et Syndic, chacun avec une capacité incluse (logements sous mandat ; copropriétés et lots) et un prix d'extension au-delà. Les packs Promoteur et Opérateur intégré prévus par la proposition commerciale ne sont pas commercialisés actuellement.
+- Quatre packs : Agence, Syndic, Promoteur et Opérateur intégré, chacun avec une capacité incluse (logements sous mandat ; copropriétés et lots ; chantiers et lots de programme) et un prix d'extension au-delà.
 - Le mensuel est payé d'avance.
 - Offre de lancement : le premier mois d'abonnement est offert sur tous les packs, sans engagement (résiliable à tout moment). La mise en route accompagnée, si elle est choisie, reste facturée.
 - L'annuel payé d'avance coûte 11 mensualités, soit 12 mois pour le prix de 11 (environ 8,3 % de remise). Exemple : Agence à 29 900 FCFA par mois, soit 328 900 FCFA par an, hors mise en route et consommation.

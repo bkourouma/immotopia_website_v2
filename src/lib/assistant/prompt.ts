@@ -3,7 +3,7 @@
 // puisse le mettre en cache d'une requête à l'autre.
 
 import { fcfa } from "../format";
-import { activePacks, ANNUAL_MONTHS, coverage, packs } from "../pricing";
+import { activePacks, ANNUAL_MONTHS, coverage } from "../pricing";
 import { APP_LOGIN_URL, contact, legal, SITE_URL } from "../site";
 import { tools } from "../tools";
 import { KNOWLEDGE } from "./knowledge.generated";
@@ -18,8 +18,8 @@ function pricingSection() {
   const table = coverage.map(([label, ...cells]) => `- ${label} : ${cells.map((ok, i) => `${names[i]} ${ok ? "oui" : "non"}`).join(", ")}`);
   return [
     "## Grille tarifaire officielle (source de vérité pour tout chiffre)",
-    `Packs actuellement commercialisés : ${activePacks.map((p) => p.name).join(" et ")}. ` +
-      `Les packs ${packs.filter((p) => !p.available).map((p) => p.name).join(" et ")} ne sont pas encore commercialisés : ne donne pas leur prix. Le module Promoteur (chantiers, stock, tâcherons) et la finance opérationnelle (caisse, fournisseurs, validations) sont en cours de développement : tu peux les présenter comme tels et proposer d'en parler avec l'équipe.`,
+    `Packs commercialisés : ${activePacks.map((p) => p.name).join(", ")}. ` +
+      `Tu peux donner le prix de chacun. Le module Promoteur (chantiers, stock, tâcherons) et la finance opérationnelle (caisse, fournisseurs, validations) sont en cours de déploiement : quand tu présentes les packs Promoteur ou Opérateur intégré, précise-le sans donner de date et propose d'en parler avec l'équipe en démonstration.`,
     ...lines,
     "",
     "Offre de lancement : le premier mois d'abonnement est offert sur tous les packs, sans engagement (résiliable à tout moment) ; la mise en route accompagnée reste facturée si elle est choisie. Règles : paiement mensuel d'avance ; l'annuel payé d'avance coûte 11 mensualités (12 mois pour le prix de 11). Packs combinables avec 10 % de remise sur le moins cher des abonnements combinés ; avec les trois métiers, on compare au forfait Opérateur intégré et on applique le moins cher. Aucune commission ImmoTopia sur les loyers. Les comptes collaborateurs, propriétaires et locataires ne sont pas facturés. WhatsApp est facturé à la consommation. Mise en route gratuite si le client prépare et saisit lui-même ses données. Au-delà des capacités, devis sur mesure. Les prix sont hors taxes.",

@@ -13,7 +13,7 @@ export type Pack = {
   setup: number; // mise en route accompagnée (facultative)
   highlights: string[];
   featured?: boolean;
-  /** false = pack non commercialisé pour l'instant (fonctions pas encore en production) : masqué sur le site et pour l'assistant */
+  /** false = pack masqué sur le site et pour l'assistant */
   available: boolean;
 };
 
@@ -67,7 +67,7 @@ export const packs: Pack[] = [
     included: "2 chantiers actifs et 150 lots de programme",
     extension: "+40 000 FCFA/chantier ; +100 FCFA/lot au-delà de 150",
     setup: 450_000,
-    available: false,
+    available: true,
     highlights: [
       "Chantiers : budgets, coûts, achats et avancement",
       "Matériaux, stock, personnel et tâcherons",
@@ -86,7 +86,7 @@ export const packs: Pack[] = [
     extension: "+35 000 FCFA/chantier ; +10 000 FCFA/copropriété ; +100 FCFA/lot",
     setup: 650_000,
     featured: true,
-    available: false,
+    available: true,
     highlights: [
       "Tous les modules : Agence, Syndic et Promoteur",
       "Un même lot compté une seule fois, du chantier à la gestion",
@@ -112,9 +112,9 @@ const coverageAll: { label: string; cells: [boolean, boolean, boolean, boolean];
   { label: "Maintenance et interventions", cells: [true, true, true, true], live: true },
   { label: "Syndic : copropriétés, tantièmes, charges, impayés, AG", cells: [false, true, false, true], live: true },
   { label: "Comptabilité de copropriété et budgets", cells: [false, true, false, true], live: true },
-  { label: "Chantiers : budgets, coûts, achats, avancement, lots, clôture", cells: [false, false, true, true], live: false },
-  { label: "BTP : matériaux et stock, personnel, tâcherons, terrain", cells: [false, false, true, true], live: false },
-  { label: "Finance opérationnelle : fournisseurs, caisse, validations", cells: [true, true, true, true], live: false },
+  { label: "Chantiers : budgets, coûts, achats, avancement, lots, clôture", cells: [false, false, true, true], live: true },
+  { label: "BTP : matériaux et stock, personnel, tâcherons, terrain", cells: [false, false, true, true], live: true },
+  { label: "Finance opérationnelle : fournisseurs, caisse, validations", cells: [true, true, true, true], live: true },
   { label: "Patrimoine : valorisation, rendement, emprunts, travaux", cells: [true, false, true, true], live: true },
   { label: "Communication : e-mail, modèles, rappels, WhatsApp, newsletter", cells: [true, true, true, true], live: true },
 ];
