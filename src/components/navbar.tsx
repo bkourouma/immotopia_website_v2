@@ -39,8 +39,8 @@ export function Navbar() {
           {navLinks.map((l) => (
             <li
               key={l.href}
-              // Entre md et lg, la place manque : « Fonctionnalités » ramène seulement en haut de l'accueil.
-              className={`relative ${l.href === "#top" ? "hidden lg:block" : ""}`}
+              // Sous xl, la place manque : « Fonctionnalités » ramène seulement en haut de l'accueil.
+              className={`relative ${l.href === "#top" ? "hidden xl:block" : ""}`}
               onMouseEnter={() => setHovered(l.href)}
               onFocus={() => setHovered(l.href)}
               onBlur={(e) => !e.currentTarget.contains(e.relatedTarget) && setHovered(null)}
@@ -49,7 +49,7 @@ export function Navbar() {
                 href={l.href}
                 aria-haspopup={l.children ? "true" : undefined}
                 aria-expanded={l.children ? hovered === l.href : undefined}
-                className="relative z-10 flex items-center gap-1 px-2.5 py-2 text-[13px] font-medium whitespace-nowrap text-white/75 transition-colors hover:text-white lg:px-4 lg:text-sm"
+                className="relative z-10 flex items-center gap-1 px-2.5 py-2 text-[13px] font-medium whitespace-nowrap text-white/75 transition-colors hover:text-white xl:px-4 xl:text-sm"
               >
                 {l.label}
                 {l.children && <ChevronDown className={`size-3.5 transition-transform ${hovered === l.href ? "rotate-180" : ""}`} />}
