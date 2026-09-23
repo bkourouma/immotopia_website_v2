@@ -1,6 +1,7 @@
 // Tout le texte du site est centralisé ici pour pouvoir être modifié sans toucher aux composants.
-// Règle éditoriale : n'annoncer que des fonctions disponibles en production.
-// (Exception décidée le 23/09/2026 : la page /comparatif reprend tout le périmètre de l'Excel de veille.)
+// Règle éditoriale (23/09/2026) : le site peut présenter les fonctions en production ET celles en cours
+// de développement. Ne jamais annoncer de date de livraison ; une fonction qui n'existe nulle part
+// (ni en production ni en développement) ne s'annonce pas.
 
 import { comparatifHref, domains } from "./comparatif-domains";
 

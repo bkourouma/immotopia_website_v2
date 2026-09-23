@@ -1,8 +1,9 @@
 // Comparatif ImmoTopia face à trois éditeurs ivoiriens.
 // Les lignes et les sources sont générées depuis l'Excel de veille (voir comparatif-data.ts) ;
 // ce fichier porte ce qui ne se déduit pas du tableau : produits, domaines, libellés.
-// Décision du 23/09/2026 : le comparatif reprend tout le périmètre de l'Excel, y compris les
-// fonctions en cours de déploiement (exception assumée à la règle éditoriale de content.ts).
+// Le comparatif reprend tout le périmètre de l'Excel, fonctions en cours de développement comprises,
+// comme le permet la règle éditoriale de content.ts. Régénérer les données :
+// python scripts/comparatif-from-excel.py <chemin de l'Excel>
 
 import { compareRows, compareSources } from "./comparatif-data";
 import type { DomainId } from "./comparatif-domains";

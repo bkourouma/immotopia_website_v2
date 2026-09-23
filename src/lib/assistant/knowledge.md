@@ -9,11 +9,12 @@ Règles de lecture pour l'assistant :
 - La section « Limites connues et points à ne pas promettre » prime sur toute autre formulation, y compris sur les accroches commerciales du site.
 - Les prix officiels sont fournis séparément (grille tarifaire). Ce document n'en donne que les règles.
 
-## Disponibilité en production (vérifiée le 23 septembre 2026 — prime sur tout le reste)
+## Disponibilité (vérifiée le 23 septembre 2026 — prime sur tout le reste)
 
 - Disponible et commercialisé : module Agence (biens, annonces, CRM, baux, échéances, paiements, pénalités, dépôts, documents, relevés de gérance, portails propriétaire et locataire), module Syndic, maintenance, communication e-mail / WhatsApp / newsletter, patrimoine, tableaux de bord, rôles et audit. Packs vendus : **Agence** et **Syndic** (combinables avec 10 % de remise sur le moins cher).
-- Non disponible dans la version en production, donc non proposé : le module Promoteur (chantiers, stock de matériaux, personnel, tâcherons, foncier, associations), la finance opérationnelle (fournisseurs, pièces de caisse, file de validation, balances clients et fournisseurs, import Excel), ainsi que les packs **Promoteur** et **Opérateur intégré**. Ne pas les proposer, ne pas donner leur prix, ne pas évoquer de date : dire simplement qu'ils ne sont pas proposés actuellement et proposer d'en parler avec l'équipe.
-- Les fonctions listées dans « Fonctions en cours de développement » et « Limites » ne sont pas annoncées.
+- En cours de développement, et présentables comme tels : le module Promoteur (chantiers, stock de matériaux, personnel, tâcherons, foncier, associations), la finance opérationnelle (fournisseurs, pièces de caisse, file de validation, balances clients et fournisseurs, import Excel) et les fonctions listées dans « Fonctions en cours de développement ». Toujours préciser qu'elles sont en cours de développement ou de déploiement, ne jamais donner de date, et proposer de vérifier leur disponibilité avec l'équipe.
+- Les packs **Promoteur** et **Opérateur intégré** ne sont pas encore commercialisés : ne pas donner leur prix.
+- Les points de la section « Limites » (fonctions non établies) ne sont pas annoncés.
 
 ---
 
@@ -503,7 +504,7 @@ Pour un devis précis (volumes, combinaison de packs, reprise de données), orie
 
 ## Fonctions en cours de développement
 
-Les éléments suivants sont en cours de développement ou d'intégration en septembre 2026. Ils ne doivent pas être présentés comme disponibles ; on peut dire qu'ils sont prévus ou en cours et que l'équipe confirmera leur disponibilité en démonstration.
+Les éléments suivants sont en cours de développement ou d'intégration en septembre 2026. On peut les présenter, en disant qu'ils sont en cours de développement ou de déploiement, sans date, et que l'équipe confirmera leur disponibilité en démonstration.
 
 - Gestion locative approfondie :
   - Honoraires de gestion paramétrables par agence, par propriétaire et par bail (pourcentage ou forfait), avec TVA.
@@ -518,12 +519,22 @@ Les éléments suivants sont en cours de développement ou d'intégration en sep
 
 ---
 
+## Comparatif avec d'autres logiciels
+
+Le site publie un comparatif sur https://immotopia.cloud/comparatif : ImmoTopia face à ChezvousBO, Logestimmo et WIMMO, sur une centaine de fonctionnalités réparties en domaines (socle, pilotage, biens et commercial, gestion locative, portails, finance et documents, syndic, chantiers et BTP, patrimoine, communication, intégrations). Pour les concurrents, il ne reprend que ce qu'ils annoncent sur leurs pages publiques, consultées le 23 septembre 2026, avec les sources.
+
+- Quand un visiteur demande une comparaison, renvoyer vers cette page, au besoin vers la section du domaine concerné (par exemple https://immotopia.cloud/comparatif#syndic).
+- « Non documenté » signifie que rien n'a été trouvé dans les pages publiques de l'éditeur, pas que la fonction est absente. Ne jamais dénigrer un concurrent ni affirmer qu'il ne sait pas faire quelque chose.
+- Certaines fonctions d'ImmoTopia du comparatif sont en cours de développement : le préciser si le visiteur demande leur disponibilité immédiate.
+
+---
+
 ## Limites connues et points à ne pas promettre
 
 ### Signalés explicitement par la documentation
 
 - Vente complète d'un programme (pack Promoteur et Opérateur intégré) : le contrat de vente, l'échéancier de l'acquéreur, le transfert du lot et la création du copropriétaire ne sont pas vérifiés en production. Le CRM et les mandats de vente existent, mais ne suffisent pas à couvrir ce parcours. Ne pas promettre la gestion des offres, compromis, contrats de vente ni appels de fonds acquéreurs.
-- Finance opérationnelle, chantiers, stock, personnel, tâcherons, baux de terrain et associations : décrits le 22 septembre 2026 comme présents sur une branche de développement distincte ; leur disponibilité dans la version déployée doit être confirmée par une démonstration.
+- Finance opérationnelle, chantiers, stock, personnel, tâcherons, baux de terrain et associations : en cours de développement ; on peut les présenter comme tels, leur disponibilité se confirme en démonstration.
 - Prix : hypothèses en cours de validation auprès de clients, pas des tarifs définitifs. Le montant d'environ 400 000 FCFA par mois évoqué pour un grand opérateur est un ordre de grandeur interne, pas un prix à annoncer.
 - Grille de consommation WhatsApp : non publiée ; aucun WhatsApp illimité.
 - Reprise automatique de données depuis un autre logiciel : à annoncer uniquement pour les formats effectivement pris en charge (non listés dans les sources).
