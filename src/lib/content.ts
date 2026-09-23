@@ -1,5 +1,8 @@
 // Tout le texte du site est centralisé ici pour pouvoir être modifié sans toucher aux composants.
 // Règle éditoriale : n'annoncer que des fonctions disponibles en production.
+// (Exception décidée le 23/09/2026 : la page /comparatif reprend tout le périmètre de l'Excel de veille.)
+
+import { comparatifHref, domains } from "./comparatif-domains";
 
 export type MockupKind =
   | "payments"
@@ -175,10 +178,17 @@ export const roles: {
 
 // Les tarifs sont dans src/lib/pricing.ts
 
-export const navLinks = [
+export type NavLink = { label: string; href: string; children?: { label: string; href: string; text: string }[] };
+
+export const navLinks: NavLink[] = [
   { label: "Fonctionnalités", href: "#top" },
   { label: "Rôles", href: "#roles" },
   { label: "Écosystème", href: "#ecosysteme" },
+  {
+    label: "Comparatif",
+    href: comparatifHref(),
+    children: domains.map((d) => ({ label: d.label, href: comparatifHref(d.id), text: d.pitch })),
+  },
   { label: "Tarifs", href: "/tarifs" },
   { label: "Outils gratuits", href: "/outils" },
 ];

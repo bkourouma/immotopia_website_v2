@@ -30,7 +30,7 @@ const perks = [
   { icon: BadgePercent, text: "Packs combinables : −10 %" },
 ];
 
-export function Pricing() {
+export function Pricing({ comparisonOpen = false }: { comparisonOpen?: boolean }) {
   const [billing, setBilling] = useState<Billing>("monthly");
   const { open } = useDemo();
 
@@ -71,7 +71,7 @@ export function Pricing() {
           consommation. Au-delà des capacités indiquées, devis sur mesure.
         </p>
 
-        <Comparison />
+        <Comparison defaultOpen={comparisonOpen} />
         <Simulator billing={billing} />
       </div>
     </section>
@@ -179,8 +179,8 @@ function PackCard({ pack, billing, onCta }: { pack: Pack; billing: Billing; onCt
 
 /* ------------------------------------------------------------------ tableau comparatif */
 
-function Comparison() {
-  const [open, setOpen] = useState(false);
+function Comparison({ defaultOpen }: { defaultOpen: boolean }) {
+  const [open, setOpen] = useState(defaultOpen);
   return (
     <div className="mt-14">
       <div className="flex justify-center">

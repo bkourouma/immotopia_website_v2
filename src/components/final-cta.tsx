@@ -35,7 +35,7 @@ export function FinalCta() {
         <div className="grid gap-10 md:grid-cols-[1.3fr_1fr_1fr_1.2fr]">
           <div>
             <Logo className="text-ink-900" onLight />
-            <p className="mt-4 max-w-xs">L&apos;ERP immobilier le plus complet de Côte d&apos;Ivoire : gestion locative, syndic, promotion et Mobile Money.</p>
+            <p className="mt-4 max-w-xs">L&apos;ERP immobilier le plus complet de Côte d&apos;Ivoire : gestion locative, syndic, CRM et portails clients.</p>
           </div>
           <FooterCol title="Produit">
             {navLinks.map((l) => (

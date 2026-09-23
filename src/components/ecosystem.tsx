@@ -3,8 +3,10 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { BellRing, Globe, KeyRound, MessageSquareText, Smartphone, Webhook } from "lucide-react";
+import { ArrowRight, BellRing, Globe, KeyRound, MessageSquareText, Smartphone, Webhook } from "lucide-react";
 import { useRef, type ReactNode } from "react";
+import { comparatifHref } from "@/lib/comparatif-domains";
+import { SmartLink } from "./smart-link";
 import { Eyebrow, Logo, trackSpotlight } from "./ui";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
@@ -92,6 +94,23 @@ export function Ecosystem() {
           <p className="mt-5 text-lg text-white/60">
             Portails, e-mail, WhatsApp et API d&apos;annonces : chaque échange passe par la même plateforme, sans ressaisie.
           </p>
+          <div className="mt-6 flex flex-wrap justify-center gap-2 text-sm font-semibold">
+            {(
+              [
+                ["communication", "Comparer la communication"],
+                ["portails-service", "Comparer les portails"],
+                ["integrations", "Comparer les intégrations"],
+              ] as const
+            ).map(([d, label]) => (
+              <SmartLink
+                key={d}
+                href={comparatifHref(d)}
+                className="group inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-white/[0.04] px-4 py-2 text-white/80 transition hover:border-white/30 hover:text-white"
+              >
+                {label} <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-0.5" />
+              </SmartLink>
+            ))}
+          </div>
         </div>
 
         <div className="mt-14 grid auto-rows-[minmax(200px,auto)] gap-4 md:grid-cols-6">

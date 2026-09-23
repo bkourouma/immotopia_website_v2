@@ -1,11 +1,20 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import { Bell, Calendar, CheckCheck, Download, FileSpreadsheet, MessageCircle, TrendingUp } from "lucide-react";
+import { ArrowRight, Bell, Calendar, CheckCheck, Download, FileSpreadsheet, MessageCircle, TrendingUp } from "lucide-react";
 import { useEffect, useState } from "react";
 import { roles, type RoleId } from "@/lib/content";
+import { comparatifHref, type DomainId } from "@/lib/comparatif-domains";
 import { ROLE_EVENT } from "@/lib/nav";
+import { SmartLink } from "./smart-link";
 import { Eyebrow, Reveal, trackSpotlight } from "./ui";
+
+// Domaine du comparatif qui prolonge chaque onglet
+const compareFor: Record<RoleId, { domain: DomainId; label: string }> = {
+  directeur: { domain: "pilotage", label: "Comparer le pilotage" },
+  comptable: { domain: "gestion-locative", label: "Comparer la gestion locative" },
+  agent: { domain: "biens-commercial", label: "Comparer le CRM et les biens" },
+};
 
 export function Roles() {
   const [tab, setTab] = useState<RoleId>("directeur");
@@ -86,6 +95,13 @@ export function Roles() {
                     </motion.div>
                   ))}
                 </div>
+                <SmartLink
+                  href={comparatifHref(compareFor[tab].domain)}
+                  className="group mt-6 inline-flex items-center gap-2 text-sm font-semibold text-brand-600 hover:text-brand-500"
+                >
+                  {compareFor[tab].label} face aux autres logiciels
+                  <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
+                </SmartLink>
               </div>
               <RoleVisual id={tab} />
             </motion.div>

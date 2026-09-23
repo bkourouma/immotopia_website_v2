@@ -1,3 +1,4 @@
+import { ComparatifTeaser } from "@/components/comparatif/comparatif-teaser";
 import { Ecosystem } from "@/components/ecosystem";
 import { FinalCta } from "@/components/final-cta";
 import { Hero } from "@/components/hero";
@@ -18,6 +19,7 @@ export default function Home() {
         <Marquee />
         <Roles />
         <Ecosystem />
+        <ComparatifTeaser />
         <ToolsSection />
         <Pricing />
       </main>

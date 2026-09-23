@@ -21,7 +21,7 @@ export default function TarifsPage() {
         <PageHero eyebrow="Tarifs" title="Des tarifs clairs, en FCFA.">
           Choisissez le pack de votre métier, estimez votre abonnement en quelques secondes, et réservez une démonstration.
         </PageHero>
-        <Pricing />
+        <Pricing comparisonOpen />
       </main>
       <FinalCta />
     </>
