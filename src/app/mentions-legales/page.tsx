@@ -18,6 +18,8 @@ export default function MentionsLegalesPage() {
         {contact.city}.
       </p>
       <ul>
+        <li>RCCM : {legal.rccm}</li>
+        <li>Compte contribuable (CC) : {legal.taxId}</li>
         <li>Téléphone : {contact.phone}</li>
         <li>
           E-mail : <a href={`mailto:${contact.email}`}>{contact.email}</a>

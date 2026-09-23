@@ -14,6 +14,8 @@ export const contact = {
 
 export const legal = {
   publisher: "Alliance Consultants",
+  rccm: "CI-ABJ-2014-B-20956",
+  taxId: "1438224 S", // numéro de compte contribuable (CC)
   publisherSite: "https://allianceconsultants.net",
   host: "Hostinger International Ltd.",
   hostAddress: "61 Lordou Vironos Street, 6023 Larnaca, Chypre",

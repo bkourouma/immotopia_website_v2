@@ -25,7 +25,15 @@ export function OrganizationJsonLd() {
             name: "ImmoTopia",
             url: SITE_URL,
             logo: `${SITE_URL}/apple-icon.png`,
-            parentOrganization: { "@type": "Organization", name: legal.publisher, url: legal.publisherSite },
+            parentOrganization: {
+              "@type": "Organization",
+              name: legal.publisher,
+              url: legal.publisherSite,
+              identifier: [
+                { "@type": "PropertyValue", propertyID: "RCCM", value: legal.rccm },
+                { "@type": "PropertyValue", propertyID: "Compte contribuable", value: legal.taxId },
+              ],
+            },
             contactPoint: {
               "@type": "ContactPoint",
               telephone: contact.phone.replace(/\s/g, ""),
