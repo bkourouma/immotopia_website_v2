@@ -102,26 +102,11 @@ export function Hero() {
           <span className="rounded-full bg-mint-400 px-2 py-0.5 text-[10px] font-bold text-ink-950">{t("NOUVEAU", "NEW")}</span>
           {t("Module Syndic de copropriété disponible", "Condominium management module now available")}
         </div>
-        <h1 className="mt-6 font-display text-[2.35rem] leading-[1.02] font-bold tracking-tight text-balance sm:text-6xl md:text-7xl">
-          {title.split(" ").map((w, i) => (
-            <span key={i} className="inline-block overflow-hidden pb-1 align-bottom">
-              <span className={`hero-word inline-block ${i >= gradientFrom ? "text-gradient" : ""}`} style={{ animationDelay: `${i * 60}ms` }}>
-                {w}&nbsp;
-              </span>
-            </span>
-          ))}
-        </h1>
-        <p className="hero-fade mx-auto mt-5 max-w-2xl text-base text-white/65 md:text-lg" style={{ animationDelay: "350ms" }}>
-          {t(
-            "Gestion locative, syndic de copropriété, CRM et portails clients réunis dans une plateforme pensée pour les professionnels de l'immobilier à Abidjan.",
-            "Rental management, condominium management, CRM and client portals in one platform built for real estate professionals in Abidjan.",
-          )}
-        </p>
       </div>
 
       {/* Scène Coverflow 3D */}
       <div
-        className="hero-stage relative mx-auto mt-12 h-[680px] w-full [perspective:1800px] sm:h-[600px] md:mt-14 md:h-[540px]"
+        className="hero-stage relative mx-auto mt-8 h-[680px] w-full [perspective:1800px] sm:h-[600px] md:mt-10 md:h-[540px]"
         onMouseEnter={() => setPaused(true)}
         onMouseLeave={() => setPaused(false)}
         role="region"
@@ -173,7 +158,7 @@ export function Hero() {
       </div>
 
       {/* Contrôles */}
-      <div className="hero-fade mx-auto mt-8 flex max-w-5xl flex-col items-center gap-5 px-5" style={{ animationDelay: "700ms" }}>
+      <div className="hero-fade mx-auto mt-8 flex max-w-5xl flex-col items-center gap-5 px-5" style={{ animationDelay: "300ms" }}>
         <div className="flex items-center gap-3">
           <NavButton label={t("Carte précédente", "Previous card")} onClick={() => go(-1)}>
             <ChevronLeft className="size-5" />
@@ -218,12 +203,33 @@ export function Hero() {
             {String(active + 1).padStart(2, "0")} / {String(N).padStart(2, "0")} · {cards[active].eyebrow}
           </motion.p>
         </AnimatePresence>
-        <MagneticButton
-          onClick={open}
-          className="mt-2 bg-white px-7 py-3.5 text-sm text-ink-950 shadow-[0_0_40px_-8px_rgba(255,255,255,0.5)] hover:shadow-[0_0_60px_-6px_rgba(255,255,255,0.7)]"
-        >
-          <Play className="size-4 fill-current" /> {t("Demander une démonstration", "Request a demo")}
-        </MagneticButton>
+      </div>
+
+      {/* Titre et accroche, sous le carrousel */}
+      <div className="mx-auto mt-14 max-w-5xl px-5 text-center md:mt-16">
+        <h1 className="font-display text-[2.35rem] leading-[1.02] font-bold tracking-tight text-balance sm:text-6xl md:text-7xl">
+          {title.split(" ").map((w, i) => (
+            <span key={i} className="inline-block overflow-hidden pb-1 align-bottom">
+              <span className={`hero-word inline-block ${i >= gradientFrom ? "text-gradient" : ""}`} style={{ animationDelay: `${i * 60}ms` }}>
+                {w}&nbsp;
+              </span>
+            </span>
+          ))}
+        </h1>
+        <p className="hero-fade mx-auto mt-5 max-w-2xl text-base text-white/65 md:text-lg" style={{ animationDelay: "350ms" }}>
+          {t(
+            "Gestion locative, syndic de copropriété, CRM et portails clients réunis dans une plateforme pensée pour les professionnels de l'immobilier à Abidjan.",
+            "Rental management, condominium management, CRM and client portals in one platform built for real estate professionals in Abidjan.",
+          )}
+        </p>
+        <div className="hero-fade mt-8 flex justify-center" style={{ animationDelay: "500ms" }}>
+          <MagneticButton
+            onClick={open}
+            className="bg-white px-7 py-3.5 text-sm text-ink-950 shadow-[0_0_40px_-8px_rgba(255,255,255,0.5)] hover:shadow-[0_0_60px_-6px_rgba(255,255,255,0.7)]"
+          >
+            <Play className="size-4 fill-current" /> {t("Demander une démonstration", "Request a demo")}
+          </MagneticButton>
+        </div>
       </div>
     </section>
   );
