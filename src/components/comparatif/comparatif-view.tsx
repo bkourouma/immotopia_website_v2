@@ -8,20 +8,24 @@ import {
   domains,
   isExclusive,
   products,
-  rows,
+  rowsFor,
   scores,
-  sources,
+  sourcesFor,
   statusMeta,
   type CompareRow,
   type DomainId,
 } from "@/lib/comparatif";
+import { useI18n } from "../locale-provider";
 import { CoverageMap } from "./coverage-map";
 import { Legend, StatusDot } from "./status";
 
 const plain = (s: string) => s.normalize("NFD").replace(/\p{M}/gu, "").toLowerCase();
-const hasVerif = rows.some((r) => r.statuses.includes("verif"));
 
 export function ComparatifView() {
+  const { locale, t } = useI18n();
+  const rows = rowsFor(locale);
+  const sources = sourcesFor(locale);
+  const hasVerif = rows.some((r) => r.statuses.includes("verif"));
   const [rival, setRival] = useState(0); // 0 = les trois, sinon index du concurrent en duel
   const [onlyExclusive, setOnlyExclusive] = useState(false);
   const [query, setQuery] = useState("");
@@ -30,8 +34,8 @@ export function ComparatifView() {
   const cols = rival ? [0, rival] : [0, 1, 2, 3];
   const q = plain(query.trim());
   const visible = useMemo(
-    () => rows.filter((r) => (!onlyExclusive || isExclusive(r)) && (!q || plain(`${r.feature} ${r.note}`).includes(q))),
-    [onlyExclusive, q],
+    () => rowsFor(locale).filter((r) => (!onlyExclusive || isExclusive(r)) && (!q || plain(`${r.feature} ${r.note}`).includes(q))),
+    [locale, onlyExclusive, q],
   );
 
   // Domaine actif dans la barre : la dernière section dont le titre est passé sous la barre collante
@@ -51,9 +55,9 @@ export function ComparatifView() {
 
   const controlsBar = (
     <div className="flex flex-wrap items-center gap-2">
-      <div role="radiogroup" aria-label="Mode de comparaison" className="inline-flex max-w-full items-center gap-1 overflow-x-auto rounded-full border border-ink-900/10 bg-white p-1 text-xs font-semibold whitespace-nowrap shadow-sm [scrollbar-width:none]">
+      <div role="radiogroup" aria-label={t("Mode de comparaison", "Comparison mode")} className="inline-flex max-w-full items-center gap-1 overflow-x-auto rounded-full border border-ink-900/10 bg-white p-1 text-xs font-semibold whitespace-nowrap shadow-sm [scrollbar-width:none]">
         <Swords className="ms-2 me-1 size-3.5 text-ink-900/40" aria-hidden />
-        {["Les trois", ...products.slice(1).map((p) => `Duel ${p.name}`)].map((label, i) => (
+        {[t("Les trois", "All three"), ...products.slice(1).map((p) => t(`Duel ${p.name}`, `vs ${p.name}`))].map((label, i) => (
           <button
             key={label}
             role="radio"
@@ -72,23 +76,23 @@ export function ComparatifView() {
           onlyExclusive ? "border-sun-500 bg-sun-500 text-ink-950" : "border-ink-900/10 bg-white text-ink-900/70 hover:text-ink-900"
         }`}
       >
-        <Sparkles className="size-3.5" /> Ce que seul ImmoTopia annonce
+        <Sparkles className="size-3.5" /> {t("Ce que seul ImmoTopia annonce", "Only ImmoTopia advertises")}
       </button>
       <label className="relative ms-auto w-full sm:w-64">
-        <span className="sr-only">Chercher une fonctionnalité</span>
+        <span className="sr-only">{t("Chercher une fonctionnalité", "Search for a feature")}</span>
         <Search className="pointer-events-none absolute start-3 top-1/2 size-4 -translate-y-1/2 text-ink-900/35" />
         <input
           type="search"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          placeholder="Chercher : caisse, WhatsApp, bail…"
+          placeholder={t("Chercher : caisse, WhatsApp, bail…", "Search: cash desk, WhatsApp, lease…")}
           className="w-full rounded-full border border-ink-900/10 bg-white py-2 ps-9 pe-4 text-sm shadow-sm outline-none focus:border-brand-500"
         />
       </label>
     </div>
   );
 
-  const total = scores();
+  const total = scores(rows);
 
   return (
     <>
@@ -99,14 +103,17 @@ export function ComparatifView() {
         <div className="mx-auto max-w-6xl px-5">
           <div className="mx-auto max-w-4xl text-center">
             <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3.5 py-1.5 text-xs font-semibold tracking-[0.14em] text-white/80 uppercase backdrop-blur-md">
-              <span className="size-1.5 rounded-full bg-mint-400" /> Comparatif
+              <span className="size-1.5 rounded-full bg-mint-400" /> {t("Comparatif", "Comparison")}
             </span>
             <h1 className="mt-6 font-display text-4xl leading-[1.03] font-bold tracking-tight text-balance md:text-7xl">
-              ImmoTopia face à <span className="text-gradient">trois logiciels ivoiriens.</span>
+              {t("ImmoTopia face à", "ImmoTopia versus")}{" "}
+              <span className="text-gradient">{t("trois logiciels ivoiriens.", "three Ivorian software products.")}</span>
             </h1>
             <p className="mx-auto mt-6 max-w-2xl text-lg text-white/65">
-              {rows.length} fonctionnalités passées au crible, domaine par domaine, à partir des pages publiques de chaque éditeur,
-              consultées le {CONSULTED_ON}. Chaque case renvoie à sa source.
+              {t(
+                `${rows.length} fonctionnalités passées au crible, domaine par domaine, à partir des pages publiques de chaque éditeur, consultées le ${CONSULTED_ON.fr}. Chaque case renvoie à sa source.`,
+                `${rows.length} features examined, domain by domain, based on each vendor's public pages, consulted on ${CONSULTED_ON.en}. Every cell links to its source.`,
+              )}
             </p>
           </div>
 
@@ -115,21 +122,31 @@ export function ComparatifView() {
               <ScoreCard key={p.id} name={p.name} color={p.color} value={total[i]} max={rows.length} lead={i === 0} />
             ))}
           </div>
-          <p className="mt-3 text-center text-xs text-white/45">Nombre de fonctions annoncées explicitement par l&apos;éditeur, sur {rows.length}.</p>
+          <p className="mt-3 text-center text-xs text-white/45">
+            {t(
+              `Nombre de fonctions annoncées explicitement par l'éditeur, sur ${rows.length}.`,
+              `Number of features explicitly advertised by the vendor, out of ${rows.length}.`,
+            )}
+          </p>
 
           <div className="mt-14 grid items-start gap-8 lg:grid-cols-[1fr_1.5fr]">
             <div>
-              <h2 className="font-display text-3xl leading-tight font-bold tracking-tight md:text-4xl">La carte, en un coup d&apos;œil.</h2>
+              <h2 className="font-display text-3xl leading-tight font-bold tracking-tight md:text-4xl">{t("La carte, en un coup d'œil.", "The map, at a glance.")}</h2>
               <p className="mt-4 text-white/60">
-                Plus la bulle est pleine, plus l&apos;éditeur couvre le domaine. Cliquez sur une ligne pour voir le détail, fonction par
-                fonction.
+                {t(
+                  "Plus la bulle est pleine, plus l'éditeur couvre le domaine. Cliquez sur une ligne pour voir le détail, fonction par fonction.",
+                  "The fuller the bubble, the more of the domain the vendor covers. Click a row to see the detail, feature by feature.",
+                )}
               </p>
               <div className="mt-6">
                 <Legend dark withVerif={hasVerif} />
               </div>
               <p className="mt-6 rounded-2xl border border-white/10 bg-white/[0.04] p-4 text-sm text-white/60">
-                <strong className="text-white/85">« Non documenté » ne veut pas dire « absent ».</strong> Cela signifie que nous n&apos;avons
-                rien trouvé dans les pages publiques de l&apos;éditeur. Une démonstration chez lui peut montrer davantage.
+                <strong className="text-white/85">{t("« Non documenté » ne veut pas dire « absent ».", "“Not documented” does not mean “missing”.")}</strong>{" "}
+                {t(
+                  "Cela signifie que nous n'avons rien trouvé dans les pages publiques de l'éditeur. Une démonstration chez lui peut montrer davantage.",
+                  "It means we found nothing in the vendor's public pages. A demo from the vendor may show more.",
+                )}
               </p>
             </div>
             <CoverageMap hrefFor={(d) => `#${d}`} />
@@ -140,7 +157,7 @@ export function ComparatifView() {
       {/* ——— Barre de navigation collante ——— */}
       <div className="sticky top-[76px] z-30 border-b border-ink-900/[0.07] bg-paper/85 backdrop-blur-xl">
         <div className="mx-auto flex max-w-6xl flex-col gap-3 px-5 py-3">
-          <nav aria-label="Domaines du comparatif" className="mask-fade-x relative -mx-5 flex gap-1.5 overflow-x-auto px-5 [scrollbar-width:none]">
+          <nav aria-label={t("Domaines du comparatif", "Comparison domains")} className="mask-fade-x relative -mx-5 flex gap-1.5 overflow-x-auto px-5 [scrollbar-width:none]">
             {domains.map((d) => (
               <a
                 key={d.id}
@@ -156,7 +173,7 @@ export function ComparatifView() {
                 }`}
               >
                 {active === d.id && <motion.span layoutId="cmp-domain" className="absolute inset-0 rounded-full bg-ink-900" transition={{ type: "spring", stiffness: 380, damping: 32 }} />}
-                <span className="relative">{d.label}</span>
+                <span className="relative">{d.label[locale]}</span>
               </a>
             ))}
           </nav>
@@ -171,13 +188,13 @@ export function ComparatifView() {
         <div className="mx-auto max-w-6xl px-5 py-12 md:py-16">
           {visible.length === 0 && (
             <p className="rounded-3xl border border-dashed border-ink-900/15 p-10 text-center text-ink-900/55">
-              Aucune fonctionnalité ne correspond. Essayez un autre mot, ou retirez le filtre.
+              {t("Aucune fonctionnalité ne correspond. Essayez un autre mot, ou retirez le filtre.", "No feature matches. Try another word, or remove the filter.")}
             </p>
           )}
           {domains.map((d) => {
             const list = visible.filter((r) => r.domain === d.id);
             if (!list.length) return null;
-            return <DomainBlock key={d.id} id={d.id} label={d.label} pitch={d.pitch} list={list} cols={cols} />;
+            return <DomainBlock key={d.id} id={d.id} label={d.label[locale]} pitch={d.pitch[locale]} list={list} cols={cols} />;
           })}
         </div>
       </div>
@@ -186,11 +203,12 @@ export function ComparatifView() {
       <section id="sources" className="bg-paper pb-20">
         <div className="mx-auto max-w-6xl px-5">
           <div className="rounded-[28px] border border-ink-900/[0.07] bg-white p-6 shadow-sm md:p-10">
-            <h2 className="font-display text-2xl font-bold tracking-tight md:text-3xl">Méthode et sources</h2>
+            <h2 className="font-display text-2xl font-bold tracking-tight md:text-3xl">{t("Méthode et sources", "Method and sources")}</h2>
             <p className="mt-3 max-w-3xl text-ink-900/60">
-              Pour les trois concurrents, nous ne décrivons que ce qu&apos;ils annoncent eux-mêmes publiquement, sans tester leurs
-              logiciels. Pages consultées le {CONSULTED_ON}. Un éditeur cité peut nous écrire pour faire corriger une case : nous la
-              mettrons à jour.
+              {t(
+                `Pour les trois concurrents, nous ne décrivons que ce qu'ils annoncent eux-mêmes publiquement, sans tester leurs logiciels. Pages consultées le ${CONSULTED_ON.fr}. Un éditeur cité peut nous écrire pour faire corriger une case : nous la mettrons à jour.`,
+                `For the three competitors, we only describe what they publicly advertise themselves, without testing their software. Pages consulted on ${CONSULTED_ON.en}. Any vendor listed can write to us to have a cell corrected: we will update it.`,
+              )}
             </p>
             <ul className="mt-6 grid grid-cols-[minmax(0,1fr)] gap-2 md:grid-cols-2">
               {sources.map((s) => (
@@ -248,6 +266,7 @@ function ScoreCard({ name, color, value, max, lead }: { name: string; color: str
 }
 
 function DomainBlock({ id, label, pitch, list, cols }: { id: DomainId; label: string; pitch: string; list: CompareRow[]; cols: number[] }) {
+  const { t } = useI18n();
   const s = scores(list);
   return (
     <section id={id} className="scroll-mt-16 py-8 first:pt-0 md:scroll-mt-28">
@@ -256,7 +275,7 @@ function DomainBlock({ id, label, pitch, list, cols }: { id: DomainId; label: st
           <h2 className="font-display text-3xl font-bold tracking-tight md:text-4xl">{label}</h2>
           <p className="mt-1.5 text-ink-900/55">{pitch}</p>
         </div>
-        <div className="flex gap-4" aria-label="Fonctions annoncées dans ce domaine">
+        <div className="flex gap-4" aria-label={t("Fonctions annoncées dans ce domaine", "Features advertised in this domain")}>
           {cols.map((i) => (
             <div key={i} className="w-20 text-xs">
               <p className="truncate font-semibold text-ink-900/70">{products[i].name}</p>
@@ -280,7 +299,7 @@ function DomainBlock({ id, label, pitch, list, cols }: { id: DomainId; label: st
 
       <div className="mt-5 overflow-hidden rounded-3xl border border-ink-900/[0.07] bg-white shadow-sm">
         <div className="hidden items-center gap-3 border-b border-ink-900/[0.06] px-5 py-3 text-xs font-semibold text-ink-900/45 md:flex">
-          <span className="flex-1">Fonctionnalité</span>
+          <span className="flex-1">{t("Fonctionnalité", "Feature")}</span>
           {cols.map((i) => (
             <span key={i} className={`text-center ${cols.length === 2 ? "w-32" : "w-24"}`} style={{ color: i === 0 ? products[0].color : undefined }}>
               {products[i].name}
@@ -300,6 +319,7 @@ function DomainBlock({ id, label, pitch, list, cols }: { id: DomainId; label: st
 
 function Row({ row, cols }: { row: CompareRow; cols: number[] }) {
   const [open, setOpen] = useState(false);
+  const { locale, t } = useI18n();
   const exclusive = isExclusive(row);
   return (
     <li className="border-t border-ink-900/[0.05] first:border-t-0">
@@ -307,7 +327,7 @@ function Row({ row, cols }: { row: CompareRow; cols: number[] }) {
         <span className="flex flex-1 items-center gap-2 font-medium">
           {row.feature}
           {exclusive && (
-            <span className="shrink-0 rounded-full bg-sun-500/15 px-2 py-0.5 text-[10px] font-bold tracking-wide text-[#b45309] uppercase">Exclusif</span>
+            <span className="shrink-0 rounded-full bg-sun-500/15 px-2 py-0.5 text-[10px] font-bold tracking-wide text-[#b45309] uppercase">{t("Exclusif", "Exclusive")}</span>
           )}
         </span>
         <span className="flex items-start gap-3 md:items-center">
@@ -331,12 +351,14 @@ function Row({ row, cols }: { row: CompareRow; cols: number[] }) {
               <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1.5 text-xs text-ink-900/50">
                 {cols.map((i) => (
                   <span key={i}>
-                    <strong className="text-ink-900/70">{products[i].name}</strong> : {statusMeta[row.statuses[i]].label.toLowerCase()}
+                    <strong className="text-ink-900/70">{products[i].name}</strong>
+                    {t(" : ", ": ")}
+                    {statusMeta[locale][row.statuses[i]].label.toLowerCase()}
                   </span>
                 ))}
               </div>
               <p className="mt-3 flex flex-wrap items-center gap-1.5 text-xs text-ink-900/50">
-                Sources :
+                {t("Sources :", "Sources:")}
                 {row.sources.map((s) => (
                   <a key={s} href={`#src-${s}`} className="rounded-md bg-white px-1.5 py-0.5 font-mono font-semibold text-brand-600 ring-1 ring-ink-900/10 hover:bg-brand-500 hover:text-white">
                     {s}

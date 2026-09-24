@@ -6,11 +6,13 @@ import { ArrowRight, ChevronLeft, ChevronRight, Play } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { heroCards, type HeroCard } from "@/lib/content";
 import { goTo } from "@/lib/nav";
+import { useI18n } from "./locale-provider";
 import { Mockup } from "./mockups";
 import { useDemo } from "./providers";
 import { MagneticButton } from "./ui";
 
-const N = heroCards.length;
+// Même nombre de cartes dans chaque langue
+const N = heroCards.fr.length;
 const AUTOPLAY_MS = 8000;
 
 /** Décalage circulaire d'une carte par rapport à la carte active, dans [-3, 3] */
@@ -25,6 +27,8 @@ export function Hero() {
   const dragging = useRef(false);
   const root = useRef<HTMLElement>(null);
   const { open } = useDemo();
+  const { locale, t } = useI18n();
+  const cards = heroCards[locale];
 
   const go = useCallback((dir: number) => setActive((a) => (a + dir + N) % N), []);
 
@@ -60,8 +64,10 @@ export function Hero() {
     setTimeout(() => (dragging.current = false), 0);
   }
 
-  const title = "L'ERP immobilier le plus complet de Côte d'Ivoire.";
-  const accent = heroCards[active].accent;
+  const title = t("L'ERP immobilier le plus complet de Côte d'Ivoire.", "Côte d'Ivoire's most complete real estate ERP.");
+  // Index du premier mot mis en dégradé
+  const gradientFrom = t(4, 2);
+  const accent = cards[active].accent;
 
   return (
     <section
@@ -93,21 +99,23 @@ export function Hero() {
 
       <div className="mx-auto max-w-5xl px-5 text-center">
         <div className="hero-fade inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs text-white/75 backdrop-blur-md">
-          <span className="rounded-full bg-mint-400 px-2 py-0.5 text-[10px] font-bold text-ink-950">NOUVEAU</span>
-          Module Syndic de copropriété disponible
+          <span className="rounded-full bg-mint-400 px-2 py-0.5 text-[10px] font-bold text-ink-950">{t("NOUVEAU", "NEW")}</span>
+          {t("Module Syndic de copropriété disponible", "Condominium management module now available")}
         </div>
         <h1 className="mt-6 font-display text-[2.35rem] leading-[1.02] font-bold tracking-tight text-balance sm:text-6xl md:text-7xl">
           {title.split(" ").map((w, i) => (
             <span key={i} className="inline-block overflow-hidden pb-1 align-bottom">
-              <span className={`hero-word inline-block ${i >= 4 ? "text-gradient" : ""}`} style={{ animationDelay: `${i * 60}ms` }}>
+              <span className={`hero-word inline-block ${i >= gradientFrom ? "text-gradient" : ""}`} style={{ animationDelay: `${i * 60}ms` }}>
                 {w}&nbsp;
               </span>
             </span>
           ))}
         </h1>
         <p className="hero-fade mx-auto mt-5 max-w-2xl text-base text-white/65 md:text-lg" style={{ animationDelay: "350ms" }}>
-          Gestion locative, syndic de copropriété, CRM et portails clients réunis dans une plateforme pensée pour les
-          professionnels de l&apos;immobilier à Abidjan.
+          {t(
+            "Gestion locative, syndic de copropriété, CRM et portails clients réunis dans une plateforme pensée pour les professionnels de l'immobilier à Abidjan.",
+            "Rental management, condominium management, CRM and client portals in one platform built for real estate professionals in Abidjan.",
+          )}
         </p>
       </div>
 
@@ -117,8 +125,8 @@ export function Hero() {
         onMouseEnter={() => setPaused(true)}
         onMouseLeave={() => setPaused(false)}
         role="region"
-        aria-roledescription="carrousel"
-        aria-label="Fonctionnalités ImmoTopia"
+        aria-roledescription={t("carrousel", "carousel")}
+        aria-label={t("Fonctionnalités ImmoTopia", "ImmoTopia features")}
       >
         <motion.div
           className="absolute inset-0 cursor-grab touch-pan-y [transform-style:preserve-3d] active:cursor-grabbing"
@@ -128,7 +136,7 @@ export function Hero() {
           onDragStart={() => (dragging.current = true)}
           onDragEnd={onDragEnd}
         >
-          {heroCards.map((card, i) => {
+          {cards.map((card, i) => {
             const d = offsetOf(i, active);
             const abs = Math.abs(d);
             return (
@@ -167,11 +175,11 @@ export function Hero() {
       {/* Contrôles */}
       <div className="hero-fade mx-auto mt-8 flex max-w-5xl flex-col items-center gap-5 px-5" style={{ animationDelay: "700ms" }}>
         <div className="flex items-center gap-3">
-          <NavButton label="Carte précédente" onClick={() => go(-1)}>
+          <NavButton label={t("Carte précédente", "Previous card")} onClick={() => go(-1)}>
             <ChevronLeft className="size-5" />
           </NavButton>
           <div className="flex items-center">
-            {heroCards.map((c, i) => (
+            {cards.map((c, i) => (
               <button
                 key={c.id}
                 onClick={() => setActive(i)}
@@ -195,7 +203,7 @@ export function Hero() {
               </button>
             ))}
           </div>
-          <NavButton label="Carte suivante" onClick={() => go(1)}>
+          <NavButton label={t("Carte suivante", "Next card")} onClick={() => go(1)}>
             <ChevronRight className="size-5" />
           </NavButton>
         </div>
@@ -207,14 +215,14 @@ export function Hero() {
             exit={{ opacity: 0, y: -6 }}
             className="text-xs font-semibold tracking-[0.16em] text-white/50 uppercase"
           >
-            {String(active + 1).padStart(2, "0")} / {String(N).padStart(2, "0")} · {heroCards[active].eyebrow}
+            {String(active + 1).padStart(2, "0")} / {String(N).padStart(2, "0")} · {cards[active].eyebrow}
           </motion.p>
         </AnimatePresence>
         <MagneticButton
           onClick={open}
           className="mt-2 bg-white px-7 py-3.5 text-sm text-ink-950 shadow-[0_0_40px_-8px_rgba(255,255,255,0.5)] hover:shadow-[0_0_60px_-6px_rgba(255,255,255,0.7)]"
         >
-          <Play className="size-4 fill-current" /> Demander une démonstration
+          <Play className="size-4 fill-current" /> {t("Demander une démonstration", "Request a demo")}
         </MagneticButton>
       </div>
     </section>

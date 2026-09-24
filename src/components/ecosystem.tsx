@@ -6,6 +6,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowRight, BellRing, Globe, KeyRound, MessageSquareText, Smartphone, Webhook } from "lucide-react";
 import { useRef, type ReactNode } from "react";
 import { comparatifHref } from "@/lib/comparatif-domains";
+import { useI18n } from "./locale-provider";
 import { SmartLink } from "./smart-link";
 import { Eyebrow, Logo, trackSpotlight } from "./ui";
 
@@ -13,14 +14,14 @@ gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 // Nœuds du circuit, en coordonnées du viewBox 600 × 340
 const inputs = [
-  { label: "Locataires", color: "#2EE6A8", x: 70, y: 60 },
-  { label: "Propriétaires", color: "#8B8BFF", x: 70, y: 170 },
-  { label: "Prestataires", color: "#FACC15", x: 70, y: 280 },
+  { label: { fr: "Locataires", en: "Tenants" }, color: "#2EE6A8", x: 70, y: 60 },
+  { label: { fr: "Propriétaires", en: "Landlords" }, color: "#8B8BFF", x: 70, y: 170 },
+  { label: { fr: "Prestataires", en: "Contractors" }, color: "#FACC15", x: 70, y: 280 },
 ];
 const outputs = [
-  { label: "WhatsApp", color: "#25D366", x: 530, y: 60 },
-  { label: "E-mail", color: "#FF8A3D", x: 530, y: 170 },
-  { label: "Site vitrine", color: "#38BDF8", x: 530, y: 280 },
+  { label: { fr: "WhatsApp", en: "WhatsApp" }, color: "#25D366", x: 530, y: 60 },
+  { label: { fr: "E-mail", en: "Email" }, color: "#FF8A3D", x: 530, y: 170 },
+  { label: { fr: "Site vitrine", en: "Agency website" }, color: "#38BDF8", x: 530, y: 280 },
 ];
 const C = { x: 300, y: 170 };
 
@@ -30,6 +31,7 @@ const outPaths = outputs.map((n, i) => `M${C.x + 62},${C.y - 16 + i * 16} H${410
 
 export function Ecosystem() {
   const root = useRef<HTMLElement>(null);
+  const { locale, t } = useI18n();
 
   useGSAP(
     () => {
@@ -87,19 +89,29 @@ export function Ecosystem() {
 
       <div className="relative mx-auto max-w-6xl px-5">
         <div className="mx-auto max-w-3xl text-center">
-          <Eyebrow dark>Écosystème connecté</Eyebrow>
+          <Eyebrow dark>{t("Écosystème connecté", "Connected ecosystem")}</Eyebrow>
           <h2 className="mt-5 font-display text-4xl leading-[1.05] font-bold tracking-tight text-balance md:text-6xl">
-            Vos outils parlent enfin <span className="text-gradient">le même langage.</span>
+            {t(
+              <>
+                Vos outils parlent enfin <span className="text-gradient">le même langage.</span>
+              </>,
+              <>
+                Your tools finally <span className="text-gradient">speak the same language.</span>
+              </>,
+            )}
           </h2>
           <p className="mt-5 text-lg text-white/60">
-            Portails, e-mail, WhatsApp et API d&apos;annonces : chaque échange passe par la même plateforme, sans ressaisie.
+            {t(
+              "Portails, e-mail, WhatsApp et API d'annonces : chaque échange passe par la même plateforme, sans ressaisie.",
+              "Portals, email, WhatsApp and a listings API: every interaction runs through one platform, with no double entry.",
+            )}
           </p>
           <div className="mt-6 flex flex-wrap justify-center gap-2 text-sm font-semibold">
             {(
               [
-                ["communication", "Comparer la communication"],
-                ["portails-service", "Comparer les portails"],
-                ["integrations", "Comparer les intégrations"],
+                ["communication", t("Comparer la communication", "Compare communication")],
+                ["portails-service", t("Comparer les portails", "Compare portals")],
+                ["integrations", t("Comparer les intégrations", "Compare integrations")],
               ] as const
             ).map(([d, label]) => (
               <SmartLink
@@ -116,7 +128,14 @@ export function Ecosystem() {
         <div className="mt-14 grid auto-rows-[minmax(200px,auto)] gap-4 md:grid-cols-6">
           {/* Grande carte : le circuit */}
           <Bento className="md:col-span-6 lg:col-span-4 lg:row-span-2" spot="rgba(91,91,247,0.25)">
-            <CardHead icon={<Webhook className="size-5" />} title="Toutes les parties connectées" text="Locataires, propriétaires et prestataires échangent avec l'agence via leurs portails ; chacun est prévenu par e-mail ou WhatsApp." />
+            <CardHead
+              icon={<Webhook className="size-5" />}
+              title={t("Toutes les parties connectées", "Every party, connected")}
+              text={t(
+                "Locataires, propriétaires et prestataires échangent avec l'agence via leurs portails ; chacun est prévenu par e-mail ou WhatsApp.",
+                "Tenants, landlords and contractors work with the agency through their own portals, and everyone gets notified by email or WhatsApp.",
+              )}
+            />
             <div data-circuit className="relative mt-6 aspect-[600/340] w-full">
               <svg viewBox="0 0 600 340" className="absolute inset-0 size-full" fill="none" aria-hidden>
                 <defs>
@@ -139,8 +158,8 @@ export function Ecosystem() {
                 ))}
               </svg>
               {[...inputs, ...outputs].map((n) => (
-                <Node key={n.label} x={n.x} y={n.y} color={n.color}>
-                  {n.label}
+                <Node key={n.label.fr} x={n.x} y={n.y} color={n.color}>
+                  {n.label[locale]}
                 </Node>
               ))}
               <div
@@ -154,7 +173,11 @@ export function Ecosystem() {
           </Bento>
 
           <Bento className="md:col-span-3 lg:col-span-2" spot="rgba(46,230,168,0.2)">
-            <CardHead icon={<KeyRound className="size-5" />} title="API d'annonces" text="Alimentez le site vitrine de votre agence avec vos biens publiés." />
+            <CardHead
+              icon={<KeyRound className="size-5" />}
+              title={t("API d'annonces", "Listings API")}
+              text={t("Alimentez le site vitrine de votre agence avec vos biens publiés.", "Feed your agency website with your published properties.")}
+            />
             <pre className="mt-5 overflow-hidden rounded-xl bg-black/40 p-3 font-mono text-[11px] leading-relaxed text-white/70 ring-1 ring-white/10">
               <span className="text-mint-400">GET</span> /annonces{"\n"}
               {"{"}{"\n"}
@@ -166,9 +189,16 @@ export function Ecosystem() {
           </Bento>
 
           <Bento className="md:col-span-3 lg:col-span-2" spot="rgba(37,211,102,0.2)">
-            <CardHead icon={<MessageSquareText className="size-5" />} title="Rappels e-mail & WhatsApp" text="Rappels d'échéance planifiés, confirmations de paiement et alertes de fin de bail." />
+            <CardHead
+              icon={<MessageSquareText className="size-5" />}
+              title={t("Rappels e-mail & WhatsApp", "Email & WhatsApp reminders")}
+              text={t(
+                "Rappels d'échéance planifiés, confirmations de paiement et alertes de fin de bail.",
+                "Scheduled due-date reminders, payment confirmations and lease-expiry alerts.",
+              )}
+            />
             <div className="mt-5 flex items-center justify-between">
-              {["J-5", "J-1", "J0", "Retard"].map((j, i) => (
+              {(locale === "en" ? ["D-5", "D-1", "D0", "Late"] : ["J-5", "J-1", "J0", "Retard"]).map((j, i) => (
                 <div key={j} className="flex flex-1 items-center">
                   <span className={`grid size-10 place-items-center rounded-full text-xs font-bold ${i < 2 ? "bg-[#25D366] text-ink-950" : "bg-white/10 text-white/70"}`}>
                     {j}
@@ -180,18 +210,32 @@ export function Ecosystem() {
           </Bento>
 
           <Bento className="md:col-span-2" spot="rgba(255,138,61,0.2)">
-            <CardHead icon={<Globe className="size-5" />} title="Newsletter" text="Listes de diffusion, campagnes programmées, double confirmation et désinscription en un clic." />
+            <CardHead
+              icon={<Globe className="size-5" />}
+              title="Newsletter"
+              text={t(
+                "Listes de diffusion, campagnes programmées, double confirmation et désinscription en un clic.",
+                "Mailing lists, scheduled campaigns, double opt-in and one-click unsubscribe.",
+              )}
+            />
             <div className="mt-5 flex flex-wrap gap-2">
-              {["Listes", "Modèles", "Campagnes", "Statistiques"].map((t, i) => (
-                <span key={t} className={`rounded-full px-3 py-1.5 text-xs font-semibold ${i === 3 ? "bg-sun-500 text-ink-950" : "bg-white/10 text-white/80"}`}>
-                  {t}
+              {(locale === "en" ? ["Lists", "Templates", "Campaigns", "Analytics"] : ["Listes", "Modèles", "Campagnes", "Statistiques"]).map((tag, i) => (
+                <span key={tag} className={`rounded-full px-3 py-1.5 text-xs font-semibold ${i === 3 ? "bg-sun-500 text-ink-950" : "bg-white/10 text-white/80"}`}>
+                  {tag}
                 </span>
               ))}
             </div>
           </Bento>
 
           <Bento className="md:col-span-2" spot="rgba(29,200,255,0.2)">
-            <CardHead icon={<Smartphone className="size-5" />} title="Mobile Money suivi" text="Paiements enregistrés par opérateur (Wave, Orange Money, MTN, Moov), déclarations des locataires validées par l'agence." />
+            <CardHead
+              icon={<Smartphone className="size-5" />}
+              title={t("Mobile Money suivi", "Mobile Money tracking")}
+              text={t(
+                "Paiements enregistrés par opérateur (Wave, Orange Money, MTN, Moov), déclarations des locataires validées par l'agence.",
+                "Payments recorded by operator (Wave, Orange Money, MTN, Moov), with tenant-reported payments validated by the agency.",
+              )}
+            />
             <div className="mt-5 flex -space-x-2">
               {["#1DC8FF", "#FF7900", "#FFCB05", "#0066B3"].map((c) => (
                 <span key={c} className="size-9 rounded-full border-2 border-ink-900" style={{ background: c }} />
@@ -200,9 +244,16 @@ export function Ecosystem() {
           </Bento>
 
           <Bento className="md:col-span-2" spot="rgba(167,139,250,0.22)">
-            <CardHead icon={<BellRing className="size-5" />} title="Rôles & journal d'audit" text="Permissions fines par rôle et trace des actions sensibles : qui, quoi, quand." />
+            <CardHead
+              icon={<BellRing className="size-5" />}
+              title={t("Rôles & journal d'audit", "Roles & audit log")}
+              text={t(
+                "Permissions fines par rôle et trace des actions sensibles : qui, quoi, quand.",
+                "Granular role-based permissions and a trail of sensitive actions: who, what, when.",
+              )}
+            />
             <div className="mt-5 flex gap-2 text-xs">
-              {["Admin", "Manager", "Agent", "Comptable"].map((s) => (
+              {["Admin", "Manager", "Agent", t("Comptable", "Accountant")].map((s) => (
                 <span key={s} className="flex-1 rounded-lg bg-white/[0.06] py-2 text-center font-semibold text-white/80 ring-1 ring-white/10">
                   ✓ {s}
                 </span>

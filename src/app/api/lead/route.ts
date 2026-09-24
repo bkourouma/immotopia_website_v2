@@ -29,6 +29,9 @@ export async function POST(request: Request) {
     return Response.json({ error: "E-mail invalide" }, { status: 400 });
   }
 
+  // Langue du site au moment de la demande (facultative) : permet de répondre au prospect dans sa langue
+  const locale = body.locale === "en" ? "en" : "fr";
+
   const webhook = process.env.N8N_WEBHOOK_URL;
   if (!webhook) {
     console.warn("[lead] N8N_WEBHOOK_URL non défini : demande reçue mais non transmise.");
@@ -39,7 +42,7 @@ export async function POST(request: Request) {
     const res = await fetch(webhook, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ ...lead, source: "site-vitrine", receivedAt: new Date().toISOString() }),
+      body: JSON.stringify({ ...lead, locale, source: "site-vitrine", receivedAt: new Date().toISOString() }),
       signal: AbortSignal.timeout(8000),
     });
     if (!res.ok) throw new Error(`n8n a répondu ${res.status}`);

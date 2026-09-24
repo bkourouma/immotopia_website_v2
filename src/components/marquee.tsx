@@ -1,7 +1,8 @@
 import { ShieldCheck } from "lucide-react";
-import { partners } from "@/lib/content";
+import { partners, type Partner } from "@/lib/content";
+import { getI18n } from "@/lib/i18n-server";
 
-function Item({ p }: { p: (typeof partners)[number] }) {
+function Item({ p }: { p: Partner }) {
   return (
     <li className="flex shrink-0 items-center gap-3 px-8">
       {p.badge ? (
@@ -20,16 +21,18 @@ function Item({ p }: { p: (typeof partners)[number] }) {
 }
 
 /** Bandeau de réassurance défilant à l'infini (animation CSS pure, 60 FPS sur GPU) */
-export function Marquee() {
+export async function Marquee() {
+  const { locale, t } = await getI18n();
+  const list = partners[locale];
   return (
-    <section aria-label="Partenaires et conformité" className="border-y border-ink-900/5 bg-white py-10">
+    <section aria-label={t("Partenaires et conformité", "Partners and compliance")} className="border-y border-ink-900/5 bg-white py-10">
       <p className="mb-6 text-center text-xs font-semibold tracking-[0.18em] text-ink-900/60 uppercase">
-        Paiements, messagerie et conformité intégrés nativement
+        {t("Paiements, messagerie et conformité intégrés nativement", "Payments, messaging and compliance built in")}
       </p>
       <div className="mask-fade-x group flex overflow-hidden">
         <ul className="flex w-max animate-marquee items-center will-change-transform group-hover:[animation-play-state:paused]">
           {/* 4 copies : la translation de -50 % retombe exactement sur une copie identique */}
-          {[...partners, ...partners, ...partners, ...partners].map((p, i) => (
+          {[...list, ...list, ...list, ...list].map((p, i) => (
             <Item key={i} p={p} />
           ))}
         </ul>

@@ -5,11 +5,20 @@ import { Building2, Download, Home, Loader2, Percent, Receipt, ShieldCheck, Stor
 import { useId, useState, type ReactNode } from "react";
 import { downloadPdf, type Block, type Doc } from "@/lib/document";
 import type { ToolMeta } from "@/lib/tools";
+import { useI18n } from "../locale-provider";
 import { useDemo } from "../providers";
 import { MagneticButton } from "../ui";
 
 export function ToolIcon({ name, className = "size-5" }: { name: ToolMeta["icon"]; className?: string }) {
-  const I = { receipt: Receipt, home: Home, store: Store, shield: ShieldCheck, trending: TrendingUp, percent: Percent, building: Building2 }[name];
+  const I = {
+    receipt: Receipt,
+    home: Home,
+    store: Store,
+    shield: ShieldCheck,
+    trending: TrendingUp,
+    percent: Percent,
+    building: Building2,
+  }[name];
   return <I className={className} />;
 }
 
@@ -48,7 +57,15 @@ export function Text({
       <label htmlFor={id} className="mb-1.5 block text-sm font-medium text-ink-900/70">
         {label}
       </label>
-      <input id={id} type={type} value={value} placeholder={placeholder} onChange={(e) => onChange(e.target.value)} maxLength={160} className={inputCls} />
+      <input
+        id={id}
+        type={type}
+        value={value}
+        placeholder={placeholder}
+        onChange={(e) => onChange(e.target.value)}
+        maxLength={160}
+        className={inputCls}
+      />
     </div>
   );
 }
@@ -92,7 +109,9 @@ export function Num({
           }}
           className={`${inputCls} pr-16 tabular-nums`}
         />
-        <span className="pointer-events-none absolute inset-y-0 right-3.5 flex items-center text-sm font-medium text-ink-900/40">{suffix}</span>
+        <span className="pointer-events-none absolute inset-y-0 right-3.5 flex items-center text-sm font-medium text-ink-900/40">
+          {suffix}
+        </span>
       </div>
       {hint && <p className="mt-1 text-xs text-ink-900/45">{hint}</p>}
     </div>
@@ -123,7 +142,9 @@ export function Choice<T extends string>({
             onClick={() => onChange(o.value)}
             aria-pressed={value === o.value}
             className={`cursor-pointer rounded-full border px-3.5 py-2 text-sm font-medium transition ${
-              value === o.value ? "border-ink-900 bg-ink-900 text-white" : "border-ink-900/10 bg-white text-ink-900/70 hover:border-ink-900/30"
+              value === o.value
+                ? "border-ink-900 bg-ink-900 text-white"
+                : "border-ink-900/10 bg-white text-ink-900/70 hover:border-ink-900/30"
             }`}
           >
             {o.label}
@@ -143,7 +164,12 @@ export function Stat({ label, value, highlight, sub }: { label: string; value: s
       className={`rounded-2xl p-4 ${highlight ? "bg-ink-900 text-white shadow-[0_20px_50px_-20px_rgba(91,91,247,0.8)]" : "bg-white ring-1 ring-ink-900/[0.07]"}`}
     >
       <p className={`text-xs font-medium ${highlight ? "text-white/60" : "text-ink-900/50"}`}>{label}</p>
-      <motion.p key={value} initial={{ opacity: 0.4, y: 4 }} animate={{ opacity: 1, y: 0 }} className="mt-1 font-display text-2xl font-bold tabular-nums">
+      <motion.p
+        key={value}
+        initial={{ opacity: 0.4, y: 4 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="mt-1 font-display text-2xl font-bold tabular-nums"
+      >
         {value}
       </motion.p>
       {sub && <p className={`mt-0.5 text-xs ${highlight ? "text-white/50" : "text-ink-900/45"}`}>{sub}</p>}
@@ -234,13 +260,15 @@ export function DocPreview({ blocks }: { blocks: Block[] }) {
               <div key={i} className="mt-6">
                 <p>{b.place}</p>
                 <div className="mt-4 grid grid-cols-2 gap-4">
-                  {[b.left, b.right].filter((s): s is string => !!s).map((s) => (
-                    <div key={s}>
-                      <p className="font-semibold">{s}</p>
-                      <p className="text-[11px] text-ink-900/45 italic">Signature précédée de « Lu et approuvé »</p>
-                      <div className="mt-3 h-14 rounded-lg border border-dashed border-ink-900/15" />
-                    </div>
-                  ))}
+                  {[b.left, b.right]
+                    .filter((s): s is string => !!s)
+                    .map((s) => (
+                      <div key={s}>
+                        <p className="font-semibold">{s}</p>
+                        <p className="text-[11px] text-ink-900/45 italic">Signature précédée de « Lu et approuvé »</p>
+                        <div className="mt-3 h-14 rounded-lg border border-dashed border-ink-900/15" />
+                      </div>
+                    ))}
                 </div>
               </div>
             );
@@ -250,7 +278,8 @@ export function DocPreview({ blocks }: { blocks: Block[] }) {
   );
 }
 
-export function DownloadButton({ doc, label = "Télécharger le PDF" }: { doc: Doc; label?: string }) {
+export function DownloadButton({ doc, label }: { doc: Doc; label?: string }) {
+  const { t } = useI18n();
   const [busy, setBusy] = useState(false);
   return (
     <MagneticButton
@@ -267,14 +296,26 @@ export function DownloadButton({ doc, label = "Télécharger le PDF" }: { doc: D
       className="w-full bg-gradient-to-r from-brand-500 to-brand-600 py-4 text-white shadow-[0_14px_40px_-12px_rgba(91,91,247,0.9)] disabled:opacity-70"
     >
       {busy ? <Loader2 className="size-5 animate-spin" /> : <Download className="size-5" />}
-      {label}
+      {label ?? t("Télécharger le PDF", "Download PDF")}
     </MagneticButton>
+  );
+}
+
+/** En anglais uniquement : rappelle que le document généré reste en français (langue juridique ivoirienne). */
+export function DocLanguageNote() {
+  const { locale } = useI18n();
+  if (locale !== "en") return null;
+  return (
+    <p className="rounded-xl bg-brand-500/[0.07] px-4 py-3 text-sm text-ink-900/70 ring-1 ring-brand-500/15">
+      The document is generated in French, the legal language in Côte d&apos;Ivoire.
+    </p>
   );
 }
 
 /** Encart de conversion affiché sous chaque outil */
 export function UpsellCta({ text }: { text: string }) {
   const { open } = useDemo();
+  const { t } = useI18n();
   return (
     <div className="relative overflow-hidden rounded-[24px] bg-ink-950 p-6 text-white">
       <div aria-hidden className="absolute -top-16 -right-10 size-48 rounded-full bg-brand-500/40 blur-3xl" />
@@ -283,7 +324,7 @@ export function UpsellCta({ text }: { text: string }) {
         onClick={open}
         className="shine relative mt-4 inline-flex cursor-pointer items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-ink-950"
       >
-        Demander une démonstration
+        {t("Demander une démonstration", "Request a demo")}
       </button>
     </div>
   );

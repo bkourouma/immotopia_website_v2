@@ -1,7 +1,8 @@
 // Assistant immotopIA : relaie la conversation vers DeepSeek via OpenRouter et renvoie la réponse en flux texte.
 // La clé OPENROUTER_API_KEY reste côté serveur ; le modèle est configurable par OPENROUTER_MODEL.
 
-import { SYSTEM_PROMPT } from "@/lib/assistant/prompt";
+import { LOCALE_PROMPT, SYSTEM_PROMPT } from "@/lib/assistant/prompt";
+import { translator, type Locale } from "@/lib/i18n";
 import { SITE_URL } from "@/lib/site";
 
 const MODEL = process.env.OPENROUTER_MODEL || "deepseek/deepseek-v4.1-flash";
@@ -45,24 +46,48 @@ const plain = (text: string, status = 200) =>
   new Response(text, { status, headers: { "Content-Type": "text/plain; charset=utf-8", "Cache-Control": "no-store" } });
 
 export async function POST(request: Request) {
-  const apiKey = process.env.OPENROUTER_API_KEY;
-  if (!apiKey) {
-    return plain("L'assistant n'est pas encore configuré. Écrivez-nous sur WhatsApp ou réservez une démonstration.\n[[DEMO]]", 503);
-  }
-
-  const ip = request.headers.get("x-real-ip") ?? request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "inconnu";
-  if (rateLimited(ip)) {
-    return plain("Vous avez envoyé beaucoup de messages en peu de temps. Réessayez dans quelques minutes, ou écrivez-nous sur WhatsApp.\n[[WHATSAPP]]", 429);
-  }
-
+  // Le corps est lu d'abord pour connaître la langue du visiteur et lui répondre dans celle-ci
   let body: unknown;
   try {
     body = await request.json();
   } catch {
-    return plain("Requête invalide.", 400);
+    body = null;
   }
+  const locale: Locale = (body as { locale?: unknown })?.locale === "en" ? "en" : "fr";
+  const t = translator(locale);
+  const unavailable = t(
+    "L'assistant est momentanément indisponible. Réessayez dans un instant.",
+    "The assistant is temporarily unavailable. Please try again in a moment.",
+  );
+  const interrupted = t("\n\n(La réponse a été interrompue. Réessayez.)", "\n\n(The answer was interrupted. Please try again.)");
+
+  const apiKey = process.env.OPENROUTER_API_KEY;
+  if (!apiKey) {
+    return plain(
+      t(
+        "L'assistant n'est pas encore configuré. Écrivez-nous sur WhatsApp ou réservez une démonstration.\n[[DEMO]]",
+        "The assistant isn't set up yet. Message us on WhatsApp or book a demo.\n[[DEMO]]",
+      ),
+      503,
+    );
+  }
+
+  const ip = request.headers.get("x-real-ip") ?? request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "inconnu";
+  if (rateLimited(ip)) {
+    return plain(
+      t(
+        "Vous avez envoyé beaucoup de messages en peu de temps. Réessayez dans quelques minutes, ou écrivez-nous sur WhatsApp.\n[[WHATSAPP]]",
+        "You've sent a lot of messages in a short time. Please try again in a few minutes, or message us on WhatsApp.\n[[WHATSAPP]]",
+      ),
+      429,
+    );
+  }
+
+  if (body === null) return plain(t("Requête invalide.", "Invalid request."), 400);
   const messages = parseMessages(body);
-  if (!messages) return plain(`Message invalide (${MAX_CHARS} caractères maximum).`, 400);
+  if (!messages) return plain(t(`Message invalide (${MAX_CHARS} caractères maximum).`, `Invalid message (${MAX_CHARS} characters maximum).`), 400);
+
+  const localePrompt = LOCALE_PROMPT[locale];
 
   let upstream: Response;
   try {
@@ -81,18 +106,22 @@ export async function POST(request: Request) {
         temperature: 0.3,
         // Pas de raisonnement exposé : réponses plus rapides pour un assistant de site
         reasoning: { exclude: true },
-        messages: [{ role: "system", content: SYSTEM_PROMPT }, ...messages],
+        messages: [
+          { role: "system", content: SYSTEM_PROMPT },
+          ...(localePrompt ? [{ role: "system", content: localePrompt }] : []),
+          ...messages,
+        ],
       }),
       signal: AbortSignal.timeout(60_000),
     });
   } catch (err) {
     console.error("[chat] OpenRouter injoignable :", err);
-    return plain("L'assistant est momentanément indisponible. Réessayez dans un instant.", 502);
+    return plain(unavailable, 502);
   }
 
   if (!upstream.ok || !upstream.body) {
     console.error("[chat] OpenRouter a répondu", upstream.status, await upstream.text().catch(() => ""));
-    return plain("L'assistant est momentanément indisponible. Réessayez dans un instant.", 502);
+    return plain(unavailable, 502);
   }
 
   // Flux SSE OpenRouter (« data: {...} ») → texte brut envoyé au navigateur au fil de l'eau
@@ -118,7 +147,7 @@ export async function POST(request: Request) {
               const json = JSON.parse(data);
               if (json.error) {
                 console.error("[chat] erreur en cours de flux :", json.error);
-                controller.enqueue(encoder.encode("\n\n(La réponse a été interrompue. Réessayez.)"));
+                controller.enqueue(encoder.encode(interrupted));
                 continue;
               }
               const delta: string | undefined = json.choices?.[0]?.delta?.content;
@@ -130,7 +159,7 @@ export async function POST(request: Request) {
         }
       } catch (err) {
         console.error("[chat] flux interrompu :", err);
-        controller.enqueue(encoder.encode("\n\n(La réponse a été interrompue. Réessayez.)"));
+        controller.enqueue(encoder.encode(interrupted));
       } finally {
         controller.close();
       }

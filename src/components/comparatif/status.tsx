@@ -1,5 +1,8 @@
+"use client";
+
 import { Check, Clock3, Minus, X } from "lucide-react";
 import { statusMeta, type Status } from "@/lib/comparatif";
+import { useLocale } from "../locale-provider";
 
 const tone: Record<Status, string> = {
   oui: "bg-emerald-500 text-white ring-emerald-500",
@@ -13,9 +16,10 @@ const tone: Record<Status, string> = {
 export function StatusDot({ status, size = "md" }: { status: Status; size?: "sm" | "md" }) {
   const s = size === "sm" ? "size-6" : "size-8";
   const i = size === "sm" ? "size-3.5" : "size-4";
+  const meta = statusMeta[useLocale()][status];
   return (
     <span
-      title={`${statusMeta[status].label} — ${statusMeta[status].hint}`}
+      title={`${meta.label} — ${meta.hint}`}
       className={`relative inline-grid shrink-0 place-items-center rounded-full ring-1 ${s} ${tone[status]} ${status === "nd" ? "border border-dashed border-ink-900/25 ring-0" : ""}`}
     >
       {status === "oui" && <Check className={i} strokeWidth={3} />}
@@ -23,19 +27,20 @@ export function StatusDot({ status, size = "md" }: { status: Status; size?: "sm"
       {status === "nd" && <Minus className={i} />}
       {status === "absent" && <X className={i} strokeWidth={3} />}
       {status === "verif" && <Clock3 className={i} />}
-      <span className="sr-only">{statusMeta[status].label}</span>
+      <span className="sr-only">{meta.label}</span>
     </span>
   );
 }
 
 export function Legend({ dark = false, withVerif = false }: { dark?: boolean; withVerif?: boolean }) {
+  const meta = statusMeta[useLocale()];
   const list: Status[] = withVerif ? ["oui", "partiel", "nd", "absent", "verif"] : ["oui", "partiel", "nd", "absent"];
   return (
     <ul className={`flex flex-wrap gap-x-5 gap-y-2 text-xs ${dark ? "text-white/70" : "text-ink-900/60"}`}>
       {list.map((s) => (
-        <li key={s} className="inline-flex items-center gap-2" title={statusMeta[s].hint}>
+        <li key={s} className="inline-flex items-center gap-2" title={meta[s].hint}>
           <StatusDot status={s} size="sm" />
-          {statusMeta[s].label}
+          {meta[s].label}
         </li>
       ))}
     </ul>

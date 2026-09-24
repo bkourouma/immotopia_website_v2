@@ -8,51 +8,58 @@ import {
   agencePrice,
   ANNUAL_MONTHS,
   comboPrice,
-  coverage,
-  activePacks,
+  coverageByLocale,
+  getActivePacks,
   integrePrice,
   packs,
   promoteurPrice,
   syndicPrice,
-  TRIAL_TEXT,
+  trialText,
   type Pack,
 } from "@/lib/pricing";
+import { useI18n } from "./locale-provider";
 import { useDemo } from "./providers";
 import { Eyebrow, MagneticButton, Reveal, trackSpotlight } from "./ui";
 
 type Billing = "monthly" | "annual";
 
 const perks = [
-  { icon: Wallet, text: "Aucune commission sur vos loyers" },
-  { icon: Users, text: "Propriétaires, locataires et collaborateurs non facturés" },
-  { icon: Gift, text: "Premier mois offert, sans engagement" },
-  { icon: CalendarRange, text: "Annuel : 12 mois pour le prix de 11" },
-  { icon: BadgePercent, text: "Packs combinables : −10 %" },
+  { icon: Wallet, fr: "Aucune commission sur vos loyers", en: "No commission on your rent" },
+  { icon: Users, fr: "Propriétaires, locataires et collaborateurs non facturés", en: "Owners, tenants and team members at no extra cost" },
+  { icon: Gift, fr: "Premier mois offert, sans engagement", en: "First month free, no commitment" },
+  { icon: CalendarRange, fr: "Annuel : 12 mois pour le prix de 11", en: "Annual: 12 months for the price of 11" },
+  { icon: BadgePercent, fr: "Packs combinables : −10 %", en: "Combine packs: −10%" },
 ];
 
 export function Pricing({ comparisonOpen = false }: { comparisonOpen?: boolean }) {
   const [billing, setBilling] = useState<Billing>("monthly");
   const { open } = useDemo();
+  const { locale, t } = useI18n();
+  const activePacks = getActivePacks(locale);
 
   return (
     <section id="tarifs" className="relative bg-paper py-24 md:py-32">
       <div className="mx-auto max-w-6xl px-5">
         <Reveal className="mx-auto max-w-3xl text-center">
-          <Eyebrow>Tarifs</Eyebrow>
+          <Eyebrow>{t("Tarifs", "Pricing")}</Eyebrow>
           <h2 className="mt-5 font-display text-4xl leading-[1.05] font-bold tracking-tight text-balance md:text-6xl">
-            Un pack par métier, <span className="text-gradient-dark">sans surprise.</span>
+            {t("Un pack par métier, ", "One pack per business, ")}
+            <span className="text-gradient-dark">{t("sans surprise.", "no surprises.")}</span>
           </h2>
           <p className="mt-5 text-lg text-ink-900/60">
-            Vous payez le processus de votre métier, pas une liste de menus. Et si votre activité s&apos;élargit, les packs se combinent.
+            {t(
+              "Vous payez le processus de votre métier, pas une liste de menus. Et si votre activité s'élargit, les packs se combinent.",
+              "You pay for the workflow of your trade, not a list of menus. And as your business grows, packs can be combined.",
+            )}
           </p>
         </Reveal>
 
         <Reveal delay={0.1} className="mt-10 flex flex-col items-center gap-6">
           <BillingToggle value={billing} onChange={setBilling} />
           <ul className="flex flex-wrap justify-center gap-2">
-            {perks.map(({ icon: Icon, text }) => (
-              <li key={text} className="inline-flex items-center gap-2 rounded-full bg-white px-3.5 py-2 text-sm text-ink-900/70 ring-1 ring-ink-900/[0.07]">
-                <Icon className="size-4 text-brand-600" /> {text}
+            {perks.map(({ icon: Icon, fr, en }) => (
+              <li key={fr} className="inline-flex items-center gap-2 rounded-full bg-white px-3.5 py-2 text-sm text-ink-900/70 ring-1 ring-ink-900/[0.07]">
+                <Icon className="size-4 text-brand-600" /> {t(fr, en)}
               </li>
             ))}
           </ul>
@@ -67,8 +74,10 @@ export function Pricing({ comparisonOpen = false }: { comparisonOpen?: boolean }
         </div>
 
         <p className="mt-6 text-center text-xs text-ink-900/60">
-          Prix hors taxes. Premier mois d&apos;abonnement offert sur tous les packs, résiliable à tout moment. Mise en route facultative si vous préparez et saisissez vos données vous-même. WhatsApp facturé à la
-          consommation. Au-delà des capacités indiquées, devis sur mesure.
+          {t(
+            "Prix hors taxes. Premier mois d'abonnement offert sur tous les packs, résiliable à tout moment. Mise en route facultative si vous préparez et saisissez vos données vous-même. WhatsApp facturé à la consommation. Au-delà des capacités indiquées, devis sur mesure.",
+            "Prices excl. VAT. First month free on every pack, cancel anytime. Onboarding is optional if you prepare and enter your data yourself. WhatsApp billed per use. Beyond the stated capacities, custom quote.",
+          )}
         </p>
 
         <Comparison defaultOpen={comparisonOpen} />
@@ -79,12 +88,13 @@ export function Pricing({ comparisonOpen = false }: { comparisonOpen?: boolean }
 }
 
 function BillingToggle({ value, onChange }: { value: Billing; onChange: (b: Billing) => void }) {
+  const { t } = useI18n();
   return (
-    <div role="radiogroup" aria-label="Période de facturation" className="inline-flex rounded-full border border-ink-900/10 bg-white p-1.5 shadow-sm">
+    <div role="radiogroup" aria-label={t("Période de facturation", "Billing period")} className="inline-flex rounded-full border border-ink-900/10 bg-white p-1.5 shadow-sm">
       {(
         [
-          ["monthly", "Mensuel"],
-          ["annual", "Annuel"],
+          ["monthly", t("Mensuel", "Monthly")],
+          ["annual", t("Annuel", "Annual")],
         ] as const
       ).map(([id, label]) => (
         <button
@@ -97,7 +107,7 @@ function BillingToggle({ value, onChange }: { value: Billing; onChange: (b: Bill
           {value === id && <motion.span layoutId="billing-pill" className="absolute inset-0 rounded-full bg-ink-900" transition={{ type: "spring", stiffness: 380, damping: 32 }} />}
           <span className="relative flex items-center gap-2">
             {label}
-            {id === "annual" && <span className="rounded-full bg-mint-400 px-2 py-0.5 text-[10px] font-bold text-ink-950">12 MOIS POUR 11</span>}
+            {id === "annual" && <span className="rounded-full bg-mint-400 px-2 py-0.5 text-[10px] font-bold text-ink-950">{t("12 MOIS POUR 11", "12 MONTHS FOR 11")}</span>}
           </span>
         </button>
       ))}
@@ -108,13 +118,18 @@ function BillingToggle({ value, onChange }: { value: Billing; onChange: (b: Bill
 function Price({ monthly, billing, dark }: { monthly: number; billing: Billing; dark?: boolean }) {
   const amount = billing === "monthly" ? monthly : monthly * ANNUAL_MONTHS;
   const muted = dark ? "text-white/50" : "text-ink-900/45";
+  const { t } = useI18n();
   return (
     <div className="mt-6 min-h-[88px]">
       <AnimatePresence mode="wait" initial={false}>
         <motion.div key={billing} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.25 }}>
           <p className="font-display text-[2rem] leading-none font-bold tracking-tight tabular-nums">{fcfa(amount).replace(" FCFA", "")}</p>
-          <p className={`mt-1.5 text-sm ${muted}`}>FCFA HT / {billing === "monthly" ? "mois" : "an"}</p>
-          {billing === "annual" && <p className={`mt-1 text-xs ${muted}`}>soit {fcfa(Math.round(amount / 12))} / mois</p>}
+          <p className={`mt-1.5 text-sm ${muted}`}>{t("FCFA HT", "FCFA excl. VAT")} / {billing === "monthly" ? t("mois", "month") : t("an", "year")}</p>
+          {billing === "annual" && (
+            <p className={`mt-1 text-xs ${muted}`}>
+              {t("soit", "i.e.")} {fcfa(Math.round(amount / 12))} / {t("mois", "month")}
+            </p>
+          )}
         </motion.div>
       </AnimatePresence>
     </div>
@@ -123,6 +138,7 @@ function Price({ monthly, billing, dark }: { monthly: number; billing: Billing; 
 
 function PackCard({ pack, billing, onCta }: { pack: Pack; billing: Billing; onCta: () => void }) {
   const dark = !!pack.featured;
+  const { locale, t } = useI18n();
   return (
     <motion.div
       whileHover={{ y: -6 }}
@@ -135,7 +151,7 @@ function PackCard({ pack, billing, onCta }: { pack: Pack; billing: Billing; onCt
     >
       {dark && (
         <span className="absolute -top-3.5 left-1/2 inline-flex -translate-x-1/2 items-center gap-1.5 rounded-full bg-gradient-to-r from-brand-500 to-sun-500 px-4 py-1.5 text-xs font-bold whitespace-nowrap">
-          <Sparkles className="size-3.5" /> Tout inclus
+          <Sparkles className="size-3.5" /> {t("Tout inclus", "All inclusive")}
         </span>
       )}
       <div className="relative flex flex-1 flex-col">
@@ -146,10 +162,12 @@ function PackCard({ pack, billing, onCta }: { pack: Pack; billing: Billing; onCt
         </div>
         <Price monthly={pack.monthly} billing={billing} dark={dark} />
         <p className={`mt-3 inline-flex w-fit items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-semibold ${dark ? "bg-mint-400/15 text-mint-400" : "bg-emerald-50 text-emerald-700"}`}>
-          <Gift className="size-3.5" /> {TRIAL_TEXT}
+          <Gift className="size-3.5" /> {trialText[locale]}
         </p>
         <div className={`mt-4 rounded-xl p-3 text-xs ${dark ? "bg-white/[0.06] text-white/75" : "bg-brand-500/[0.06] text-ink-900/70"}`}>
-          <p className="font-semibold">Inclus : {pack.included}</p>
+          <p className="font-semibold">
+            {t("Inclus :", "Included:")} {pack.included}
+          </p>
           <p className="mt-1 opacity-80">{pack.extension}</p>
         </div>
         <ul className="mt-6 flex-1 space-y-2.5">
@@ -167,10 +185,10 @@ function PackCard({ pack, billing, onCta }: { pack: Pack; billing: Billing; onCt
           strength={0.18}
           className={`mt-7 w-full py-3.5 text-sm ${dark ? "bg-white text-ink-950 hover:shadow-[0_0_40px_-6px_rgba(255,255,255,0.6)]" : "bg-ink-900 text-white hover:bg-ink-800"}`}
         >
-          Demander une démonstration
+          {t("Demander une démonstration", "Request a demo")}
         </MagneticButton>
         <p className={`mt-3 text-center text-[11px] ${dark ? "text-white/45" : "text-ink-900/40"}`}>
-          Mise en route accompagnée : {fcfa(pack.setup)} HT
+          {t("Mise en route accompagnée :", "Guided onboarding:")} {fcfa(pack.setup)} {t("HT", "excl. VAT")}
         </p>
       </div>
     </motion.div>
@@ -181,6 +199,8 @@ function PackCard({ pack, billing, onCta }: { pack: Pack; billing: Billing; onCt
 
 function Comparison({ defaultOpen }: { defaultOpen: boolean }) {
   const [open, setOpen] = useState(defaultOpen);
+  const { locale, t } = useI18n();
+  const activePacks = getActivePacks(locale);
   return (
     <div className="mt-14">
       <div className="flex justify-center">
@@ -189,7 +209,7 @@ function Comparison({ defaultOpen }: { defaultOpen: boolean }) {
           aria-expanded={open}
           className="inline-flex cursor-pointer items-center gap-2 rounded-full border border-ink-900/15 bg-white px-5 py-3 text-sm font-semibold transition hover:border-ink-900/40"
         >
-          Comparer les packs en détail
+          {t("Comparer les packs en détail", "Compare packs in detail")}
           <ChevronDown className={`size-4 transition-transform duration-300 ${open ? "rotate-180" : ""}`} />
         </button>
       </div>
@@ -206,7 +226,7 @@ function Comparison({ defaultOpen }: { defaultOpen: boolean }) {
               <table className="w-full min-w-[720px] text-sm">
                 <thead>
                   <tr className="border-b border-ink-900/[0.07] text-left">
-                    <th className="p-4 font-medium text-ink-900/50">Domaine fonctionnel</th>
+                    <th className="p-4 font-medium text-ink-900/50">{t("Domaine fonctionnel", "Functional area")}</th>
                     {activePacks.map((p) => (
                       <th key={p.id} className={`p-4 text-center font-display font-bold ${p.featured ? "text-brand-600" : ""}`}>
                         {p.name}
@@ -215,15 +235,15 @@ function Comparison({ defaultOpen }: { defaultOpen: boolean }) {
                   </tr>
                 </thead>
                 <tbody>
-                  {coverage.map(([label, ...cells]) => (
+                  {coverageByLocale[locale].map(([label, ...cells]) => (
                     <tr key={label} className="border-b border-ink-900/[0.05] last:border-0 hover:bg-brand-500/[0.03]">
                       <td className="p-4 text-ink-900/75">{label}</td>
                       {cells.map((ok, i) => (
                         <td key={i} className={`p-4 text-center ${activePacks[i]?.featured ? "bg-brand-500/[0.04]" : ""}`}>
                           {ok ? (
-                            <Check className="mx-auto size-4.5 text-emerald-600" strokeWidth={3} aria-label="Inclus" />
+                            <Check className="mx-auto size-4.5 text-emerald-600" strokeWidth={3} aria-label={t("Inclus", "Included")} />
                           ) : (
-                            <Minus className="mx-auto size-4 text-ink-900/20" aria-label="Non inclus" />
+                            <Minus className="mx-auto size-4 text-ink-900/20" aria-label={t("Non inclus", "Not included")} />
                           )}
                         </td>
                       ))}
@@ -250,15 +270,18 @@ function Simulator({ billing }: { billing: Billing }) {
   const [coproLots, setCoproLots] = useState(140);
   const [sites, setSites] = useState(3);
   const [programLots, setProgramLots] = useState(120);
+  const { locale, t } = useI18n();
 
   const sellable = (t: Trade) => packs.find((p) => p.id === t)?.available ?? false;
   const toggle = (t: Trade) => setTrades((ts) => (ts.includes(t) ? (ts.length > 1 ? ts.filter((x) => x !== t) : ts) : [...ts, t]));
   const has = (t: Trade) => trades.includes(t);
 
   const lines: [string, number][] = [];
-  if (has("agence")) lines.push([`Agence · ${units} logements`, agencePrice(units)]);
-  if (has("syndic")) lines.push([`Syndic · ${copros} copropriétés, ${coproLots} lots`, syndicPrice(copros, coproLots)]);
-  if (has("promoteur")) lines.push([`Promoteur · ${sites} chantiers, ${programLots} lots`, promoteurPrice(sites, programLots)]);
+  if (has("agence")) lines.push([t(`Agence · ${units} logements`, `Agency · ${units} units`), agencePrice(units)]);
+  if (has("syndic"))
+    lines.push([t(`Syndic · ${copros} copropriétés, ${coproLots} lots`, `Condo Management · ${copros} condominiums, ${coproLots} lots`), syndicPrice(copros, coproLots)]);
+  if (has("promoteur"))
+    lines.push([t(`Promoteur · ${sites} chantiers, ${programLots} lots`, `Developer · ${sites} sites, ${programLots} lots`), promoteurPrice(sites, programLots)]);
   const combo = comboPrice(lines.map(([, p]) => p));
 
   // Avec les trois métiers, on compare au forfait intégré (lots comptés sans dédoublonnage : estimation haute)
@@ -273,17 +296,17 @@ function Simulator({ billing }: { billing: Billing }) {
       <div className="grid lg:grid-cols-[1.2fr_1fr]">
         <div className="p-7 md:p-10">
           <p className="inline-flex items-center gap-2 text-xs font-bold tracking-[0.16em] text-mint-400 uppercase">
-            <Calculator className="size-4" /> Simulateur
+            <Calculator className="size-4" /> {t("Simulateur", "Simulator")}
           </p>
-          <h3 className="mt-3 font-display text-3xl font-bold">Estimez votre abonnement</h3>
-          <p className="mt-2 text-white/60">Choisissez vos métiers et vos volumes.</p>
+          <h3 className="mt-3 font-display text-3xl font-bold">{t("Estimez votre abonnement", "Estimate your subscription")}</h3>
+          <p className="mt-2 text-white/60">{t("Choisissez vos métiers et vos volumes.", "Choose your business lines and volumes.")}</p>
 
           <div className="mt-6 flex flex-wrap gap-2">
             {(
               [
-                ["agence", "Gestion locative"],
-                ["syndic", "Syndic"],
-                ["promoteur", "Promotion"],
+                ["agence", t("Gestion locative", "Property management")],
+                ["syndic", t("Syndic", "Condo management")],
+                ["promoteur", t("Promotion", "Development")],
               ] as const
             )
               .filter(([id]) => sellable(id))
@@ -305,12 +328,12 @@ function Simulator({ billing }: { billing: Billing }) {
           <div className="mt-6 grid gap-5 sm:grid-cols-2">
             <AnimatePresence initial={false}>
               {has("agence") && (
-                <Field key="u" label="Logements sous mandat de gestion" value={units} onChange={setUnits} max={2000} />
+                <Field key="u" label={t("Logements sous mandat de gestion", "Units under management")} value={units} onChange={setUnits} max={2000} />
               )}
-              {has("syndic") && <Field key="c" label="Copropriétés actives" value={copros} onChange={setCopros} max={30} />}
-              {has("syndic") && <Field key="cl" label="Lots de copropriété" value={coproLots} onChange={setCoproLots} max={3000} />}
-              {has("promoteur") && <Field key="s" label="Chantiers actifs" value={sites} onChange={setSites} max={20} />}
-              {has("promoteur") && <Field key="pl" label="Lots de programme" value={programLots} onChange={setProgramLots} max={2000} />}
+              {has("syndic") && <Field key="c" label={t("Copropriétés actives", "Active condominiums")} value={copros} onChange={setCopros} max={30} />}
+              {has("syndic") && <Field key="cl" label={t("Lots de copropriété", "Condominium lots")} value={coproLots} onChange={setCoproLots} max={3000} />}
+              {has("promoteur") && <Field key="s" label={t("Chantiers actifs", "Active sites")} value={sites} onChange={setSites} max={20} />}
+              {has("promoteur") && <Field key="pl" label={t("Lots de programme", "Project lots")} value={programLots} onChange={setProgramLots} max={2000} />}
             </AnimatePresence>
           </div>
         </div>
@@ -318,30 +341,41 @@ function Simulator({ billing }: { billing: Billing }) {
         <div className="relative border-t border-white/10 bg-white/[0.03] p-7 md:p-10 lg:border-t-0 lg:border-l">
           <div aria-hidden className="absolute -top-20 -right-20 size-64 rounded-full bg-brand-500/30 blur-3xl" />
           <div className="relative">
-            <p className="text-sm text-white/55">{useIntegrated ? "Forfait Opérateur intégré" : "Votre estimation"}</p>
+            <p className="text-sm text-white/55">{useIntegrated ? t("Forfait Opérateur intégré", "Integrated Operator plan") : t("Votre estimation", "Your estimate")}</p>
             <motion.p key={`${shown}-${billing}`} initial={{ opacity: 0.3, y: 6 }} animate={{ opacity: 1, y: 0 }} className="mt-1 font-display text-5xl font-bold tracking-tight tabular-nums">
               {fcfa(shown).replace(" FCFA", "")}
             </motion.p>
-            <p className="mt-1 text-sm text-white/55">FCFA HT / {billing === "monthly" ? "mois" : "an (12 mois pour 11)"}</p>
-            <p className="mt-2 inline-flex items-center gap-1.5 text-sm font-semibold text-mint-400"><Gift className="size-4" /> {TRIAL_TEXT}</p>
+            <p className="mt-1 text-sm text-white/55">
+              {t("FCFA HT", "FCFA excl. VAT")} / {billing === "monthly" ? t("mois", "month") : t("an (12 mois pour 11)", "year (12 months for 11)")}
+            </p>
+            <p className="mt-2 inline-flex items-center gap-1.5 text-sm font-semibold text-mint-400"><Gift className="size-4" /> {trialText[locale]}</p>
 
             <div className="mt-6 space-y-2 text-sm">
               {lines.map(([label, price]) => (
                 <Row key={label} label={label} value={fcfa(price)} strike={useIntegrated} />
               ))}
-              {combo.discount > 0 && <Row label="Remise combinaison (−10 % sur le moins cher)" value={`− ${fcfa(combo.discount)}`} accent strike={useIntegrated} />}
+              {combo.discount > 0 && <Row label={t("Remise combinaison (−10 % sur le moins cher)", "Combo discount (−10% on the cheapest)")} value={`− ${fcfa(combo.discount)}`} accent strike={useIntegrated} />}
               {integrated !== null && (
                 <div className={`mt-3 rounded-xl p-3 ring-1 ${useIntegrated ? "bg-mint-400/10 ring-mint-400/40" : "bg-white/5 ring-white/10"}`}>
                   <p className="font-semibold">
-                    Opérateur intégré : {fcfa(integrated)} / mois {useIntegrated && <span className="text-mint-400">· le plus avantageux</span>}
+                    {t("Opérateur intégré :", "Integrated Operator:")} {fcfa(integrated)} / {t("mois", "month")}{" "}
+                    {useIntegrated && <span className="text-mint-400">· {t("le plus avantageux", "best value")}</span>}
                   </p>
                   <p className="mt-1 text-xs text-white/50">
-                    Estimation haute : un même lot passé du chantier à la gestion ne compte qu&apos;une fois dans le forfait.
+                    {t(
+                      "Estimation haute : un même lot passé du chantier à la gestion ne compte qu'une fois dans le forfait.",
+                      "Upper estimate: a lot that moves from construction to management is counted only once in the plan.",
+                    )}
                   </p>
                 </div>
               )}
             </div>
-            <p className="mt-6 text-xs text-white/60">Hors taxes, mise en route et messages WhatsApp consommés. Estimation indicative, devis sur demande.</p>
+            <p className="mt-6 text-xs text-white/60">
+              {t(
+                "Hors taxes, mise en route et messages WhatsApp consommés. Estimation indicative, devis sur demande.",
+                "Excl. VAT, onboarding and WhatsApp messages used. Indicative estimate, quote on request.",
+              )}
+            </p>
           </div>
         </div>
       </div>

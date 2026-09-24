@@ -6,18 +6,30 @@ import { useEffect, useState } from "react";
 import { roles, type RoleId } from "@/lib/content";
 import { comparatifHref, type DomainId } from "@/lib/comparatif-domains";
 import { ROLE_EVENT } from "@/lib/nav";
+import { useI18n } from "./locale-provider";
 import { SmartLink } from "./smart-link";
 import { Eyebrow, Reveal, trackSpotlight } from "./ui";
 
 // Domaine du comparatif qui prolonge chaque onglet
-const compareFor: Record<RoleId, { domain: DomainId; label: string }> = {
-  directeur: { domain: "pilotage", label: "Comparer le pilotage" },
-  comptable: { domain: "gestion-locative", label: "Comparer la gestion locative" },
-  agent: { domain: "biens-commercial", label: "Comparer le CRM et les biens" },
+const compareFor: Record<RoleId, { domain: DomainId; label: { fr: string; en: string } }> = {
+  directeur: {
+    domain: "pilotage",
+    label: { fr: "Comparer le pilotage face aux autres logiciels", en: "Compare oversight features with other software" },
+  },
+  comptable: {
+    domain: "gestion-locative",
+    label: { fr: "Comparer la gestion locative face aux autres logiciels", en: "Compare rental management with other software" },
+  },
+  agent: {
+    domain: "biens-commercial",
+    label: { fr: "Comparer le CRM et les biens face aux autres logiciels", en: "Compare CRM and listings with other software" },
+  },
 };
 
 export function Roles() {
   const [tab, setTab] = useState<RoleId>("directeur");
+  const { locale, t } = useI18n();
+  const list = roles[locale];
 
   useEffect(() => {
     const onSelect = (e: Event) => setTab((e as CustomEvent<RoleId>).detail);
@@ -25,24 +37,34 @@ export function Roles() {
     return () => window.removeEventListener(ROLE_EVENT, onSelect);
   }, []);
 
-  const role = roles.find((r) => r.id === tab)!;
+  const role = list.find((r) => r.id === tab)!;
 
   return (
     <section id="roles" className="relative bg-paper py-24 md:py-32">
       <div className="mx-auto max-w-6xl px-5">
         <Reveal className="mx-auto max-w-3xl text-center">
-          <Eyebrow>Une interface par métier</Eyebrow>
+          <Eyebrow>{t("Une interface par métier", "One interface per job")}</Eyebrow>
           <h2 className="mt-5 font-display text-4xl leading-[1.05] font-bold tracking-tight text-balance md:text-6xl">
-            À chaque rôle, <span className="text-gradient-dark">son interface.</span>
+            {t(
+              <>
+                À chaque rôle, <span className="text-gradient-dark">son interface.</span>
+              </>,
+              <>
+                Every role, <span className="text-gradient-dark">its own interface.</span>
+              </>,
+            )}
           </h2>
           <p className="mt-5 text-lg text-ink-900/60">
-            Directeur, comptable ou agent : chacun voit exactement ce dont il a besoin, rien de plus.
+            {t(
+              "Directeur, comptable ou agent : chacun voit exactement ce dont il a besoin, rien de plus.",
+              "Director, accountant or agent: everyone sees exactly what they need, nothing more.",
+            )}
           </p>
         </Reveal>
 
         <Reveal delay={0.1} className="mt-12 flex justify-center">
-          <div role="tablist" aria-label="Rôles" className="inline-flex max-w-full overflow-x-auto rounded-full border border-ink-900/10 bg-white p-1.5 shadow-sm">
-            {roles.map((r) => (
+          <div role="tablist" aria-label={t("Rôles", "Roles")} className="inline-flex max-w-full overflow-x-auto rounded-full border border-ink-900/10 bg-white p-1.5 shadow-sm">
+            {list.map((r) => (
               <button
                 key={r.id}
                 role="tab"
@@ -99,7 +121,7 @@ export function Roles() {
                   href={comparatifHref(compareFor[tab].domain)}
                   className="group mt-6 inline-flex items-center gap-2 text-sm font-semibold text-brand-600 hover:text-brand-500"
                 >
-                  {compareFor[tab].label} face aux autres logiciels
+                  {compareFor[tab].label[locale]}
                   <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
                 </SmartLink>
               </div>
@@ -121,15 +143,16 @@ function Panel({ children }: { children: React.ReactNode }) {
 }
 
 function RoleVisual({ id }: { id: RoleId }) {
+  const { t } = useI18n();
   if (id === "directeur") {
     const bars = [42, 55, 48, 66, 72, 61, 84, 90];
     return (
       <Panel>
         <div className="grid grid-cols-3 gap-3">
           {[
-            ["Loyers encaissés", "48,2 M", "+12 %"],
-            ["Taux d'occupation", "94 %", "+3 pts"],
-            ["Encaissé du mois", "48,2 M", "88 % obj."],
+            [t("Loyers encaissés", "Rent collected"), t("48,2 M", "48.2M"), "+12 %"],
+            [t("Taux d'occupation", "Occupancy rate"), "94 %", "+3 pts"],
+            [t("Encaissé du mois", "Collected this month"), t("48,2 M", "48.2M"), t("88 % obj.", "88 % of target")],
           ].map(([k, v, t]) => (
             <div key={k} className="rounded-2xl bg-white p-3 shadow-sm ring-1 ring-ink-900/5">
               <p className="text-[11px] text-ink-900/65">{k}</p>
@@ -161,43 +184,44 @@ function RoleVisual({ id }: { id: RoleId }) {
             <Bell className="size-5" />
           </span>
           <div className="min-w-0 flex-1 text-sm">
-            <p className="font-semibold">Déclaration de paiement · Wave</p>
-            <p className="truncate text-xs text-white/60">Studio 3, Angré · 150 000 FCFA · à valider</p>
+            <p className="font-semibold">{t("Déclaration de paiement · Wave", "Payment notice · Wave")}</p>
+            <p className="truncate text-xs text-white/60">{t("Studio 3, Angré · 150 000 FCFA · à valider", "Studio 3, Angré · 150,000 FCFA · to approve")}</p>
           </div>
-          <button className="shine cursor-pointer rounded-full bg-mint-400 px-4 py-2 text-xs font-bold text-ink-950">Valider</button>
+          <button className="shine cursor-pointer rounded-full bg-mint-400 px-4 py-2 text-xs font-bold text-ink-950">{t("Valider", "Approve")}</button>
         </motion.div>
       </Panel>
     );
   }
 
   if (id === "comptable") {
-    const rows = [
-      ["05/09", "Loyer sept. · Studio 3, Angré", "150 000", "Payé"],
-      ["05/09", "Loyer sept. · Villa 7, Marcory", "450 000", "Partiel"],
-      ["15/09", "Pénalité de retard · Villa 7", "22 500", "Calculée"],
-      ["05/10", "Loyer oct. · Studio 3, Angré", "150 000", "À échoir"],
+    type Status = "paid" | "partial" | "computed" | "upcoming";
+    const rows: [string, string, string, Status][] = [
+      [t("05/09", "09/05"), t("Loyer sept. · Studio 3, Angré", "Sept. rent · Studio 3, Angré"), t("150 000", "150,000"), "paid"],
+      [t("05/09", "09/05"), t("Loyer sept. · Villa 7, Marcory", "Sept. rent · Villa 7, Marcory"), t("450 000", "450,000"), "partial"],
+      [t("15/09", "09/15"), t("Pénalité de retard · Villa 7", "Late fee · Villa 7"), t("22 500", "22,500"), "computed"],
+      [t("05/10", "10/05"), t("Loyer oct. · Studio 3, Angré", "Oct. rent · Studio 3, Angré"), t("150 000", "150,000"), "upcoming"],
     ];
-    const tone: Record<string, string> = {
-      Payé: "bg-emerald-50 text-emerald-700",
-      Partiel: "bg-amber-50 text-amber-700",
-      Calculée: "bg-rose-50 text-rose-700",
-      "À échoir": "bg-slate-100 text-slate-600",
+    const status: Record<Status, { label: string; tone: string }> = {
+      paid: { label: t("Payé", "Paid"), tone: "bg-emerald-50 text-emerald-700" },
+      partial: { label: t("Partiel", "Partial"), tone: "bg-amber-50 text-amber-700" },
+      computed: { label: t("Calculée", "Calculated"), tone: "bg-rose-50 text-rose-700" },
+      upcoming: { label: t("À échoir", "Upcoming"), tone: "bg-slate-100 text-slate-600" },
     };
     return (
       <Panel>
         <div className="overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-ink-900/5">
           <div className="flex items-center justify-between border-b border-ink-900/5 px-4 py-3">
-            <p className="text-sm font-semibold">Échéancier · septembre</p>
-            <span className="rounded-full bg-amber-50 px-2.5 py-1 text-[11px] font-semibold text-amber-700">Reste à encaisser : 247 500</span>
+            <p className="text-sm font-semibold">{t("Échéancier · septembre", "Payment schedule · September")}</p>
+            <span className="rounded-full bg-amber-50 px-2.5 py-1 text-[11px] font-semibold text-amber-700">{t("Reste à encaisser : 247 500", "Outstanding: 247,500")}</span>
           </div>
           <div className="overflow-x-auto">
             <table className="w-full min-w-[440px] text-left text-xs">
               <thead className="text-ink-900/45">
                 <tr>
-                  <th className="px-4 py-2 font-medium">Échéance</th>
-                  <th className="px-2 py-2 font-medium">Libellé</th>
-                  <th className="px-2 py-2 text-right font-medium">Montant</th>
-                  <th className="px-4 py-2 text-right font-medium">Statut</th>
+                  <th className="px-4 py-2 font-medium">{t("Échéance", "Due date")}</th>
+                  <th className="px-2 py-2 font-medium">{t("Libellé", "Description")}</th>
+                  <th className="px-2 py-2 text-right font-medium">{t("Montant", "Amount")}</th>
+                  <th className="px-4 py-2 text-right font-medium">{t("Statut", "Status")}</th>
                 </tr>
               </thead>
               <tbody>
@@ -213,7 +237,7 @@ function RoleVisual({ id }: { id: RoleId }) {
                     <td className="px-2 py-2.5 text-ink-900/70">{r[1]}</td>
                     <td className="px-2 py-2.5 text-right tabular-nums">{r[2]}</td>
                     <td className="px-4 py-2.5 text-right">
-                      <span className={`rounded-full px-2 py-0.5 text-[11px] font-semibold ${tone[r[3]]}`}>{r[3]}</span>
+                      <span className={`rounded-full px-2 py-0.5 text-[11px] font-semibold ${status[r[3]].tone}`}>{status[r[3]].label}</span>
                     </td>
                   </motion.tr>
                 ))}
@@ -223,8 +247,8 @@ function RoleVisual({ id }: { id: RoleId }) {
         </div>
         <div className="mt-3 grid grid-cols-2 gap-3">
           {[
-            [FileSpreadsheet, "Quittance", "Générée depuis votre modèle Word"],
-            [Download, "Relevé de compte", "Historique du locataire"],
+            [FileSpreadsheet, t("Quittance", "Rent receipt"), t("Générée depuis votre modèle Word", "Generated from your Word template")],
+            [Download, t("Relevé de compte", "Account statement"), t("Historique du locataire", "Tenant history")],
           ].map(([Icon, t, s]) => {
             const I = Icon as typeof Download;
             return (
@@ -259,7 +283,7 @@ function RoleVisual({ id }: { id: RoleId }) {
             </span>
             <div className="text-xs">
               <p className="font-semibold">Aya Kouassi</p>
-              <p className="text-white/50">Locataire · Riviera 3</p>
+              <p className="text-white/50">{t("Locataire · Riviera 3", "Tenant · Riviera 3")}</p>
             </div>
           </div>
           <div className="space-y-2 py-3 text-[11px]">
@@ -269,8 +293,13 @@ function RoleVisual({ id }: { id: RoleId }) {
               transition={{ delay: 0.3 }}
               className="max-w-[88%] rounded-xl rounded-tl-sm bg-[#202c33] p-2.5 text-white/90"
             >
-              Bonjour Mme Kouassi 👋 Votre loyer de septembre (250 000 FCFA) arrive à échéance le 05/10.
-              <span className="mt-1.5 block rounded-lg bg-[#1DC8FF]/15 px-2 py-1.5 font-semibold text-[#6fdcff]">Déclarer mon paiement sur mon portail →</span>
+              {t(
+                "Bonjour Mme Kouassi 👋 Votre loyer de septembre (250 000 FCFA) arrive à échéance le 05/10.",
+                "Hello Mrs. Kouassi 👋 Your September rent (250,000 FCFA) is due on October 5.",
+              )}
+              <span className="mt-1.5 block rounded-lg bg-[#1DC8FF]/15 px-2 py-1.5 font-semibold text-[#6fdcff]">
+                {t("Déclarer mon paiement sur mon portail →", "Report my payment on my portal →")}
+              </span>
             </motion.div>
             <motion.div
               initial={{ opacity: 0, y: 10 }}
@@ -278,7 +307,7 @@ function RoleVisual({ id }: { id: RoleId }) {
               transition={{ delay: 0.9 }}
               className="ml-auto max-w-[70%] rounded-xl rounded-tr-sm bg-[#005c4b] p-2.5 text-white"
             >
-              C&apos;est fait, merci !
+              {t("C'est fait, merci !", "Done, thank you!")}
               <span className="mt-1 flex items-center justify-end gap-1 text-[9px] text-white/60">
                 10:42 <CheckCheck className="size-3 text-sky-300" />
               </span>
@@ -289,18 +318,18 @@ function RoleVisual({ id }: { id: RoleId }) {
               transition={{ delay: 1.4 }}
               className="mx-auto w-fit rounded-full bg-emerald-400/15 px-3 py-1 text-[10px] font-semibold text-emerald-300"
             >
-              ✓ Déclaration reçue · validation par l&apos;agence
+              {t("✓ Déclaration reçue · validation par l'agence", "✓ Notice received · pending agency approval")}
             </motion.div>
           </div>
         </div>
         <div className="hidden flex-1 flex-col gap-2 sm:flex">
           <p className="flex items-center gap-2 text-sm font-semibold">
-            <Calendar className="size-4 text-brand-600" /> Visites du jour
+            <Calendar className="size-4 text-brand-600" /> {t("Visites du jour", "Today's viewings")}
           </p>
           {[
-            ["09:30", "Villa 5 pièces · Cocody", "M. Ouattara"],
-            ["11:00", "Appt F3 · Deux Plateaux", "Mme Diallo"],
-            ["15:30", "Bureau · Plateau", "SARL Akwaba"],
+            ["09:30", t("Villa 5 pièces · Cocody", "5-room villa · Cocody"), t("M. Ouattara", "Mr. Ouattara")],
+            ["11:00", t("Appt F3 · Deux Plateaux", "2-bed apartment · Deux Plateaux"), t("Mme Diallo", "Mrs. Diallo")],
+            ["15:30", t("Bureau · Plateau", "Office · Plateau"), "SARL Akwaba"],
           ].map(([h, b, c], i) => (
             <motion.div
               key={h}

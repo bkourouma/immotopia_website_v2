@@ -1,5 +1,7 @@
 // Coordonnées et identité légale, centralisées ici (pied de page, contact, WhatsApp, mentions légales).
 
+import { defaultLocale, type Locale } from "./i18n";
+
 export const SITE_URL = "https://immotopia.cloud";
 export const APP_LOGIN_URL = "https://app.immotopia.cloud/login";
 
@@ -7,7 +9,10 @@ export const contact = {
   phone: "+225 01 01 51 01 36",
   phoneHref: "tel:+2250101510136",
   whatsapp: "https://wa.me/2250101510136",
-  whatsappMessage: "Bonjour ImmoTopia, je souhaite en savoir plus sur votre ERP immobilier.",
+  whatsappMessage: {
+    fr: "Bonjour ImmoTopia, je souhaite en savoir plus sur votre ERP immobilier.",
+    en: "Hello ImmoTopia, I would like to know more about your real estate ERP.",
+  } satisfies Record<Locale, string>,
   email: "immotopia@allianceconsultants.net",
   city: "Abidjan, Côte d'Ivoire",
 };
@@ -23,6 +28,6 @@ export const legal = {
   hostSite: "https://www.hostinger.com",
 };
 
-export function whatsappLink(message = contact.whatsappMessage) {
+export function whatsappLink(locale: Locale = defaultLocale, message = contact.whatsappMessage[locale]) {
   return `${contact.whatsapp}?text=${encodeURIComponent(message)}`;
 }

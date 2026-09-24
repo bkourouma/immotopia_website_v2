@@ -3,26 +3,32 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import { tools } from "@/lib/tools";
+import { getTools } from "@/lib/tools";
+import { useI18n } from "@/components/locale-provider";
 import { trackSpotlight } from "../ui";
 import { ToolIcon } from "./tool-ui";
 
 /** Grille bento des outils gratuits (page /outils et section d'accueil) */
 export function ToolsGrid({ dark = false }: { dark?: boolean }) {
+  const { locale, href } = useI18n();
   return (
     <div className="grid gap-4 md:grid-cols-6">
-      {tools.map((t, i) => (
+      {getTools(locale).map((t, i) => (
         <motion.div
           key={t.slug}
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-60px" }}
-          transition={{ duration: 0.7, delay: (i % 3) * 0.08, ease: [0.16, 1, 0.3, 1] }}
+          transition={{
+            duration: 0.7,
+            delay: (i % 3) * 0.08,
+            ease: [0.16, 1, 0.3, 1],
+          }}
           // 2 grandes cartes en tête, puis des cartes d'un tiers
           className={i < 2 ? "md:col-span-3" : i === 6 ? "md:col-span-6 lg:col-span-2" : "md:col-span-3 lg:col-span-2"}
         >
           <Link
-            href={`/outils/${t.slug}`}
+            href={href(`/outils/${t.slug}`)}
             onMouseMove={trackSpotlight}
             style={{ ["--spot" as string]: `${t.accent}33` }}
             className={`spotlight group flex h-full flex-col rounded-[24px] border p-6 transition duration-500 hover:-translate-y-1 ${
@@ -38,7 +44,9 @@ export function ToolsGrid({ dark = false }: { dark?: boolean }) {
               </span>
               <span
                 className={`grid size-9 place-items-center rounded-full transition group-hover:rotate-45 ${
-                  dark ? "bg-white/10 group-hover:bg-white group-hover:text-ink-950" : "bg-ink-900/5 group-hover:bg-ink-900 group-hover:text-white"
+                  dark
+                    ? "bg-white/10 group-hover:bg-white group-hover:text-ink-950"
+                    : "bg-ink-900/5 group-hover:bg-ink-900 group-hover:text-white"
                 }`}
               >
                 <ArrowUpRight className="size-4" />

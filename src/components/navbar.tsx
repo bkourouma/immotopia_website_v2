@@ -5,6 +5,8 @@ import { ArrowRight, ChevronDown, Menu, X } from "lucide-react";
 import { useState } from "react";
 import { navLinks } from "@/lib/content";
 import { APP_LOGIN_URL } from "@/lib/site";
+import { LanguageSwitcher } from "./language-switcher";
+import { useI18n } from "./locale-provider";
 import { useDemo } from "./providers";
 import { SmartLink } from "./smart-link";
 import { Logo, MagneticButton } from "./ui";
@@ -16,6 +18,8 @@ export function Navbar() {
   const [hovered, setHovered] = useState<string | null>(null);
   const [sub, setSub] = useState<string | null>(null);
   const { open } = useDemo();
+  const { locale, t } = useI18n();
+  const links = navLinks[locale];
 
   useMotionValueEvent(scrollY, "change", (v) => setScrolled(v > 24));
 
@@ -31,12 +35,12 @@ export function Navbar() {
             : "border-transparent bg-transparent"
         }`}
       >
-        <SmartLink href="#top" className="text-white" aria-label="ImmoTopia — accueil">
+        <SmartLink href="#top" className="text-white" aria-label={t("ImmoTopia — accueil", "ImmoTopia — home")}>
           <Logo />
         </SmartLink>
 
         <ul className="hidden items-center md:flex" onMouseLeave={() => setHovered(null)}>
-          {navLinks.map((l) => (
+          {links.map((l) => (
             <li
               key={l.href}
               // Sous xl, la place manque : « Fonctionnalités » ramène seulement en haut de l'accueil.
@@ -84,7 +88,7 @@ export function Navbar() {
                         onClick={() => setHovered(null)}
                         className="group mt-2 flex items-center justify-between rounded-xl bg-gradient-to-r from-brand-500/25 to-sun-500/15 px-4 py-3 text-sm font-semibold text-white ring-1 ring-white/10"
                       >
-                        Voir tout le comparatif, avec les sources
+                        {t("Voir tout le comparatif, avec les sources", "See the full comparison, with sources")}
                         <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
                       </SmartLink>
                     </div>
@@ -97,20 +101,21 @@ export function Navbar() {
 
         <div className="flex items-center gap-2">
           <a href={APP_LOGIN_URL} className="hidden rounded-full px-3 py-2 text-sm font-medium text-white/75 transition-colors hover:text-white lg:block">
-            Connexion
+            {t("Connexion", "Log in")}
           </a>
+          <LanguageSwitcher className="hidden md:inline-flex" />
           <div className="hidden sm:block">
             <MagneticButton
               onClick={open}
               className="bg-gradient-to-r from-brand-500 to-brand-600 px-5 py-2.5 text-sm whitespace-nowrap text-white shadow-[0_8px_30px_-8px_rgba(91,91,247,0.9)]"
             >
-              Demander une démo
+              {t("Demander une démo", "Book a demo")}
             </MagneticButton>
           </div>
           <button
             className="grid size-10 cursor-pointer place-items-center rounded-xl text-white hover:bg-white/10 md:hidden"
             onClick={() => setMenu((m) => !m)}
-            aria-label={menu ? "Fermer le menu" : "Ouvrir le menu"}
+            aria-label={menu ? t("Fermer le menu", "Close menu") : t("Ouvrir le menu", "Open menu")}
             aria-expanded={menu}
           >
             {menu ? <X className="size-5" /> : <Menu className="size-5" />}
@@ -126,7 +131,7 @@ export function Navbar() {
             exit={{ opacity: 0, y: -12, scale: 0.98 }}
             className="absolute inset-x-3 top-[76px] max-h-[calc(100dvh-90px)] overflow-y-auto rounded-2xl border border-white/10 bg-ink-950/90 p-3 text-white backdrop-blur-xl md:hidden"
           >
-            {navLinks.map((l) =>
+            {links.map((l) =>
               l.children ? (
                 <div key={l.href}>
                   <button
@@ -141,7 +146,7 @@ export function Navbar() {
                     {sub === l.href && (
                       <motion.div initial={{ height: 0 }} animate={{ height: "auto" }} exit={{ height: 0 }} className="overflow-hidden">
                         <div className="grid grid-cols-2 gap-1 ps-3 pb-2">
-                          {[{ label: "Tout le comparatif", href: l.href }, ...l.children].map((c) => (
+                          {[{ label: t("Tout le comparatif", "Full comparison"), href: l.href }, ...l.children].map((c) => (
                             <SmartLink key={c.href} href={c.href} onClick={() => setMenu(false)} className="rounded-lg px-3 py-2 text-sm text-white/75 hover:bg-white/10 hover:text-white">
                               {c.label}
                             </SmartLink>
@@ -163,8 +168,11 @@ export function Navbar() {
               ),
             )}
             <a href={APP_LOGIN_URL} className="block rounded-xl px-4 py-3 text-base font-medium text-white/70 hover:bg-white/10">
-              Connexion clients
+              {t("Connexion clients", "Client log in")}
             </a>
+            <div className="px-4 py-3">
+              <LanguageSwitcher />
+            </div>
             <button
               onClick={() => {
                 setMenu(false);
@@ -172,7 +180,7 @@ export function Navbar() {
               }}
               className="mt-2 w-full cursor-pointer rounded-xl bg-brand-500 py-3 font-semibold"
             >
-              Demander une démo
+              {t("Demander une démo", "Book a demo")}
             </button>
           </motion.div>
         )}

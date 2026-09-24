@@ -3,18 +3,24 @@
 import { useState, type ReactNode } from "react";
 import type { Block, Doc } from "@/lib/document";
 import { fcfa, fcfaWords, longDate, monthBounds, monthLabel, todayISO } from "@/lib/format";
-import { Card, Choice, DocPreview, DownloadButton, Num, Text, UpsellCta } from "./tool-ui";
+import { useI18n } from "../locale-provider";
+import { Card, Choice, DocLanguageNote, DocPreview, DownloadButton, Num, Text, UpsellCta } from "./tool-ui";
 
 // Ces composants sont chargés uniquement dans le navigateur (dates du jour par défaut).
+// L'interface est traduite, mais le document généré reste en français (langue juridique en Côte d'Ivoire).
 
 function Layout({ form, doc, upsell }: { form: ReactNode; doc: Doc; upsell: string }) {
+  const { t } = useI18n();
   return (
     <div className="grid items-start gap-6 lg:grid-cols-[1fr_1.05fr]">
       <div className="space-y-6">{form}</div>
       <div className="space-y-4 lg:sticky lg:top-24">
         <DownloadButton doc={doc} />
+        <DocLanguageNote />
         <div className="max-h-[70vh] overflow-y-auto rounded-[22px] bg-[#e9eaf3] p-3 md:p-5">
-          <p className="mb-3 text-center text-xs font-semibold tracking-[0.14em] text-ink-900/40 uppercase">Aperçu en direct</p>
+          <p className="mb-3 text-center text-xs font-semibold tracking-[0.14em] text-ink-900/40 uppercase">
+            {t("Aperçu en direct", "Live preview")}
+          </p>
           <DocPreview blocks={doc.blocks} />
         </div>
         <UpsellCta text={upsell} />
@@ -38,9 +44,16 @@ function currentMonth() {
 
 /* ================================================================ Quittance */
 
+// Les valeurs restent en français (elles figurent dans la quittance) ; seuls les libellés sont traduits.
 const payModes = ["Wave", "Orange Money", "MTN MoMo", "Moov Money", "Virement", "Chèque", "Espèces"] as const;
+const payModeEn: Partial<Record<(typeof payModes)[number], string>> = {
+  Virement: "Bank transfer",
+  Chèque: "Cheque",
+  Espèces: "Cash",
+};
 
 export function ReceiptGenerator() {
+  const { t } = useI18n();
   const [landlord, setLandlord] = useState("Konan Yao");
   const [landlordAddr, setLandlordAddr] = useState("Cocody Ambassades, Abidjan");
   const [tenant, setTenant] = useState("Aya Kouassi");
@@ -59,11 +72,21 @@ export function ReceiptGenerator() {
   if (charges) rows.push(["Charges", fcfa(charges)]);
 
   const blocks: Block[] = [
-    { t: "title", text: "Quittance de loyer", sub: `Période : ${monthLabel(period)}` },
+    {
+      t: "title",
+      text: "Quittance de loyer",
+      sub: `Période : ${monthLabel(period)}`,
+    },
     {
       t: "parties",
-      left: { label: "Bailleur", lines: [or(landlord, "Nom du bailleur"), or(landlordAddr, "Adresse du bailleur")] },
-      right: { label: "Locataire", lines: [or(tenant, "Nom du locataire"), or(property, "Adresse du logement")] },
+      left: {
+        label: "Bailleur",
+        lines: [or(landlord, "Nom du bailleur"), or(landlordAddr, "Adresse du bailleur")],
+      },
+      right: {
+        label: "Locataire",
+        lines: [or(tenant, "Nom du locataire"), or(property, "Adresse du logement")],
+      },
     },
     { t: "table", rows, total: ["Total payé", fcfa(total)] },
     {
@@ -71,7 +94,11 @@ export function ReceiptGenerator() {
       text: `Je soussigné(e) ${or(landlord, "…")}, propriétaire du logement désigné ci-dessus, déclare avoir reçu de ${or(tenant, "…")} la somme de ${fcfaWords(total)} (${fcfa(total)}), au titre du loyer${charges ? " et des charges" : ""} pour la période ${periodText}, et lui en donne quittance, sous réserve de tous mes droits.`,
     },
     { t: "p", text: `Paiement reçu le ${longDate(paidOn)} par ${mode}.` },
-    { t: "sign", place: `Fait à ${or(place, "…")}, le ${longDate(paidOn)}`, left: "Le bailleur" },
+    {
+      t: "sign",
+      place: `Fait à ${or(place, "…")}, le ${longDate(paidOn)}`,
+      left: "Le bailleur",
+    },
     {
       t: "note",
       text: "La présente quittance vaut reçu pour la période indiquée. Elle ne libère pas le locataire des sommes éventuellement dues pour des périodes antérieures.",
@@ -81,22 +108,34 @@ export function ReceiptGenerator() {
   return (
     <Layout
       doc={{ filename: `quittance-${slug(tenant)}-${period}.pdf`, blocks }}
-      upsell="Avec ImmoTopia, quittances et reçus sont générés depuis vos propres modèles et numérotés automatiquement."
+      upsell={t(
+        "Avec ImmoTopia, quittances et reçus sont générés depuis vos propres modèles et numérotés automatiquement.",
+        "With ImmoTopia, rent receipts and payment receipts are generated from your own templates and numbered automatically.",
+      )}
       form={
         <>
-          <Card title="Les parties">
-            <Text label="Nom du bailleur" value={landlord} onChange={setLandlord} />
-            <Text label="Adresse du bailleur" value={landlordAddr} onChange={setLandlordAddr} />
-            <Text label="Nom du locataire" value={tenant} onChange={setTenant} />
-            <Text label="Ville de signature" value={place} onChange={setPlace} />
-            <Text label="Adresse du logement loué" value={property} onChange={setProperty} wide />
+          <Card title={t("Les parties", "The parties")}>
+            <Text label={t("Nom du bailleur", "Landlord's name")} value={landlord} onChange={setLandlord} />
+            <Text label={t("Adresse du bailleur", "Landlord's address")} value={landlordAddr} onChange={setLandlordAddr} />
+            <Text label={t("Nom du locataire", "Tenant's name")} value={tenant} onChange={setTenant} />
+            <Text label={t("Ville de signature", "City of signing")} value={place} onChange={setPlace} />
+            <Text label={t("Adresse du logement loué", "Address of the rented property")} value={property} onChange={setProperty} wide />
           </Card>
-          <Card title="Le paiement">
-            <Text label="Mois concerné" type="month" value={period} onChange={setPeriod} />
-            <Text label="Date du paiement" type="date" value={paidOn} onChange={setPaidOn} />
-            <Num label="Loyer" value={rent} onChange={setRent} />
-            <Num label="Charges" value={charges} onChange={setCharges} />
-            <Choice wide label="Mode de paiement" value={mode} onChange={setMode} options={payModes.map((m) => ({ value: m, label: m }))} />
+          <Card title={t("Le paiement", "Payment")}>
+            <Text label={t("Mois concerné", "Month covered")} type="month" value={period} onChange={setPeriod} />
+            <Text label={t("Date du paiement", "Payment date")} type="date" value={paidOn} onChange={setPaidOn} />
+            <Num label={t("Loyer", "Rent")} value={rent} onChange={setRent} />
+            <Num label={t("Charges", "Charges")} value={charges} onChange={setCharges} />
+            <Choice
+              wide
+              label={t("Mode de paiement", "Payment method")}
+              value={mode}
+              onChange={setMode}
+              options={payModes.map((m) => ({
+                value: m,
+                label: t(m, payModeEn[m] ?? m),
+              }))}
+            />
           </Card>
         </>
       }
@@ -107,6 +146,7 @@ export function ReceiptGenerator() {
 /* ================================================================ Bail d'habitation (Côte d'Ivoire) */
 
 export function ResidentialLeaseGenerator() {
+  const { t } = useI18n();
   const [landlord, setLandlord] = useState("Konan Yao");
   const [landlordId, setLandlordId] = useState("");
   const [tenant, setTenant] = useState("Aya Kouassi");
@@ -125,12 +165,22 @@ export function ResidentialLeaseGenerator() {
   const L = or(landlord, "…");
   const T = or(tenant, "…");
   const blocks: Block[] = [
-    { t: "title", text: "Contrat de bail à usage d'habitation", sub: "République de Côte d'Ivoire" },
+    {
+      t: "title",
+      text: "Contrat de bail à usage d'habitation",
+      sub: "République de Côte d'Ivoire",
+    },
     { t: "p", text: "ENTRE LES SOUSSIGNÉS :" },
     {
       t: "parties",
-      left: { label: "Le bailleur", lines: [L, landlordId ? `Pièce d'identité n° ${landlordId}` : "Pièce d'identité n° …"] },
-      right: { label: "Le locataire", lines: [T, tenantId ? `Pièce d'identité n° ${tenantId}` : "Pièce d'identité n° …"] },
+      left: {
+        label: "Le bailleur",
+        lines: [L, landlordId ? `Pièce d'identité n° ${landlordId}` : "Pièce d'identité n° …"],
+      },
+      right: {
+        label: "Le locataire",
+        lines: [T, tenantId ? `Pièce d'identité n° ${tenantId}` : "Pièce d'identité n° …"],
+      },
     },
     { t: "p", text: "Il a été convenu et arrêté ce qui suit :" },
     { t: "h", text: "Article 1 — Objet et désignation" },
@@ -183,7 +233,12 @@ export function ResidentialLeaseGenerator() {
       t: "p",
       text: "Le présent bail est régi par la législation ivoirienne en vigueur, notamment la loi n° 2019-576 du 26 juin 2019 instituant le Code de la construction et de l'habitat. Tout litige relève de la juridiction compétente du lieu de situation du logement. Le bail est soumis à l'enregistrement auprès des services des impôts.",
     },
-    { t: "sign", place: `Fait à ${or(place, "…")}, le ${longDate(todayISO())}, en deux exemplaires originaux.`, left: "Le bailleur", right: "Le locataire" },
+    {
+      t: "sign",
+      place: `Fait à ${or(place, "…")}, le ${longDate(todayISO())}, en deux exemplaires originaux.`,
+      left: "Le bailleur",
+      right: "Le locataire",
+    },
     {
       t: "note",
       text: "Modèle fourni à titre indicatif par ImmoTopia. Il ne remplace pas le conseil d'un professionnel du droit ; adaptez-le à votre situation avant signature.",
@@ -193,28 +248,58 @@ export function ResidentialLeaseGenerator() {
   return (
     <Layout
       doc={{ filename: `bail-habitation-${slug(tenant)}.pdf`, blocks }}
-      upsell="Dans ImmoTopia, chaque bail génère son échéancier, ses rappels de loyer et ses documents."
+      upsell={t(
+        "Dans ImmoTopia, chaque bail génère son échéancier, ses rappels de loyer et ses documents.",
+        "In ImmoTopia, every lease generates its payment schedule, rent reminders and documents.",
+      )}
       form={
         <>
-          <Card title="Les parties">
-            <Text label="Nom du bailleur" value={landlord} onChange={setLandlord} />
-            <Text label="N° de pièce d'identité (bailleur)" value={landlordId} onChange={setLandlordId} placeholder="Facultatif" />
-            <Text label="Nom du locataire" value={tenant} onChange={setTenant} />
-            <Text label="N° de pièce d'identité (locataire)" value={tenantId} onChange={setTenantId} placeholder="Facultatif" />
+          <Card title={t("Les parties", "The parties")}>
+            <Text label={t("Nom du bailleur", "Landlord's name")} value={landlord} onChange={setLandlord} />
+            <Text
+              label={t("N° de pièce d'identité (bailleur)", "ID number (landlord)")}
+              value={landlordId}
+              onChange={setLandlordId}
+              placeholder={t("Facultatif", "Optional")}
+            />
+            <Text label={t("Nom du locataire", "Tenant's name")} value={tenant} onChange={setTenant} />
+            <Text
+              label={t("N° de pièce d'identité (locataire)", "ID number (tenant)")}
+              value={tenantId}
+              onChange={setTenantId}
+              placeholder={t("Facultatif", "Optional")}
+            />
           </Card>
-          <Card title="Le logement">
-            <Text label="Type de logement" value={kind} onChange={setKind} />
-            <Text label="Ville de signature" value={place} onChange={setPlace} />
-            <Text label="Adresse" value={address} onChange={setAddress} wide />
+          <Card title={t("Le logement", "The property")}>
+            <Text label={t("Type de logement", "Type of property")} value={kind} onChange={setKind} />
+            <Text label={t("Ville de signature", "City of signing")} value={place} onChange={setPlace} />
+            <Text label={t("Adresse", "Address")} value={address} onChange={setAddress} wide />
           </Card>
-          <Card title="Les conditions">
-            <Text label="Date de prise d'effet" type="date" value={start} onChange={setStart} />
-            <Num label="Durée" value={duration} onChange={(v) => setDuration(Math.max(1, v))} suffix="an(s)" />
-            <Num label="Loyer mensuel" value={rent} onChange={setRent} />
-            <Num label="Échéance (jour du mois)" value={dueDay} onChange={(v) => setDueDay(Math.min(28, Math.max(1, v)))} suffix="" />
-            <Num label="Caution" value={deposit} onChange={setDeposit} suffix="mois" hint="Plafond légal : 2 mois." />
-            <Num label="Avance" value={advance} onChange={setAdvance} suffix="mois" hint="Plafond légal : 2 mois." />
-            <Num label="Préavis de congé" value={notice} onChange={setNotice} suffix="mois" wide />
+          <Card title={t("Les conditions", "The terms")}>
+            <Text label={t("Date de prise d'effet", "Start date")} type="date" value={start} onChange={setStart} />
+            <Num label={t("Durée", "Term")} value={duration} onChange={(v) => setDuration(Math.max(1, v))} suffix={t("an(s)", "year(s)")} />
+            <Num label={t("Loyer mensuel", "Monthly rent")} value={rent} onChange={setRent} />
+            <Num
+              label={t("Échéance (jour du mois)", "Due date (day of the month)")}
+              value={dueDay}
+              onChange={(v) => setDueDay(Math.min(28, Math.max(1, v)))}
+              suffix=""
+            />
+            <Num
+              label={t("Caution", "Security deposit")}
+              value={deposit}
+              onChange={setDeposit}
+              suffix={t("mois", "months")}
+              hint={t("Plafond légal : 2 mois.", "Legal cap: 2 months.")}
+            />
+            <Num
+              label={t("Avance", "Advance rent")}
+              value={advance}
+              onChange={setAdvance}
+              suffix={t("mois", "months")}
+              hint={t("Plafond légal : 2 mois.", "Legal cap: 2 months.")}
+            />
+            <Num label={t("Préavis de congé", "Notice period")} value={notice} onChange={setNotice} suffix={t("mois", "months")} wide />
           </Card>
         </>
       }
@@ -225,6 +310,7 @@ export function ResidentialLeaseGenerator() {
 /* ================================================================ Bail commercial (OHADA) */
 
 export function CommercialLeaseGenerator() {
+  const { t } = useI18n();
   const [landlord, setLandlord] = useState("SCI Les Cocotiers");
   const [tenant, setTenant] = useState("SARL Akwaba Services");
   const [rccm, setRccm] = useState("");
@@ -240,12 +326,19 @@ export function CommercialLeaseGenerator() {
   const L = or(landlord, "…");
   const T = or(tenant, "…");
   const blocks: Block[] = [
-    { t: "title", text: "Bail à usage professionnel", sub: "Acte uniforme OHADA relatif au droit commercial général" },
+    {
+      t: "title",
+      text: "Bail à usage professionnel",
+      sub: "Acte uniforme OHADA relatif au droit commercial général",
+    },
     { t: "p", text: "ENTRE LES SOUSSIGNÉS :" },
     {
       t: "parties",
       left: { label: "Le bailleur", lines: [L] },
-      right: { label: "Le preneur", lines: [T, rccm ? `RCCM : ${rccm}` : "RCCM : …"] },
+      right: {
+        label: "Le preneur",
+        lines: [T, rccm ? `RCCM : ${rccm}` : "RCCM : …"],
+      },
     },
     { t: "p", text: "Il a été convenu et arrêté ce qui suit :" },
     { t: "h", text: "Article 1 — Objet" },
@@ -291,7 +384,12 @@ export function CommercialLeaseGenerator() {
       t: "p",
       text: "Le présent bail est régi par les dispositions de l'Acte uniforme OHADA relatif au droit commercial général relatives au bail à usage professionnel, et par la loi ivoirienne pour tout ce qui n'y est pas contraire. Il est soumis à l'enregistrement.",
     },
-    { t: "sign", place: `Fait à ${or(place, "…")}, le ${longDate(todayISO())}, en deux exemplaires originaux.`, left: "Le bailleur", right: "Le preneur" },
+    {
+      t: "sign",
+      place: `Fait à ${or(place, "…")}, le ${longDate(todayISO())}, en deux exemplaires originaux.`,
+      left: "Le bailleur",
+      right: "Le preneur",
+    },
     {
       t: "note",
       text: "Modèle fourni à titre indicatif par ImmoTopia. Il ne remplace pas le conseil d'un avocat ou d'un notaire ; adaptez-le avant signature.",
@@ -301,34 +399,46 @@ export function CommercialLeaseGenerator() {
   return (
     <Layout
       doc={{ filename: `bail-commercial-${slug(tenant)}.pdf`, blocks }}
-      upsell="Suivez vos baux et leurs échéances dans ImmoTopia, avec un rappel automatique avant leur terme."
+      upsell={t(
+        "Suivez vos baux et leurs échéances dans ImmoTopia, avec un rappel automatique avant leur terme.",
+        "Track your leases and their key dates in ImmoTopia, with an automatic reminder before they expire.",
+      )}
       form={
         <>
-          <Card title="Les parties">
-            <Text label="Bailleur (nom ou société)" value={landlord} onChange={setLandlord} />
-            <Text label="Preneur (société)" value={tenant} onChange={setTenant} />
-            <Text label="N° RCCM du preneur" value={rccm} onChange={setRccm} placeholder="CI-ABJ-…" />
-            <Text label="Ville de signature" value={place} onChange={setPlace} />
+          <Card title={t("Les parties", "The parties")}>
+            <Text label={t("Bailleur (nom ou société)", "Landlord (name or company)")} value={landlord} onChange={setLandlord} />
+            <Text label={t("Preneur (société)", "Tenant (company)")} value={tenant} onChange={setTenant} />
+            <Text label={t("N° RCCM du preneur", "Tenant's RCCM number")} value={rccm} onChange={setRccm} placeholder="CI-ABJ-…" />
+            <Text label={t("Ville de signature", "City of signing")} value={place} onChange={setPlace} />
           </Card>
-          <Card title="Les locaux">
-            <Text label="Adresse des locaux" value={address} onChange={setAddress} wide />
-            <Text label="Activité autorisée" value={activity} onChange={setActivity} wide />
+          <Card title={t("Les locaux", "The premises")}>
+            <Text label={t("Adresse des locaux", "Address of the premises")} value={address} onChange={setAddress} wide />
+            <Text label={t("Activité autorisée", "Permitted business activity")} value={activity} onChange={setActivity} wide />
           </Card>
-          <Card title="Les conditions">
+          <Card title={t("Les conditions", "The terms")}>
             <Choice
               wide
-              label="Type de bail"
+              label={t("Type de bail", "Lease type")}
               value={term}
               onChange={setTerm}
               options={[
-                { value: "fixed", label: "Durée déterminée" },
-                { value: "open", label: "Durée indéterminée" },
+                { value: "fixed", label: t("Durée déterminée", "Fixed term") },
+                { value: "open", label: t("Durée indéterminée", "Open-ended") },
               ]}
             />
-            <Text label="Date de prise d'effet" type="date" value={start} onChange={setStart} />
-            {term === "fixed" ? <Num label="Durée" value={duration} onChange={(v) => setDuration(Math.max(1, v))} suffix="an(s)" /> : <div />}
-            <Num label="Loyer mensuel HT" value={rent} onChange={setRent} />
-            <Num label="Dépôt de garantie" value={deposit} onChange={setDeposit} suffix="mois" />
+            <Text label={t("Date de prise d'effet", "Start date")} type="date" value={start} onChange={setStart} />
+            {term === "fixed" ? (
+              <Num
+                label={t("Durée", "Term")}
+                value={duration}
+                onChange={(v) => setDuration(Math.max(1, v))}
+                suffix={t("an(s)", "year(s)")}
+              />
+            ) : (
+              <div />
+            )}
+            <Num label={t("Loyer mensuel HT", "Monthly rent excl. tax")} value={rent} onChange={setRent} />
+            <Num label={t("Dépôt de garantie", "Security deposit")} value={deposit} onChange={setDeposit} suffix={t("mois", "months")} />
           </Card>
         </>
       }

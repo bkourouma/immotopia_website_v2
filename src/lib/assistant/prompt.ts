@@ -3,6 +3,7 @@
 // puisse le mettre en cache d'une requête à l'autre.
 
 import { fcfa } from "../format";
+import type { Locale } from "../i18n";
 import { activePacks, ANNUAL_MONTHS, coverage } from "../pricing";
 import { APP_LOGIN_URL, contact, legal, SITE_URL } from "../site";
 import { tools } from "../tools";
@@ -73,3 +74,12 @@ export const SYSTEM_PROMPT = [
   "## Base de connaissances",
   KNOWLEDGE || "(Base de connaissances non disponible : limite-toi aux informations ci-dessus.)",
 ].join("\n\n");
+
+// Consigne de langue envoyée dans un second message système, après SYSTEM_PROMPT,
+// pour que le grand prompt reste identique (et donc en cache) quelle que soit la langue du site.
+export const LOCALE_PROMPT: Record<Locale, string | null> = {
+  fr: null,
+  en:
+    "The visitor is browsing the English version of the site: answer in English (unless they write in another language), keeping the same rules, figures and markers. " +
+    `Amounts stay in FCFA. English pages live under ${SITE_URL}/en (e.g. ${SITE_URL}/en/tarifs, ${SITE_URL}/en/contact).`,
+};

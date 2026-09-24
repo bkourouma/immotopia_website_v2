@@ -1,4 +1,7 @@
+"use client";
+
 import { Fragment, type ReactNode } from "react";
+import { useI18n } from "../locale-provider";
 
 // Rendu Markdown minimal et sûr pour les réponses de l'assistant (aucun HTML injecté) :
 // paragraphes, listes « - » / « 1. », **gras**, *italique*, [liens](https://…) et adresses web nues.
@@ -30,10 +33,14 @@ function inline(text: string, keyBase: string): ReactNode[] {
 }
 
 function Link({ href, label }: { href: string; label: string }) {
+  const { href: localize } = useI18n();
   const internal = href.startsWith("https://immotopia.cloud");
+  const path = internal ? href.replace("https://immotopia.cloud", "") || "/" : href;
+  // Lien interne : ouvert dans la langue courante, sauf s'il en précise déjà une
+  const localized = internal && !/^\/(en|fr)(\/|$|#|\?)/.test(path) ? localize(path) : path;
   return (
     <a
-      href={internal ? href.replace("https://immotopia.cloud", "") || "/" : href}
+      href={localized}
       {...(internal ? {} : { target: "_blank", rel: "noopener noreferrer" })}
       className="font-medium text-brand-300 underline underline-offset-2 hover:text-white"
     >

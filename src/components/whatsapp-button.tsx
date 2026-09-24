@@ -3,6 +3,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { whatsappLink } from "@/lib/site";
+import { useI18n } from "./locale-provider";
 import { useDemo } from "./providers";
 
 function WhatsAppIcon({ className }: { className?: string }) {
@@ -17,6 +18,7 @@ function WhatsAppIcon({ className }: { className?: string }) {
 export function WhatsAppButton() {
   const [visible, setVisible] = useState(false);
   const { isOpen } = useDemo();
+  const { locale, t } = useI18n();
 
   useEffect(() => {
     const onScroll = () => setVisible(window.scrollY > 240);
@@ -29,10 +31,10 @@ export function WhatsAppButton() {
     <AnimatePresence>
       {visible && !isOpen && (
         <motion.a
-          href={whatsappLink()}
+          href={whatsappLink(locale)}
           target="_blank"
           rel="noopener noreferrer"
-          aria-label="Écrire à ImmoTopia sur WhatsApp"
+          aria-label={t("Écrire à ImmoTopia sur WhatsApp", "Message ImmoTopia on WhatsApp")}
           initial={{ opacity: 0, scale: 0.6, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.6, y: 20 }}
@@ -43,7 +45,7 @@ export function WhatsAppButton() {
           <span className="absolute inset-0 -z-10 animate-ping rounded-full bg-[#25D366]/40 [animation-duration:2.8s]" />
           <WhatsAppIcon className="size-6" />
           <span className="hidden max-w-0 overflow-hidden text-sm font-semibold whitespace-nowrap transition-all duration-300 group-hover:max-w-40 group-hover:pr-1 md:inline">
-            Écrivez-nous
+            {t("Écrivez-nous", "Chat with us")}
           </span>
         </motion.a>
       )}

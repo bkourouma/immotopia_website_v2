@@ -1,7 +1,15 @@
-import { activePacks } from "@/lib/pricing";
+import { localizeHref, type Locale } from "@/lib/i18n";
+import { getI18n } from "@/lib/i18n-server";
+import { getActivePacks } from "@/lib/pricing";
 import { contact, legal, SITE_URL } from "@/lib/site";
 
 // Données structurées schema.org : aident Google à comprendre qui édite le site et ce qui est vendu.
+
+/** Adresse absolue dans la langue voulue (accueil français = racine du site) */
+function absolute(locale: Locale, path: string) {
+  const href = localizeHref(locale, path);
+  return href === "/" ? SITE_URL : `${SITE_URL}${href}`;
+}
 
 function Script({ data }: { data: object }) {
   return (
@@ -13,7 +21,8 @@ function Script({ data }: { data: object }) {
   );
 }
 
-export function OrganizationJsonLd() {
+export async function OrganizationJsonLd() {
+  const { locale } = await getI18n();
   return (
     <Script
       data={{
@@ -40,16 +49,16 @@ export function OrganizationJsonLd() {
               email: contact.email,
               contactType: "sales",
               areaServed: "CI",
-              availableLanguage: "French",
+              availableLanguage: ["French", "English"],
             },
             address: { "@type": "PostalAddress", addressLocality: "Abidjan", addressCountry: "CI" },
           },
           {
             "@type": "WebSite",
             "@id": `${SITE_URL}/#website`,
-            url: SITE_URL,
+            url: absolute(locale, "/"),
             name: "ImmoTopia",
-            inLanguage: "fr-CI",
+            inLanguage: ["fr-CI", "en"],
             publisher: { "@id": `${SITE_URL}/#organization` },
           },
         ],
@@ -58,7 +67,8 @@ export function OrganizationJsonLd() {
   );
 }
 
-export function SoftwareJsonLd() {
+export async function SoftwareJsonLd() {
+  const { locale, t } = await getI18n();
   return (
     <Script
       data={{
@@ -67,14 +77,20 @@ export function SoftwareJsonLd() {
         name: "ImmoTopia",
         applicationCategory: "BusinessApplication",
         operatingSystem: "Web",
-        url: SITE_URL,
-        description:
+        url: absolute(locale, "/"),
+        inLanguage: ["fr-CI", "en"],
+        description: t(
           "ERP immobilier pour la Côte d'Ivoire : gestion locative, syndic de copropriété, CRM, portails propriétaire et locataire, maintenance et rappels e-mail / WhatsApp.",
+          "Real estate ERP for Côte d'Ivoire: property management, condominium management, CRM, owner and tenant portals, maintenance, and email / WhatsApp reminders.",
+        ),
         publisher: { "@id": `${SITE_URL}/#organization` },
-        offers: activePacks.map((p) => ({
+        offers: getActivePacks(locale).map((p) => ({
           "@type": "Offer",
-          name: `Pack ${p.name}`,
-          description: `${p.audience}. Inclus : ${p.included}. Premier mois offert, sans engagement.`,
+          name: t(`Pack ${p.name}`, `${p.name} pack`),
+          description: t(
+            `${p.audience}. Inclus : ${p.included}. Premier mois offert, sans engagement.`,
+            `${p.audience}. Included: ${p.included}. First month free, no commitment.`,
+          ),
           price: p.monthly,
           priceCurrency: "XOF",
           priceSpecification: {
@@ -84,7 +100,7 @@ export function SoftwareJsonLd() {
             unitCode: "MON",
             valueAddedTaxIncluded: false,
           },
-          url: `${SITE_URL}/tarifs`,
+          url: absolute(locale, "/tarifs"),
         })),
       }}
     />
