@@ -1,0 +1,58 @@
+# Intégration continue du site vitrine ImmoTopia, posée par acc-standard (seed :
+# propriété du projet après création), adaptée le 2026-09-27.
+# Aucun secret : les routes API lisent OPENROUTER_* et N8N_WEBHOOK_URL à
+# l'exécution, le build n'en a pas besoin. Pas de tests automatisés dans ce
+# projet (pas de script « test ») : types, lint, contrôle du comparatif et build.
+# Dépôt local sans remote au 2026-09-27 : ce fichier ne tourne qu'une fois le
+# dépôt poussé sur GitHub.
+name: CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    name: Vérifications
+    runs-on: ubuntu-latest
+    env:
+      NEXT_TELEMETRY_DISABLED: "1"
+    steps:
+      - uses: actions/checkout@v4
+
+      # Même version majeure que l'image de production (Dockerfile : node:24-alpine).
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: npm
+
+      # « npm install » plutôt que « npm ci » : le lockfile généré sous Windows
+      # omet des dépendances optionnelles Linux (voir Dockerfile).
+      - name: Installer les dépendances
+        run: npm install --no-audit --no-fund
+
+      # Sur un checkout neuf, tsc échoue sans ces deux fichiers générés (ignorés
+      # par git) : knowledge.generated.ts (importé par le prompt de l'assistant)
+      # et les types de routes de Next 16 (PageProps, LayoutProps, next-env.d.ts).
+      - name: Générer la base de connaissances et les types de routes
+        run: |
+          node scripts/build-knowledge.mjs
+          npx next typegen
+
+      - name: Typecheck
+        run: npx tsc --noEmit
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Traduction du comparatif
+        run: node scripts/check-comparatif-en.mjs
+
+      # prebuild génère src/lib/assistant/knowledge.generated.ts
+      - name: Build
+        run: npm run build

@@ -43,3 +43,15 @@ next-env.d.ts
 
 # base de connaissances de l'assistant, générée au build
 src/lib/assistant/knowledge.generated.ts
+
+# acc-standard
+.agent-bus/
+CLAUDE.local.md
+.claude/settings.local.json
+.claude/worktrees/
+*.acc-new
+*.acc-bak
+repomix-output*
+.env
+.env.*
+!.env.example

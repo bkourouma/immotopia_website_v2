@@ -8,7 +8,10 @@
     "prebuild": "node scripts/build-knowledge.mjs",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "prepare": "node scripts/install-git-hooks.cjs",
+    "agent-bus": "node scripts/agent-bus.cjs",
+    "repomix": "repomix"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
@@ -28,6 +31,15 @@
     "eslint": "^9",
     "eslint-config-next": "16.3.6",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "lint-staged": "^17.5.0",
+    "chrome-devtools-mcp": "^0.10.1",
+    "lefthook": "^2.1.14",
+    "repomix": "^1.14.0"
+  },
+  "lint-staged": {
+    "*.{js,jsx,mjs,cjs,ts,tsx,mts,cts}": [
+      "node node_modules/eslint/bin/eslint.js --fix"
+    ]
   }
 }

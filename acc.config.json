@@ -3,7 +3,7 @@
   "project": {
     "name": "site",
     "slug": "site",
-    "description": "",
+    "description": "Site vitrine ImmoTopia (Next.js 16, bilingue FR/EN) : pages produit, tarifs, outils gratuits, assistant IA et demandes de démonstration.",
     "language": "fr"
   },
   "profiles": [
@@ -32,7 +32,9 @@
     "lint": "npm run lint",
     "test": ""
   },
-  "ports": {},
+  "ports": {
+    "web": 3000
+  },
   "git": {
     "mainBranch": "master",
     "protectedBranches": [
@@ -58,18 +60,40 @@
         "whenStaged": [
           "**/*.{js,jsx,mjs,cjs,ts,tsx}"
         ]
+      },
+      {
+        "name": "comparatif-en",
+        "command": "node scripts/check-comparatif-en.mjs",
+        "blocking": true,
+        "whenStaged": [
+          "src/lib/comparatif-data.ts",
+          "src/lib/comparatif-data.en.ts"
+        ]
       }
     ]
   },
   "guard": {
     "protectedPaths": [
       "src",
-      "public"
+      "public",
+      "scripts",
+      "deploy",
+      "docs",
+      ".claude",
+      ".acc"
     ],
     "destructiveCommands": [
       {
         "pattern": "\\bDROP\\s+DATABASE\\b",
         "reason": "Suppression de base de données interdite aux agents."
+      },
+      {
+        "pattern": "\\bssh\\s+(\\S+\\s+)*alliance\\b",
+        "reason": "Commande sur le serveur de production (alliance) : déploiement ou intervention réservés à l'utilisateur."
+      },
+      {
+        "pattern": "\\b(scp|rsync)\\b.*\\balliance:",
+        "reason": "Envoi de fichiers vers le serveur de production (alliance) : déploiement réservé à l'utilisateur."
       }
     ]
   },

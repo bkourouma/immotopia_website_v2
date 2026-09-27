@@ -3,6 +3,8 @@
 FROM node:24-alpine AS deps
 WORKDIR /app
 COPY package.json package-lock.json ./
+# Le script « prepare » (hooks git d'acc-standard) doit exister ici : hors dépôt git, il ne fait rien
+COPY scripts/install-git-hooks.cjs scripts/
 # « npm install » plutôt que « npm ci » : le lockfile généré sous Windows omet des dépendances optionnelles Linux
 RUN npm install --no-audit --no-fund
 
