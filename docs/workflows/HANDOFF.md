@@ -43,9 +43,9 @@ Pièges et décisions :
 
 ## Branche `feat/wiki-fonctionnalites` — 2026-09-27
 
-**État :** wiki en production ; correctifs défilement + icône commités, pas encore déployés
-**Dernier commit :** `53b59d9` Assistant : le wiki, la FAQ et les pages thématiques se donnent à leur adresse française
-(`e2df911` pour le wiki ; `lancement-site-v2` avancée sur `53b59d9`, elle inclut `chore/acc-standard-v0.1.0`)
+**État :** tout est en production (wiki, défilement, icône) ; reste la relecture des textes et les logos texte
+**Dernier commit :** `3582c86` Nouvelle icône ImmoTopia : maison en cubes bleus et orange
+(`e2df911` wiki, `53b59d9` consigne de l'assistant, `16a1b8d` défilement ; `lancement-site-v2` = `3582c86`)
 
 Déploiement (fait par la session Pilote, à la demande de l'utilisateur) :
 
@@ -53,6 +53,10 @@ Déploiement (fait par la session Pilote, à la demande de l'utilisateur) :
   `docker compose up -d --build`) : conteneur sain, `/wiki` et les fiches en 200, 95 URL wiki dans le sitemap.
 - Retour arrière possible : image `immotopia-site:avant-wiki-20260927` et
   `~/immotopia-site-avant-wiki-20260927.tgz` sur le serveur.
+- `3582c86` (défilement + icône) en production le 2026-09-27 vers 15:50 UTC : conteneur sain,
+  `/icon.png` 200, `/icon.svg` 404, `/apple-icon.png`, `/images/logo/icone.png`, `/opengraph-image` 200,
+  `<html data-scroll-behavior="smooth">`, navigation depuis le bas de `/wiki` → nouvelle page à `scrollY` 0.
+  Retour arrière : image `immotopia-site:avant-icone-20260927`.
 
 Fait (dans `e2df911` / `53b59d9`) :
 
@@ -66,7 +70,7 @@ Fait (dans `e2df911` / `53b59d9`) :
 - Sitemap, lien « Wiki » dans le menu FR, lien depuis la FAQ, section « Wiki » dans `knowledge.md`,
   consigne `/wiki` en français dans `LOCALE_PROMPT.en` (`prompt.ts`), composant `JsonLd` exporté de `json-ld.tsx`.
 
-Commités (`16a1b8d` défilement, puis le commit de l'icône), non déployés (vérifié : `tsc` et `lint` à 0 erreur, navigateur en local) :
+En production depuis ~15:50 UTC (`16a1b8d` défilement, `3582c86` icône) :
 
 - `data-scroll-behavior="smooth"` sur `<html>` (`src/app/[lang]/layout.tsx`) : sans lui, Next 16 ne coupe
   plus le défilement fluide de `globals.css` pendant un changement de page, et chaque page s'ouvrait à la
@@ -77,7 +81,6 @@ Commités (`16a1b8d` défilement, puis le commit de l'icône), non déployés (v
 
 Reste à faire :
 
-- Redéployer pour mettre en ligne les correctifs ci-dessus (réservé à l'utilisateur).
 - Logos texte « ImmoTopia » (couleur et blanc) : envoyés dans la conversation mais pas encore déposés
   sur le disque ; le composant `Logo` écrit toujours le nom en texte.
 - Relecture humaine des textes du wiki, surtout les statuts (voir ci-dessous).
