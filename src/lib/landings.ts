@@ -245,7 +245,7 @@ export const landings: Landing[] = [
       {
         title: "Comparer en toute transparence",
         intro:
-          "Notre page Comparatif met ImmoTopia face à trois logiciels ivoiriens, sur une centaine de fonctionnalités, à partir des pages publiques de chaque éditeur et avec les sources.",
+          "Notre page Comparatif met ImmoTopia face à trois logiciels similaires, sur une centaine de fonctionnalités, à partir des pages publiques de chaque éditeur et avec les sources.",
       },
     ],
     faq: [

@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: LayoutProps<"/[lang]">): Prom
   return {
     metadataBase: new URL(SITE_URL),
     alternates: alternates(lang, "/"),
-    title: t("ImmoTopia — L'ERP immobilier le plus complet de Côte d'Ivoire", "ImmoTopia — The most complete real estate ERP in Côte d'Ivoire"),
+    title: t("ImmoTopia — L'ERP immobilier le plus complet utilisé en Côte d'Ivoire", "ImmoTopia — The most complete real estate ERP used in Côte d'Ivoire"),
     description: t(
       "Gestion locative, syndic de copropriété, CRM, portails propriétaire et locataire, rappels e-mail et WhatsApp : ImmoTopia réunit votre agence sur une seule plateforme, à Abidjan.",
       "Property management, condominium management, CRM, owner and tenant portals, e-mail and WhatsApp reminders: ImmoTopia brings your whole agency together on one platform, in Abidjan.",

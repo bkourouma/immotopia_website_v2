@@ -107,7 +107,7 @@ export function ComparatifView() {
             </span>
             <h1 className="mt-6 font-display text-4xl leading-[1.03] font-bold tracking-tight text-balance md:text-7xl">
               {t("ImmoTopia face à", "ImmoTopia versus")}{" "}
-              <span className="text-gradient">{t("trois logiciels ivoiriens.", "three Ivorian software products.")}</span>
+              <span className="text-gradient">{t("trois logiciels similaires.", "three similar software products.")}</span>
             </h1>
             <p className="mx-auto mt-6 max-w-2xl text-lg text-white/65">
               {t(

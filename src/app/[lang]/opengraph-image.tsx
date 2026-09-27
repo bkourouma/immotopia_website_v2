@@ -9,7 +9,7 @@ const iconSrc = await png("icone.png");
 const nameSrc = await png("logo-immotopia-nom-inverse.png"); // 953 × 189
 
 // Image d'aperçu affichée lors du partage d'un lien (WhatsApp, Facebook, LinkedIn…)
-export const alt = "ImmoTopia — L'ERP immobilier le plus complet de Côte d'Ivoire";
+export const alt = "ImmoTopia — L'ERP immobilier le plus complet utilisé en Côte d'Ivoire";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 

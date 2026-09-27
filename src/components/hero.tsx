@@ -64,7 +64,7 @@ export function Hero() {
     setTimeout(() => (dragging.current = false), 0);
   }
 
-  const title = t("L'ERP immobilier le plus complet de Côte d'Ivoire.", "Côte d'Ivoire's most complete real estate ERP.");
+  const title = t("L'ERP immobilier le plus complet utilisé en Côte d'Ivoire.", "The most complete real estate ERP used in Côte d'Ivoire.");
   // Index du premier mot mis en dégradé
   const gradientFrom = t(4, 2);
   const accent = cards[active].accent;
