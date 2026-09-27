@@ -43,9 +43,9 @@ Pièges et décisions :
 
 ## Branche `feat/wiki-fonctionnalites` — 2026-09-27
 
-**État :** tout est en production (wiki, défilement, icône) ; reste la relecture des textes et les logos texte
-**Dernier commit :** `3582c86` Nouvelle icône ImmoTopia : maison en cubes bleus et orange
-(`e2df911` wiki, `53b59d9` consigne de l'assistant, `16a1b8d` défilement ; `lancement-site-v2` = `3582c86`)
+**État :** tout est en production (wiki, défilement, icône, logos texte, menu à sous-menus, formulations)
+**Dernier commit :** `9b30cbd` Menu : type explicite des liens du pied de page (build Docker)
+(`lancement-site-v2` = `9b30cbd` ; `55dc15e` logos, `c050786` menu, `eb963a9` formulations)
 
 Déploiement (fait par la session Pilote, à la demande de l'utilisateur) :
 
@@ -57,6 +57,14 @@ Déploiement (fait par la session Pilote, à la demande de l'utilisateur) :
   `/icon.png` 200, `/icon.svg` 404, `/apple-icon.png`, `/images/logo/icone.png`, `/opengraph-image` 200,
   `<html data-scroll-behavior="smooth">`, navigation depuis le bas de `/wiki` → nouvelle page à `scrollY` 0.
   Retour arrière : image `immotopia-site:avant-icone-20260927`.
+- `9b30cbd` (logos texte, menu Produit / Comparatif / Ressources / Tarifs, « le plus complet utilisé en
+  Côte d'Ivoire », « trois logiciels similaires ») en production le 2026-09-27 vers 17:12 UTC : conteneur
+  sain ; menu complet sans débordement à 1024 et 1280 px ; Produit et Ressources ouvrent 4 liens chacun ;
+  `/images/logo/logo-immotopia-nom-inverse.png` 200 ; titre de l'accueil avec « utilisé en Côte d'Ivoire ».
+  Retour arrière : image `immotopia-site:avant-menu-20260927`.
+- Piège : `c050786` ne passait pas `next build` (tsc : `footerProductLinks` typé `NavChild[] | NavLink[]`)
+  alors que `npx tsc --noEmit` local passait grâce au cache incrémental (`tsconfig.tsbuildinfo`). Avant un
+  déploiement, vérifier avec `npx tsc --noEmit --incremental false` ou `npm run build`.
 
 Fait (dans `e2df911` / `53b59d9`) :
 
