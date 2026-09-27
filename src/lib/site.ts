@@ -13,7 +13,7 @@ export const contact = {
     fr: "Bonjour ImmoTopia, je souhaite en savoir plus sur votre ERP immobilier.",
     en: "Hello ImmoTopia, I would like to know more about your real estate ERP.",
   } satisfies Record<Locale, string>,
-  email: "immotopia@allianceconsultants.net",
+  email: "support@immotopia.cloud",
   city: "Abidjan, Côte d'Ivoire",
 };
 

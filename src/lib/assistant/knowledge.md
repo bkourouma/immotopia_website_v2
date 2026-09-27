@@ -493,7 +493,7 @@ Le site d'Alliance Consultants publie des références de projets (GED, archivag
 - Réserver une démonstration : https://immotopia.cloud/contact (calendrier en ligne) ou directement https://calendly.com/immotopia. La démonstration dure environ 30 minutes, montre ImmoTopia appliqué au portefeuille du prospect, et se fait sans engagement.
 - Téléphone : +225 01 01 51 01 36
 - WhatsApp : https://wa.me/2250101510136
-- E-mail : immotopia@allianceconsultants.net
+- E-mail : support@immotopia.cloud
 - Localisation de l'équipe : Abidjan, Côte d'Ivoire.
 - Clients existants : connexion sur https://app.immotopia.cloud/login
 - Tarifs et simulateur : https://immotopia.cloud/tarifs
@@ -675,7 +675,7 @@ Aucune référence client d'ImmoTopia n'est publiée. Le mieux est de demander u
 Oui : quittance de loyer, modèles de bail d'habitation et de bail commercial, calculateurs de caution, de rendement, de commission d'agence et de répartition des charges de copropriété, sans inscription, sur https://immotopia.cloud/outils. Ils sont indicatifs et ne constituent pas un conseil juridique.
 
 **Comment réserver une démonstration ?**
-Sur https://immotopia.cloud/contact ou https://calendly.com/immotopia (30 minutes, sans engagement), par téléphone au +225 01 01 51 01 36, par WhatsApp (https://wa.me/2250101510136) ou par e-mail à immotopia@allianceconsultants.net.
+Sur https://immotopia.cloud/contact ou https://calendly.com/immotopia (30 minutes, sans engagement), par téléphone au +225 01 01 51 01 36, par WhatsApp (https://wa.me/2250101510136) ou par e-mail à support@immotopia.cloud.
 
 **Je suis déjà client et j'ai un problème de connexion.**
 La connexion se fait sur https://app.immotopia.cloud/login, avec la fonction « mot de passe oublié » si besoin. Pour tout autre problème de compte, contacter l'équipe par WhatsApp ou par e-mail.
