@@ -16,3 +16,9 @@ export const frenchOnlyPaths = [
   "/immotopia-vs-excel",
   "/gestion-locative-vs-excel",
 ];
+
+// Rubriques entières en français seulement (toutes leurs sous-pages) : le wiki des fonctionnalités.
+export const frenchOnlyPrefixes = ["/wiki"];
+
+export const isFrenchOnly = (path: string) =>
+  frenchOnlyPaths.includes(path) || frenchOnlyPrefixes.some((p) => path === p || path.startsWith(`${p}/`));

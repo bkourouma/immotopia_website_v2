@@ -519,6 +519,15 @@ Les éléments suivants sont en cours de développement ou d'intégration en sep
 
 ---
 
+## Wiki des fonctionnalités
+
+Le site publie un wiki des fonctionnalités sur https://immotopia.cloud/wiki (en français) : une page par domaine (gestion locative, biens et patrimoine, CRM et ventes, syndic, portails clients, maintenance, communication et documents, finance et comptabilité, promotion et chantiers, agence et abonnement) et une page par fonctionnalité, qui détaille chaque action, les packs qui y donnent accès, les profils concernés et le statut (disponible ou en cours de déploiement).
+
+- Quand un visiteur demande le détail d'une fonction (« comment se fait un appel de charges ? », « que voit le locataire ? »), répondre à partir de cette base, puis renvoyer vers https://immotopia.cloud/wiki pour le détail action par action.
+- Le statut affiché par le wiki suit la section « Disponibilité » ci-dessus.
+
+---
+
 ## Comparatif avec d'autres logiciels
 
 Le site publie un comparatif sur https://immotopia.cloud/comparatif : ImmoTopia face à ChezvousBO, Logestimmo et WIMMO, sur une centaine de fonctionnalités réparties en domaines (socle, pilotage, biens et commercial, gestion locative, portails, finance et documents, syndic, chantiers et BTP, patrimoine, communication, intégrations). Pour les concurrents, il ne reprend que ce qu'ils annoncent sur leurs pages publiques, consultées le 23 septembre 2026, avec les sources.

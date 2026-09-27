@@ -43,6 +43,11 @@ export function FaqPage() {
           <section>
             <h2 className="font-display text-2xl font-bold tracking-tight">Pour aller plus loin</h2>
             <ul className="mt-5 grid gap-2 sm:grid-cols-2">
+              <li>
+                <SmartLink href="/wiki" className="text-sm font-medium text-brand-600 hover:underline">
+                  Wiki des fonctionnalités : toutes les actions, une à une
+                </SmartLink>
+              </li>
               {landings.map((l) => (
                 <li key={l.slug}>
                   <SmartLink href={`/${l.slug}`} className="text-sm font-medium text-brand-600 hover:underline">

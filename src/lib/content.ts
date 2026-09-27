@@ -308,6 +308,7 @@ export const navLinks: Record<Locale, NavLink[]> = {
       children: domains.map((d) => ({ label: d.label.fr, href: comparatifHref(d.id), text: d.pitch.fr })),
     },
     { label: "Tarifs", href: "/tarifs" },
+    { label: "Wiki", href: "/wiki" },
     { label: "Outils gratuits", href: "/outils" },
   ],
   en: [

@@ -3,7 +3,7 @@
 // Utilisable côté serveur comme côté client.
 
 import type { Metadata } from "next";
-import { frenchOnlyPaths } from "./french-only";
+import { isFrenchOnly } from "./french-only";
 
 export const locales = ["fr", "en"] as const;
 export type Locale = (typeof locales)[number];
@@ -33,7 +33,7 @@ export function splitPath(pathname: string): { locale: Locale; path: string } {
 /** Même page dans l'autre langue */
 export function switchLocalePath(pathname: string, target: Locale) {
   const { path } = splitPath(pathname);
-  if (target !== defaultLocale && frenchOnlyPaths.includes(path)) return localizeHref(target, "/");
+  if (target !== defaultLocale && isFrenchOnly(path)) return localizeHref(target, "/");
   return localizeHref(target, path);
 }
 

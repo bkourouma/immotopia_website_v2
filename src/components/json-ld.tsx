@@ -11,6 +11,11 @@ function absolute(locale: Locale, path: string) {
   return href === "/" ? SITE_URL : `${SITE_URL}${href}`;
 }
 
+/** Bloc JSON-LD quelconque (fil d'Ariane, FAQ…), avec le même échappement. */
+export function JsonLd({ data }: { data: object }) {
+  return <Script data={data} />;
+}
+
 function Script({ data }: { data: object }) {
   return (
     <script

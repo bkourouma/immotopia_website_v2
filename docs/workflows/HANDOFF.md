@@ -41,6 +41,39 @@ Pièges et décisions :
 
 ---
 
+## Wiki des fonctionnalités (non commité, sur `chore/acc-standard-v0.1.0`) — 2026-09-27
+
+**État :** prêt à relire, rien n'est commité (à mettre sur sa propre branche, par ex. `feat/wiki-fonctionnalites`)
+**Dernier commit :** `23608ea` (le wiki n'y est pas)
+
+Fait :
+
+- `/wiki` (accueil + recherche), `/wiki/<domaine>` (10), `/wiki/<domaine>/<fonctionnalite>` (84) :
+  539 actions, français seulement, pages statiques (`dynamicParams = false`), 404 sous `/en`.
+- Données : `src/lib/wiki/<domaine>.ts` (un fichier par domaine), types dans `types.ts`, assemblage,
+  libellés et contrôles au build dans `index.ts`. Composants : `src/components/wiki/`.
+- Source : `docs/ImmoTopia_Wiki_Fonctionnalites.xlsx` (dossier parent), réécrit pour le public :
+  super-admin, routes, permissions, lignes « À vérifier » et notes de sécurité écartées.
+- `french-only.ts` : `frenchOnlyPrefixes` (`/wiki`) + `isFrenchOnly()`, utilisé par `switchLocalePath`.
+- Sitemap, lien « Wiki » dans le menu FR, lien depuis la FAQ, section « Wiki » dans `knowledge.md`,
+  composant `JsonLd` exporté de `json-ld.tsx`.
+- `tsc`, `lint` : 0 erreur ; `npm run build` réussi ; pages vérifiées dans le navigateur (FR, 404 EN, mobile).
+
+Reste à faire :
+
+- Relecture humaine des textes, surtout les statuts (voir ci-dessous).
+- Commit sur une branche dédiée.
+
+Pièges et décisions :
+
+- Statuts alignés sur `knowledge.md` (« Disponibilité », 23/09), pas sur l'Excel qui dit « Disponible »
+  dès que le code existe : Promoteur/chantiers, finance opérationnelle, offres/compromis/commissions de vente,
+  vie du bail, états des lieux, honoraires/reversements/compte courant, paiement en ligne = « en cours de
+  déploiement ». Changer un statut : champ `status` de la fonctionnalité ou de l'action.
+- Pas de générateur (contrairement au comparatif) : les textes sont rédigés, l'Excel est une matière première.
+
+---
+
 ## Branche `chore/acc-standard-v0.1.0` — 2026-09-27
 
 **État :** prêt à relire (rien n'est commité depuis `421bbd4`)
