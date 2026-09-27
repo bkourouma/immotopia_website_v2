@@ -35,16 +35,17 @@ export function Navbar() {
             : "border-transparent bg-transparent"
         }`}
       >
-        <SmartLink href="#top" className="text-white" aria-label={t("ImmoTopia — accueil", "ImmoTopia — home")}>
+        <SmartLink href="#top" className="shrink-0 text-white" aria-label={t("ImmoTopia — accueil", "ImmoTopia — home")}>
           <Logo />
         </SmartLink>
 
-        <ul className="hidden items-center md:flex" onMouseLeave={() => setHovered(null)}>
+        <ul className="hidden items-center xl:flex" onMouseLeave={() => setHovered(null)}>
           {links.map((l) => (
             <li
               key={l.href}
-              // Sous xl, la place manque : « Fonctionnalités » ramène seulement en haut de l'accueil.
-              className={`relative ${l.href === "#top" ? "hidden xl:block" : ""}`}
+              // Le menu (max-w-6xl) n'a pas la place : « Fonctionnalités » ramène seulement en haut de l'accueil,
+              // comme le logo ; il reste dans le menu mobile.
+              className={`relative ${l.href === "#top" ? "hidden" : ""}`}
               onMouseEnter={() => setHovered(l.href)}
               onFocus={() => setHovered(l.href)}
               onBlur={(e) => !e.currentTarget.contains(e.relatedTarget) && setHovered(null)}
@@ -53,7 +54,7 @@ export function Navbar() {
                 href={l.href}
                 aria-haspopup={l.children ? "true" : undefined}
                 aria-expanded={l.children ? hovered === l.href : undefined}
-                className="relative z-10 flex items-center gap-1 px-2.5 py-2 text-[13px] font-medium whitespace-nowrap text-white/75 transition-colors hover:text-white xl:px-4 xl:text-sm"
+                className="relative z-10 flex items-center gap-1 px-2.5 py-2 text-[13px] font-medium whitespace-nowrap text-white/75 transition-colors hover:text-white xl:px-3 xl:text-sm"
               >
                 {l.label}
                 {l.children && <ChevronDown className={`size-3.5 transition-transform ${hovered === l.href ? "rotate-180" : ""}`} />}
@@ -113,7 +114,7 @@ export function Navbar() {
             </MagneticButton>
           </div>
           <button
-            className="grid size-10 cursor-pointer place-items-center rounded-xl text-white hover:bg-white/10 md:hidden"
+            className="grid size-10 cursor-pointer place-items-center rounded-xl text-white hover:bg-white/10 xl:hidden"
             onClick={() => setMenu((m) => !m)}
             aria-label={menu ? t("Fermer le menu", "Close menu") : t("Ouvrir le menu", "Open menu")}
             aria-expanded={menu}
@@ -129,7 +130,7 @@ export function Navbar() {
             initial={{ opacity: 0, y: -12, scale: 0.98 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -12, scale: 0.98 }}
-            className="absolute inset-x-3 top-[76px] max-h-[calc(100dvh-90px)] overflow-y-auto rounded-2xl border border-white/10 bg-ink-950/90 p-3 text-white backdrop-blur-xl md:hidden"
+            className="absolute inset-x-3 top-[76px] max-h-[calc(100dvh-90px)] overflow-y-auto rounded-2xl border border-white/10 bg-ink-950/90 p-3 text-white backdrop-blur-xl xl:hidden"
           >
             {links.map((l) =>
               l.children ? (

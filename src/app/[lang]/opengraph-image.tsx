@@ -3,8 +3,10 @@ import { join } from "node:path";
 import { ImageResponse } from "next/og";
 import { hasLocale, translator } from "@/lib/i18n";
 
-// Icône ImmoTopia (public/images/logo/icone.png), lue une fois et intégrée à l'image
-const iconSrc = `data:image/png;base64,${await readFile(join(process.cwd(), "public/images/logo/icone.png"), "base64")}`;
+// Icône et nom ImmoTopia (public/images/logo/), lus une fois et intégrés à l'image
+const png = async (file: string) => `data:image/png;base64,${await readFile(join(process.cwd(), "public/images/logo", file), "base64")}`;
+const iconSrc = await png("icone.png");
+const nameSrc = await png("logo-immotopia-nom-inverse.png"); // 953 × 189
 
 // Image d'aperçu affichée lors du partage d'un lien (WhatsApp, Facebook, LinkedIn…)
 export const alt = "ImmoTopia — L'ERP immobilier le plus complet de Côte d'Ivoire";
@@ -32,9 +34,8 @@ export default async function OpengraphImage({ params }: { params: Promise<{ lan
         <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
           {/* eslint-disable-next-line @next/next/no-img-element -- ImageResponse n'accepte que <img> */}
           <img src={iconSrc} width={72} height={72} alt="" />
-          <div style={{ display: "flex", fontSize: 44, fontWeight: 800 }}>
-            Immo<span style={{ color: "#FF8A3D" }}>Topia</span>
-          </div>
+          {/* eslint-disable-next-line @next/next/no-img-element -- ImageResponse n'accepte que <img> */}
+          <img src={nameSrc} width={222} height={44} alt="ImmoTopia" />
         </div>
         <div style={{ display: "flex", flexDirection: "column" }}>
           <div style={{ fontSize: 72, fontWeight: 800, lineHeight: 1.05, letterSpacing: -2 }}>{t("L'ERP immobilier", "The most complete")}</div>

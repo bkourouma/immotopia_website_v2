@@ -47,7 +47,7 @@ export function FinalCta() {
       <footer className="mx-auto max-w-6xl px-5 pt-14 pb-10 text-sm text-ink-900/60">
         <div className="grid gap-10 md:grid-cols-[1.3fr_1fr_1fr_1.2fr]">
           <div>
-            <Logo className="text-ink-900" onLight />
+            <Logo onLight full />
             <p className="mt-4 max-w-xs">
               {t(
                 "L'ERP immobilier le plus complet de Côte d'Ivoire : gestion locative, syndic, CRM et portails clients.",

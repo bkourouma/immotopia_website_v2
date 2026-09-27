@@ -81,8 +81,13 @@ En production depuis ~15:50 UTC (`16a1b8d` défilement, `3582c86` icône) :
 
 Reste à faire :
 
-- Logos texte « ImmoTopia » (couleur et blanc) : envoyés dans la conversation mais pas encore déposés
-  sur le disque ; le composant `Logo` écrit toujours le nom en texte.
+- Logos texte (non commités, non déployés, vérifiés en local : `tsc`, `lint`, navigateur de 375 à 1536 px) :
+  `public/images/logo/logo-immotopia(-inverse).png` (fournis, avec slogan) et `logo-immotopia-nom(-inverse).png`
+  (découpés sans slogan, 953 × 189). `Logo` (`ui.tsx`) : icône + nom en image, `onLight` (bleu marine) ou
+  inverse (blanc) ; `full` = logo avec slogan (pied de page). Image Open Graph : nom en image.
+  Menu : le nom (121 px) ne tenait plus → lien du logo en `shrink-0`, rangée de liens à partir de `xl`
+  seulement (menu compact en dessous : elle débordait déjà entre 768 et 1279 px), « Fonctionnalités »
+  (#top) retiré du menu ordinateur (le logo ramène en haut), `xl:px-3` sur les liens.
 - Relecture humaine des textes du wiki, surtout les statuts (voir ci-dessous).
 
 Pièges et décisions :

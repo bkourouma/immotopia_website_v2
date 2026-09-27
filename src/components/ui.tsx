@@ -86,13 +86,19 @@ export function Eyebrow({ children, dark = false }: { children: ReactNode; dark?
   );
 }
 
-export function Logo({ className = "", onLight = false }: { className?: string; onLight?: boolean }) {
+/**
+ * Logo ImmoTopia : icône + nom (images de public/images/logo/).
+ * Fond sombre par défaut (« Immo » en blanc) ; `onLight` pour un fond clair (« Immo » en bleu marine) ;
+ * `full` ajoute le slogan « L'ERP immobilier le plus Complet », lisible seulement en grand (pied de page).
+ */
+export function Logo({ className = "", onLight = false, full = false }: { className?: string; onLight?: boolean; full?: boolean }) {
+  const name = full
+    ? { src: onLight ? "/images/logo/logo-immotopia.png" : "/images/logo/logo-immotopia-inverse.png", width: 993, height: 307, cls: "h-14 w-auto shrink-0" }
+    : { src: onLight ? "/images/logo/logo-immotopia-nom.png" : "/images/logo/logo-immotopia-nom-inverse.png", width: 953, height: 189, cls: "h-6 w-auto shrink-0" };
   return (
-    <span className={`inline-flex items-center gap-2.5 ${className}`}>
-      <Image src="/images/logo/icone.png" alt="" width={32} height={32} className="size-8" priority />
-      <span className="font-display text-xl font-bold tracking-tight">
-        Immo<span className={onLight ? "text-[#c2410c]" : "text-sun-500"}>Topia</span>
-      </span>
+    <span className={`inline-flex shrink-0 items-center gap-2.5 ${className}`}>
+      <Image src="/images/logo/icone.png" alt="" width={32} height={32} className={`shrink-0 ${full ? "size-12" : "size-8"}`} priority />
+      <Image src={name.src} alt="ImmoTopia" width={name.width} height={name.height} className={name.cls} priority={!full} />
     </span>
   );
 }
