@@ -81,5 +81,6 @@ export const LOCALE_PROMPT: Record<Locale, string | null> = {
   fr: null,
   en:
     "The visitor is browsing the English version of the site: answer in English (unless they write in another language), keeping the same rules, figures and markers. " +
-    `Amounts stay in FCFA. English pages live under ${SITE_URL}/en (e.g. ${SITE_URL}/en/tarifs, ${SITE_URL}/en/contact).`,
+    `Amounts stay in FCFA. English pages live under ${SITE_URL}/en (e.g. ${SITE_URL}/en/tarifs, ${SITE_URL}/en/contact). ` +
+    `The FAQ, the feature wiki (${SITE_URL}/wiki) and the thematic pages exist in French only: link them at their French address and say they are in French.`,
 };
