@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, useMotionValue, useSpring, type HTMLMotionProps } from "framer-motion";
+import Image from "next/image";
 import { useRef, type MouseEvent, type ReactNode } from "react";
 
 /** Bouton « magnétique » : il suit légèrement le curseur puis revient en place. */
@@ -88,17 +89,7 @@ export function Eyebrow({ children, dark = false }: { children: ReactNode; dark?
 export function Logo({ className = "", onLight = false }: { className?: string; onLight?: boolean }) {
   return (
     <span className={`inline-flex items-center gap-2.5 ${className}`}>
-      <svg viewBox="0 0 32 32" className="size-8" aria-hidden>
-        <defs>
-          <linearGradient id="lg-logo" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stopColor="#5B5BF7" />
-            <stop offset="1" stopColor="#FF8A3D" />
-          </linearGradient>
-        </defs>
-        <rect width="32" height="32" rx="9" fill="url(#lg-logo)" />
-        <path d="M7.5 15.5 16 8.5l8.5 7" fill="none" stroke="#fff" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" />
-        <rect x="14.2" y="15" width="3.6" height="9" rx="1.8" fill="#fff" />
-      </svg>
+      <Image src="/images/logo/icone.png" alt="" width={32} height={32} className="size-8" priority />
       <span className="font-display text-xl font-bold tracking-tight">
         Immo<span className={onLight ? "text-[#c2410c]" : "text-sun-500"}>Topia</span>
       </span>

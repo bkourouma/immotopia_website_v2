@@ -1,5 +1,10 @@
+import { readFile } from "node:fs/promises";
+import { join } from "node:path";
 import { ImageResponse } from "next/og";
 import { hasLocale, translator } from "@/lib/i18n";
+
+// Icône ImmoTopia (public/images/logo/icone.png), lue une fois et intégrée à l'image
+const iconSrc = `data:image/png;base64,${await readFile(join(process.cwd(), "public/images/logo/icone.png"), "base64")}`;
 
 // Image d'aperçu affichée lors du partage d'un lien (WhatsApp, Facebook, LinkedIn…)
 export const alt = "ImmoTopia — L'ERP immobilier le plus complet de Côte d'Ivoire";
@@ -25,17 +30,8 @@ export default async function OpengraphImage({ params }: { params: Promise<{ lan
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
-          <svg width="72" height="72" viewBox="0 0 32 32">
-            <defs>
-              <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0" stopColor="#5B5BF7" />
-                <stop offset="1" stopColor="#FF8A3D" />
-              </linearGradient>
-            </defs>
-            <rect width="32" height="32" rx="9" fill="url(#g)" />
-            <path d="M7.5 15.5 16 8.5l8.5 7" fill="none" stroke="#fff" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" />
-            <rect x="14.2" y="15" width="3.6" height="9" rx="1.8" fill="#fff" />
-          </svg>
+          {/* eslint-disable-next-line @next/next/no-img-element -- ImageResponse n'accepte que <img> */}
+          <img src={iconSrc} width={72} height={72} alt="" />
           <div style={{ display: "flex", fontSize: 44, fontWeight: 800 }}>
             Immo<span style={{ color: "#FF8A3D" }}>Topia</span>
           </div>

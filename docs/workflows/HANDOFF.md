@@ -41,12 +41,20 @@ Pièges et décisions :
 
 ---
 
-## Wiki des fonctionnalités (non commité, sur `chore/acc-standard-v0.1.0`) — 2026-09-27
+## Branche `feat/wiki-fonctionnalites` — 2026-09-27
 
-**État :** prêt à relire, rien n'est commité (à mettre sur sa propre branche, par ex. `feat/wiki-fonctionnalites`)
-**Dernier commit :** `23608ea` (le wiki n'y est pas)
+**État :** wiki en production ; correctifs défilement + icône commités, pas encore déployés
+**Dernier commit :** `53b59d9` Assistant : le wiki, la FAQ et les pages thématiques se donnent à leur adresse française
+(`e2df911` pour le wiki ; `lancement-site-v2` avancée sur `53b59d9`, elle inclut `chore/acc-standard-v0.1.0`)
 
-Fait :
+Déploiement (fait par la session Pilote, à la demande de l'utilisateur) :
+
+- `53b59d9` en production sur immotopia.cloud depuis le 2026-09-27 14:57 UTC (tarball puis
+  `docker compose up -d --build`) : conteneur sain, `/wiki` et les fiches en 200, 95 URL wiki dans le sitemap.
+- Retour arrière possible : image `immotopia-site:avant-wiki-20260927` et
+  `~/immotopia-site-avant-wiki-20260927.tgz` sur le serveur.
+
+Fait (dans `e2df911` / `53b59d9`) :
 
 - `/wiki` (accueil + recherche), `/wiki/<domaine>` (10), `/wiki/<domaine>/<fonctionnalite>` (84) :
   539 actions, français seulement, pages statiques (`dynamicParams = false`), 404 sous `/en`.
@@ -56,13 +64,23 @@ Fait :
   super-admin, routes, permissions, lignes « À vérifier » et notes de sécurité écartées.
 - `french-only.ts` : `frenchOnlyPrefixes` (`/wiki`) + `isFrenchOnly()`, utilisé par `switchLocalePath`.
 - Sitemap, lien « Wiki » dans le menu FR, lien depuis la FAQ, section « Wiki » dans `knowledge.md`,
-  composant `JsonLd` exporté de `json-ld.tsx`.
-- `tsc`, `lint` : 0 erreur ; `npm run build` réussi ; pages vérifiées dans le navigateur (FR, 404 EN, mobile).
+  consigne `/wiki` en français dans `LOCALE_PROMPT.en` (`prompt.ts`), composant `JsonLd` exporté de `json-ld.tsx`.
+
+Commités (`16a1b8d` défilement, puis le commit de l'icône), non déployés (vérifié : `tsc` et `lint` à 0 erreur, navigateur en local) :
+
+- `data-scroll-behavior="smooth"` sur `<html>` (`src/app/[lang]/layout.tsx`) : sans lui, Next 16 ne coupe
+  plus le défilement fluide de `globals.css` pendant un changement de page, et chaque page s'ouvrait à la
+  position de la précédente (souvent en bas). Constaté en production sur `/wiki`, touche toutes les pages.
+- Nouvelle icône (maison en cubes) : `public/images/logo/icone.png` (composant `Logo` de `ui.tsx`, image
+  Open Graph), `src/app/icon.png` (remplace `icon.svg`, supprimé), `src/app/apple-icon.png` (fond blanc).
+  `src/proxy.ts` : `icon.svg` → `icon.png` dans le matcher. Source : `../docs/logos/`.
 
 Reste à faire :
 
-- Relecture humaine des textes, surtout les statuts (voir ci-dessous).
-- Commit sur une branche dédiée.
+- Redéployer pour mettre en ligne les correctifs ci-dessus (réservé à l'utilisateur).
+- Logos texte « ImmoTopia » (couleur et blanc) : envoyés dans la conversation mais pas encore déposés
+  sur le disque ; le composant `Logo` écrit toujours le nom en texte.
+- Relecture humaine des textes du wiki, surtout les statuts (voir ci-dessous).
 
 Pièges et décisions :
 
