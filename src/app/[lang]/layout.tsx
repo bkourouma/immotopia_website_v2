@@ -53,7 +53,9 @@ export default async function RootLayout({ children, params }: LayoutProps<"/[la
   const { lang } = await params;
   if (!hasLocale(lang)) notFound();
   return (
-    <html lang={htmlLang[lang]} className={`${inter.variable} ${bricolage.variable} antialiased`}>
+    // data-scroll-behavior : Next 16 coupe le défilement fluide (globals.css) pendant un changement de page ;
+    // sans lui, la remontée en haut de la nouvelle page est interrompue et on arrive en bas.
+    <html lang={htmlLang[lang]} data-scroll-behavior="smooth" className={`${inter.variable} ${bricolage.variable} antialiased`}>
       <body className="min-h-dvh font-sans">
         <OrganizationJsonLd />
         <Providers locale={lang}>{children}</Providers>
