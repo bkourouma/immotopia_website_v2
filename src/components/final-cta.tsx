@@ -2,7 +2,7 @@
 
 import { ArrowRight, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 import type { ReactNode } from "react";
-import { navLinks } from "@/lib/content";
+import { footerProductLinks } from "@/lib/content";
 import { contact, legal, whatsappLink } from "@/lib/site";
 import { LanguageSwitcher } from "./language-switcher";
 import { useI18n } from "./locale-provider";
@@ -50,13 +50,13 @@ export function FinalCta() {
             <Logo onLight full />
             <p className="mt-4 max-w-xs">
               {t(
-                "L'ERP immobilier le plus complet de Côte d'Ivoire : gestion locative, syndic, CRM et portails clients.",
-                "The most complete real estate ERP in Côte d'Ivoire: property management, condominium management, CRM and client portals.",
+                "L'ERP immobilier le plus complet utilisé en Côte d'Ivoire : gestion locative, syndic, CRM et portails clients.",
+                "The most complete real estate ERP used in Côte d'Ivoire: property management, condominium management, CRM and client portals.",
               )}
             </p>
           </div>
           <FooterCol title={t("Produit", "Product")}>
-            {navLinks[locale].map((l) => (
+            {footerProductLinks(locale).map((l) => (
               <SmartLink key={l.href} href={l.href} className="transition-colors hover:text-ink-900">
                 {l.label}
               </SmartLink>

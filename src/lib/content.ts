@@ -294,33 +294,85 @@ export const roles: Record<Locale, Role[]> = {
 
 // Les tarifs sont dans src/lib/pricing.ts
 
-export type NavLink = { label: string; href: string; children?: { label: string; href: string; text: string }[] };
+export type NavChild = { label: string; href: string; text: string };
+export type NavLink = {
+  label: string;
+  /** Adresse du libellé lui-même (clic sur « Produit », « Comparatif »…) */
+  href: string;
+  /** Sous-menu : ouvert au survol sur ordinateur, en accordéon sur mobile */
+  children?: NavChild[];
+  /** Lien mis en avant en bas du sous-menu */
+  footer?: { label: string; href: string };
+  /** Sous-menu sur deux colonnes (listes longues) */
+  wide?: boolean;
+};
 
 // Adresses sans préfixe de langue : SmartLink les localise.
+// Le wiki et la FAQ n'existent qu'en français : absents du menu anglais.
 export const navLinks: Record<Locale, NavLink[]> = {
   fr: [
-    { label: "Fonctionnalités", href: "#top" },
-    { label: "Rôles", href: "#roles" },
-    { label: "Écosystème", href: "#ecosysteme" },
+    {
+      label: "Produit",
+      href: "#top",
+      children: [
+        { label: "Fonctionnalités", href: "#top", text: "Les grands volets d'ImmoTopia en un coup d'œil" },
+        { label: "Rôles", href: "#roles", text: "Une interface pour chaque métier de l'agence" },
+        { label: "Écosystème", href: "#ecosysteme", text: "Contacts, biens, baux et finances reliés" },
+        { label: "Wiki des fonctionnalités", href: "/wiki", text: "Chaque action détaillée, pack par pack" },
+      ],
+    },
     {
       label: "Comparatif",
       href: comparatifHref(),
+      wide: true,
       children: domains.map((d) => ({ label: d.label.fr, href: comparatifHref(d.id), text: d.pitch.fr })),
+      footer: { label: "Voir tout le comparatif, avec les sources", href: comparatifHref() },
+    },
+    {
+      label: "Ressources",
+      href: "/wiki",
+      children: [
+        { label: "Wiki des fonctionnalités", href: "/wiki", text: "Tout ce que fait ImmoTopia, action par action" },
+        { label: "Outils gratuits", href: "/outils", text: "Quittance, bail, rendement locatif, commission…" },
+        { label: "FAQ", href: "/faq", text: "Les réponses aux questions fréquentes" },
+        { label: "Contact", href: "/contact", text: "Parler à l'équipe, réserver une démonstration" },
+      ],
     },
     { label: "Tarifs", href: "/tarifs" },
-    { label: "Wiki", href: "/wiki" },
-    { label: "Outils gratuits", href: "/outils" },
   ],
   en: [
-    { label: "Features", href: "#top" },
-    { label: "Roles", href: "#roles" },
-    { label: "Ecosystem", href: "#ecosysteme" },
+    {
+      label: "Product",
+      href: "#top",
+      children: [
+        { label: "Features", href: "#top", text: "ImmoTopia's main modules at a glance" },
+        { label: "Roles", href: "#roles", text: "An interface for every job in the agency" },
+        { label: "Ecosystem", href: "#ecosysteme", text: "Contacts, properties, leases and finance, connected" },
+      ],
+    },
     {
       label: "Comparison",
       href: comparatifHref(),
+      wide: true,
       children: domains.map((d) => ({ label: d.label.en, href: comparatifHref(d.id), text: d.pitch.en })),
+      footer: { label: "See the full comparison, with sources", href: comparatifHref() },
+    },
+    {
+      label: "Resources",
+      href: "/outils",
+      children: [
+        { label: "Free tools", href: "/outils", text: "Rent receipt, lease, rental yield, commission…" },
+        { label: "Contact", href: "/contact", text: "Talk to the team, book a demo" },
+      ],
     },
     { label: "Pricing", href: "/tarifs" },
-    { label: "Free tools", href: "/outils" },
   ],
+};
+
+/** Colonne « Produit » du pied de page : le menu à plat, sans doublon ni Contact (colonne « Entreprise »). */
+export const footerProductLinks = (locale: Locale) => {
+  const seen = new Set<string>(["/contact"]);
+  return navLinks[locale]
+    .flatMap((l) => (l.footer ? [{ label: l.label, href: l.href }] : (l.children ?? [l])))
+    .filter((l) => !seen.has(l.href) && seen.add(l.href));
 };

@@ -85,9 +85,12 @@ Reste à faire :
   `public/images/logo/logo-immotopia(-inverse).png` (fournis, avec slogan) et `logo-immotopia-nom(-inverse).png`
   (découpés sans slogan, 953 × 189). `Logo` (`ui.tsx`) : icône + nom en image, `onLight` (bleu marine) ou
   inverse (blanc) ; `full` = logo avec slogan (pied de page). Image Open Graph : nom en image.
-  Menu : le nom (121 px) ne tenait plus → lien du logo en `shrink-0`, rangée de liens à partir de `xl`
-  seulement (menu compact en dessous : elle débordait déjà entre 768 et 1279 px), « Fonctionnalités »
-  (#top) retiré du menu ordinateur (le logo ramène en haut), `xl:px-3` sur les liens.
+  Commité en `55dc15e`, pas encore déployé.
+- Menu réorganisé (non commité, vérifié en local de 375 à 1280 px, FR et EN) : « Produit ▾ · Comparatif ▾ ·
+  Ressources ▾ · Tarifs » (choix de l'utilisateur). `navLinks` (`content.ts`) : `children`, `footer` (lien mis
+  en avant), `wide` (deux colonnes) ; Produit = Fonctionnalités, Rôles, Écosystème, Wiki ; Ressources = Wiki,
+  Outils gratuits, FAQ, Contact (EN : Free tools, Contact). Rangée complète dès `lg` (1024 px), menu compact
+  en dessous. Pied de page : `footerProductLinks()` (menu à plat, sans doublon ni Contact).
 - Relecture humaine des textes du wiki, surtout les statuts (voir ci-dessous).
 
 Pièges et décisions :

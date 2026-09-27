@@ -39,13 +39,11 @@ export function Navbar() {
           <Logo />
         </SmartLink>
 
-        <ul className="hidden items-center xl:flex" onMouseLeave={() => setHovered(null)}>
+        <ul className="hidden items-center lg:flex" onMouseLeave={() => setHovered(null)}>
           {links.map((l) => (
             <li
               key={l.href}
-              // Le menu (max-w-6xl) n'a pas la place : « Fonctionnalités » ramène seulement en haut de l'accueil,
-              // comme le logo ; il reste dans le menu mobile.
-              className={`relative ${l.href === "#top" ? "hidden" : ""}`}
+              className="relative"
               onMouseEnter={() => setHovered(l.href)}
               onFocus={() => setHovered(l.href)}
               onBlur={(e) => !e.currentTarget.contains(e.relatedTarget) && setHovered(null)}
@@ -54,7 +52,7 @@ export function Navbar() {
                 href={l.href}
                 aria-haspopup={l.children ? "true" : undefined}
                 aria-expanded={l.children ? hovered === l.href : undefined}
-                className="relative z-10 flex items-center gap-1 px-2.5 py-2 text-[13px] font-medium whitespace-nowrap text-white/75 transition-colors hover:text-white xl:px-3 xl:text-sm"
+                className="relative z-10 flex items-center gap-1 px-4 py-2 text-sm font-medium whitespace-nowrap text-white/75 transition-colors hover:text-white"
               >
                 {l.label}
                 {l.children && <ChevronDown className={`size-3.5 transition-transform ${hovered === l.href ? "rotate-180" : ""}`} />}
@@ -73,10 +71,10 @@ export function Navbar() {
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: 8, scale: 0.98 }}
                     transition={{ duration: 0.2 }}
-                    className="absolute top-full left-1/2 w-[640px] -translate-x-1/2 pt-3"
+                    className={`absolute top-full left-1/2 -translate-x-1/2 pt-3 ${l.wide ? "w-[640px]" : "w-[340px]"}`}
                   >
                     <div className="rounded-2xl border border-white/10 bg-ink-950/95 p-3 shadow-[0_30px_80px_-20px_rgba(0,0,0,0.8)] backdrop-blur-xl">
-                      <div className="grid grid-cols-2 gap-1">
+                      <div className={`grid gap-1 ${l.wide ? "grid-cols-2" : ""}`}>
                         {l.children.map((c) => (
                           <SmartLink key={c.href} href={c.href} onClick={() => setHovered(null)} className="group rounded-xl px-3 py-2.5 transition-colors hover:bg-white/[0.07]">
                             <span className="block text-sm font-semibold text-white">{c.label}</span>
@@ -84,14 +82,16 @@ export function Navbar() {
                           </SmartLink>
                         ))}
                       </div>
-                      <SmartLink
-                        href={l.href}
-                        onClick={() => setHovered(null)}
-                        className="group mt-2 flex items-center justify-between rounded-xl bg-gradient-to-r from-brand-500/25 to-sun-500/15 px-4 py-3 text-sm font-semibold text-white ring-1 ring-white/10"
-                      >
-                        {t("Voir tout le comparatif, avec les sources", "See the full comparison, with sources")}
-                        <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
-                      </SmartLink>
+                      {l.footer && (
+                        <SmartLink
+                          href={l.footer.href}
+                          onClick={() => setHovered(null)}
+                          className="group mt-2 flex items-center justify-between rounded-xl bg-gradient-to-r from-brand-500/25 to-sun-500/15 px-4 py-3 text-sm font-semibold text-white ring-1 ring-white/10"
+                        >
+                          {l.footer.label}
+                          <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
+                        </SmartLink>
+                      )}
                     </div>
                   </motion.div>
                 )}
@@ -114,7 +114,7 @@ export function Navbar() {
             </MagneticButton>
           </div>
           <button
-            className="grid size-10 cursor-pointer place-items-center rounded-xl text-white hover:bg-white/10 xl:hidden"
+            className="grid size-10 cursor-pointer place-items-center rounded-xl text-white hover:bg-white/10 lg:hidden"
             onClick={() => setMenu((m) => !m)}
             aria-label={menu ? t("Fermer le menu", "Close menu") : t("Ouvrir le menu", "Open menu")}
             aria-expanded={menu}
@@ -130,7 +130,7 @@ export function Navbar() {
             initial={{ opacity: 0, y: -12, scale: 0.98 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -12, scale: 0.98 }}
-            className="absolute inset-x-3 top-[76px] max-h-[calc(100dvh-90px)] overflow-y-auto rounded-2xl border border-white/10 bg-ink-950/90 p-3 text-white backdrop-blur-xl xl:hidden"
+            className="absolute inset-x-3 top-[76px] max-h-[calc(100dvh-90px)] overflow-y-auto rounded-2xl border border-white/10 bg-ink-950/90 p-3 text-white backdrop-blur-xl lg:hidden"
           >
             {links.map((l) =>
               l.children ? (
@@ -146,8 +146,8 @@ export function Navbar() {
                   <AnimatePresence initial={false}>
                     {sub === l.href && (
                       <motion.div initial={{ height: 0 }} animate={{ height: "auto" }} exit={{ height: 0 }} className="overflow-hidden">
-                        <div className="grid grid-cols-2 gap-1 ps-3 pb-2">
-                          {[{ label: t("Tout le comparatif", "Full comparison"), href: l.href }, ...l.children].map((c) => (
+                        <div className={`grid gap-1 ps-3 pb-2 ${l.wide ? "grid-cols-2" : ""}`}>
+                          {[...(l.footer ? [l.footer] : []), ...l.children].map((c) => (
                             <SmartLink key={c.href} href={c.href} onClick={() => setMenu(false)} className="rounded-lg px-3 py-2 text-sm text-white/75 hover:bg-white/10 hover:text-white">
                               {c.label}
                             </SmartLink>
