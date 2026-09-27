@@ -370,9 +370,11 @@ export const navLinks: Record<Locale, NavLink[]> = {
 };
 
 /** Colonne « Produit » du pied de page : le menu à plat, sans doublon ni Contact (colonne « Entreprise »). */
-export const footerProductLinks = (locale: Locale) => {
+export const footerProductLinks = (locale: Locale): { label: string; href: string }[] => {
   const seen = new Set<string>(["/contact"]);
   return navLinks[locale]
-    .flatMap((l) => (l.footer ? [{ label: l.label, href: l.href }] : (l.children ?? [l])))
+    .flatMap((l): { label: string; href: string }[] =>
+      l.footer ? [{ label: l.label, href: l.href }] : (l.children ?? [l]).map(({ label, href }) => ({ label, href })),
+    )
     .filter((l) => !seen.has(l.href) && seen.add(l.href));
 };
