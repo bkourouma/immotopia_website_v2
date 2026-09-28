@@ -27,7 +27,7 @@ export async function Marquee() {
   return (
     <section aria-label={t("Partenaires et conformité", "Partners and compliance")} className="border-y border-ink-900/5 bg-white py-10">
       <p className="mb-6 text-center text-xs font-semibold tracking-[0.18em] text-ink-900/60 uppercase">
-        {t("Paiements, messagerie et conformité intégrés nativement", "Payments, messaging and compliance built in")}
+        {t("Règlements Wave, Orange Money, MTN MoMo et Moov Money, validés par l'agence", "Wave, Orange Money, MTN MoMo and Moov Money payments, approved by the agency")}
       </p>
       <div className="mask-fade-x group flex overflow-hidden">
         <ul className="flex w-max animate-marquee items-center will-change-transform group-hover:[animation-play-state:paused]">

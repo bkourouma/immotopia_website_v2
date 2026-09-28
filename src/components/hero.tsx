@@ -64,9 +64,9 @@ export function Hero() {
     setTimeout(() => (dragging.current = false), 0);
   }
 
-  const title = t("L'ERP immobilier le plus complet utilisé en Côte d'Ivoire.", "The most complete real estate ERP used in Côte d'Ivoire.");
+  const title = t("Suivez vos biens, vos loyers et vos clients au même endroit.", "Track your properties, rents and clients in one place.");
   // Index du premier mot mis en dégradé
-  const gradientFrom = t(4, 2);
+  const gradientFrom = t(4, 3);
   const accent = cards[active].accent;
 
   return (
@@ -101,6 +101,39 @@ export function Hero() {
         <div className="hero-fade inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs text-white/75 backdrop-blur-md">
           <span className="rounded-full bg-mint-400 px-2 py-0.5 text-[10px] font-bold text-ink-950">{t("NOUVEAU", "NEW")}</span>
           {t("Module Syndic de copropriété disponible", "Condominium management module now available")}
+        </div>
+      </div>
+
+      {/* Titre, accroche et appels à l'action : premier écran */}
+      <div className="mx-auto mt-6 max-w-4xl px-5 text-center">
+        <h1 className="font-display text-[2.35rem] leading-[1.02] font-bold tracking-tight text-balance sm:text-5xl md:text-6xl">
+          {title.split(" ").map((w, i) => (
+            <span key={i} className="inline-block overflow-hidden pb-1 align-bottom">
+              <span className={`hero-word inline-block ${i >= gradientFrom ? "text-gradient" : ""}`} style={{ animationDelay: `${i * 60}ms` }}>
+                {w}&nbsp;
+              </span>
+            </span>
+          ))}
+        </h1>
+        <p className="hero-fade mx-auto mt-5 max-w-2xl text-base text-white/65 md:text-lg" style={{ animationDelay: "350ms" }}>
+          {t(
+            "Logiciel immobilier pour agences et syndics en Côte d'Ivoire. Gérez les baux, les encaissements, les relances et les échanges avec les propriétaires depuis une plateforme adaptée à votre activité.",
+            "Real estate software for agencies and condominium managers in Côte d'Ivoire. Manage leases, collections, reminders and landlord communication from a platform built for your business.",
+          )}
+        </p>
+        <div className="hero-fade mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row" style={{ animationDelay: "500ms" }}>
+          <MagneticButton
+            onClick={open}
+            className="bg-white px-7 py-3.5 text-sm text-ink-950 shadow-[0_0_40px_-8px_rgba(255,255,255,0.5)] hover:shadow-[0_0_60px_-6px_rgba(255,255,255,0.7)]"
+          >
+            <Play className="size-4 fill-current" /> {t("Réserver une démo de 30 min", "Book a 30-min demo")}
+          </MagneticButton>
+          <MagneticButton
+            onClick={() => goTo("#tarifs")}
+            className="border border-white/25 bg-white/5 px-7 py-3.5 text-sm text-white backdrop-blur-md hover:bg-white/15"
+          >
+            {t("Voir les tarifs", "See pricing")}
+          </MagneticButton>
         </div>
       </div>
 
@@ -205,32 +238,6 @@ export function Hero() {
         </AnimatePresence>
       </div>
 
-      {/* Titre et accroche, sous le carrousel */}
-      <div className="mx-auto mt-14 max-w-5xl px-5 text-center md:mt-16">
-        <h1 className="font-display text-[2.35rem] leading-[1.02] font-bold tracking-tight text-balance sm:text-6xl md:text-7xl">
-          {title.split(" ").map((w, i) => (
-            <span key={i} className="inline-block overflow-hidden pb-1 align-bottom">
-              <span className={`hero-word inline-block ${i >= gradientFrom ? "text-gradient" : ""}`} style={{ animationDelay: `${i * 60}ms` }}>
-                {w}&nbsp;
-              </span>
-            </span>
-          ))}
-        </h1>
-        <p className="hero-fade mx-auto mt-5 max-w-2xl text-base text-white/65 md:text-lg" style={{ animationDelay: "350ms" }}>
-          {t(
-            "Gestion locative, syndic de copropriété, CRM et portails clients réunis dans une plateforme pensée pour les professionnels de l'immobilier à Abidjan.",
-            "Rental management, condominium management, CRM and client portals in one platform built for real estate professionals in Abidjan.",
-          )}
-        </p>
-        <div className="hero-fade mt-8 flex justify-center" style={{ animationDelay: "500ms" }}>
-          <MagneticButton
-            onClick={open}
-            className="bg-white px-7 py-3.5 text-sm text-ink-950 shadow-[0_0_40px_-8px_rgba(255,255,255,0.5)] hover:shadow-[0_0_60px_-6px_rgba(255,255,255,0.7)]"
-          >
-            <Play className="size-4 fill-current" /> {t("Demander une démonstration", "Request a demo")}
-          </MagneticButton>
-        </div>
-      </div>
     </section>
   );
 }

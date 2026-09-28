@@ -5,6 +5,12 @@ Point d'entrée des sessions Claude Code. La constitution du projet est
 
 @AGENTS.md
 
+## Emplacement du projet
+
+Le projet et son dépôt git sont dans le dossier **`site/`** ; le dossier
+parent (`ImmoTopiaWebsite2Version2`) n'est pas un dépôt git. Lancer `npm`,
+`npx` et `git` depuis `site/`.
+
 ## Chargement progressif
 
 Ne pas tout lire d'avance. Charger le document quand la tâche le demande :

@@ -22,10 +22,10 @@ export function FinalCta() {
           <h2 className="mx-auto max-w-3xl font-display text-4xl leading-[1.05] font-bold tracking-tight text-balance md:text-6xl">
             {t(
               <>
-                Prêt à faire entrer votre agence <span className="text-gradient">dans une autre ère ?</span>
+                Voyez ImmoTopia <span className="text-gradient">appliqué à votre activité</span>
               </>,
               <>
-                Ready to take your agency <span className="text-gradient">into a new era?</span>
+                See ImmoTopia <span className="text-gradient">applied to your business</span>
               </>,
             )}
           </h2>
@@ -39,7 +39,7 @@ export function FinalCta() {
             onClick={open}
             className="mt-9 bg-white px-8 py-4 text-base text-ink-950 shadow-[0_0_50px_-8px_rgba(255,255,255,0.6)]"
           >
-            {t("Demander une démonstration", "Request a demo")} <ArrowRight className="size-5" />
+            {t("Réserver une démo de 30 min", "Book a 30-min demo")} <ArrowRight className="size-5" />
           </MagneticButton>
         </div>
       </Reveal>
@@ -50,8 +50,8 @@ export function FinalCta() {
             <Logo onLight full />
             <p className="mt-4 max-w-xs">
               {t(
-                "L'ERP immobilier le plus complet utilisé en Côte d'Ivoire : gestion locative, syndic, CRM et portails clients.",
-                "The most complete real estate ERP used in Côte d'Ivoire: property management, condominium management, CRM and client portals.",
+                "Logiciel immobilier pour agences et syndics en Côte d'Ivoire : gestion locative, syndic, CRM et portails clients.",
+                "Real estate software for agencies and condominium managers in Côte d'Ivoire: property management, condominium management, CRM and client portals.",
               )}
             </p>
           </div>

@@ -9,7 +9,7 @@ const iconSrc = await png("icone.png");
 const nameSrc = await png("logo-immotopia-nom-inverse.png"); // 953 × 189
 
 // Image d'aperçu affichée lors du partage d'un lien (WhatsApp, Facebook, LinkedIn…)
-export const alt = "ImmoTopia — L'ERP immobilier le plus complet utilisé en Côte d'Ivoire";
+export const alt = "ImmoTopia — Logiciel immobilier pour agences et syndics en Côte d'Ivoire";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -38,9 +38,9 @@ export default async function OpengraphImage({ params }: { params: Promise<{ lan
           <img src={nameSrc} width={222} height={44} alt="ImmoTopia" />
         </div>
         <div style={{ display: "flex", flexDirection: "column" }}>
-          <div style={{ fontSize: 72, fontWeight: 800, lineHeight: 1.05, letterSpacing: -2 }}>{t("L'ERP immobilier", "The most complete")}</div>
+          <div style={{ fontSize: 72, fontWeight: 800, lineHeight: 1.05, letterSpacing: -2 }}>{t("Logiciel immobilier", "Real estate software")}</div>
           <div style={{ fontSize: 72, fontWeight: 800, lineHeight: 1.05, letterSpacing: -2, color: "#b3b3ff" }}>
-            {t("le plus complet de Côte d'Ivoire.", "real estate ERP in Côte d'Ivoire.")}
+            {t("pour agences et syndics.", "for agencies and condominium managers.")}
           </div>
           <div style={{ marginTop: 28, fontSize: 30, color: "rgba(255,255,255,0.65)" }}>
             {t("Gestion locative · Syndic · CRM · Portails clients", "Property management · Condominiums · CRM · Client portals")}

@@ -167,7 +167,7 @@ export async function downloadPdf(doc: Doc) {
     pdf.setFont("helvetica", "normal");
     pdf.setFontSize(7.5);
     pdf.setTextColor(150);
-    pdf.text("Document généré gratuitement avec ImmoTopia, l'ERP immobilier le plus complet.", M, 297 - 10);
+    pdf.text("Document généré gratuitement avec ImmoTopia, logiciel immobilier pour agences et syndics.", M, 297 - 10);
     pdf.text(`Page ${i} / ${n}`, 210 - M, 297 - 10, { align: "right" });
   }
 

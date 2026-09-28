@@ -26,9 +26,9 @@ export default function Home() {
         <Marquee />
         <Roles />
         <Ecosystem />
+        <Pricing />
         <ComparatifTeaser />
         <ToolsSection />
-        <Pricing />
       </main>
       <FinalCta />
     </>

@@ -32,6 +32,12 @@ La configuration du standard (commandes, ports, branches protégées, garde des
 commandes) est dans `acc.config.json` ; les hooks et scripts la lisent à
 l'exécution.
 
+## Emplacement du projet
+
+Le projet et son dépôt git sont dans le dossier **`site/`** ; le dossier
+parent (`ImmoTopiaWebsite2Version2`) n'est pas un dépôt git. Lancer `npm`,
+`npx` et `git` depuis `site/`.
+
 ## Structure réelle
 
 Site vitrine Next.js 16.3 (App Router, Turbopack) + React 19.2 + Tailwind 4,

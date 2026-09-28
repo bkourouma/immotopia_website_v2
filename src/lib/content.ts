@@ -49,7 +49,7 @@ const heroCardsSource: HeroCardSource[] = [
       fr: "Échéances générées depuis le bail, paiements enregistrés par moyen de règlement (espèces, virement, Wave, Orange Money, MTN, Moov) et déclarations des locataires validées en un clic.",
       en: "Due dates generated from the lease, payments recorded by method (cash, bank transfer, Wave, Orange Money, MTN, Moov) and tenant payment notices approved in one click.",
     },
-    cta: { fr: "Découvrir la gestion locative", en: "Explore rental management" },
+    cta: { fr: "Voir le suivi des loyers", en: "See rent tracking" },
     href: "#roles-comptable",
     image: "/images/hero/paiements.jpg",
     imageAlt: {
@@ -61,7 +61,7 @@ const heroCardsSource: HeroCardSource[] = [
   {
     id: "owners",
     eyebrow: { fr: "Relation propriétaires", en: "Landlord relations" },
-    title: { fr: "Une transparence qui fidélise vos propriétaires.", en: "Transparency that keeps your landlords loyal." },
+    title: { fr: "Donnez aux propriétaires une vue claire sur leurs loyers.", en: "Give landlords a clear view of their rents." },
     description: {
       fr: "Relevés de gérance par période et portail propriétaire : loyers encaissés, revenus, dépôts de garantie et tickets en cours, consultables à tout moment.",
       en: "Periodic management statements and a landlord portal: rent collected, income, security deposits and open tickets, available at any time.",
@@ -95,7 +95,7 @@ const heroCardsSource: HeroCardSource[] = [
   {
     id: "ecosystem",
     eyebrow: { fr: "L'ERP tout-en-un", en: "The all-in-one ERP" },
-    title: { fr: "Toute votre agence sur un seul écran.", en: "Your entire agency on one screen." },
+    title: { fr: "Retrouvez vos biens, baux et encaissements au même endroit.", en: "Find your properties, leases and collections in one place." },
     description: {
       fr: "Biens, baux, encaissements, CRM, syndic, maintenance et communication sur une plateforme rapide, accessible depuis un navigateur, sur ordinateur comme sur mobile.",
       en: "Properties, leases, collections, CRM, condominium management, maintenance and communication on one fast platform, right in your browser, on desktop or mobile.",
@@ -112,7 +112,7 @@ const heroCardsSource: HeroCardSource[] = [
   {
     id: "crm",
     eyebrow: { fr: "CRM & relation client", en: "CRM & client relations" },
-    title: { fr: "Convertissez chaque contact en opportunité.", en: "Turn every contact into an opportunity." },
+    title: { fr: "Suivez les demandes, les visites et les relances.", en: "Follow enquiries, viewings and follow-ups." },
     description: {
       fr: "Centralisez vos prospects et organisez vos visites. Ne ratez aucune affaire grâce au pipeline commercial visuel et au rapprochement entre besoins et biens disponibles.",
       en: "Keep all your leads in one place and organize your viewings. Never miss a deal with a visual sales pipeline and matching between client needs and available properties.",
