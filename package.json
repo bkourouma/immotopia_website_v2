@@ -25,17 +25,17 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
-    "@types/node": "20.19.43",
-    "@types/react": "19.3.0",
+    "@types/node": "^20",
+    "@types/react": "^19",
     "@types/react-dom": "^19",
-    "chrome-devtools-mcp": "^0.10.1",
     "eslint": "^9",
     "eslint-config-next": "16.3.6",
-    "lefthook": "^2.1.14",
-    "lint-staged": "^17.5.0",
-    "repomix": "^1.14.0",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "lint-staged": "^17.5.0",
+    "chrome-devtools-mcp": "^0.10.1",
+    "lefthook": "^2.1.14",
+    "repomix": "^1.14.0"
   },
   "lint-staged": {
     "*.{js,jsx,mjs,cjs,ts,tsx,mts,cts}": [
