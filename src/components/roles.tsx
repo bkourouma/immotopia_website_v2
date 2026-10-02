@@ -24,6 +24,22 @@ const compareFor: Record<RoleId, { domain: DomainId; label: { fr: string; en: st
     domain: "biens-commercial",
     label: { fr: "Comparer le CRM et les biens face aux autres logiciels", en: "Compare CRM and listings with other software" },
   },
+  gestionnaire: {
+    domain: "gestion-locative",
+    label: { fr: "Comparer la gestion locative face aux autres logiciels", en: "Compare rental management with other software" },
+  },
+  proprietaire: {
+    domain: "portails-service",
+    label: { fr: "Comparer les portails face aux autres logiciels", en: "Compare portals with other software" },
+  },
+  locataire: {
+    domain: "portails-service",
+    label: { fr: "Comparer les portails face aux autres logiciels", en: "Compare portals with other software" },
+  },
+  coproprietaire: {
+    domain: "syndic",
+    label: { fr: "Comparer le syndic face aux autres logiciels", en: "Compare condominium features with other software" },
+  },
 };
 
 export function Roles() {
@@ -56,8 +72,8 @@ export function Roles() {
           </h2>
           <p className="mt-5 text-lg text-ink-900/60">
             {t(
-              "Directeur, comptable ou agent : chacun voit exactement ce dont il a besoin, rien de plus.",
-              "Director, accountant or agent: everyone sees exactly what they need, nothing more.",
+              "Directeur, gestionnaire, comptable, agent, mais aussi propriétaire, locataire ou copropriétaire : chacun voit exactement ce dont il a besoin, rien de plus.",
+              "Director, manager, accountant, agent, but also landlord, tenant or co-owner: everyone sees exactly what they need, nothing more.",
             )}
           </p>
         </Reveal>
@@ -272,6 +288,10 @@ function RoleVisual({ id }: { id: RoleId }) {
     );
   }
 
+  if (id === "gestionnaire" || id === "proprietaire" || id === "locataire" || id === "coproprietaire") {
+    return <ListVisual id={id} />;
+  }
+
   return (
     <Panel>
       <div className="flex justify-center gap-4">
@@ -344,6 +364,76 @@ function RoleVisual({ id }: { id: RoleId }) {
             </motion.div>
           ))}
         </div>
+      </div>
+    </Panel>
+  );
+}
+
+type ListId = "gestionnaire" | "proprietaire" | "locataire" | "coproprietaire";
+
+// Aperçu d'un portail ou d'un écran de gestion : liste d'éléments avec statut
+function ListVisual({ id }: { id: ListId }) {
+  const { t } = useI18n();
+  const views: Record<ListId, { title: string; rows: [string, string, string, string][] }> = {
+    gestionnaire: {
+      title: t("À traiter aujourd'hui", "To do today"),
+      rows: [
+        [t("Bail", "Lease"), t("Renouvellement · Villa 7, Marcory", "Renewal · Villa 7, Marcory"), t("À renouveler", "To renew"), "bg-amber-50 text-amber-700"],
+        [t("État des lieux", "Inspection"), t("Sortie · Studio 3, Angré", "Move-out · Studio 3, Angré"), t("En cours", "In progress"), "bg-sky-50 text-sky-700"],
+        [t("Incident", "Incident"), t("Fuite d'eau · Appt F3, Plateau", "Water leak · 2-bed apt, Plateau"), t("Ouvert", "Open"), "bg-rose-50 text-rose-700"],
+        [t("Relevé", "Statement"), t("Septembre · M. Ouattara", "September · Mr. Ouattara"), t("Prêt à envoyer", "Ready to send"), "bg-emerald-50 text-emerald-700"],
+      ],
+    },
+    proprietaire: {
+      title: t("Mon portail propriétaire", "My landlord portal"),
+      rows: [
+        [t("Revenus", "Income"), t("Loyers perçus · septembre", "Rent received · September"), t("Reçu", "Received"), "bg-emerald-50 text-emerald-700"],
+        [t("Bail", "Lease"), t("Villa 7, Marcory", "Villa 7, Marcory"), t("En cours", "Active"), "bg-sky-50 text-sky-700"],
+        [t("Document", "Document"), t("Rapport de revenus", "Income report"), t("À télécharger", "To download"), "bg-slate-100 text-slate-600"],
+        [t("Incident", "Incident"), t("Climatisation · Studio 3", "Air conditioning · Studio 3"), t("En suivi", "Tracked"), "bg-amber-50 text-amber-700"],
+      ],
+    },
+    locataire: {
+      title: t("Mon espace locataire", "My tenant space"),
+      rows: [
+        [t("Échéance", "Due date"), t("Loyer d'octobre · 05/10", "October rent · Oct 5"), t("À échoir", "Upcoming"), "bg-slate-100 text-slate-600"],
+        [t("Paiement", "Payment"), t("Déclaration · Wave", "Notice · Wave"), t("Reçue", "Received"), "bg-emerald-50 text-emerald-700"],
+        [t("Quittance", "Receipt"), t("Septembre", "September"), t("À télécharger", "To download"), "bg-sky-50 text-sky-700"],
+        [t("Incident", "Incident"), t("Porte d'entrée", "Front door"), t("Ouvert", "Open"), "bg-amber-50 text-amber-700"],
+      ],
+    },
+    coproprietaire: {
+      title: t("Mon espace copropriétaire", "My co-owner space"),
+      rows: [
+        [t("Lot", "Unit"), t("Lot 12 · Résidence Les Palmiers", "Unit 12 · Les Palmiers residence"), t("À jour", "Up to date"), "bg-emerald-50 text-emerald-700"],
+        [t("Appel de charges", "Charge call"), t("4e trimestre", "Q4"), t("À payer", "To pay"), "bg-amber-50 text-amber-700"],
+        [t("Assemblée", "Meeting"), t("Assemblée générale annuelle", "Annual general meeting"), t("Convoquée", "Convened"), "bg-sky-50 text-sky-700"],
+        [t("Document", "Document"), t("Règlement de copropriété", "Condominium by-laws"), t("À télécharger", "To download"), "bg-slate-100 text-slate-600"],
+      ],
+    },
+  };
+  const view = views[id];
+  return (
+    <Panel>
+      <div className="overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-ink-900/5">
+        <p className="border-b border-ink-900/5 px-4 py-3 text-sm font-semibold">{view.title}</p>
+        <ul>
+          {view.rows.map(([kind, label, status, tone], i) => (
+            <motion.li
+              key={label}
+              initial={{ opacity: 0, x: -10 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.15 + i * 0.1 }}
+              className="flex items-center justify-between gap-3 border-t border-ink-900/5 px-4 py-3 first:border-t-0"
+            >
+              <span className="min-w-0">
+                <span className="block text-[11px] text-ink-900/50">{kind}</span>
+                <span className="block truncate text-sm font-semibold">{label}</span>
+              </span>
+              <span className={`shrink-0 rounded-full px-2 py-0.5 text-[11px] font-semibold ${tone}`}>{status}</span>
+            </motion.li>
+          ))}
+        </ul>
       </div>
     </Panel>
   );
