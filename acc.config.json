@@ -86,14 +86,6 @@
       {
         "pattern": "\\bDROP\\s+DATABASE\\b",
         "reason": "Suppression de base de données interdite aux agents."
-      },
-      {
-        "pattern": "\\bssh\\s+(\\S+\\s+)*alliance\\b",
-        "reason": "Commande sur le serveur de production (alliance) : déploiement ou intervention réservés à l'utilisateur."
-      },
-      {
-        "pattern": "\\b(scp|rsync)\\b.*\\balliance:",
-        "reason": "Envoi de fichiers vers le serveur de production (alliance) : déploiement réservé à l'utilisateur."
       }
     ]
   },

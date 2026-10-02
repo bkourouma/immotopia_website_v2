@@ -1,6 +1,6 @@
 ---
 name: run-site
-description: Fait tourner le site vitrine ImmoTopia (Next.js 16, FR/EN) en local et le pilote pour constater qu'une modification fonctionne dans le vrai site. À utiliser pour démarrer ou relancer le serveur de dev, ouvrir une page en français ou sous /en, en faire une capture, sonder /api/chat ou /api/lead, ou diagnostiquer une page blanche, un 404 inattendu, un port 3000 occupé ou un assistant « pas encore configuré ». Ne sert pas à corriger des erreurs de typage ou de lint ni à déployer (réservé à l'utilisateur).
+description: Fait tourner le site vitrine ImmoTopia (Next.js 16, FR/EN) en local et le pilote pour constater qu'une modification fonctionne dans le vrai site. À utiliser pour démarrer ou relancer le serveur de dev, ouvrir une page en français ou sous /en, en faire une capture, sonder /api/chat ou /api/lead, ou diagnostiquer une page blanche, un 404 inattendu, un port 3000 occupé ou un assistant « pas encore configuré ». Ne sert pas à corriger des erreurs de typage ou de lint ni à déployer (seulement après accord explicite de l'utilisateur).
 ---
 
 # Lancer site
