@@ -49,11 +49,11 @@ Pièges et décisions :
 Fait :
 
 - Section « À chaque rôle » de l'accueil : 7 onglets au lieu de 3 (ajout Gestionnaire, Propriétaire, Locataire, Copropriétaire) dans `content.ts` (`roles`, FR/EN), `roles.tsx` (aperçu `ListVisual`, lien de comparatif) et `nav.ts` (ancres `#roles-…`). Contenus tirés du wiki (portails « disponible »).
-- `tsc` et `lint` : 0 erreur. `build` et contrôle navigateur FR/EN non faits.
+- `tsc`, `lint` et `build` OK ; 7 onglets cliqués en FR et EN, bureau et mobile (Playwright), sans débordement.
 
 Reste à faire :
 
-- Relire les textes ; vérifier le rendu des 7 onglets sur mobile.
+- Relire les textes.
 
 ---
 
