@@ -21,23 +21,6 @@ plusieurs étapes (règle posée dans AGENTS.md et CLAUDE.md).
 Modèle de section :
 
 ```markdown
-## Mise à jour des packs et du wiki — 2026-10-02
-
-**État :** non commité, build/lint/tsc OK (arbre déjà modifié par ailleurs : analytics, confidentialité)
-
-Fait :
-
-- `pricing.ts` : 6 packs (ajout Patrimoine Essentiel 9 900 et Patrimoine Pro 29 900), extensions à la carte, règles commerciales (TVA 18 %, dépassement facturé), remise de combinaison calculée sur le prix de base du moins cher ; tableau comparatif à 6 colonnes.
-- `pricing.tsx` : grille 3 colonnes, bloc « Extensions à la carte », limite affichée sur les cartes Patrimoine. Page Tarifs, FAQ (`landings.ts`) et assistant (`prompt.ts`, `knowledge.md`) alignés.
-- Wiki resynchronisé le 2026-10-02 sur l'inventaire `Immobillier/docs/ImmoTopia_Wiki_Fonctionnalites.xlsx` (846 lignes) : tout est publié, y compris le non fusionné (statut « En développement », espace Particulier gratuit/plus, console plateforme dans le domaine `administration-plateforme`, domaine `patrimoine-multi-actifs`). 130 fonctionnalités, 835 actions.
-
-Reste à faire :
-
-- Confirmer les prix avec `packages/api/src/lib/subscription/catalog.ts` (non accessible d'ici : valeurs reprises de la demande).
-- Le simulateur ne couvre pas les packs Patrimoine. Pas de déploiement fait.
-
----
-
 ## Branche `type/sujet` — AAAA-MM-JJ
 
 **État :** en cours | prêt à relire | bloqué
@@ -55,6 +38,39 @@ Pièges et décisions :
 
 - …
 ```
+
+---
+
+## Branche `feat/packs-patrimoine-wiki` — 2026-10-02
+
+**État :** fusionnée (PR n°1) dans `feat/accueil-audit-marketing`, déployée en production le 2026-10-02
+**Dernier commit :** `f038dff` (après `2d452fe`)
+
+Fait :
+
+- `pricing.ts` : 6 packs (ajout de Patrimoine Essentiel, 9 900, et Patrimoine Pro, 29 900 FCFA HT/mois), extensions à la carte, règles commerciales (TVA 18 % Alliance Consultants, dépassement facturé et non bloqué), remise de combinaison calculée sur le prix de base du pack le moins cher. Comparatif à 6 colonnes, grille sur 3 colonnes, bloc « Extensions à la carte » (`pricing.tsx`), page Tarifs, FAQ (`landings.ts`), assistant (`prompt.ts`, `knowledge.md`) alignés.
+- « Valeur nette et projections consolidées » annoncées « bientôt (en développement) » : non livrées (développements non fusionnés côté application). Les paliers Particulier gratuit/plus ne sont pas sur Tarifs.
+- Wiki resynchronisé sur l'inventaire `Immobillier/docs/ImmoTopia_Wiki_Fonctionnalites.xlsx` (846 lignes) : 130 fonctionnalités, 835 actions, statut « En développement » (`types.ts`, `index.ts`, `wiki-ui.tsx`), nouveaux domaines `patrimoine-multi-actifs` et `administration-plateforme`. Reversements, honoraires, comptes propriétaires et mandats limités à Agence et Intégré ; packs Patrimoine ajoutés aux fonctions CORE.
+- Mesure d'audience Umami (`analytics.tsx`) et page confidentialité embarquées dans la même PR.
+- Garde de déploiement levée : `acc.config.json` ne bloque plus `ssh`/`scp` vers `alliance` ; `AGENTS.md`, `RUNBOOK.md` et `run-site` disent qu'un agent ne déploie qu'avec un « oui » explicite de l'utilisateur, demandé avant chaque déploiement.
+- Déploiement selon le README : image de retour arrière `immotopia-site:avant-packs-20261002`, archive `~/immotopia-site-avant-packs-20261002.tgz` sur le serveur. Contrôle en 200 de `/tarifs`, `/en/tarifs`, `/wiki`, `/faq`, `/wiki/patrimoine-multi-actifs`, `/wiki/administration-plateforme` ; wiki en ligne à 130 fonctionnalités.
+- Vérifications : `tsc --noEmit`, `npm run lint` et `npm run build` OK. Le site n'a aucun test automatisé ; le wiki n'a pas été relu texte par texte.
+
+Reste à faire :
+
+- Recouper les prix avec `packages/api/src/lib/subscription/catalog.ts` (non accessible depuis ce dépôt : valeurs reprises de la demande).
+- Le simulateur ne couvre pas les packs Patrimoine.
+- Deux choix de packs à confirmer dans le wiki : maintenance (Agence, Syndic, Promoteur, Intégré seulement, comme dans l'inventaire) et les 9 fonctionnalités « Agence et abonnement » (packs Patrimoine ajoutés par cohérence).
+- Deux résumés du wiki hors de la plage de 140 à 160 caractères (162 et 139).
+- `/en/wiki` répond 404 : le wiki est en français seulement.
+- `.claude/settings.json` porte encore, en local, des règles `Edit(...)` temporaires (non commitées) à retirer.
+- La branche distante `feat/packs-patrimoine-wiki` peut être supprimée (sur demande de l'utilisateur).
+
+Pièges et décisions :
+
+- `lefthook.exe` est bloqué par Smart App Control sur cette machine ; l'utilisateur l'a désactivé pour que les hooks pre-commit et pre-push s'exécutent.
+- `gh pr merge` est refusé aux agents par le contrôle d'autorisation de la session : la fusion se fait depuis GitHub ou avec une règle de permission explicite.
+- La branche par défaut du dépôt GitHub est `feat/accueil-audit-marketing` (pas de `master`).
 
 ---
 
