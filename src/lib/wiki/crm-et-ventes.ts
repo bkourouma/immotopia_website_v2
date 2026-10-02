@@ -27,7 +27,9 @@ export const crmEtVentes: WikiDomain = {
           goal: "Enregistrer un prospect ou un client, particulier ou société.",
           input:
             "Nom, prénom et e-mail, puis au besoin la civilité, les coordonnées, l'adresse et la zone, la situation professionnelle, le projet immobilier, l'origine du contact et ses consentements.",
-          output: "La fiche du contact, prête à être suivie.",
+          output:
+            "La fiche du contact, prête à être suivie. Une société s'affiche sous sa raison sociale dans les listes, et un e-mail déjà utilisé est refusé avec un message clair.",
+          prereq: "La commune est requise, même si vous n'avez pas ouvert l'onglet Contact du formulaire.",
         },
         {
           title: "Consulter la fiche d'un contact",
@@ -237,7 +239,8 @@ export const crmEtVentes: WikiDomain = {
         {
           title: "Consulter le calendrier CRM",
           goal: "Voir sur une période les relances à faire et les visites de biens prévues.",
-          input: "La période, la portée (toute l'agence ou vous seul) et les types d'événements à afficher.",
+          input:
+            "La période (de début et de fin obligatoires, 366 jours au plus), la portée (toute l'agence ou vous seul) et les types d'événements à afficher.",
         },
         {
           title: "Reprogrammer une relance",
@@ -273,6 +276,10 @@ export const crmEtVentes: WikiDomain = {
           output:
             "Une liste de biens classés par score, avec l'explication du score (budget, localisation, nombre de pièces, surface).",
           prereq: "Les critères du client (budget, zone, pièces, surface) sont renseignés dans l'affaire.",
+        },
+        {
+          title: "Lancer un rapprochement par l'ancien écran",
+          goal: "Un second chemin, conservé pour compatibilité, permet aussi de lancer le rapprochement d'une affaire, d'ajouter un bien à la sélection et d'en changer le statut. Le résultat est le même qu'avec le chemin principal.",
         },
         {
           title: "Consulter les biens retenus pour une affaire",
@@ -318,7 +325,7 @@ export const crmEtVentes: WikiDomain = {
           title: "Créer un mandat de vente",
           goal: "Enregistrer le mandat confié par le vendeur pour vendre un bien.",
           input:
-            "Le bien, le vendeur, le type de mandat, le prix demandé et le prix plancher, le mode et le taux de commission, qui paie la commission, la date de début et le négociateur.",
+            "Le bien, le vendeur, le type de mandat, le prix demandé et le prix plancher, le mode et le taux de commission (en pourcentage : supérieur à 0 et de 20 % au plus), qui paie la commission, la date de début et le négociateur.",
           output: "Le mandat, avec un numéro qui suit l'ordre de l'année.",
           prereq:
             "Le bien et le vendeur sont enregistrés, le négociateur est un collaborateur actif, et le bien n'a pas déjà un mandat actif.",
@@ -334,7 +341,7 @@ export const crmEtVentes: WikiDomain = {
         },
         {
           title: "Modifier un mandat",
-          goal: "Ajuster le prix, la commission, les dates ou le négociateur.",
+          goal: "Ajuster le prix, la commission (même règle sur le taux : supérieur à 0 et de 20 % au plus), les dates ou le négociateur.",
           prereq: "Le mandat est actif et aucun compromis n'est signé ou conclu.",
         },
         {
@@ -372,11 +379,11 @@ export const crmEtVentes: WikiDomain = {
       packs: ["agence", "promoteur", "integre"],
       profiles: ["equipe"],
       menu: "Ventes › Mandats de vente",
-      status: "deploiement",
+      status: "disponible",
       actions: [
         {
           title: "Enregistrer une offre d'achat",
-          goal: "Déposer l'offre d'un acquéreur sur un mandat en cours.",
+          goal: "Déposer l'offre d'un acquéreur sur un mandat en cours. Le choix de l'affaire d'origine affiche le contact, le type et le montant, sans les affaires déjà gagnées ou perdues.",
           input:
             "L'acquéreur, le montant, le mode de financement et, si besoin, l'affaire liée, les conditions et la date limite de validité.",
           output: "L'offre, avec son numéro.",
@@ -467,7 +474,7 @@ export const crmEtVentes: WikiDomain = {
       packs: ["agence", "promoteur", "integre"],
       profiles: ["equipe"],
       menu: "Ventes › Mandats de vente",
-      status: "deploiement",
+      status: "disponible",
       actions: [
         {
           title: "Ajouter une condition suspensive",
@@ -508,7 +515,7 @@ export const crmEtVentes: WikiDomain = {
         "Le tableau des ventes donne l'état du portefeuille : mandats actifs et expirés, offres ouvertes, compromis signés, ventes du mois et commissions. Chaque vente conclue crée sa commission, que vous encaissez en un ou plusieurs règlements. Le directeur et le comptable savent à tout moment ce qui est dû, payé et restant.",
       packs: ["agence", "promoteur", "integre"],
       profiles: ["equipe", "comptable"],
-      status: "deploiement",
+      status: "disponible",
       actions: [
         {
           title: "Consulter le tableau des ventes",

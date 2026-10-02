@@ -21,6 +21,23 @@ plusieurs étapes (règle posée dans AGENTS.md et CLAUDE.md).
 Modèle de section :
 
 ```markdown
+## Mise à jour des packs et du wiki — 2026-10-02
+
+**État :** non commité, build/lint/tsc OK (arbre déjà modifié par ailleurs : analytics, confidentialité)
+
+Fait :
+
+- `pricing.ts` : 6 packs (ajout Patrimoine Essentiel 9 900 et Patrimoine Pro 29 900), extensions à la carte, règles commerciales (TVA 18 %, dépassement facturé), remise de combinaison calculée sur le prix de base du moins cher ; tableau comparatif à 6 colonnes.
+- `pricing.tsx` : grille 3 colonnes, bloc « Extensions à la carte », limite affichée sur les cartes Patrimoine. Page Tarifs, FAQ (`landings.ts`) et assistant (`prompt.ts`, `knowledge.md`) alignés.
+- Wiki resynchronisé le 2026-10-02 sur l'inventaire `Immobillier/docs/ImmoTopia_Wiki_Fonctionnalites.xlsx` (846 lignes) : tout est publié, y compris le non fusionné (statut « En développement », espace Particulier gratuit/plus, console plateforme dans le domaine `administration-plateforme`, domaine `patrimoine-multi-actifs`). 130 fonctionnalités, 835 actions.
+
+Reste à faire :
+
+- Confirmer les prix avec `packages/api/src/lib/subscription/catalog.ts` (non accessible d'ici : valeurs reprises de la demande).
+- Le simulateur ne couvre pas les packs Patrimoine. Pas de déploiement fait.
+
+---
+
 ## Branche `type/sujet` — AAAA-MM-JJ
 
 **État :** en cours | prêt à relire | bloqué
@@ -38,6 +55,42 @@ Pièges et décisions :
 
 - …
 ```
+
+---
+
+## Branche `feat/accueil-audit-marketing` — 2026-09-28
+
+**État :** déployé en production le 2026-09-28
+**Dernier commit :** `fd61d19`
+
+Fait :
+
+- Audit marketing de l'accueil (10 fichiers), y compris la suppression de la formule « le plus complet ».
+- Premier écran : titre, accroche et deux CTA (« Réserver une démo de 30 min », « Voir les tarifs ») au-dessus du
+  carrousel ; sections réordonnées (tarifs avant comparatif et outils) ; reformulations FR/EN dans `content.ts`,
+  `final-cta.tsx`, `marquee.tsx`.
+- `AGENTS.md` et `CLAUDE.md` (ici et dans le dossier parent) disent que le projet et le dépôt git sont dans `site/`.
+- Vérifications : `npm run build` OK, `npm run lint` sans erreur, `tsc --noEmit --incremental false` sans erreur,
+  alignement des traductions anglaises, `check-comparatif-en.mjs`. Le site n'a aucun test automatisé.
+- Déploiement selon la procédure du README : image de retour arrière `immotopia-site:avant-accueil-20260928` ;
+  archive de l'ancien dossier `~/immotopia-site-avant-accueil-20260928.tgz` sur le serveur ; tarball transféré
+  vers `/var/www/immotopia-site/`, puis `docker compose up -d --build`.
+- Pages contrôlées en 200 : `/`, `/en`, `/tarifs`, `/contact`, `/wiki`, `/robots.txt`, `/sitemap.xml` ;
+  aucune erreur dans les journaux.
+- Images de retour plus anciennes encore présentes : `avant-email`, `avant-menu`, `avant-icone`, `avant-wiki`.
+
+Reste à faire :
+
+- Non traité de l'audit : calendrier de réservation en anglais (iframe Calendly, à régler côté Calendly), carte
+  tarifaire Promoteur à aligner sur la FAQ (`pricing.ts`), nuance « fonctions annoncées publiquement » à côté
+  des scores du comparatif, parcours par métier, bouton de la carte « loyers » qui mène encore à la section rôles.
+- Aucune copie distante du code (pas de remote git) : décision de l'utilisateur sur l'hébergement du dépôt.
+- La branche n'est pas fusionnée dans une branche principale.
+
+Pièges et décisions :
+
+- `npx tsc --noEmit` peut passer grâce au cache incrémental alors que `next build` échoue : vérifier avec
+  `--incremental false` ou `npm run build`.
 
 ---
 

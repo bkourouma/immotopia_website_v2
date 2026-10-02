@@ -17,17 +17,17 @@ export const biensEtPatrimoine: WikiDomain = {
         "Créez la fiche de chaque bien : type, adresse, prix, surfaces, statut, appartements d'un immeuble. Recherche multicritère et score de qualité inclus.",
       intro:
         "La fiche bien est le point de départ de tout votre travail : chaque bien, de l'appartement à l'immeuble entier, y est décrit une fois pour toutes. Les champs s'adaptent au type de bien, et un immeuble regroupe ses appartements sous forme de lots. Vos agents retrouvent un bien en quelques secondes grâce aux filtres et à la recherche avancée. Un score de qualité vous signale ce qui manque pour avoir une fiche complète.",
-      packs: ["agence", "syndic", "promoteur", "integre"],
+      packs: ["agence", "syndic", "promoteur", "integre", "patrimoine-essentiel", "patrimoine-pro"],
       profiles: ["equipe"],
       menu: "Biens › Toutes les propriétés",
       status: "disponible",
       actions: [
         {
           title: "Créer un bien",
-          goal: "Ajouter un bien au portefeuille, qu'il appartienne à l'agence ou à un propriétaire privé.",
+          goal: "Ajouter un bien au portefeuille, qu'il appartienne à l'agence ou à un propriétaire privé. Dans l'assistant de création, vous indiquez si le bien est détenu par « L'agence » ou par « Un client » (dans ce cas, vous choisissez le client propriétaire).",
           input:
-            "Le type de bien, un titre, l'adresse, le prix, les surfaces, le nombre de pièces, le ou les modes de transaction, les caractéristiques propres au type et, si besoin, le propriétaire.",
-          output: "Une fiche créée, avec une référence interne attribuée automatiquement.",
+            "Le type de bien (appartement, villa, boutique ou local commercial, immeuble…), un titre, l'adresse, le prix, les surfaces, le nombre de pièces, le ou les modes de transaction, les caractéristiques propres au type et, si besoin, le propriétaire.",
+          output: "Une fiche créée, avec une référence interne attribuée automatiquement et le nom du propriétaire enregistré avec le bien.",
           profiles: ["direction", "gestionnaire", "agent"],
         },
         {
@@ -78,18 +78,27 @@ export const biensEtPatrimoine: WikiDomain = {
         },
         {
           title: "Ajouter un appartement à un immeuble",
-          goal: "Créer un lot rattaché à un immeuble. Il reprend automatiquement la localisation et l'adresse de l'immeuble.",
+          goal: "Créer un lot rattaché à un immeuble. Il reprend automatiquement la localisation et l'adresse de l'immeuble. Cette action n'est proposée ni avec le pack Syndic ni avec les packs Patrimoine.",
           input: "Les mêmes informations que pour un bien ; le type appartement est proposé par défaut.",
           prereq: "L'immeuble doit exister dans vos biens, avec le type immeuble.",
         },
         {
           title: "Consulter les appartements d'un immeuble",
-          goal: "Lister tous les lots d'un immeuble, avec leur vignette, depuis l'onglet Lots de sa fiche.",
+          goal: "Lister tous les lots d'un immeuble, avec leur vignette, depuis l'onglet Lots de sa fiche. Cette action n'est proposée ni avec le pack Syndic ni avec les packs Patrimoine.",
         },
         {
           title: "Supprimer un bien",
           goal: "Supprimer définitivement un bien, avec ses photos, ses documents et ses lots.",
-          prereq: "Aucune affaire en cours dans le CRM ne doit être liée au bien.",
+          output:
+            "Si le bien est encore lié à un bail, un mandat, un ticket, une vente, une visite planifiée, un document, un lot ou une affaire en cours, la suppression est refusée avec la liste détaillée de ce qui bloque, et la fiche vous invite à archiver le bien (statut « Archivé »).",
+          prereq: "Aucun élément en cours ne doit être lié au bien (bail, mandat, visite planifiée, affaire du CRM…).",
+        },
+        {
+          title: "Être protégé contre la suppression d'un bien encore financé",
+          goal: "Éviter de supprimer par mégarde un bien qui porte un emprunt en cours, ce qui effacerait aussi le prêt.",
+          output: "Un message vous invite à solder ou supprimer l'emprunt avant de supprimer le bien.",
+          prereq: "Un emprunt actif est enregistré sur le bien.",
+          status: "developpement",
         },
       ],
       faq: [
@@ -116,9 +125,9 @@ export const biensEtPatrimoine: WikiDomain = {
         "Ajoutez photos, vidéos et documents à chaque bien : photo principale, ordre d'affichage, dates d'expiration et pièces obligatoires, tout est sur la fiche.",
       intro:
         "Chaque bien a sa galerie et son classeur. Vous y déposez les photos et vidéos qui mettront le bien en valeur, et les pièces du dossier, plans compris. Un document peut porter une date d'expiration et être marqué obligatoire : vous voyez tout de suite ce qui n'est plus valable. Plus besoin de chercher un fichier dans un téléphone ou une boîte e-mail.",
-      packs: ["agence", "syndic", "promoteur", "integre"],
+      packs: ["agence", "syndic", "promoteur", "integre", "patrimoine-essentiel", "patrimoine-pro"],
       profiles: ["equipe"],
-      menu: "Biens › Toutes les propriétés › fiche bien",
+      menu: "Biens › Toutes les propriétés › fiche bien › onglets Médias et Documents",
       status: "disponible",
       actions: [
         {
@@ -126,7 +135,7 @@ export const biensEtPatrimoine: WikiDomain = {
           goal: "Enrichir la galerie du bien.",
           input:
             "Le fichier : photo JPEG, PNG ou WebP, ou vidéo MP4, WebM ou QuickTime. Si besoin, sa position dans la galerie et s'il s'agit de la photo principale.",
-          output: "Le média ajouté à la galerie du bien.",
+          output: "Le média ajouté à la galerie du bien. Un fichier qui ne correspond pas au type choisi (photo ou vidéo) est refusé avec un message clair.",
         },
         {
           title: "Consulter la galerie",
@@ -183,7 +192,7 @@ export const biensEtPatrimoine: WikiDomain = {
       summary:
         "Prenez en gestion les biens de propriétaires privés : mandats datés, révocation avec historique, et quotes-parts de chaque propriétaire en indivision.",
       intro:
-        "Quand un propriétaire vous confie son bien, le mandat de gestion formalise cette prise en charge dans ImmoTopia. Vous suivez ses dates, son périmètre et l'ensemble des mandats en cours de l'agence. Pour un bien détenu à plusieurs, vous indiquez la quote-part de chaque propriétaire. Un mandat révoqué reste dans l'historique.",
+        "Quand un propriétaire vous confie son bien, le mandat de gestion formalise cette prise en charge dans ImmoTopia. Vous suivez ses dates, son périmètre et l'ensemble des mandats en cours de l'agence. Pour un bien détenu à plusieurs, vous indiquez la quote-part de chaque propriétaire. Un mandat révoqué reste dans l'historique. Les packs Patrimoine couvrent la gestion locative directe de vos propres biens, sans mandat ni propriétaire tiers : un compte Patrimoine seul ne peut pas créer de mandat ni rattacher de propriétaire tiers.",
       packs: ["agence", "promoteur", "integre"],
       profiles: ["equipe"],
       menu: "Biens › Toutes les propriétés › fiche bien",
@@ -191,15 +200,15 @@ export const biensEtPatrimoine: WikiDomain = {
       actions: [
         {
           title: "Créer un mandat de gestion",
-          goal: "Enregistrer la prise en gestion, par l'agence, d'un bien appartenant à un propriétaire privé.",
+          goal: "Enregistrer la prise en gestion, par l'agence, d'un bien appartenant à un propriétaire privé. Depuis l'onglet « Mandat de gestion » de la fiche d'un bien client, le bouton « Confier ce bien » ouvre la saisie.",
           input: "Le bien, la date de début, la date de fin si elle est connue, le périmètre du mandat et des notes.",
           output: "Un mandat actif sur le bien.",
           prereq:
-            "Le bien doit être enregistré comme bien d'un propriétaire client, sans mandat déjà actif de votre agence.",
+            "Le bien doit être enregistré comme bien d'un propriétaire client, sans mandat déjà actif de votre agence. Un compte Patrimoine seul ne peut pas créer de mandat.",
         },
         {
           title: "Consulter les mandats d'un bien",
-          goal: "Voir les mandats en cours de votre agence sur ce bien. Les mandats d'une autre agence ne sont jamais visibles.",
+          goal: "Voir, dans l'onglet « Mandat de gestion » de la fiche, les mandats en cours de votre agence sur ce bien. Les mandats d'une autre agence ne sont jamais visibles.",
         },
         {
           title: "Consulter tous les mandats de l'agence",
@@ -223,7 +232,8 @@ export const biensEtPatrimoine: WikiDomain = {
           input:
             "Chaque propriétaire et son pourcentage, jusqu'à quatre décimales. Le total doit faire 100 %, avec au plus 50 propriétaires, chacun une seule fois.",
           output: "La nouvelle répartition, qui remplace entièrement l'ancienne.",
-          prereq: "Les propriétaires doivent déjà être enregistrés comme clients de l'agence.",
+          prereq:
+            "Les propriétaires doivent déjà être enregistrés comme clients de l'agence. Un compte Patrimoine seul ne peut pas rattacher de propriétaire tiers.",
         },
       ],
       faq: [
@@ -246,7 +256,7 @@ export const biensEtPatrimoine: WikiDomain = {
         "Planifiez les visites de biens, désignez l'agent, liez le contact et l'affaire du CRM, puis rédigez le compte rendu. Calendrier partagé de toute l'agence.",
       intro:
         "Organisez les visites sans cahier ni messages éparpillés. Chaque visite est rattachée à un bien, à un agent responsable et, si besoin, au contact et à l'affaire suivis dans le CRM. Le calendrier de l'agence montre qui fait visiter quoi, et quand. Après la visite, le compte rendu est enregistré et retrouvé sur la fiche du contact.",
-      packs: ["agence", "syndic", "promoteur", "integre"],
+      packs: ["agence", "syndic", "promoteur", "integre", "patrimoine-essentiel", "patrimoine-pro"],
       profiles: ["equipe"],
       menu: "Biens › Calendrier des visites",
       status: "disponible",
@@ -256,7 +266,8 @@ export const biensEtPatrimoine: WikiDomain = {
           goal: "Programmer une visite sur un bien.",
           input:
             "Le type de visite, son objectif, la date et l'heure à venir, la durée, le lieu, l'agent responsable, les collègues présents, le contact et l'affaire concernés, des notes.",
-          output: "La visite programmée. Si un contact est lié, une activité s'ajoute à sa fiche CRM.",
+          output:
+            "La visite programmée. Si un contact est lié, une activité s'ajoute à sa fiche CRM. Si le bien a déjà une visite prévue sur ce créneau, la planification est refusée et le créneau en conflit vous est indiqué (des créneaux qui se suivent sont acceptés).",
         },
         {
           title: "Consulter les visites d'un bien",
@@ -264,7 +275,7 @@ export const biensEtPatrimoine: WikiDomain = {
         },
         {
           title: "Mettre à jour le statut d'une visite",
-          goal: "Indiquer qu'une visite est confirmée ou annulée, par exemple.",
+          goal: "Indiquer qu'une visite est confirmée ou annulée, par exemple. Un statut inconnu est refusé avec un message clair.",
           input: "Le nouveau statut et, si besoin, une note.",
         },
         {
@@ -294,14 +305,14 @@ export const biensEtPatrimoine: WikiDomain = {
         "Publiez vos biens sur le portail d'annonces public, après un contrôle de la fiche : photo principale, prix, localisation, documents obligatoires valides.",
       intro:
         "Un bien prêt à louer ou à vendre se met en ligne depuis sa fiche. Avant publication, ImmoTopia vérifie que l'annonce est complète, pour ne jamais montrer une annonce sans photo ni prix. Les visiteurs consultent ensuite les biens publiés sans créer de compte, avec des filtres simples. Vous retirez l'annonce dès que le bien n'est plus disponible.",
-      packs: ["agence", "syndic", "promoteur", "integre"],
+      packs: ["agence", "syndic", "promoteur", "integre", "patrimoine-essentiel", "patrimoine-pro"],
       profiles: ["direction", "visiteur"],
       menu: "Biens › Toutes les propriétés › fiche bien",
       status: "disponible",
       actions: [
         {
           title: "Publier un bien",
-          goal: "Rendre le bien visible sur le portail public des annonces, après vérification de la fiche.",
+          goal: "Rendre le bien visible sur le portail public des annonces, après vérification de la fiche. Cette action n'est proposée ni avec le pack Syndic ni avec les packs Patrimoine.",
           prereq:
             "La fiche doit avoir un titre, une description, une adresse, une photo principale, une position sur la carte, un prix, un statut commercialisable et des documents obligatoires valides.",
           output:
@@ -310,7 +321,7 @@ export const biensEtPatrimoine: WikiDomain = {
         },
         {
           title: "Retirer une annonce",
-          goal: "Retirer le bien du portail public.",
+          goal: "Retirer le bien du portail public. Cette action n'est proposée ni avec le pack Syndic ni avec les packs Patrimoine.",
           profiles: ["direction"],
         },
         {
@@ -346,32 +357,63 @@ export const biensEtPatrimoine: WikiDomain = {
         "Mesurez la valeur totale de votre patrimoine, le rendement brut, net et net-net de chaque bien, la plus-value latente et une projection sur plusieurs années.",
       intro:
         "Pour un propriétaire institutionnel, un promoteur ou une agence qui détient des biens, la question est simple : combien vaut le patrimoine, et combien rapporte-t-il ? La vue consolidée répond d'un coup d'œil. L'écran de performance calcule les rendements et la plus-value latente, puis projette l'évolution selon vos propres hypothèses.",
-      packs: ["agence", "promoteur", "integre"],
+      packs: ["agence", "promoteur", "integre", "patrimoine-essentiel", "patrimoine-pro"],
       profiles: ["equipe"],
-      menu: "Patrimoine › Vue consolidée",
+      menu: "Patrimoine › Vue consolidée ; Patrimoine › Performance",
       status: "disponible",
       actions: [
         {
           title: "Consulter la vue consolidée",
           goal: "Voir d'un coup d'œil la valeur totale du patrimoine, les indicateurs clés et les travaux en cours.",
+          output:
+            "La valeur de chaque bien est celle de sa dernière estimation enregistrée ; si deux estimations portent la même date, la plus récemment saisie l'emporte.",
         },
         {
           title: "Analyser la performance du portefeuille",
           goal: "Calculer le rendement brut, net et net-net, la plus-value latente et une projection, pour tout le portefeuille ou pour un bien choisi.",
           input:
             "Vos hypothèses : nombre d'années, hausse de la valeur, des loyers et des charges, taux de vacance.",
-          output: "Un aperçu du portefeuille, ou le détail des rendements et de la projection pour le bien choisi.",
+          output:
+            "Un aperçu du portefeuille, ou le détail des rendements et de la projection pour le bien choisi. Le rendement net-net et la plus-value latente s'affichent « — » tant que le prix d'acquisition du bien n'est pas connu.",
         },
         {
           title: "Calculer le rendement d'un bien",
           goal: "Depuis l'onglet Patrimoine de la fiche, obtenir les rendements du bien et leur projection dans le temps.",
           input: "Les mêmes hypothèses de projection.",
+          output:
+            "Le loyer annuel est calculé d'après les baux actifs, et les charges d'après les dépenses non capitalisées des 12 derniers mois.",
+        },
+        {
+          title: "Retrouver et enregistrer les hypothèses de projection d'un bien",
+          goal: "Les hypothèses du simulateur sont conservées pour chaque bien : vous les retrouvez sur tout appareil et elles sont partagées entre les collaborateurs de l'agence.",
+          input:
+            "L'horizon en années, la hausse de la valeur, des loyers et des charges, et le taux de vacance. Elles sont enregistrées quand vous cliquez sur « Recalculer ».",
+          output:
+            "Sans réglage enregistré, des valeurs de départ sont proposées (10 ans, +3 % pour la valeur, +2 % pour les loyers, +2,5 % pour les charges, 5 % de vacance).",
+        },
+        {
+          title: "Consulter les ratios bancaires d'un bien",
+          goal: "Lire les quatre ratios qu'une banque demande, chacun avec sa définition en info-bulle : couverture de la dette par les loyers (DSCR), part de la valeur financée par l'emprunt (LTV), rendement des fonds propres investis (cash-on-cash) et taux de rentabilité interne (TRI).",
+          output: "Les quatre ratios calculés d'après les loyers, les charges, les emprunts actifs et les hypothèses de projection du bien.",
+          prereq: "Le bien doit avoir une estimation de valeur et, pour les ratios liés à la dette, au moins un emprunt actif.",
+        },
+        {
+          title: "Choisir ce que les propriétaires voient de leur patrimoine",
+          goal: "Décider si vos propriétaires voient la vue patrimoine dans leur portail, et quelles rubriques elle montre : valorisation, rendements, emprunts, travaux, documents.",
+          input: "Un interrupteur général et un choix par rubrique, dans les paramètres de l'agence (carte Portail propriétaire).",
+          output: "Un réglage pour toute l'agence. Tout est ouvert tant que rien n'est enregistré.",
+          prereq: "Ce réglage s'adresse aux packs Agence, Promoteur et Opérateur intégré, qui gèrent des biens pour des propriétaires.",
+          profiles: ["direction"],
         },
       ],
       faq: [
         {
           q: "Peut-on simuler l'évolution d'un bien sur plusieurs années ?",
-          a: "Oui. Vous indiquez le nombre d'années, la hausse attendue de la valeur, des loyers et des charges, et le taux de vacance ; ImmoTopia calcule la projection.",
+          a: "Oui. Vous indiquez le nombre d'années, la hausse attendue de la valeur, des loyers et des charges, et le taux de vacance ; ImmoTopia calcule la projection et conserve vos hypothèses pour toute l'équipe.",
+        },
+        {
+          q: "À quoi servent les ratios bancaires ?",
+          a: "Ils rassemblent les quatre mesures qu'une banque regarde pour juger un financement : DSCR, LTV, cash-on-cash et TRI. Chacun est expliqué par une info-bulle à l'écran.",
         },
       ],
       related: [
@@ -388,7 +430,7 @@ export const biensEtPatrimoine: WikiDomain = {
         "Gardez l'historique des estimations de chaque bien : valeur manuelle, de marché ou d'expertise, coût et date d'acquisition, pour suivre sa valeur dans le temps.",
       intro:
         "La valeur d'un bien change avec le marché, les travaux et le quartier. Ici, vous enregistrez chaque estimation avec sa date et sa méthode. Vous gardez ainsi un historique fiable, prêt à présenter à un propriétaire ou à une banque.",
-      packs: ["agence", "promoteur", "integre"],
+      packs: ["agence", "promoteur", "integre", "patrimoine-essentiel", "patrimoine-pro"],
       profiles: ["equipe"],
       menu: "Biens › fiche bien › onglet Patrimoine",
       status: "disponible",
@@ -421,8 +463,8 @@ export const biensEtPatrimoine: WikiDomain = {
       summary:
         "Enregistrez les dépenses de chaque bien : catégorie, montant en FCFA, date, moyen de paiement, fournisseur, justificatif. Vous savez ce que chaque bien coûte.",
       intro:
-        "Réparations, taxes, assurances : les dépenses d'un bien finissent souvent dans des carnets séparés. Ici, chaque charge est saisie sur la fiche du bien, avec son fournisseur et son justificatif. Vous distinguez aussi les dépenses qui s'ajoutent à la valeur du bien. Vous savez enfin ce que coûte réellement chaque bien.",
-      packs: ["agence", "promoteur", "integre"],
+        "Réparations, taxes, assurances : les dépenses d'un bien finissent souvent dans des carnets séparés. Ici, chaque charge est saisie sur la fiche du bien, avec son fournisseur et son justificatif. Vous distinguez aussi les dépenses qui s'ajoutent à la valeur du bien, et vous pouvez rendre une charge récurrente. Vous savez enfin ce que coûte réellement chaque bien.",
+      packs: ["agence", "promoteur", "integre", "patrimoine-essentiel", "patrimoine-pro"],
       profiles: ["equipe"],
       menu: "Biens › fiche bien › onglet Patrimoine",
       status: "disponible",
@@ -435,15 +477,23 @@ export const biensEtPatrimoine: WikiDomain = {
           title: "Ajouter une dépense",
           goal: "Saisir une charge payée pour le bien.",
           input:
-            "La catégorie, un libellé, le montant, la devise, la date de paiement, le moyen de paiement, le fournisseur, le justificatif et si la dépense s'ajoute à la valeur du bien.",
+            "La catégorie, un libellé, le montant, la devise, la date de paiement, le moyen de paiement, le compte de trésorerie, le fournisseur, le justificatif et si la dépense s'ajoute à la valeur du bien.",
+          output:
+            "Pour un bien détenu en propre, la dépense est inscrite automatiquement en comptabilité (charge et trésorerie).",
+        },
+        {
+          title: "Rendre une dépense récurrente",
+          goal: "Indiquer qu'une charge revient chaque mois, chaque trimestre ou chaque année, avec une date de fin facultative, pour qu'elle alimente le plan de trésorerie prévisionnel.",
+          input: "La périodicité (ponctuelle par défaut, mensuelle, trimestrielle ou annuelle) et, si besoin, la date de fin.",
+          output: "Une dépense dont les occurrences à venir sont prises en compte dans la trésorerie prévisionnelle.",
         },
         {
           title: "Modifier une dépense",
-          goal: "Corriger une charge déjà enregistrée.",
+          goal: "Corriger une charge déjà enregistrée. L'inscription en comptabilité est corrigée en même temps.",
         },
         {
           title: "Supprimer une dépense",
-          goal: "Retirer une charge du bien.",
+          goal: "Retirer une charge du bien. Son inscription en comptabilité est annulée en même temps.",
         },
       ],
       related: ["biens-et-patrimoine/vue-consolidee-du-patrimoine", "biens-et-patrimoine/programmes-de-travaux"],
@@ -456,7 +506,7 @@ export const biensEtPatrimoine: WikiDomain = {
         "Rattachez à chaque bien les prêts qui le financent : banque, capital emprunté et restant dû, taux, mensualité, dates et statut, en cours ou soldé.",
       intro:
         "Un bien financé à crédit se suit avec son prêt. Vous enregistrez chaque emprunt sur la fiche du bien, avec sa mensualité et le capital restant dû. Vous voyez ce qui reste à rembourser, bien par bien, sans rouvrir les tableaux de la banque.",
-      packs: ["agence", "promoteur", "integre"],
+      packs: ["agence", "promoteur", "integre", "patrimoine-essentiel", "patrimoine-pro"],
       profiles: ["equipe"],
       menu: "Biens › fiche bien › onglet Patrimoine",
       status: "disponible",
@@ -490,7 +540,7 @@ export const biensEtPatrimoine: WikiDomain = {
         "Planifiez les travaux de chaque bien : coût estimé puis réel, date prévue et date de fin, statut. Une vue de l'agence liste tous les travaux en cours.",
       intro:
         "Réfection, extension, remise en état : chaque programme de travaux est rattaché à son bien. Vous comparez le coût estimé au coût réel et suivez l'avancement par statut. La vue de l'agence montre d'un coup d'œil tout ce qui est planifié, en cours ou terminé.",
-      packs: ["agence", "promoteur", "integre"],
+      packs: ["agence", "promoteur", "integre", "patrimoine-essentiel", "patrimoine-pro"],
       profiles: ["equipe"],
       menu: "Patrimoine › Travaux",
       status: "disponible",
@@ -503,7 +553,7 @@ export const biensEtPatrimoine: WikiDomain = {
           title: "Consulter tous les travaux de l'agence",
           goal: "Voir tous les programmes de travaux, tous biens confondus.",
           input: "Si besoin, un statut : planifié, en cours, terminé ou annulé.",
-          output: "La liste par pages, avec le bien concerné.",
+          output: "La liste par pages, avec le bien concerné et, si le programme est rattaché à un chantier, le nom de ce chantier.",
         },
         {
           title: "Ajouter un programme de travaux",
@@ -514,7 +564,7 @@ export const biensEtPatrimoine: WikiDomain = {
         },
         {
           title: "Modifier un programme de travaux",
-          goal: "Mettre à jour le programme : coût réel, date de fin, statut.",
+          goal: "Mettre à jour le programme : coût réel, date de fin, statut. Quand le programme est rattaché à un chantier, le coût réel est repris du chantier et ne se saisit plus à la main.",
         },
         {
           title: "Supprimer un programme de travaux",
@@ -524,7 +574,7 @@ export const biensEtPatrimoine: WikiDomain = {
           title: "Rattacher des travaux à un chantier",
           goal: "Lier un programme de travaux à un chantier suivi financièrement, ou l'en détacher.",
           output: "Tant que le lien existe, le coût réel des travaux est repris du chantier.",
-          status: "deploiement",
+          prereq: "Ce rattachement concerne les packs Agence, Promoteur et Opérateur intégré, et un chantier doit exister.",
         },
       ],
       related: ["biens-et-patrimoine/vue-consolidee-du-patrimoine", "biens-et-patrimoine/charges-et-depenses"],
@@ -536,8 +586,8 @@ export const biensEtPatrimoine: WikiDomain = {
       summary:
         "Rangez les pièces patrimoniales de chaque bien : titre de propriété, acte notarié, assurance, diagnostic, plan, permis, avec leur date d'expiration.",
       intro:
-        "Les papiers qui prouvent la propriété et la valeur d'un bien méritent un classement à part. Titre de propriété, acte notarié, documents fiscaux, assurance, diagnostic, plan ou permis : tout se retrouve sur l'onglet Patrimoine de la fiche. Vous pouvez relier chaque pièce au propriétaire concerné.",
-      packs: ["agence", "promoteur", "integre"],
+        "Les papiers qui prouvent la propriété et la valeur d'un bien méritent un classement à part. Titre de propriété, acte notarié, documents fiscaux, assurance, diagnostic, plan ou permis : tout se retrouve sur l'onglet Patrimoine de la fiche. Une alerte par e-mail prévient les propriétaires avant l'expiration d'une pièce.",
+      packs: ["agence", "promoteur", "integre", "patrimoine-essentiel", "patrimoine-pro"],
       profiles: ["equipe"],
       menu: "Biens › fiche bien › onglet Patrimoine",
       status: "disponible",
@@ -550,12 +600,18 @@ export const biensEtPatrimoine: WikiDomain = {
           title: "Ajouter un document patrimonial",
           goal: "Enregistrer une pièce patrimoniale sur le bien.",
           input:
-            "Un titre, le type de document, le lien vers le fichier, la date d'expiration si besoin et, si vous le souhaitez, le propriétaire concerné.",
-          prereq: "Le propriétaire, s'il est indiqué, doit déjà figurer dans les contacts du CRM.",
+            "Le fichier (PDF, Word, JPEG, PNG ou TIFF, 10 Mo au maximum), le type de document (titre de propriété, acte notarié, document fiscal, assurance, diagnostic technique, plan, permis de construire, ACD, mandat ou autre), la date d'expiration si besoin et s'il est obligatoire.",
+          output: "Le document enregistré, marqué valide ou non d'après sa date d'expiration.",
         },
         {
           title: "Supprimer un document patrimonial",
           goal: "Retirer une pièce patrimoniale du bien.",
+        },
+        {
+          title: "Être prévenu quand un document arrive à échéance",
+          goal: "Chaque jour, ImmoTopia repère les documents d'un bien dont la date d'expiration tombe dans les 30 prochains jours.",
+          output: "Un e-mail « Document patrimoine expirant » aux propriétaires du bien, indivision comprise, une seule fois par document.",
+          prereq: "Le document doit avoir une date d'expiration, et le bien au moins un propriétaire joignable par e-mail.",
         },
       ],
       related: ["biens-et-patrimoine/photos-et-documents-du-bien"],

@@ -41,6 +41,12 @@ export const syndicCopropriete: WikiDomain = {
           goal: "Tout voir sur une copropriété : l'immeuble lié, les lots avec leur propriétaire et leurs locataires en place, les appels de charges et les fonds.",
         },
         {
+          title: "Changer de copropriété depuis le bandeau",
+          goal: "Passer à une autre copropriété de votre cabinet sans revenir à la liste, en restant sur le même onglet (fiche, lots, finances, assemblées…).",
+          input: "Le choix de la copropriété dans le sélecteur, avec une recherche par nom.",
+          prereq: "Le sélecteur s'affiche à partir de deux copropriétés.",
+        },
+        {
           title: "Modifier une copropriété",
           goal: "Mettre à jour les informations de la copropriété, changer son statut et y rattacher son règlement de copropriété.",
           input:
@@ -67,6 +73,7 @@ export const syndicCopropriete: WikiDomain = {
         "syndic-copropriete/lots-et-tantiemes",
         "syndic-copropriete/coproprietaires-et-occupants",
         "syndic-copropriete/documents-copropriete",
+        "syndic-copropriete/identite-des-documents",
       ],
     },
     {
@@ -94,7 +101,13 @@ export const syndicCopropriete: WikiDomain = {
             "Le numéro du lot, son type (appartement, parking, cave, bureau, local commercial ou autre), ses tantièmes, la surface, l'étage, si un parking est inclus, et en option le bien lié et le copropriétaire.",
           output: "Le lot, prêt à être pris en compte dans le budget et les appels de charges.",
           prereq:
-            "Le bien lié ne peut pas être un immeuble entier. Le copropriétaire doit être un contact de votre CRM.",
+            "Le numéro de lot doit être unique dans la copropriété. Le bien lié ne peut pas être un immeuble entier. Le copropriétaire doit être un contact de votre CRM.",
+        },
+        {
+          title: "Renseigner les tantièmes spéciaux et la date d'entrée d'un lot",
+          goal: "Saisir, à la création ou à la modification d'un lot, ses tantièmes spéciaux (pour les répartitions de charges spéciales) et la date depuis laquelle son propriétaire le détient. Sans saisie, un lot n'a pas de tantièmes spéciaux et pèse zéro dans ces répartitions, au lieu de recopier ses tantièmes généraux.",
+          input: "Les tantièmes spéciaux et la date d'entrée du propriétaire.",
+          status: "developpement",
         },
         {
           title: "Importer des lots depuis des biens existants",
@@ -105,7 +118,14 @@ export const syndicCopropriete: WikiDomain = {
         },
         {
           title: "Modifier un lot",
-          goal: "Corriger le numéro, le type, les tantièmes, le bien lié ou le copropriétaire d'un lot.",
+          goal: "Corriger le numéro, le type, les tantièmes, le bien lié ou le copropriétaire d'un lot. Un lot dont les tantièmes passent à zéro sort de la clé de répartition et des appels de charges à venir.",
+        },
+        {
+          title: "Supprimer ou désactiver un lot",
+          goal: "Supprimer un lot saisi par erreur. Dès que le lot porte un mouvement (appel de charges, paiement, quittance, écriture, vote, incident…), il ne peut plus être supprimé : le logiciel vous propose de le désactiver, ce qui l'exclut des appels futurs en conservant tout l'historique.",
+          output:
+            "Le lot supprimé et sa place libérée dans votre abonnement, ou le lot désactivé (tantièmes à zéro) avec son historique conservé.",
+          prereq: "Le lot doit exister.",
         },
       ],
       faq: [
@@ -146,11 +166,12 @@ export const syndicCopropriete: WikiDomain = {
           goal: "Indiquer qui détient un lot, avec sa quote-part, et décider s'il a accès au portail copropriétaire.",
           input:
             "Le lot, le contact propriétaire, sa quote-part en pourcentage, les dates de début et de fin de détention, l'accès au portail et ses préférences de notification.",
-          prereq: "Le lot doit exister et le propriétaire doit être un contact de votre agence.",
+          prereq:
+            "Le lot doit exister et le propriétaire doit être un contact de votre agence. Le total des quotes-parts actuelles d'un lot ne peut pas dépasser 100 %.",
         },
         {
           title: "Modifier le propriétaire d'un lot",
-          goal: "Mettre à jour la quote-part, les dates de détention, l'accès au portail ou désactiver un propriétaire qui a vendu.",
+          goal: "Mettre à jour la quote-part (toujours dans la limite de 100 % pour le lot), les dates de détention, l'accès au portail ou désactiver un propriétaire qui a vendu.",
         },
         {
           title: "Inviter un copropriétaire sur son portail",
@@ -273,12 +294,13 @@ export const syndicCopropriete: WikiDomain = {
       actions: [
         {
           title: "Consulter les prestataires de la copropriété",
-          goal: "Voir vos prestataires avec les contrats qui les lient à cette copropriété, ainsi que les équipements communs.",
+          goal: "Voir vos prestataires avec les contrats qui les lient à cette copropriété, ainsi que les équipements communs. Les prestataires sous contrat avec la copropriété s'affichent en premier, avec un filtre « Sous contrat / Tous ».",
         },
         {
           title: "Ajouter un prestataire",
           goal: "Enregistrer un prestataire, réutilisable dans toutes vos copropriétés.",
           input: "Le nom, la spécialité, l'e-mail et le téléphone.",
+          prereq: "Le nom doit être unique dans votre agence, sans tenir compte des majuscules ni des espaces en bord de nom.",
         },
         {
           title: "Modifier un prestataire",
@@ -355,9 +377,18 @@ export const syndicCopropriete: WikiDomain = {
           prereq: "Pour associer un compte comptable, il doit exister dans le plan comptable de la copropriété.",
         },
         {
-          title: "Approuver un budget",
-          goal: "Faire évoluer le budget de brouillon à approuvé, puis à révisé ou clos, en le reliant si besoin à la résolution d'assemblée générale qui l'a voté.",
-          output: "Le budget approuvé, daté du jour de son approbation.",
+          title: "Approuver, réviser ou clôturer un budget",
+          goal: "Faire évoluer le budget de brouillon à approuvé, puis à révisé ou clôturé, en le reliant si besoin à la résolution d'assemblée générale qui l'a voté. Avant la clôture, le logiciel affiche le budgété, le réalisé et l'écart. Un budget clôturé n'est plus modifiable.",
+          output:
+            "Le budget approuvé, daté du jour de son approbation. Réserve : le lien avec la résolution d'assemblée est facultatif et seule son existence est vérifiée ; un budget peut être approuvé sans résolution votée liée.",
+          prereq:
+            "Les passages autorisés sont : brouillon vers approuvé, approuvé vers révisé et inversement, approuvé ou révisé vers clôturé. Un budget encore utilisé par une programmation d'appels de charges active ne peut pas être clôturé.",
+        },
+        {
+          title: "Affecter un poste du budget à un fonds",
+          goal: "Désigner le fonds (fonds travaux, par exemple) qu'alimente un poste du budget : il reçoit sa part de chaque paiement de charges enregistré ensuite, au prorata de la répartition du lot. Vous pouvez aussi retirer l'affectation.",
+          input: "Le poste du budget et le fonds.",
+          prereq: "Le fonds doit appartenir à la même copropriété et avoir la même devise que le budget.",
         },
         {
           title: "Recalculer la répartition par lot",
@@ -413,6 +444,18 @@ export const syndicCopropriete: WikiDomain = {
           goal: "Voir le détail d'un appel : lot, copropriété, paiements reçus et statut.",
         },
         {
+          title: "Télécharger l'avis d'appel de charges en PDF",
+          goal: "Récupérer l'avis d'appel d'un appel de charges (montant, avance imputée, reste à payer, échéance), le même que celui joint à l'e-mail du copropriétaire.",
+          output: "Un avis d'appel en PDF.",
+          prereq: "L'appel de charges doit exister.",
+        },
+        {
+          title: "Affecter un appel de charges à un fonds",
+          goal: "Désigner le fonds qui recevra en entier ce qui sera payé ensuite sur l'appel, par exemple pour un appel de fonds travaux. Vous pouvez aussi retirer l'affectation ; les paiements déjà reçus ne sont pas repris.",
+          input: "L'appel de charges et le fonds.",
+          prereq: "Le fonds doit appartenir à la même copropriété et avoir la même devise.",
+        },
+        {
           title: "Générer les appels depuis le budget",
           goal: "Émettre en une fois la campagne d'appels de charges : un appel par lot, du montant de sa part du budget.",
           input: "Le libellé, la période, la date d'échéance et le type de campagne.",
@@ -442,8 +485,107 @@ export const syndicCopropriete: WikiDomain = {
       ],
       related: [
         "syndic-copropriete/budget-previsionnel",
+        "syndic-copropriete/programmation-appels-de-charges",
         "syndic-copropriete/encaissements-comptes-coproprietaires",
         "syndic-copropriete/impayes-et-relances",
+      ],
+    },
+    {
+      slug: "programmation-appels-de-charges",
+      title: "Programmation des appels de charges",
+      metaTitle: "Appels de charges programmés : mensuel, trimestriel, annuel",
+      summary:
+        "Programmez l'émission automatique des appels de charges de votre copropriété (mensuelle à annuelle), suivez chaque exécution et relancez les avis non envoyés.",
+      intro:
+        "Au lieu d'émettre vos appels de charges à la main à chaque échéance, vous programmez une fois le rythme (mensuel, trimestriel, semestriel ou annuel) et la source du montant : le budget approuvé, réparti par lot, ou un montant fixe. Le logiciel émet les appels à la date prévue, impute les avances déjà versées, délivre la quittance des appels entièrement couverts et envoie l'avis d'appel en PDF aux copropriétaires qui ont un reste à payer. Chaque exécution est historisée, avec la raison en clair des avis non partis.",
+      packs: ["syndic", "integre"],
+      profiles: ["equipe"],
+      menu: "Syndic › Finances",
+      status: "disponible",
+      actions: [
+        {
+          title: "Consulter les programmations d'appels de charges",
+          goal: "Voir les programmations de la copropriété, avec la prochaine période à émettre, la dernière exécution et l'état (active ou en pause).",
+        },
+        {
+          title: "Consulter une programmation",
+          goal: "Voir le détail d'une programmation : calendrier, montant, budget lié et dernière exécution.",
+        },
+        {
+          title: "Créer une programmation d'appels de charges",
+          goal: "Programmer l'émission automatique des appels de charges : mensuelle, trimestrielle, semestrielle ou annuelle, avec un montant tiré du budget ou un montant fixe.",
+          input:
+            "Le libellé, la fréquence, le jour d'émission (du 1 au 28), le nombre de jours avant l'échéance, la source du montant (budget ou montant fixe) et le budget ou le montant, la date de début, et en option la devise et la date de fin.",
+          output:
+            "La programmation, avec sa prochaine date d'émission. Aucune période passée n'est émise d'office.",
+          prereq:
+            "Avec un budget comme source, il doit appartenir à la copropriété, être approuvé et réparti par lot. Deux programmations actives ne peuvent pas couvrir la même période.",
+        },
+        {
+          title: "Modifier une programmation",
+          goal: "Changer le libellé, le calendrier, la source du montant ou les dates d'une programmation. La prochaine date d'émission est recalculée. Évolution en développement : l'état actif ou en pause se change uniquement par la pause et la reprise, plus par cette modification.",
+          status: "developpement",
+        },
+        {
+          title: "Mettre en pause une programmation",
+          goal: "Suspendre l'émission automatique des appels d'une programmation.",
+        },
+        {
+          title: "Reprendre une programmation",
+          goal: "Réactiver une programmation en pause. Les périodes échues pendant la pause ne sont pas rattrapées.",
+        },
+        {
+          title: "Supprimer une programmation",
+          goal: "Supprimer une programmation qui n'a encore rien émis. Sinon, elle est seulement désactivée : l'historique et les appels déjà émis sont conservés.",
+        },
+        {
+          title: "Prévisualiser les prochaines périodes",
+          goal: "Afficher les trois prochaines périodes à émettre, avec leurs dates d'émission et d'échéance et leurs montants, au total et par lot, sans rien enregistrer.",
+          output:
+            "Un aperçu par période. Un budget non approuvé ou sans répartition est signalé comme une erreur sur la période concernée.",
+        },
+        {
+          title: "Exécuter une programmation maintenant",
+          goal: "Émettre à la demande la période due (sinon la période en cours) : un appel par lot, avec imputation des avances et quittance pour chaque appel entièrement couvert. L'avis d'appel en PDF part aux seuls copropriétaires qui ont un reste à payer.",
+          output:
+            "Le résultat de l'exécution : appels créés, appels couverts par une avance, avis envoyés et avis non envoyés avec leur raison en clair. Une période déjà émise n'est jamais émise deux fois.",
+          prereq: "Avec un budget comme source, il doit être approuvé et réparti par lot.",
+        },
+        {
+          title: "Renvoyer les avis non envoyés d'une exécution",
+          goal: "Après avoir corrigé la cause (adresse e-mail du copropriétaire, réglage de notification…), renvoyer l'avis d'appel aux seuls appels de l'exécution dont l'avis n'est jamais parti.",
+          output: "Un résumé des avis envoyés et de ceux qui restent non envoyés, avec leurs raisons.",
+          prereq: "Un renvoi n'est possible qu'une fois par minute, et seulement s'il reste des avis à envoyer.",
+        },
+        {
+          title: "Consulter l'historique d'exécution",
+          goal: "Afficher les exécutions d'une programmation, automatiques ou manuelles, avec la période, le résultat, les appels créés et couverts, les avis envoyés ou non, et l'erreur éventuelle.",
+        },
+        {
+          title: "Émettre automatiquement les appels programmés",
+          goal: "Chaque jour, le logiciel émet les appels des programmations actives dont la date d'émission est arrivée, comme une exécution manuelle. Les périodes manquées sont rattrapées dans l'ordre, et l'échec d'une programmation n'arrête pas les autres.",
+          output: "Les appels de charges, quittances et avis d'appel envoyés, tracés dans l'historique d'exécution.",
+          prereq: "La programmation doit être active.",
+        },
+      ],
+      faq: [
+        {
+          q: "Les appels de charges sont-ils émis sans intervention de ma part ?",
+          a: "Oui, une fois la programmation créée et active : le logiciel émet les appels à la date prévue. Vous pouvez aussi déclencher une période à la demande, ou mettre la programmation en pause.",
+        },
+        {
+          q: "Que se passe-t-il si un copropriétaire a déjà versé une avance ?",
+          a: "L'avance du lot est imputée sur chaque nouvel appel. Si l'appel est entièrement couvert, il est soldé et la quittance est délivrée, sans avis de paiement à envoyer.",
+        },
+        {
+          q: "Que faire si un avis d'appel n'est pas parti ?",
+          a: "L'historique d'exécution indique la raison : pas d'adresse e-mail, notification désactivée, envoi d'e-mails non configuré… Une fois la cause corrigée, vous renvoyez les avis non envoyés en un clic.",
+        },
+      ],
+      related: [
+        "syndic-copropriete/appels-de-charges",
+        "syndic-copropriete/budget-previsionnel",
+        "syndic-copropriete/quittances-et-recus",
       ],
     },
     {
@@ -461,11 +603,40 @@ export const syndicCopropriete: WikiDomain = {
       actions: [
         {
           title: "Enregistrer un paiement de charges",
-          goal: "Saisir un règlement reçu sur un appel de charges.",
+          goal: "Saisir un règlement reçu sur un appel de charges précis. Si le montant dépasse le reste dû, l'excédent est imputé sur les autres appels ouverts du lot, puis conservé en avance.",
           input: "Le montant, la date du paiement, et en option le moyen de paiement et la référence.",
           output:
-            "L'appel passe à « partiellement payé » ou « payé » et le compte du lot est crédité.",
-          prereq: "Le paiement ne peut pas dépasser le reste dû sur l'appel.",
+            "L'appel passe à « partiellement payé » ou « payé », le compte du lot est crédité et le reçu, puis la quittance des appels soldés, sont émis. Les fonds de la copropriété concernés sont crédités.",
+          prereq: "L'appel de charges doit exister.",
+        },
+        {
+          title: "Enregistrer un paiement de lot avec affectation",
+          goal: "Saisir un paiement reçu d'un lot et le répartir sur les appels que vous cochez, sinon du plus ancien au plus récent. L'excédent devient une avance du lot, imputée automatiquement sur les prochains appels.",
+          input:
+            "Le montant, la date, le moyen de paiement, en option la référence et les appels (mois) à couvrir.",
+          output:
+            "Le détail de l'affectation appel par appel, l'avance du lot, le reçu et la quittance de chaque appel soldé. Les fonds de la copropriété concernés sont crédités.",
+          prereq: "Le lot doit exister.",
+        },
+        {
+          title: "Prévisualiser l'affectation d'un paiement",
+          goal: "Voir comment un paiement serait réparti entre les appels du lot avant de l'enregistrer. Rien n'est écrit.",
+          input: "Les mêmes informations que pour l'enregistrement du paiement.",
+          output: "La répartition prévue, appel par appel, et l'avance qui en résulterait.",
+        },
+        {
+          title: "Consulter les appels ouverts d'un lot",
+          goal: "Afficher les appels de charges non soldés du lot, pour cocher les mois à couvrir au moment d'un paiement.",
+          output: "Pour chaque appel : période, échéance, montant, déjà payé, reste dû et statut.",
+        },
+        {
+          title: "Consulter l'avance d'un lot",
+          goal: "Voir le crédit non affecté d'un lot (excédent de paiements passés), qui s'impute automatiquement sur chaque nouvel appel.",
+        },
+        {
+          title: "Consulter le suivi mensuel de la copropriété",
+          goal: "Voir d'un coup d'œil, pour un exercice, une grille lot par mois : chaque mois est réglé, partiel, dû ou en retard, avec l'avance de chaque lot.",
+          input: "L'année (l'année en cours par défaut).",
         },
         {
           title: "Consulter le compte d'un lot",
@@ -499,6 +670,72 @@ export const syndicCopropriete: WikiDomain = {
       related: [
         "syndic-copropriete/appels-de-charges",
         "syndic-copropriete/impayes-et-relances",
+        "syndic-copropriete/quittances-et-recus",
+      ],
+    },
+    {
+      slug: "quittances-et-recus",
+      title: "Quittances et reçus de charges",
+      metaTitle: "Quittances et reçus de charges de copropriété en PDF",
+      summary:
+        "Retrouvez les reçus de paiement et les quittances de charges de chaque copropriété, téléchargez-les, renvoyez-les par e-mail ou imprimez-les en planche.",
+      intro:
+        "À chaque paiement, le logiciel émet un reçu, puis une quittance pour chaque appel de charges soldé. Vous les retrouvez par copropriété ou par lot, vous téléchargez le PDF, vous le renvoyez au copropriétaire par e-mail ou vous imprimez plusieurs quittances sur une même feuille A4. Pour les appels déjà soldés avant l'arrivée des quittances, un rattrapage les émet en une fois.",
+      packs: ["syndic", "integre"],
+      profiles: ["equipe"],
+      menu: "Syndic › Finances",
+      status: "disponible",
+      actions: [
+        {
+          title: "Consulter les quittances et reçus d'une copropriété",
+          goal: "Afficher l'historique des reçus de paiement et des quittances de la copropriété, avec des filtres par lot, copropriétaire, type et période.",
+          output: "Pour chaque document : numéro, période, montant, dates d'émission et d'envoi, et erreur d'envoi éventuelle.",
+        },
+        {
+          title: "Consulter les quittances et reçus d'un lot",
+          goal: "Afficher l'historique des reçus et quittances d'un lot précis.",
+        },
+        {
+          title: "Télécharger un reçu ou une quittance",
+          goal: "Récupérer le PDF d'un reçu de paiement ou d'une quittance déjà émis.",
+          output: "Un document PDF.",
+        },
+        {
+          title: "Renvoyer une quittance ou un reçu par e-mail",
+          goal: "Renvoyer au copropriétaire le PDF d'un reçu ou d'une quittance.",
+          output: "La confirmation d'envoi, ou l'erreur éventuelle consignée sur le document.",
+          prereq: "Le reçu ou la quittance doit avoir été émis. Le nombre de renvois est limité pour éviter les envois répétés.",
+        },
+        {
+          title: "Imprimer les quittances en grille",
+          goal: "Composer un PDF imprimable en A4 de plusieurs quittances (ou reçus, ou les deux) d'une période, pour tous les copropriétaires ou pour un seul.",
+          input:
+            "Les dates de début et de fin, le type de document, en option le lot ou le copropriétaire, et le nombre de colonnes (1 à 3) et de lignes (1 à 4) par feuille.",
+          output: "Un PDF avec une grille par feuille, adaptée à la découpe.",
+          prereq: "Des quittances ou reçus doivent avoir été émis sur la période.",
+        },
+        {
+          title: "Générer les quittances manquantes",
+          goal: "Émettre une quittance pour chaque appel de charges déjà soldé qui n'en a pas encore, sans jamais régénérer une quittance existante.",
+          output: "Le nombre de quittances créées, ignorées et restant à traiter.",
+          prereq:
+            "Aucune quittance n'est créée pour d'anciens paiements non rattachés à un appel. Si beaucoup d'appels restent à traiter, relancez l'action jusqu'à ce que plus rien ne reste.",
+        },
+      ],
+      faq: [
+        {
+          q: "Quand une quittance est-elle émise ?",
+          a: "À l'enregistrement d'un paiement qui solde un appel de charges, le logiciel émet le reçu puis la quittance de cet appel.",
+        },
+        {
+          q: "Peut-on imprimer plusieurs quittances sur une même feuille ?",
+          a: "Oui. Vous choisissez une grille de 1 à 3 colonnes et de 1 à 4 lignes par feuille A4, avec des repères de découpe.",
+        },
+      ],
+      related: [
+        "syndic-copropriete/encaissements-comptes-coproprietaires",
+        "syndic-copropriete/programmation-appels-de-charges",
+        "syndic-copropriete/identite-des-documents",
       ],
     },
     {
@@ -527,13 +764,17 @@ export const syndicCopropriete: WikiDomain = {
           title: "Relancer un copropriétaire",
           goal: "Envoyer une relance ponctuelle sur un appel de charges impayé.",
           input: "Le niveau de relance et le canal d'envoi.",
-          output: "La relance est envoyée et inscrite à l'historique.",
+          output:
+            "La relance est envoyée et inscrite à l'historique. Évolution en développement : si l'envoi échoue, la relance reste enregistrée avec le statut « échec » et l'écran vous avertit.",
+          status: "developpement",
           prereq: "L'appel de charges ne doit pas être soldé.",
         },
         {
           title: "Relancer tous les retardataires",
           goal: "Relancer en une fois tous les appels de charges en retard et non soldés de la copropriété. Le niveau de relance augmente à chaque campagne, jusqu'au quatrième niveau.",
-          output: "Le nombre d'appels traités et de relances envoyées.",
+          output:
+            "Le nombre d'appels traités et de relances envoyées. Évolution en développement : le nombre de relances dont l'envoi a échoué est aussi indiqué.",
+          status: "developpement",
         },
         {
           title: "Consulter les pénalités de retard",
@@ -541,8 +782,8 @@ export const syndicCopropriete: WikiDomain = {
         },
         {
           title: "Appliquer une pénalité de retard",
-          goal: "Facturer une pénalité sur un appel de charges impayé. Elle est débitée du compte du lot.",
-          input: "Le taux, le nombre de jours de retard, le montant et la date d'application.",
+          goal: "Facturer une pénalité sur un appel de charges impayé. Le taux saisi est mensuel (10 % au maximum), proratisé au nombre de jours de retard, et plafonné au reste dû. Un aperçu du montant s'affiche avant validation, puis la pénalité est débitée du compte du lot.",
+          input: "Le taux mensuel, le nombre de jours de retard et la date d'application.",
           prereq: "L'appel de charges ne doit pas être soldé.",
         },
         {
@@ -612,10 +853,10 @@ export const syndicCopropriete: WikiDomain = {
           goal: "Changer le nom d'un fonds existant.",
         },
         {
-          title: "Ajuster le solde d'un fonds",
-          goal: "Créditer ou débiter un fonds à la main, avec un motif obligatoire.",
-          input: "Le sens (crédit ou débit), le montant et le motif.",
-          output: "Le nouveau solde du fonds, avec l'opération tracée dans le journal d'audit.",
+          title: "Ajuster le solde d'un fonds ou saisir une dépense",
+          goal: "Créditer ou débiter un fonds à la main, ou saisir une dépense payée par le fonds (toujours un débit), avec un motif obligatoire. Le solde peut devenir négatif : l'écran le signale.",
+          input: "Le sens (crédit ou débit), le montant, le motif et le type d'opération (ajustement ou dépense).",
+          output: "Le nouveau solde du fonds, avec l'opération inscrite au journal du fonds et tracée dans le journal d'audit.",
         },
       ],
       related: [
@@ -720,7 +961,16 @@ export const syndicCopropriete: WikiDomain = {
           goal: "Créer une assemblée ordinaire ou extraordinaire avec ses premières résolutions.",
           input:
             "Le type d'assemblée, la date, les heures de début et de fin, le lieu et les résolutions (titre, description, règle de majorité).",
-          output: "L'assemblée et ses résolutions. Une notification de convocation est envoyée.",
+          output:
+            "L'assemblée et ses résolutions, avec le décompte d'envoi de la convocation par e-mail aux copropriétaires (envoyés, échecs, sans adresse). Un échec d'envoi n'annule pas l'assemblée.",
+          prereq: "L'heure de début doit être antérieure à l'heure de fin.",
+        },
+        {
+          title: "Renvoyer la convocation",
+          goal: "Réenvoyer par e-mail la convocation aux copropriétaires d'une assemblée encore planifiée.",
+          output:
+            "Le décompte des envois : copropriétaires, e-mails envoyés, échecs, et copropriétaires sans adresse comptés à part.",
+          prereq: "L'assemblée doit être planifiée.",
         },
         {
           title: "Modifier ou faire avancer une assemblée",
@@ -729,7 +979,7 @@ export const syndicCopropriete: WikiDomain = {
         },
         {
           title: "Consulter le détail d'une assemblée",
-          goal: "Tout voir sur une assemblée : ordre du jour, résolutions avec le décompte des voix en tantièmes, pouvoirs, présence et quorum.",
+          goal: "Tout voir sur une assemblée : ordre du jour, résolutions avec le décompte des voix en tantièmes, pouvoirs, présence et quorum. Chaque lot affiche ses votants à la date de l'assemblée (propriétaire à cette date, indivisaires nommés).",
         },
         {
           title: "Ajouter une résolution",
@@ -752,7 +1002,7 @@ export const syndicCopropriete: WikiDomain = {
         },
         {
           title: "Enregistrer le vote d'un lot",
-          goal: "Saisir ou corriger le vote d'un lot sur une résolution : pour, contre ou abstention.",
+          goal: "Saisir ou corriger le vote d'un lot sur une résolution : pour, contre ou abstention. Le votant retenu est le propriétaire du lot à la date de l'assemblée, pas le propriétaire actuel.",
           output: "Le résultat de la résolution et le quorum, recalculés immédiatement.",
           prereq: "L'assemblée ne doit être ni clôturée ni annulée.",
         },
@@ -775,7 +1025,8 @@ export const syndicCopropriete: WikiDomain = {
         {
           title: "Générer le procès-verbal",
           goal: "Produire le compte rendu de l'assemblée : ordre du jour, résolutions, résultats en tantièmes et quorum.",
-          output: "Un document Word, prêt à être relu et diffusé.",
+          output:
+            "Un document Word, prêt à être relu et diffusé. Réserve : le compte rendu peut être généré avant la clôture de l'assemblée ; pensez à le relire une fois la séance terminée.",
         },
       ],
       faq: [
@@ -796,6 +1047,103 @@ export const syndicCopropriete: WikiDomain = {
         "syndic-copropriete/budget-previsionnel",
         "syndic-copropriete/documents-copropriete",
         "syndic-copropriete/coproprietaires-et-occupants",
+      ],
+    },
+    {
+      slug: "identite-des-documents",
+      title: "Identité des documents de copropriété",
+      metaTitle: "Logo, signature et cachet sur les documents de copropriété",
+      summary:
+        "Faites apparaître le logo, la signature et le cachet de votre cabinet, de l'agence mandante ou de la copropriété sur les relevés, procès-verbaux et quittances.",
+      intro:
+        "Les documents que vous éditez pour une copropriété (relevés de compte, procès-verbaux d'assemblée, reçus et quittances) portent l'identité de qui les signe. Si la copropriété dépend d'une agence mandante, ce sont le logo, la signature et le cachet du mandant qui s'affichent ; sinon, ceux de votre cabinet. La copropriété peut en plus avoir son propre logo, affiché en complément.",
+      packs: ["syndic", "integre"],
+      profiles: ["direction", "equipe"],
+      menu: "Agence › Paramètres de l'agence",
+      status: "disponible",
+      actions: [
+        {
+          title: "Consulter la signature et le cachet de l'agence",
+          goal: "Voir si votre agence a déjà une signature et un cachet pour ses documents. Ils servent quand une copropriété n'a pas d'agence mandante.",
+          output: "L'état de la signature et du cachet, avec leur aperçu s'ils existent.",
+        },
+        {
+          title: "Gérer la signature et le cachet de l'agence",
+          goal: "Déposer, remplacer ou supprimer la signature et le cachet apposés sur les documents de l'agence (relevés, procès-verbaux d'assemblée, reçus et quittances) quand une copropriété n'a pas de mandant.",
+          input: "Une image de la signature ou du cachet.",
+          output: "La signature ou le cachet mis à jour, utilisé sur les prochains documents.",
+        },
+        {
+          title: "Gérer le logo d'une copropriété",
+          goal: "Déposer, remplacer ou supprimer le logo propre à la copropriété, affiché en complément du logo du mandant (ou de l'agence) sur ses documents.",
+          input: "Une image au format PNG ou JPG.",
+          prereq: "La copropriété doit être créée.",
+        },
+      ],
+      faq: [
+        {
+          q: "Quelle identité apparaît sur les documents d'une copropriété ?",
+          a: "Celle de l'agence mandante si la copropriété en a une, sinon celle de votre cabinet. Le logo de la copropriété, s'il existe, s'ajoute à ce logo.",
+        },
+      ],
+      related: [
+        "syndic-copropriete/agences-mandantes",
+        "syndic-copropriete/quittances-et-recus",
+        "syndic-copropriete/assemblees-generales",
+      ],
+    },
+    {
+      slug: "agences-mandantes",
+      title: "Agences mandantes",
+      metaTitle: "Agences mandantes : gérer des copropriétés pour un tiers",
+      summary:
+        "Enregistrez les agences mandantes pour le compte desquelles votre cabinet gère des copropriétés, avec leur logo, leur signature et leur cachet sur les documents.",
+      intro:
+        "Quand votre cabinet gère des copropriétés pour le compte d'une autre agence, vous enregistrez cette agence comme mandant. Ses coordonnées, son logo, sa signature et son cachet sont repris sur les documents des copropriétés qu'elle mandate : relevés, procès-verbaux, reçus et quittances.",
+      packs: ["syndic", "integre"],
+      profiles: ["equipe"],
+      status: "disponible",
+      actions: [
+        {
+          title: "Consulter les agences mandantes",
+          goal: "Voir les agences mandantes pour le compte desquelles votre cabinet gère des copropriétés, avec la présence de leur logo, de leur signature et de leur cachet.",
+        },
+        {
+          title: "Créer une agence mandante",
+          goal: "Enregistrer un mandant dont le cabinet gère des copropriétés.",
+          input: "Le nom (obligatoire), et en option la raison sociale, l'adresse, le téléphone, l'e-mail, le RCCM et l'identifiant fiscal.",
+          prereq: "Le nom doit être unique dans votre agence, sans tenir compte des majuscules.",
+        },
+        {
+          title: "Consulter une agence mandante",
+          goal: "Voir la fiche complète d'un mandant.",
+        },
+        {
+          title: "Modifier une agence mandante",
+          goal: "Mettre à jour les coordonnées d'un mandant.",
+          prereq: "Si vous changez le nom, il doit rester unique dans votre agence.",
+        },
+        {
+          title: "Supprimer une agence mandante",
+          goal: "Retirer un mandant qui ne rend plus service au cabinet. Son logo, sa signature et son cachet sont effacés.",
+          prereq: "Aucune copropriété ne doit lui être rattachée : détachez-les d'abord.",
+        },
+        {
+          title: "Gérer le logo d'un mandant",
+          goal: "Déposer, remplacer ou supprimer le logo du mandant, apposé sur les documents des copropriétés qu'il mandate.",
+          input: "Une image au format PNG ou JPG.",
+          prereq: "L'agence mandante doit être créée.",
+        },
+        {
+          title: "Gérer la signature et le cachet d'un mandant",
+          goal: "Déposer, remplacer ou supprimer la signature et le cachet du mandant, apposés sur les documents des copropriétés qu'il mandate.",
+          input: "Une image de la signature ou du cachet.",
+          prereq: "L'agence mandante doit être créée.",
+        },
+      ],
+      related: [
+        "syndic-copropriete/identite-des-documents",
+        "syndic-copropriete/coproprietes",
       ],
     },
     {

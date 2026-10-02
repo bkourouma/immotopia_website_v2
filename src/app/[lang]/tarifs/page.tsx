@@ -12,10 +12,10 @@ export async function generateMetadata({ params }: PageProps<"/[lang]/tarifs">):
   if (!hasLocale(lang)) return {};
   const t = translator(lang);
   return {
-    title: t("Tarifs — Packs Agence, Syndic et Promoteur | ImmoTopia", "Pricing — Agency, Condo Management and Developer packs | ImmoTopia"),
+    title: t("Tarifs — 6 packs, de l'agence au particulier | ImmoTopia", "Pricing — 6 packs, from agencies to individuals | ImmoTopia"),
     description: t(
-      "Tarifs ImmoTopia en FCFA : Agence dès 29 900, Syndic dès 49 900, Promoteur dès 149 900 FCFA HT/mois, et forfait Opérateur intégré. Premier mois offert, sans engagement. Aucune commission sur les loyers.",
-      "ImmoTopia pricing in FCFA: Agency from 29,900, Condo Management from 49,900, Developer from 149,900 FCFA excl. VAT/month, plus an all-in Integrated Operator plan. First month free, no commitment. No commission on rent.",
+      "Tarifs ImmoTopia en FCFA HT/mois : Patrimoine dès 9 900 (particuliers, diaspora), Agence dès 29 900, Syndic dès 49 900, Promoteur dès 149 900 et Opérateur intégré. Premier mois offert, sans engagement. Aucune commission sur les loyers.",
+      "ImmoTopia pricing in FCFA excl. VAT/month: Portfolio from 9,900 (individuals, diaspora), Agency from 29,900, Condo Management from 49,900, Developer from 149,900, plus an all-in Integrated Operator plan. First month free, no commitment. No commission on rent.",
     ),
     alternates: alternates(lang, "/tarifs"),
   };
@@ -30,8 +30,8 @@ export default async function TarifsPage() {
       <main>
         <PageHero eyebrow={t("Tarifs", "Pricing")} title={t("Des tarifs clairs, en FCFA.", "Clear pricing, in FCFA.")}>
           {t(
-            "Choisissez le pack de votre métier, estimez votre abonnement en quelques secondes, et réservez une démonstration.",
-            "Pick the pack for your business, estimate your subscription in seconds, and book a demo.",
+            "Professionnels de l'immobilier ou particuliers : choisissez votre pack, estimez votre abonnement en quelques secondes, et réservez une démonstration.",
+            "Real estate professionals or individuals: pick your pack, estimate your subscription in seconds, and book a demo.",
           )}
         </PageHero>
         <Pricing comparisonOpen />

@@ -7,7 +7,7 @@ export const communicationEtDocuments: WikiDomain = {
   summary:
     "Notifications e-mail et WhatsApp, newsletters, campagnes et modèles Word de l'agence : communiquez avec vos clients et générez baux et quittances en un clic.",
   intro:
-    "Ce domaine réunit tout ce que l'agence envoie à ses clients et tout ce qu'elle produit comme documents. Côté communication : notifications automatiques par e-mail et WhatsApp, diffusion dans votre groupe WhatsApp, listes de diffusion et campagnes de newsletter. Côté documents : vos propres modèles Word pour les baux, quittances et relevés, remplis automatiquement. Il s'adresse à la direction et à tous les collaborateurs qui échangent avec les propriétaires, locataires et prospects.",
+    "Ce domaine réunit tout ce que l'agence envoie à ses clients et tout ce qu'elle produit comme documents. Côté communication : notifications automatiques par e-mail et WhatsApp, diffusion dans votre groupe WhatsApp, listes de diffusion et campagnes de newsletter. Côté documents : vos propres modèles Word pour les baux, quittances et relevés, remplis automatiquement. Un assistant IA, ImmoCopilot, est présent dans l'application mais désactivé par défaut. Il s'adresse à la direction et à tous les collaborateurs qui échangent avec les propriétaires, locataires et prospects.",
   features: [
     {
       slug: "notifications-email-whatsapp",
@@ -17,7 +17,7 @@ export const communicationEtDocuments: WikiDomain = {
         "Choisissez les notifications e-mail et WhatsApp envoyées à vos clients, personnalisez leurs textes et diffusez vos messages dans votre groupe WhatsApp.",
       intro:
         "ImmoTopia prévient automatiquement vos clients par e-mail et par WhatsApp : maintenance, paiements, baux, syndic, invitations. Vous décidez quelles notifications partent et avec quel texte. Vous pouvez aussi inviter vos contacts dans votre groupe WhatsApp et y diffuser une annonce avec une photo. Vos clients reçoivent l'information là où ils la lisent vraiment.",
-      packs: ["agence", "syndic", "promoteur", "integre"],
+      packs: ["agence", "syndic", "promoteur", "integre", "patrimoine-essentiel", "patrimoine-pro"],
       profiles: ["equipe"],
       status: "disponible",
       actions: [
@@ -25,14 +25,32 @@ export const communicationEtDocuments: WikiDomain = {
           title: "Paramétrer les notifications e-mail",
           goal: "Choisir, parmi près de quarante notifications automatiques (maintenance, paiements, baux, CRM, syndic, patrimoine, invitations, mot de passe oublié…), celles que l'agence envoie.",
           input: "Pour chaque notification : activée ou non, et si vous le souhaitez un objet et un texte personnalisés.",
-          output: "Des e-mails à l'image de l'agence. Un bouton rétablit le texte d'origine.",
+          output:
+            "Des e-mails à l'image de l'agence. Un bouton rétablit le texte d'origine. Seules les notifications des modules de votre abonnement s'affichent et se modifient.",
         },
         {
           title: "Paramétrer les notifications WhatsApp",
           goal: "Choisir, parmi une vingtaine de notifications (maintenance, paiements, baux, CRM, compte du portail, syndic…), celles qui partent par WhatsApp.",
           input:
             "Pour chaque notification : activée ou non, un texte personnalisé ou un modèle de message WhatsApp Business.",
-          output: "Des messages WhatsApp adaptés à l'agence. Un bouton rétablit le texte d'origine.",
+          output:
+            "Des messages WhatsApp adaptés à l'agence. Un bouton rétablit le texte d'origine. Seules les notifications des modules de votre abonnement s'affichent et se modifient.",
+        },
+        {
+          title: "Recevoir les messages WhatsApp entrants",
+          goal: "L'application reçoit les messages que vos contacts envoient à votre numéro WhatsApp. Pour l'instant, la réception est minimale : elle est enregistrée et un accusé générique est renvoyé, sans conversation ni ticket créé.",
+          output: "Un accusé de réception générique.",
+          status: "deploiement",
+        },
+        {
+          title: "Personnaliser le message du lien de paiement d'un loyer",
+          goal: "Activer, désactiver ou adapter le message qui porte le lien de paiement envoyé au locataire. L'e-mail est actif d'office ; le message WhatsApp reste à activer par l'agence.",
+          input:
+            "Pour l'e-mail, un objet et un texte ; pour WhatsApp, un texte ou un modèle de message. Le texte peut reprendre le nom du locataire, de l'agence, la période, le montant dû, le lien de paiement et sa date d'expiration.",
+          output: "Un message de lien de paiement à l'image de l'agence. Un bouton rétablit le texte d'origine.",
+          prereq:
+            "Réservé aux abonnements qui comprennent la gestion locative. L'envoi réel de ce lien par WhatsApp ou par e-mail est encore en cours de validation.",
+          status: "deploiement",
         },
         {
           title: "Envoyer un message WhatsApp de test",
@@ -79,7 +97,7 @@ export const communicationEtDocuments: WikiDomain = {
         "Constituez vos listes de diffusion à partir des propriétaires, locataires ou contacts, importez des abonnés par CSV et laissez chacun se désinscrire en un clic.",
       intro:
         "Une liste de diffusion regroupe les destinataires d'une newsletter. Elle peut se remplir à la main, par import, ou se construire toute seule à partir de vos propriétaires, locataires ou contacts qui ont donné leur accord. Les visiteurs peuvent aussi s'inscrire eux-mêmes, avec confirmation par e-mail si vous le souhaitez. Chaque destinataire peut se désinscrire à tout moment.",
-      packs: ["agence", "syndic", "promoteur", "integre"],
+      packs: ["agence", "syndic", "promoteur", "integre", "patrimoine-essentiel", "patrimoine-pro"],
       profiles: ["equipe"],
       menu: "Communication › Newsletter — Listes",
       status: "disponible",
@@ -147,7 +165,7 @@ export const communicationEtDocuments: WikiDomain = {
         "Rédigez vos newsletters à partir de modèles, prévisualisez-les, envoyez-les tout de suite ou à la date choisie, puis suivez envois et ouvertures par destinataire.",
       intro:
         "Les campagnes vous permettent de tenir vos clients informés : nouveaux biens, rappels, actualités de l'agence. Vous partez d'un modèle à vos couleurs, rédigez le message, le prévisualisez, puis l'envoyez tout de suite ou à la date choisie. Vous voyez ensuite qui l'a reçu et qui l'a ouvert.",
-      packs: ["agence", "syndic", "promoteur", "integre"],
+      packs: ["agence", "syndic", "promoteur", "integre", "patrimoine-essentiel", "patrimoine-pro"],
       profiles: ["equipe"],
       menu: "Communication › Newsletter — Campagnes",
       status: "disponible",
@@ -221,7 +239,7 @@ export const communicationEtDocuments: WikiDomain = {
         "Déposez vos propres modèles Word de bail, quittance et relevé de loyer : ImmoTopia repère les zones à remplir et utilise le modèle par défaut de votre choix.",
       intro:
         "Chaque agence a ses contrats et ses quittances. Vous déposez vos modèles Word tels que vous les utilisez déjà, et ImmoTopia repère les zones à remplir. Vous choisissez le modèle par défaut pour chaque type de document. Vos baux et quittances gardent votre présentation, sans ressaisie.",
-      packs: ["agence", "syndic", "promoteur", "integre"],
+      packs: ["agence", "syndic", "promoteur", "integre", "patrimoine-essentiel", "patrimoine-pro"],
       profiles: ["equipe"],
       menu: "Documents › Modèles de documents",
       status: "disponible",
@@ -235,7 +253,7 @@ export const communicationEtDocuments: WikiDomain = {
         },
         {
           title: "Lister les modèles de documents",
-          goal: "Retrouver les modèles de l'agence.",
+          goal: "Retrouver les modèles de l'agence. Les modèles de bail d'habitation et de bail commercial livrés avec l'application sont tenus à jour tant que vous ne les avez pas personnalisés ; vos propres modèles ne sont jamais remplacés.",
           input: "Des filtres : type de document, actif ou inactif.",
         },
         {
@@ -272,19 +290,29 @@ export const communicationEtDocuments: WikiDomain = {
         "Produisez baux, quittances et relevés de loyer au format Word à partir de vos modèles, remplis avec les données du bail ou du paiement et numérotés d'office.",
       intro:
         "Depuis un bail ou un paiement, ImmoTopia produit le document Word à partir de votre modèle, rempli avec les bonnes informations. Chaque document reçoit un numéro, par exemple BAIL-2026-0001. Plus besoin de recopier noms, montants et dates à la main : le document est prêt à imprimer ou à envoyer.",
-      packs: ["agence", "syndic", "promoteur", "integre"],
+      packs: ["agence", "syndic", "promoteur", "integre", "patrimoine-essentiel", "patrimoine-pro"],
       profiles: ["equipe"],
       status: "disponible",
       actions: [
         {
           title: "Générer un bail, une quittance ou un relevé",
-          goal: "Produire le document à partir du bail ou du paiement concerné.",
+          goal: "Produire le document à partir du bail ou du paiement concerné. Le contrat de bail suit le type du bien : bail commercial pour un bureau, une boutique ou un entrepôt, bail d'habitation sinon.",
           input:
             "Le type de document, le bail ou le paiement, et si besoin le modèle à utiliser, l'échéance ou la période du relevé.",
           output:
             "Un document Word numéroté. ImmoTopia prend le modèle choisi, sinon le modèle par défaut, sinon le dernier modèle actif, et vérifie que les informations essentielles sont remplies.",
           prereq:
-            "Un modèle actif pour ce type de document et le bail ou le paiement concerné. Sans modèle, un message vous invite à en déposer un.",
+            "Un modèle actif pour ce type de document et le bail ou le paiement concerné. Sans modèle, un message vous invite à en déposer un. Une quittance demandée depuis un bail reprend le dernier paiement encaissé, ou celui de l'échéance choisie ; sans paiement encaissé, elle n'est pas produite. Un bail n'a qu'un seul contrat : pour le refaire, utilisez « Régénérer ».",
+        },
+        {
+          title: "Produire un second contrat pour un même bail",
+          goal: "Un bail peut porter plusieurs contrats : le premier garde le numéro du bail, les suivants prennent -A2, -A3… Le numéro d'une quittance est attribué avant la production du document.",
+          status: "developpement",
+        },
+        {
+          title: "Afficher la devise du bail dans les modèles",
+          goal: "Un nouveau champ de fusion reprend la devise du bail (FCFA par défaut) dans les quatre modèles Word. Les modèles déjà installés gardent leur ancien texte tant qu'ils ne sont pas remplacés.",
+          status: "developpement",
         },
         {
           title: "Régénérer un document",
@@ -301,11 +329,117 @@ export const communicationEtDocuments: WikiDomain = {
       ],
       faq: [
         {
+          q: "Peut-on produire plusieurs contrats pour un même bail ?",
+          a: "C'est en cours de développement : le premier contrat garde le numéro du bail, les suivants prennent un suffixe (-A2, -A3…).",
+        },
+        {
+          q: "Qui figure comme bailleur dans le document ?",
+          a: "L'entité qui détient le bien (SCI, holding, société) si elle existe, sinon le propriétaire client, l'agence étant alors son mandataire, sinon l'agence elle-même. Une coordonnée absente est remplacée par un tiret.",
+        },
+        {
+          q: "Comment la clause de pénalité du contrat est-elle rédigée ?",
+          a: "Elle reprend le mode de pénalité du bail : forfait, pourcentage du loyer ou du solde, avec son plafond. Le relevé de loyer ne compte une échéance qu'à sa date d'exigibilité, comme le compte du locataire.",
+        },
+        {
           q: "Quel modèle est utilisé si je n'en choisis pas ?",
           a: "Le modèle par défaut de l'agence pour ce type de document, ou à défaut le dernier modèle actif.",
         },
       ],
       related: ["communication-et-documents/modeles-de-documents-word"],
+    },
+    {
+      slug: "assistant-ia-immocopilot",
+      title: "Assistant IA ImmoCopilot",
+      metaTitle: "Assistant IA ImmoCopilot pour agence immobilière",
+      summary:
+        "Posez vos questions en français à l'assistant : il retrouve biens et baux, liste leurs documents et prépare quittances et relevés que vous confirmez vous-même.",
+      intro:
+        "ImmoCopilot est un assistant de conversation accessible depuis toutes les pages de l'agence, par un bouton flottant ou le raccourci Ctrl/Cmd+J. Il répond par écrit en direct, présente les biens, baux et documents trouvés sous forme de cartes et s'adapte à l'écran que vous consultez. Il ne modifie rien de lui-même : un document n'est produit qu'après votre confirmation. Il est désactivé par défaut et ne propose que les outils permis par vos droits et par votre abonnement.",
+      packs: ["agence", "syndic", "promoteur", "integre", "patrimoine-essentiel", "patrimoine-pro"],
+      profiles: ["equipe"],
+      menu: "Bouton flottant « Assistant » (Ctrl/Cmd+J), sur toutes les pages de l'agence",
+      status: "deploiement",
+      actions: [
+        {
+          title: "Savoir si l'assistant est disponible",
+          goal: "À l'ouverture de l'application, l'assistant indique s'il est activé et quels outils vous pouvez employer. Le bouton flottant n'apparaît que si l'assistant est activé.",
+          output:
+            "Le bouton « Assistant », et un message d'accueil qui ne cite que ce que vous avez le droit de faire : sans gestion locative, ni baux ni quittances ne sont annoncés.",
+        },
+        {
+          title: "Discuter avec l'assistant",
+          goal: "Poser une question en langage courant et suivre la réponse qui s'écrit en direct, avec des suggestions selon l'écran où vous êtes.",
+          input: "Votre message ; vous pouvez arrêter la réponse ou ouvrir une nouvelle conversation.",
+          output:
+            "Un texte et, selon la demande, des cartes de résultats. La conversation n'est pas conservée dans le navigateur, et le nombre de messages par minute et par jour est limité.",
+          prereq: "L'assistant doit être activé pour votre agence.",
+        },
+        {
+          title: "Rechercher des biens en langage naturel",
+          goal: "Retrouver des biens de l'agence en les décrivant, par exemple « appartements disponibles à Cocody ».",
+          input: "Une description : texte, commune ou zone, type, statut, mode de transaction, prix, nombre de chambres.",
+          output:
+            "Jusqu'à 10 biens, sous forme de cartes cliquables vers la fiche du bien (référence, type, statut, zone, prix, chambres, surface).",
+        },
+        {
+          title: "Lister les documents d'un bien",
+          goal: "Voir les pièces du dossier d'un bien : titre foncier, mandat, plans, y compris celles qui sont expirées.",
+          output: "Jusqu'à 10 documents, avec le nom du fichier, le type, le statut valide ou expiré et la date.",
+          prereq: "Le bien a été trouvé par l'assistant ou correspond à l'écran en cours.",
+        },
+        {
+          title: "Retrouver un bail",
+          goal: "Chercher un bail par son numéro, le nom du locataire, le bien ou le statut.",
+          output: "Jusqu'à 10 baux, avec le numéro, le statut, le bien, le locataire, le loyer et la date de début.",
+          prereq:
+            "La gestion locative est comprise dans votre abonnement. Pour les packs Patrimoine, cela concerne la gestion locative directe.",
+        },
+        {
+          title: "Lister les documents d'un bail",
+          goal: "Voir les quittances, le contrat, les relevés et autres documents d'un bail, au besoin filtrés par type.",
+          output: "Jusqu'à 10 documents, avec le libellé, le type, le statut, la date et la possibilité de les télécharger.",
+          prereq: "Le bail a été retrouvé par l'assistant ou correspond à l'écran en cours.",
+        },
+        {
+          title: "Préparer une quittance ou un relevé de compte",
+          goal: "L'assistant prépare une proposition de quittance de loyer pour un mois, ou de relevé de compte sur 12 mois au plus, sans rien produire encore.",
+          input: "Le bail et, pour une quittance, le mois ; pour un relevé, les dates de début et de fin.",
+          output:
+            "Une carte récapitulative (bail, bien, locataire, période, montant), valable quelques minutes. Si la quittance existe déjà, elle est affichée au lieu d'être reproposée.",
+          prereq:
+            "Un paiement encaissé pour l'échéance du mois, et un modèle de document actif. À défaut, l'assistant explique pourquoi il ne peut pas proposer.",
+        },
+        {
+          title: "Confirmer et générer le document proposé",
+          goal: "Valider vous-même la carte de proposition pour que le document Word soit produit. C'est la seule façon dont l'assistant génère un document.",
+          output: "Le document Word numéroté. Confirmer deux fois ne crée pas de doublon : le document existant est renvoyé.",
+          prereq: "Vous avez le droit de générer et de consulter les documents locatifs, et la proposition n'a pas expiré.",
+        },
+        {
+          title: "Télécharger le document généré",
+          goal: "Récupérer en un clic le fichier Word produit, depuis la carte affichée après la confirmation.",
+          output: "Le fichier Word (.docx).",
+          prereq: "Le document a été généré.",
+        },
+      ],
+      faq: [
+        {
+          q: "L'assistant peut-il modifier mes données ?",
+          a: "Non. Il cherche, présente et prépare des propositions. Un document n'est produit qu'après votre confirmation sur la carte.",
+        },
+        {
+          q: "Pourquoi ne vois-je pas le bouton « Assistant » ?",
+          a: "L'assistant est désactivé par défaut. Le bouton n'apparaît que s'il est activé pour la plateforme et si au moins un de ses outils vous est permis.",
+        },
+        {
+          q: "Que voit l'assistant de mes données ?",
+          a: "Seulement ce que vos droits et votre abonnement permettent. Il ne cherche que dans les données de votre agence, et un outil d'un module que vous n'avez pas souscrit lui est refusé.",
+        },
+      ],
+      related: [
+        "communication-et-documents/generation-baux-quittances",
+        "communication-et-documents/modeles-de-documents-word",
+      ],
     },
   ],
 };

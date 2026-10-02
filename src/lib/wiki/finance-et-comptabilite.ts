@@ -7,7 +7,7 @@ export const financeEtComptabilite: WikiDomain = {
   summary:
     "Caisse, trésorerie, facturation des loyers, impayés, fournisseurs, bons de commande et comptabilité : toute la finance de votre agence immobilière.",
   intro:
-    "Ce domaine réunit la finance opérationnelle de l'agence : la caisse et la trésorerie, la facturation des loyers, le suivi des impayés, les fournisseurs, les bons de commande et les états comptables. Les factures et les règlements fournisseurs sont saisis en brouillon, puis validés par la direction avant d'être comptabilisés. Une erreur se corrige par une annulation, jamais en effaçant. Il s'adresse à la direction, aux comptables et aux gestionnaires. Ces fonctions sont présentes dans l'application et en cours de déploiement.",
+    "Ce domaine réunit la finance opérationnelle de l'agence : la caisse et la trésorerie, la facturation des loyers, le suivi des impayés, les fournisseurs, les bons de commande et les états comptables. Les factures et les règlements fournisseurs sont saisis en brouillon, puis validés par la direction avant d'être comptabilisés. Une erreur se corrige par une annulation, jamais en effaçant. Il s'adresse à la direction, aux comptables et aux gestionnaires.",
   features: [
     {
       slug: "caisse",
@@ -17,10 +17,10 @@ export const financeEtComptabilite: WikiDomain = {
         "Ouvrez votre caisse avec un fond de départ, clôturez-la par comptage ou billetage et faites valider l'écart par un tiers : la caisse de l'agence sous contrôle.",
       intro:
         "La caisse suit les espèces que vos caissiers encaissent et décaissent chaque jour. Chaque caissier ouvre sa session avec un fond de caisse, la clôture par un comptage, puis une autre personne valide la clôture. Vous voyez en un coup d'œil le montant attendu, le montant compté et l'écart de chaque caisse.",
-      packs: ["agence", "syndic", "promoteur", "integre"],
+      packs: ["agence", "syndic", "promoteur", "integre", "patrimoine-essentiel", "patrimoine-pro"],
       profiles: ["direction", "gestionnaire", "comptable"],
       menu: "Finance › Caisse et comptabilité › Caisse et trésorerie › Caisse",
-      status: "deploiement",
+      status: "disponible",
       actions: [
         {
           title: "Consulter sa caisse du jour",
@@ -88,10 +88,10 @@ export const financeEtComptabilite: WikiDomain = {
         "Suivez les soldes de vos caisses, comptes bancaires et comptes Mobile Money, passez des virements internes et déclarez vos versements de retenue à la source.",
       intro:
         "La trésorerie regroupe tous les comptes où circule l'argent de l'agence : caisses, banques et Mobile Money. Vous voyez le solde de chaque compte, vous déplacez des fonds d'un compte à l'autre et chaque mouvement est comptabilisé. Vous suivez aussi la retenue à la source collectée et ses versements à la DGI.",
-      packs: ["agence", "syndic", "promoteur", "integre"],
+      packs: ["agence", "syndic", "promoteur", "integre", "patrimoine-essentiel", "patrimoine-pro"],
       profiles: ["direction", "gestionnaire", "comptable"],
       menu: "Finance › Caisse et comptabilité › Caisse et trésorerie › Trésorerie",
-      status: "deploiement",
+      status: "disponible",
       actions: [
         {
           title: "Consulter les comptes de trésorerie",
@@ -186,10 +186,10 @@ export const financeEtComptabilite: WikiDomain = {
         "Importez vos opérations depuis un classeur Excel et faites valider factures fournisseurs, règlements et pièces de caisse dans une file unique par la direction.",
       intro:
         "Plus besoin de ressaisir ligne par ligne : vous chargez un classeur Excel, l'application reconnaît la nature de chaque ligne et l'enregistre. Les pièces saisies en brouillon arrivent ensuite dans une file de validation unique. La direction voit en un coup d'œil ce qui attend son accord, qui l'a saisi et pour quel montant.",
-      packs: ["agence", "syndic", "promoteur", "integre"],
+      packs: ["agence", "syndic", "promoteur", "integre", "patrimoine-essentiel", "patrimoine-pro"],
       profiles: ["direction", "comptable"],
       menu: "Finance › Caisse et comptabilité › Saisie et validation",
-      status: "deploiement",
+      status: "disponible",
       actions: [
         {
           title: "Importer un classeur Excel",
@@ -219,15 +219,15 @@ export const financeEtComptabilite: WikiDomain = {
       summary:
         "Consultez le journal, le grand livre, la balance générale et les états auxiliaires des mandants sur la période voulue, puis exportez-les en CSV ou en Excel.",
       intro:
-        "Les écritures passées par la caisse, la trésorerie et les fournisseurs se retrouvent dans les états comptables. Vous choisissez une période et consultez le journal, le grand livre ou la balance, à l'écran ou en fichier. Le grand livre et la balance des mandants détaillent les mouvements par propriétaire ou par copropriété.",
-      packs: ["agence", "syndic", "promoteur", "integre"],
+        "Les écritures passées par la caisse, la trésorerie et les fournisseurs se retrouvent dans les états comptables. Vous choisissez une période et consultez le journal, le grand livre ou la balance, à l'écran ou en fichier. Le grand livre et la balance des mandants détaillent les mouvements par propriétaire ou par copropriété. Pour les biens que vous détenez en propre, les écritures de la gestion locative directe s'écrivent toutes seules.",
+      packs: ["agence", "syndic", "promoteur", "integre", "patrimoine-essentiel", "patrimoine-pro"],
       profiles: ["direction", "gestionnaire", "comptable"],
       menu: "Finance › Caisse et comptabilité › Comptabilité",
-      status: "deploiement",
+      status: "disponible",
       actions: [
         {
           title: "Consulter le journal comptable",
-          goal: "Lister les écritures d'une période, journal par journal.",
+          goal: "Lister les écritures d'une période, journal par journal, y compris les écritures automatiques de la gestion locative directe.",
           input: "La période et, si besoin, le journal voulu.",
           output: "Les lignes au débit et au crédit, à l'écran ou en fichier CSV ou Excel.",
         },
@@ -239,9 +239,18 @@ export const financeEtComptabilite: WikiDomain = {
         },
         {
           title: "Consulter la balance générale",
-          goal: "Obtenir la balance de tous les comptes sur une période.",
+          goal: "Obtenir la balance de tous les comptes sur une période, avec les intitulés du plan de comptes.",
           input: "La période.",
           output: "La balance, à l'écran ou en fichier CSV ou Excel.",
+        },
+        {
+          title: "Laisser l'application écrire la comptabilité de la gestion locative directe",
+          goal: "Pour un bien que vous détenez en propre (ni indivision, ni propriétaire tiers), chaque événement locatif s'écrit seul au journal : encaissement d'un loyer, créance du locataire, remise ou annulation, dépense du bien. Une pièce modifiée ou supprimée est contre-passée puis réécrite, sans doublon.",
+          output:
+            "Les écritures apparaissent au journal et au grand livre, et le compte du locataire se lit comme son relevé (facturé moins réglé).",
+          prereq:
+            "Enregistrer un paiement, générer les échéances ou ajouter une dépense du bien. Concerne les biens détenus en propre, notamment pour les packs Patrimoine.",
+          profiles: ["equipe"],
         },
         {
           title: "Consulter le grand livre des mandants",
@@ -271,17 +280,17 @@ export const financeEtComptabilite: WikiDomain = {
       summary:
         "Générez en une fois les factures de loyer du mois pour tous vos baux actifs, puis retrouvez l'historique et le résumé de chaque campagne de facturation.",
       intro:
-        "Chaque mois, vous lancez une campagne qui génère les factures de loyer de tous les baux actifs. Relancer la même période ne crée pas de doublon : l'application vous renvoie la campagne déjà faite. Vous gardez l'historique de toutes les campagnes et leur résumé.",
-      packs: ["agence", "syndic", "promoteur", "integre"],
+        "Chaque mois, vous lancez une campagne qui génère les factures de loyer de tous les baux actifs. Relancer la même période ne crée pas de doublon : l'application vous renvoie la campagne déjà faite, et les échéances déjà préparées en brouillon sont simplement émises. Cette fonction suppose d'avoir la gestion locative dans votre abonnement. Vous gardez l'historique de toutes les campagnes et leur résumé.",
+      packs: ["agence", "syndic", "promoteur", "integre", "patrimoine-essentiel", "patrimoine-pro"],
       profiles: ["direction", "gestionnaire", "comptable"],
       menu: "Finance › Clients et propriétaires › Facturation et balances › Facturation du mois",
-      status: "deploiement",
+      status: "disponible",
       actions: [
         {
           title: "Lancer la facturation du mois",
-          goal: "Générer les factures de loyer du mois pour tous les baux actifs.",
+          goal: "Générer les factures de loyer du mois pour tous les baux actifs. Une échéance déjà préparée en brouillon pour la période est émise, une échéance déjà émise n'est pas refacturée, et le loyer facturé est le loyer effectif de la période (révisions datées comprises).",
           input: "Le mois et l'année.",
-          output: "Une campagne de facturation avec son résumé.",
+          output: "Une campagne de facturation avec son résumé, et les échéances inscrites au compte du locataire.",
           prereq: "Vos baux doivent être créés et actifs.",
           profiles: ["direction", "comptable"],
         },
@@ -312,17 +321,24 @@ export const financeEtComptabilite: WikiDomain = {
         "Suivez le facturé, le réglé et le solde de chaque locataire, repérez l'ancienneté des impayés avec la balance âgée et imprimez le relevé de compte en PDF.",
       intro:
         "La balance clients montre, locataire par locataire, ce qui a été facturé, ce qui a été réglé et ce qui reste dû. La balance âgée classe les impayés par ancienneté pour mieux prioriser vos relances. Depuis la fiche d'un compte, vous consultez le relevé détaillé et l'imprimez en PDF.",
-      packs: ["agence", "syndic", "promoteur", "integre"],
+      packs: ["agence", "syndic", "promoteur", "integre", "patrimoine-essentiel", "patrimoine-pro"],
       profiles: ["direction", "gestionnaire", "comptable"],
       menu: "Finance › Clients et propriétaires › Facturation et balances",
-      status: "deploiement",
+      status: "disponible",
       actions: [
         {
           title: "Consulter la balance clients",
-          goal: "Voir le facturé, le réglé et le solde de chaque locataire sur une période.",
+          goal: "Voir le facturé, le réglé et le solde de chaque locataire sur une période. Une échéance ne compte au solde qu'à sa date d'exigibilité, comme dans le relevé du portail locataire.",
           input: "La période et, si besoin, un bien précis.",
           output:
             "Une ligne par locataire avec ses biens, le facturé, le réglé et le solde, exportable en CSV.",
+        },
+        {
+          title: "Consulter la balance clients sur une période précise",
+          goal: "Faire porter le facturé et le réglé sur la période choisie, la date de fin comprise, avec le solde à la fin de la période et une note à l'écran.",
+          input: "La période et, si besoin, un bien précis.",
+          output: "Une balance dont les montants et le solde correspondent à la période filtrée.",
+          status: "developpement",
         },
         {
           title: "Consulter la balance âgée",
@@ -332,7 +348,7 @@ export const financeEtComptabilite: WikiDomain = {
         },
         {
           title: "Consulter le relevé d'un compte",
-          goal: "Détailler les mouvements du compte d'un locataire ou d'un mandant sur une période.",
+          goal: "Détailler les mouvements du compte d'un locataire ou d'un mandant sur une période, avec la même règle d'exigibilité que la balance clients.",
           input: "La période.",
           output: "Le relevé, avec le solde d'ouverture, le solde de clôture et chaque mouvement.",
         },
@@ -344,6 +360,10 @@ export const financeEtComptabilite: WikiDomain = {
         },
       ],
       faq: [
+        {
+          q: "Ces écrans sont-ils inclus dans tous les abonnements ?",
+          a: "Non. La balance clients et la balance âgée supposent la gestion locative : sans elle, l'écran indique que la fonction n'est pas comprise dans votre abonnement.",
+        },
         {
           q: "Peut-on voir depuis combien de temps un loyer est impayé ?",
           a: "Oui. La balance âgée répartit les impayés par tranches d'ancienneté, à la date que vous choisissez.",
@@ -359,10 +379,10 @@ export const financeEtComptabilite: WikiDomain = {
         "Tenez le registre de vos fournisseurs, saisissez leurs factures et vos règlements, faites-les valider et suivez la balance fournisseurs, chantier par chantier.",
       intro:
         "Chaque fournisseur a sa fiche et son compte, avec le solde que vous lui devez. Les factures et les règlements sont saisis en brouillon, puis validés par la direction avant d'être comptabilisés. Une erreur se corrige par une annulation, jamais par une modification : vous gardez une trace de tout.",
-      packs: ["agence", "syndic", "promoteur", "integre"],
+      packs: ["agence", "syndic", "promoteur", "integre", "patrimoine-essentiel", "patrimoine-pro"],
       profiles: ["direction", "gestionnaire", "comptable"],
       menu: "Finance › Achats et fournisseurs › Fournisseurs et commandes › Fournisseurs",
-      status: "deploiement",
+      status: "disponible",
       actions: [
         {
           title: "Consulter la liste des fournisseurs",
@@ -391,7 +411,8 @@ export const financeEtComptabilite: WikiDomain = {
           goal: "Enregistrer une facture reçue, avec ses lignes et leur répartition par chantier et par poste de dépense.",
           input: "La date, la référence, les lignes de la facture et leur répartition.",
           output: "Une facture en brouillon, dont le montant est calculé à partir des lignes.",
-          prereq: "La facture compte au moins une ligne. Une facture de matériaux doit être rattachée à un chantier.",
+          prereq:
+            "La facture compte au moins une ligne et la répartition doit totaliser le montant de la facture. Une facture de matériaux n'est rattachée à un chantier que si votre agence a la gestion des chantiers ; sans elle, ces répartitions sont masquées.",
           profiles: ["direction", "comptable"],
         },
         {
@@ -408,10 +429,10 @@ export const financeEtComptabilite: WikiDomain = {
         },
         {
           title: "Annuler une facture validée",
-          goal: "Corriger une facture fournisseur validée par erreur.",
+          goal: "Corriger une facture fournisseur validée par erreur. Un brouillon jamais validé peut aussi être annulé : le chantier est libéré, sans écriture comptable.",
           input: "Le motif de l'annulation.",
           output: "Une pièce d'annulation qui passe l'écriture inverse.",
-          prereq: "La facture doit être validée et pas déjà annulée.",
+          prereq: "La facture doit être validée (ou en brouillon) et pas déjà annulée.",
           profiles: ["direction"],
         },
         {
@@ -441,7 +462,7 @@ export const financeEtComptabilite: WikiDomain = {
         },
         {
           title: "Consulter la balance fournisseurs",
-          goal: "Voir ce que vous devez à chaque fournisseur sur une période, au besoin pour un seul chantier.",
+          goal: "Voir ce que vous devez à chaque fournisseur sur une période, au besoin pour un seul chantier. Une facture annulée et sa contrepassation sont écartées des cumuls.",
           input: "La période et, si besoin, le chantier.",
           output: "La balance fournisseurs.",
         },
@@ -470,10 +491,10 @@ export const financeEtComptabilite: WikiDomain = {
         "Passez vos commandes aux fournisseurs par chantier, émettez-les, rapprochez-les des factures reçues et suivez l'engagé : coût réel et commandes en cours.",
       intro:
         "Le bon de commande fixe ce que vous commandez à un fournisseur pour un chantier, poste par poste. Une fois émis, il entre dans l'engagé du chantier ; quand la facture arrive, vous la rattachez au bon pour suivre le facturé et le reste à facturer. Vous connaissez ainsi le coût réel d'un chantier et ce qui est déjà engagé.",
-      packs: ["agence", "syndic", "promoteur", "integre"],
+      packs: ["agence", "syndic", "promoteur", "integre", "patrimoine-essentiel", "patrimoine-pro"],
       profiles: ["direction", "gestionnaire", "comptable"],
       menu: "Finance › Achats et fournisseurs › Fournisseurs et commandes › Bons de commande",
-      status: "deploiement",
+      status: "disponible",
       actions: [
         {
           title: "Consulter les bons de commande",

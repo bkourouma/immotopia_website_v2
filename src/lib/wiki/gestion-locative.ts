@@ -7,7 +7,7 @@ export const gestionLocative: WikiDomain = {
   summary:
     "Baux, échéances, encaissement des loyers en espèces ou Mobile Money, pénalités, caution et quittances : la gestion locative d'ImmoTopia expliquée en détail.",
   intro:
-    "Le domaine gestion locative couvre tout le cycle d'un bail : sa création, l'échéancier des loyers, l'encaissement, les pénalités de retard, le dépôt de garantie et les documents remis au locataire. Il s'adresse aux agences et aux administrateurs de biens qui gèrent des logements pour le compte de propriétaires. Les relevés de gérance permettent de rendre compte à chaque bailleur. La vie du bail, les états des lieux, les reversements et les honoraires paramétrables sont en cours de déploiement.",
+    "Le domaine gestion locative couvre tout le cycle d'un bail : sa création, la vie du bail, les états des lieux, l'échéancier des loyers, l'encaissement, les pénalités de retard, le dépôt de garantie et les documents remis au locataire. Il s'adresse aux agences et aux administrateurs de biens, Les packs Patrimoine ouvrent la gestion locative directe de vos propres biens, sans mandat ni propriétaire tiers. Les relevés de gérance, les reversements, les honoraires et les accès en lecture seule pour les tiers de confiance concernent la gestion pour le compte de propriétaires. Les liens de paiement d'un loyer et les envois automatiques au propriétaire sont en cours de déploiement.",
   features: [
     {
       slug: "gestion-des-baux",
@@ -17,7 +17,7 @@ export const gestionLocative: WikiDomain = {
         "Créez vos baux en quelques minutes : bien, locataire, loyer, jour d'échéance, caution et règles de pénalité. Colocataires, statuts et fiche bail complète.",
       intro:
         "Le bail est le point de départ de toute la gestion locative : échéances, paiements, pénalités et dépôt de garantie s'y rattachent. Vos collaborateurs créent un bail sur un bien de l'agence, y ajoutent les colocataires et suivent son statut. Toute l'information du contrat tient sur une seule fiche : plus besoin de chercher dans les classeurs.",
-      packs: ["agence", "integre"],
+      packs: ["agence", "integre", "patrimoine-essentiel", "patrimoine-pro"],
       profiles: ["equipe"],
       menu: "Baux",
       status: "disponible",
@@ -87,10 +87,10 @@ export const gestionLocative: WikiDomain = {
         "Révisez le loyer, renouvelez ou résiliez un bail, enregistrez un avenant et estimez le solde de tout compte, avec l'historique complet de chaque contrat.",
       intro:
         "Un bail évolue : hausse de loyer, prolongation, avenant, départ du locataire. Cette fonctionnalité trace chaque événement sur le bail et met à jour les échéances non réglées en conséquence. En fin de bail, vous voyez d'un coup d'œil ce qui reste à rendre au locataire.",
-      packs: ["agence", "integre"],
+      packs: ["agence", "integre", "patrimoine-essentiel", "patrimoine-pro"],
       profiles: ["equipe"],
       menu: "Baux › Détail du bail › Vie du bail",
-      status: "deploiement",
+      status: "disponible",
       actions: [
         {
           title: "Consulter l'historique du bail",
@@ -98,7 +98,7 @@ export const gestionLocative: WikiDomain = {
         },
         {
           title: "Réviser le loyer",
-          goal: "Appliquer un nouveau loyer, et si besoin de nouvelles charges, à partir d'un mois donné.",
+          goal: "Appliquer un nouveau loyer, et si besoin de nouvelles charges, à partir d'un mois donné. Une révision à date future est planifiée : le bail garde l'ancien loyer jusqu'à cette date.",
           input: "Le mois d'effet, le nouveau loyer, les nouvelles charges, le taux de révision et un commentaire.",
           output:
             "Les échéances non réglées à partir de ce mois sont recalculées et l'écart est reporté au compte du locataire.",
@@ -159,10 +159,10 @@ export const gestionLocative: WikiDomain = {
         "Réalisez vos états des lieux d'entrée et de sortie pièce par pièce, avec photos, compteurs et clés, puis comparez-les pour repérer les dégradations.",
       intro:
         "L'état des lieux protège le bailleur comme le locataire. Votre agent le remplit pièce par pièce, élément par élément, ajoute des photos, relève les compteurs et note les retenues. À la sortie, la comparaison avec l'entrée montre tout de suite ce qui s'est dégradé.",
-      packs: ["agence", "integre"],
+      packs: ["agence", "integre", "patrimoine-essentiel", "patrimoine-pro"],
       profiles: ["equipe"],
       menu: "Baux › Détail du bail › États des lieux",
-      status: "deploiement",
+      status: "disponible",
       actions: [
         {
           title: "Ouvrir un état des lieux",
@@ -231,7 +231,7 @@ export const gestionLocative: WikiDomain = {
         "Suivez la caution de chaque bail : montant attendu, encaissé, retenu et restitué. Chaque mouvement du dépôt de garantie est tracé et reste consultable.",
       intro:
         "La caution est souvent source de litiges en fin de bail. ImmoTopia tient pour chaque bail le montant attendu, encaissé, retenu, restitué ou conservé, et garde l'historique de chaque mouvement. Vous répondez au bailleur comme au locataire, chiffres à l'appui.",
-      packs: ["agence", "integre"],
+      packs: ["agence", "integre", "patrimoine-essentiel", "patrimoine-pro"],
       profiles: ["equipe"],
       menu: "Baux › Détail du bail › Dépôt de garantie",
       status: "disponible",
@@ -256,10 +256,9 @@ export const gestionLocative: WikiDomain = {
         },
         {
           title: "Retenir ou conserver une partie de la caution",
-          goal: "Bloquer une somme sur le dépôt, conserver tout ou partie de la caution, ou corriger un montant.",
+          goal: "Bloquer une somme sur le dépôt, la libérer, conserver tout ou partie de la caution, ou corriger un montant. Le solde détenu tient compte de chaque mouvement, une seule fois.",
           input: "Le type de mouvement, le montant et une note.",
-          prereq: "Le montant conservé ne dépasse pas le solde détenu.",
-          status: "deploiement",
+          prereq: "Le montant conservé ou remboursé ne dépasse pas le solde détenu.",
         },
         {
           title: "Consulter l'historique des mouvements",
@@ -286,7 +285,7 @@ export const gestionLocative: WikiDomain = {
         "Générez contrats de bail, avenants, quittances, reçus de loyer, reçus de caution et relevés, numérotés à la suite et classés avec chaque bail.",
       intro:
         "Les documents remis au locataire et au bailleur se créent depuis la fiche du bail, sans ressaisie. Chaque document reçoit un numéro d'ordre et reste rattaché au bail, à l'échéance ou au paiement concerné. Vous retrouvez en quelques secondes la quittance d'un mois donné.",
-      packs: ["agence", "integre"],
+      packs: ["agence", "integre", "patrimoine-essentiel", "patrimoine-pro"],
       profiles: ["equipe"],
       menu: "Baux › Détail du bail › Documents",
       status: "disponible",
@@ -322,14 +321,14 @@ export const gestionLocative: WikiDomain = {
         "Générez en un clic toutes les échéances d'un bail, loyer et charges compris, puis suivez celles qui sont dues, en retard, partiellement payées ou soldées.",
       intro:
         "L'échéancier transforme le bail en appels de loyer, période par période, selon la fréquence choisie. Vous voyez d'un coup d'œil qui doit quoi, et depuis quand. Les échéances devenues exigibles sont reportées au compte du locataire, ce qui prépare l'encaissement et le calcul des pénalités.",
-      packs: ["agence", "integre"],
+      packs: ["agence", "integre", "patrimoine-essentiel", "patrimoine-pro"],
       profiles: ["equipe"],
       menu: "Encaisser › Échéances",
       status: "disponible",
       actions: [
         {
           title: "Générer les échéances d'un bail",
-          goal: "Créer toutes les échéances du bail, loyer et charges, selon sa fréquence de facturation.",
+          goal: "Créer toutes les échéances du bail, loyer et charges, selon sa fréquence de facturation. Elles démarrent en brouillon et sont émises par la facturation du mois.",
           output: "Une échéance par période jusqu'à la fin du bail, ou sur 12 mois pour un bail sans date de fin.",
           prereq: "Le bail n'est ni annulé ni terminé et n'a pas encore d'échéances.",
         },
@@ -342,6 +341,11 @@ export const gestionLocative: WikiDomain = {
           title: "Mettre à jour les statuts",
           goal: "Recalculer le statut des échéances d'un bail : brouillon, due, en retard, partiellement payée ou payée.",
           output: "Les échéances devenues exigibles sont inscrites au compte du locataire.",
+        },
+        {
+          title: "Passer automatiquement les échéances échues en retard",
+          goal: "Chaque nuit, appliquer les révisions de loyer arrivées à date, puis faire passer « en retard » les échéances échues et non soldées, avant le calcul des pénalités. Les listes reclassent aussi le statut à l'affichage.",
+          output: "Les échéances en retard et les pénalités sont à jour chaque matin, sans action de votre part.",
         },
         {
           title: "Supprimer les échéances d'un bail",
@@ -370,7 +374,7 @@ export const gestionLocative: WikiDomain = {
         "Enregistrez les loyers reçus en espèces, virement, chèque ou Mobile Money, affectez-les aux échéances et validez les paiements déclarés par vos locataires.",
       intro:
         "Chaque règlement reçu d'un locataire est saisi avec son moyen de paiement, y compris Mobile Money avec l'opérateur et le numéro utilisés. Vous l'affectez ensuite à une ou plusieurs échéances ; le surplus reste en avance au compte du locataire. Les paiements déclarés par les locataires depuis leur portail arrivent dans une liste où votre équipe les approuve ou les rejette.",
-      packs: ["agence", "integre"],
+      packs: ["agence", "integre", "patrimoine-essentiel", "patrimoine-pro"],
       profiles: ["equipe"],
       menu: "Encaisser › Paiements",
       status: "disponible",
@@ -401,7 +405,7 @@ export const gestionLocative: WikiDomain = {
         },
         {
           title: "Vérifier un paiement en ligne",
-          goal: "Redemander à la passerelle de paiement le statut d'un règlement fait en ligne.",
+          goal: "Redemander à la passerelle de paiement le statut d'un règlement fait en ligne. Le paiement réel en ligne n'est pas encore validé.",
           output: "Le statut et le montant du paiement en ligne, mis à jour.",
           status: "deploiement",
         },
@@ -437,6 +441,7 @@ export const gestionLocative: WikiDomain = {
       related: [
         "gestion-locative/echeancier-des-loyers",
         "gestion-locative/penalites-de-retard",
+        "gestion-locative/liens-de-paiement-loyer",
         "portails-clients/portail-locataire",
       ],
     },
@@ -448,7 +453,7 @@ export const gestionLocative: WikiDomain = {
         "Calculez les pénalités de retard selon les règles du bail, une échéance à la fois ou en masse, accordez des remises motivées et joignez les justificatifs.",
       intro:
         "Les règles de pénalité se fixent dans chaque bail : taux ou montant fixe, plafond et jours de grâce. ImmoTopia calcule la pénalité due sur chaque échéance en retard et l'inscrit au compte du locataire. Vous gardez la main : une remise se fait avec un motif, et un justificatif peut être joint.",
-      packs: ["agence", "integre"],
+      packs: ["agence", "integre", "patrimoine-essentiel", "patrimoine-pro"],
       profiles: ["equipe"],
       menu: "Baux › Détail du bail › Pénalités",
       status: "disponible",
@@ -526,12 +531,36 @@ export const gestionLocative: WikiDomain = {
         {
           title: "Recalculer un relevé",
           goal: "Refaire le calcul d'un relevé ancien avec la méthode de calcul actuelle, sur ses biens et son mois d'origine.",
-          status: "deploiement",
         },
         {
           title: "Envoyer le relevé au propriétaire",
           goal: "Transmettre le relevé au propriétaire ; il passe au statut « envoyé ».",
-          prereq: "Un relevé calculé avec une ancienne méthode doit d'abord être recalculé.",
+          prereq:
+            "Un relevé calculé avec une ancienne méthode doit d'abord être recalculé. Le propriétaire doit avoir accepté de recevoir des messages par e-mail.",
+        },
+        {
+          title: "Envoyer le rapport du mois au propriétaire",
+          goal: "Envoyer au propriétaire un lien vers le rapport mensuel de son relevé, par son canal préféré (WhatsApp ou e-mail), un seul canal par message.",
+          output:
+            "Le propriétaire reçoit le lien. Si aucun envoi n'aboutit, le lien est retiré automatiquement et vous voyez la raison.",
+          prereq:
+            "Le relevé n'est plus un brouillon et n'est pas calculé avec une ancienne méthode. Le propriétaire a donné son accord pour WhatsApp ou l'e-mail. L'envoi par WhatsApp se règle dans la configuration de l'agence.",
+        },
+        {
+          title: "Créer et copier un lien de rapport mensuel",
+          goal: "Obtenir un lien en lecture seule vers le rapport mensuel d'un relevé, pour le transmettre vous-même au propriétaire.",
+          input: "La durée de validité, de 1 à 30 jours (7 par défaut).",
+          output: "Un lien et sa date d'expiration. Le lien complet n'est affiché qu'à la création.",
+          prereq: "Le relevé n'est plus un brouillon et n'est pas calculé avec une ancienne méthode.",
+        },
+        {
+          title: "Voir les liens actifs d'un relevé",
+          goal: "Contrôler les liens encore valides d'un relevé.",
+          output: "Pour chaque lien : sa création, son expiration, le nombre de consultations et la dernière consultation.",
+        },
+        {
+          title: "Révoquer un lien de rapport",
+          goal: "Rendre un lien inutilisable immédiatement, par exemple s'il a été envoyé à la mauvaise personne.",
         },
       ],
       faq: [
@@ -544,6 +573,7 @@ export const gestionLocative: WikiDomain = {
         "gestion-locative/reversements-aux-proprietaires",
         "gestion-locative/honoraires-de-gestion",
         "portails-clients/portail-proprietaire",
+        "portails-clients/rapport-mensuel-proprietaire",
       ],
     },
     {
@@ -553,11 +583,11 @@ export const gestionLocative: WikiDomain = {
       summary:
         "Suivez le compte courant de chaque propriétaire (loyers encaissés, honoraires, TVA, dépenses) et enregistrez le reversement du solde qui lui est dû.",
       intro:
-        "Pour chaque propriétaire, ImmoTopia tient un compte courant : loyers encaissés, moins honoraires, TVA, dépenses et reversements déjà faits. Vous savez à tout moment combien vous lui devez. Le reversement s'enregistre en quelques clics, et une erreur se corrige par une annulation motivée.",
+        "Pour chaque propriétaire, ImmoTopia tient un compte courant : loyers encaissés, moins honoraires, TVA, dépenses et reversements déjà faits. Vous savez à tout moment combien vous lui devez. Le reversement s'enregistre en quelques clics, et une erreur se corrige par une annulation motivée. Les packs Patrimoine ne comprennent pas cette fonction (pas de propriétaire tiers).",
       packs: ["agence", "integre"],
       profiles: ["equipe"],
       menu: "Finance › Clients et propriétaires › Reversements et commissions › Comptes propriétaires",
-      status: "deploiement",
+      status: "disponible",
       actions: [
         {
           title: "Consulter les comptes propriétaires",
@@ -600,10 +630,11 @@ export const gestionLocative: WikiDomain = {
       summary:
         "Paramétrez les honoraires de gestion par agence, propriétaire ou bail, désignez le gestionnaire de chaque bail et suivez chaque mois les commissions des agents.",
       intro:
-        "Les honoraires de gestion se règlent à trois niveaux : les réglages de l'agence, puis une dérogation par propriétaire, puis une dérogation par bail, qui l'emporte. Chaque bail peut avoir son gestionnaire attitré, et chaque collaborateur sa part de commission. Chaque mois, l'état des commissions montre ce que rapportent les honoraires, et à qui.",
+        "Les honoraires de gestion se règlent à trois niveaux : les réglages de l'agence, puis une dérogation par propriétaire, puis une dérogation par bail, qui l'emporte. Chaque bail peut avoir son gestionnaire attitré, et chaque collaborateur sa part de commission. Chaque mois, l'état des commissions montre ce que rapportent les honoraires, et à qui. Les honoraires par propriétaire et la commission des collaborateurs se règlent dans les paramètres financiers de l'agence. Les packs Patrimoine ne comprennent pas cette fonction (pas de propriétaire tiers).",
       packs: ["agence", "integre"],
       profiles: ["equipe"],
-      status: "deploiement",
+      menu: "Paramétrage › Agence › Paramètres financiers",
+      status: "disponible",
       actions: [
         {
           title: "Configurer les honoraires d'un propriétaire",
@@ -659,7 +690,7 @@ export const gestionLocative: WikiDomain = {
       packs: ["agence", "integre"],
       profiles: ["direction", "gestionnaire", "comptable"],
       menu: "Finance › Clients et propriétaires › Reversements et commissions › Associations",
-      status: "deploiement",
+      status: "disponible",
       actions: [
         {
           title: "Consulter les associations",
@@ -699,6 +730,183 @@ export const gestionLocative: WikiDomain = {
         },
       ],
       related: ["gestion-locative/reversements-aux-proprietaires", "gestion-locative/releves-de-gerance"],
+    },
+    {
+      slug: "liens-de-paiement-loyer",
+      title: "Liens de paiement d'un loyer",
+      metaTitle: "Lien de paiement d'un loyer par Mobile Money",
+      summary:
+        "Envoyez au locataire un lien pour payer une échéance de loyer en Mobile Money, sans compte. Copiez-le, suivez l'état du paiement et révoquez-le au besoin.",
+      intro:
+        "Depuis une échéance, vous envoyez au locataire un lien qui mène à une page de paiement du reste dû. Il paie en Mobile Money, sans créer de compte. Vous choisissez d'envoyer le lien par WhatsApp ou par e-mail, ou de le copier pour le transmettre vous-même. Cette fonction est en cours de déploiement : elle est éprouvée en mode simulation, et le paiement réel ainsi que l'envoi réel des messages ne sont pas encore validés.",
+      packs: ["agence", "integre", "patrimoine-essentiel", "patrimoine-pro"],
+      profiles: ["equipe"],
+      menu: "Encaisser › Échéances",
+      status: "deploiement",
+      actions: [
+        {
+          title: "Envoyer le lien de paiement au locataire",
+          goal: "Envoyer au locataire, par son canal préféré (WhatsApp ou e-mail), un lien vers une seule échéance de loyer.",
+          input: "La durée de validité du lien, de 1 à 30 jours (7 par défaut). Le destinataire est celui de la fiche du locataire.",
+          output:
+            "Le lien est envoyé avec le montant dû. Si aucun canal n'est possible ou si l'envoi échoue, aucun lien n'est conservé et la raison s'affiche.",
+          prereq:
+            "Le bail est actif, l'échéance n'est ni soldée ni annulée, le paiement en ligne est utilisable pour l'agence et le locataire a donné son accord pour WhatsApp ou l'e-mail.",
+        },
+        {
+          title: "Copier le lien de paiement",
+          goal: "Créer un lien sans l'envoyer, pour le transmettre vous-même : messagerie, SMS personnel ou en main propre.",
+          output: "Un lien et sa date d'expiration. Le lien complet n'est affiché qu'une seule fois, à la création.",
+          prereq: "L'échéance peut encore être payée.",
+        },
+        {
+          title: "Suivre les liens d'une échéance",
+          goal: "Voir les liens émis pour une échéance et l'état du paiement associé.",
+          output:
+            "Pour chaque lien : actif, expiré ou révoqué, ses dates, le nombre de consultations et l'état du paiement (aucun, en cours, payé, échoué, annulé, expiré ou à vérifier).",
+          profiles: ["equipe"],
+        },
+        {
+          title: "Révoquer un lien de paiement",
+          goal: "Rendre un lien inutilisable tout de suite, s'il a été envoyé par erreur ou divulgué.",
+          output: "Le lien affiche ensuite « Lien invalide ou expiré. ». Révoquer un lien déjà révoqué est sans effet.",
+        },
+      ],
+      faq: [
+        {
+          q: "Le locataire a-t-il besoin d'un compte pour payer ?",
+          a: "Non. Le lien lui ouvre directement une page de paiement Mobile Money pour l'échéance concernée.",
+        },
+        {
+          q: "Peut-on payer une partie du loyer avec le lien ?",
+          a: "Non. Le lien propose de régler le reste dû de l'échéance, pénalités comprises.",
+        },
+      ],
+      related: [
+        "gestion-locative/echeancier-des-loyers",
+        "gestion-locative/encaissement-des-loyers",
+        "portails-clients/paiement-loyer-par-lien",
+      ],
+    },
+    {
+      slug: "acces-partages-tiers-de-confiance",
+      title: "Accès partagés pour tiers de confiance",
+      metaTitle: "Accès partagé en lecture seule pour notaire ou banquier",
+      summary:
+        "Donnez à un notaire, un expert-comptable ou un banquier un accès en lecture seule à des biens et documents choisis, avec échéance et journal des consultations.",
+      intro:
+        "Pour un dossier de prêt, une succession ou une clôture comptable, vous évitez d'envoyer des pièces par e-mail. Vous créez un accès en lecture seule, sans compte pour le destinataire, limité aux biens, aux rubriques et aux documents que vous choisissez. Il dure le temps voulu ou reste permanent, se modifie ou se retire à tout moment, et chaque consultation est enregistrée.",
+      packs: ["agence", "integre"],
+      profiles: ["equipe"],
+      menu: "Patrimoine › Accès partagés",
+      status: "disponible",
+      actions: [
+        {
+          title: "Consulter les accès partagés",
+          goal: "Voir les accès donnés aux notaires, experts-comptables et banquiers.",
+          output:
+            "Pour chaque accès : le bénéficiaire, les rubriques, le périmètre, le statut (actif, expire bientôt, expiré ou révoqué), le nombre de consultations et la dernière consultation.",
+        },
+        {
+          title: "Préparer un accès partagé",
+          goal: "Choisir le propriétaire, les biens et les entités concernés, avec des rubriques proposées selon le type de bénéficiaire.",
+          output:
+            "Banquier : valorisations, rendement et ratios, emprunts. Expert-comptable : dépenses, loyers, emprunts. Notaire : titres et propriété, documents, valorisations.",
+        },
+        {
+          title: "Choisir les documents à partager",
+          goal: "Sélectionner, parmi les documents d'un bien de l'agence, ceux que le bénéficiaire pourra consulter.",
+        },
+        {
+          title: "Créer un accès partagé",
+          goal: "Ouvrir un accès en lecture seule à des biens ou des entités choisis, avec des rubriques précises et une échéance, ou sans limite de durée.",
+          input:
+            "Le type et le nom du bénéficiaire, son e-mail, les biens et entités, le propriétaire si besoin, les rubriques, les documents partagés, l'échéance et la durée de validité du lien.",
+          output:
+            "Un accès créé et un lien envoyé par e-mail au bénéficiaire. Le lien complet n'est affiché qu'une seule fois.",
+          prereq: "Au moins un bien ou une entité de l'agence, une rubrique et une échéance qui n'est pas passée.",
+        },
+        {
+          title: "Consulter le détail d'un accès",
+          goal: "Voir le périmètre exact : biens, entités, documents et rubriques.",
+        },
+        {
+          title: "Modifier un accès",
+          goal: "Réduire ou élargir les rubriques, le périmètre et les documents, changer l'échéance (y compris rouvrir un accès expiré) ou le rendre permanent.",
+          output: "Le changement s'applique tout de suite. Changer l'e-mail du bénéficiaire retire ses liens actifs.",
+          prereq: "L'accès n'est pas révoqué.",
+        },
+        {
+          title: "Révoquer un accès",
+          goal: "Retirer immédiatement l'accès d'un tiers : l'accès et tous ses liens deviennent inutilisables.",
+        },
+        {
+          title: "Renvoyer un lien d'accès",
+          goal: "Envoyer un nouveau lien au bénéficiaire pour un accès actif, par exemple pour un accès permanent dont les liens ont une durée limitée.",
+          input: "La durée de validité du lien et, si besoin, la révocation des liens précédents.",
+          output: "Un nouveau lien envoyé par e-mail. Le lien complet n'est affiché qu'une seule fois.",
+          prereq: "L'accès est actif, ni révoqué ni expiré.",
+        },
+        {
+          title: "Consulter le journal des consultations",
+          goal: "Voir qui a consulté ou téléchargé quoi, et quand : date, action, rubriques consultées, document téléchargé, envois de lien, modifications et révocation.",
+        },
+        {
+          title: "Prévenir le bénéficiaire par e-mail",
+          goal: "Envoyer au tiers de confiance le lien d'accès dans le corps d'un e-mail. Le message peut être désactivé et personnalisé par agence.",
+        },
+      ],
+      faq: [
+        {
+          q: "Le tiers peut-il modifier quelque chose ?",
+          a: "Non. L'accès est en lecture seule et limité aux biens, rubriques et documents que vous avez choisis. Aucune coordonnée de locataire n'est affichée.",
+        },
+        {
+          q: "Peut-on retirer l'accès avant l'échéance ?",
+          a: "Oui. La révocation est immédiate et rend tous les liens de l'accès inutilisables.",
+        },
+      ],
+      related: [
+        "portails-clients/acces-partage-tiers-de-confiance",
+        "gestion-locative/releves-de-gerance",
+      ],
+    },
+    {
+      slug: "notifications-proprietaire",
+      title: "Envois automatiques au propriétaire",
+      metaTitle: "Rapport mensuel et alertes d'échéance envoyés au propriétaire",
+      summary:
+        "Envoyez automatiquement chaque mois le rapport au propriétaire et prévenez-le des fins de bail et des documents à renouveler, par WhatsApp ou e-mail.",
+      intro:
+        "Une fois par mois, le rapport du mois précédent peut partir tout seul vers les propriétaires qui ont donné leur accord, avec un lien de consultation. Le propriétaire est aussi prévenu quand un bail arrive à échéance ou qu'un document doit être renouvelé. L'envoi automatique du rapport est désactivé par défaut et en cours de déploiement ; l'envoi par WhatsApp s'active agence par agence.",
+      packs: ["agence", "integre"],
+      profiles: ["direction"],
+      menu: "Communication › Notifications e-mail",
+      status: "deploiement",
+      actions: [
+        {
+          title: "Envoyer automatiquement le rapport du mois",
+          goal: "Envoyer chaque mois, sans action manuelle, le rapport du mois précédent aux propriétaires consentants, une seule fois par relevé.",
+          output: "Un message WhatsApp ou e-mail avec un lien sécurisé vers le rapport.",
+          prereq:
+            "L'envoi automatique est activé pour votre agence, le relevé n'est plus un brouillon et le propriétaire a donné son accord. L'envoi a lieu pendant les dix premiers jours du mois.",
+        },
+        {
+          title: "Alerter d'une fin de bail ou d'un document à renouveler",
+          goal: "Prévenir le propriétaire d'une fin de bail ou d'un document qui arrive à échéance, par son canal préféré, sans doublon.",
+          output:
+            "Un message par e-mail ou, si l'agence l'a activé et que le propriétaire est d'accord, par WhatsApp.",
+          prereq: "Le propriétaire a donné son accord et l'événement est activé dans la configuration de l'agence.",
+          status: "disponible",
+        },
+      ],
+      faq: [
+        {
+          q: "Le propriétaire reçoit-il des messages sans son accord ?",
+          a: "Non. Les envois se font seulement s'il a donné son accord pour le canal concerné, WhatsApp ou e-mail.",
+        },
+      ],
+      related: ["gestion-locative/releves-de-gerance", "portails-clients/rapport-mensuel-proprietaire"],
     },
   ],
 };

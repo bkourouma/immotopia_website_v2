@@ -16,8 +16,8 @@ export const agenceEtAbonnement: WikiDomain = {
       summary:
         "Créez votre compte, confirmez votre adresse e-mail, connectez-vous avec votre mot de passe ou votre compte Google et réinitialisez un mot de passe oublié.",
       intro:
-        "Chaque utilisateur accède à ImmoTopia avec son adresse e-mail et son mot de passe. L'adresse est confirmée par un lien reçu par e-mail, et un mot de passe oublié se réinitialise depuis la page de connexion. Chacun peut aussi consulter son profil et choisir la langue des e-mails qu'il reçoit.",
-      packs: ["agence", "syndic", "promoteur", "integre"],
+        "Chaque utilisateur accède à ImmoTopia avec son adresse e-mail et son mot de passe. L'adresse est confirmée par un lien reçu par e-mail, et un mot de passe oublié se réinitialise depuis la page de connexion. Les e-mails de confirmation et de réinitialisation arrivent dans la langue préférée du compte, à défaut dans celle de votre navigateur, sinon en français. Chacun peut aussi consulter son profil et choisir cette langue.",
+      packs: ["agence", "syndic", "promoteur", "integre", "patrimoine-essentiel", "patrimoine-pro"],
       profiles: ["visiteur", "equipe"],
       status: "disponible",
       actions: [
@@ -25,7 +25,7 @@ export const agenceEtAbonnement: WikiDomain = {
           title: "Créer son compte",
           goal: "Ouvrir un compte utilisateur depuis la page d'inscription.",
           input: "Votre nom complet, votre adresse e-mail et un mot de passe.",
-          output: "Votre compte est créé et un e-mail de confirmation vous est envoyé.",
+          output: "Votre compte est créé et un e-mail de confirmation vous est envoyé, dans votre langue.",
           profiles: ["visiteur"],
         },
         {
@@ -46,7 +46,7 @@ export const agenceEtAbonnement: WikiDomain = {
         {
           title: "Se connecter",
           goal: "Accéder à l'application avec son adresse e-mail et son mot de passe.",
-          output: "Vous arrivez dans votre espace.",
+          output: "Vous arrivez dans votre espace ; votre dernière connexion est enregistrée.",
           prereq: "Un compte existant et confirmé.",
         },
         {
@@ -88,6 +88,13 @@ export const agenceEtAbonnement: WikiDomain = {
           output: "Les e-mails suivants arrivent dans cette langue.",
           profiles: ["equipe"],
         },
+        {
+          title: "S'inscrire et se connecter avec des messages plus discrets",
+          goal: "À l'inscription et à la connexion, l'application ne révèle pas si une adresse e-mail possède déjà un compte : les messages sont les mêmes dans tous les cas. Le nombre d'inscriptions par heure est aussi limité.",
+          output: "Un message identique que l'adresse existe ou non, et un message d'erreur unique tant que le mot de passe n'est pas correct.",
+          profiles: ["visiteur"],
+          status: "developpement",
+        },
       ],
       faq: [
         {
@@ -104,8 +111,8 @@ export const agenceEtAbonnement: WikiDomain = {
       summary:
         "Invitez vos collaborateurs par e-mail avec leurs rôles, suivez les invitations, désactivez ou réactivez un accès et coupez les sessions d'un membre en un clic.",
       intro:
-        "Vous ajoutez un collaborateur en l'invitant par e-mail : il choisit son mot de passe et rejoint l'agence avec les rôles que vous avez prévus. Vous suivez les invitations en attente, gardez la liste de l'équipe à jour et coupez un accès dès qu'un collaborateur quitte l'agence. Au besoin, vous le déconnectez de tous ses appareils.",
-      packs: ["agence", "syndic", "promoteur", "integre"],
+        "Vous ajoutez un collaborateur en l'invitant par e-mail : il choisit son mot de passe et rejoint l'agence avec les rôles que vous avez prévus. Vous suivez les invitations en attente, gardez la liste de l'équipe à jour, avec la date de dernière connexion de chacun, et coupez un accès dès qu'un collaborateur quitte l'agence. Au besoin, vous le déconnectez de tous ses appareils.",
+      packs: ["agence", "syndic", "promoteur", "integre", "patrimoine-essentiel", "patrimoine-pro"],
       profiles: ["direction", "equipe"],
       menu: "Agence › Collaborateurs",
       status: "disponible",
@@ -142,7 +149,13 @@ export const agenceEtAbonnement: WikiDomain = {
         {
           title: "Consulter la liste des collaborateurs",
           goal: "Retrouver les membres de l'agence, avec une recherche et des filtres par statut ou par rôle.",
-          output: "La liste de l'équipe.",
+          output: "La liste de l'équipe, avec la date de dernière connexion de chaque membre.",
+        },
+        {
+          title: "Choisir un collaborateur dans une liste « Assigné à »",
+          goal: "Attribuer un contact, un bien, une vente ou une demande de maintenance à un membre de l'équipe, sans avoir besoin d'accéder à la liste complète des collaborateurs.",
+          output: "Une liste réduite des membres actifs, avec leur nom et leurs rôles.",
+          profiles: ["equipe"],
         },
         {
           title: "Consulter la fiche d'un collaborateur",
@@ -169,6 +182,15 @@ export const agenceEtAbonnement: WikiDomain = {
           goal: "Fermer d'un coup toutes les sessions ouvertes d'un membre.",
           output: "Le collaborateur doit se reconnecter sur chaque appareil.",
         },
+        {
+          title: "Activer l'invitation du premier administrateur d'une agence",
+          goal: "Le premier administrateur d'une agence créée par ImmoTopia accepte son invitation avec le seul lien reçu et choisit son premier mot de passe, sans avoir à se connecter d'abord.",
+          input: "Son mot de passe.",
+          output: "Il rejoint l'agence avec le rôle prévu.",
+          prereq: "Avoir reçu l'invitation de création de l'agence.",
+          profiles: ["visiteur"],
+          status: "developpement",
+        },
       ],
       faq: [
         {
@@ -190,7 +212,7 @@ export const agenceEtAbonnement: WikiDomain = {
         "Consultez les rôles proposés et les permissions qu'ils ouvrent, puis attribuez à chaque collaborateur les rôles qui correspondent à son poste dans l'agence.",
       intro:
         "Chaque collaborateur reçoit un ou plusieurs rôles, et chaque rôle ouvre un ensemble de permissions. Vous voyez ce que permet un rôle avant de l'attribuer, et vous ajustez les rôles d'un collaborateur quand son poste change.",
-      packs: ["agence", "syndic", "promoteur", "integre"],
+      packs: ["agence", "syndic", "promoteur", "integre", "patrimoine-essentiel", "patrimoine-pro"],
       profiles: ["direction", "equipe"],
       status: "disponible",
       actions: [
@@ -233,7 +255,7 @@ export const agenceEtAbonnement: WikiDomain = {
         "Tenez à jour le nom, la raison sociale, les coordonnées, le logo et la couleur de votre agence, repris sur la fiche publique que voient vos visiteurs.",
       intro:
         "Les paramètres de l'agence regroupent son identité : nom, raison sociale, coordonnées, adresse, site web, couleur principale et logo. Ces informations alimentent la fiche publique de l'agence, qui ne montre que ce qui est destiné au public. Chaque membre de l'équipe retrouve aussi la fiche complète de l'agence.",
-      packs: ["agence", "syndic", "promoteur", "integre"],
+      packs: ["agence", "syndic", "promoteur", "integre", "patrimoine-essentiel", "patrimoine-pro"],
       profiles: ["direction", "equipe", "visiteur"],
       menu: "Agence › Paramètres de l'agence",
       status: "disponible",
@@ -287,7 +309,7 @@ export const agenceEtAbonnement: WikiDomain = {
         "Réglez la fiscalité, les honoraires de gestion et les comptes de gestion locative de l'agence, et configurez sa passerelle de paiement pour encaisser en ligne.",
       intro:
         "Les paramètres financiers fixent les règles de l'agence : fiscalité, honoraires de gestion et comptes utilisés pour la gestion locative. La passerelle de paiement permet à l'agence d'encaisser en ligne : vous choisissez le mode test ou réel, le compte qui reçoit les fonds et qui supporte les frais. Ces réglages sont en cours de déploiement.",
-      packs: ["agence", "syndic", "promoteur", "integre"],
+      packs: ["agence", "syndic", "promoteur", "integre", "patrimoine-essentiel", "patrimoine-pro"],
       profiles: ["direction", "equipe"],
       status: "deploiement",
       actions: [
@@ -339,7 +361,7 @@ export const agenceEtAbonnement: WikiDomain = {
         "Consultez les modules et fonctions inclus dans votre pack, vos limites et votre consommation, puis demandez une extension et suivez l'historique de vos demandes.",
       intro:
         "Votre abonnement fixe les modules et fonctions auxquels l'agence a accès, ainsi que ses limites. Vous voyez à tout moment ce qui est inclus, ce que vous avez consommé et l'état de votre abonnement. Quand l'agence grandit, vous demandez une extension directement depuis l'application ; pour le détail des packs, voir les tarifs.",
-      packs: ["agence", "syndic", "promoteur", "integre"],
+      packs: ["agence", "syndic", "promoteur", "integre", "patrimoine-essentiel", "patrimoine-pro"],
       profiles: ["direction", "equipe"],
       menu: "Agence › Paramètres de l'agence",
       status: "disponible",
@@ -355,12 +377,24 @@ export const agenceEtAbonnement: WikiDomain = {
           title: "Demander une extension",
           goal: "Demander plus de capacité ou un élément supplémentaire, sans quitter l'application.",
           input: "Ce que vous souhaitez ajouter, la quantité et un message.",
-          output: "La demande est enregistrée et l'équipe ImmoTopia en est prévenue par e-mail.",
+          output: "La demande est enregistrée et l'équipe ImmoTopia en est prévenue par e-mail. Seules les extensions vendues avec votre pack sont proposées.",
         },
         {
           title: "Suivre ses demandes d'extension",
           goal: "Retrouver l'historique des demandes d'extension de l'agence.",
           output: "La liste de vos demandes.",
+          profiles: ["equipe"],
+        },
+        {
+          title: "Voir un message clair pour une fonction hors abonnement",
+          goal: "Quand vous ouvrez l'écran d'un module que votre pack ne comprend pas, un message « Fonction non comprise dans votre abonnement » remplace l'écran, avec un lien vers l'abonnement.",
+          output: "Un message explicatif, au lieu d'un écran vide.",
+          profiles: ["equipe"],
+        },
+        {
+          title: "Ne voir que ce que comprend son pack",
+          goal: "Le menu, le tableau de bord, les paramètres financiers, les onglets de la finance, la fiche d'un bien ou d'un contact et les modèles de documents n'affichent que les blocs des modules inclus dans votre pack.",
+          output: "Des écrans qui ne montrent que les modules de votre abonnement.",
           profiles: ["equipe"],
         },
       ],
@@ -380,7 +414,7 @@ export const agenceEtAbonnement: WikiDomain = {
         "Retrouvez les factures d'abonnement de votre agence, consultez leur détail et téléchargez-les en PDF ; leur paiement en ligne est en cours de déploiement.",
       intro:
         "Toutes les factures émises pour votre abonnement sont réunies au même endroit, avec leur détail et leur version PDF. Le paiement en ligne d'une facture est en cours de déploiement : vous pourrez la régler depuis l'application, même si votre compte est passé en lecture seule, et suivre où en est votre paiement.",
-      packs: ["agence", "syndic", "promoteur", "integre"],
+      packs: ["agence", "syndic", "promoteur", "integre", "patrimoine-essentiel", "patrimoine-pro"],
       profiles: ["direction", "equipe"],
       menu: "Agence › Paramètres financiers",
       status: "disponible",
@@ -424,6 +458,86 @@ export const agenceEtAbonnement: WikiDomain = {
         {
           q: "Puis-je télécharger mes factures d'abonnement ?",
           a: "Oui. Chaque facture émise se consulte en détail et se télécharge en PDF depuis les paramètres financiers de l'agence.",
+        },
+      ],
+      related: ["agence-et-abonnement/abonnement-par-pack"],
+    },
+    {
+      slug: "journal-activite-agence",
+      title: "Journal d'activité de l'agence",
+      metaTitle: "Journal d'activité : qui a fait quoi dans votre agence",
+      summary:
+        "Retrouvez qui a fait quoi et quand dans votre agence : connexions, changements de droits, biens, baux, contacts et factures, avec filtres. En développement.",
+      intro:
+        "Le journal d'activité garde la trace des actions faites dans votre agence : connexions, changements de droits, création et modification de biens, de baux, de contacts ou de factures. Il se lit du plus récent au plus ancien, avec des filtres. Le personnel de la plateforme y apparaît sous le nom « Support ImmoTopia », sans autre détail. Cette fonction est en cours de développement.",
+      packs: ["agence", "syndic", "promoteur", "integre", "patrimoine-essentiel", "patrimoine-pro"],
+      profiles: ["direction"],
+      menu: "Agence › Journal d'activité",
+      status: "developpement",
+      actions: [
+        {
+          title: "Consulter le journal d'activité",
+          goal: "Voir qui a fait quoi dans l'agence et à quel moment.",
+          input: "Des filtres facultatifs : catégorie, résultat, action, auteur, élément concerné, période.",
+          output:
+            "Les événements, du plus récent au plus ancien, chargés page par page : date, action, résultat, auteur, élément concerné, détails et valeurs avant et après.",
+          prereq: "Le droit de consulter le journal, donné par défaut à l'administrateur de l'agence et attribuable à un autre rôle.",
+        },
+      ],
+      related: ["agence-et-abonnement/roles-et-permissions"],
+    },
+    {
+      slug: "reglages-sms-agence",
+      title: "Réglages SMS de l'agence",
+      metaTitle: "Réglages SMS de l'agence : expéditeur, quota et consommation",
+      summary:
+        "Consultez les réglages SMS de votre agence : activation, nom d'expéditeur, quota mensuel et SMS restants, fixés par ImmoTopia. En développement.",
+      intro:
+        "Les SMS de l'agence passent par un compte d'envoi géré par ImmoTopia. Vous consultez simplement vos réglages : SMS activé ou non, nom d'expéditeur, quota du mois et consommation. Vous ne pouvez rien modifier vous-même, ces réglages sont fixés par l'équipe ImmoTopia. Cette fonction est en cours de développement.",
+      packs: ["agence", "syndic", "promoteur", "integre", "patrimoine-essentiel", "patrimoine-pro"],
+      profiles: ["direction", "equipe"],
+      status: "developpement",
+      actions: [
+        {
+          title: "Consulter les réglages SMS de l'agence",
+          goal: "Voir si le SMS est activé, le nom d'expéditeur, le quota mensuel, la consommation du mois et les SMS restants.",
+          output: "Les réglages et la consommation ; si rien n'a été fixé, le SMS est désactivé avec le quota par défaut.",
+        },
+      ],
+      related: ["administration-plateforme/sms"],
+    },
+    {
+      slug: "espace-particulier",
+      title: "Espace particulier",
+      metaTitle: "Espace particulier : gérer son patrimoine, gratuit ou plus",
+      summary:
+        "Un particulier crée son espace de patrimoine en quelques champs, le suit avec un menu réduit et peut passer à un palier payant. En développement.",
+      intro:
+        "L'espace particulier permet à une personne de suivre son propre patrimoine sans passer par une agence. Elle crée son espace elle-même, avec un menu réduit à l'essentiel : patrimoine, biens, baux, paramètres et abonnement. Un palier gratuit et un palier payant sont prévus ; le palier payant relève le plafond d'actifs. Cette fonction est en cours de développement.",
+      packs: ["particulier-gratuit", "particulier-plus"],
+      profiles: ["visiteur", "direction"],
+      status: "developpement",
+      actions: [
+        {
+          title: "Créer son espace personnel",
+          goal: "Obtenir son espace de patrimoine en quelques champs, sans l'aide d'un administrateur.",
+          input: "Un nom d'affichage, le pays (Côte d'Ivoire ou autre pays de l'UEMOA) et, si vous le souhaitez, un téléphone.",
+          output: "Votre espace est créé avec le palier gratuit.",
+          prereq: "Être connecté avec une adresse e-mail confirmée et ne pas avoir déjà d'espace.",
+          profiles: ["visiteur"],
+        },
+        {
+          title: "Naviguer dans son espace particulier",
+          goal: "Accéder à ce qui sert un particulier : patrimoine, biens, baux, paramètres et abonnement.",
+          output: "Un menu réduit et un accueil centré sur la valeur nette du patrimoine.",
+          profiles: ["direction"],
+        },
+        {
+          title: "Passer au palier payant",
+          goal: "Relever le plafond d'actifs en réglant le palier payant par Mobile Money ou par carte.",
+          output: "Une facture et une page de paiement en ligne.",
+          prereq: "Le téléphone de l'espace doit être renseigné.",
+          profiles: ["direction"],
         },
       ],
       related: ["agence-et-abonnement/abonnement-par-pack"],

@@ -5,6 +5,15 @@ import { defaultLocale, type Locale } from "./i18n";
 export const SITE_URL = "https://immotopia.cloud";
 export const APP_LOGIN_URL = "https://app.immotopia.cloud/login";
 
+// Mesure d'audience : Umami, hébergé par Alliance Consultants (sans cookie, sans adresse IP conservée). L'identifiant du site
+// est public (il figure dans le HTML servi) ; `domains` limite le comptage au vrai site : ni le développement local ni un aperçu
+// ne gonflent les chiffres.
+export const analytics = {
+  scriptUrl: "https://analytics.allianceconsultants.net/script.js",
+  websiteId: "7dfaaa70-7960-4239-a862-2196b6a0e099",
+  domains: "immotopia.cloud,www.immotopia.cloud",
+};
+
 export const contact = {
   phone: "+225 01 01 51 01 36",
   phoneHref: "tel:+2250101510136",

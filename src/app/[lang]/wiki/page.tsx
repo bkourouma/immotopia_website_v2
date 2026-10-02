@@ -106,9 +106,9 @@ export default async function WikiPage({ params }: PageProps<"/[lang]/wiki">) {
           <section className="mt-20">
             <h2 className="font-display text-3xl font-bold tracking-tight md:text-4xl">Ce que contient chaque pack</h2>
             <p className="mt-4 max-w-3xl text-lg text-ink-900/65">
-              Chaque fonctionnalité indique les packs qui y donnent accès. Le pack Opérateur intégré réunit les trois autres.
+              Chaque fonctionnalité indique les packs qui y donnent accès. Le pack Opérateur intégré réunit Agence, Syndic et Promoteur ; les packs Patrimoine, pour les particuliers et les entreprises qui gèrent leurs propres biens, ouvrent la vue patrimoniale, la gestion locative directe, les documents, la finance et la maintenance.
             </p>
-            <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {packOrder.map((p) => {
                 const list = allFeatures.filter(({ feature }) => feature.packs.includes(p));
                 const domains = wikiDomains.filter((d) => d.features.some((f) => f.packs.includes(p)));
@@ -139,7 +139,7 @@ export default async function WikiPage({ params }: PageProps<"/[lang]/wiki">) {
             <div className="rounded-[22px] bg-white p-6 ring-1 ring-ink-900/[0.07] md:p-7">
               <h2 className="font-display text-xl font-bold">Comment lire ce wiki</h2>
               <ul className="mt-4 space-y-3 text-sm text-ink-900/70">
-                {(["disponible", "deploiement"] as const).map((s) => (
+                {(["disponible", "deploiement", "developpement"] as const).map((s) => (
                   <li key={s} className="flex flex-col items-start gap-1.5">
                     <StatusBadge status={s} />
                     {statusMeta[s].hint}

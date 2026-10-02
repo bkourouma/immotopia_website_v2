@@ -25,7 +25,7 @@ export default async function ConfidentialitePage() {
 
 function ConfidentialiteFr() {
   return (
-    <LegalPage title="Politique de confidentialité" updated="23 septembre 2026">
+    <LegalPage title="Politique de confidentialité" updated="2 octobre 2026">
       <p>
         {legal.publisher}, éditeur d&apos;ImmoTopia, s&apos;engage à protéger vos données personnelles conformément à la loi ivoirienne
         n° 2013-450 du 19 juin 2013 relative à la protection des données à caractère personnel.
@@ -86,8 +86,11 @@ function ConfidentialiteFr() {
 
       <h2>Cookies</h2>
       <p>
-        Le site n&apos;utilise pas de cookies publicitaires ni d&apos;outil de mesure d&apos;audience tiers. Le calendrier de
-        réservation Calendly, affiché dans la page, peut déposer ses propres cookies nécessaires à son fonctionnement.
+        Le site n&apos;utilise pas de cookies publicitaires. Il mesure sa fréquentation avec Umami, un outil libre que nous
+        hébergeons nous-mêmes : sans cookie, sans conserver votre adresse IP, et sans envoyer de données à un service de mesure
+        d&apos;audience tiers. Il enregistre les pages consultées, la page d&apos;origine, le pays, la région et la ville
+        approximatifs, ainsi que le type d&apos;appareil, de navigateur et d&apos;écran. Le calendrier de réservation Calendly,
+        affiché dans la page, peut déposer ses propres cookies nécessaires à son fonctionnement.
       </p>
 
       <h2>Vos droits</h2>
@@ -103,7 +106,7 @@ function ConfidentialiteFr() {
 
 function PrivacyPolicyEn() {
   return (
-    <LegalPage title="Privacy policy" updated="September 23, 2026">
+    <LegalPage title="Privacy policy" updated="October 2, 2026">
       <p>
         {legal.publisher}, publisher of ImmoTopia, is committed to protecting your personal data in accordance with Ivorian Law
         No. 2013-450 of June 19, 2013 on the protection of personal data.
@@ -161,8 +164,10 @@ function PrivacyPolicyEn() {
 
       <h2>Cookies</h2>
       <p>
-        The website uses no advertising cookies and no third-party audience measurement tool. The Calendly booking calendar embedded in
-        the page may set its own cookies required for it to work.
+        The website uses no advertising cookies. It measures its traffic with Umami, an open-source tool that we host ourselves:
+        no cookies, no storage of your IP address, and no data sent to a third-party audience measurement service. It records the
+        pages viewed, the referring page, the approximate country, region and city, and the type of device, browser and screen. The
+        Calendly booking calendar embedded in the page may set its own cookies required for it to work.
       </p>
 
       <h2>Your rights</h2>

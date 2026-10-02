@@ -2,6 +2,7 @@
 // Les textes vivent dans un fichier par domaine (même dossier) ; ce fichier les assemble, porte les libellés
 // communs et vérifie au build que les adresses sont uniques et que les liens entre pages existent.
 
+import { administrationPlateforme } from "./administration-plateforme";
 import { agenceEtAbonnement } from "./agence-et-abonnement";
 import { biensEtPatrimoine } from "./biens-et-patrimoine";
 import { communicationEtDocuments } from "./communication-et-documents";
@@ -9,19 +10,21 @@ import { crmEtVentes } from "./crm-et-ventes";
 import { financeEtComptabilite } from "./finance-et-comptabilite";
 import { gestionLocative } from "./gestion-locative";
 import { maintenance } from "./maintenance";
+import { patrimoineMultiActifs } from "./patrimoine-multi-actifs";
 import { portailsClients } from "./portails-clients";
 import { promotionEtChantiers } from "./promotion-et-chantiers";
 import { syndicCopropriete } from "./syndic-copropriete";
-import type { PackId, WikiAction, WikiDomain, WikiFeature, WikiProfile, WikiStatus } from "./types";
+import type { WikiPackId, WikiAction, WikiDomain, WikiFeature, WikiProfile, WikiStatus } from "./types";
 
 export type * from "./types";
 
 /** Date de l'inventaire dont le wiki est tiré. */
-export const WIKI_UPDATED_ON = "27 septembre 2026";
+export const WIKI_UPDATED_ON = "2 octobre 2026";
 
 export const wikiDomains: WikiDomain[] = [
   gestionLocative,
   biensEtPatrimoine,
+  patrimoineMultiActifs,
   crmEtVentes,
   syndicCopropriete,
   portailsClients,
@@ -30,6 +33,7 @@ export const wikiDomains: WikiDomain[] = [
   financeEtComptabilite,
   promotionEtChantiers,
   agenceEtAbonnement,
+  administrationPlateforme,
 ];
 
 export const wikiHref = (domain?: string, feature?: string) =>
@@ -55,13 +59,17 @@ export const actionAnchor = (a: WikiAction) =>
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-|-$/g, "");
 
-export const packLabel: Record<PackId, string> = {
+export const packLabel: Record<WikiPackId, string> = {
   agence: "Agence",
   syndic: "Syndic",
   promoteur: "Promoteur",
   integre: "Opérateur intégré",
+  "patrimoine-essentiel": "Patrimoine Essentiel",
+  "patrimoine-pro": "Patrimoine Pro",
+  "particulier-gratuit": "Particulier gratuit (en développement)",
+  "particulier-plus": "Particulier plus (en développement)",
 };
-export const packOrder: PackId[] = ["agence", "syndic", "promoteur", "integre"];
+export const packOrder: WikiPackId[] = ["agence", "syndic", "promoteur", "integre", "patrimoine-essentiel", "patrimoine-pro", "particulier-gratuit", "particulier-plus"];
 
 export const profileLabel: Record<WikiProfile, string> = {
   direction: "Direction de l'agence",
@@ -80,6 +88,10 @@ export const statusMeta: Record<WikiStatus, { label: string; hint: string }> = {
   deploiement: {
     label: "En cours de déploiement",
     hint: "Présent dans l'application et en cours de déploiement : sa disponibilité pour votre agence se confirme en démonstration.",
+  },
+  developpement: {
+    label: "En développement",
+    hint: "Fonction en cours de développement : pas encore en production. Elle figure ici pour information, sans date.",
   },
 };
 
