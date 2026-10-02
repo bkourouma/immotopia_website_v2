@@ -7,7 +7,7 @@ export const promotionEtChantiers: WikiDomain = {
   summary:
     "Chantiers, lots, budget, avancement, stock de matériaux, salaires, tâcherons et retenues de garantie : le module Promoteur d'ImmoTopia pour la Côte d'Ivoire.",
   intro:
-    "Ce domaine regroupe le module Promoteur d'ImmoTopia, en cours de déploiement. Il s'adresse aux promoteurs et aux groupes immobiliers ivoiriens qui construisent : suivi des chantiers et de leurs lots, budget et avenants, avancement, dépenses et pièces de caisse, baux de terrain. Il couvre aussi le stock de matériaux, la main-d'œuvre salariée, les tâcherons et leurs situations de travaux, ainsi que les retenues de garantie. En fin de chantier, chaque lot rejoint le patrimoine avec son coût de revient définitif.",
+    "Ce domaine regroupe le module Promoteur d'ImmoTopia. Il s'adresse aux promoteurs et aux groupes immobiliers ivoiriens qui construisent : suivi des chantiers et de leurs lots, budget et avenants, avancement, dépenses et pièces de caisse, baux de terrain. Il couvre aussi le stock de matériaux, la main-d'œuvre salariée, les tâcherons et leurs situations de travaux, ainsi que les retenues de garantie. En fin de chantier, chaque lot rejoint le patrimoine avec son coût de revient définitif.",
   features: [
     {
       slug: "suivi-des-chantiers",
@@ -20,7 +20,7 @@ export const promotionEtChantiers: WikiDomain = {
       packs: ["promoteur", "integre"],
       profiles: ["direction", "gestionnaire", "comptable"],
       menu: "Finance › Chantiers et stock › Suivi des chantiers › Chantiers",
-      status: "deploiement",
+      status: "disponible",
       actions: [
         {
           title: "Consulter la liste des chantiers",
@@ -82,7 +82,7 @@ export const promotionEtChantiers: WikiDomain = {
       packs: ["promoteur", "integre"],
       profiles: ["direction", "gestionnaire", "comptable"],
       menu: "Finance › Chantiers et stock › Suivi des chantiers › Chantiers",
-      status: "deploiement",
+      status: "disponible",
       actions: [
         {
           title: "Ajouter un lot à un chantier",
@@ -149,7 +149,7 @@ export const promotionEtChantiers: WikiDomain = {
       packs: ["promoteur", "integre"],
       profiles: ["direction", "gestionnaire", "comptable"],
       menu: "Finance › Chantiers et stock › Suivi des chantiers › Chantiers",
-      status: "deploiement",
+      status: "disponible",
       actions: [
         {
           title: "Créer un budget de chantier",
@@ -215,7 +215,7 @@ export const promotionEtChantiers: WikiDomain = {
       packs: ["promoteur", "integre"],
       profiles: ["direction", "gestionnaire", "comptable"],
       menu: "Finance › Chantiers et stock › Suivi des chantiers › Tableau de bord",
-      status: "deploiement",
+      status: "disponible",
       actions: [
         {
           title: "Consulter le tableau de bord des chantiers",
@@ -263,7 +263,7 @@ export const promotionEtChantiers: WikiDomain = {
       packs: ["promoteur", "integre"],
       profiles: ["direction", "gestionnaire", "comptable"],
       menu: "Finance › Chantiers et stock › Suivi des chantiers › Chantiers",
-      status: "deploiement",
+      status: "disponible",
       actions: [
         {
           title: "Consulter le détail des coûts d'un chantier",
@@ -340,7 +340,7 @@ export const promotionEtChantiers: WikiDomain = {
       packs: ["promoteur", "integre"],
       profiles: ["direction", "gestionnaire", "comptable"],
       menu: "Finance › Chantiers et stock › Suivi des chantiers › Baux de terrain",
-      status: "deploiement",
+      status: "disponible",
       actions: [
         {
           title: "Enregistrer un bail de terrain",
@@ -411,7 +411,7 @@ export const promotionEtChantiers: WikiDomain = {
       packs: ["promoteur", "integre"],
       profiles: ["direction", "gestionnaire", "comptable"],
       menu: "Finance › Chantiers et stock › Gestion du stock › Articles et lieux",
-      status: "deploiement",
+      status: "disponible",
       actions: [
         {
           title: "Consulter les articles de stock",
@@ -485,7 +485,7 @@ export const promotionEtChantiers: WikiDomain = {
       packs: ["promoteur", "integre"],
       profiles: ["direction", "gestionnaire", "comptable"],
       menu: "Finance › Chantiers et stock › Gestion du stock",
-      status: "deploiement",
+      status: "disponible",
       actions: [
         {
           title: "Enregistrer une réception de matériaux",
@@ -541,7 +541,7 @@ export const promotionEtChantiers: WikiDomain = {
       packs: ["promoteur", "integre"],
       profiles: ["direction", "gestionnaire", "comptable"],
       menu: "Finance › Chantiers et stock › Gestion du stock › Inventaire",
-      status: "deploiement",
+      status: "disponible",
       actions: [
         {
           title: "Ouvrir un inventaire",
@@ -602,7 +602,7 @@ export const promotionEtChantiers: WikiDomain = {
       packs: ["promoteur", "integre"],
       profiles: ["direction", "gestionnaire", "comptable"],
       menu: "Finance › Main-d'œuvre › Salaires",
-      status: "deploiement",
+      status: "disponible",
       actions: [
         {
           title: "Consulter la liste des employés",
@@ -676,7 +676,7 @@ export const promotionEtChantiers: WikiDomain = {
       packs: ["promoteur", "integre"],
       profiles: ["direction", "gestionnaire", "comptable"],
       menu: "Finance › Main-d'œuvre › Tâcherons",
-      status: "deploiement",
+      status: "disponible",
       actions: [
         {
           title: "Consulter la liste des tâcherons",
@@ -759,7 +759,7 @@ export const promotionEtChantiers: WikiDomain = {
       packs: ["promoteur", "integre"],
       profiles: ["direction", "gestionnaire", "comptable"],
       menu: "Finance › Achats et fournisseurs › Retenues de garantie",
-      status: "deploiement",
+      status: "disponible",
       actions: [
         {
           title: "Poser une retenue de garantie",

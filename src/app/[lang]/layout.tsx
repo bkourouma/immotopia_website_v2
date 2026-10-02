@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Bricolage_Grotesque, Inter } from "next/font/google";
 import { notFound } from "next/navigation";
 import "./globals.css";
+import { Analytics } from "@/components/analytics";
 import { OrganizationJsonLd } from "@/components/json-ld";
 import { Providers } from "@/components/providers";
 import { alternates, hasLocale, htmlLang, locales, ogLocale, translator } from "@/lib/i18n";
@@ -59,6 +60,7 @@ export default async function RootLayout({ children, params }: LayoutProps<"/[la
       <body className="min-h-dvh font-sans">
         <OrganizationJsonLd />
         <Providers locale={lang}>{children}</Providers>
+        <Analytics />
       </body>
     </html>
   );

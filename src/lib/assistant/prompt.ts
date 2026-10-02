@@ -4,7 +4,7 @@
 
 import { fcfa } from "../format";
 import type { Locale } from "../i18n";
-import { activePacks, ANNUAL_MONTHS, coverage } from "../pricing";
+import { activePacks, ANNUAL_MONTHS, commercialRules, coverage, extensions } from "../pricing";
 import { APP_LOGIN_URL, contact, legal, SITE_URL } from "../site";
 import { tools } from "../tools";
 import { KNOWLEDGE } from "./knowledge.generated";
@@ -13,7 +13,8 @@ function pricingSection() {
   const lines = activePacks.map(
     (p) =>
       `- **${p.name}** (${p.audience}) : ${fcfa(p.monthly)} HT/mois, soit ${fcfa(p.monthly * ANNUAL_MONTHS)} HT/an en paiement annuel. ` +
-      `Inclus : ${p.included}. Au-delà : ${p.extension}. Mise en route accompagnée (facultative) : ${fcfa(p.setup)} HT.`,
+      `Inclus : ${p.included}. Au-delà : ${p.extension}. Mise en route accompagnée (facultative) : ${fcfa(p.setup)} HT.` +
+      (p.limit ? ` Limite : ${p.limit}` : ""),
   );
   const names = activePacks.map((p) => p.name);
   const table = coverage.map(([label, ...cells]) => `- ${label} : ${cells.map((ok, i) => `${names[i]} ${ok ? "oui" : "non"}`).join(", ")}`);
@@ -23,7 +24,12 @@ function pricingSection() {
       `Tu peux donner le prix de chacun. Le module Promoteur (chantiers, stock, tâcherons) et la finance opérationnelle (caisse, fournisseurs, validations) sont en cours de déploiement : quand tu présentes les packs Promoteur ou Opérateur intégré, précise-le sans donner de date et propose d'en parler avec l'équipe en démonstration.`,
     ...lines,
     "",
-    "Offre de lancement : le premier mois d'abonnement est offert sur tous les packs, sans engagement (résiliable à tout moment) ; la mise en route accompagnée reste facturée si elle est choisie. Règles : paiement mensuel d'avance ; l'annuel payé d'avance coûte 11 mensualités (12 mois pour le prix de 11). Packs combinables avec 10 % de remise sur le moins cher des abonnements combinés ; avec les trois métiers, on compare au forfait Opérateur intégré et on applique le moins cher. Aucune commission ImmoTopia sur les loyers. Les comptes collaborateurs, propriétaires et locataires ne sont pas facturés. WhatsApp est facturé à la consommation. Mise en route gratuite si le client prépare et saisit lui-même ses données. Au-delà des capacités, devis sur mesure. Les prix sont hors taxes.",
+    "Extensions à la carte :",
+    ...extensions.map((e) => `- ${e.name.fr} : ${e.price.fr}. ${e.note.fr}`),
+    "Règles commerciales : " + commercialRules.fr.join(" "),
+    "Les packs Patrimoine (particuliers et diaspora, entreprises et institutionnels) servent à suivre et louer ses propres biens, sans mandat ni propriétaire tiers. La valeur nette et les projections consolidées sont en développement : dis « bientôt, en développement », sans date. Une fonction « Patrimoine particulier gratuit » ou « plus » n'est pas disponible : ne l'annonce pas.",
+    "",
+    "Offre de lancement : le premier mois d'abonnement est offert sur tous les packs, sans engagement (résiliable à tout moment) ; la mise en route accompagnée reste facturée si elle est choisie. Règles : paiement mensuel d'avance ; l'annuel payé d'avance coûte 11 mensualités (12 mois pour le prix de 11). Packs combinables avec 10 % de remise sur le prix de base du pack le moins cher ; avec les trois métiers, on compare au forfait Opérateur intégré et on applique le moins cher. Aucune commission ImmoTopia sur les loyers. Les comptes collaborateurs, propriétaires et locataires ne sont pas facturés. WhatsApp est facturé à la consommation. Mise en route gratuite si le client prépare et saisit lui-même ses données. Au-delà des capacités, le dépassement est facturé (extensions ci-dessus), jamais bloqué ; grand réseau : devis sur mesure. Les prix sont hors taxes (TVA 18 % ajoutée sur les factures d'Alliance Consultants).",
     `Un simulateur de prix est disponible sur ${SITE_URL}/tarifs.`,
     "",
     "### Couverture fonctionnelle par pack",

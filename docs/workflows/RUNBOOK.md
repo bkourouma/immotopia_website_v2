@@ -113,9 +113,10 @@ c'est à l'utilisateur de le créer.
 
 ## Déploiement
 
-Réservé à l'utilisateur (accord explicite, voir AGENTS.md) ; les commandes
-`ssh alliance` et `scp … alliance:` sont refusées aux agents par
-`guard.destructiveCommands`. Procédure : [README.md](../../README.md),
+Un agent ne déploie qu'avec l'accord explicite de l'utilisateur, demandé dans
+la conversation avant chaque déploiement (voir AGENTS.md) ; les commandes
+`ssh alliance` et `scp … alliance:` ne sont plus bloquées par
+`guard.destructiveCommands` (décision du 2026-10-02). Procédure : [README.md](../../README.md),
 section « Déploiement ».
 
 ## Dépannage

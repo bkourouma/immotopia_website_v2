@@ -2,7 +2,7 @@ import { ChevronRight } from "lucide-react";
 import { DemoButton } from "@/components/demo-button";
 import { SmartLink } from "@/components/smart-link";
 import { SITE_URL } from "@/lib/site";
-import { packLabel, packOrder, statusMeta, type PackId, type WikiStatus } from "@/lib/wiki";
+import { packLabel, packOrder, statusMeta, type WikiPackId, type WikiStatus } from "@/lib/wiki";
 
 export type Crumb = { label: string; href: string };
 
@@ -45,21 +45,22 @@ export function breadcrumbLd(items: Crumb[]) {
 
 export function StatusBadge({ status, className = "" }: { status: WikiStatus; className?: string }) {
   const ready = status === "disponible";
+  const dev = status === "developpement";
   return (
     <span
       title={statusMeta[status].hint}
       className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-semibold whitespace-nowrap ring-1 ${
-        ready ? "bg-emerald-50 text-emerald-700 ring-emerald-600/20" : "bg-sun-500/10 text-[#b45309] ring-sun-500/30"
+        ready ? "bg-emerald-50 text-emerald-700 ring-emerald-600/20" : dev ? "bg-ink-900/[0.06] text-ink-900/70 ring-ink-900/15" : "bg-sun-500/10 text-[#b45309] ring-sun-500/30"
       } ${className}`}
     >
-      <span className={`size-1.5 rounded-full ${ready ? "bg-emerald-500" : "bg-sun-500"}`} aria-hidden />
+      <span className={`size-1.5 rounded-full ${ready ? "bg-emerald-500" : dev ? "bg-ink-900/40" : "bg-sun-500"}`} aria-hidden />
       {statusMeta[status].label}
     </span>
   );
 }
 
 /** Packs qui donnent accès, dans l'ordre de la grille tarifaire. */
-export function PackChips({ packs, link = false }: { packs: PackId[]; link?: boolean }) {
+export function PackChips({ packs, link = false }: { packs: WikiPackId[]; link?: boolean }) {
   const list = packOrder.filter((p) => packs.includes(p));
   const cls = "rounded-full bg-brand-500/[0.08] px-2.5 py-1 text-xs font-semibold text-brand-600 ring-1 ring-brand-500/15";
   return (

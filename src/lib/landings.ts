@@ -545,10 +545,26 @@ export const faqGroups: { title: string; items: { q: string; a: string }[] }[] =
     items: [
       {
         q: "Combien coûte ImmoTopia ?",
-        a: "Agence dès 29 900 FCFA HT par mois, Syndic dès 49 900, Promoteur dès 149 900, et forfait Opérateur intégré à 249 900. Un simulateur est disponible sur la page Tarifs.",
+        a: "Six packs, en FCFA HT par mois : Patrimoine Essentiel 9 900 (particuliers, diaspora), Patrimoine Pro 29 900 (entreprises, institutionnels), Agence 29 900, Syndic 49 900, Promoteur 149 900 et Opérateur intégré 249 900. Un simulateur est disponible sur la page Tarifs.",
       },
-      { q: "Y a-t-il une période d'essai ?", a: "Le premier mois d'abonnement est offert sur tous les packs, sans engagement." },
-      { q: "Y a-t-il une remise en annuel ?", a: "Oui : en paiement annuel, vous payez 11 mois pour 12." },
+      {
+        q: "Je suis un particulier ou je vis à l'étranger : quel pack ?",
+        a: "Patrimoine Essentiel : 9 900 FCFA HT par mois pour 10 biens détenus en propre, loués ou non, avec vue patrimoniale (valeur des biens, emprunts, ratios bancaires, projections par bien), gestion locative directe de vos propres biens (baux, loyers, quittances), documents, finance, maintenance et communication. Pas de mandat de gestion ni de propriétaire tiers. La valeur nette et les projections consolidées sont en développement.",
+      },
+      {
+        q: "Quelle est la différence entre Patrimoine Essentiel et Patrimoine Pro ?",
+        a: "Le Pro (29 900 FCFA HT par mois) couvre 100 biens détenus en propre, pour les entreprises et institutionnels ; l'Essentiel (9 900) en couvre 10. Les fonctionnalités et la limite sont les mêmes (gestion de vos propres biens : ni mandat ni propriétaire tiers). Les deux ne se cumulent pas : on passe de l'un à l'autre par changement de pack.",
+      },
+      {
+        q: "Que se passe-t-il si je dépasse la capacité de mon pack ?",
+        a: "Le dépassement est facturé, pas bloqué. Des extensions à la carte existent : bloc de 10 lots (1 500 FCFA par mois), copropriété supplémentaire (10 000), chantier supplémentaire (40 000), bloc de 10 biens détenus (9 900 avec Patrimoine Essentiel ; 2 990 de dépassement avec le Pro).",
+      },
+      {
+        q: "Les prix incluent-ils la TVA ?",
+        a: "Non : les prix sont hors taxes. Les factures sont émises par Alliance Consultants, avec une TVA de 18 % ajoutée.",
+      },
+      { q: "Y a-t-il une période d'essai ?", a: "Le premier mois d'abonnement est offert (essai de 30 jours) sur tous les packs, sans engagement." },
+      { q: "Y a-t-il une remise en annuel ?", a: "Oui : en paiement annuel d'avance, vous payez 11 mensualités pour 12 mois. Les packs combinés bénéficient de 10 % de remise sur le prix de base du pack le moins cher." },
       { q: "ImmoTopia prend-il une commission sur les loyers ?", a: "Non. Les comptes collaborateurs, propriétaires et locataires ne sont pas facturés non plus." },
       { q: "WhatsApp est-il inclus ?", a: "Les e-mails sont inclus ; les messages WhatsApp sont facturés à la consommation." },
     ],

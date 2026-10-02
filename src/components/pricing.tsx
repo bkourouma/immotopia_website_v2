@@ -8,7 +8,9 @@ import {
   agencePrice,
   ANNUAL_MONTHS,
   comboPrice,
+  commercialRules,
   coverageByLocale,
+  extensions,
   getActivePacks,
   integrePrice,
   packs,
@@ -43,13 +45,13 @@ export function Pricing({ comparisonOpen = false }: { comparisonOpen?: boolean }
         <Reveal className="mx-auto max-w-3xl text-center">
           <Eyebrow>{t("Tarifs", "Pricing")}</Eyebrow>
           <h2 className="mt-5 font-display text-4xl leading-[1.05] font-bold tracking-tight text-balance md:text-6xl">
-            {t("Un pack par métier, ", "One pack per business, ")}
+            {t("Un pack par profil, ", "One pack per profile, ")}
             <span className="text-gradient-dark">{t("sans surprise.", "no surprises.")}</span>
           </h2>
           <p className="mt-5 text-lg text-ink-900/60">
             {t(
-              "Vous payez le processus de votre métier, pas une liste de menus. Et si votre activité s'élargit, les packs se combinent.",
-              "You pay for the workflow of your trade, not a list of menus. And as your business grows, packs can be combined.",
+              "Agence, syndic, promoteur, opérateur intégré, ou simple propriétaire de patrimoine : vous payez le processus de votre métier, pas une liste de menus. Et si votre activité s'élargit, les packs se combinent.",
+              "Agency, condo management, developer, integrated operator, or simply a property owner: you pay for the workflow of your trade, not a list of menus. And as your business grows, packs can be combined.",
             )}
           </p>
         </Reveal>
@@ -65,7 +67,7 @@ export function Pricing({ comparisonOpen = false }: { comparisonOpen?: boolean }
           </ul>
         </Reveal>
 
-        <div className={`mx-auto mt-14 grid items-stretch gap-5 md:grid-cols-2 ${activePacks.length > 2 ? "lg:grid-cols-4" : "max-w-4xl"}`}>
+        <div className={`mx-auto mt-14 grid items-stretch gap-5 md:grid-cols-2 ${activePacks.length > 2 ? "lg:grid-cols-3" : "max-w-4xl"}`}>
           {activePacks.map((p, i) => (
             <Reveal key={p.id} delay={i * 0.08} className="h-full">
               <PackCard pack={p} billing={billing} onCta={open} />
@@ -75,11 +77,12 @@ export function Pricing({ comparisonOpen = false }: { comparisonOpen?: boolean }
 
         <p className="mt-6 text-center text-xs text-ink-900/60">
           {t(
-            "Prix hors taxes. Premier mois d'abonnement offert sur tous les packs, résiliable à tout moment. Mise en route facultative si vous préparez et saisissez vos données vous-même. WhatsApp facturé à la consommation. Au-delà des capacités indiquées, devis sur mesure.",
-            "Prices excl. VAT. First month free on every pack, cancel anytime. Onboarding is optional if you prepare and enter your data yourself. WhatsApp billed per use. Beyond the stated capacities, custom quote.",
+            "Prix hors taxes (TVA 18 % ajoutée sur les factures émises par Alliance Consultants). Premier mois d'abonnement offert (essai de 30 jours) sur tous les packs, résiliable à tout moment. Mise en route facultative si vous préparez et saisissez vos données vous-même. WhatsApp facturé à la consommation.",
+            "Prices excl. VAT (18% VAT added on invoices issued by Alliance Consultants). First month free (30-day trial) on every pack, cancel anytime. Onboarding is optional if you prepare and enter your data yourself. WhatsApp billed per use.",
           )}
         </p>
 
+        <Extensions />
         <Comparison defaultOpen={comparisonOpen} />
         <Simulator billing={billing} />
       </div>
@@ -170,7 +173,7 @@ function PackCard({ pack, billing, onCta }: { pack: Pack; billing: Billing; onCt
           </p>
           <p className="mt-1 opacity-80">{pack.extension}</p>
         </div>
-        <ul className="mt-6 flex-1 space-y-2.5">
+        <ul className="mt-6 space-y-2.5">
           {pack.highlights.map((f) => (
             <li key={f} className="flex items-start gap-2.5 text-sm">
               <span className={`mt-0.5 grid size-4.5 shrink-0 place-items-center rounded-full ${dark ? "bg-mint-400 text-ink-950" : "bg-brand-500/10 text-brand-600"}`}>
@@ -180,6 +183,9 @@ function PackCard({ pack, billing, onCta }: { pack: Pack; billing: Billing; onCt
             </li>
           ))}
         </ul>
+        <div className="flex-1">
+          {pack.limit && <p className={`mt-5 text-xs italic ${dark ? "text-white/55" : "text-ink-900/55"}`}>{pack.limit}</p>}
+        </div>
         <MagneticButton
           onClick={onCta}
           strength={0.18}
@@ -192,6 +198,36 @@ function PackCard({ pack, billing, onCta }: { pack: Pack; billing: Billing; onCt
         </p>
       </div>
     </motion.div>
+  );
+}
+
+/* ------------------------------------------------------------------ extensions et règles */
+
+function Extensions() {
+  const { locale, t } = useI18n();
+  return (
+    <div className="mt-14 rounded-[28px] bg-white p-7 ring-1 ring-ink-900/[0.07] md:p-9">
+      <h3 className="font-display text-2xl font-bold">{t("Extensions à la carte", "Add-ons")}</h3>
+      <dl className="mt-5 grid gap-5 md:grid-cols-2">
+        {extensions.map((e) => (
+          <div key={e.name.fr} className="rounded-xl bg-brand-500/[0.05] p-4">
+            <dt className="flex flex-wrap items-baseline justify-between gap-2">
+              <span className="font-semibold">{e.name[locale]}</span>
+              <span className="font-display font-bold tabular-nums">{e.price[locale]}</span>
+            </dt>
+            <dd className="mt-1.5 text-sm text-ink-900/65">{e.note[locale]}</dd>
+          </div>
+        ))}
+      </dl>
+      <ul className="mt-6 space-y-2 text-sm text-ink-900/70">
+        {commercialRules[locale].map((r) => (
+          <li key={r} className="flex items-start gap-2.5">
+            <Check className="mt-0.5 size-4 shrink-0 text-brand-600" strokeWidth={3} />
+            {r}
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
 
@@ -223,7 +259,7 @@ function Comparison({ defaultOpen }: { defaultOpen: boolean }) {
             className="overflow-hidden"
           >
             <div className="mt-6 overflow-x-auto rounded-[24px] bg-white ring-1 ring-ink-900/[0.07]">
-              <table className="w-full min-w-[720px] text-sm">
+              <table className="w-full min-w-[960px] text-sm">
                 <thead>
                   <tr className="border-b border-ink-900/[0.07] text-left">
                     <th className="p-4 font-medium text-ink-900/50">{t("Domaine fonctionnel", "Functional area")}</th>
@@ -277,12 +313,20 @@ function Simulator({ billing }: { billing: Billing }) {
   const has = (t: Trade) => trades.includes(t);
 
   const lines: [string, number][] = [];
-  if (has("agence")) lines.push([t(`Agence · ${units} logements`, `Agency · ${units} units`), agencePrice(units)]);
-  if (has("syndic"))
+  const bases: number[] = [];
+  if (has("agence")) {
+    lines.push([t(`Agence · ${units} lots`, `Agency · ${units} lots`), agencePrice(units)]);
+    bases.push(29_900);
+  }
+  if (has("syndic")) {
     lines.push([t(`Syndic · ${copros} copropriétés, ${coproLots} lots`, `Condo Management · ${copros} condominiums, ${coproLots} lots`), syndicPrice(copros, coproLots)]);
-  if (has("promoteur"))
+    bases.push(49_900);
+  }
+  if (has("promoteur")) {
     lines.push([t(`Promoteur · ${sites} chantiers, ${programLots} lots`, `Developer · ${sites} sites, ${programLots} lots`), promoteurPrice(sites, programLots)]);
-  const combo = comboPrice(lines.map(([, p]) => p));
+    bases.push(149_900);
+  }
+  const combo = comboPrice(lines.map(([, p]) => p), bases);
 
   // Avec les trois métiers, on compare au forfait intégré (lots comptés sans dédoublonnage : estimation haute)
   const integreSold = packs.find((p) => p.id === "integre")?.available ?? false;
@@ -328,7 +372,7 @@ function Simulator({ billing }: { billing: Billing }) {
           <div className="mt-6 grid gap-5 sm:grid-cols-2">
             <AnimatePresence initial={false}>
               {has("agence") && (
-                <Field key="u" label={t("Logements sous mandat de gestion", "Units under management")} value={units} onChange={setUnits} max={2000} />
+                <Field key="u" label={t("Lots sous mandat de gestion", "Lots under management")} value={units} onChange={setUnits} max={2000} />
               )}
               {has("syndic") && <Field key="c" label={t("Copropriétés actives", "Active condominiums")} value={copros} onChange={setCopros} max={30} />}
               {has("syndic") && <Field key="cl" label={t("Lots de copropriété", "Condominium lots")} value={coproLots} onChange={setCoproLots} max={3000} />}
@@ -354,7 +398,7 @@ function Simulator({ billing }: { billing: Billing }) {
               {lines.map(([label, price]) => (
                 <Row key={label} label={label} value={fcfa(price)} strike={useIntegrated} />
               ))}
-              {combo.discount > 0 && <Row label={t("Remise combinaison (−10 % sur le moins cher)", "Combo discount (−10% on the cheapest)")} value={`− ${fcfa(combo.discount)}`} accent strike={useIntegrated} />}
+              {combo.discount > 0 && <Row label={t("Remise combinaison (−10 % sur le prix de base du moins cher)", "Combo discount (−10% on the cheapest base price)")} value={`− ${fcfa(combo.discount)}`} accent strike={useIntegrated} />}
               {integrated !== null && (
                 <div className={`mt-3 rounded-xl p-3 ring-1 ${useIntegrated ? "bg-mint-400/10 ring-mint-400/40" : "bg-white/5 ring-white/10"}`}>
                   <p className="font-semibold">
@@ -372,8 +416,8 @@ function Simulator({ billing }: { billing: Billing }) {
             </div>
             <p className="mt-6 text-xs text-white/60">
               {t(
-                "Hors taxes, mise en route et messages WhatsApp consommés. Estimation indicative, devis sur demande.",
-                "Excl. VAT, onboarding and WhatsApp messages used. Indicative estimate, quote on request.",
+                "Hors taxes, mise en route et messages WhatsApp consommés. Les packs Patrimoine ne sont pas simulés ici. Estimation indicative, devis sur demande.",
+                "Excl. VAT, onboarding and WhatsApp messages used. Portfolio packs are not simulated here. Indicative estimate, quote on request.",
               )}
             </p>
           </div>

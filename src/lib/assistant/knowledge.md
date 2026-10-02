@@ -11,7 +11,7 @@ Règles de lecture pour l'assistant :
 
 ## Disponibilité (vérifiée le 23 septembre 2026 — prime sur tout le reste)
 
-- Disponible et commercialisé : module Agence (biens, annonces, CRM, baux, échéances, paiements, pénalités, dépôts, documents, relevés de gérance, portails propriétaire et locataire), module Syndic, maintenance, communication e-mail / WhatsApp / newsletter, patrimoine, tableaux de bord, rôles et audit. Packs vendus : **Agence**, **Syndic**, **Promoteur** et **Opérateur intégré** (combinables avec 10 % de remise sur le moins cher).
+- Disponible et commercialisé : module Agence (biens, annonces, CRM, baux, échéances, paiements, pénalités, dépôts, documents, relevés de gérance, portails propriétaire et locataire), module Syndic, maintenance, communication e-mail / WhatsApp / newsletter, patrimoine, tableaux de bord, rôles et audit. Packs vendus : **Agence**, **Syndic**, **Promoteur**, **Opérateur intégré**, **Patrimoine Essentiel** et **Patrimoine Pro** (combinables avec 10 % de remise sur le prix de base du moins cher).
 - En cours de développement, et présentables comme tels : le module Promoteur (chantiers, stock de matériaux, personnel, tâcherons, foncier, associations), la finance opérationnelle (fournisseurs, pièces de caisse, file de validation, balances clients et fournisseurs, import Excel) et les fonctions listées dans « Fonctions en cours de développement ». Toujours préciser qu'elles sont en cours de développement ou de déploiement, ne jamais donner de date, et proposer de vérifier leur disponibilité avec l'équipe.
 - Les packs **Promoteur** et **Opérateur intégré** sont affichés avec leur prix ; leurs fonctions de chantier, de BTP et de finance opérationnelle sont en cours de déploiement : le préciser, sans date.
 - Les points de la section « Limites » (fonctions non établies) ne sont pas annoncés.
@@ -71,28 +71,31 @@ L'application possède trois modules métier, activés ou désactivés organisat
 
 Une même organisation peut avoir plusieurs modules activés en même temps (par exemple un cabinet qui fait à la fois de la gestion locative et du syndic).
 
-### Quatre packs commerciaux
+### Six packs commerciaux
 
-L'offre commerciale est organisée en quatre packs, qui correspondent aux métiers :
+L'offre commerciale est organisée en six packs, qui correspondent aux métiers et aux profils :
 
 - Agence : agences de transaction et de gestion locative.
 - Syndic : cabinets de copropriété.
 - Promoteur : promoteurs ou entreprises immobilières qui construisent et commercialisent.
 - Opérateur intégré : groupes qui construisent, commercialisent, louent et gèrent des copropriétés. Il inclut tous les modules métier et toutes les fonctions transversales, sans supplément finance, CRM ou patrimoine.
+- Patrimoine Essentiel : particuliers et diaspora, 10 biens détenus en propre, loués ou non.
+- Patrimoine Pro : entreprises et institutionnels, 100 biens détenus en propre, loués ou non. Mêmes fonctionnalités que l'Essentiel ; les deux ne se cumulent pas, on passe de l'un à l'autre par changement de pack.
+- Les packs Patrimoine comprennent la vue patrimoniale (valeur des biens, emprunts, ratios bancaires, hypothèses de projection par bien), la gestion locative directe de leurs propres biens (baux, loyers, quittances), les documents, la finance, la maintenance, la communication, les rôles et l'audit. Pas de mandat de gestion ni de propriétaire tiers. La valeur nette consolidée et les projections consolidées sont en développement (à dire sans date). Pas de mandat de gestion pour un tiers ni de propriétaire tiers. Une fonction « Patrimoine particulier gratuit » ou « plus » est encore en développement : ne pas l'annoncer.
 
 Couverture fonctionnelle par pack (d'après la proposition de modèle économique) :
 
-- Socle (biens, contacts, documents, rôles, audit, tableaux de bord) : tous les packs.
+- Biens, documents, contacts, rôles, audit, tableaux de bord : tous les packs.
 - CRM, mandats, annonces, visites et suivi commercial : Agence, Promoteur, Opérateur intégré.
-- Baux, échéances, paiements, pénalités, dépôts : Agence, Opérateur intégré.
+- Baux, loyers, échéances, paiements, quittances : Agence, Opérateur intégré, Patrimoine Essentiel et Pro (gestion locative directe de leurs propres biens). Pénalités de retard et dépôts de garantie : Agence, Opérateur intégré.
 - Portails propriétaire et locataire : Agence, Opérateur intégré.
 - Maintenance et interventions : tous les packs.
 - Syndic (copropriétés, tantièmes, charges, impayés, assemblées générales) : Syndic, Opérateur intégré.
 - Comptabilité de copropriété et budgets : Syndic, Opérateur intégré.
 - Chantiers (budgets, coûts, achats, avancement, lots, clôture) : Promoteur, Opérateur intégré.
 - BTP (matériaux et stock, personnel, tâcherons, terrain, associations) : Promoteur, Opérateur intégré.
-- Finance opérationnelle (tiers, fournisseurs, caisse, validations, imports) : tous les packs.
-- Patrimoine (valorisation, rendement, emprunts, dépenses et travaux) : Agence, Promoteur, Opérateur intégré.
+- Finance : tous les packs.
+- Patrimoine (valeur des biens, emprunts, ratios bancaires, projections par bien) : Agence, Promoteur, Opérateur intégré, Patrimoine Essentiel et Pro. Valeur nette et projections consolidées : en développement.
 - Communication (e-mail, modèles, relances, WhatsApp, newsletter) : tous les packs.
 - Vente complète du programme et passage à la copropriété : prévue dans Promoteur et Opérateur intégré, mais sous réserve de vérification du parcours complet en production (voir Limites).
 
@@ -363,11 +366,12 @@ Les montants exacts des packs, capacités incluses, extensions et frais de mise 
 ### Principes
 
 - Prix mensuels en FCFA, hors taxes applicables.
-- Quatre packs : Agence, Syndic, Promoteur et Opérateur intégré, chacun avec une capacité incluse (logements sous mandat ; copropriétés et lots ; chantiers et lots de programme) et un prix d'extension au-delà.
+- Six packs : Agence, Syndic, Promoteur, Opérateur intégré, Patrimoine Essentiel et Patrimoine Pro, chacun avec une capacité incluse (lots sous mandat ; copropriétés et lots ; chantiers et lots de programme ; biens détenus en propre) et une extension au-delà. Le dépassement est facturé, pas bloqué.
+- Factures émises par Alliance Consultants, TVA de 18 % ajoutée aux prix hors taxes.
 - Le mensuel est payé d'avance.
 - Offre de lancement : le premier mois d'abonnement est offert sur tous les packs, sans engagement (résiliable à tout moment). La mise en route accompagnée, si elle est choisie, reste facturée.
 - L'annuel payé d'avance coûte 11 mensualités, soit 12 mois pour le prix de 11 (environ 8,3 % de remise). Exemple : Agence à 29 900 FCFA par mois, soit 328 900 FCFA par an, hors mise en route et consommation.
-- Packs combinables : un client qui fait à la fois de la gestion locative et du syndic achète les deux packs, avec 10 % de remise sur le moins cher des deux abonnements, et conserve les capacités incluses de chaque pack.
+- Packs combinables : un client qui fait à la fois de la gestion locative et du syndic achète les deux packs, avec 10 % de remise sur le prix de base du moins cher des deux packs, et conserve les capacités incluses de chaque pack.
 - Au-delà des capacités (grand réseau), devis sur mesure avec périmètre, accompagnement et niveau de service écrits.
 
 ### Ce qui n'est pas facturé ou est facturé à part
@@ -383,7 +387,7 @@ Les montants exacts des packs, capacités incluses, extensions et frais de mise 
 
 - Agence avec 180 logements gérés : 29 900 + 80 × 150 = 41 900 FCFA par mois.
 - Syndic avec 2 copropriétés et 140 lots : 49 900 + 40 × 150 = 55 900 FCFA par mois.
-- Cabinet réunissant ces deux activités : 41 900 + 55 900 − 10 % × 41 900 = 93 610 FCFA par mois.
+- Cabinet réunissant ces deux activités : 41 900 + 55 900 − 10 % × 29 900 (prix de base du pack le moins cher) = 94 810 FCFA par mois.
 
 ### Statut des prix
 
@@ -401,6 +405,7 @@ La proposition commerciale précise que ces prix sont des hypothèses en cours d
   - Syndic : deux copropriétés, tantièmes et soldes d'ouverture fournis par le client, formation ; 12 heures maximum.
   - Promoteur : deux chantiers, nomenclature des coûts et des stocks, formation des équipes ; 20 heures maximum.
   - Opérateur intégré : trois métiers, plan de reprise et formations par rôle ; 30 heures maximum.
+  - Patrimoine Essentiel (30 000 FCFA HT) et Patrimoine Pro (90 000 FCFA HT) : mise en route facultative ; le périmètre est précisé en démonstration.
 - Les historiques complexes, les données à nettoyer et les intégrations spécifiques font l'objet d'un devis distinct.
 
 ### Reprise de données : ce qui est documenté
@@ -600,13 +605,13 @@ Non. C'est une application web accessible depuis un navigateur, sur ordinateur, 
 Il n'existe pas d'application native documentée. L'application web s'utilise sur téléphone, avec une barre d'onglets mobile (Accueil, Biens, Baux, Encaisser, Plus).
 
 **Combien coûte ImmoTopia ?**
-Quatre packs mensuels en FCFA hors taxes (Agence, Syndic, Promoteur, Opérateur intégré), avec capacité incluse et extensions. Voir la grille officielle et le simulateur sur https://immotopia.cloud/tarifs. Les prix sont en cours de validation ; le devis fait foi.
+Six packs mensuels en FCFA hors taxes (Agence, Syndic, Promoteur, Opérateur intégré, Patrimoine Essentiel, Patrimoine Pro), avec capacité incluse et extensions. Voir la grille officielle et le simulateur sur https://immotopia.cloud/tarifs. Les prix sont en cours de validation ; le devis fait foi.
 
 **Y a-t-il une réduction en paiement annuel ?**
 Oui : l'annuel payé d'avance coûte 11 mensualités, soit 12 mois pour le prix de 11.
 
 **Je fais de la gestion locative et du syndic : dois-je payer deux fois plein tarif ?**
-Non. Les packs se combinent avec 10 % de remise sur le moins cher des deux. Avec les trois métiers, on compare au pack Opérateur intégré et on retient le moins cher.
+Non. Les packs se combinent avec 10 % de remise sur le prix de base du moins cher des deux. Avec les trois métiers, on compare au pack Opérateur intégré et on retient le moins cher.
 
 **ImmoTopia prend-il une commission sur les loyers ?**
 Non. Aucune commission sur les loyers ni pourcentage sur les ventes.

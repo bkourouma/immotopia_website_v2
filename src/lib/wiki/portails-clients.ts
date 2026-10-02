@@ -7,7 +7,7 @@ export const portailsClients: WikiDomain = {
   summary:
     "Donnez à vos propriétaires, locataires et copropriétaires un espace en ligne : loyers, échéances, documents, incidents, appels de charges et assemblées.",
   intro:
-    "Les portails clients ouvrent à vos clients un accès en ligne à leurs propres informations, tenues par votre agence. Le propriétaire suit ses biens, ses revenus et ses documents ; le locataire consulte son bail, déclare ses paiements et signale ses incidents ; le copropriétaire suit ses lots, ses appels de charges et les assemblées générales. Chacun ne voit que ce qui le concerne. Votre équipe répond à moins d'appels pour une simple question de solde ou de document.",
+    "Les portails clients ouvrent à vos clients un accès en ligne à leurs propres informations, tenues par votre agence. Le propriétaire suit ses biens, ses revenus et ses documents ; le locataire consulte son bail, déclare ses paiements et signale ses incidents ; le copropriétaire suit ses lots, ses appels de charges et les assemblées générales. Chacun ne voit que ce qui le concerne. Des pages publiques sans compte complètent ces portails : paiement d'un loyer, rapport mensuel du propriétaire et accès en lecture seule pour un tiers de confiance. Votre équipe répond à moins d'appels pour une simple question de solde ou de document.",
   features: [
     {
       slug: "portail-proprietaire",
@@ -29,7 +29,7 @@ export const portailsClients: WikiDomain = {
         },
         {
           title: "Consulter mes biens",
-          goal: "Voir la liste de ses biens dans l'agence, filtrée par statut, type de bien ou mode de transaction.",
+          goal: "Voir la liste de ses biens dans l'agence, filtrée par statut, type de bien ou mode de transaction. Les biens confiés à l'agence sous mandat de gestion en cours en font partie.",
           output: "Pour chaque bien : l'adresse, le type, le statut et le bail en cours, avec un résumé du portefeuille.",
         },
         {
@@ -78,7 +78,6 @@ export const portailsClients: WikiDomain = {
           title: "Consulter mon compte courant",
           goal: "Voir le solde du compte que l'agence tient pour lui : loyers encaissés, honoraires, TVA, dépenses et reversements.",
           output: "Le solde, les mouvements datés avec leur référence et le bail lié, et l'historique des reversements.",
-          status: "deploiement",
         },
         {
           title: "Consulter et télécharger mes documents",
@@ -92,6 +91,24 @@ export const portailsClients: WikiDomain = {
         {
           title: "Ouvrir une pièce jointe d'incident",
           goal: "Télécharger un fichier joint à un incident portant sur l'un de ses biens.",
+        },
+        {
+          title: "Générer un rapport de revenus",
+          goal: "Télécharger les revenus perçus sur une période, pour tous ses biens ou pour un seul.",
+          input: "La période, le bien si besoin et le format : PDF, CSV ou Excel.",
+          output: "Un fichier à télécharger.",
+        },
+        {
+          title: "Générer un rapport d'occupation",
+          goal: "Télécharger le taux d'occupation de ses biens à une date donnée.",
+          input: "La date et le format.",
+          output: "Un fichier à télécharger.",
+        },
+        {
+          title: "Exporter mes données",
+          goal: "Exporter ses paiements, ses échéances ou ses baux, sur une période et pour un bien si besoin.",
+          input: "Le type de données, la période et le format : CSV ou Excel.",
+          output: "Un fichier à télécharger, limité à ses propres biens.",
         },
         {
           title: "Gérer mes préférences",
@@ -112,6 +129,8 @@ export const portailsClients: WikiDomain = {
         "portails-clients/portail-locataire",
         "gestion-locative/releves-de-gerance",
         "gestion-locative/reversements-aux-proprietaires",
+        "portails-clients/vue-patrimoine-proprietaire",
+        "portails-clients/rapport-mensuel-proprietaire",
       ],
     },
     {
@@ -175,7 +194,6 @@ export const portailsClients: WikiDomain = {
         {
           title: "Consulter mon compte",
           goal: "Voir, en lecture seule, le solde et le relevé des mouvements de son compte chez l'agence.",
-          status: "deploiement",
         },
         {
           title: "Consulter et télécharger mes documents",
@@ -196,6 +214,7 @@ export const portailsClients: WikiDomain = {
         "portails-clients/signalement-incidents-locataire",
         "gestion-locative/encaissement-des-loyers",
         "gestion-locative/depot-de-garantie",
+        "portails-clients/paiement-loyer-par-lien",
       ],
     },
     {
@@ -279,6 +298,44 @@ export const portailsClients: WikiDomain = {
           output:
             "Le type, la date, le lieu, le statut et l'ordre du jour ; pour une assemblée clôturée, les résolutions, les résultats et ses propres votes, jamais ceux des autres lots.",
         },
+        {
+          title: "Consulter mes paiements",
+          goal: "Voir, en lecture seule, les paiements de charges versés sur ses lots, leur affectation aux appels et l'avance restante par lot.",
+          input: "Un lot ou une année, si besoin.",
+          output: "Pour chaque paiement : la date, le montant, le mode, la référence, le lot et les reçus ou quittances liés.",
+        },
+        {
+          title: "Consulter mes reçus et quittances",
+          goal: "Retrouver les reçus de paiement et les quittances d'appel émis à son nom sur ses lots.",
+          input: "Un lot, un type de document ou une période, si besoin.",
+          output: "La liste des documents avec leur numéro, le lot, la période, le montant et la date d'émission.",
+        },
+        {
+          title: "Télécharger un reçu ou une quittance",
+          goal: "Télécharger en PDF un reçu ou une quittance de ses lots.",
+        },
+        {
+          title: "Télécharger le relevé de compte d'un lot",
+          goal: "Obtenir en PDF le relevé du compte d'un lot sur une période, jamais avant son acquisition.",
+          input: "Le lot et la période, si besoin.",
+          output: "Un PDF avec le solde d'ouverture, les mouvements et le solde de clôture.",
+        },
+        {
+          title: "Consulter le suivi mensuel d'un lot",
+          goal: "Voir mois par mois ce qui est dû et payé sur un lot, avec l'avance disponible.",
+          input: "L'année, par défaut l'année en cours.",
+          output: "Une grille de 12 mois avec les totaux dû, payé et restant. Les mois avant l'acquisition du lot restent vides.",
+        },
+        {
+          title: "Consulter la fiche de ma copropriété",
+          goal: "Voir l'identité d'une copropriété où l'on a un lot.",
+          output: "L'adresse, l'immatriculation, le nombre de lots, ses propres lots, l'émetteur des documents et le contact du syndic.",
+        },
+        {
+          title: "Télécharger l'avis d'appel de charges",
+          goal: "Récupérer en PDF l'avis d'un appel de charges de l'un de ses lots, depuis la liste de ses appels.",
+          prereq: "L'appel porte sur un lot qu'il détient et date d'après l'acquisition du lot.",
+        },
       ],
       faq: [
         {
@@ -291,6 +348,136 @@ export const portailsClients: WikiDomain = {
         },
       ],
       related: ["portails-clients/portail-proprietaire"],
+    },
+    {
+      slug: "vue-patrimoine-proprietaire",
+      title: "Patrimoine dans le portail propriétaire",
+      metaTitle: "Valeur et rendement de ses biens dans le portail propriétaire",
+      summary:
+        "Le propriétaire suit en ligne la valeur de ses biens, sa plus-value latente, ses rendements, ses emprunts et les documents de chaque bien, en lecture seule.",
+      intro:
+        "En plus des loyers, le propriétaire peut consulter la valeur et la performance de ses biens, telles que l'agence les a renseignées : dernière valorisation, plus-value latente, rendements, capital restant dû des emprunts. Seules les rubriques que l'agence ouvre sont visibles. Il retrouve aussi le dossier de chaque bien et télécharge les documents.",
+      packs: ["agence", "promoteur", "integre"],
+      profiles: ["proprietaire"],
+      menu: "Portail propriétaire › Mon patrimoine",
+      status: "disponible",
+      actions: [
+        {
+          title: "Consulter mon patrimoine",
+          goal: "Voir la valeur et la performance de l'ensemble de ses biens.",
+          output:
+            "Le nombre de biens, la valeur estimée, la plus-value latente et le capital restant dû, pondérés par sa quote-part. Pour chaque bien : valorisation, rendements brut, net et net après emprunt, résumé des emprunts et quote-part en indivision.",
+          prereq:
+            "L'agence a saisi les valorisations, emprunts et dépenses et a ouvert cette vue au propriétaire. Les biens confiés sous mandat de gestion en cours en font partie.",
+        },
+        {
+          title: "Consulter le patrimoine d'un bien",
+          goal: "Ouvrir le détail patrimonial de l'un de ses biens.",
+          output:
+            "L'historique des valorisations, la plus-value latente, les rendements, les emprunts, les travaux et les documents. Une rubrique que l'agence n'ouvre pas n'apparaît pas.",
+        },
+        {
+          title: "Télécharger un document patrimonial",
+          goal: "Ouvrir un document du dossier d'un de ses biens : titre, acte notarié, assurance, diagnostic.",
+        },
+      ],
+      faq: [
+        {
+          q: "Le propriétaire voit-il tout le patrimoine de l'agence ?",
+          a: "Non. Il ne voit que ses propres biens, et seulement les rubriques que l'agence a ouvertes.",
+        },
+      ],
+      related: ["portails-clients/portail-proprietaire", "gestion-locative/acces-partages-tiers-de-confiance"],
+    },
+    {
+      slug: "rapport-mensuel-proprietaire",
+      title: "Rapport mensuel par lien sécurisé",
+      metaTitle: "Rapport mensuel du propriétaire consultable par lien sécurisé",
+      summary:
+        "Le propriétaire ouvre son rapport mensuel de gérance depuis un lien reçu par WhatsApp ou e-mail, sans compte, et l'imprime ou l'enregistre en PDF.",
+      intro:
+        "Quand l'agence lui envoie son rapport du mois, le propriétaire clique sur le lien et le lit tout de suite, sans identifiant. Il voit les totaux du mois et le détail bien par bien, puis l'imprime ou l'enregistre en PDF depuis son navigateur. Le lien a une durée limitée et l'agence peut le retirer à tout moment.",
+      packs: ["agence", "integre"],
+      profiles: ["proprietaire", "visiteur"],
+      status: "disponible",
+      actions: [
+        {
+          title: "Consulter le rapport du mois par lien",
+          goal: "Afficher en lecture seule le relevé du mois d'un seul propriétaire, sans connexion.",
+          output:
+            "Les totaux du mois, dont la retenue à la source et le dépôt de garantie conservé, et le détail par bien. Le rapport s'imprime ou s'enregistre en PDF.",
+          prereq:
+            "L'agence a envoyé le rapport du mois ou créé un lien. Un lien inconnu, expiré ou retiré n'affiche rien.",
+        },
+      ],
+      faq: [
+        {
+          q: "Que se passe-t-il quand le lien expire ?",
+          a: "Il n'affiche plus rien. L'agence peut en envoyer un nouveau, et retirer à tout moment un lien encore valide.",
+        },
+      ],
+      related: ["gestion-locative/releves-de-gerance", "gestion-locative/notifications-proprietaire"],
+    },
+    {
+      slug: "paiement-loyer-par-lien",
+      title: "Page de paiement d'un loyer",
+      metaTitle: "Payer son loyer par Mobile Money depuis un lien reçu",
+      summary:
+        "Le locataire ouvre le lien reçu de son agence, voit le reste dû de son échéance et paie en Mobile Money, sans compte, puis suit le statut de son paiement.",
+      intro:
+        "Le locataire reçoit de son agence un lien vers une seule échéance de loyer. La page lui montre l'agence, la période, la date d'échéance et le reste dû, puis lance le paiement Mobile Money. Au retour, une page lui indique si le règlement est confirmé, en cours, échoué ou annulé. Cette fonction est en cours de déploiement : elle est éprouvée en mode simulation, et le paiement réel n'est pas encore validé.",
+      packs: ["agence", "integre", "patrimoine-essentiel", "patrimoine-pro"],
+      profiles: ["locataire", "visiteur"],
+      status: "deploiement",
+      actions: [
+        {
+          title: "Payer mon loyer depuis le lien reçu",
+          goal: "Afficher l'échéance concernée et son reste dû, puis lancer le paiement Mobile Money.",
+          output:
+            "Le nom de l'agence, la période, la date d'échéance et le montant dû, pénalités comprises, puis la page de paiement de l'opérateur choisi : Wave, Orange Money, MTN ou Moov.",
+          prereq:
+            "Le lien est valide et l'échéance n'est ni soldée ni annulée. Si un paiement est déjà en cours, la page l'indique.",
+        },
+        {
+          title: "Suivre le statut du paiement",
+          goal: "Savoir si le règlement est confirmé, en cours, échoué ou annulé, au retour de la page de paiement.",
+          output: "Le statut, le montant, l'agence et la période, mis à jour automatiquement pendant quelques minutes.",
+        },
+      ],
+      faq: [
+        {
+          q: "Le montant peut-il être modifié par le locataire ?",
+          a: "Non. Le montant est celui du reste dû de l'échéance, calculé par ImmoTopia, et non celui d'une saisie.",
+        },
+      ],
+      related: ["gestion-locative/liens-de-paiement-loyer", "portails-clients/portail-locataire"],
+    },
+    {
+      slug: "acces-partage-tiers-de-confiance",
+      title: "Accès partagé en lecture seule",
+      metaTitle: "Consulter un patrimoine par accès partagé, sans compte",
+      summary:
+        "Le notaire, l'expert-comptable ou le banquier ouvre le lien reçu, consulte en lecture seule les biens accordés et télécharge les documents partagés.",
+      intro:
+        "Le destinataire d'un accès partagé n'a ni compte ni mot de passe à créer. Le lien qu'il reçoit ouvre une page en lecture seule, avec la mention de l'agence qui lui accorde l'accès. Il ne voit que les biens et les rubriques accordés, et ne télécharge que les documents explicitement partagés. Chaque consultation est enregistrée.",
+      packs: ["agence", "integre"],
+      profiles: ["visiteur"],
+      status: "disponible",
+      actions: [
+        {
+          title: "Consulter le patrimoine en lecture seule",
+          goal: "Voir les biens du périmètre et les seules rubriques accordées : valorisations, rendement et ratios, emprunts, dépenses, baux et loyers, titres et propriété, documents partageables.",
+          output:
+            "Une page en lecture seule avec l'agence, le bénéficiaire, l'échéance de l'accès, les rubriques et les biens. Aucune coordonnée ni identité de locataire n'est affichée.",
+          prereq: "L'agence a créé l'accès et envoyé le lien. Un lien inconnu, expiré ou retiré n'affiche rien.",
+        },
+        {
+          title: "Télécharger un document partagé",
+          goal: "Télécharger un document que l'agence a explicitement partagé : titre de propriété, acte, diagnostic.",
+          prereq: "La rubrique documents est accordée et le document appartient à l'accès.",
+        },
+      ],
+      related: ["gestion-locative/acces-partages-tiers-de-confiance"],
     },
   ],
 };

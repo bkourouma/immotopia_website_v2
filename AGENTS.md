@@ -129,8 +129,11 @@ aucun HTML injecté).
   impose de reconstruire l'image.
 - `next build` charge `.env.local` s'il existe ; la CI construit sans aucun
   secret (les routes API lisent leurs variables à l'exécution).
-- Le déploiement (`ssh alliance`, `scp … alliance:`) est réservé à
-  l'utilisateur ; `validate-bash.sh` le refuse aux agents.
+- Le déploiement (`ssh alliance`, `scp … alliance:`) n'est plus refusé par
+  le hook, mais un agent ne déploie qu'après avoir demandé, dans la
+  conversation, l'autorisation de l'utilisateur et obtenu un « oui » explicite
+  pour ce déploiement (décision du 2026-10-02) ; l'accord ne vaut que pour
+  l'opération demandée.
 - La dette mesurée le 2026-09-27 est nulle (`tsc` : 0 erreur, `lint` :
   0 erreur) : toute nouvelle erreur est une régression.
 - Sur un checkout neuf, `npx tsc --noEmit` échoue (`PageProps` introuvable,

@@ -16,7 +16,7 @@ export const maintenance: WikiDomain = {
       summary:
         "Enregistrez les pannes signalées par vos locataires : plomberie, électricité, climatisation. Photos, commentaires et suivi de la demande jusqu'à sa résolution.",
       intro:
-        "Quand un locataire signale une fuite ou une panne, votre équipe enregistre la demande en son nom, rattachée au bien et au bail. La demande porte une catégorie, une priorité et une description précise. Vous y joignez photos ou PDF et suivez les échanges dans un fil de commentaires. Tant qu'elle n'est pas prise en charge, la demande peut encore être corrigée.",
+        "Quand un locataire signale une fuite ou une panne, votre équipe enregistre la demande en son nom, rattachée au bien et, le cas échéant, au bail. Un agent peut aussi déclarer une panne sur un bien sans bail, par exemple un bien en vente ou détenu en propre. La demande porte une catégorie, une priorité et une description précise. Vous y joignez photos ou PDF et suivez les échanges dans un fil de commentaires. Tant qu'elle n'est pas prise en charge, la demande peut encore être corrigée.",
       packs: ["agence", "syndic", "promoteur", "integre"],
       profiles: ["equipe"],
       menu: "Maintenance › Mes demandes",
@@ -28,7 +28,8 @@ export const maintenance: WikiDomain = {
           input:
             "Un titre, la catégorie (plomberie, électricité, climatisation ou autre), la priorité (basse, moyenne, haute ou urgente), une description, l'endroit précis dans le logement, le bien et, si besoin, le bail.",
           output: "Un ticket au statut « déclaré », rattaché au bien, au bail et au locataire.",
-          prereq: "Un bail actif doit exister sur ce bien, et pour ce locataire s'il est précisé.",
+          prereq:
+            "Pour une demande de locataire, un bail actif doit exister sur ce bien (et pour ce locataire s'il est précisé). Un agent peut déclarer sur un bien sans bail ; s'il y a un bail actif, la demande s'y rattache.",
         },
         {
           title: "Consulter mes demandes",
@@ -171,7 +172,8 @@ export const maintenance: WikiDomain = {
           goal: "Ajouter un prestataire au carnet de l'agence.",
           input: "Son nom, son téléphone, son e-mail, son adresse et ses spécialités.",
           output: "Un prestataire actif, prêt à être assigné.",
-          prereq: "Le nom ne doit pas déjà exister dans le carnet de l'agence.",
+          prereq:
+            "Le nom ne doit pas déjà exister dans le carnet de l'agence, sans tenir compte des majuscules ni des espaces autour.",
         },
         {
           title: "Consulter la liste des prestataires",
@@ -185,11 +187,18 @@ export const maintenance: WikiDomain = {
         {
           title: "Modifier un prestataire",
           goal: "Mettre à jour ses coordonnées, ses spécialités ou le rendre de nouveau actif.",
+          prereq: "Si vous changez le nom, il doit rester unique dans le carnet de l'agence.",
         },
         {
           title: "Désactiver un prestataire",
           goal: "Retirer un prestataire de la liste des prestataires assignables, sans le supprimer.",
           prereq: "Aucun ticket non résolu ne doit lui être assigné.",
+        },
+        {
+          title: "Lister les prestataires actifs pour une assignation",
+          goal: "Alimenter la liste de choix des prestataires au moment d'assigner un ticket.",
+          output: "Les prestataires actifs seulement.",
+          status: "deploiement",
         },
         {
           title: "Supprimer définitivement un prestataire",

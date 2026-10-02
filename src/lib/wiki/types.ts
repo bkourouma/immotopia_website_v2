@@ -7,8 +7,11 @@ import type { PackId } from "../pricing";
 
 export type { PackId };
 
+/** Packs du wiki : les six packs commercialisés, plus les paliers Particulier encore en développement (non commercialisés). */
+export type WikiPackId = PackId | "particulier-gratuit" | "particulier-plus";
+
 /** « disponible » : en production. « deploiement » : présent dans l'application, en cours de déploiement. */
-export type WikiStatus = "disponible" | "deploiement";
+export type WikiStatus = "disponible" | "deploiement" | "developpement";
 
 /** Profils de la configuration de départ (une agence peut réattribuer les droits dans « Rôles et permissions »). */
 export type WikiProfile =
@@ -52,7 +55,7 @@ export type WikiFeature = {
   summary: string;
   /** Deux à quatre phrases : à quoi sert la fonctionnalité, pour qui, ce qu'elle change au quotidien. */
   intro: string;
-  packs: PackId[];
+  packs: WikiPackId[];
   profiles: WikiProfile[];
   /** Chemin dans le menu de l'application : « Biens › Toutes les propriétés ». */
   menu?: string;
