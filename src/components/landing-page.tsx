@@ -3,7 +3,7 @@ import { landingBySlug, type Landing } from "@/lib/landings";
 import { SITE_URL } from "@/lib/site";
 import { DemoButton } from "./demo-button";
 import { FinalCta } from "./final-cta";
-import { InlineLinks } from "./inline-links";
+import { InlineLinks, stripLinks } from "./inline-links";
 import { Navbar } from "./navbar";
 import { PageHero } from "./page-hero";
 import { SmartLink } from "./smart-link";
@@ -15,7 +15,7 @@ export function LandingPage({ landing }: { landing: Landing }) {
     "@graph": [
       {
         "@type": "FAQPage",
-        mainEntity: landing.faq.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
+        mainEntity: landing.faq.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: stripLinks(f.a) } })),
       },
       {
         "@type": "BreadcrumbList",
@@ -33,7 +33,9 @@ export function LandingPage({ landing }: { landing: Landing }) {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
       <main className="bg-paper">
         <PageHero eyebrow={landing.eyebrow} title={landing.h1}>
-          <p>{landing.intro}</p>
+          <p>
+            <InlineLinks text={landing.intro} linkClassName="font-medium text-white underline decoration-white/40 underline-offset-4 hover:decoration-white" />
+          </p>
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
             <DemoButton />
             <SmartLink
@@ -49,7 +51,16 @@ export function LandingPage({ landing }: { landing: Landing }) {
           {landing.sections.map((s) => (
             <section key={s.title} className="mb-16 last:mb-0">
               <h2 className="font-display text-3xl font-bold tracking-tight text-balance md:text-4xl">{s.title}</h2>
-              {s.intro && <p className="mt-4 max-w-3xl text-lg text-ink-900/65">{s.intro}</p>}
+              {s.intro && (
+                <p className="mt-4 max-w-3xl text-lg text-ink-900/65">
+                  <InlineLinks text={s.intro} />
+                </p>
+              )}
+              {s.paragraphs?.map((p) => (
+                <p key={p} className="mt-4 max-w-3xl text-ink-900/70">
+                  <InlineLinks text={p} />
+                </p>
+              ))}
               {s.items && (
                 <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                   {s.items.map((it) => (
@@ -67,12 +78,51 @@ export function LandingPage({ landing }: { landing: Landing }) {
                   {s.bullets.map((b) => (
                     <li key={b} className="flex items-start gap-3 rounded-2xl bg-white px-5 py-4 text-ink-900/75 ring-1 ring-ink-900/[0.07]">
                       <Check className="mt-0.5 size-4.5 shrink-0 text-emerald-600" strokeWidth={3} aria-hidden />
-                      {b}
+                      <span>
+                        <InlineLinks text={b} />
+                      </span>
                     </li>
                   ))}
                 </ul>
               )}
-              {s.note && <p className="mt-5 rounded-2xl bg-sun-500/10 px-5 py-4 text-sm text-ink-900/70 ring-1 ring-sun-500/25">{s.note}</p>}
+              {s.table && (
+                <div className="mt-8 overflow-x-auto rounded-[22px] bg-white ring-1 ring-ink-900/[0.07]">
+                  <table className="w-full min-w-[640px] border-collapse text-left text-sm">
+                    <caption className="sr-only">{s.table.caption}</caption>
+                    <thead>
+                      <tr className="border-b border-ink-900/[0.07] bg-ink-900/[0.03]">
+                        {s.table.head.map((h, i) => (
+                          <th key={i} scope="col" className={`px-5 py-4 font-display font-bold ${i === s.table!.head.length - 1 ? "text-brand-600" : ""}`}>
+                            {h || <span className="sr-only">Critère</span>}
+                          </th>
+                        ))}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {s.table.rows.map((row) => (
+                        <tr key={row[0]} className="border-b border-ink-900/[0.06] align-top last:border-b-0">
+                          {row.map((cell, i) =>
+                            i === 0 ? (
+                              <th key={i} scope="row" className="px-5 py-4 font-semibold">
+                                <InlineLinks text={cell} />
+                              </th>
+                            ) : (
+                              <td key={i} className={`px-5 py-4 leading-relaxed ${i === row.length - 1 ? "bg-brand-500/[0.04] font-medium text-ink-900" : "text-ink-900/65"}`}>
+                                <InlineLinks text={cell} />
+                              </td>
+                            ),
+                          )}
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
+              {s.note && (
+                <p className="mt-5 rounded-2xl bg-sun-500/10 px-5 py-4 text-sm text-ink-900/70 ring-1 ring-sun-500/25">
+                  <InlineLinks text={s.note} />
+                </p>
+              )}
             </section>
           ))}
 
@@ -90,7 +140,9 @@ export function LandingPage({ landing }: { landing: Landing }) {
                         </span>
                       </span>
                     </summary>
-                    <p className="mt-3 text-ink-900/65">{f.a}</p>
+                    <p className="mt-3 text-ink-900/65">
+                      <InlineLinks text={f.a} />
+                    </p>
                   </details>
                 ))}
               </div>

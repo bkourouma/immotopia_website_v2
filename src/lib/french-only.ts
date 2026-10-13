@@ -9,6 +9,7 @@ export const frenchOnlyPaths = [
   "/logiciel-syndic-copropriete-cote-divoire",
   "/meilleur-logiciel-immobilier-cote-divoire",
   "/crm-immobilier-cote-divoire",
+  "/crm-promoteur-immobilier-cote-divoire",
   "/paiement-loyer-charges-mobile-money-cote-divoire",
   "/maintenance-immobiliere-ticketing-cote-divoire",
   "/tableaux-de-bord-kpi-immobilier-cote-divoire",

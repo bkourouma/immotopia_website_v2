@@ -11,9 +11,10 @@ Règles de lecture pour l'assistant :
 
 ## Disponibilité (vérifiée le 23 septembre 2026 — prime sur tout le reste)
 
-- Disponible et commercialisé : module Agence (biens, annonces, CRM, baux, échéances, paiements, pénalités, dépôts, documents, relevés de gérance, portails propriétaire et locataire), module Syndic, maintenance, communication e-mail / WhatsApp / newsletter, patrimoine, tableaux de bord, rôles et audit. Packs vendus : **Agence**, **Syndic**, **Promoteur**, **Opérateur intégré**, **Patrimoine Essentiel** et **Patrimoine Pro** (combinables avec 10 % de remise sur le prix de base du moins cher).
-- En cours de développement, et présentables comme tels : le module Promoteur (chantiers, stock de matériaux, personnel, tâcherons, foncier, associations), la finance opérationnelle (fournisseurs, pièces de caisse, file de validation, balances clients et fournisseurs, import Excel) et les fonctions listées dans « Fonctions en cours de développement ». Toujours préciser qu'elles sont en cours de développement ou de déploiement, ne jamais donner de date, et proposer de vérifier leur disponibilité avec l'équipe.
-- Les packs **Promoteur** et **Opérateur intégré** sont affichés avec leur prix ; leurs fonctions de chantier, de BTP et de finance opérationnelle sont en cours de déploiement : le préciser, sans date.
+- Disponible et commercialisé : module Agence (biens, annonces, CRM, baux, échéances, paiements, pénalités, dépôts, documents, relevés de gérance, portails propriétaire et locataire), module Syndic, module Promoteur (chantiers, lots et coût de revient, budget et avenants, avancement, dépenses, stock de matériaux, personnel, tâcherons, retenues de garantie, foncier), états des lieux (signature électronique, export et impression PDF, utilisation sur téléphone et tablette, photos par pièce), maintenance, communication e-mail / WhatsApp / newsletter, patrimoine, tableaux de bord, rôles et audit. Packs vendus : **Agence**, **Syndic**, **Promoteur**, **Opérateur intégré**, **Patrimoine Essentiel** et **Patrimoine Pro** (combinables avec 10 % de remise sur le prix de base du moins cher).
+- États des lieux d'entrée et de sortie, disponibles en production (confirmé par l'équipe le 13 octobre 2026) : pièces, compteurs, clés, signataires, retenues sur le dépôt, comparaison entrée / sortie, photos par pièce, signature électronique, export et impression en PDF, utilisation sur téléphone et tablette dans le navigateur (sans application native, connexion Internet nécessaire). L'agence transmet elle-même le PDF exporté au locataire (pas d'envoi automatique documenté). Détail : https://immotopia.cloud/wiki/gestion-locative/etats-des-lieux
+- En cours de développement, et présentables comme tels : la finance opérationnelle (fournisseurs, pièces de caisse, file de validation, balances clients et fournisseurs, import Excel) et les fonctions listées dans « Fonctions en cours de développement ». Toujours préciser qu'elles sont en cours de développement ou de déploiement, ne jamais donner de date, et proposer de vérifier leur disponibilité avec l'équipe.
+- Les packs **Promoteur** et **Opérateur intégré** sont affichés avec leur prix. Le module Promoteur (chantiers, BTP) est disponible en production (confirmé par l'équipe le 13 octobre 2026) ; seule la finance opérationnelle reste en cours de déploiement : le préciser, sans date.
 - Les points de la section « Limites » (fonctions non établies) ne sont pas annoncés.
 
 ---
@@ -97,7 +98,7 @@ Couverture fonctionnelle par pack (d'après la proposition de modèle économiqu
 - Finance : tous les packs.
 - Patrimoine (valeur des biens, emprunts, ratios bancaires, projections par bien) : Agence, Promoteur, Opérateur intégré, Patrimoine Essentiel et Pro. Valeur nette et projections consolidées : en développement.
 - Communication (e-mail, modèles, relances, WhatsApp, newsletter) : tous les packs.
-- Vente complète du programme et passage à la copropriété : prévue dans Promoteur et Opérateur intégré, mais sous réserve de vérification du parcours complet en production (voir Limites).
+- Vente des lots d'un promoteur : le suivi commercial (prospects, contacts, pipeline, visites, relances, rapprochement) se fait dans le CRM ; il n'y a ni offre, ni compromis, ni échéancier de l'acquéreur pour la vente des lots d'un promoteur (voir Limites).
 
 ---
 
@@ -178,7 +179,7 @@ Couverture fonctionnelle par pack (d'après la proposition de modèle économiqu
 
 ## Module Promoteur : chantiers, construction et BTP
 
-Ces fonctions ont été ajoutées en septembre 2026 (« finance opérationnelle et chantiers »). La documentation du 22 septembre 2026 les décrit comme constatées dans l'interface, mais présentes sur une branche de développement distincte de la ligne principale au moment de sa rédaction. Leur disponibilité dans la version déployée pour un client doit être confirmée en démonstration.
+Le module Promoteur est disponible en production (confirmé par l'équipe le 13 octobre 2026) : chantiers, lots, budget, avancement, dépenses, stock, personnel, tâcherons, retenues de garantie, foncier. Le détail de chaque fonction est dans le wiki (domaine « Promotion et chantiers »).
 
 ### Chantiers
 
@@ -215,7 +216,7 @@ Ces fonctions ont été ajoutées en septembre 2026 (« finance opérationnelle 
 ### Commercialisation des programmes
 
 - Le CRM (contacts, affaires de type vente, pipeline, visites) sert au suivi commercial des lots.
-- La chaîne complète de vente d'un programme (contrat de vente, échéancier de l'acquéreur, transfert du lot à l'acquéreur, création du copropriétaire) n'est pas établie à ce jour : voir Limites.
+- Vente des lots d'un promoteur : le CRM (contacts, affaires de type vente, pipeline, visites, relances, rapprochement) sert au suivi commercial. Le parcours offre, compromis, conditions suspensives et échéancier de l'acquéreur existe uniquement pour une vente sous mandat d'agence (vente pour le compte d'un propriétaire), pas pour la vente des lots d'un promoteur. Il n'y a ni réservation de lots ni portail acquéreur.
 
 ---
 
@@ -232,7 +233,7 @@ Ces fonctions ont été ajoutées en septembre 2026 (« finance opérationnelle 
 
 ### Finance opérationnelle
 
-Doctrine affichée dans l'interface : l'utilisateur « facture » et « règle » ; aucun écran n'expose les notions de débit et de crédit. Comme pour le module Promoteur, ces écrans ont été ajoutés en septembre 2026 et leur présence dans la version déployée est à confirmer.
+Doctrine affichée dans l'interface : l'utilisateur « facture » et « règle » ; aucun écran n'expose les notions de débit et de crédit. Ces écrans ont été ajoutés en septembre 2026 et leur présence dans la version déployée est à confirmer.
 
 Volet clients :
 
@@ -522,7 +523,6 @@ Les éléments suivants sont en cours de développement ou d'intégration en sep
   - Relevé de gérance distinguant l'appelé, l'encaissé, l'impayé, les honoraires, la TVA et les dépenses, avec le net à reverser.
   - Paramètres financiers de l'agence (assujettissement et taux de TVA, taux d'honoraires, comptes comptables de la gestion locative).
   - Vie du bail : révision du loyer, renouvellement, avenant, résiliation, solde de tout compte, avec historique.
-  - États des lieux d'entrée et de sortie (pièces, compteurs, clés, signataires, retenues sur le dépôt, comparaison entrée / sortie, photos par pièce). Fonctions confirmées par l'équipe le 13 octobre 2026 : signature électronique de l'état des lieux, export et impression en PDF, utilisation sur téléphone et tablette dans le navigateur (sans application native, connexion Internet nécessaire), photos par pièce. L'agence transmet elle-même le PDF exporté au locataire (pas d'envoi automatique documenté). Détail : https://immotopia.cloud/wiki/gestion-locative/etats-des-lieux
 - Comptabilité de la gestion locative : écritures automatiques en partie double et exports journal, grand livre et balance (CSV, Excel) pour le cabinet comptable.
 - Notifications internes à l'application (avec compteur de non-lus) et messagerie directe entre l'agence, les propriétaires, les locataires et les contacts : spécifiées, pas encore disponibles en production.
 
@@ -534,6 +534,14 @@ Le site publie un wiki des fonctionnalités sur https://immotopia.cloud/wiki (en
 
 - Quand un visiteur demande le détail d'une fonction (« comment se fait un appel de charges ? », « que voit le locataire ? »), répondre à partir de cette base, puis renvoyer vers https://immotopia.cloud/wiki pour le détail action par action.
 - Le statut affiché par le wiki suit la section « Disponibilité » ci-dessus.
+
+---
+
+## Pages CRM du site
+
+- https://immotopia.cloud/crm-immobilier-cote-divoire : le logiciel CRM immobilier pour agences et promoteurs (contacts, pipeline, rapprochement, mandats, offres et compromis de vente sous mandat, relances et notifications e-mail / WhatsApp, tableau comparatif avec Excel et un CRM généraliste, FAQ).
+- https://immotopia.cloud/crm-promoteur-immobilier-cote-divoire : le CRM pour promoteur immobilier (prospects, contacts, pipeline, visites, relances, puis lots, coût de revient, budget, avancement, tableau de bord de chantier). Renvoyer vers ces pages quand un visiteur demande un CRM, en rappelant les limites de la section « Limites » (pas d'offre ni de compromis pour la vente des lots d'un promoteur).
+- L'ancienne adresse /fonctionnalites/crm-immobilier redirige vers la page du CRM pour promoteur.
 
 ---
 
@@ -551,8 +559,8 @@ Le site publie un comparatif sur https://immotopia.cloud/comparatif : ImmoTopia 
 
 ### Signalés explicitement par la documentation
 
-- Vente complète d'un programme (pack Promoteur et Opérateur intégré) : le contrat de vente, l'échéancier de l'acquéreur, le transfert du lot et la création du copropriétaire ne sont pas vérifiés en production. Le CRM et les mandats de vente existent, mais ne suffisent pas à couvrir ce parcours. Ne pas promettre la gestion des offres, compromis, contrats de vente ni appels de fonds acquéreurs.
-- Finance opérationnelle, chantiers, stock, personnel, tâcherons, baux de terrain et associations : en cours de développement ; on peut les présenter comme tels, leur disponibilité se confirme en démonstration.
+- Vente des lots d'un promoteur (pack Promoteur et Opérateur intégré) : pas d'offre, de compromis, de condition suspensive ni d'échéancier de l'acquéreur pour ces ventes ; pas de réservation de lots ni de portail acquéreur. Ce parcours (offre, compromis, échéancier de l'acquéreur) existe seulement pour une vente sous mandat d'agence, pour le compte d'un propriétaire. Le CRM d'un promoteur couvre prospects, contacts, pipeline, visites, relances, rapprochement et tableaux de bord. Ne pas promettre le reste.
+- Finance opérationnelle (fournisseurs, pièces de caisse, file de validation, balances) : en cours de développement ; on peut la présenter comme telle, sa disponibilité se confirme en démonstration. Le module Promoteur (chantiers, stock, personnel, tâcherons, baux de terrain) est disponible.
 - Prix : hypothèses en cours de validation auprès de clients, pas des tarifs définitifs. Le montant d'environ 400 000 FCFA par mois évoqué pour un grand opérateur est un ordre de grandeur interne, pas un prix à annoncer.
 - Grille de consommation WhatsApp : non publiée ; aucun WhatsApp illimité.
 - Reprise automatique de données depuis un autre logiciel : à annoncer uniquement pour les formats effectivement pris en charge (non listés dans les sources).
@@ -567,7 +575,7 @@ Le site immotopia.cloud contient des accroches commerciales qui vont plus loin q
 - La séparation comptable des fonds de tiers (fonds des propriétaires) et de la trésorerie de l'agence : en cours de développement, non confirmée en production.
 - La clôture physique de caisse par caissier (montant attendu, compté, écart) : non décrite. Les pièces de caisse et la file de validation existent.
 - Le calcul automatique des commissions et du partage agence / agents / apporteurs d'affaires, et le calcul automatique du net à reverser : en cours de développement.
-- La signature électronique des baux (« baux signés numériquement ») : non documentée. La génération des contrats en Word depuis les modèles de l'agence est établie.
+- La signature électronique des baux (« baux signés numériquement ») : non documentée. La génération des contrats en Word depuis les modèles de l'agence est établie. La signature électronique de l'état des lieux, elle, existe.
 - Une API ouverte et des webhooks à disposition des clients : seule une interface publique de publication des annonces (pour un site vitrine) et la réception des messages WhatsApp entrants sont documentées.
 - Des SMS automatiques : non documentés (e-mail et WhatsApp le sont).
 - Un site vitrine fourni à l'agence ou la diffusion automatique vers des portails d'annonces : non documentés.
@@ -654,10 +662,10 @@ La comptabilité de copropriété (partie double, journaux, grand livre, balance
 Aucune certification n'est documentée. La comptabilité de copropriété est décrite comme conforme OHADA dans les spécifications, et la comptabilité locative en cours de développement utilise des comptes du plan SYSCOHADA paramétrables. Pour un besoin de conformité précis, voir avec l'équipe.
 
 **Peut-on suivre un chantier de construction ?**
-Oui, avec le pack Promoteur ou Opérateur intégré : budgets et avenants, coûts réels calculés à partir des factures, salaires, caisse et sorties de stock, bons de commande, avancement, alertes de dépassement, lots et coût de revient, clôture et bascule des lots au patrimoine. La disponibilité de ces écrans dans votre version est confirmée en démonstration.
+Oui, avec le pack Promoteur ou Opérateur intégré : budgets et avenants, coûts réels calculés à partir des factures, salaires, caisse et sorties de stock, bons de commande, avancement, alertes de dépassement, lots et coût de revient, clôture et bascule des lots au patrimoine.
 
 **Peut-on gérer la vente des appartements d'un programme jusqu'à l'acte ?**
-Le suivi commercial des acquéreurs se fait dans le CRM. En revanche, le contrat de vente, l'échéancier de l'acquéreur et le transfert du lot ne sont pas encore vérifiés en production : il faut en parler avec l'équipe avant de compter dessus.
+Le suivi commercial des acquéreurs (prospects, contacts, pipeline, visites, relances, rapprochement) se fait dans le CRM. En revanche, il n'y a ni offre, ni compromis, ni échéancier de l'acquéreur pour la vente des lots d'un promoteur : ce parcours existe pour une vente sous mandat d'agence, pour le compte d'un propriétaire. Il n'y a pas non plus de réservation de lots ni de portail acquéreur.
 
 **Peut-on gérer les calculs de commission et les reversements aux propriétaires ?**
 Des relevés de gérance existent. Le calcul automatique des honoraires, des commissions des agents, du net à reverser et le suivi des reversements sont en cours de développement : l'équipe confirmera leur disponibilité.
