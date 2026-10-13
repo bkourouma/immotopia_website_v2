@@ -42,15 +42,37 @@ Photos : générées pour ImmoTopia, dans `public/images/hero/` (format 3:4).
 
 Le site tourne dans le conteneur Docker `immotopia-site` (port local 3023), derrière nginx.
 
-```bash
-# depuis ce dossier : envoyer le code puis reconstruire
-tar --exclude=node_modules --exclude=.next --exclude=.git --exclude=.env.local -czf /tmp/site.tgz .
-scp /tmp/site.tgz alliance:/var/www/immotopia-site/
-ssh alliance 'cd /var/www/immotopia-site && tar -xzf site.tgz && rm site.tgz && docker compose up -d --build'
-```
+### Déploiement automatique (procédure normale)
 
-- Configuration nginx : `deploy/nginx-immotopia.cloud.conf` (installée dans `/etc/nginx/sites-enabled/immotopia.cloud`).
+Chaque fusion d'une pull request dans la branche `main` déploie le site :
+
+1. `.github/workflows/deploy.yml` lance d'abord les vérifications de `ci.yml` (types, lint,
+   traduction du comparatif, build) sur GitHub ;
+2. si elles passent, le job « Déployer sur alliance » tourne sur le runner auto-hébergé
+   `immotopia-site` (utilisateur `deployer`, service systemd
+   `actions.runner.bkourouma-immotopia_website_v2.immotopia-site-runner`) : il garde l'image actuelle
+   sous l'étiquette `immotopia-site:avant-ci-<date>-<commit>`, synchronise le code dans
+   `/var/www/immotopia-site` (`rsync`, sans toucher au `.env` de production), lance
+   `docker compose up -d --build`, puis vérifie `http://127.0.0.1:3023/robots.txt` et `/`
+   (30 tentatives, 5 s d'écart) ;
+3. si le contrôle de santé échoue, le job remet automatiquement l'image précédente et se termine
+   en échec (visible dans l'onglet Actions). Si la construction elle-même échoue, l'ancien conteneur
+   reste en service.
+
+Un seul déploiement à la fois (`concurrency`). On peut aussi relancer un déploiement sans nouveau
+commit : onglet Actions, « Déploiement », « Run workflow », branche `main`.
+
+Le `.env` de production (`/var/www/immotopia-site/.env`, clé OpenRouter, webhook n8n) n'est jamais
+dans le dépôt ni écrasé par le déploiement. Aucun secret GitHub n'est nécessaire.
+
+Retour arrière et secours manuel : `docs/workflows/RUNBOOK.md`, section « Déploiement ».
+
+### Autres éléments
+
+- Configuration nginx : `deploy/nginx-immotopia.cloud.conf` (installée dans `/etc/nginx/sites-enabled/immotopia.cloud`),
+  non touchée par le déploiement automatique.
 - Retour à l'ancien site (Astro) : la configuration d'origine est sauvegardée dans
   `/etc/nginx/backup/immotopia.cloud.astro.conf` et `deploy/nginx-immotopia.cloud.astro-backup.conf`.
+- Installation du runner sur le serveur : `deploy/install-runner.sh`.
 - Redirections 301 des anciennes adresses : `next.config.ts`.
 - Coordonnées, mentions légales, lien de connexion : `src/lib/site.ts`.
