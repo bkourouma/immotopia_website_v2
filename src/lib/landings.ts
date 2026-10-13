@@ -72,6 +72,10 @@ export const landings: Landing[] = [
           { title: "Déclaration par le locataire", text: "Le locataire déclare son paiement depuis son portail ; l'agence le valide en un clic dans sa file « À traiter aujourd'hui »." },
           { title: "Pénalités de retard", text: "Montant fixe ou pourcentage, avec période de grâce : les pénalités se calculent automatiquement et restent ajustables." },
           { title: "Cautions tracées", text: "Constitution, retenues et restitutions du dépôt de garantie, chaque mouvement étant conservé." },
+          {
+            title: "États des lieux d'entrée et de sortie",
+            text: "Pièces, compteurs, clés et photos par pièce, signature électronique et export PDF, depuis un ordinateur, un téléphone ou une tablette, avec la comparaison entrée / sortie. Voir la [fiche du wiki](/wiki/gestion-locative/etats-des-lieux) et le [guide des critères de choix](/guides/logiciel-etat-des-lieux-comparatif).",
+          },
           { title: "Quittances et documents", text: "Quittances, reçus, contrats et avenants générés depuis vos propres modèles Word, avec numérotation continue." },
           { title: "Relances e-mail et WhatsApp", text: "Rappel avant l'échéance, confirmation de paiement, alerte de fin de bail : les messages partent seuls, selon le consentement de chaque destinataire." },
           { title: "Portails propriétaire et locataire", text: "Chacun consulte ses baux, échéances, paiements et documents. Les comptes propriétaires et locataires ne sont pas facturés." },
@@ -81,7 +85,6 @@ export const landings: Landing[] = [
         title: "En cours de déploiement",
         bullets: [
           "Renouvellement, avenant et résiliation du bail avec historique conservé.",
-          "États des lieux d'entrée et de sortie (pièces, compteurs, clés, photos) et retenues sur dépôt.",
           "Honoraires de gestion à trois niveaux, compte courant propriétaire et reversements.",
         ],
         note: "Ces fonctions sont en cours de déploiement : leur disponibilité se confirme en démonstration.",
@@ -354,7 +357,7 @@ export const landings: Landing[] = [
           { title: "Le groupe WhatsApp de l'agence", text: "Invitez en une fois vos contacts dans le groupe WhatsApp de l'agence et diffusez-y vos annonces." },
           { title: "Campagnes", text: "Vos listes de contacts reçoivent une campagne par e-mail, et par WhatsApp quand le contact a un numéro et a donné son accord." },
         ],
-        note: "Les messages WhatsApp ne partent qu'aux contacts qui ont donné leur accord, et leur envoi suppose que le service WhatsApp soit configuré pour votre agence.",
+        note: "Les messages WhatsApp ne partent qu'aux contacts qui ont donné leur accord, et leur envoi suppose que le service WhatsApp soit configuré pour votre agence. Fréquence et exemples de messages : [guide des relances en CRM immobilier](/guides/crm-immobilier-relances).",
       },
       {
         title: "ImmoTopia, Excel ou CRM généraliste : que choisir ?",
@@ -373,7 +376,7 @@ export const landings: Landing[] = [
             ["Prix", "Gratuit", "Abonnement, variable selon l'outil", `Pack Agence à partir de ${fcfa(agence.monthly)} HT par mois`],
           ],
         },
-        note: "La colonne « CRM généraliste » décrit des tendances d'ensemble, à vérifier outil par outil. Pour aller plus loin : [ImmoTopia vs Excel](/immotopia-vs-excel) et le [comparatif avec d'autres logiciels immobiliers](/comparatif).",
+        note: "La colonne « CRM généraliste » décrit des tendances d'ensemble, à vérifier outil par outil. Pour choisir, le guide [Comment choisir son CRM immobilier](/guides/crm-immobilier-bonnes-pratiques) détaille dix critères. Pour aller plus loin : [ImmoTopia vs Excel](/immotopia-vs-excel) et le [comparatif avec d'autres logiciels immobiliers](/comparatif).",
       },
       {
         title: "Relié au reste de l'agence",
@@ -488,7 +491,7 @@ export const landings: Landing[] = [
             ["Coût", "Abonnement, variable selon l'outil", "Investissement initial, puis maintenance", `Abonnement mensuel en FCFA, pack Promoteur à partir de ${fcfa(promoteur.monthly)} HT`],
           ],
         },
-        note: "Les colonnes « CRM généraliste » et « Outil sur mesure » décrivent des tendances d'ensemble, qui varient selon l'outil ou le prestataire. Pour comparer avec d'autres logiciels immobiliers, voir le [comparatif](/comparatif).",
+        note: "Les colonnes « CRM généraliste » et « Outil sur mesure » décrivent des tendances d'ensemble, qui varient selon l'outil ou le prestataire. Pour choisir, voir le guide [Comment choisir son CRM immobilier](/guides/crm-immobilier-bonnes-pratiques) ; pour comparer avec d'autres logiciels immobiliers, voir le [comparatif](/comparatif).",
       },
       {
         title: "Tarifs du pack Promoteur",
@@ -823,7 +826,7 @@ export const faqGroups: { title: string; items: { q: string; a: string }[] }[] =
       { q: "Peut-on publier des annonces ?", a: "Oui, et une API d'annonces alimente votre site internet. La publication d'un bien peut aussi être diffusée dans le groupe WhatsApp de l'agence." },
       {
         q: "Et le module Promoteur ?",
-        a: "Les chantiers, le stock de matériaux, les tâcherons et la finance opérationnelle sont en cours de déploiement. Parlez-en avec l'équipe en démonstration.",
+        a: "Le module Promoteur est disponible : chantiers, lots et coût de revient, budget et avenants, avancement, dépenses, stock de matériaux, main-d'œuvre, tâcherons, retenues de garantie et transfert au patrimoine. Voir le [CRM pour promoteur immobilier](/crm-promoteur-immobilier-cote-divoire). La finance opérationnelle est, elle, en cours de déploiement : parlez-en avec l'équipe en démonstration.",
       },
     ],
   },

@@ -7,7 +7,7 @@ export const crmEtVentes: WikiDomain = {
   summary:
     "Contacts, affaires, relances, rapprochement de biens et mandats de vente : le CRM immobilier d'ImmoTopia pour suivre chaque prospect jusqu'à la vente.",
   intro:
-    "Ce domaine décrit le [logiciel CRM immobilier](/crm-immobilier-cote-divoire) d'ImmoTopia, c'est-à-dire tout le travail commercial de l'agence : fichier de contacts, affaires en cours, activités et relances, calendrier, rapprochement entre biens et acquéreurs. Il se prolonge par la vente : mandats de vente, offres d'achat, compromis, conditions suspensives, échéancier de l'acquéreur et commissions. Il s'adresse aux directeurs d'agence, aux gestionnaires et aux agents commerciaux, ainsi qu'aux équipes commerciales des promoteurs avec le pack Promoteur (voir le [CRM pour promoteur immobilier](/crm-promoteur-immobilier-cote-divoire)). Chaque prospect a son historique complet, et chaque vente se suit du mandat jusqu'à l'acte.",
+    "Ce domaine décrit le [logiciel CRM immobilier](/crm-immobilier-cote-divoire) d'ImmoTopia, c'est-à-dire tout le travail commercial de l'agence : fichier de contacts, affaires en cours, activités et relances, calendrier, rapprochement entre biens et acquéreurs. Il se prolonge par la vente : mandats de vente, offres d'achat, compromis, conditions suspensives, échéancier de l'acquéreur et commissions. Il s'adresse aux directeurs d'agence, aux gestionnaires et aux agents commerciaux, ainsi qu'aux équipes commerciales des promoteurs avec le pack Promoteur (voir le [CRM pour promoteur immobilier](/crm-promoteur-immobilier-cote-divoire)). Chaque prospect a son historique complet, et chaque vente se suit du mandat jusqu'à l'acte. Pour choisir un outil, voir le guide [Comment choisir son CRM immobilier](/guides/crm-immobilier-bonnes-pratiques).",
   features: [
     {
       slug: "contacts-prospects",
@@ -225,7 +225,7 @@ export const crmEtVentes: WikiDomain = {
       summary:
         "Relances et visites dans un seul calendrier, indicateurs commerciaux en un coup d'œil : suivez l'activité de l'équipe et ne laissez filer aucun prospect.",
       intro:
-        "Le calendrier CRM rassemble les relances prévues et les visites de biens, pour vous seul ou pour toute l'agence. Le tableau de bord résume l'activité commerciale : nouveaux prospects, conversions, affaires gagnées, relances en retard. Le directeur voit où agir, l'agent sait quoi faire aujourd'hui.",
+        "Le calendrier CRM rassemble les relances prévues et les visites de biens, pour vous seul ou pour toute l'agence. Le tableau de bord résume l'activité commerciale : nouveaux prospects, conversions, affaires gagnées, relances en retard. Le directeur voit où agir, l'agent sait quoi faire aujourd'hui. Fréquence et messages : voir le guide [Relances en CRM immobilier](/guides/crm-immobilier-relances).",
       packs: ["agence", "promoteur", "integre"],
       profiles: ["equipe"],
       status: "disponible",

@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { localizeHref, locales } from "@/lib/i18n";
 import { SITE_URL } from "@/lib/site";
+import { guideHref, guides } from "@/lib/guides";
 import { landings } from "@/lib/landings";
 import { tools } from "@/lib/tools";
 import { allFeatures, wikiDomains, wikiHref } from "@/lib/wiki";
@@ -39,6 +40,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
         .filter(({ domain }) => !wikiDomainsOutOfSitemap.includes(domain.slug))
         .map(({ domain, feature }) => ({ path: wikiHref(domain.slug, feature.slug), priority: 0.6 })),
     ].map(({ path, priority }) => ({ url: url(path), lastModified: now, changeFrequency: "monthly" as const, priority })),
+    // Guides : en français seulement, datés de la dernière mise à jour réelle de chaque article
+    {
+      url: url(guideHref()),
+      lastModified: new Date(Math.max(...guides.map((g) => Date.parse(g.updated)))),
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    },
+    ...guides.map((g) => ({ url: url(guideHref(g.slug)), lastModified: new Date(g.updated), changeFrequency: "monthly" as const, priority: 0.7 })),
     ...page("/mentions-legales", 0.2, "yearly"),
     ...page("/confidentialite", 0.2, "yearly"),
   ];

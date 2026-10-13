@@ -18,8 +18,8 @@ export const frenchOnlyPaths = [
   "/gestion-locative-vs-excel",
 ];
 
-// Rubriques entières en français seulement (toutes leurs sous-pages) : le wiki des fonctionnalités.
-export const frenchOnlyPrefixes = ["/wiki"];
+// Rubriques entières en français seulement (toutes leurs sous-pages) : le wiki des fonctionnalités et les guides.
+export const frenchOnlyPrefixes = ["/wiki", "/guides"];
 
 export const isFrenchOnly = (path: string) =>
   frenchOnlyPaths.includes(path) || frenchOnlyPrefixes.some((p) => path === p || path.startsWith(`${p}/`));

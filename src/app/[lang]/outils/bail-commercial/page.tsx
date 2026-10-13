@@ -11,6 +11,8 @@ const SLUG = "bail-commercial";
 // Sources lues pour rédiger cette page (Acte uniforme du 15 décembre 2010, Livre 6, titre 1, art. 101 à 134).
 const OHADA_PAGE = "https://www.ohada.org/droit-commercial-general/";
 const OHADA_TEXT = "https://faolex.fao.org/docs/pdf/oha195620.pdf";
+// Les guides sont publiés en français seulement : le lien est identique dans les deux langues.
+const GUIDE_BAIL_COMMERCIAL = "/guides/bail-commercial-ohada-cote-divoire";
 const REGISTRATION_PROCEDURE = "https://cotedivoire.eregulations.org/procedure/99/5/step/29?l=fr";
 
 export async function generateMetadata({ params }: PageProps<"/[lang]/outils/bail-commercial">): Promise<Metadata> {
@@ -140,6 +142,10 @@ export default async function Page() {
             décrit la procédure.
           </p>
           <p>
+            Pour un mode d&apos;emploi pas à pas (points à régler, délais à retenir, étapes de la signature et de l&apos;enregistrement),
+            lisez notre <Link href={GUIDE_BAIL_COMMERCIAL}>guide du bail commercial OHADA en Côte d&apos;Ivoire</Link>.
+          </p>
+          <p>
             <strong>Ce modèle est fourni à titre indicatif : faites-le valider par un avocat ou un notaire avant signature.</strong>
           </p>
         </>,
@@ -254,6 +260,10 @@ export default async function Page() {
               eRegulations Côte d&apos;Ivoire
             </a>{" "}
             portal describes the procedure.
+          </p>
+          <p>
+            For a step-by-step walkthrough (points to settle, deadlines to remember, signing and registration steps), read our{" "}
+            <Link href={GUIDE_BAIL_COMMERCIAL}>guide to the OHADA commercial lease in Côte d&apos;Ivoire</Link> (in French).
           </p>
           <p>
             <strong>
