@@ -276,11 +276,12 @@ export const financeEtComptabilite: WikiDomain = {
     {
       slug: "facturation-des-loyers",
       title: "Facturation mensuelle des loyers",
-      metaTitle: "Facturation mensuelle des loyers en Côte d'Ivoire",
+      h1: "Facturation des loyers : logiciel de facture de loyer",
+      metaTitle: "Facture de loyer : logiciel de facturation mensuelle",
       summary:
         "Générez en une fois les factures de loyer du mois pour tous vos baux actifs, puis retrouvez l'historique et le résumé de chaque campagne de facturation.",
       intro:
-        "Chaque mois, vous lancez une campagne qui génère les factures de loyer de tous les baux actifs. Relancer la même période ne crée pas de doublon : l'application vous renvoie la campagne déjà faite, et les échéances déjà préparées en brouillon sont simplement émises. Cette fonction suppose d'avoir la gestion locative dans votre abonnement. Vous gardez l'historique de toutes les campagnes et leur résumé.",
+        "Ce logiciel de facture de loyer génère, chaque mois, les factures de loyer de tous vos baux actifs en une seule campagne. Relancer la même période ne crée pas de doublon : l'application vous renvoie la campagne déjà faite, et les échéances déjà préparées en brouillon sont simplement émises. Cette fonction suppose d'avoir la gestion locative dans votre abonnement. Vous gardez l'historique de toutes les campagnes et leur résumé.",
       packs: ["agence", "syndic", "promoteur", "integre", "patrimoine-essentiel", "patrimoine-pro"],
       profiles: ["direction", "gestionnaire", "comptable"],
       menu: "Finance › Clients et propriétaires › Facturation et balances › Facturation du mois",

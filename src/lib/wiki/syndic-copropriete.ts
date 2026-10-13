@@ -354,11 +354,12 @@ export const syndicCopropriete: WikiDomain = {
     {
       slug: "budget-previsionnel",
       title: "Budget prévisionnel",
+      h1: "Budget prévisionnel de copropriété : préparation et répartition par lot",
       metaTitle: "Budget prévisionnel de copropriété : logiciel syndic",
       summary:
         "Préparez le budget prévisionnel de la copropriété ligne par ligne, faites-le approuver en assemblée générale et obtenez la quote-part de chaque lot selon les tantièmes.",
       intro:
-        "Vous construisez le budget prévisionnel de l'exercice ligne par ligne, avec une clé de répartition pour chacune. Le logiciel calcule aussitôt la part de chaque lot selon ses tantièmes. Une fois le budget approuvé, et relié si vous le souhaitez à la résolution d'assemblée qui l'a voté, il sert de base aux appels de charges.",
+        "Le budget prévisionnel de copropriété se prépare dans le logiciel, ligne par ligne, avec une clé de répartition pour chacune. Le logiciel calcule aussitôt la part de chaque lot selon ses tantièmes. Une fois le budget approuvé, et relié si vous le souhaitez à la résolution d'[assemblée générale](/wiki/syndic-copropriete/assemblees-generales) qui l'a voté, il sert de base aux [appels de charges](/wiki/syndic-copropriete/appels-de-charges).",
       packs: ["syndic", "integre"],
       profiles: ["equipe"],
       menu: "Syndic › Finances",
@@ -824,11 +825,21 @@ export const syndicCopropriete: WikiDomain = {
     {
       slug: "fonds-de-copropriete",
       title: "Fonds et synthèse financière",
+      h1: "Fonds de roulement et fonds travaux de copropriété",
       metaTitle: "Fonds de roulement et fonds travaux de copropriété",
       summary:
         "Suivez les fonds de chaque copropriété (fonds de roulement, fonds travaux) et sa synthèse financière : total appelé, payé, restant dû et retards en un coup d'œil.",
       intro:
         "La synthèse financière vous donne l'état d'une copropriété en un écran : soldes des fonds, total appelé, total payé, restant dû et retards. Vous créez les fonds dont la copropriété a besoin, comme le fonds de roulement ou le fonds travaux, et vous ajustez leur solde avec un motif. Chaque opération sur un fonds est tracée dans le journal d'audit.",
+      sections: [
+        {
+          title: "Fonds de roulement de copropriété : définition et suivi",
+          body: [
+            "Le fonds de roulement est une avance de trésorerie constituée par les copropriétaires : il permet de payer les dépenses courantes de la copropriété en attendant que les appels de charges soient encaissés. Ses conditions de constitution et d'usage dépendent du règlement de copropriété et de la réglementation applicable, à vérifier avec votre syndic ou votre conseil juridique.",
+            "Dans ImmoTopia, vous ouvrez le fonds de roulement comme n'importe quel fonds de la copropriété, avec son solde de départ et sa devise (FCFA par défaut). Vous le créditez ou le débitez avec un motif obligatoire, vous saisissez les dépenses qu'il règle, et chaque opération est inscrite à son journal et tracée dans le journal d'audit. Son solde figure dans la synthèse financière, à côté du total appelé, du total payé, du restant dû et des retards. Un poste du [budget prévisionnel](/wiki/syndic-copropriete/budget-previsionnel) peut aussi alimenter un fonds, qui reçoit alors sa part de chaque paiement de charges.",
+          ],
+        },
+      ],
       packs: ["syndic", "integre"],
       profiles: ["equipe"],
       menu: "Syndic › Finances",
@@ -859,19 +870,31 @@ export const syndicCopropriete: WikiDomain = {
           output: "Le nouveau solde du fonds, avec l'opération inscrite au journal du fonds et tracée dans le journal d'audit.",
         },
       ],
+      faq: [
+        {
+          q: "Quelle différence entre fonds de roulement et fonds de travaux ?",
+          a: "Le fonds de roulement est une avance de trésorerie qui sert aux dépenses courantes en attendant l'encaissement des charges. Le fonds de travaux est une réserve mise de côté pour financer des travaux futurs. Dans ImmoTopia, chacun est un fonds distinct, avec son propre solde et son propre journal.",
+        },
+        {
+          q: "Peut-on alimenter un fonds depuis le budget ?",
+          a: "Oui. Vous affectez un poste du budget prévisionnel à un fonds : il reçoit sa part de chaque paiement de charges enregistré ensuite, au prorata de la répartition du lot.",
+        },
+      ],
       related: [
         "syndic-copropriete/comptabilite-copropriete",
         "syndic-copropriete/appels-de-charges",
+        "syndic-copropriete/budget-previsionnel",
       ],
     },
     {
       slug: "comptabilite-copropriete",
       title: "Comptabilité de copropriété",
-      metaTitle: "Comptabilité de copropriété en partie double",
+      h1: "Comptabilité de copropriété : plan comptable, journaux et grand livre",
+      metaTitle: "Plan comptable copropriété : comptabilité en partie double",
       summary:
         "Tenez la comptabilité de chaque copropriété en partie double : plan comptable, journaux, écritures équilibrées et verrouillées, balance et grand livre.",
       intro:
-        "Chaque copropriété a sa propre comptabilité en partie double. Vous organisez son plan comptable et ses journaux, vous saisissez les écritures, toujours équilibrées, et vous les verrouillez une fois validées. La balance et le grand livre sont disponibles à tout moment, sur la période de votre choix.",
+        "Chaque copropriété a sa propre comptabilité en partie double, avec son plan comptable de copropriété et ses journaux. Vous saisissez les écritures, toujours équilibrées, et vous les verrouillez une fois validées. La balance et le grand livre sont disponibles à tout moment, sur la période de votre choix.",
       packs: ["syndic", "integre"],
       profiles: ["equipe"],
       menu: "Syndic › Finances",
@@ -942,11 +965,21 @@ export const syndicCopropriete: WikiDomain = {
     {
       slug: "assemblees-generales",
       title: "Assemblées générales",
+      h1: "Assemblée générale de copropriété : convocation, vote et procès-verbal",
       metaTitle: "Assemblée générale de copropriété : convocation, vote, PV",
       summary:
         "Convoquez l'assemblée générale de copropriété, préparez l'ordre du jour, gérez les pouvoirs, saisissez les votes en tantièmes et générez le procès-verbal en Word.",
       intro:
         "De la convocation au procès-verbal, l'assemblée générale se prépare et se tient dans le logiciel. Vous fixez l'ordre du jour et les résolutions, enregistrez les pouvoirs, puis saisissez le vote de chaque lot : le résultat en tantièmes et le quorum se recalculent aussitôt. À la fin, le compte rendu est généré en Word, prêt à être relu et diffusé.",
+      sections: [
+        {
+          title: "Où retrouver le procès-verbal d'une assemblée générale ?",
+          body: [
+            "Une fois l'assemblée tenue, le syndic génère le procès-verbal depuis l'assemblée : le document Word reprend l'ordre du jour, les résolutions, les résultats en tantièmes et le quorum. Il se relit avant d'être diffusé.",
+            "Pour le mettre à disposition, le syndic le dépose dans les [documents de la copropriété](/wiki/syndic-copropriete/documents-copropriete), avec le type « procès-verbal ». Le copropriétaire le retrouve ensuite dans son [portail copropriétaire](/wiki/portails-clients/portail-coproprietaire), à côté du règlement de copropriété, et peut le télécharger. Pour une assemblée clôturée, il y voit aussi les résolutions, les résultats et ses propres votes, jamais ceux des autres lots.",
+          ],
+        },
+      ],
       packs: ["syndic", "integre"],
       profiles: ["equipe"],
       menu: "Syndic › Assemblées et documents",
@@ -1042,8 +1075,13 @@ export const syndicCopropriete: WikiDomain = {
           q: "Le procès-verbal est-il généré automatiquement ?",
           a: "Le logiciel génère le compte rendu en Word avec l'ordre du jour, les résolutions, les résultats en tantièmes et le quorum.",
         },
+        {
+          q: "Où le copropriétaire retrouve-t-il le procès-verbal d'une assemblée ?",
+          a: "Le syndic génère le procès-verbal en Word, le relit, puis le dépose dans les documents de la copropriété. Le copropriétaire le consulte et le télécharge depuis son portail copropriétaire.",
+        },
       ],
       related: [
+        "portails-clients/portail-coproprietaire",
         "syndic-copropriete/budget-previsionnel",
         "syndic-copropriete/documents-copropriete",
         "syndic-copropriete/coproprietaires-et-occupants",
@@ -1154,6 +1192,14 @@ export const syndicCopropriete: WikiDomain = {
         "Classez les documents de chaque copropriété (règlement, procès-verbaux, diagnostics, assurance, budget) avec leur date d'expiration, et retrouvez-les en un clic.",
       intro:
         "Règlement de copropriété, procès-verbaux d'assemblée, diagnostics, attestations d'assurance : tous les documents d'une copropriété sont rangés au même endroit, classés par type. Vous notez leur date d'expiration et les retrouvez en un clic.",
+      sections: [
+        {
+          title: "Quels documents le copropriétaire peut-il consulter ?",
+          body: [
+            "Parmi les documents d'une copropriété, le règlement de copropriété et les procès-verbaux d'assemblée sont ceux que le copropriétaire consulte et télécharge lui-même, depuis son [portail copropriété](/wiki/portails-clients/portail-coproprietaire). Les autres documents du syndic (diagnostics, assurance, budget) ne lui sont pas affichés. Le procès-verbal vient de l'[assemblée générale](/wiki/syndic-copropriete/assemblees-generales) : une fois généré en Word, vous le déposez ici.",
+          ],
+        },
+      ],
       packs: ["syndic", "integre"],
       profiles: ["equipe"],
       menu: "Syndic › Assemblées et documents",
@@ -1174,6 +1220,7 @@ export const syndicCopropriete: WikiDomain = {
         },
       ],
       related: [
+        "portails-clients/portail-coproprietaire",
         "syndic-copropriete/assemblees-generales",
         "syndic-copropriete/coproprietes",
       ],

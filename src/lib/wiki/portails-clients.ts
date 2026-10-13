@@ -256,11 +256,29 @@ export const portailsClients: WikiDomain = {
     {
       slug: "portail-coproprietaire",
       title: "Portail copropriétaire",
-      metaTitle: "Portail copropriétaire en ligne : charges, AG et documents",
+      h1: "Portail copropriété : l'espace en ligne de chaque copropriétaire",
+      metaTitle: "Portail copropriété en ligne : charges, AG, documents",
       summary:
-        "Vos copropriétaires suivent en ligne leurs lots, le solde de leur compte, leurs appels de charges, le règlement de copropriété, les PV et les assemblées.",
+        "Portail copropriété : chaque copropriétaire suit en ligne ses lots, le solde de son compte, ses appels de charges, ses PV d'assemblée et ses documents.",
       intro:
-        "Le portail copropriétaire donne à chaque copropriétaire invité par le syndic un accès à ses propres lots. Il consulte le solde de chaque lot et ses appels de charges, et télécharge le règlement de copropriété et les procès-verbaux d'assemblée. Pour une assemblée clôturée, il voit les résolutions, les résultats et ses propres votes. Le syndic reçoit moins de demandes de relevé ou de copie de PV.",
+        "Le portail de la copropriété est l'espace en ligne que le syndic ouvre à chaque copropriétaire. Dans ce portail copropriétaire, chacun consulte ses propres lots, le solde de son compte et ses appels de charges, retrouve ses reçus et quittances, et télécharge le règlement de copropriété et les procès-verbaux d'assemblée. Le syndic reçoit ainsi moins de demandes de relevé ou de copie de PV.",
+      sections: [
+        {
+          title: "À quoi sert le portail de la copropriété ?",
+          body: [
+            "Le portail évite au copropriétaire d'appeler le syndic pour connaître sa situation. Chaque copropriétaire invité y trouve, en lecture seule :",
+            [
+              "ses lots, avec le solde de chacun, l'historique de son compte et son suivi mois par mois ;",
+              "ses appels de charges (période, montant, payé, restant dû, échéance, statut y compris « en retard »), dont il télécharge l'avis en PDF ;",
+              "ses paiements, ses reçus et ses quittances, et le relevé de compte d'un lot en PDF ;",
+              "le règlement de copropriété et les procès-verbaux d'[assemblée générale](/wiki/syndic-copropriete/assemblees-generales) ;",
+              "les assemblées de sa copropriété et leur ordre du jour ; pour une assemblée clôturée, les résolutions, les résultats et ses propres votes ;",
+              "la fiche de sa copropriété, avec le contact du syndic.",
+            ],
+            "L'accès se fait sur invitation : le syndic invite le copropriétaire depuis sa fiche ([copropriétaires et occupants](/wiki/syndic-copropriete/coproprietaires-et-occupants)) et peut le retirer, par exemple après la vente du lot. Les documents visibles sont ceux que le syndic dépose dans les [documents de copropriété](/wiki/syndic-copropriete/documents-copropriete).",
+          ],
+        },
+      ],
       packs: ["syndic", "integre"],
       profiles: ["coproprietaire"],
       status: "disponible",
@@ -339,15 +357,37 @@ export const portailsClients: WikiDomain = {
       ],
       faq: [
         {
+          q: "Comment un copropriétaire accède-t-il au portail ?",
+          a: "Sur invitation du syndic. Le syndic l'invite depuis la fiche du copropriétaire ; le copropriétaire reçoit un lien d'invitation pour activer son compte ou s'y connecter. Le syndic peut retirer cet accès, par exemple après la vente de son lot.",
+        },
+        {
+          q: "Le portail est-il sécurisé ? Que voit chaque copropriétaire ?",
+          a: "L'accès est personnel et se fait sur invitation. Chaque copropriétaire ne voit que ses propres lots, en lecture seule, et uniquement ses propres votes. Parmi les documents du syndic, seuls le règlement de copropriété et les procès-verbaux d'assemblée lui sont affichés.",
+        },
+        {
           q: "Le copropriétaire peut-il payer ses charges en ligne ?",
-          a: "Non. Le portail affiche les appels de charges, le montant payé et le restant dû, en lecture seule.",
+          a: "Non. Le portail affiche les appels de charges, le montant payé et le restant dû, en lecture seule. Il y retrouve ensuite ses paiements, ses reçus et ses quittances.",
+        },
+        {
+          q: "Peut-on retrouver le procès-verbal d'une assemblée générale dans le portail ?",
+          a: "Oui. Le copropriétaire consulte et télécharge les procès-verbaux d'assemblée que le syndic a déposés dans les documents de la copropriété.",
         },
         {
           q: "Voit-il les votes des autres copropriétaires ?",
           a: "Non. Pour une assemblée clôturée, il voit les résultats de chaque résolution et uniquement ses propres votes.",
         },
+        {
+          q: "Le copropriétaire peut-il télécharger un relevé de compte ?",
+          a: "Oui. Il obtient en PDF le relevé du compte d'un de ses lots sur une période, avec le solde d'ouverture, les mouvements et le solde de clôture.",
+        },
       ],
-      related: ["portails-clients/portail-proprietaire"],
+      related: [
+        "syndic-copropriete/coproprietaires-et-occupants",
+        "syndic-copropriete/assemblees-generales",
+        "syndic-copropriete/documents-copropriete",
+        "syndic-copropriete/appels-de-charges",
+        "portails-clients/portail-proprietaire",
+      ],
     },
     {
       slug: "vue-patrimoine-proprietaire",
@@ -421,11 +461,12 @@ export const portailsClients: WikiDomain = {
     {
       slug: "paiement-loyer-par-lien",
       title: "Page de paiement d'un loyer",
-      metaTitle: "Payer son loyer par Mobile Money depuis un lien reçu",
+      h1: "Payer son loyer en ligne par lien",
+      metaTitle: "Payer son loyer en ligne par lien, sans compte",
       summary:
-        "Le locataire ouvre le lien reçu de son agence, voit le reste dû de son échéance et paie en Mobile Money, sans compte, puis suit le statut de son paiement.",
+        "Côté locataire : ouvrez le lien de paiement reçu de votre agence, voyez le reste dû de votre loyer et payez en Mobile Money, sans compte, puis suivez le statut.",
       intro:
-        "Le locataire reçoit de son agence un lien vers une seule échéance de loyer. La page lui montre l'agence, la période, la date d'échéance et le reste dû, puis lance le paiement Mobile Money. Au retour, une page lui indique si le règlement est confirmé, en cours, échoué ou annulé. Cette fonction est en cours de déploiement : elle est éprouvée en mode simulation, et le paiement réel n'est pas encore validé.",
+        "Le locataire reçoit de son agence un lien vers une seule échéance de loyer. La page lui montre l'agence, la période, la date d'échéance et le reste dû, puis lance le paiement Mobile Money. Au retour, une page lui indique si le règlement est confirmé, en cours, échoué ou annulé. C'est le parcours du locataire ; la création et le suivi des liens se font côté agence, dans [Générer des liens de paiement de loyer](/wiki/gestion-locative/liens-de-paiement-loyer). Cette fonction est en cours de déploiement : elle est éprouvée en mode simulation, et le paiement réel n'est pas encore validé.",
       packs: ["agence", "integre", "patrimoine-essentiel", "patrimoine-pro"],
       profiles: ["locataire", "visiteur"],
       status: "deploiement",
@@ -455,11 +496,12 @@ export const portailsClients: WikiDomain = {
     {
       slug: "acces-partage-tiers-de-confiance",
       title: "Accès partagé en lecture seule",
-      metaTitle: "Consulter un patrimoine par accès partagé, sans compte",
+      h1: "Accès partagé en lecture seule : l'espace du notaire ou du banquier",
+      metaTitle: "Consulter un dossier partagé par une agence, sans compte",
       summary:
-        "Le notaire, l'expert-comptable ou le banquier ouvre le lien reçu, consulte en lecture seule les biens accordés et télécharge les documents partagés.",
+        "Côté destinataire : notaire, expert-comptable ou banquier ouvre le lien reçu, consulte en lecture seule les biens accordés et télécharge les documents partagés.",
       intro:
-        "Le destinataire d'un accès partagé n'a ni compte ni mot de passe à créer. Le lien qu'il reçoit ouvre une page en lecture seule, avec la mention de l'agence qui lui accorde l'accès. Il ne voit que les biens et les rubriques accordés, et ne télécharge que les documents explicitement partagés. Chaque consultation est enregistrée.",
+        "Le destinataire d'un accès partagé n'a ni compte ni mot de passe à créer. Le lien qu'il reçoit ouvre une page en lecture seule, avec la mention de l'agence qui lui accorde l'accès. Il ne voit que les biens et les rubriques accordés, et ne télécharge que les documents explicitement partagés. Chaque consultation est enregistrée. C'est la vue du destinataire ; l'agence crée et gère l'accès dans [Partager un dossier avec un notaire, un banquier ou un expert-comptable](/wiki/gestion-locative/acces-partages-tiers-de-confiance).",
       packs: ["agence", "integre"],
       profiles: ["visiteur"],
       status: "disponible",

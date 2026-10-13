@@ -193,6 +193,7 @@ export const landings: Landing[] = [
           { title: "Appels de charges", text: "Appels individuels ou en masse, encaissements et suivi du taux de recouvrement." },
           { title: "Recouvrement", text: "Vue des retards, relances individuelles ou groupées par e-mail et WhatsApp, pénalités et échéanciers de paiement." },
           { title: "Compte par lot", text: "Relevé, transactions et ajustements pour chaque copropriétaire." },
+          { title: "Portail copropriétaire", text: "Chaque copropriétaire invité suit en ligne, en lecture seule, ses lots, ses appels de charges, ses reçus et les procès-verbaux d'assemblée dans le [portail de la copropriété](/wiki/portails-clients/portail-coproprietaire)." },
         ],
       },
       {

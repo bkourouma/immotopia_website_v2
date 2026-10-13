@@ -509,11 +509,12 @@ export const agenceEtAbonnement: WikiDomain = {
     {
       slug: "espace-particulier",
       title: "Espace particulier",
-      metaTitle: "Espace particulier : gérer son patrimoine, gratuit ou plus",
+      h1: "Créer son espace particulier et choisir son palier",
+      metaTitle: "Créer son espace particulier : palier gratuit ou payant",
       summary:
-        "Un particulier crée son espace de patrimoine en quelques champs, le suit avec un menu réduit et peut passer à un palier payant. En développement.",
+        "Créez votre espace particulier en quelques champs, démarrez sur le palier gratuit et passez au palier payant par Mobile Money ou carte. En développement.",
       intro:
-        "L'espace particulier permet à une personne de suivre son propre patrimoine sans passer par une agence. Elle crée son espace elle-même, avec un menu réduit à l'essentiel : patrimoine, biens, baux, paramètres et abonnement. Un palier gratuit et un palier payant sont prévus ; le palier payant relève le plafond d'actifs. Cette fonction est en cours de développement.",
+        "Cette fiche décrit la création de l'espace et son abonnement ; le suivi du patrimoine au quotidien est dans [Suivre son patrimoine immobilier sans agence](/wiki/patrimoine-multi-actifs/espace-particulier). L'espace particulier permet à une personne de suivre son propre patrimoine sans passer par une agence. Elle crée son espace elle-même, avec un menu réduit à l'essentiel : patrimoine, biens, baux, paramètres et abonnement. Un palier gratuit et un palier payant sont prévus ; le palier payant relève le plafond d'actifs. Cette fonction est en cours de développement.",
       packs: ["particulier-gratuit", "particulier-plus"],
       profiles: ["visiteur", "direction"],
       status: "developpement",
@@ -540,7 +541,7 @@ export const agenceEtAbonnement: WikiDomain = {
           profiles: ["direction"],
         },
       ],
-      related: ["agence-et-abonnement/abonnement-par-pack"],
+      related: ["patrimoine-multi-actifs/espace-particulier", "agence-et-abonnement/abonnement-par-pack"],
     },
   ],
 };

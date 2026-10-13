@@ -170,6 +170,9 @@ Couverture fonctionnelle par pack (d'après la proposition de modèle économiqu
 - Prestataires et contrats de maintenance, équipements des parties communes.
 - Incidents de copropriété avec imputation des coûts, et lien vers la maintenance.
 - Documents de copropriété (coffre documentaire) et fonds de la copropriété.
+- Procès-verbal d'assemblée générale : le syndic le génère en Word, le relit, puis le dépose dans les documents de la copropriété (type « procès-verbal »).
+- Portail copropriétaire : sur invitation du syndic, chaque copropriétaire consulte en lecture seule ses lots, le solde et l'historique de son compte, ses appels de charges, ses paiements, reçus et quittances, le relevé de compte en PDF, les assemblées (ses propres votes uniquement), le règlement de copropriété et les procès-verbaux. Il ne peut pas payer ses charges en ligne depuis ce portail. Détail : https://immotopia.cloud/wiki/portails-clients/portail-coproprietaire
+- Fonds de la copropriété : fonds de roulement (avance de trésorerie pour les dépenses courantes) et fonds de travaux (réserve pour travaux futurs) sont des fonds distincts, avec leur solde et leur journal ; un poste du budget peut alimenter un fonds.
 
 ---
 
@@ -518,7 +521,7 @@ Les éléments suivants sont en cours de développement ou d'intégration en sep
   - Relevé de gérance distinguant l'appelé, l'encaissé, l'impayé, les honoraires, la TVA et les dépenses, avec le net à reverser.
   - Paramètres financiers de l'agence (assujettissement et taux de TVA, taux d'honoraires, comptes comptables de la gestion locative).
   - Vie du bail : révision du loyer, renouvellement, avenant, résiliation, solde de tout compte, avec historique.
-  - États des lieux d'entrée et de sortie (pièces, compteurs, clés, signataires, retenues sur le dépôt, comparaison entrée / sortie, photos).
+  - États des lieux d'entrée et de sortie (pièces, compteurs, clés, signataires, retenues sur le dépôt, comparaison entrée / sortie, photos par pièce). Fonctions confirmées par l'équipe le 13 octobre 2026 : signature électronique de l'état des lieux, export et impression en PDF, utilisation sur téléphone et tablette dans le navigateur (sans application native, connexion Internet nécessaire), photos par pièce. L'agence transmet elle-même le PDF exporté au locataire (pas d'envoi automatique documenté). Détail : https://immotopia.cloud/wiki/gestion-locative/etats-des-lieux
 - Comptabilité de la gestion locative : écritures automatiques en partie double et exports journal, grand livre et balance (CSV, Excel) pour le cabinet comptable.
 - Notifications internes à l'application (avec compteur de non-lus) et messagerie directe entre l'agence, les propriétaires, les locataires et les contacts : spécifiées, pas encore disponibles en production.
 
