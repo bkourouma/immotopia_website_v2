@@ -25,7 +25,7 @@ export const landings: Landing[] = [
     slug: "gestion-locative-cote-divoire",
     metaTitle: "Logiciel de gestion locative en Côte d'Ivoire | ImmoTopia",
     metaDescription:
-      "Gestion locative en Côte d'Ivoire : baux, échéances, paiements Mobile Money, pénalités, cautions, quittances et portails propriétaire et locataire, dans l'ERP immobilier ImmoTopia.",
+      "Gestion locative en Côte d'Ivoire : baux, échéances, Mobile Money, pénalités, cautions, quittances et portails propriétaire et locataire dans ImmoTopia.",
     eyebrow: "Gestion locative",
     h1: "Gestion locative en Côte d'Ivoire",
     intro:
@@ -82,7 +82,7 @@ export const landings: Landing[] = [
     slug: "logiciel-immobilier-cote-divoire",
     metaTitle: "Logiciel immobilier en Côte d'Ivoire | ERP ImmoTopia",
     metaDescription:
-      "ImmoTopia, logiciel immobilier en ligne pour les professionnels en Côte d'Ivoire : CRM, biens et annonces, gestion locative, syndic de copropriété, portails clients, maintenance, e-mail et WhatsApp.",
+      "Logiciel immobilier en ligne pour les professionnels en Côte d'Ivoire : CRM, gestion locative, syndic, portails clients, maintenance, e-mail et WhatsApp.",
     eyebrow: "ERP immobilier",
     h1: "Logiciel immobilier en Côte d'Ivoire : un ERP complet pour les professionnels",
     intro:
@@ -127,9 +127,9 @@ export const landings: Landing[] = [
   },
   {
     slug: "logiciel-annonces-immobilieres-cote-divoire",
-    metaTitle: "Logiciel d'annonces immobilières en Côte d'Ivoire | ImmoTopia",
+    metaTitle: "Logiciel d'annonces immobilières en Côte d'Ivoire",
     metaDescription:
-      "Gérez votre stock de biens et vos annonces en Côte d'Ivoire : fiches par type de bien, statuts, médias, score de qualité, API d'annonces pour votre site et diffusion WhatsApp, dans ImmoTopia.",
+      "Gérez votre stock de biens et vos annonces : fiches par type de bien, statuts, médias, score de qualité, API d'annonces et diffusion WhatsApp.",
     eyebrow: "Biens et annonces",
     h1: "Logiciel d'annonces immobilières en Côte d'Ivoire : stock, publication et prospects",
     intro:
@@ -171,9 +171,9 @@ export const landings: Landing[] = [
   },
   {
     slug: "logiciel-syndic-copropriete-cote-divoire",
-    metaTitle: "Logiciel de syndic de copropriété en Côte d'Ivoire | ImmoTopia",
+    metaTitle: "Logiciel de syndic de copropriété en Côte d'Ivoire",
     metaDescription:
-      "Logiciel de syndic en Côte d'Ivoire : lots et tantièmes, budgets, appels de charges, recouvrement, assemblées générales avec votes et quorum, comptabilité de copropriété. Pack Syndic dès 49 900 FCFA HT/mois.",
+      "Syndic en Côte d'Ivoire : lots et tantièmes, budgets, appels de charges, recouvrement, assemblées générales. Pack Syndic dès 49 900 FCFA HT/mois.",
     eyebrow: "Syndic de copropriété",
     h1: "Logiciel de syndic de copropriété en Côte d'Ivoire",
     intro:
@@ -213,9 +213,9 @@ export const landings: Landing[] = [
   },
   {
     slug: "meilleur-logiciel-immobilier-cote-divoire",
-    metaTitle: "Meilleur logiciel immobilier en Côte d'Ivoire : critères de choix | ImmoTopia",
+    metaTitle: "Meilleur logiciel immobilier en Côte d'Ivoire : les critères",
     metaDescription:
-      "Comment choisir le meilleur logiciel immobilier en Côte d'Ivoire : couverture des métiers, Mobile Money, WhatsApp, portails clients, prix en FCFA, reprise des données. Grille de choix et checklist.",
+      "Comment choisir le meilleur logiciel immobilier en Côte d'Ivoire : métiers couverts, Mobile Money, WhatsApp, portails, prix en FCFA, reprise des données.",
     eyebrow: "Guide de choix",
     h1: "Meilleur logiciel immobilier en Côte d'Ivoire : comment choisir ?",
     intro:
@@ -292,9 +292,9 @@ export const landings: Landing[] = [
   },
   {
     slug: "paiement-loyer-charges-mobile-money-cote-divoire",
-    metaTitle: "Paiement des loyers et charges par Mobile Money en Côte d'Ivoire | ImmoTopia",
+    metaTitle: "Loyers et charges par Mobile Money en Côte d'Ivoire",
     metaDescription:
-      "Suivez les loyers et charges payés par Orange Money, MTN MoMo, Moov Money et Wave : enregistrement par opérateur, déclaration par le locataire, validation par l'agence, relances et reporting, dans ImmoTopia.",
+      "Suivez les loyers payés par Orange Money, MTN MoMo, Moov Money et Wave : enregistrement, déclaration du locataire, validation et relances dans ImmoTopia.",
     eyebrow: "Mobile Money",
     h1: "Paiement des loyers et charges par Mobile Money en Côte d'Ivoire",
     intro:
@@ -328,9 +328,9 @@ export const landings: Landing[] = [
   },
   {
     slug: "maintenance-immobiliere-ticketing-cote-divoire",
-    metaTitle: "Maintenance immobilière et tickets d'incident en Côte d'Ivoire | ImmoTopia",
+    metaTitle: "Maintenance immobilière : tickets d'incident, Côte d'Ivoire",
     metaDescription:
-      "Maintenance immobilière en Côte d'Ivoire : tickets avec photos et priorités, prestataires, fil d'échange, notifications à chaque étape, pour la gestion locative et la copropriété, dans ImmoTopia.",
+      "Maintenance en Côte d'Ivoire : tickets avec photos et priorités, prestataires, fil d'échange et notifications, en location comme en copropriété.",
     eyebrow: "Maintenance",
     h1: "Maintenance immobilière en Côte d'Ivoire : tickets, prestataires et suivi centralisé",
     intro:
@@ -364,9 +364,9 @@ export const landings: Landing[] = [
   },
   {
     slug: "tableaux-de-bord-kpi-immobilier-cote-divoire",
-    metaTitle: "Tableaux de bord et KPI immobilier en Côte d'Ivoire | ImmoTopia",
+    metaTitle: "Tableaux de bord et KPI immobilier en Côte d'Ivoire",
     metaDescription:
-      "Pilotez votre activité immobilière : impayés, encaissements face à l'objectif, occupation, trésorerie sur 12 mois, pipeline commercial, tickets et recouvrement des charges, dans les tableaux de bord ImmoTopia.",
+      "Pilotez votre activité : impayés, encaissements face à l'objectif, occupation, trésorerie sur 12 mois, pipeline commercial et tickets dans ImmoTopia.",
     eyebrow: "Pilotage",
     h1: "Tableaux de bord immobilier en Côte d'Ivoire : vos KPI d'un coup d'œil",
     intro:
@@ -408,9 +408,9 @@ export const landings: Landing[] = [
   },
   {
     slug: "logiciel-immobilier-afrique",
-    metaTitle: "Logiciel immobilier en Afrique : solution locale ou étrangère ? | ImmoTopia",
+    metaTitle: "Logiciel immobilier en Afrique : local ou étranger ?",
     metaDescription:
-      "Logiciel immobilier en Afrique de l'Ouest : pourquoi une solution conçue localement (FCFA, Mobile Money, WhatsApp, équipe à Abidjan) s'adapte mieux qu'un logiciel européen. Critères et points de vigilance.",
+      "Logiciel immobilier en Afrique de l'Ouest : pourquoi une solution conçue localement (FCFA, Mobile Money, WhatsApp) s'adapte mieux. Critères et vigilance.",
     eyebrow: "Afrique",
     h1: "Logiciel immobilier en Afrique : solution locale ou étrangère ?",
     intro:
@@ -444,9 +444,9 @@ export const landings: Landing[] = [
   },
   {
     slug: "immotopia-vs-excel",
-    metaTitle: "ImmoTopia vs Excel : pourquoi passer à un ERP immobilier | Côte d'Ivoire",
+    metaTitle: "ImmoTopia vs Excel : pourquoi passer à un ERP immobilier",
     metaDescription:
-      "Excel suffit pour démarrer, pas pour piloter une agence ou un portefeuille. Comparez Excel et ImmoTopia : CRM, loyers, syndic, Mobile Money, maintenance, relances WhatsApp et tableaux de bord.",
+      "Excel suffit pour démarrer, pas pour piloter une agence. Comparez Excel et ImmoTopia : CRM, loyers, syndic, Mobile Money, relances et tableaux de bord.",
     eyebrow: "Comparaison",
     h1: "ImmoTopia vs Excel : quel outil pour gérer l'immobilier en Côte d'Ivoire ?",
     intro:
@@ -479,9 +479,9 @@ export const landings: Landing[] = [
   },
   {
     slug: "gestion-locative-vs-excel",
-    metaTitle: "Gestion locative : Excel ou logiciel ? | ImmoTopia Côte d'Ivoire",
+    metaTitle: "Gestion locative : Excel ou logiciel ? | ImmoTopia",
     metaDescription:
-      "Excel suffit pour débuter, mais devient risqué pour suivre loyers, impayés et quittances. Comparez Excel et ImmoTopia pour la gestion locative : échéancier, Mobile Money, relances et portails.",
+      "Excel suffit pour débuter, mais devient risqué pour suivre loyers, impayés et quittances. Comparez Excel et ImmoTopia : échéancier, relances, portails.",
     eyebrow: "Comparaison",
     h1: "Gestion locative : Excel ou logiciel, que choisir en Côte d'Ivoire ?",
     intro:

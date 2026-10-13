@@ -23,7 +23,7 @@ import {
   wikiStats,
 } from "@/lib/wiki";
 
-const title = "Wiki des fonctionnalités ImmoTopia — logiciel immobilier en Côte d'Ivoire";
+const title = "Wiki des fonctionnalités ImmoTopia : logiciel immobilier";
 const description = `Les ${wikiStats.features} fonctionnalités et ${wikiStats.actions} actions d'ImmoTopia expliquées une à une : gestion locative, syndic, CRM, portails, maintenance, finance et chantiers.`;
 
 export const metadata: Metadata = {

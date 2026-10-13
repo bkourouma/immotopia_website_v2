@@ -14,8 +14,8 @@ export async function generateMetadata({ params }: PageProps<"/[lang]/tarifs">):
   return {
     title: t("Tarifs — 6 packs, de l'agence au particulier | ImmoTopia", "Pricing — 6 packs, from agencies to individuals | ImmoTopia"),
     description: t(
-      "Tarifs ImmoTopia en FCFA HT/mois : Patrimoine dès 9 900 (particuliers, diaspora), Agence dès 29 900, Syndic dès 49 900, Promoteur dès 149 900 et Opérateur intégré. Premier mois offert, sans engagement. Aucune commission sur les loyers.",
-      "ImmoTopia pricing in FCFA excl. VAT/month: Portfolio from 9,900 (individuals, diaspora), Agency from 29,900, Condo Management from 49,900, Developer from 149,900, plus an all-in Integrated Operator plan. First month free, no commitment. No commission on rent.",
+      "Tarifs ImmoTopia en FCFA HT/mois : Patrimoine dès 9 900, Agence dès 29 900, Syndic dès 49 900, Promoteur dès 149 900. Premier mois offert, sans engagement.",
+      "ImmoTopia pricing, FCFA excl. VAT/month: Portfolio from 9,900, Agency from 29,900, Condo Management from 49,900, Developer from 149,900. First month free.",
     ),
     alternates: alternates(lang, "/tarifs"),
   };

@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { FaqPage } from "@/components/faq-page";
 
 export const metadata: Metadata = {
-  title: { absolute: "FAQ ImmoTopia — Questions fréquentes sur le logiciel immobilier" },
+  title: { absolute: "FAQ ImmoTopia : vos questions sur le logiciel immobilier" },
   description:
     "Tarifs, période d'essai, gestion locative, Mobile Money, syndic, sécurité, reprise des données : les réponses aux questions fréquentes sur ImmoTopia.",
   alternates: { canonical: "/faq" },

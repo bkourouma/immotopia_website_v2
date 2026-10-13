@@ -5,6 +5,10 @@ import { landings } from "@/lib/landings";
 import { tools } from "@/lib/tools";
 import { allFeatures, wikiDomains, wikiHref } from "@/lib/wiki";
 
+// Domaines du wiki laissés en ligne mais hors sitemap : documentation d'administration de la plateforme (réservée aux équipes
+// ImmoTopia), sans intérêt pour une recherche publique. Les pages restent indexables (pas de noindex), seulement non recommandées.
+const wikiDomainsOutOfSitemap = ["administration-plateforme"];
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
   const url = (href: string) => `${SITE_URL}${href === "/" ? "" : href}`;
@@ -15,7 +19,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: now,
       changeFrequency,
       priority,
-      alternates: { languages: Object.fromEntries(locales.map((l) => [l, url(localizeHref(l, path))])) },
+      // x-default = français, comme dans les balises hreflang de chaque page (src/lib/i18n.ts, alternates())
+      alternates: { languages: { ...Object.fromEntries(locales.map((l) => [l, url(localizeHref(l, path))])), "x-default": url(path) } },
     }));
   return [
     ...page("/", 1, "weekly"),
@@ -29,8 +34,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // Wiki des fonctionnalités : en français seulement
     ...[
       { path: "/wiki", priority: 0.8 },
-      ...wikiDomains.map((d) => ({ path: wikiHref(d.slug), priority: 0.7 })),
-      ...allFeatures.map(({ domain, feature }) => ({ path: wikiHref(domain.slug, feature.slug), priority: 0.6 })),
+      ...wikiDomains.filter((d) => !wikiDomainsOutOfSitemap.includes(d.slug)).map((d) => ({ path: wikiHref(d.slug), priority: 0.7 })),
+      ...allFeatures
+        .filter(({ domain }) => !wikiDomainsOutOfSitemap.includes(domain.slug))
+        .map(({ domain, feature }) => ({ path: wikiHref(domain.slug, feature.slug), priority: 0.6 })),
     ].map(({ path, priority }) => ({ url: url(path), lastModified: now, changeFrequency: "monthly" as const, priority })),
     ...page("/mentions-legales", 0.2, "yearly"),
     ...page("/confidentialite", 0.2, "yearly"),

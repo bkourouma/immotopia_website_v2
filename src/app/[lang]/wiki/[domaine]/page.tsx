@@ -27,6 +27,8 @@ export async function generateMetadata({ params }: PageProps<"/[lang]/wiki/[doma
     description: d.summary,
     alternates: { canonical: url },
     openGraph: { title, description: d.summary, url, locale: "fr_CI" },
+    // Hors sitemap (src/app/sitemap.ts) mais toujours indexable : on ne la passe pas en noindex
+    ...(d.slug === "administration-plateforme" ? { robots: { index: true } } : {}),
   };
 }
 
