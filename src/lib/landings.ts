@@ -76,18 +76,12 @@ export const landings: Landing[] = [
             title: "États des lieux d'entrée et de sortie",
             text: "Pièces, compteurs, clés et photos par pièce, signature électronique et export PDF, depuis un ordinateur, un téléphone ou une tablette, avec la comparaison entrée / sortie. Voir la [fiche du wiki](/wiki/gestion-locative/etats-des-lieux) et le [guide des critères de choix](/guides/logiciel-etat-des-lieux-comparatif).",
           },
+          { title: "Renouvellement, avenant et résiliation du bail", text: "Le bail se renouvelle, se modifie par avenant ou se résilie depuis l'application, avec l'historique conservé. Une échéance déjà réglée n'est jamais modifiée ; la résiliation contre-passe les échéances futures." },
+          { title: "Honoraires, compte courant et reversements", text: "Honoraires de gestion à trois niveaux (le bail l'emporte sur le propriétaire, qui l'emporte sur l'agence ; pourcentage ou forfait), compte courant de chaque propriétaire visible dans son portail, et reversements numérotés, plafonnés au solde dû." },
           { title: "Quittances et documents", text: "Quittances, reçus, contrats et avenants générés depuis vos propres modèles Word, avec numérotation continue." },
           { title: "Relances e-mail et WhatsApp", text: "Rappel avant l'échéance, confirmation de paiement, alerte de fin de bail : les messages partent seuls, selon le consentement de chaque destinataire." },
           { title: "Portails propriétaire et locataire", text: "Chacun consulte ses baux, échéances, paiements et documents. Les comptes propriétaires et locataires ne sont pas facturés." },
         ],
-      },
-      {
-        title: "En cours de déploiement",
-        bullets: [
-          "Renouvellement, avenant et résiliation du bail avec historique conservé.",
-          "Honoraires de gestion à trois niveaux, compte courant propriétaire et reversements.",
-        ],
-        note: "Ces fonctions sont en cours de déploiement : leur disponibilité se confirme en démonstration.",
       },
     ],
     faq: [
