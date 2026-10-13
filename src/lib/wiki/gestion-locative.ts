@@ -154,11 +154,47 @@ export const gestionLocative: WikiDomain = {
     {
       slug: "etats-des-lieux",
       title: "États des lieux",
-      metaTitle: "État des lieux d'entrée et de sortie : logiciel en ligne",
+      h1: "Logiciel d'état des lieux d'entrée et de sortie",
+      metaTitle: "Logiciel état des lieux en ligne : entrée, sortie, photos",
       summary:
-        "Réalisez vos états des lieux d'entrée et de sortie pièce par pièce, avec photos, compteurs et clés, puis comparez-les pour repérer les dégradations.",
+        "Logiciel d'état des lieux d'entrée et de sortie : pièces, photos, compteurs, signature électronique et PDF, sur téléphone ou tablette, avec comparaison.",
       intro:
-        "L'état des lieux protège le bailleur comme le locataire. Votre agent le remplit pièce par pièce, élément par élément, ajoute des photos, relève les compteurs et note les retenues. À la sortie, la comparaison avec l'entrée montre tout de suite ce qui s'est dégradé.",
+        "Ce logiciel d'état des lieux permet à votre agence de réaliser l'état des lieux d'entrée et l'état des lieux de sortie de chaque bail, pièce par pièce, depuis un ordinateur, une tablette ou un téléphone. Votre agent décrit chaque élément, ajoute des photos par pièce, relève les compteurs et les clés, puis fait signer l'état des lieux par voie électronique. Les états des lieux se rangent avec le bail, s'exportent ou s'impriment en PDF, et celui de sortie se compare à celui d'entrée pour repérer les dégradations.",
+      sections: [
+        {
+          title: "Pourquoi utiliser un logiciel pour vos états des lieux ?",
+          body: [
+            "Un état des lieux sur papier se perd, se froisse et se discute. Dans un logiciel, chaque pièce est décrite élément par élément, avec ses photos, et l'état des lieux reste attaché au bail. L'agence peut s'y référer à tout moment en cas de désaccord.",
+            [
+              "La preuve par la photo : les photos sont rattachées à la pièce ou à l'élément concerné, avec une légende, et ne peuvent plus être ajoutées ni supprimées une fois l'état des lieux finalisé.",
+              "Moins de litiges sur le dépôt de garantie : à la sortie, l'écart avec l'entrée se lit élément par élément, et les retenues se justifient avec le même document que celui signé à l'entrée.",
+              "Un vrai gain de temps : l'état des lieux de sortie reprend les pièces et les éléments de l'entrée, prêts à être remplis, et le PDF s'exporte au lieu d'être recopié.",
+            ],
+          ],
+        },
+        {
+          title: "État des lieux d'entrée et de sortie : la comparaison",
+          body: [
+            "Chaque bail a un état des lieux d'entrée et un état des lieux de sortie. Quand vous ouvrez celui de sortie, les pièces et les éléments de l'entrée sont repris à vide : il ne reste qu'à constater l'état du logement au moment de la restitution des clés.",
+            "Un tableau compare ensuite, élément par élément, l'état à l'entrée, l'état à la sortie et ce qui s'est dégradé. Il s'affiche même si un seul des deux états des lieux existe.",
+          ],
+        },
+        {
+          title: "Que doit contenir un état des lieux ?",
+          body: [
+            "Un état des lieux complet décrit le logement tel qu'il est remis, puis tel qu'il est rendu. Dans ImmoTopia, vous renseignez :",
+            [
+              "les pièces et, pour chacune, les éléments contrôlés avec leur état ;",
+              "les relevés de compteurs ;",
+              "le nombre de clés remises ;",
+              "les photos par pièce ou par élément, avec une légende ;",
+              "un commentaire général, la présence du locataire et le nom des signataires (locataire et agence), puis la signature électronique ;",
+              "les retenues éventuelles sur le dépôt de garantie.",
+            ],
+            "Les retenues notées à la sortie se règlent ensuite sur la fiche du [dépôt de garantie](/wiki/gestion-locative/depot-de-garantie), où chaque retenue et chaque restitution est tracée. Une fois l'état des lieux finalisé, il ne peut plus être modifié.",
+          ],
+        },
+      ],
       packs: ["agence", "integre", "patrimoine-essentiel", "patrimoine-pro"],
       profiles: ["equipe"],
       menu: "Baux › Détail du bail › États des lieux",
@@ -185,11 +221,27 @@ export const gestionLocative: WikiDomain = {
           prereq: "L'état des lieux n'est pas encore finalisé.",
         },
         {
+          title: "Faire signer l'état des lieux",
+          goal: "Recueillir la signature électronique de l'agence et du locataire sur l'état des lieux, sans exemplaire papier à faire circuler.",
+          input: "Le nom du signataire de l'agence et celui du locataire s'il est présent.",
+          prereq: "L'état des lieux est rempli et n'est pas encore finalisé.",
+        },
+        {
           title: "Finaliser un état des lieux",
           goal: "Verrouiller l'état des lieux une fois signé : il ne peut plus être modifié.",
           output: "Un état des lieux finalisé et daté.",
           prereq:
             "Le nom du signataire de l'agence est saisi, celui du locataire aussi s'il était présent, et au moins un élément a un état renseigné.",
+        },
+        {
+          title: "Exporter ou imprimer en PDF",
+          goal: "Obtenir l'état des lieux en PDF, pour l'imprimer ou le transmettre vous-même au locataire et au propriétaire.",
+          output: "Un fichier PDF de l'état des lieux.",
+        },
+        {
+          title: "Remplir sur téléphone ou tablette",
+          goal: "Faire l'état des lieux sur place, dans le logement, depuis le navigateur d'un téléphone ou d'une tablette, avec les photos pièce par pièce.",
+          prereq: "Une connexion Internet : ImmoTopia s'utilise dans le navigateur, sans application mobile native.",
         },
         {
           title: "Supprimer un état des lieux",
@@ -202,7 +254,7 @@ export const gestionLocative: WikiDomain = {
         },
         {
           title: "Ajouter et gérer les photos",
-          goal: "Illustrer une pièce ou un élément par une photo, la consulter ou la supprimer.",
+          goal: "Illustrer chaque pièce, et si besoin chaque élément, par des photos, puis les consulter ou les supprimer.",
           input: "Une photo (JPEG, PNG ou WebP, 10 Mo au plus), la pièce ou l'élément concerné et une légende.",
           prereq: "Une fois l'état des lieux finalisé, on ne peut plus ajouter ni supprimer de photo.",
         },
@@ -210,11 +262,23 @@ export const gestionLocative: WikiDomain = {
       faq: [
         {
           q: "Peut-on joindre des photos à l'état des lieux ?",
-          a: "Oui, jusqu'à 10 Mo par photo, rattachées à une pièce ou à un élément, avec une légende.",
+          a: "Oui, pièce par pièce. Chaque photo (JPEG, PNG ou WebP, 10 Mo au plus) se rattache à une pièce ou à un élément, avec une légende.",
         },
         {
           q: "L'état des lieux de sortie reprend-il celui d'entrée ?",
           a: "Oui. À sa création, les pièces et éléments de l'entrée sont repris, prêts à être remplis. Un tableau compare ensuite les deux, élément par élément.",
+        },
+        {
+          q: "Peut-on le signer et l'envoyer au locataire ?",
+          a: "Oui pour la signature : elle se fait par voie électronique, avec le nom des signataires de l'agence et du locataire. Pour l'envoi, vous exportez l'état des lieux en PDF (ou vous l'imprimez), puis vous le transmettez vous-même au locataire.",
+        },
+        {
+          q: "Peut-on le faire depuis un téléphone ?",
+          a: "Oui. ImmoTopia est une application web : vous remplissez l'état des lieux depuis le navigateur d'un téléphone ou d'une tablette, sur place, avec les photos pièce par pièce. Il n'existe pas d'application mobile native, et une connexion Internet est nécessaire.",
+        },
+        {
+          q: "Peut-on corriger un état des lieux une fois finalisé ?",
+          a: "Non. Tant qu'il est en brouillon, vous le modifiez librement ; une fois finalisé, il est verrouillé et les photos ne peuvent plus être ajoutées ni supprimées.",
         },
       ],
       related: [
@@ -231,6 +295,15 @@ export const gestionLocative: WikiDomain = {
         "Suivez la caution de chaque bail : montant attendu, encaissé, retenu et restitué. Chaque mouvement du dépôt de garantie est tracé et reste consultable.",
       intro:
         "La caution est souvent source de litiges en fin de bail. ImmoTopia tient pour chaque bail le montant attendu, encaissé, retenu, restitué ou conservé, et garde l'historique de chaque mouvement. Vous répondez au bailleur comme au locataire, chiffres à l'appui.",
+      sections: [
+        {
+          title: "Encaisser, suivre et restituer le dépôt de garantie",
+          body: [
+            "À l'entrée dans les lieux, vous enregistrez le dépôt de garantie encaissé : il se constate en une seule fois, pour le montant prévu au bail, rattaché au paiement du locataire. Vous suivez ensuite à tout moment le montant attendu, encaissé, retenu, restitué et le solde détenu, sans refaire de calcul.",
+            "À la fin du bail, la restitution s'appuie sur l'[état des lieux de sortie](/wiki/gestion-locative/etats-des-lieux), qui compare l'état du logement à celui de l'entrée. Vous retenez ce que justifient les dégradations constatées, puis vous restituez le solde au locataire, en une ou plusieurs fois, dans la limite du solde détenu. Chaque mouvement reste dans l'historique du dépôt.",
+          ],
+        },
+      ],
       packs: ["agence", "integre", "patrimoine-essentiel", "patrimoine-pro"],
       profiles: ["equipe"],
       menu: "Baux › Détail du bail › Dépôt de garantie",
@@ -272,6 +345,7 @@ export const gestionLocative: WikiDomain = {
         },
       ],
       related: [
+        "gestion-locative/etats-des-lieux",
         "gestion-locative/gestion-des-baux",
         "gestion-locative/vie-du-bail",
         "gestion-locative/encaissement-des-loyers",
@@ -734,11 +808,12 @@ export const gestionLocative: WikiDomain = {
     {
       slug: "liens-de-paiement-loyer",
       title: "Liens de paiement d'un loyer",
-      metaTitle: "Lien de paiement d'un loyer par Mobile Money",
+      h1: "Générer des liens de paiement de loyer",
+      metaTitle: "Générer un lien de paiement de loyer pour vos locataires",
       summary:
-        "Envoyez au locataire un lien pour payer une échéance de loyer en Mobile Money, sans compte. Copiez-le, suivez l'état du paiement et révoquez-le au besoin.",
+        "Côté agence : générez un lien de paiement de loyer par échéance, envoyez-le par WhatsApp ou e-mail, suivez son état et révoquez-le au besoin.",
       intro:
-        "Depuis une échéance, vous envoyez au locataire un lien qui mène à une page de paiement du reste dû. Il paie en Mobile Money, sans créer de compte. Vous choisissez d'envoyer le lien par WhatsApp ou par e-mail, ou de le copier pour le transmettre vous-même. Cette fonction est en cours de déploiement : elle est éprouvée en mode simulation, et le paiement réel ainsi que l'envoi réel des messages ne sont pas encore validés.",
+        "Depuis une échéance, vous générez un lien de paiement de loyer qui mène à une page de paiement du reste dû. Vous choisissez de l'envoyer au locataire par WhatsApp ou par e-mail, ou de le copier pour le transmettre vous-même, puis vous suivez son état et le révoquez au besoin. C'est la vue de l'agence : le parcours du locataire, qui paie en Mobile Money sans créer de compte, est décrit dans [Payer son loyer en ligne par lien](/wiki/portails-clients/paiement-loyer-par-lien). Cette fonction est en cours de déploiement : elle est éprouvée en mode simulation, et le paiement réel ainsi que l'envoi réel des messages ne sont pas encore validés.",
       packs: ["agence", "integre", "patrimoine-essentiel", "patrimoine-pro"],
       profiles: ["equipe"],
       menu: "Encaisser › Échéances",
@@ -791,11 +866,12 @@ export const gestionLocative: WikiDomain = {
     {
       slug: "acces-partages-tiers-de-confiance",
       title: "Accès partagés pour tiers de confiance",
-      metaTitle: "Accès partagé en lecture seule pour notaire ou banquier",
+      h1: "Partager un dossier avec un notaire, un banquier ou un expert-comptable",
+      metaTitle: "Partager un dossier avec un notaire ou un banquier",
       summary:
-        "Donnez à un notaire, un expert-comptable ou un banquier un accès en lecture seule à des biens et documents choisis, avec échéance et journal des consultations.",
+        "Côté agence : créez, modifiez et révoquez l'accès en lecture seule d'un notaire, banquier ou expert-comptable, avec échéance et journal des consultations.",
       intro:
-        "Pour un dossier de prêt, une succession ou une clôture comptable, vous évitez d'envoyer des pièces par e-mail. Vous créez un accès en lecture seule, sans compte pour le destinataire, limité aux biens, aux rubriques et aux documents que vous choisissez. Il dure le temps voulu ou reste permanent, se modifie ou se retire à tout moment, et chaque consultation est enregistrée.",
+        "Pour un dossier de prêt, une succession ou une clôture comptable, vous évitez d'envoyer des pièces par e-mail. Vous créez un accès en lecture seule, sans compte pour le destinataire, limité aux biens, aux rubriques et aux documents que vous choisissez. Il dure le temps voulu ou reste permanent, se modifie ou se retire à tout moment, et chaque consultation est enregistrée. Ce que le destinataire voit de son côté est décrit dans [Accès partagé en lecture seule](/wiki/portails-clients/acces-partage-tiers-de-confiance).",
       packs: ["agence", "integre"],
       profiles: ["equipe"],
       menu: "Patrimoine › Accès partagés",

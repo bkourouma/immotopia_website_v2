@@ -44,17 +44,27 @@ export type WikiAction = {
 
 export type WikiFaq = { q: string; a: string };
 
+/** Un paragraphe (chaîne) ou une liste à puces (tableau de chaînes). Les liens internes s'écrivent « [texte](/chemin) ». */
+export type WikiBlock = string | string[];
+
+/** Section éditoriale (titre H2 et texte), affichée avant « Ce que vous pouvez faire ». */
+export type WikiSection = { title: string; body: WikiBlock[] };
+
 export type WikiFeature = {
   /** Segment d'URL, en minuscules sans accents : « fiche-bien ». */
   slug: string;
-  /** Titre court, repris dans le H1 : « Fiche bien ». */
+  /** Titre court : menus, fil d'Ariane, listes. Sert aussi de H1 quand `h1` est absent. */
   title: string;
+  /** H1 de la page quand il doit différer du titre court : requête de recherche + précision métier. */
+  h1?: string;
   /** Titre de la balise <title> (sans « | ImmoTopia », ajouté par la page), 60 caractères environ. */
   metaTitle: string;
   /** Méta-description : 140 à 160 caractères. */
   summary: string;
-  /** Deux à quatre phrases : à quoi sert la fonctionnalité, pour qui, ce qu'elle change au quotidien. */
+  /** Deux à quatre phrases : à quoi sert la fonctionnalité, pour qui, ce qu'elle change au quotidien. Accepte les liens « [texte](/chemin) ». */
   intro: string;
+  /** Sections éditoriales facultatives (H2) : usage, définitions, contenu attendu… Avant la liste des actions. */
+  sections?: WikiSection[];
   packs: WikiPackId[];
   profiles: WikiProfile[];
   /** Chemin dans le menu de l'application : « Biens › Toutes les propriétés ». */

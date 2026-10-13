@@ -92,11 +92,12 @@ export const communicationEtDocuments: WikiDomain = {
     {
       slug: "listes-de-diffusion-newsletter",
       title: "Listes de diffusion",
-      metaTitle: "Listes de diffusion newsletter pour agence immobilière",
+      h1: "Listes de diffusion : constituer les destinataires de vos newsletters",
+      metaTitle: "Liste de diffusion newsletter : abonnés, import CSV",
       summary:
         "Constituez vos listes de diffusion à partir des propriétaires, locataires ou contacts, importez des abonnés par CSV et laissez chacun se désinscrire en un clic.",
       intro:
-        "Une liste de diffusion regroupe les destinataires d'une newsletter. Elle peut se remplir à la main, par import, ou se construire toute seule à partir de vos propriétaires, locataires ou contacts qui ont donné leur accord. Les visiteurs peuvent aussi s'inscrire eux-mêmes, avec confirmation par e-mail si vous le souhaitez. Chaque destinataire peut se désinscrire à tout moment.",
+        "Cette fiche décrit les destinataires : l'envoi des messages est détaillé dans [Newsletter pour agence immobilière](/wiki/communication-et-documents/campagnes-newsletter). Une liste de diffusion regroupe les destinataires d'une newsletter. Elle peut se remplir à la main, par import, ou se construire toute seule à partir de vos propriétaires, locataires ou contacts qui ont donné leur accord. Les visiteurs peuvent aussi s'inscrire eux-mêmes, avec confirmation par e-mail si vous le souhaitez. Chaque destinataire peut se désinscrire à tout moment.",
       packs: ["agence", "syndic", "promoteur", "integre", "patrimoine-essentiel", "patrimoine-pro"],
       profiles: ["equipe"],
       menu: "Communication › Newsletter — Listes",
@@ -160,11 +161,12 @@ export const communicationEtDocuments: WikiDomain = {
     {
       slug: "campagnes-newsletter",
       title: "Campagnes et newsletters",
-      metaTitle: "Newsletter et campagnes e-mail pour agence immobilière",
+      h1: "Newsletter pour agence immobilière",
+      metaTitle: "Newsletter d'agence immobilière : campagnes e-mail clients",
       summary:
-        "Rédigez vos newsletters à partir de modèles, prévisualisez-les, envoyez-les tout de suite ou à la date choisie, puis suivez envois et ouvertures par destinataire.",
+        "Newsletter d'agence immobilière : rédigez vos campagnes e-mail à partir de modèles, envoyez-les ou programmez-les, puis suivez envois et ouvertures.",
       intro:
-        "Les campagnes vous permettent de tenir vos clients informés : nouveaux biens, rappels, actualités de l'agence. Vous partez d'un modèle à vos couleurs, rédigez le message, le prévisualisez, puis l'envoyez tout de suite ou à la date choisie. Vous voyez ensuite qui l'a reçu et qui l'a ouvert.",
+        "La newsletter d'une agence immobilière sert à tenir clients, propriétaires et prospects informés : nouveaux biens, rappels, actualités de l'agence. Vous choisissez une liste de diffusion, partez d'un modèle à vos couleurs, rédigez et prévisualisez le message, puis l'envoyez tout de suite ou à la date choisie. Chaque message porte un lien de désinscription, et l'envoi par WhatsApp ne concerne que les destinataires qui ont donné leur accord. Vous voyez ensuite qui l'a reçu et qui l'a ouvert. Les destinataires se constituent dans les [listes de diffusion](/wiki/communication-et-documents/listes-de-diffusion-newsletter).",
       packs: ["agence", "syndic", "promoteur", "integre", "patrimoine-essentiel", "patrimoine-pro"],
       profiles: ["equipe"],
       menu: "Communication › Newsletter — Campagnes",

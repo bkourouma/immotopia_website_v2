@@ -3,6 +3,7 @@ import { landingBySlug, type Landing } from "@/lib/landings";
 import { SITE_URL } from "@/lib/site";
 import { DemoButton } from "./demo-button";
 import { FinalCta } from "./final-cta";
+import { InlineLinks } from "./inline-links";
 import { Navbar } from "./navbar";
 import { PageHero } from "./page-hero";
 import { SmartLink } from "./smart-link";
@@ -54,7 +55,9 @@ export function LandingPage({ landing }: { landing: Landing }) {
                   {s.items.map((it) => (
                     <div key={it.title} className="rounded-[22px] bg-white p-6 ring-1 ring-ink-900/[0.07]">
                       <h3 className="font-display text-lg font-bold">{it.title}</h3>
-                      <p className="mt-2 text-sm leading-relaxed text-ink-900/65">{it.text}</p>
+                      <p className="mt-2 text-sm leading-relaxed text-ink-900/65">
+                        <InlineLinks text={it.text} />
+                      </p>
                     </div>
                   ))}
                 </div>
