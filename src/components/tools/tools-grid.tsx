@@ -25,7 +25,7 @@ export function ToolsGrid({ dark = false }: { dark?: boolean }) {
             ease: [0.16, 1, 0.3, 1],
           }}
           // 2 grandes cartes en tête, puis des cartes d'un tiers
-          className={i < 2 ? "md:col-span-3" : i === 6 ? "md:col-span-6 lg:col-span-2" : "md:col-span-3 lg:col-span-2"}
+          className={i < 2 ? "md:col-span-3" : "md:col-span-3 lg:col-span-2"}
         >
           <Link
             href={href(`/outils/${t.slug}`)}

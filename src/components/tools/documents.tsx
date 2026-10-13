@@ -4,15 +4,17 @@ import { useState, type ReactNode } from "react";
 import type { Block, Doc } from "@/lib/document";
 import { fcfa, fcfaWords, longDate, monthBounds, monthLabel, todayISO } from "@/lib/format";
 import { useI18n } from "../locale-provider";
-import { Card, Choice, DocLanguageNote, DocPreview, DownloadButton, Num, Text, UpsellCta } from "./tool-ui";
+import { Card, Choice, DocLanguageNote, DocPreview, DownloadButton, MultiChoice, Num, SoftwareBanner, Text, UpsellCta } from "./tool-ui";
 
 // Ces composants sont chargés uniquement dans le navigateur (dates du jour par défaut).
 // L'interface est traduite, mais le document généré reste en français (langue juridique en Côte d'Ivoire).
 
-function Layout({ form, doc, upsell }: { form: ReactNode; doc: Doc; upsell: string }) {
+function Layout({ form, doc, upsell, banner }: { form: ReactNode; doc: Doc; upsell: string; banner?: ReactNode }) {
   const { t } = useI18n();
   return (
-    <div className="grid items-start gap-6 lg:grid-cols-[1fr_1.05fr]">
+    <div className="space-y-6">
+      {banner}
+      <div className="grid items-start gap-6 lg:grid-cols-[1fr_1.05fr]">
       <div className="space-y-6">{form}</div>
       <div className="space-y-4 lg:sticky lg:top-24">
         <DownloadButton doc={doc} />
@@ -24,6 +26,7 @@ function Layout({ form, doc, upsell }: { form: ReactNode; doc: Doc; upsell: stri
           <DocPreview blocks={doc.blocks} />
         </div>
         <UpsellCta text={upsell} />
+      </div>
       </div>
     </div>
   );
@@ -344,20 +347,20 @@ export function CommercialLeaseGenerator() {
     { t: "h", text: "Article 1 — Objet" },
     {
       t: "p",
-      text: `Le bailleur donne à bail au preneur, qui accepte, les locaux situés ${or(address, "…")}, pour l'exercice de l'activité suivante : ${or(activity, "…")}. Le preneur ne peut changer d'activité sans l'accord écrit du bailleur.`,
+      text: `Le bailleur donne à bail au preneur, qui accepte, les locaux situés ${or(address, "…")}, pour l'exercice de l'activité suivante : ${or(activity, "…")}. Le preneur ne peut changer d'activité sans l'accord préalable et exprès du bailleur.`,
     },
     { t: "h", text: "Article 2 — Durée" },
     {
       t: "p",
       text:
         term === "fixed"
-          ? `Le bail est conclu pour une durée déterminée de ${duration} an${duration > 1 ? "s" : ""} à compter du ${longDate(start)}. Conformément à l'Acte uniforme, le preneur qui a exploité son activité pendant au moins deux ans dans les lieux bénéficie d'un droit au renouvellement, qu'il doit demander avant l'expiration du bail dans les formes prévues par ce texte.`
-          : `Le bail est conclu pour une durée indéterminée à compter du ${longDate(start)}. Chaque partie peut y mettre fin en donnant congé par acte extrajudiciaire au moins six mois à l'avance, dans les conditions prévues par l'Acte uniforme.`,
+          ? `Le bail est conclu pour une durée déterminée de ${duration} an${duration > 1 ? "s" : ""} à compter du ${longDate(start)}. Conformément à l'Acte uniforme, le preneur qui a exploité l'activité prévue au bail pendant au moins deux ans dans les lieux bénéficie d'un droit au renouvellement. Il le demande au plus tard trois mois avant l'expiration du bail, par signification d'huissier de justice ou par notification permettant d'établir la réception effective ; un bail renouvelé est conclu pour trois ans au moins.`
+          : `Le bail est conclu pour une durée indéterminée à compter du ${longDate(start)}. Chaque partie peut y mettre fin en donnant congé, par signification d'huissier de justice ou par notification permettant d'établir la réception effective, au moins six mois à l'avance, dans les conditions prévues par l'Acte uniforme.`,
     },
     { t: "h", text: "Article 3 — Loyer et révision" },
     {
       t: "p",
-      text: `Le loyer mensuel est fixé à ${fcfaWords(rent)} (${fcfa(rent)}) hors taxes et hors charges, payable d'avance le 5 de chaque mois. À défaut d'accord entre les parties, le loyer peut être révisé à l'expiration de chaque période triennale, dans les conditions prévues par l'Acte uniforme.`,
+      text: `Le loyer mensuel est fixé à ${fcfaWords(rent)} (${fcfa(rent)}) hors taxes et hors charges, payable d'avance le 5 de chaque mois. Le loyer est révisable dans les conditions fixées par les parties ou, à défaut, lors de chaque renouvellement du bail, conformément à l'Acte uniforme.`,
     },
     { t: "h", text: "Article 4 — Dépôt de garantie" },
     {
@@ -372,12 +375,12 @@ export function CommercialLeaseGenerator() {
     { t: "h", text: "Article 6 — Cession et sous-location" },
     {
       t: "p",
-      text: "La sous-location, totale ou partielle, est interdite sauf accord écrit du bailleur. La cession du bail s'effectue dans les conditions prévues par l'Acte uniforme, après signification au bailleur.",
+      text: "La sous-location, totale ou partielle, est interdite sauf accord écrit du bailleur ; si elle est autorisée, elle est portée à sa connaissance par écrit. La cession du bail s'effectue dans les conditions prévues par l'Acte uniforme, après signification ou notification au bailleur.",
     },
     { t: "h", text: "Article 7 — Clause résolutoire" },
     {
       t: "p",
-      text: "En cas de non-paiement du loyer ou d'inexécution d'une clause du bail, le bailleur pourra, après mise en demeure restée sans effet pendant le délai légal, demander à la juridiction compétente la résiliation du bail.",
+      text: "En cas de non-paiement du loyer ou d'inexécution d'une clause du bail, le bailleur pourra, après une mise en demeure indiquant les clauses violées et restée sans effet pendant un mois à compter de sa réception, demander à la juridiction compétente la résiliation du bail.",
     },
     { t: "h", text: "Article 8 — Droit applicable" },
     {
@@ -439,6 +442,242 @@ export function CommercialLeaseGenerator() {
             )}
             <Num label={t("Loyer mensuel HT", "Monthly rent excl. tax")} value={rent} onChange={setRent} />
             <Num label={t("Dépôt de garantie", "Security deposit")} value={deposit} onChange={setDeposit} suffix={t("mois", "months")} />
+          </Card>
+        </>
+      }
+    />
+  );
+}
+
+/* ================================================================ État des lieux */
+
+// Les valeurs restent en français (elles figurent dans le document) ; seuls les libellés de l'interface sont traduits.
+const inventoryRooms = [
+  "Entrée / couloir",
+  "Salon / séjour",
+  "Cuisine",
+  "Chambre 1",
+  "Chambre 2",
+  "Chambre 3",
+  "Salle de bain / douche",
+  "WC",
+  "Véranda / balcon",
+  "Cour / jardin",
+  "Garage / parking",
+] as const;
+type InventoryRoom = (typeof inventoryRooms)[number];
+
+const inventoryRoomEn: Record<InventoryRoom, string> = {
+  "Entrée / couloir": "Entrance / hallway",
+  "Salon / séjour": "Living room",
+  Cuisine: "Kitchen",
+  "Chambre 1": "Bedroom 1",
+  "Chambre 2": "Bedroom 2",
+  "Chambre 3": "Bedroom 3",
+  "Salle de bain / douche": "Bathroom / shower",
+  WC: "Toilet",
+  "Véranda / balcon": "Veranda / balcony",
+  "Cour / jardin": "Yard / garden",
+  "Garage / parking": "Garage / parking",
+};
+
+const baseItems = ["Murs et peinture", "Plafond", "Sol / carrelage", "Portes et serrures", "Fenêtres et vitres", "Prises et interrupteurs"];
+const roomItems: Partial<Record<InventoryRoom, string[]>> = {
+  "Salon / séjour": [...baseItems, "Climatiseur / ventilateur", "Éclairage"],
+  Cuisine: [...baseItems, "Évier et robinetterie", "Placards et plan de travail", "Hotte / évacuation"],
+  "Chambre 1": [...baseItems, "Placards", "Climatiseur / ventilateur"],
+  "Chambre 2": [...baseItems, "Placards", "Climatiseur / ventilateur"],
+  "Chambre 3": [...baseItems, "Placards", "Climatiseur / ventilateur"],
+  "Salle de bain / douche": [...baseItems, "Lavabo et robinetterie", "Douche / baignoire", "Chauffe-eau", "Évacuation (siphons)"],
+  WC: [...baseItems, "Cuvette et chasse d'eau", "Évacuation"],
+  "Véranda / balcon": ["Sol / revêtement", "Garde-corps / grilles", "Portes et serrures", "Éclairage"],
+  "Cour / jardin": ["Clôture / portail", "Sol / revêtement", "Éclairage extérieur", "Végétation / entretien"],
+  "Garage / parking": ["Portail / porte", "Sol", "Éclairage"],
+};
+
+const STATE_CHOICES = "[   ] Bon   [   ] Moyen   [   ] Mauvais";
+const DOTS = "...........................................................................";
+
+export function InventoryGenerator() {
+  const { t } = useI18n();
+  const [kind, setKind] = useState<"entree" | "sortie">("entree");
+  const [date, setDate] = useState(todayISO);
+  const [entryDate, setEntryDate] = useState("");
+  const [landlord, setLandlord] = useState("");
+  const [tenant, setTenant] = useState("");
+  const [propertyType, setPropertyType] = useState("Appartement de 3 pièces");
+  const [address, setAddress] = useState("");
+  const [place, setPlace] = useState("Abidjan");
+  const [rooms, setRooms] = useState<InventoryRoom[]>([
+    "Entrée / couloir",
+    "Salon / séjour",
+    "Cuisine",
+    "Chambre 1",
+    "Salle de bain / douche",
+    "WC",
+  ]);
+  const [water, setWater] = useState("");
+  const [electricity, setElectricity] = useState("");
+  const [keys, setKeys] = useState(2);
+  const [remarks, setRemarks] = useState("");
+
+  const exit = kind === "sortie";
+  const blocks: Block[] = [
+    {
+      t: "title",
+      text: exit ? "État des lieux de sortie" : "État des lieux d'entrée",
+      sub: `Établi le ${longDate(date)}`,
+    },
+    {
+      t: "parties",
+      left: { label: "Le bailleur ou son représentant", lines: [or(landlord, "Nom du bailleur")] },
+      right: { label: "Le locataire", lines: [or(tenant, "Nom du locataire")] },
+    },
+    {
+      t: "p",
+      text: `Logement concerné : ${or(propertyType, "…")}, situé ${or(address, "…")}.`,
+    },
+  ];
+  if (exit) {
+    blocks.push({
+      t: "p",
+      text: `Cet état des lieux de sortie se compare à l'état des lieux d'entrée${entryDate ? ` établi le ${longDate(entryDate)}` : ""}. Les écarts constatés, hors usure normale, sont notés dans les observations.`,
+    });
+  }
+  blocks.push(
+    { t: "h", text: "Compteurs" },
+    {
+      t: "table",
+      rows: [
+        ["Compteur d'eau (index)", or(water, DOTS.slice(0, 24))],
+        ["Compteur d'électricité (index)", or(electricity, DOTS.slice(0, 24))],
+      ],
+    },
+    { t: "h", text: "Clés et accès" },
+    {
+      t: "table",
+      rows: [
+        ["Nombre de clés remises", keys ? String(keys) : DOTS.slice(0, 24)],
+        ["Badges, télécommandes, cartes", DOTS.slice(0, 24)],
+      ],
+    },
+  );
+  for (const room of inventoryRooms.filter((r) => rooms.includes(r))) {
+    blocks.push(
+      { t: "h", text: room },
+      { t: "table", rows: (roomItems[room] ?? baseItems).map((item): [string, string] => [item, STATE_CHOICES]) },
+      { t: "p", text: `Observations : ${DOTS}` },
+    );
+  }
+  blocks.push({ t: "h", text: "Observations générales" }, { t: "p", text: remarks.trim() ? remarks.trim() : `${DOTS}\n${DOTS}\n${DOTS}` });
+  if (exit) {
+    blocks.push({ t: "h", text: "Retenues éventuelles sur le dépôt de garantie" }, { t: "p", text: `${DOTS}\n${DOTS}` });
+  }
+  blocks.push(
+    {
+      t: "p",
+      text: `Nom et prénom du bailleur ou de son représentant : ${or(landlord, DOTS.slice(0, 40))}\nNom et prénom du locataire : ${or(tenant, DOTS.slice(0, 40))}`,
+    },
+    {
+      t: "sign",
+      place: `Fait à ${or(place, "…")}, le ${longDate(date)}, en deux exemplaires originaux.`,
+      left: "Le bailleur ou son représentant",
+      right: "Le locataire",
+    },
+    {
+      t: "note",
+      text: "Document à remplir sur place, en présence des deux parties : cochez l'état de chaque élément, notez vos observations, puis signez. Chaque partie conserve un exemplaire. Modèle fourni à titre indicatif par ImmoTopia.",
+    },
+  );
+
+  return (
+    <Layout
+      doc={{ filename: `etat-des-lieux-${kind}-${slug(tenant)}.pdf`, blocks }}
+      banner={
+        <SoftwareBanner
+          text={t(
+            "Avec ImmoTopia : état des lieux sur téléphone, photos par pièce, signature électronique et PDF",
+            "With ImmoTopia: inventories on your phone, photos for each room, e-signature and PDF",
+          )}
+          linkLabel={t("Découvrir la fonction", "See the feature (in French)")}
+          href="/wiki/gestion-locative/etats-des-lieux"
+        />
+      }
+      upsell={t(
+        "Dans ImmoTopia, l'état des lieux de sortie se compare à celui d'entrée, pièce par pièce, pour repérer ce qui s'est dégradé.",
+        "In ImmoTopia, the move-out inventory is compared with the move-in one, room by room, to spot what has deteriorated.",
+      )}
+      form={
+        <>
+          <Card title={t("Le type d'état des lieux", "Type of inventory")}>
+            <Choice
+              wide
+              label={t("Type", "Type")}
+              value={kind}
+              onChange={setKind}
+              options={[
+                { value: "entree", label: t("Entrée", "Move-in") },
+                { value: "sortie", label: t("Sortie", "Move-out") },
+              ]}
+            />
+            <Text label={t("Date de l'état des lieux", "Inventory date")} type="date" value={date} onChange={setDate} />
+            <Text label={t("Ville de signature", "City of signing")} value={place} onChange={setPlace} />
+            {exit && (
+              <Text
+                wide
+                label={t("Date de l'état des lieux d'entrée", "Date of the move-in inventory")}
+                type="date"
+                value={entryDate}
+                onChange={setEntryDate}
+              />
+            )}
+          </Card>
+          <Card title={t("Les parties et le logement", "The parties and the property")}>
+            <Text
+              label={t("Bailleur ou représentant", "Landlord or representative")}
+              value={landlord}
+              onChange={setLandlord}
+              placeholder={t("Nom ou agence", "Name or agency")}
+            />
+            <Text label={t("Locataire", "Tenant")} value={tenant} onChange={setTenant} placeholder={t("Nom du locataire", "Tenant's name")} />
+            <Text label={t("Type de logement", "Type of property")} value={propertyType} onChange={setPropertyType} />
+            <Text
+              label={t("Adresse du logement", "Address of the property")}
+              value={address}
+              onChange={setAddress}
+              placeholder="Riviera 3, Cocody, Abidjan"
+            />
+          </Card>
+          <Card title={t("Les pièces à décrire", "Rooms to describe")}>
+            <MultiChoice
+              wide
+              label={t("Pièces et espaces", "Rooms and areas")}
+              values={rooms}
+              onChange={setRooms}
+              options={inventoryRooms.map((r) => ({ value: r, label: t(r, inventoryRoomEn[r]) }))}
+            />
+          </Card>
+          <Card title={t("Compteurs, clés et observations", "Meters, keys and remarks")}>
+            <Text
+              label={t("Compteur d'eau (index)", "Water meter (reading)")}
+              value={water}
+              onChange={setWater}
+              placeholder={t("À relever sur place", "To read on site")}
+            />
+            <Text
+              label={t("Compteur d'électricité (index)", "Electricity meter (reading)")}
+              value={electricity}
+              onChange={setElectricity}
+              placeholder={t("À relever sur place", "To read on site")}
+            />
+            <Num label={t("Clés remises", "Keys handed over")} value={keys} onChange={setKeys} suffix={t("clé(s)", "key(s)")} wide />
+            <Text
+              wide
+              label={t("Observations générales", "General remarks")}
+              value={remarks}
+              onChange={setRemarks}
+              placeholder={t("Laissez vide pour des lignes à remplir à la main", "Leave blank for lines to fill in by hand")}
+            />
           </Card>
         </>
       }

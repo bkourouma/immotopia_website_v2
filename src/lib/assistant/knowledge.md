@@ -429,11 +429,12 @@ La proposition commerciale précise que ces prix sont des hypothèses en cours d
 
 ## Outils gratuits du site
 
-Le site propose sept outils gratuits, utilisables sans inscription. Ils sont indicatifs et ne remplacent pas un conseil juridique ou fiscal.
+Le site propose huit outils gratuits, utilisables sans inscription. Ils sont indicatifs et ne remplacent pas un conseil juridique ou fiscal.
 
 - Générateur de quittance de loyer : https://immotopia.cloud/outils/quittance-de-loyer — une quittance en PDF, montant en lettres inclus ; rien n'est enregistré.
 - Modèle de bail d'habitation (Côte d'Ivoire) : https://immotopia.cloud/outils/bail-habitation — contrat de bail à usage d'habitation inspiré du Code de la construction et de l'habitat ivoirien, téléchargeable en PDF.
 - Modèle de bail commercial (OHADA) : https://immotopia.cloud/outils/bail-commercial — bail à usage professionnel fondé sur l'Acte uniforme OHADA relatif au droit commercial général, en PDF.
+- Modèle d'état des lieux (entrée et sortie) : https://immotopia.cloud/outils/etat-des-lieux — un modèle PDF à imprimer et à remplir sur place (pièces, éléments et état, compteurs, clés, observations, signatures). L'application ImmoTopia, elle, permet de faire l'état des lieux sur téléphone avec photos par pièce, signature électronique et PDF.
 - Calculateur de caution et d'avance : https://immotopia.cloud/outils/caution-et-avance — dépôt de garantie, avance sur loyer et frais d'agence à l'entrée dans un logement, avec les plafonds légaux ivoiriens.
 - Calculateur de rendement locatif : https://immotopia.cloud/outils/rendement-locatif — rendement brut, rendement net et cash-flow mensuel à partir du prix, des frais, travaux, loyer, charges, impôt foncier et vacance locative.
 - Calculateur de commission d'agence : https://immotopia.cloud/outils/commission-agence — commission de gestion HT, TVA et net reversé au propriétaire.
@@ -680,7 +681,7 @@ Oui : le premier mois d'abonnement est offert sur tous les packs, sans engagemen
 Aucune référence client d'ImmoTopia n'est publiée. Le mieux est de demander une démonstration sur un dossier réel.
 
 **Les outils gratuits du site sont-ils vraiment gratuits ?**
-Oui : quittance de loyer, modèles de bail d'habitation et de bail commercial, calculateurs de caution, de rendement, de commission d'agence et de répartition des charges de copropriété, sans inscription, sur https://immotopia.cloud/outils. Ils sont indicatifs et ne constituent pas un conseil juridique.
+Oui : quittance de loyer, modèles de bail d'habitation, de bail commercial et d'état des lieux, calculateurs de caution, de rendement, de commission d'agence et de répartition des charges de copropriété, sans inscription, sur https://immotopia.cloud/outils. Ils sont indicatifs et ne constituent pas un conseil juridique.
 
 **Comment réserver une démonstration ?**
 Sur https://immotopia.cloud/contact ou https://calendly.com/immotopia (30 minutes, sans engagement), par téléphone au +225 01 01 51 01 36, par WhatsApp (https://wa.me/2250101510136) ou par e-mail à support@immotopia.cloud.

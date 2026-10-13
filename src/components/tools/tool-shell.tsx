@@ -1,10 +1,11 @@
 import Link from "next/link";
 import { ArrowRight, ChevronRight, Lock } from "lucide-react";
 import type { ReactNode } from "react";
-import { getTools, type ToolMeta } from "@/lib/tools";
+import { getTools, toolJsonLd, type ToolMeta } from "@/lib/tools";
 import { localizeHref } from "@/lib/i18n";
 import { getI18n } from "@/lib/i18n-server";
 import { FinalCta } from "../final-cta";
+import { JsonLd } from "../json-ld";
 import { Navbar } from "../navbar";
 import { ToolIcon } from "./tool-ui";
 
@@ -16,6 +17,7 @@ export async function ToolShell({ tool, children, about }: { tool: ToolMeta; chi
     .slice(0, 3);
   return (
     <>
+      <JsonLd data={toolJsonLd(tool, locale)} />
       <Navbar />
       <main className="bg-paper">
         <section className="relative isolate overflow-hidden bg-ink-950 pt-32 pb-16 text-white">
@@ -36,6 +38,10 @@ export async function ToolShell({ tool, children, about }: { tool: ToolMeta; chi
               <Link href={localizeHref(locale, "/outils")} className="hover:text-white">
                 {tr("Outils gratuits", "Free tools")}
               </Link>
+              <ChevronRight className="size-3.5" />
+              <span aria-current="page" className="text-white/70">
+                {tool.title}
+              </span>
             </nav>
             <div className="mt-6 flex items-start gap-4">
               <span
@@ -48,7 +54,7 @@ export async function ToolShell({ tool, children, about }: { tool: ToolMeta; chi
                 <p className="text-xs font-bold tracking-[0.18em] uppercase" style={{ color: tool.accent }}>
                   {tool.category} · {tr("Gratuit, sans inscription", "Free, no sign-up")}
                 </p>
-                <h1 className="mt-2 font-display text-3xl leading-tight font-bold tracking-tight text-balance md:text-5xl">{tool.title}</h1>
+                <h1 className="mt-2 font-display text-3xl leading-tight font-bold tracking-tight text-balance md:text-5xl">{tool.h1}</h1>
                 <p className="mt-4 max-w-2xl text-white/65 md:text-lg">{tool.description}</p>
                 <p className="mt-4 inline-flex items-center gap-2 text-xs text-white/45">
                   <Lock className="size-3.5" />{" "}
@@ -65,8 +71,25 @@ export async function ToolShell({ tool, children, about }: { tool: ToolMeta; chi
         <section className="mx-auto max-w-6xl px-5 py-12 md:py-16">{children}</section>
 
         {about && (
-          <section className="mx-auto max-w-3xl px-5 pb-8 text-ink-900/75 [&_h2]:mt-8 [&_h2]:mb-3 [&_h2]:font-display [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:text-ink-900 [&_li]:ml-5 [&_li]:list-disc [&_p]:mb-3 [&_ul]:mb-3 [&_ul]:space-y-1">
+          <section className="mx-auto max-w-3xl px-5 pb-8 text-ink-900/75 [&_h2]:mt-8 [&_h2]:mb-3 [&_h2]:font-display [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:text-ink-900 [&_a]:font-medium [&_a]:text-brand-600 [&_a]:underline [&_h3]:mt-5 [&_h3]:mb-1.5 [&_h3]:font-display [&_h3]:text-lg [&_h3]:font-bold [&_h3]:text-ink-900 [&_li]:ml-5 [&_li]:list-disc [&_p]:mb-3 [&_ul]:mb-3 [&_ul]:space-y-1">
             {about}
+          </section>
+        )}
+
+        {tool.faq.length > 0 && (
+          <section
+            aria-labelledby="faq-outil"
+            className="mx-auto max-w-3xl px-5 pb-8 text-ink-900/75 [&_p]:mb-3"
+          >
+            <h2 id="faq-outil" className="mt-8 mb-3 font-display text-2xl font-bold text-ink-900">
+              {tr("Questions fréquentes", "Frequently asked questions")}
+            </h2>
+            {tool.faq.map((f) => (
+              <div key={f.q}>
+                <h3 className="mt-5 mb-1.5 font-display text-lg font-bold text-ink-900">{f.q}</h3>
+                <p>{f.a}</p>
+              </div>
+            ))}
           </section>
         )}
 

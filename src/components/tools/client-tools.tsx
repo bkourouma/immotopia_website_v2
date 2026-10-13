@@ -15,3 +15,4 @@ function Skeleton() {
 export const ReceiptGenerator = dynamic(() => import("./documents").then((m) => m.ReceiptGenerator), { ssr: false, loading: Skeleton });
 export const ResidentialLeaseGenerator = dynamic(() => import("./documents").then((m) => m.ResidentialLeaseGenerator), { ssr: false, loading: Skeleton });
 export const CommercialLeaseGenerator = dynamic(() => import("./documents").then((m) => m.CommercialLeaseGenerator), { ssr: false, loading: Skeleton });
+export const InventoryGenerator = dynamic(() => import("./documents").then((m) => m.InventoryGenerator), { ssr: false, loading: Skeleton });
