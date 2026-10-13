@@ -10,7 +10,7 @@ plusieurs étapes (règle posée dans AGENTS.md et CLAUDE.md).
   branche au lieu d'empiler des entrées : ce fichier décrit l'état présent, pas
   l'historique (l'historique, c'est `git log`).
 - Supprimer la section d'une branche une fois fusionnée dans
-  `master`.
+  `main`.
 - Dates absolues (`AAAA-MM-JJ`), jamais « hier ».
 - Chaque worktree a sa copie : en cas de conflit à la fusion, garder les deux
   sections de branche, elles sont indépendantes.
@@ -38,6 +38,24 @@ Pièges et décisions :
 
 - …
 ```
+
+---
+
+## Branche `ci/deploiement-auto` — 2026-10-13
+
+**État :** prêt à relire (PR vers `main`) ; la fusion déclenche le premier déploiement automatique
+**Dernier commit :** voir `git log`
+
+Fait :
+
+- Branche `main` créée à partir de `feat/accueil-audit-marketing` (qui contient toutes les autres branches), devenue la branche par défaut.
+- `ci.yml` : sur pull request, et appelé par `deploy.yml` ; `deploy.yml` : vérifications puis déploiement sur le runner `immotopia-site` du serveur alliance (rsync hors `.env`, `docker compose up -d --build`, contrôle de santé, retour arrière automatique). `deploy/install-runner.sh` installe le runner.
+- README, RUNBOOK et AGENTS.md à jour (retour arrière, secours manuel).
+
+Pièges et décisions :
+
+- La production tournait sur le code de la PR n°2 ; la PR n°3 (7 rôles sur l'accueil) n'était pas déployée : elle part au premier déploiement automatique.
+- Protection de branche : exiger une PR pour `main` est un réglage GitHub à faire par l'utilisateur.
 
 ---
 

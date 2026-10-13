@@ -113,11 +113,59 @@ c'est à l'utilisateur de le créer.
 
 ## Déploiement
 
-Un agent ne déploie qu'avec l'accord explicite de l'utilisateur, demandé dans
-la conversation avant chaque déploiement (voir AGENTS.md) ; les commandes
-`ssh alliance` et `scp … alliance:` ne sont plus bloquées par
-`guard.destructiveCommands` (décision du 2026-10-02). Procédure : [README.md](../../README.md),
-section « Déploiement ».
+Depuis le 2026-10-13, **fusionner une PR dans `main` déploie le site** (workflow
+`.github/workflows/deploy.yml`, détail dans [README.md](../../README.md), section « Déploiement »).
+Un agent ne fusionne dans `main` qu'avec l'accord explicite de l'utilisateur, puisque la fusion met le
+site en production (voir AGENTS.md). Rien ne se pousse directement sur `main` : tout passe par une PR
+dont la CI (`ci.yml`) est verte.
+
+Suivre un déploiement : `gh run list --repo bkourouma/immotopia_website_v2 --workflow Déploiement`
+puis `gh run watch <id>`. Vérifier le runner :
+`gh api repos/bkourouma/immotopia_website_v2/actions/runners` (statut `online`, label `immotopia-site`).
+
+### Retour arrière
+
+Avant chaque déploiement, le job garde l'image en service sous `immotopia-site:avant-ci-<date>-<commit>`
+(les 5 dernières sont conservées ; `docker image ls immotopia-site` sur le serveur). Si le contrôle de
+santé échoue, le job rétablit seul l'image précédente. Pour revenir en arrière après coup, deux voies :
+
+- **Par git (conseillé, garde `main` fidèle à la production)** : `git revert -m 1 <fusion>` sur une
+  branche, PR, fusion ; le déploiement automatique republie l'ancienne version.
+- **Immédiat, sur le serveur** (`ssh alliance`, une seule connexion) :
+
+  ```bash
+  cd /var/www/immotopia-site
+  docker tag immotopia-site:avant-ci-<date>-<commit> immotopia-site:latest
+  docker compose up -d --no-build
+  curl -fsS http://127.0.0.1:3023/robots.txt
+  ```
+
+  Le prochain déploiement automatique repart du code de `main` : revenir aussi sur `main` (revert) si
+  l'ancienne version doit rester.
+
+### Déploiement manuel de secours
+
+À n'utiliser que si le runner ou GitHub Actions est indisponible, avec l'accord explicite de l'utilisateur.
+Depuis un clone à jour de `main` (même chose que le job, sans toucher au `.env` du serveur) :
+
+```bash
+tar --exclude=node_modules --exclude=.next --exclude=.git --exclude='.env*' -czf /tmp/site.tgz .
+scp /tmp/site.tgz alliance:/var/www/immotopia-site/
+ssh alliance 'cd /var/www/immotopia-site && docker tag immotopia-site:latest immotopia-site:avant-manuel-$(date +%Y%m%d-%H%M) && tar -xzf site.tgz && rm site.tgz && docker compose up -d --build && curl -fsS http://127.0.0.1:3023/robots.txt'
+```
+
+(`tar` ajoute et écrase mais ne supprime pas les fichiers retirés du dépôt ; sans conséquence pour un
+secours.) Le `.env` de production n'est jamais envoyé ni modifié. Regrouper les commandes en une seule
+connexion SSH : sshd coupe les reconnexions répétées.
+
+### Runner auto-hébergé
+
+Service `actions.runner.bkourouma-immotopia_website_v2.immotopia-site-runner`, dossier
+`~/actions-runner-immotopia-site`, utilisateur `deployer` (propriétaire de `/var/www/immotopia-site`,
+membre du groupe `docker`), label `immotopia-site`. Hors ligne : `sudo systemctl status` puis
+`sudo systemctl restart` sur ce service. Réinstallation : `deploy/install-runner.sh` (la commande avec un
+jeton frais est en tête de fichier). Les workflows de pull request tournent sur les machines GitHub
+(`ubuntu-latest`), jamais sur ce runner.
 
 ## Dépannage
 

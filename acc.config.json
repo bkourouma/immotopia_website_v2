@@ -36,7 +36,7 @@
     "web": 3000
   },
   "git": {
-    "mainBranch": "master",
+    "mainBranch": "main",
     "protectedBranches": [
       "main",
       "master"

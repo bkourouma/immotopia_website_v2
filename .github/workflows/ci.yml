@@ -1,20 +1,26 @@
 # Intégration continue du site vitrine ImmoTopia, posée par acc-standard (seed :
-# propriété du projet après création), adaptée le 2026-09-27.
+# propriété du projet après création), adaptée le 2026-09-27 puis le 2026-10-13.
 # Aucun secret : les routes API lisent OPENROUTER_* et N8N_WEBHOOK_URL à
 # l'exécution, le build n'en a pas besoin. Pas de tests automatisés dans ce
 # projet (pas de script « test ») : types, lint, contrôle du comparatif et build.
-# Dépôt local sans remote au 2026-09-27 : ce fichier ne tourne qu'une fois le
-# dépôt poussé sur GitHub.
+#
+# Ce workflow tourne sur chaque pull request, et il est aussi appelé par
+# deploy.yml (workflow_call) à chaque poussée sur main : les vérifications
+# passent donc toujours avant un déploiement, sans être jouées deux fois.
 name: CI
 
 on:
-  push:
-    branches: [master]
   pull_request:
+  workflow_call:
 
+# Une PR mise à jour annule sa vérification précédente. Appelé par deploy.yml,
+# le workflow ne s'annule jamais (la concurrence du déploiement s'en charge).
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+  group: ci-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+permissions:
+  contents: read
 
 jobs:
   verify:
