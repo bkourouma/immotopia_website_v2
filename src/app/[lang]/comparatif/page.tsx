@@ -10,12 +10,12 @@ export async function generateMetadata({ params }: PageProps<"/[lang]/comparatif
   if (!hasLocale(lang)) return {};
   const t = translator(lang);
   const title = t(
-    "Comparatif — ImmoTopia face à ChezvousBO, Logestimmo et WIMMO | ImmoTopia",
-    "Comparison — ImmoTopia vs ChezvousBO, Logestimmo and WIMMO | ImmoTopia",
+    "Comparatif ImmoTopia : ChezvousBO, Logestimmo et WIMMO",
+    "Comparison: ImmoTopia vs ChezvousBO, Logestimmo, WIMMO",
   );
   const description = t(
-    `${rows.length} fonctionnalités comparées domaine par domaine : gestion locative, syndic, finance, chantiers, CRM et communication. Sources publiques des éditeurs, consultées en septembre 2026.`,
-    `${rows.length} features compared domain by domain: property management, condominium management, finance, construction sites, CRM and communication. Vendors' public sources, consulted in September 2026.`,
+    `${rows.length} fonctionnalités comparées par domaine : gestion locative, syndic, finance, chantiers, CRM. Sources publiques des éditeurs, septembre 2026.`,
+    `${rows.length} features compared by domain: property management, condo management, finance, construction, CRM. Vendors' public sources, September 2026.`,
   );
   return {
     title,

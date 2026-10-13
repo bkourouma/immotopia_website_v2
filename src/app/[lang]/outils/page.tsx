@@ -11,12 +11,12 @@ export async function generateMetadata({ params }: PageProps<"/[lang]/outils">):
   if (!hasLocale(lang)) return {};
   const t = translator(lang);
   const title = t(
-    "Outils gratuits pour la gestion locative en Côte d'Ivoire | ImmoTopia",
-    "Free property management tools for Côte d'Ivoire | ImmoTopia",
+    "Outils gratuits de gestion locative en Côte d'Ivoire",
+    "Free property management tools for Côte d'Ivoire",
   );
   const description = t(
-    "Quittance de loyer, bail d'habitation, bail commercial OHADA, caution, rendement locatif, commission d'agence et charges de copropriété : des outils gratuits, sans inscription.",
-    "Rent receipts, residential leases, OHADA commercial leases, deposits, rental yield, agency commission and condominium charges: free tools, no sign-up required.",
+    "Quittance de loyer, bail d'habitation, bail commercial OHADA, caution, rendement locatif, commission, charges de copropriété : outils gratuits.",
+    "Rent receipts, residential leases, OHADA commercial leases, deposits, rental yield, agency commission, condo charges: free tools, no sign-up.",
   );
   return {
     title,

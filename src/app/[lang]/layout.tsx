@@ -26,10 +26,11 @@ export async function generateMetadata({ params }: LayoutProps<"/[lang]">): Prom
   return {
     metadataBase: new URL(SITE_URL),
     alternates: alternates(lang, "/"),
-    title: t("ImmoTopia — Logiciel immobilier pour agences et syndics en Côte d'Ivoire", "ImmoTopia — Real estate software for agencies and condominium managers in Côte d'Ivoire"),
+    // Titre ≤ 60 caractères et description ≤ 155 : au-delà, Google tronque l'extrait dans les résultats
+    title: t("ImmoTopia, logiciel immobilier pour agences en Côte d'Ivoire", "ImmoTopia, real estate software for Côte d'Ivoire agencies"),
     description: t(
-      "Gestion locative, syndic de copropriété, CRM, portails propriétaire et locataire, rappels e-mail et WhatsApp : ImmoTopia réunit votre agence sur une seule plateforme, à Abidjan.",
-      "Property management, condominium management, CRM, owner and tenant portals, e-mail and WhatsApp reminders: ImmoTopia brings your whole agency together on one platform, in Abidjan.",
+      "Gestion locative, syndic, CRM et portails propriétaire/locataire sur une seule plateforme, à Abidjan. Rappels e-mail et WhatsApp inclus.",
+      "Property management, condo management, CRM and owner/tenant portals on one platform, in Abidjan. E-mail and WhatsApp reminders included.",
     ),
     openGraph: {
       title: t("ImmoTopia — Logiciel immobilier pour agences et syndics", "ImmoTopia — Real estate software for agencies and condominium managers"),

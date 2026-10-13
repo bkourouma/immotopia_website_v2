@@ -97,8 +97,10 @@ export function Logo({ className = "", onLight = false, full = false }: { classN
     : { src: onLight ? "/images/logo/logo-immotopia-nom.png" : "/images/logo/logo-immotopia-nom-inverse.png", width: 953, height: 189, cls: "h-6 w-auto shrink-0" };
   return (
     <span className={`inline-flex shrink-0 items-center gap-2.5 ${className}`}>
-      <Image src="/images/logo/icone.png" alt="" width={32} height={32} className={`shrink-0 ${full ? "size-12" : "size-8"}`} priority />
-      <Image src={name.src} alt="ImmoTopia" width={name.width} height={name.height} className={name.cls} priority={!full} />
+      {/* L'icône porte le texte alternatif « ImmoTopia » ; le nom écrit à côté le répète, donc masqué aux lecteurs d'écran
+          (aria-hidden) pour ne pas lire deux fois la marque. Aucune image sans alt, ce que signalent les audits SEO. */}
+      <Image src="/images/logo/icone.png" alt="ImmoTopia" width={32} height={32} className={`shrink-0 ${full ? "size-12" : "size-8"}`} priority />
+      <Image src={name.src} alt="ImmoTopia" aria-hidden width={name.width} height={name.height} className={name.cls} priority={!full} />
     </span>
   );
 }

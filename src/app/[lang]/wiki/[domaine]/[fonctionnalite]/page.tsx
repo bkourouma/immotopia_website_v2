@@ -40,6 +40,8 @@ export async function generateMetadata({ params }: PageProps<"/[lang]/wiki/[doma
     description: feature.summary,
     alternates: { canonical: url },
     openGraph: { title, description: feature.summary, url, locale: "fr_CI", type: "article" },
+    // Hors sitemap (src/app/sitemap.ts) mais toujours indexable : on ne la passe pas en noindex
+    ...(domaine === "administration-plateforme" ? { robots: { index: true } } : {}),
   };
 }
 
