@@ -3,12 +3,13 @@
 import { AnimatePresence, motion, type PanInfo } from "framer-motion";
 import Image from "next/image";
 import { ArrowRight, ChevronLeft, ChevronRight, Play } from "lucide-react";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { Fragment, useCallback, useEffect, useRef, useState } from "react";
 import { heroCards, type HeroCard } from "@/lib/content";
 import { goTo } from "@/lib/nav";
 import { useI18n } from "./locale-provider";
 import { Mockup } from "./mockups";
 import { useDemo } from "./providers";
+import { SmartLink } from "./smart-link";
 import { MagneticButton } from "./ui";
 
 // Même nombre de cartes dans chaque langue
@@ -299,6 +300,25 @@ function Card({ card, active, near }: { card: HeroCard; active: boolean; near: b
             {card.cta}
             <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
           </button>
+          {card.links && (
+            <p className="mt-3 text-sm text-white/75">
+              {card.links.map((l, i) => (
+                <Fragment key={l.href}>
+                  {i > 0 && <span aria-hidden> · </span>}
+                  <SmartLink
+                    href={l.href}
+                    tabIndex={active ? 0 : -1}
+                    onClick={(e) => {
+                      if (!active) e.preventDefault();
+                    }}
+                    className="underline decoration-white/40 underline-offset-4 hover:text-white hover:decoration-white"
+                  >
+                    {l.label}
+                  </SmartLink>
+                </Fragment>
+              ))}
+            </p>
+          )}
         </div>
       </div>
 

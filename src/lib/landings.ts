@@ -4,10 +4,27 @@
  * en cours de déploiement (en le disant, sans date) ; jamais ce qui n'existe pas.
  */
 
+import { fcfa } from "./format";
 import { frenchOnlyPaths } from "./french-only";
+import { packs, promoteurPrice, type PackId } from "./pricing";
 
 export type LandingItem = { title: string; text: string };
-export type LandingSection = { title: string; intro?: string; items?: LandingItem[]; bullets?: string[]; note?: string };
+/** Tableau comparatif : la première colonne de chaque ligne sert d'en-tête de ligne. */
+export type LandingTable = { caption: string; head: string[]; rows: string[][] };
+/**
+ * Dans les textes (intro, paragraphes, cartes, puces, cellules, note, réponses de FAQ), « [texte](/chemin) » devient
+ * un lien interne dans la langue courante (voir src/components/inline-links.tsx).
+ */
+export type LandingSection = {
+  title: string;
+  intro?: string;
+  /** Paragraphes de texte courant, avant les cartes. */
+  paragraphs?: string[];
+  items?: LandingItem[];
+  bullets?: string[];
+  table?: LandingTable;
+  note?: string;
+};
 export type Landing = {
   slug: string;
   metaTitle: string;
@@ -19,6 +36,14 @@ export type Landing = {
   faq: { q: string; a: string }[];
   related: string[];
 };
+
+// Prix et capacités : repris de pricing.ts (source de vérité), jamais recopiés dans les textes.
+const pack = (id: PackId) => packs.find((p) => p.id === id)!;
+const agence = pack("agence");
+const promoteur = pack("promoteur");
+const integre = pack("integre");
+const chantierSup = promoteurPrice(3, 150) - promoteurPrice(2, 150); // un chantier actif de plus
+const blocLots = promoteurPrice(2, 160) - promoteurPrice(2, 150); // un bloc de 10 lots de plus
 
 export const landings: Landing[] = [
   {
@@ -91,7 +116,7 @@ export const landings: Landing[] = [
       {
         title: "Un seul outil pour tous vos métiers",
         items: [
-          { title: "Transaction et CRM", text: "Contacts, pipeline de ventes et de locations, visites, rapprochement entre la demande d'un client et les biens disponibles." },
+          { title: "Transaction et CRM", text: "Un [logiciel CRM immobilier](/crm-immobilier-cote-divoire) complet : contacts, pipeline de ventes et de locations, visites, rapprochement entre la demande d'un client et les biens disponibles." },
           { title: "Biens et annonces", text: "Fiches par type de bien, médias, mandats, score de qualité de l'annonce et publication vers votre site grâce à l'API d'annonces." },
           { title: "Gestion locative", text: "Baux, échéancier, paiements, pénalités, cautions, quittances et relevés de gérance." },
           { title: "Syndic de copropriété", text: "Lots et tantièmes, budgets, appels de charges, recouvrement, assemblées générales et comptabilité de copropriété." },
@@ -257,39 +282,250 @@ export const landings: Landing[] = [
   },
   {
     slug: "crm-immobilier-cote-divoire",
-    metaTitle: "CRM immobilier en Côte d'Ivoire | ImmoTopia",
+    metaTitle: "Logiciel CRM immobilier pour agences à Abidjan | ImmoTopia",
     metaDescription:
-      "CRM immobilier en Côte d'Ivoire : contacts, pipeline de ventes et de locations, visites, rapprochement client et biens, activités et tableau de bord commercial, intégré à l'ERP ImmoTopia.",
+      "Logiciel CRM immobilier pour agences et promoteurs en Côte d'Ivoire : contacts, pipeline, visites, mandats, offres, relances. Essai offert.",
     eyebrow: "CRM immobilier",
-    h1: "CRM immobilier en Côte d'Ivoire : prospects, visites et ventes centralisés",
+    h1: "Logiciel CRM immobilier pour agences et promoteurs en Côte d'Ivoire",
     intro:
-      "Chaque appel, chaque visite, chaque affaire au même endroit. Le CRM d'ImmoTopia est relié à vos biens et à votre gestion locative : un prospect devenu locataire ou propriétaire ne se ressaisit jamais.",
+      "Chaque appel, chaque visite, chaque affaire au même endroit. ImmoTopia est un logiciel CRM immobilier conçu à Abidjan pour les agences et les promoteurs : il remplace le fichier Excel et le carnet de notes par un pipeline partagé par toute l'équipe, relié à vos biens et à votre gestion locative. Un prospect devenu locataire ou propriétaire ne se ressaisit jamais.",
     sections: [
+      {
+        title: "Pourquoi un CRM immobilier plutôt qu'un fichier Excel ?",
+        intro:
+          "Un tableur suffit tant que l'on suit quelques contacts. Dès que plusieurs agents appellent, visitent et négocient en parallèle, les mêmes problèmes reviennent.",
+        items: [
+          { title: "Des prospects qui se perdent", text: "La prochaine relance n'existe que dans la mémoire de l'agent ou sur un bout de papier. Un client qui a visité deux fois n'est plus rappelé, et personne ne s'en aperçoit." },
+          { title: "Un historique éparpillé", text: "Appels, messages WhatsApp, visites et promesses se retrouvent dans des téléphones différents. Quand un agent s'absente, son dossier part avec lui." },
+          { title: "Des demandes et des biens qui ne se rencontrent pas", text: "Le client cherche un trois-pièces dans un quartier précis, un bien correspondant est disponible, mais personne ne fait le lien : la comparaison se fait de tête." },
+        ],
+        note: "Le point par point avec Excel est détaillé dans [ImmoTopia vs Excel](/immotopia-vs-excel).",
+      },
       {
         title: "Ce que fait le CRM",
         items: [
-          { title: "Contacts complets", text: "Prospects, clients, propriétaires, locataires, acquéreurs ; rôles multiples, étiquettes, zones recherchées et notes." },
-          { title: "Pipeline par étapes", text: "Nouveau, qualifié, visite, négociation, gagné ou perdu, pour la vente comme pour la location, avec l'entonnoir valorisé." },
-          { title: "Rapprochement", text: "ImmoTopia met en face le besoin d'un client et les biens disponibles." },
+          { title: "Contacts complets", text: "Prospects, clients, propriétaires, locataires, acquéreurs ; rôles multiples, étiquettes, zones recherchées et notes. Un [fichier unique](/wiki/crm-et-ventes/contacts-prospects) pour toute l'agence." },
+          { title: "Pipeline par étapes", text: "Nouveau, qualifié, visite, négociation, gagné ou perdu, pour la vente comme pour la location, avec l'entonnoir valorisé et le collaborateur responsable de chaque [affaire](/wiki/crm-et-ventes/affaires-et-activites)." },
+          { title: "Rapprochement", text: "ImmoTopia met en face le besoin d'un client (budget, zone, nombre de pièces, surface) et les biens disponibles, avec un score de [correspondance expliqué](/wiki/crm-et-ventes/rapprochement-de-biens)." },
           { title: "Visites et agenda", text: "Rendez-vous et visites avec les collaborateurs affectés, en vue calendrier." },
-          { title: "Activités", text: "Appels, tâches et notes rattachés aux contacts et aux affaires : l'historique suit le client." },
-          { title: "Tableau de bord commercial", text: "Affaires par étape, contacts par catégorie, recherches enregistrées et export CSV ou Excel." },
+          { title: "Activités", text: "Appels, e-mails, WhatsApp, tâches et notes rattachés aux contacts et aux affaires : l'historique suit le client, même quand l'agent change." },
+          { title: "Tableau de bord commercial", text: "Nouveaux prospects, conversions, affaires par étape, relances en retard, recherches enregistrées et export CSV, dans le [tableau de bord CRM](/wiki/crm-et-ventes/calendrier-et-tableau-de-bord-crm)." },
         ],
+      },
+      {
+        title: "Un CRM pour agence ou pour promoteur ?",
+        intro:
+          "Les deux métiers vendent des biens, mais pas de la même façon. ImmoTopia propose un CRM commun et laisse chaque métier activer ce dont il a besoin.",
+        items: [
+          {
+            title: "Agence de transaction et de gestion",
+            text: `Mandats de gestion et de vente, rapprochement entre les demandes et le portefeuille, visites planifiées, annonces publiées vers votre site grâce à l'API d'annonces, puis passage du bien trouvé au bail. Le CRM est inclus dans le pack Agence, à partir de ${fcfa(agence.monthly)} HT par mois.`,
+          },
+          {
+            title: "Promoteur",
+            text: "Un programme se vend pendant des mois et se construit en parallèle. Le CRM suit les prospects, les visites, les offres et les compromis ; le module Promoteur suit les lots, le budget et l'avancement du chantier. Voir le [CRM pour promoteur immobilier](/crm-promoteur-immobilier-cote-divoire).",
+          },
+          {
+            title: "Les deux à la fois",
+            text: "Un groupe qui construit, vend et gère ses biens garde un seul fichier de contacts et un seul parc de biens avec le pack Opérateur intégré.",
+          },
+        ],
+      },
+      {
+        title: "Mandats, offres et compromis dans le même outil",
+        intro:
+          "La vente ne s'arrête pas à la visite. Depuis la fiche d'un mandat, le CRM accompagne l'affaire jusqu'à l'acte, sans ressaisie ni fichier parallèle.",
+        items: [
+          { title: "Mandats de vente", text: "Prix demandé, prix plancher, commission et négociateur ; un numéro par année et un seul mandat actif par bien. Détail des [mandats de vente](/wiki/crm-et-ventes/mandats-de-vente)." },
+          { title: "Offres d'achat", text: "Enregistrez les offres des acquéreurs, répondez par une contre-offre, acceptez ou refusez avec un motif. Chaque étape met à jour le statut du bien pour toute l'équipe." },
+          { title: "Compromis de vente", text: "Prix, dépôt, notaire et date prévue de l'acte, avec les conditions suspensives à lever (l'obtention d'un prêt, par exemple) avant de conclure. Voir [offres et compromis](/wiki/crm-et-ventes/offres-et-compromis-de-vente)." },
+          { title: "Conclusion à l'acte", text: "Le bien passe en vendu, le mandat se termine, l'affaire est gagnée et la commission de vente est créée automatiquement." },
+          { title: "Commissions", text: "Montant dû, règlements encaissés en une ou plusieurs fois et reste à percevoir. Voir les [commissions et le tableau des ventes](/wiki/crm-et-ventes/commissions-de-vente)." },
+          { title: "Un pas vers la gestion", text: "Le bien loué ou le propriétaire signé rejoint la [gestion locative](/gestion-locative-cote-divoire) avec ses contacts et ses documents, sans nouvelle saisie." },
+        ],
+      },
+      {
+        title: "Relances par e-mail et WhatsApp",
+        intro:
+          "Un prospect non relancé est un prospect perdu. Le CRM garde la date de la prochaine action et la fait apparaître dans le calendrier et dans le tableau de bord, y compris quand elle est en retard.",
+        items: [
+          { title: "Une relance datée à chaque échange", text: "Après un appel ou une visite, vous indiquez la date de la prochaine action. Vous pouvez ensuite la reprogrammer ou la marquer comme faite." },
+          { title: "Notifications par e-mail et WhatsApp", text: "Parmi les notifications automatiques de l'application, celles du CRM peuvent partir par e-mail et par WhatsApp. Vous choisissez lesquelles sont actives et vous adaptez leur texte. Voir les [notifications e-mail et WhatsApp](/wiki/communication-et-documents/notifications-email-whatsapp)." },
+          { title: "Le groupe WhatsApp de l'agence", text: "Invitez en une fois vos contacts dans le groupe WhatsApp de l'agence et diffusez-y vos annonces." },
+          { title: "Campagnes", text: "Vos listes de contacts reçoivent une campagne par e-mail, et par WhatsApp quand le contact a un numéro et a donné son accord." },
+        ],
+        note: "Les messages WhatsApp ne partent qu'aux contacts qui ont donné leur accord, et leur envoi suppose que le service WhatsApp soit configuré pour votre agence.",
+      },
+      {
+        title: "ImmoTopia, Excel ou CRM généraliste : que choisir ?",
+        intro: "Trois options reviennent dans les agences et chez les promoteurs. Voici leurs différences sur ce qui compte au quotidien.",
+        table: {
+          caption: "Comparaison d'ImmoTopia, d'Excel et d'un CRM généraliste pour un usage immobilier",
+          head: ["", "Excel", "CRM généraliste", "ImmoTopia"],
+          rows: [
+            ["Contacts partagés par l'équipe", "Un fichier par personne, des copies qui divergent", "Oui, base commune", "Oui, un seul fichier pour toute l'agence"],
+            ["Biens et mandats", "Colonnes à tenir à la main", "Souvent à construire avec des champs personnalisés", "Fiches par type de bien, mandats de gestion et de vente"],
+            ["Demande d'un client et biens disponibles", "Recherche manuelle", "Rarement fourni d'origine", "Rapprochement avec un score expliqué"],
+            ["Offres, compromis, commissions", "Dans des fichiers séparés", "À paramétrer", "Intégrés à la fiche du mandat"],
+            ["Relances", "À la main", "E-mail en général, WhatsApp selon l'outil", "Relances datées, notifications e-mail et WhatsApp"],
+            ["Après la vente ou la location", "Un autre fichier", "Un autre logiciel", "Gestion locative, syndic et chantiers dans la même base"],
+            ["Traçabilité", "Une cellule écrasée ne laisse aucune trace", "Historique des modifications, selon l'outil", "Journal d'audit des actions sensibles"],
+            ["Prix", "Gratuit", "Abonnement, variable selon l'outil", `Pack Agence à partir de ${fcfa(agence.monthly)} HT par mois`],
+          ],
+        },
+        note: "La colonne « CRM généraliste » décrit des tendances d'ensemble, à vérifier outil par outil. Pour aller plus loin : [ImmoTopia vs Excel](/immotopia-vs-excel) et le [comparatif avec d'autres logiciels immobiliers](/comparatif).",
       },
       {
         title: "Relié au reste de l'agence",
         bullets: [
           "Le bien trouvé devient un bail en quelques clics.",
-          "Le nouveau contact peut être invité automatiquement dans le groupe WhatsApp de l'agence.",
-          "Les rappels de rendez-vous partent par e-mail ou WhatsApp.",
+          "Les contacts qui ont accepté WhatsApp peuvent être invités dans le groupe WhatsApp de l'agence.",
+          "Les résultats d'une recherche de contacts s'exportent en CSV.",
+          "Les annonces publiées alimentent votre site grâce à l'[API d'annonces](/logiciel-annonces-immobilieres-cote-divoire).",
+        ],
+      },
+      {
+        title: "Combien coûte le CRM ?",
+        paragraphs: [
+          `Le CRM est inclus dans le pack Agence, à partir de ${fcfa(agence.monthly)} HT par mois pour ${agence.included.toLowerCase()}, et dans le pack Promoteur (${fcfa(promoteur.monthly)} HT par mois), qui y ajoute les chantiers. Le premier mois est offert, sans engagement, et les collaborateurs ne sont pas facturés à l'utilisateur. Voir [les tarifs et le simulateur](/tarifs).`,
         ],
       },
     ],
     faq: [
-      { q: "Le CRM est-il inclus dans le pack Agence ?", a: "Oui, le CRM, les mandats, les annonces et les visites font partie du pack Agence." },
-      { q: "Chaque agent voit-il tous les contacts ?", a: "Les rôles et permissions définissent ce que chaque collaborateur voit et modifie." },
+      {
+        q: "Combien coûte un CRM immobilier avec ImmoTopia ?",
+        a: `Le CRM est inclus dans le pack Agence, à partir de ${fcfa(agence.monthly)} HT par mois, et dans le pack Promoteur, à ${fcfa(promoteur.monthly)} HT par mois avec les chantiers. Les prix sont hors taxes, sans commission sur vos loyers ni sur le prix de vente. Détail et simulateur sur la page [Tarifs](/tarifs).`,
+      },
+      {
+        q: "Existe-t-il un essai gratuit ou une démonstration ?",
+        a: "Le premier mois d'abonnement est offert, sans engagement, sur tous les packs. Une démonstration gratuite de 30 minutes permet aussi de voir le CRM appliqué à votre portefeuille.",
+      },
+      {
+        q: "Puis-je reprendre mon fichier de contacts Excel ?",
+        a: `Vous pouvez saisir vous-même vos contacts, sans frais de prestation. La mise en route accompagnée, facultative (${fcfa(agence.setup)} HT pour le pack Agence, facturés une fois), comprend une reprise préparée de vos données dans un périmètre défini. Pour votre fichier précis, l'équipe l'étudie en démonstration.`,
+      },
+      {
+        q: "Combien d'utilisateurs peut-on créer ?",
+        a: "Le prix d'un pack dépend de sa capacité (logements sous mandat pour l'agence, chantiers et lots pour le promoteur), pas du nombre de comptes : les collaborateurs ne sont pas facturés à l'utilisateur.",
+      },
+      {
+        q: "Peut-on travailler à plusieurs agents sur les mêmes contacts ?",
+        a: "Oui. Tous les collaborateurs partagent le même fichier de contacts, chaque affaire a un collaborateur responsable et les listes se filtrent par collaborateur. Les rôles et permissions (administrateur, manager, agent, comptable) définissent ce que chacun voit et modifie. Si un collègue a modifié une affaire entre-temps, vous en êtes averti au lieu d'écraser son travail.",
+      },
+      {
+        q: "Mes données sont-elles séparées de celles des autres agences ?",
+        a: "Oui : les données de chaque organisation sont strictement séparées de celles des autres, et les actions sensibles sont enregistrées dans un journal d'audit. Vos listes de contacts s'exportent en CSV. Pour une exigence précise de conservation ou d'hébergement, posez la question lors de la démonstration.",
+      },
     ],
-    related: ["logiciel-annonces-immobilieres-cote-divoire", "tableaux-de-bord-kpi-immobilier-cote-divoire", "logiciel-immobilier-cote-divoire"],
+    related: ["crm-promoteur-immobilier-cote-divoire", "logiciel-annonces-immobilieres-cote-divoire", "immotopia-vs-excel"],
+  },
+  {
+    slug: "crm-promoteur-immobilier-cote-divoire",
+    metaTitle: "CRM promoteur immobilier : prospects et lots | ImmoTopia",
+    metaDescription:
+      "CRM pour promoteur immobilier en Côte d'Ivoire : prospects, offres, compromis, puis lots, budget et avancement du chantier dans ImmoTopia.",
+    eyebrow: "CRM promoteur",
+    h1: "CRM pour promoteur immobilier en Côte d'Ivoire",
+    intro:
+      "Vendre un programme, c'est suivre des dizaines de prospects pendant que le chantier avance, coûte et se règle. ImmoTopia relie les deux dans un seul logiciel : le CRM suit les prospects, les visites, les offres et les compromis ; le module Promoteur suit les lots, le coût de revient, le budget et l'avancement.",
+    sections: [
+      {
+        title: "Pourquoi Excel ne suffit plus pour suivre un programme",
+        intro: "Un tableur convient pour une première opération, pas pour plusieurs programmes.",
+        items: [
+          { title: "Des prospects dans tous les téléphones", text: "Appels, WhatsApp, visites : sans fichier commun, personne ne sait qui a été rappelé." },
+          { title: "Un budget découvert trop tard", text: "Avec des dépenses saisies en fin de mois, un dépassement se voit après coup." },
+          { title: "Le commercial et le chantier séparés", text: "Ventes et travaux vivent dans des fichiers différents : la direction recoupe à la main." },
+        ],
+        note: "La comparaison complète est dans [ImmoTopia vs Excel](/immotopia-vs-excel).",
+      },
+      {
+        title: "Suivre prospects, visites, offres et compromis",
+        intro: "Le CRM du pack Promoteur est le même [logiciel CRM immobilier](/crm-immobilier-cote-divoire) que celui des agences.",
+        items: [
+          { title: "Prospects et contacts", text: "Une fiche par contact avec ses rôles, ses étiquettes, les zones et le budget recherchés, et tout l'historique des échanges." },
+          { title: "Pipeline des affaires", text: "Nouveau, qualifié, visite, négociation, puis gagné ou perdu, avec le collaborateur responsable et l'entonnoir valorisé." },
+          { title: "Visites et relances", text: "Visites et relances datées dans un calendrier commun, avec les relances en retard dans le tableau de bord." },
+          { title: "Offres d'achat", text: "Offres, contre-offres, acceptation ou refus avec motif : chaque étape est datée. Voir [offres et compromis](/wiki/crm-et-ventes/offres-et-compromis-de-vente)." },
+          { title: "Compromis de vente", text: "Prix, dépôt, notaire, date prévue de l'acte et conditions suspensives à lever avant de conclure la vente." },
+        ],
+      },
+      {
+        title: "Du commercial au chantier : lots, coût de revient, budget, avancement",
+        intro: "Le module Promoteur prolonge le CRM côté construction. Chaque chantier se découpe en lots, se budgète et se suit jusqu'à la clôture.",
+        items: [
+          { title: "Lots et coût de revient", text: "Découpez le chantier en lots, répartissez le coût réel à la surface ou par quote-part et connaissez le coût de revient de chaque lot. Voir [lots et coût de revient](/wiki/promotion-et-chantiers/lots-et-cout-de-revient)." },
+          { title: "Budget et avenants", text: "Budget prévisionnel poste par poste, validé comme référence, puis révisé par des avenants datés et motivés. Voir le [budget de chantier](/wiki/promotion-et-chantiers/budget-de-chantier)." },
+          { title: "Avancement et alertes", text: "Pourcentage d'avancement physique saisi à chaque point, courbe dans le temps et alertes quand les dépenses engagées dépassent un seuil du budget. Voir [avancement et tableau de bord](/wiki/promotion-et-chantiers/avancement-et-tableau-de-bord)." },
+          { title: "Dépenses et pièces de caisse", text: "Dépenses suivies par poste, pièces de caisse émises, validées et imprimables. Voir les [dépenses de chantier](/wiki/promotion-et-chantiers/depenses-de-chantier)." },
+          { title: "Stock, main-d'œuvre et tâcherons", text: "Réceptions et sorties de matériaux vers les chantiers, salaires, marchés et situations de travaux. Voir le [stock de matériaux](/wiki/promotion-et-chantiers/stock-de-materiaux) et les [tâcherons](/wiki/promotion-et-chantiers/tacherons)." },
+          { title: "Retenues de garantie", text: "Retenue d'un pourcentage sur les factures fournisseurs et les situations de tâcherons, suivi par chantier, libération à l'échéance. Voir les [retenues de garantie](/wiki/promotion-et-chantiers/retenues-de-garantie)." },
+        ],
+        note: "En fin de chantier, chaque lot achevé peut être transféré au patrimoine avec son coût de revient définitif, sans ressaisie.",
+      },
+      {
+        title: "Le tableau de bord du promoteur",
+        paragraphs: [
+          "Le [tableau de bord de chantier](/wiki/promotion-et-chantiers/avancement-et-tableau-de-bord) montre, chantier par chantier, le budget, les montants engagés, le coût réel, l'avancement et l'écart. Il peut se limiter aux chantiers en dépassement.",
+          "Côté ventes, le tableau de bord CRM résume les prospects, les conversions et les relances en retard, et le tableau des ventes suit les offres ouvertes, les compromis signés et les ventes du mois.",
+        ],
+        bullets: [
+          "Budget, engagé, coût réel et écart par chantier.",
+          "Alertes de dépassement de budget et courbe d'avancement.",
+          "Prospects, conversions et relances en retard.",
+          "Offres ouvertes, compromis signés et ventes du mois.",
+        ],
+      },
+      {
+        title: "CRM de promotion immobilière ou ERP ?",
+        intro:
+          "Un CRM de promotion immobilière suit surtout les ventes. Un logiciel de promotion immobilière plus large suit aussi le chantier. Trois approches existent.",
+        table: {
+          caption: "Comparaison d'un CRM généraliste, d'un outil sur mesure et d'ImmoTopia pour un promoteur",
+          head: ["", "CRM généraliste", "Outil sur mesure", "ImmoTopia"],
+          rows: [
+            ["Ce qu'il couvre", "Prospects et ventes ; le chantier reste à part", "Ce que vous avez fait spécifier", "Prospects et ventes, puis chantiers, lots, budget, stock et tâcherons"],
+            ["Commercial et chantier ensemble", "Rarement : deux outils à relier", "Oui, si le cahier des charges le prévoit", "Oui : mêmes contacts, même base"],
+            ["Coût", "Abonnement, variable selon l'outil", "Investissement initial, puis maintenance", `Abonnement mensuel en FCFA, pack Promoteur à partir de ${fcfa(promoteur.monthly)} HT`],
+          ],
+        },
+        note: "Les colonnes « CRM généraliste » et « Outil sur mesure » décrivent des tendances d'ensemble, qui varient selon l'outil ou le prestataire. Pour comparer avec d'autres logiciels immobiliers, voir le [comparatif](/comparatif).",
+      },
+      {
+        title: "Tarifs du pack Promoteur",
+        paragraphs: [
+          `Le pack Promoteur coûte ${fcfa(promoteur.monthly)} HT par mois. Il comprend ${promoteur.included}. Au-delà, chaque chantier actif supplémentaire coûte ${fcfa(chantierSup)} HT par mois, et chaque bloc de 10 lots ${fcfa(blocLots)} HT par mois.`,
+          `La mise en route accompagnée est facultative (${fcfa(promoteur.setup)} HT, facturés une fois). Le premier mois est offert, sans engagement, et les collaborateurs ne sont pas facturés à l'utilisateur. Pour construire, vendre et gérer, voir le pack Opérateur intégré (${fcfa(integre.monthly)} HT par mois). Voir [tous les tarifs](/tarifs).`,
+        ],
+      },
+    ],
+    faq: [
+      {
+        q: "Quelle différence entre un CRM d'agence et un CRM pour promoteur ?",
+        a: "Le CRM est le même : contacts, pipeline, visites, offres et compromis. Le promoteur y ajoute le module chantiers : lots, budget, avancement, dépenses, stock, tâcherons et retenues de garantie. L'agence utilise plutôt le rapprochement et la gestion locative.",
+      },
+      {
+        q: "Peut-on suivre plusieurs programmes en même temps ?",
+        a: `Oui. Le pack Promoteur comprend ${promoteur.included} ; chaque chantier actif supplémentaire coûte ${fcfa(chantierSup)} HT par mois. Le tableau de bord les présente dans un même écran.`,
+      },
+      {
+        q: "Le coût de revient de chaque lot est-il calculé ?",
+        a: "Oui. Le coût réel du chantier vient des dépenses imputées ; vous choisissez la clé de répartition entre les lots (à la surface ou par quote-part saisie) et le coût de revient de chaque lot s'affiche. Après la clôture du chantier, un lot peut être transféré au patrimoine avec son coût définitif.",
+      },
+      {
+        q: "Combien coûte le pack Promoteur ?",
+        a: `${fcfa(promoteur.monthly)} HT par mois, avec ${promoteur.included}. Les extensions sont détaillées sur la page [Tarifs](/tarifs), avec un simulateur.`,
+      },
+      {
+        q: "Y a-t-il un essai gratuit ?",
+        a: "Le premier mois d'abonnement est offert, sans engagement. Une démonstration gratuite de 30 minutes permet aussi de voir le CRM et le suivi de chantier appliqués à votre programme.",
+      },
+      {
+        q: "Peut-on reprendre mes fichiers Excel de chantier ?",
+        a: "Vous pouvez saisir vous-même vos données, sans frais. La mise en route accompagnée du pack Promoteur couvre deux chantiers, la nomenclature des coûts et des stocks et la formation des équipes ; un historique plus complexe fait l'objet d'un devis.",
+      },
+    ],
+    related: ["crm-immobilier-cote-divoire", "immotopia-vs-excel", "tableaux-de-bord-kpi-immobilier-cote-divoire"],
   },
   {
     slug: "paiement-loyer-charges-mobile-money-cote-divoire",

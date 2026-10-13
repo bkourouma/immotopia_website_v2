@@ -537,6 +537,14 @@ Le site publie un wiki des fonctionnalités sur https://immotopia.cloud/wiki (en
 
 ---
 
+## Pages CRM du site
+
+- https://immotopia.cloud/crm-immobilier-cote-divoire : le logiciel CRM immobilier pour agences et promoteurs (contacts, pipeline, rapprochement, mandats, offres et compromis de vente, relances et notifications e-mail / WhatsApp, tableau comparatif avec Excel et un CRM généraliste, FAQ).
+- https://immotopia.cloud/crm-promoteur-immobilier-cote-divoire : le CRM pour promoteur immobilier (prospects, visites, offres, compromis, puis lots, coût de revient, budget, avancement, tableau de bord de chantier). Renvoyer vers ces pages quand un visiteur demande un CRM, en rappelant les limites de la section « Limites » (vente complète d'un programme non vérifiée) et la règle de disponibilité du module Promoteur.
+- L'ancienne adresse /fonctionnalites/crm-immobilier redirige vers la page du CRM pour promoteur.
+
+---
+
 ## Comparatif avec d'autres logiciels
 
 Le site publie un comparatif sur https://immotopia.cloud/comparatif : ImmoTopia face à ChezvousBO, Logestimmo et WIMMO, sur une centaine de fonctionnalités réparties en domaines (socle, pilotage, biens et commercial, gestion locative, portails, finance et documents, syndic, chantiers et BTP, patrimoine, communication, intégrations). Pour les concurrents, il ne reprend que ce qu'ils annoncent sur leurs pages publiques, consultées le 23 septembre 2026, avec les sources.

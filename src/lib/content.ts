@@ -27,6 +27,8 @@ export type HeroCard = {
   /** Cadrage de la photo : les groupes sont calés en bas pour que le titre ne couvre pas les visages */
   imageClass?: string;
   accent: string; // couleur d'accent de la carte (halo, sur-titre)
+  /** Liens vers des pages thématiques (en français seulement : elles n'existent pas en anglais). */
+  links?: { label: string; href: string }[];
 };
 
 type Bi = { fr: string; en: string };
@@ -126,6 +128,10 @@ const heroCardsSource: HeroCardSource[] = [
     },
     imageClass: "object-bottom",
     accent: "#F472B6",
+    links: [
+      { label: "Logiciel CRM immobilier", href: "/crm-immobilier-cote-divoire" },
+      { label: "CRM pour promoteur immobilier", href: "/crm-promoteur-immobilier-cote-divoire" },
+    ],
   },
   {
     id: "syndic",
@@ -173,6 +179,7 @@ const heroCardsFor = (locale: Locale): HeroCard[] =>
     description: c.description[locale],
     cta: c.cta[locale],
     imageAlt: c.imageAlt[locale],
+    links: locale === "fr" ? c.links : undefined,
   }));
 
 export const heroCards: Record<Locale, HeroCard[]> = { fr: heroCardsFor("fr"), en: heroCardsFor("en") };

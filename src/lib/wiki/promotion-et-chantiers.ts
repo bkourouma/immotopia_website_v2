@@ -7,7 +7,7 @@ export const promotionEtChantiers: WikiDomain = {
   summary:
     "Chantiers, lots, budget, avancement, stock de matériaux, salaires, tâcherons et retenues de garantie : le module Promoteur d'ImmoTopia pour la Côte d'Ivoire.",
   intro:
-    "Ce domaine regroupe le module Promoteur d'ImmoTopia. Il s'adresse aux promoteurs et aux groupes immobiliers ivoiriens qui construisent : suivi des chantiers et de leurs lots, budget et avenants, avancement, dépenses et pièces de caisse, baux de terrain. Il couvre aussi le stock de matériaux, la main-d'œuvre salariée, les tâcherons et leurs situations de travaux, ainsi que les retenues de garantie. En fin de chantier, chaque lot rejoint le patrimoine avec son coût de revient définitif.",
+    "Ce domaine regroupe le module Promoteur d'ImmoTopia. Il s'adresse aux promoteurs et aux groupes immobiliers ivoiriens qui construisent : suivi des chantiers et de leurs lots, budget et avenants, avancement, dépenses et pièces de caisse, baux de terrain. Il couvre aussi le stock de matériaux, la main-d'œuvre salariée, les tâcherons et leurs situations de travaux, ainsi que les retenues de garantie. En fin de chantier, chaque lot rejoint le patrimoine avec son coût de revient définitif. Le suivi commercial des programmes (prospects, visites, offres et compromis) se fait dans le [CRM pour promoteur immobilier](/crm-promoteur-immobilier-cote-divoire).",
   features: [
     {
       slug: "suivi-des-chantiers",
@@ -207,11 +207,29 @@ export const promotionEtChantiers: WikiDomain = {
     {
       slug: "avancement-et-tableau-de-bord",
       title: "Avancement et tableau de bord",
-      metaTitle: "Avancement de chantier et alertes de dépassement",
+      h1: "Tableau de bord de chantier pour promoteurs",
+      metaTitle: "Tableau de bord de chantier : avancement, budget",
       summary:
-        "Saisissez l'avancement physique de vos chantiers, comparez budget, engagé et coût réel, et recevez des alertes quand un chantier dépasse son budget.",
+        "Tableau de bord de chantier pour promoteurs : budget, engagé, coût réel, avancement et écart par chantier, avec alertes de dépassement de budget.",
       intro:
-        "Le tableau de bord des chantiers vous montre, chantier par chantier, le budget, les montants engagés, le coût réel, l'avancement et l'écart. Vous y déclarez l'avancement physique des travaux et vous retrouvez sa courbe dans le temps. Les alertes de dépassement signalent les chantiers qui consomment leur budget plus vite que prévu.",
+        "Le tableau de bord de chantier vous montre, chantier par chantier, le budget, les montants engagés, le coût réel, l'avancement et l'écart. Vous y déclarez l'avancement physique des travaux et vous retrouvez sa courbe dans le temps. Les alertes de dépassement signalent les chantiers qui consomment leur budget plus vite que prévu. Il fait partie du module Promoteur ; le suivi commercial du même programme se fait dans le [CRM pour promoteur immobilier](/crm-promoteur-immobilier-cote-divoire).",
+      sections: [
+        {
+          title: "Quels indicateurs suivre sur un chantier ?",
+          body: [
+            "Un tableau de bord de chantier est utile quand il répond à une question simple : le chantier avance-t-il au rythme prévu, et au coût prévu ? Voici les repères que le module Promoteur rassemble, chacun relié à la fiche qui explique comment il est alimenté.",
+            [
+              "Avancement physique : le pourcentage d'avancement des travaux, saisi à chaque point d'avancement avec sa date, et sa courbe dans le temps. Les alertes de dépassement repèrent les chantiers qui consomment leur budget plus vite que prévu.",
+              "Budget prévu et budget réel : le budget prévisionnel validé, poste par poste, révisé par avenants, mis en face du coût réel et de l'écart. Voir le [budget de chantier](/wiki/promotion-et-chantiers/budget-de-chantier).",
+              "Dépenses engagées : le détail des dépenses imputées au chantier, avec un sous-total par poste, et les pièces de caisse émises. Voir les [dépenses de chantier](/wiki/promotion-et-chantiers/depenses-de-chantier).",
+              "Stock de matériaux : chaque sortie impute le chantier au coût moyen de l'article, et le rapprochement entre acheté, consommé et restant fait apparaître le montant non encore rapproché. Voir les [réceptions et sorties de stock](/wiki/promotion-et-chantiers/entrees-et-sorties-de-stock).",
+              "Retenues de garantie : les sommes retenues sur les factures et les situations de travaux, chantier par chantier, avec les échéances de libération dépassées. Voir les [retenues de garantie](/wiki/promotion-et-chantiers/retenues-de-garantie).",
+              "Coût de revient par lot : la part du coût réel qui revient à chaque lot, selon la clé de répartition choisie. Voir [lots et coût de revient](/wiki/promotion-et-chantiers/lots-et-cout-de-revient).",
+            ],
+            "Pour suivre aussi les ventes du même programme (prospects, visites, offres et compromis), voir le [CRM pour promoteur immobilier](/crm-promoteur-immobilier-cote-divoire).",
+          ],
+        },
+      ],
       packs: ["promoteur", "integre"],
       profiles: ["direction", "gestionnaire", "comptable"],
       menu: "Finance › Chantiers et stock › Suivi des chantiers › Tableau de bord",
@@ -247,9 +265,21 @@ export const promotionEtChantiers: WikiDomain = {
           profiles: ["direction"],
         },
       ],
+      faq: [
+        {
+          q: "Que montre le tableau de bord de chantier ?",
+          a: "Pour chaque chantier : le budget, les dépenses engagées, le coût réel, l'avancement et l'écart. Vous pouvez filtrer par statut, ou ne garder que les chantiers en dépassement.",
+        },
+        {
+          q: "Quand une alerte de dépassement se déclenche-t-elle ?",
+          a: "Quand les dépenses engagées d'un chantier franchissent un seuil de son budget. L'alerte indique le seuil, le montant engagé, le budget et le pourcentage consommé ; il faut que le chantier ait un budget validé.",
+        },
+      ],
       related: [
         "promotion-et-chantiers/budget-de-chantier",
         "promotion-et-chantiers/suivi-des-chantiers",
+        "promotion-et-chantiers/depenses-de-chantier",
+        "promotion-et-chantiers/lots-et-cout-de-revient",
       ],
     },
     {

@@ -7,7 +7,7 @@ export const crmEtVentes: WikiDomain = {
   summary:
     "Contacts, affaires, relances, rapprochement de biens et mandats de vente : le CRM immobilier d'ImmoTopia pour suivre chaque prospect jusqu'à la vente.",
   intro:
-    "Ce domaine couvre tout le travail commercial de l'agence : fichier de contacts, affaires en cours, activités et relances, calendrier, rapprochement entre biens et acquéreurs. Il se prolonge par la vente : mandats de vente, offres d'achat, compromis, conditions suspensives, échéancier de l'acquéreur et commissions. Il s'adresse aux directeurs d'agence, aux gestionnaires et aux agents commerciaux. Chaque prospect a son historique complet, et chaque vente se suit du mandat jusqu'à l'acte.",
+    "Ce domaine décrit le [logiciel CRM immobilier](/crm-immobilier-cote-divoire) d'ImmoTopia, c'est-à-dire tout le travail commercial de l'agence : fichier de contacts, affaires en cours, activités et relances, calendrier, rapprochement entre biens et acquéreurs. Il se prolonge par la vente : mandats de vente, offres d'achat, compromis, conditions suspensives, échéancier de l'acquéreur et commissions. Il s'adresse aux directeurs d'agence, aux gestionnaires et aux agents commerciaux, ainsi qu'aux équipes commerciales des promoteurs avec le pack Promoteur (voir le [CRM pour promoteur immobilier](/crm-promoteur-immobilier-cote-divoire)). Chaque prospect a son historique complet, et chaque vente se suit du mandat jusqu'à l'acte.",
   features: [
     {
       slug: "contacts-prospects",

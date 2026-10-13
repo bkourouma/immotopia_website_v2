@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Lock, Sparkles, Zap } from "lucide-react";
 import { FinalCta } from "@/components/final-cta";
 import { Navbar } from "@/components/navbar";
+import { SmartLink } from "@/components/smart-link";
 import { ToolsGrid } from "@/components/tools/tools-grid";
 import { alternates, hasLocale, ogLocale, translator } from "@/lib/i18n";
 import { getI18n } from "@/lib/i18n-server";
@@ -27,7 +28,7 @@ export async function generateMetadata({ params }: PageProps<"/[lang]/outils">):
 }
 
 export default async function OutilsPage() {
-  const { t } = await getI18n();
+  const { locale, t } = await getI18n();
   const badges = [
     { Icon: Sparkles, label: t("100 % gratuit", "100% free") },
     { Icon: Zap, label: t("Sans inscription", "No sign-up") },
@@ -72,6 +73,29 @@ export default async function OutilsPage() {
         <section className="mx-auto -mt-10 max-w-6xl px-5 pb-24">
           <ToolsGrid />
         </section>
+        {/* Page de destination française seulement : pas de bandeau en anglais */}
+        {locale === "fr" && (
+          <section className="mx-auto max-w-6xl px-5 pb-24">
+            <div className="flex flex-col gap-5 rounded-[28px] bg-white p-8 ring-1 ring-ink-900/[0.07] md:flex-row md:items-center md:justify-between md:p-10">
+              <div className="max-w-2xl">
+                <h2 className="font-display text-2xl font-bold tracking-tight md:text-3xl">Vos clients et vos visites méritent mieux qu&apos;un tableur</h2>
+                <p className="mt-3 text-ink-900/65">
+                  Les outils gratuits règlent un besoin ponctuel. Pour suivre vos prospects, vos visites, vos offres et vos relances au quotidien, découvrez le{" "}
+                  <SmartLink href="/crm-immobilier-cote-divoire" className="font-medium text-brand-600 hover:underline">
+                    logiciel CRM immobilier
+                  </SmartLink>{" "}
+                  d&apos;ImmoTopia, pour les agences comme pour les promoteurs.
+                </p>
+              </div>
+              <SmartLink
+                href="/crm-immobilier-cote-divoire"
+                className="inline-flex shrink-0 items-center justify-center rounded-full bg-ink-900 px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-ink-800"
+              >
+                Découvrir le CRM immobilier
+              </SmartLink>
+            </div>
+          </section>
+        )}
       </main>
       <FinalCta />
     </>
