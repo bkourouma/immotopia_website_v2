@@ -323,7 +323,7 @@ export const landings: Landing[] = [
           },
           {
             title: "Promoteur",
-            text: "Un programme se vend pendant des mois et se construit en parallèle. Le CRM suit les prospects, les visites, les offres et les compromis ; le module Promoteur suit les lots, le budget et l'avancement du chantier. Voir le [CRM pour promoteur immobilier](/crm-promoteur-immobilier-cote-divoire).",
+            text: "Un programme se vend pendant des mois et se construit en parallèle. Le CRM suit les prospects, les visites et les relances ; le module Promoteur suit les lots, le budget et l'avancement du chantier. Voir le [CRM pour promoteur immobilier](/crm-promoteur-immobilier-cote-divoire).",
           },
           {
             title: "Les deux à la fois",
@@ -334,11 +334,11 @@ export const landings: Landing[] = [
       {
         title: "Mandats, offres et compromis dans le même outil",
         intro:
-          "La vente ne s'arrête pas à la visite. Depuis la fiche d'un mandat, le CRM accompagne l'affaire jusqu'à l'acte, sans ressaisie ni fichier parallèle.",
+          "La vente ne s'arrête pas à la visite. Quand l'agence vend pour le compte d'un propriétaire, le CRM accompagne l'affaire depuis la fiche du mandat jusqu'à l'acte, sans ressaisie ni fichier parallèle.",
         items: [
           { title: "Mandats de vente", text: "Prix demandé, prix plancher, commission et négociateur ; un numéro par année et un seul mandat actif par bien. Détail des [mandats de vente](/wiki/crm-et-ventes/mandats-de-vente)." },
           { title: "Offres d'achat", text: "Enregistrez les offres des acquéreurs, répondez par une contre-offre, acceptez ou refusez avec un motif. Chaque étape met à jour le statut du bien pour toute l'équipe." },
-          { title: "Compromis de vente", text: "Prix, dépôt, notaire et date prévue de l'acte, avec les conditions suspensives à lever (l'obtention d'un prêt, par exemple) avant de conclure. Voir [offres et compromis](/wiki/crm-et-ventes/offres-et-compromis-de-vente)." },
+          { title: "Compromis de vente", text: "Prix, dépôt, notaire et date prévue de l'acte, avec les conditions suspensives à lever (l'obtention d'un prêt, par exemple) et l'échéancier de paiement de l'acquéreur. Voir [offres et compromis](/wiki/crm-et-ventes/offres-et-compromis-de-vente)." },
           { title: "Conclusion à l'acte", text: "Le bien passe en vendu, le mandat se termine, l'affaire est gagnée et la commission de vente est créée automatiquement." },
           { title: "Commissions", text: "Montant dû, règlements encaissés en une ou plusieurs fois et reste à percevoir. Voir les [commissions et le tableau des ventes](/wiki/crm-et-ventes/commissions-de-vente)." },
           { title: "Un pas vers la gestion", text: "Le bien loué ou le propriétaire signé rejoint la [gestion locative](/gestion-locative-cote-divoire) avec ses contacts et ses documents, sans nouvelle saisie." },
@@ -423,11 +423,11 @@ export const landings: Landing[] = [
     slug: "crm-promoteur-immobilier-cote-divoire",
     metaTitle: "CRM promoteur immobilier : prospects et lots | ImmoTopia",
     metaDescription:
-      "CRM pour promoteur immobilier en Côte d'Ivoire : prospects, offres, compromis, puis lots, budget et avancement du chantier dans ImmoTopia.",
+      "CRM pour promoteur immobilier en Côte d'Ivoire : prospects, visites et relances, puis lots, coût de revient, budget et avancement du chantier.",
     eyebrow: "CRM promoteur",
     h1: "CRM pour promoteur immobilier en Côte d'Ivoire",
     intro:
-      "Vendre un programme, c'est suivre des dizaines de prospects pendant que le chantier avance, coûte et se règle. ImmoTopia relie les deux dans un seul logiciel : le CRM suit les prospects, les visites, les offres et les compromis ; le module Promoteur suit les lots, le coût de revient, le budget et l'avancement.",
+      "Vendre un programme, c'est suivre des dizaines de prospects pendant que le chantier avance, coûte et se règle. ImmoTopia relie les deux dans un seul logiciel : le CRM suit les prospects, les visites et les relances ; le module Promoteur suit les lots, le coût de revient, le budget et l'avancement.",
     sections: [
       {
         title: "Pourquoi Excel ne suffit plus pour suivre un programme",
@@ -435,19 +435,19 @@ export const landings: Landing[] = [
         items: [
           { title: "Des prospects dans tous les téléphones", text: "Appels, WhatsApp, visites : sans fichier commun, personne ne sait qui a été rappelé." },
           { title: "Un budget découvert trop tard", text: "Avec des dépenses saisies en fin de mois, un dépassement se voit après coup." },
-          { title: "Le commercial et le chantier séparés", text: "Ventes et travaux vivent dans des fichiers différents : la direction recoupe à la main." },
+          { title: "Le commercial et le chantier séparés", text: "Suivi commercial et travaux vivent dans des fichiers différents : la direction recoupe à la main." },
         ],
         note: "La comparaison complète est dans [ImmoTopia vs Excel](/immotopia-vs-excel).",
       },
       {
-        title: "Suivre prospects, visites, offres et compromis",
+        title: "Suivre prospects, visites et relances",
         intro: "Le CRM du pack Promoteur est le même [logiciel CRM immobilier](/crm-immobilier-cote-divoire) que celui des agences.",
         items: [
           { title: "Prospects et contacts", text: "Une fiche par contact avec ses rôles, ses étiquettes, les zones et le budget recherchés, et tout l'historique des échanges." },
           { title: "Pipeline des affaires", text: "Nouveau, qualifié, visite, négociation, puis gagné ou perdu, avec le collaborateur responsable et l'entonnoir valorisé." },
           { title: "Visites et relances", text: "Visites et relances datées dans un calendrier commun, avec les relances en retard dans le tableau de bord." },
-          { title: "Offres d'achat", text: "Offres, contre-offres, acceptation ou refus avec motif : chaque étape est datée. Voir [offres et compromis](/wiki/crm-et-ventes/offres-et-compromis-de-vente)." },
-          { title: "Compromis de vente", text: "Prix, dépôt, notaire, date prévue de l'acte et conditions suspensives à lever avant de conclure la vente." },
+          { title: "Rapprochement", text: "ImmoTopia met en face le besoin d'un prospect (budget, zone, nombre de pièces, surface) et les biens disponibles, avec un [score expliqué](/wiki/crm-et-ventes/rapprochement-de-biens)." },
+          { title: "Tableau de bord et recherches", text: "Nouveaux prospects, conversions, relances en retard, recherches enregistrées et export CSV des contacts, dans le [tableau de bord CRM](/wiki/crm-et-ventes/calendrier-et-tableau-de-bord-crm)." },
         ],
       },
       {
@@ -467,24 +467,23 @@ export const landings: Landing[] = [
         title: "Le tableau de bord du promoteur",
         paragraphs: [
           "Le [tableau de bord de chantier](/wiki/promotion-et-chantiers/avancement-et-tableau-de-bord) montre, chantier par chantier, le budget, les montants engagés, le coût réel, l'avancement et l'écart. Il peut se limiter aux chantiers en dépassement.",
-          "Côté ventes, le tableau de bord CRM résume les prospects, les conversions et les relances en retard, et le tableau des ventes suit les offres ouvertes, les compromis signés et les ventes du mois.",
+          "Côté commercial, le tableau de bord CRM résume les nouveaux prospects, les conversions, les affaires gagnées et les relances en retard.",
         ],
         bullets: [
           "Budget, engagé, coût réel et écart par chantier.",
           "Alertes de dépassement de budget et courbe d'avancement.",
           "Prospects, conversions et relances en retard.",
-          "Offres ouvertes, compromis signés et ventes du mois.",
         ],
       },
       {
         title: "CRM de promotion immobilière ou ERP ?",
         intro:
-          "Un CRM de promotion immobilière suit surtout les ventes. Un logiciel de promotion immobilière plus large suit aussi le chantier. Trois approches existent.",
+          "Un CRM de promotion immobilière suit surtout les prospects et le commercial. Un logiciel de promotion immobilière plus large suit aussi le chantier. Trois approches existent.",
         table: {
           caption: "Comparaison d'un CRM généraliste, d'un outil sur mesure et d'ImmoTopia pour un promoteur",
           head: ["", "CRM généraliste", "Outil sur mesure", "ImmoTopia"],
           rows: [
-            ["Ce qu'il couvre", "Prospects et ventes ; le chantier reste à part", "Ce que vous avez fait spécifier", "Prospects et ventes, puis chantiers, lots, budget, stock et tâcherons"],
+            ["Ce qu'il couvre", "Prospects et suivi commercial ; le chantier reste à part", "Ce que vous avez fait spécifier", "Prospects et suivi commercial, puis chantiers, lots, budget, stock et tâcherons"],
             ["Commercial et chantier ensemble", "Rarement : deux outils à relier", "Oui, si le cahier des charges le prévoit", "Oui : mêmes contacts, même base"],
             ["Coût", "Abonnement, variable selon l'outil", "Investissement initial, puis maintenance", `Abonnement mensuel en FCFA, pack Promoteur à partir de ${fcfa(promoteur.monthly)} HT`],
           ],
@@ -502,7 +501,7 @@ export const landings: Landing[] = [
     faq: [
       {
         q: "Quelle différence entre un CRM d'agence et un CRM pour promoteur ?",
-        a: "Le CRM est le même : contacts, pipeline, visites, offres et compromis. Le promoteur y ajoute le module chantiers : lots, budget, avancement, dépenses, stock, tâcherons et retenues de garantie. L'agence utilise plutôt le rapprochement et la gestion locative.",
+        a: "Le CRM est le même : contacts, pipeline, visites, relances et rapprochement. Le promoteur y ajoute le module chantiers : lots, budget, avancement, dépenses, stock, tâcherons et retenues de garantie. L'agence y ajoute les mandats, les offres et les compromis quand elle vend pour le compte d'un propriétaire, ainsi que la gestion locative.",
       },
       {
         q: "Peut-on suivre plusieurs programmes en même temps ?",

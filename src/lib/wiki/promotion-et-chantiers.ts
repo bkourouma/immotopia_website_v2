@@ -7,7 +7,7 @@ export const promotionEtChantiers: WikiDomain = {
   summary:
     "Chantiers, lots, budget, avancement, stock de matériaux, salaires, tâcherons et retenues de garantie : le module Promoteur d'ImmoTopia pour la Côte d'Ivoire.",
   intro:
-    "Ce domaine regroupe le module Promoteur d'ImmoTopia. Il s'adresse aux promoteurs et aux groupes immobiliers ivoiriens qui construisent : suivi des chantiers et de leurs lots, budget et avenants, avancement, dépenses et pièces de caisse, baux de terrain. Il couvre aussi le stock de matériaux, la main-d'œuvre salariée, les tâcherons et leurs situations de travaux, ainsi que les retenues de garantie. En fin de chantier, chaque lot rejoint le patrimoine avec son coût de revient définitif. Le suivi commercial des programmes (prospects, visites, offres et compromis) se fait dans le [CRM pour promoteur immobilier](/crm-promoteur-immobilier-cote-divoire).",
+    "Ce domaine regroupe le module Promoteur d'ImmoTopia. Il s'adresse aux promoteurs et aux groupes immobiliers ivoiriens qui construisent : suivi des chantiers et de leurs lots, budget et avenants, avancement, dépenses et pièces de caisse, baux de terrain. Il couvre aussi le stock de matériaux, la main-d'œuvre salariée, les tâcherons et leurs situations de travaux, ainsi que les retenues de garantie. En fin de chantier, chaque lot rejoint le patrimoine avec son coût de revient définitif. Le suivi commercial des programmes (prospects, visites, relances) se fait dans le [CRM pour promoteur immobilier](/crm-promoteur-immobilier-cote-divoire).",
   features: [
     {
       slug: "suivi-des-chantiers",
@@ -226,7 +226,7 @@ export const promotionEtChantiers: WikiDomain = {
               "Retenues de garantie : les sommes retenues sur les factures et les situations de travaux, chantier par chantier, avec les échéances de libération dépassées. Voir les [retenues de garantie](/wiki/promotion-et-chantiers/retenues-de-garantie).",
               "Coût de revient par lot : la part du coût réel qui revient à chaque lot, selon la clé de répartition choisie. Voir [lots et coût de revient](/wiki/promotion-et-chantiers/lots-et-cout-de-revient).",
             ],
-            "Pour suivre aussi les ventes du même programme (prospects, visites, offres et compromis), voir le [CRM pour promoteur immobilier](/crm-promoteur-immobilier-cote-divoire).",
+            "Pour suivre aussi le commercial du même programme (prospects, visites, relances), voir le [CRM pour promoteur immobilier](/crm-promoteur-immobilier-cote-divoire).",
           ],
         },
       ],
