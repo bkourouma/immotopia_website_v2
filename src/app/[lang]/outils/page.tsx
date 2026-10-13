@@ -15,8 +15,8 @@ export async function generateMetadata({ params }: PageProps<"/[lang]/outils">):
     "Free property management tools for Côte d'Ivoire",
   );
   const description = t(
-    "Quittance de loyer, bail d'habitation, bail commercial OHADA, caution, rendement locatif, commission, charges de copropriété : outils gratuits.",
-    "Rent receipts, residential leases, OHADA commercial leases, deposits, rental yield, agency commission, condo charges: free tools, no sign-up.",
+    "Quittance de loyer, bail d'habitation, bail commercial OHADA, état des lieux, caution, rendement, commission, charges : outils gratuits, sans inscription.",
+    "Rent receipts, residential and OHADA commercial leases, inventories, deposits, yield, commission and condominium charges: free tools, no sign-up.",
   );
   return {
     title,
@@ -56,8 +56,8 @@ export default async function OutilsPage() {
             </h1>
             <p className="mx-auto mt-6 max-w-2xl text-lg text-white/65">
               {t(
-                "Quittances, baux, caution, rendement, commissions, charges de copropriété : générez vos documents et faites vos calculs en quelques secondes. Et quand vous voulez que tout se fasse tout seul, ImmoTopia prend le relais.",
-                "Rent receipts, leases, deposits, yield, commissions, condominium charges: generate your documents and run your numbers in seconds. And when you want it all to run on its own, ImmoTopia takes over.",
+                "Quittances, baux, états des lieux, caution, rendement, commissions, charges de copropriété : générez vos documents et faites vos calculs en quelques secondes. Et quand vous voulez que tout se fasse tout seul, ImmoTopia prend le relais.",
+                "Rent receipts, leases, inventories, deposits, yield, commissions, condominium charges: generate your documents and run your numbers in seconds. And when you want it all to run on its own, ImmoTopia takes over.",
               )}
             </p>
             <div className="mt-8 flex flex-wrap justify-center gap-3 text-sm text-white/70">

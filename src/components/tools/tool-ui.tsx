@@ -1,7 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Building2, Download, Home, Loader2, Percent, Receipt, ShieldCheck, Store, TrendingUp } from "lucide-react";
+import Link from "next/link";
+import { ArrowRight, Building2, ClipboardList, Download, Home, Loader2, Percent, Receipt, ShieldCheck, Store, TrendingUp } from "lucide-react";
 import { useId, useState, type ReactNode } from "react";
 import { downloadPdf, type Block, type Doc } from "@/lib/document";
 import type { ToolMeta } from "@/lib/tools";
@@ -18,8 +19,9 @@ export function ToolIcon({ name, className = "size-5" }: { name: ToolMeta["icon"
     trending: TrendingUp,
     percent: Percent,
     building: Building2,
+    clipboard: ClipboardList,
   }[name];
-  return <I className={className} />;
+  return <I className={className} aria-hidden />;
 }
 
 /* ------------------------------------------------------------------ champs */
@@ -155,6 +157,45 @@ export function Choice<T extends string>({
   );
 }
 
+/** Choix multiple : chaque pastille s'active ou se désactive indépendamment. */
+export function MultiChoice<T extends string>({
+  label,
+  values,
+  options,
+  onChange,
+  wide,
+}: {
+  label: string;
+  values: T[];
+  options: { value: T; label: string }[];
+  onChange: (v: T[]) => void;
+  wide?: boolean;
+}) {
+  return (
+    <fieldset className={wide ? "sm:col-span-2" : ""}>
+      <legend className="mb-1.5 text-sm font-medium text-ink-900/70">{label}</legend>
+      <div className="flex flex-wrap gap-1.5">
+        {options.map((o) => {
+          const on = values.includes(o.value);
+          return (
+            <button
+              type="button"
+              key={o.value}
+              onClick={() => onChange(on ? values.filter((v) => v !== o.value) : options.map((x) => x.value).filter((v) => v === o.value || values.includes(v)))}
+              aria-pressed={on}
+              className={`cursor-pointer rounded-full border px-3.5 py-2 text-sm font-medium transition ${
+                on ? "border-ink-900 bg-ink-900 text-white" : "border-ink-900/10 bg-white text-ink-900/70 hover:border-ink-900/30"
+              }`}
+            >
+              {o.label}
+            </button>
+          );
+        })}
+      </div>
+    </fieldset>
+  );
+}
+
 /* ------------------------------------------------------------------ résultats */
 
 export function Stat({ label, value, highlight, sub }: { label: string; value: string; highlight?: boolean; sub?: string }) {
@@ -193,8 +234,12 @@ export function Warning({ children }: { children: ReactNode }) {
 /* ------------------------------------------------------------------ documents */
 
 export function DocPreview({ blocks }: { blocks: Block[] }) {
+  const { t } = useI18n();
   return (
-    <div className="rounded-[20px] bg-white p-6 text-[13px] leading-relaxed text-ink-900 shadow-[0_30px_80px_-30px_rgba(20,23,41,0.45)] ring-1 ring-ink-900/[0.06] md:p-9">
+    <div
+      role="region"
+      aria-label={t("Aperçu du document généré", "Preview of the generated document")}
+      className="rounded-[20px] bg-white p-6 text-[13px] leading-relaxed text-ink-900 shadow-[0_30px_80px_-30px_rgba(20,23,41,0.45)] ring-1 ring-ink-900/[0.06] md:p-9">
       {blocks.map((b, i) => {
         switch (b.t) {
           case "title":
@@ -326,6 +371,21 @@ export function UpsellCta({ text }: { text: string }) {
       >
         {t("Demander une démonstration", "Request a demo")}
       </button>
+    </div>
+  );
+}
+
+/** Bandeau vers une fiche du wiki du logiciel (le wiki est publié en français seulement : lien non préfixé par la langue). */
+export function SoftwareBanner({ text, linkLabel, href }: { text: string; linkLabel: string; href: string }) {
+  return (
+    <div className="flex flex-col gap-3 rounded-[24px] border border-brand-500/20 bg-brand-500/[0.06] p-5 md:flex-row md:items-center md:justify-between md:p-6">
+      <p className="font-display text-base leading-snug font-bold md:text-lg">{text}</p>
+      <Link
+        href={href}
+        className="group inline-flex shrink-0 items-center gap-2 text-sm font-semibold text-brand-600 hover:underline"
+      >
+        {linkLabel} <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
+      </Link>
     </div>
   );
 }
