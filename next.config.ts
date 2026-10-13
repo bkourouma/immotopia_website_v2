@@ -14,9 +14,11 @@ const legacyRedirects: [string, string][] = [
   ["/ressources/faq", "/faq"],
   ["/ressources/:slug", "/outils"],
   ["/ressources", "/outils"],
-  ["/blog/:slug", "/outils"],
-  ["/blog", "/outils"],
-  ["/guides/:slug", "/outils"],
+  // Ancien blog → rubrique /guides (src/lib/guides.ts). Aucune règle sur /guides ni /guides/:slug : l'index et les
+  // articles répondent 200, et un guide inconnu répond 404 (pas de redirection générique).
+  ["/blog/crm-immobilier-relances", "/guides/crm-immobilier-relances"],
+  ["/blog/:slug", "/guides"],
+  ["/blog", "/guides"],
   ["/vision/:slug", "/"],
   // Pages produit et pages métier → accueil (les pages thématiques gardent leur URL : src/lib/landings.ts)
   ["/fonctionnalites/crm-immobilier", "/crm-promoteur-immobilier-cote-divoire"],

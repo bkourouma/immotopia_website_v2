@@ -528,6 +528,17 @@ Les éléments suivants sont en cours de développement ou d'intégration en sep
 
 ---
 
+## Guides pratiques
+
+Le site publie des guides pratiques en français sur https://immotopia.cloud/guides, à proposer au visiteur qui compare ou qui hésite :
+
+- Comment choisir son CRM immobilier (dix critères, agence ou promoteur, tableau de critères) : https://immotopia.cloud/guides/crm-immobilier-bonnes-pratiques
+- Relances en CRM immobilier (fréquence, messages, WhatsApp) : https://immotopia.cloud/guides/crm-immobilier-relances
+- Logiciel d'état des lieux, critères de choix (mobile, photos, signature électronique, PDF, comparaison entrée / sortie) : https://immotopia.cloud/guides/logiciel-etat-des-lieux-comparatif
+- Bail commercial OHADA en Côte d'Ivoire (clauses, délais, étapes, modèle PDF) : https://immotopia.cloud/guides/bail-commercial-ohada-cote-divoire. Ce guide est informatif : toujours rappeler qu'un contrat se fait valider par un avocat ou un notaire.
+
+---
+
 ## Wiki des fonctionnalités
 
 Le site publie un wiki des fonctionnalités sur https://immotopia.cloud/wiki (en français) : une page par domaine (gestion locative, biens et patrimoine, CRM et ventes, syndic, portails clients, maintenance, communication et documents, finance et comptabilité, promotion et chantiers, agence et abonnement) et une page par fonctionnalité, qui détaille chaque action, les packs qui y donnent accès, les profils concernés et le statut (disponible ou en cours de déploiement).

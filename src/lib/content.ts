@@ -444,6 +444,7 @@ export const navLinks: Record<Locale, NavLink[]> = {
       children: [
         { label: "Wiki des fonctionnalités", href: "/wiki", text: "Tout ce que fait ImmoTopia, action par action" },
         { label: "Outils gratuits", href: "/outils", text: "Quittance, bail, rendement locatif, commission…" },
+        { label: "Guides", href: "/guides", text: "Choisir son CRM, états des lieux, bail commercial OHADA" },
         { label: "FAQ", href: "/faq", text: "Les réponses aux questions fréquentes" },
         { label: "Contact", href: "/contact", text: "Parler à l'équipe, réserver une démonstration" },
       ],

@@ -9,6 +9,8 @@ import { getTool, toolMetadata } from "@/lib/tools";
 const SLUG = "etat-des-lieux";
 // Le wiki est publié en français seulement : le lien est identique dans les deux langues.
 const WIKI_ETATS_DES_LIEUX = "/wiki/gestion-locative/etats-des-lieux";
+// Idem pour le guide (rubrique /guides en français seulement).
+const GUIDE_ETATS_DES_LIEUX = "/guides/logiciel-etat-des-lieux-comparatif";
 
 export async function generateMetadata({ params }: PageProps<"/[lang]/outils/etat-des-lieux">): Promise<Metadata> {
   const { lang } = await params;
@@ -64,7 +66,8 @@ export default async function Page() {
           <p>
             Pour aller plus loin, ImmoTopia permet de{" "}
             <Link href={WIKI_ETATS_DES_LIEUX}>réaliser les états des lieux d&apos;entrée et de sortie pièce par pièce</Link> et de les
-            comparer pour repérer ce qui s&apos;est dégradé.
+            comparer pour repérer ce qui s&apos;est dégradé. Pour choisir un outil, lisez notre{" "}
+            <Link href={GUIDE_ETATS_DES_LIEUX}>guide des critères d&apos;un logiciel d&apos;état des lieux</Link>.
           </p>
         </>,
         <>
@@ -109,7 +112,8 @@ export default async function Page() {
           <p>
             To go further, ImmoTopia lets you{" "}
             <Link href={WIKI_ETATS_DES_LIEUX}>carry out move-in and move-out inventories room by room</Link> (page in French) and compare
-            them to spot what has deteriorated.
+            them to spot what has deteriorated. To choose a tool, read our{" "}
+            <Link href={GUIDE_ETATS_DES_LIEUX}>guide to inventory software selection criteria</Link> (in French).
           </p>
         </>,
       )}

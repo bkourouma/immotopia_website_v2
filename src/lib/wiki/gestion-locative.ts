@@ -164,7 +164,7 @@ export const gestionLocative: WikiDomain = {
         {
           title: "Pourquoi utiliser un logiciel pour vos états des lieux ?",
           body: [
-            "Un état des lieux sur papier se perd, se froisse et se discute. Dans un logiciel, chaque pièce est décrite élément par élément, avec ses photos, et l'état des lieux reste attaché au bail. L'agence peut s'y référer à tout moment en cas de désaccord.",
+            "Un état des lieux sur papier se perd, se froisse et se discute. Dans un logiciel, chaque pièce est décrite élément par élément, avec ses photos, et l'état des lieux reste attaché au bail. L'agence peut s'y référer à tout moment en cas de désaccord. Pour comparer les outils, voir le guide [Logiciel d'état des lieux : critères de choix](/guides/logiciel-etat-des-lieux-comparatif).",
             [
               "La preuve par la photo : les photos sont rattachées à la pièce ou à l'élément concerné, avec une légende, et ne peuvent plus être ajoutées ni supprimées une fois l'état des lieux finalisé.",
               "Moins de litiges sur le dépôt de garantie : à la sortie, l'écart avec l'entrée se lit élément par élément, et les retenues se justifient avec le même document que celui signé à l'entrée.",

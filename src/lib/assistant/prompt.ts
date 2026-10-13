@@ -21,7 +21,7 @@ function pricingSection() {
   return [
     "## Grille tarifaire officielle (source de vérité pour tout chiffre)",
     `Packs commercialisés : ${activePacks.map((p) => p.name).join(", ")}. ` +
-      `Tu peux donner le prix de chacun. Le module Promoteur (chantiers, stock, tâcherons) et la finance opérationnelle (caisse, fournisseurs, validations) sont en cours de déploiement : quand tu présentes les packs Promoteur ou Opérateur intégré, précise-le sans donner de date et propose d'en parler avec l'équipe en démonstration.`,
+      `Tu peux donner le prix de chacun. Le module Promoteur (chantiers, stock, tâcherons) est disponible en production. La finance opérationnelle (caisse, fournisseurs, validations) est en cours de déploiement : quand tu présentes les packs Promoteur ou Opérateur intégré, précise-le sans donner de date et propose d'en parler avec l'équipe en démonstration.`,
     ...lines,
     "",
     "Extensions à la carte :",
