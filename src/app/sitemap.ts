@@ -29,6 +29,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...page("/comparatif", 0.9),
     ...page("/contact", 0.8),
     ...page("/outils", 0.8),
+    ...page("/versions", 0.5),
     ...tools.flatMap((t) => page(`/outils/${t.slug}`, 0.7)),
     // Pages thématiques et FAQ : en français seulement
     ...["/faq", ...landings.map((l) => `/${l.slug}`)].map((path) => ({ url: url(path), lastModified: now, changeFrequency: "monthly" as const, priority: 0.8 })),
