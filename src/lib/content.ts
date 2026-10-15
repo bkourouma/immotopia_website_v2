@@ -415,6 +415,8 @@ export type NavLink = {
   footer?: { label: string; href: string };
   /** Sous-menu sur deux colonnes (listes longues) */
   wide?: boolean;
+  /** Colonne du pied de page : « Produit » par défaut */
+  footerColumn?: "resources";
 };
 
 // Adresses sans préfixe de langue : SmartLink les localise.
@@ -441,11 +443,13 @@ export const navLinks: Record<Locale, NavLink[]> = {
     {
       label: "Ressources",
       href: "/wiki",
+      footerColumn: "resources",
       children: [
         { label: "Wiki des fonctionnalités", href: "/wiki", text: "Tout ce que fait ImmoTopia, action par action" },
         { label: "Outils gratuits", href: "/outils", text: "Quittance, bail, rendement locatif, commission…" },
         { label: "Guides", href: "/guides", text: "Choisir son CRM, états des lieux, bail commercial OHADA" },
         { label: "FAQ", href: "/faq", text: "Les réponses aux questions fréquentes" },
+        { label: "Historique des versions", href: "/versions", text: "Les nouveautés d'ImmoTopia, version par version" },
         { label: "Contact", href: "/contact", text: "Parler à l'équipe, réserver une démonstration" },
       ],
     },
@@ -471,8 +475,10 @@ export const navLinks: Record<Locale, NavLink[]> = {
     {
       label: "Resources",
       href: "/outils",
+      footerColumn: "resources",
       children: [
         { label: "Free tools", href: "/outils", text: "Rent receipt, lease, rental yield, commission…" },
+        { label: "Version history", href: "/versions", text: "What's new in ImmoTopia, release by release" },
         { label: "Contact", href: "/contact", text: "Talk to the team, book a demo" },
       ],
     },
@@ -480,12 +486,19 @@ export const navLinks: Record<Locale, NavLink[]> = {
   ],
 };
 
-/** Colonne « Produit » du pied de page : le menu à plat, sans doublon ni Contact (colonne « Entreprise »). */
-export const footerProductLinks = (locale: Locale): { label: string; href: string }[] => {
+type FooterLink = { label: string; href: string };
+
+/**
+ * Colonnes « Produit » et « Ressources » du pied de page : le menu à plat, sans doublon ni Contact (colonne « Entreprise »).
+ * Les ressources passent en premier : un lien présent dans les deux menus (le wiki) reste dans « Ressources ».
+ */
+export const footerColumns = (locale: Locale): { product: FooterLink[]; resources: FooterLink[] } => {
   const seen = new Set<string>(["/contact"]);
-  return navLinks[locale]
-    .flatMap((l): { label: string; href: string }[] =>
-      l.footer ? [{ label: l.label, href: l.href }] : (l.children ?? [l]).map(({ label, href }) => ({ label, href })),
-    )
-    .filter((l) => !seen.has(l.href) && seen.add(l.href));
+  const flatten = (links: NavLink[]) =>
+    links
+      .flatMap((l): FooterLink[] => (l.footer ? [{ label: l.label, href: l.href }] : (l.children ?? [l]).map(({ label, href }) => ({ label, href }))))
+      .filter((l) => !seen.has(l.href) && seen.add(l.href));
+  const resources = flatten(navLinks[locale].filter((l) => l.footerColumn === "resources"));
+  const product = flatten(navLinks[locale].filter((l) => l.footerColumn !== "resources"));
+  return { product, resources };
 };

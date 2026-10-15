@@ -2,7 +2,7 @@
 
 import { ArrowRight, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 import type { ReactNode } from "react";
-import { footerProductLinks } from "@/lib/content";
+import { footerColumns } from "@/lib/content";
 import { contact, legal, whatsappLink } from "@/lib/site";
 import { LanguageSwitcher } from "./language-switcher";
 import { useI18n } from "./locale-provider";
@@ -13,6 +13,7 @@ import { Logo, MagneticButton, Reveal } from "./ui";
 export function FinalCta() {
   const { open } = useDemo();
   const { locale, t } = useI18n();
+  const { product, resources } = footerColumns(locale);
   return (
     <section className="bg-paper px-3 pb-3">
       <Reveal>
@@ -45,7 +46,7 @@ export function FinalCta() {
       </Reveal>
 
       <footer className="mx-auto max-w-6xl px-5 pt-14 pb-10 text-sm text-ink-900/60">
-        <div className="grid gap-10 md:grid-cols-[1.3fr_1fr_1fr_1.2fr]">
+        <div className="grid gap-10 sm:grid-cols-2 md:grid-cols-[1.3fr_1fr_1fr_1fr_1.2fr]">
           <div>
             <Logo onLight full />
             <p className="mt-4 max-w-xs">
@@ -56,7 +57,14 @@ export function FinalCta() {
             </p>
           </div>
           <FooterCol title={t("Produit", "Product")}>
-            {footerProductLinks(locale).map((l) => (
+            {product.map((l) => (
+              <SmartLink key={l.href} href={l.href} className="transition-colors hover:text-ink-900">
+                {l.label}
+              </SmartLink>
+            ))}
+          </FooterCol>
+          <FooterCol title={t("Ressources", "Resources")}>
+            {resources.map((l) => (
               <SmartLink key={l.href} href={l.href} className="transition-colors hover:text-ink-900">
                 {l.label}
               </SmartLink>

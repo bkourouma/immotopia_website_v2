@@ -41,6 +41,28 @@ Pièges et décisions :
 
 ---
 
+## Branche `claude/admiring-fermat-b2y2rr` — 2026-10-15
+
+**État :** prêt à relire (PR brouillon vers `main`)
+**Dernier commit :** voir `git log`
+
+Fait :
+
+- Page bilingue `/versions` (historique des versions de l'application), données dans `src/lib/releases.ts`, ajoutée au sitemap.
+- Pied de page : colonne « Produit » scindée en « Produit » et « Ressources » (`footerColumns` de `content.ts`, champ `footerColumn` de `NavLink`) ; « Historique des versions » ajouté au menu Ressources (FR et EN).
+- Versions validées par l'utilisateur : v1.0.0 datée du 2025-04-15, v1.1.0 du 2026-04-15, v1.2.0 et v1.3.0 placées entre les deux, dates réelles à partir de v1.4.0.
+
+Reste à faire :
+
+- Tags et releases de `bkourouma/immotopia` : la poussée de tags est refusée (403) par le proxy de la session cloud ; l'utilisateur lance le script `creer-releases-immotopia.sh` fourni dans la conversation.
+- Nouvelle version de l'application : ajouter une entrée en tête de `src/lib/releases.ts` et le tag correspondant.
+
+Pièges et décisions :
+
+- `package.json` / `package-lock.json` modifiés par l'installation de l'environnement cloud : non commités.
+
+---
+
 ## Branche `ci/deploiement-auto` — 2026-10-13
 
 **État :** prêt à relire (PR vers `main`) ; la fusion déclenche le premier déploiement automatique
