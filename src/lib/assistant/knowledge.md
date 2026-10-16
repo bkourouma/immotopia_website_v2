@@ -14,6 +14,7 @@ Règles de lecture pour l'assistant :
 - Disponible et commercialisé : module Agence (biens, annonces, CRM, baux, échéances, paiements, pénalités, dépôts, documents, relevés de gérance, portails propriétaire et locataire), module Syndic, module Promoteur (chantiers, lots et coût de revient, budget et avenants, avancement, dépenses, stock de matériaux, personnel, tâcherons, retenues de garantie, foncier), états des lieux (signature électronique, export et impression PDF, utilisation sur téléphone et tablette, photos par pièce), maintenance, communication e-mail / WhatsApp / newsletter, patrimoine, tableaux de bord, rôles et audit. Packs vendus : **Agence**, **Syndic**, **Promoteur**, **Opérateur intégré**, **Patrimoine Essentiel** et **Patrimoine Pro** (combinables avec 10 % de remise sur le prix de base du moins cher).
 - États des lieux d'entrée et de sortie, disponibles en production (confirmé par l'équipe le 13 octobre 2026) : pièces, compteurs, clés, signataires, retenues sur le dépôt, comparaison entrée / sortie, photos par pièce, signature électronique, export et impression en PDF, utilisation sur téléphone et tablette dans le navigateur (sans application native, connexion Internet nécessaire). L'agence transmet elle-même le PDF exporté au locataire (pas d'envoi automatique documenté). Détail : https://immotopia.cloud/wiki/gestion-locative/etats-des-lieux
 - Disponibles en production (confirmé par l'équipe le 13 octobre 2026) : renouvellement, avenant et résiliation du bail ; honoraires de gestion à trois niveaux (bail, propriétaire, agence), compte courant du propriétaire et reversements aux propriétaires ; finance opérationnelle (fournisseurs, pièces de caisse, dépenses y compris de chantier, file de validation, balances clients et fournisseurs, import Excel).
+- Disponibles en production (confirmé par l'équipe le 16 octobre 2026) : révision / indexation du loyer ; solde de tout compte et historique du bail ; comptabilité de l'agence (écritures de la gestion locative, journal, grand livre, balance) et export comptable (CSV, Excel).
 - En cours de développement, et présentables comme tels : les fonctions listées dans « Fonctions en cours de développement ». Toujours préciser qu'elles sont en cours de développement ou de déploiement, ne jamais donner de date, et proposer de vérifier leur disponibilité avec l'équipe.
 - Les packs **Promoteur** et **Opérateur intégré** sont affichés avec leur prix. Le module Promoteur (chantiers, BTP) et la finance opérationnelle sont disponibles en production (confirmé par l'équipe le 13 octobre 2026).
 - Les points de la section « Limites » (fonctions non établies) ne sont pas annoncés.
@@ -125,6 +126,7 @@ Couverture fonctionnelle par pack (d'après la proposition de modèle économiqu
 - Création et modification des baux, avec colocataires.
 - Périodicité mensuelle, trimestrielle, semestrielle ou annuelle, et suivi du statut du bail.
 - Fiche détaillée du bail.
+- Vie du bail : révision / indexation du loyer (les échéances non réglées à partir du mois d'effet sont recalculées, une révision à date future est planifiée), renouvellement, avenant, résiliation, historique chronologique du bail et solde de tout compte (estimation de la somme à rendre au locataire en fin de bail). Disponibles en production (confirmé par l'équipe le 16 octobre 2026).
 
 ### Échéances (appels de loyer)
 
@@ -329,7 +331,7 @@ Les comptes propriétaires et locataires ne sont pas facturés au client ImmoTop
 ### Comptabilité
 
 - Copropriété : comptabilité complète en partie double (plan de comptes, journaux, écritures verrouillables, grand livre, balance), décrite dans les spécifications comme conforme OHADA.
-- Gestion locative et comptabilité opérationnelle de l'agence : des écritures comptables automatiques (loyers, honoraires, dépenses, reversements) sur des comptes du plan SYSCOHADA paramétrables, et des exports journal / grand livre / balance en CSV ou Excel pour le cabinet comptable, sont en cours de développement (septembre 2026). Ils ne doivent pas être présentés comme disponibles sans confirmation.
+- Gestion locative et comptabilité de l'agence : disponibles en production (confirmé par l'équipe le 16 octobre 2026). Écritures comptables de la gestion locative (loyers, honoraires, dépenses, reversements) sur des comptes du plan SYSCOHADA paramétrables, et consultation du journal, du grand livre et de la balance par période, avec export en CSV ou Excel pour le cabinet comptable (CSV au format Excel français : point-virgule, virgule décimale).
 - ImmoTopia n'est pas documenté comme logiciel de comptabilité générale : bilan, compte de résultat, liasse fiscale, déclarations sociales et paie sont hors périmètre de la gestion financière décrite. Aucune certification « conforme SYSCOHADA » n'est documentée.
 
 ### Rôles, permissions, sécurité et audit
@@ -515,14 +517,12 @@ Pour un devis précis (volumes, combinaison de packs, reprise de données), orie
 
 ## Fonctions en cours de développement
 
-Les éléments suivants sont en cours de développement ou d'intégration. Les fonctions de gestion locative confirmées disponibles le 13 octobre 2026 (renouvellement, avenant et résiliation du bail, honoraires à trois niveaux, compte courant du propriétaire, reversements) n'y figurent plus. On peut présenter ces éléments, en disant qu'ils sont en cours de développement ou de déploiement, sans date, et que l'équipe confirmera leur disponibilité en démonstration.
+Les éléments suivants sont en cours de développement ou d'intégration. Les fonctions de gestion locative confirmées disponibles le 13 octobre 2026 (renouvellement, avenant et résiliation du bail, honoraires à trois niveaux, compte courant du propriétaire, reversements) et le 16 octobre 2026 (révision du loyer, solde de tout compte et historique du bail, comptabilité de l'agence et export comptable) n'y figurent plus. On peut présenter ces éléments, en disant qu'ils sont en cours de développement ou de déploiement, sans date, et que l'équipe confirmera leur disponibilité en démonstration.
 
 - Gestion locative approfondie :
   - Commissions des agents par mois.
   - Relevé de gérance distinguant l'appelé, l'encaissé, l'impayé, les honoraires, la TVA et les dépenses, avec le net à reverser.
   - Paramètres financiers de l'agence (assujettissement et taux de TVA, comptes comptables de la gestion locative).
-  - Vie du bail : révision du loyer, solde de tout compte, avec historique.
-- Comptabilité de la gestion locative : écritures automatiques en partie double et exports journal, grand livre et balance (CSV, Excel) pour le cabinet comptable.
 - Notifications internes à l'application (avec compteur de non-lus) et messagerie directe entre l'agence, les propriétaires, les locataires et les contacts : spécifiées, pas encore disponibles en production.
 
 ---
@@ -581,7 +581,7 @@ Le site immotopia.cloud contient des accroches commerciales qui vont plus loin q
 
 - Une intégration directe du Mobile Money (Wave, CinetPay, Orange Money, MTN MoMo) avec paiement en ligne, confirmation par l'opérateur et rapprochement automatique « en temps réel ». Seuls l'enregistrement des paiements Mobile Money et la déclaration / validation par le locataire sont établis.
 - La génération et l'envoi automatiques d'une quittance à chaque paiement Mobile Money.
-- La conformité ou la certification SYSCOHADA des exports, ou des « comptes certifiés ». La comptabilité de copropriété en partie double est établie ; la comptabilité locative et ses exports sont en cours de développement.
+- La conformité ou la certification SYSCOHADA des exports, ou des « comptes certifiés ». La comptabilité de copropriété en partie double et la comptabilité de l'agence avec ses exports (CSV, Excel) sont disponibles, mais aucune certification n'est documentée.
 - La séparation comptable des fonds de tiers (fonds des propriétaires) et de la trésorerie de l'agence : en cours de développement, non confirmée en production.
 - La clôture physique de caisse par caissier (montant attendu, compté, écart) : non décrite. Les pièces de caisse et la file de validation existent.
 - Le calcul automatique des commissions et du partage agence / agents / apporteurs d'affaires, et le net à reverser calculé dans le relevé de gérance : en cours de développement. Le compte courant du propriétaire et les reversements, eux, sont disponibles.
@@ -666,10 +666,10 @@ Oui. L'agence téléverse ses modèles Word avec ses variables (nom de l'agence,
 Oui : ordre du jour, résolutions, votes et pouvoirs par lot, calcul du quorum et compte rendu archivé, en plus des tantièmes, budgets, appels de charges, relances et de la comptabilité de copropriété.
 
 **ImmoTopia fait-il la comptabilité ?**
-La comptabilité de copropriété (partie double, journaux, grand livre, balance) est intégrée au module Syndic. Pour la gestion locative, les écritures automatiques et les exports comptables sont en cours de développement. ImmoTopia n'est pas présenté comme un logiciel de comptabilité générale (bilan, liasse fiscale, paie).
+La comptabilité de copropriété (partie double, journaux, grand livre, balance) est intégrée au module Syndic. Pour la gestion locative, la comptabilité de l'agence (écritures, journal, grand livre, balance) et son export en CSV ou Excel pour le cabinet comptable sont disponibles. ImmoTopia n'est pas présenté comme un logiciel de comptabilité générale (bilan, liasse fiscale, paie).
 
 **Est-ce conforme SYSCOHADA ?**
-Aucune certification n'est documentée. La comptabilité de copropriété est décrite comme conforme OHADA dans les spécifications, et la comptabilité locative en cours de développement utilise des comptes du plan SYSCOHADA paramétrables. Pour un besoin de conformité précis, voir avec l'équipe.
+Aucune certification n'est documentée. La comptabilité de copropriété est décrite comme conforme OHADA dans les spécifications, et la comptabilité de l'agence utilise des comptes du plan SYSCOHADA paramétrables. Pour un besoin de conformité précis, voir avec l'équipe.
 
 **Peut-on suivre un chantier de construction ?**
 Oui, avec le pack Promoteur ou Opérateur intégré : budgets et avenants, coûts réels calculés à partir des factures, salaires, caisse et sorties de stock, bons de commande, avancement, alertes de dépassement, lots et coût de revient, clôture et bascule des lots au patrimoine.
