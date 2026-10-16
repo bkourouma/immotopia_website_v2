@@ -219,7 +219,7 @@ export const financeEtComptabilite: WikiDomain = {
       summary:
         "Consultez le journal, le grand livre, la balance générale et les états auxiliaires des mandants sur la période voulue, puis exportez-les en CSV ou en Excel.",
       intro:
-        "Les écritures passées par la caisse, la trésorerie et les fournisseurs se retrouvent dans les états comptables. Vous choisissez une période et consultez le journal, le grand livre ou la balance, à l'écran ou en fichier. Le grand livre et la balance des mandants détaillent les mouvements par propriétaire ou par copropriété. Pour les biens que vous détenez en propre, les écritures de la gestion locative directe s'écrivent toutes seules.",
+        "Les écritures passées par la caisse, la trésorerie et les fournisseurs se retrouvent dans les états comptables. Vous choisissez une période et consultez le journal, le grand livre ou la balance, à l'écran ou en fichier. Le grand livre et la balance des mandants détaillent les mouvements par propriétaire ou par copropriété. Pour la gestion locative, qu'il s'agisse de biens gérés sous mandat ou de biens que vous détenez en propre, les écritures s'écrivent toutes seules.",
       packs: ["agence", "syndic", "promoteur", "integre", "patrimoine-essentiel", "patrimoine-pro"],
       profiles: ["direction", "gestionnaire", "comptable"],
       menu: "Finance › Caisse et comptabilité › Comptabilité",
@@ -227,7 +227,7 @@ export const financeEtComptabilite: WikiDomain = {
       actions: [
         {
           title: "Consulter le journal comptable",
-          goal: "Lister les écritures d'une période, journal par journal, y compris les écritures automatiques de la gestion locative directe.",
+          goal: "Lister les écritures d'une période, journal par journal, y compris les écritures automatiques de la gestion locative.",
           input: "La période et, si besoin, le journal voulu.",
           output: "Les lignes au débit et au crédit, à l'écran ou en fichier CSV ou Excel.",
         },
@@ -244,13 +244,19 @@ export const financeEtComptabilite: WikiDomain = {
           output: "La balance, à l'écran ou en fichier CSV ou Excel.",
         },
         {
-          title: "Laisser l'application écrire la comptabilité de la gestion locative directe",
-          goal: "Pour un bien que vous détenez en propre (ni indivision, ni propriétaire tiers), chaque événement locatif s'écrit seul au journal : encaissement d'un loyer, créance du locataire, remise ou annulation, dépense du bien. Une pièce modifiée ou supprimée est contre-passée puis réécrite, sans doublon.",
+          title: "Laisser l'application écrire la comptabilité de la gestion locative",
+          goal: "Pour un bien géré sous mandat comme pour un bien que vous détenez en propre, chaque événement locatif s'écrit seul au journal : encaissement d'un loyer, créance du locataire, honoraires de gestion, remise ou annulation, dépense du bien, reversement au propriétaire. Une pièce modifiée ou supprimée est contre-passée puis réécrite, sans doublon.",
           output:
             "Les écritures apparaissent au journal et au grand livre, et le compte du locataire se lit comme son relevé (facturé moins réglé).",
           prereq:
-            "Enregistrer un paiement, générer les échéances ou ajouter une dépense du bien. Concerne les biens détenus en propre, notamment pour les packs Patrimoine.",
+            "Enregistrer un paiement, générer les échéances, ajouter une dépense du bien ou enregistrer un reversement. Les biens sous mandat concernent les packs Agence et Opérateur intégré ; les biens détenus en propre, les packs Patrimoine.",
           profiles: ["equipe"],
+        },
+        {
+          title: "Paramétrer la TVA et les comptes comptables de la gestion locative",
+          goal: "Indiquer si l'agence est assujettie à la TVA et à quel taux, et choisir les comptes comptables qui reçoivent les écritures de la gestion locative.",
+          output: "Les honoraires, la TVA et les écritures de la gestion locative suivent les paramètres financiers de l'agence.",
+          profiles: ["direction", "comptable"],
         },
         {
           title: "Consulter le grand livre des mandants",
@@ -269,6 +275,10 @@ export const financeEtComptabilite: WikiDomain = {
         {
           q: "Peut-on exporter les états comptables vers Excel ?",
           a: "Oui. Le journal, le grand livre, la balance générale et les états des mandants se téléchargent en CSV ou en Excel.",
+        },
+        {
+          q: "La comptabilité de la gestion locative couvre-t-elle les biens sous mandat ?",
+          a: "Oui. Les loyers, les honoraires, les dépenses et les reversements des biens que vous gérez pour des propriétaires s'inscrivent au journal, tout comme les biens que vous détenez en propre. Les packs Agence et Opérateur intégré couvrent les biens sous mandat ; les packs Patrimoine, les biens détenus en propre.",
         },
       ],
       related: ["finance-et-comptabilite/tresorerie", "finance-et-comptabilite/balance-clients"],

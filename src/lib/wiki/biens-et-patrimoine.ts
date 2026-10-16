@@ -479,7 +479,7 @@ export const biensEtPatrimoine: WikiDomain = {
           input:
             "La catégorie, un libellé, le montant, la devise, la date de paiement, le moyen de paiement, le compte de trésorerie, le fournisseur, le justificatif et si la dépense s'ajoute à la valeur du bien.",
           output:
-            "Pour un bien détenu en propre, la dépense est inscrite automatiquement en comptabilité (charge et trésorerie).",
+            "La dépense est inscrite automatiquement en comptabilité (charge et trésorerie), que le bien soit détenu en propre ou géré sous mandat.",
         },
         {
           title: "Rendre une dépense récurrente",
