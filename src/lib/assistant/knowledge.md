@@ -9,12 +9,20 @@ Règles de lecture pour l'assistant :
 - La section « Limites connues et points à ne pas promettre » prime sur toute autre formulation, y compris sur les accroches commerciales du site.
 - Les prix officiels sont fournis séparément (grille tarifaire). Ce document n'en donne que les règles.
 
-## Disponibilité (vérifiée le 23 septembre 2026 — prime sur tout le reste)
+## Disponibilité (vérifiée le 18 octobre 2026 — prime sur tout le reste)
 
-- Disponible et commercialisé : module Agence (biens, annonces, CRM, baux, échéances, paiements, pénalités, dépôts, documents, relevés de gérance, portails propriétaire et locataire), module Syndic, module Promoteur (chantiers, lots et coût de revient, budget et avenants, avancement, dépenses, stock de matériaux, personnel, tâcherons, retenues de garantie, foncier), états des lieux (signature électronique, export et impression PDF, utilisation sur téléphone et tablette, photos par pièce), maintenance, communication e-mail / WhatsApp / newsletter, patrimoine, tableaux de bord, rôles et audit. Packs vendus : **Agence**, **Syndic**, **Promoteur**, **Opérateur intégré**, **Patrimoine Essentiel** et **Patrimoine Pro** (combinables avec 10 % de remise sur le prix de base du moins cher).
-- États des lieux d'entrée et de sortie, disponibles en production (confirmé par l'équipe le 13 octobre 2026) : pièces, compteurs, clés, signataires, retenues sur le dépôt, comparaison entrée / sortie, photos par pièce, signature électronique, export et impression en PDF, utilisation sur téléphone et tablette dans le navigateur (sans application native, connexion Internet nécessaire). L'agence transmet elle-même le PDF exporté au locataire (pas d'envoi automatique documenté). Détail : https://immotopia.cloud/wiki/gestion-locative/etats-des-lieux
+- Disponible et commercialisé : module Agence (biens, annonces, CRM, baux, échéances, paiements, pénalités, dépôts, documents, relevés de gérance, portails propriétaire et locataire), module Syndic, module Promoteur (chantiers, lots et coût de revient, budget et avenants, avancement, dépenses, stock de matériaux, personnel, tâcherons, retenues de garantie, foncier), états des lieux (signature électronique en option payante, export et impression PDF, utilisation sur téléphone et tablette, photos par pièce), maintenance, communication e-mail / WhatsApp / newsletter, patrimoine, tableaux de bord, rôles et audit. Packs vendus : **Agence**, **Syndic**, **Promoteur**, **Opérateur intégré**, **Patrimoine Essentiel** et **Patrimoine Pro** (combinables avec 10 % de remise sur le prix de base du moins cher).
+- États des lieux d'entrée et de sortie, disponibles en production (confirmé par l'équipe le 13 octobre 2026) : pièces, compteurs, clés, signataires, retenues sur le dépôt, comparaison entrée / sortie, photos par pièce, signature électronique (option payante « Signatures électroniques »), export et impression en PDF, utilisation sur téléphone et tablette dans le navigateur (sans application native, connexion Internet nécessaire). L'agence transmet elle-même le PDF exporté au locataire (pas d'envoi automatique documenté). Détail : https://immotopia.cloud/wiki/gestion-locative/etats-des-lieux
 - Disponibles en production (confirmé par l'équipe le 13 octobre 2026) : renouvellement, avenant et résiliation du bail ; honoraires de gestion à trois niveaux (bail, propriétaire, agence), compte courant du propriétaire et reversements aux propriétaires ; finance opérationnelle (fournisseurs, pièces de caisse, dépenses y compris de chantier, file de validation, balances clients et fournisseurs, import Excel).
 - Disponibles en production (confirmé par l'équipe le 16 octobre 2026) : révision / indexation du loyer ; solde de tout compte et historique du bail ; comptabilité de l'agence (écritures de la gestion locative, journal, grand livre, balance) et export comptable (CSV, Excel) ; paramètres financiers de l'agence (assujettissement et taux de TVA, comptes comptables de la gestion locative). La comptabilité automatique de la gestion locative couvre les biens gérés sous mandat (loyers, honoraires, dépenses, reversements) comme les biens détenus en propre (packs Patrimoine).
+- Disponibles en production (versions 1.12.0 à 2.0.0, octobre 2026) :
+  - **Signature électronique** des baux, des états des lieux et des mandats : envoi à signer à distance, écran « Signatures » de suivi (filtres, relance, annulation, PDF), rappels automatiques avant l'expiration. **Option payante** « Signatures électroniques » (blocs de 50 signatures par mois, cumulables), achetable avec tous les packs ; aucune signature n'est incluse dans un pack.
+  - **Prélèvement bancaire des loyers** : créanciers, mandats de prélèvement par bail, remises, prénotification. Inclus dans la gestion locative (packs Agence, Opérateur intégré, Patrimoine Essentiel et Patrimoine Pro), sans commission ImmoTopia ; remise préparée dans l'application et déposée à la banque de l'agence.
+  - **Paiement en ligne des charges de copropriété par Mobile Money** : lien « Payer cet appel » et portail copropriétaire, avec reversements vers la banque de la copropriété. Inclus dans les packs Syndic et Opérateur intégré, sans commission ImmoTopia.
+  - **Assemblée générale en direct** : console du gestionnaire, émargement en ligne, vote en ligne par lien personnel (sans compte), écran de projection, export Word. Incluse dans les packs Syndic et Opérateur intégré. La **visio des assemblées** (salle de visio, main levée, parole, discussion écrite modérée, enregistrement de la séance) est une **option payante** « Visio des assemblées », avec Syndic ou Opérateur intégré.
+  - **Inventaire de chantier par WhatsApp** : le chef de chantier envoie la photo d'un article, l'IA propose l'article et le total. **Option payante** « Inventaire WhatsApp » (blocs de 500 photos analysées par mois, cumulables), avec Promoteur ou Opérateur intégré.
+  - **Export des tableaux** en Excel, CSV et PDF (bouton « Exporter »), et **application installable** sur l'écran d'accueil du téléphone ou de l'ordinateur : tous les packs.
+  - Dans les packs Promoteur et Opérateur intégré : contrôle du stock (alertes, indicateurs, réglages) et écran Magasin pour le magasinier. Dans les packs de gestion locative : retenues sur le dépôt proposées depuis l'état des lieux de sortie.
 - En cours de développement, et présentables comme tels : les fonctions listées dans « Fonctions en cours de développement ». Toujours préciser qu'elles sont en cours de développement ou de déploiement, ne jamais donner de date, et proposer de vérifier leur disponibilité avec l'équipe.
 - Les packs **Promoteur** et **Opérateur intégré** sont affichés avec leur prix. Le module Promoteur (chantiers, BTP) et la finance opérationnelle sont disponibles en production (confirmé par l'équipe le 13 octobre 2026).
 - Les points de la section « Limites » (fonctions non établies) ne sont pas annoncés.
@@ -92,6 +100,10 @@ Couverture fonctionnelle par pack (d'après la proposition de modèle économiqu
 - CRM, mandats, annonces, visites et suivi commercial : Agence, Promoteur, Opérateur intégré.
 - Baux, loyers, échéances, paiements, quittances : Agence, Opérateur intégré, Patrimoine Essentiel et Pro (gestion locative directe de leurs propres biens). Pénalités de retard et dépôts de garantie : Agence, Opérateur intégré.
 - Portails propriétaire et locataire : Agence, Opérateur intégré.
+- Prélèvement bancaire des loyers (sans commission ImmoTopia) : Agence, Opérateur intégré, Patrimoine Essentiel et Pro.
+- Assemblée générale en direct et vote en ligne ; paiement en ligne des charges par Mobile Money (sans commission ImmoTopia) : Syndic, Opérateur intégré.
+- Export des tableaux (Excel, CSV, PDF) et application installable sur téléphone : tous les packs.
+- Options payantes à la carte (prix dans la grille officielle) : Signatures électroniques (tous les packs), Visio des assemblées (Syndic ou Opérateur intégré), Inventaire WhatsApp (Promoteur ou Opérateur intégré).
 - Maintenance et interventions : tous les packs.
 - Syndic (copropriétés, tantièmes, charges, impayés, assemblées générales) : Syndic, Opérateur intégré.
 - Comptabilité de copropriété et budgets : Syndic, Opérateur intégré.
@@ -126,6 +138,8 @@ Couverture fonctionnelle par pack (d'après la proposition de modèle économiqu
 - Création et modification des baux, avec colocataires.
 - Périodicité mensuelle, trimestrielle, semestrielle ou annuelle, et suivi du statut du bail.
 - Fiche détaillée du bail.
+- Signature électronique du bail, de l'état des lieux et du mandat de gestion : option payante « Signatures électroniques » (voir la section « Signature électronique »).
+- Prélèvement bancaire du loyer (voir la section « Prélèvement bancaire des loyers »).
 - Vie du bail : révision / indexation du loyer (les échéances non réglées à partir du mois d'effet sont recalculées, une révision à date future est planifiée), renouvellement, avenant, résiliation, historique chronologique du bail et solde de tout compte (estimation de la somme à rendre au locataire en fin de bail). Disponibles en production (confirmé par l'équipe le 16 octobre 2026).
 
 ### Échéances (appels de loyer)
@@ -169,13 +183,16 @@ Couverture fonctionnelle par pack (d'après la proposition de modèle économiqu
 - Appels de charges : appels individuels et appels en masse (lots d'appels), encaissements des charges, suivi du taux de recouvrement.
 - Recouvrement : vue des retards, relances individuelles ou groupées, pénalités de retard, échéanciers de paiement, moyens de paiement.
 - Assemblées générales : ordre du jour, résolutions, votes et pouvoirs par lot, calcul du quorum, compte rendu archivé.
+- Assemblée générale en direct (incluse dans Syndic et Opérateur intégré) : le gestionnaire pilote la séance depuis une console ; émargement en ligne des copropriétaires et mandataires, quorum recalculé en temps réel, vote en ligne par lien personnel (Pour, Contre ou Abstention, pour tous les lots ou lot par lot, revote possible tant que le vote est ouvert), écran de projection pour la salle, export Word. Le copropriétaire n'a pas besoin de compte. Détail : https://immotopia.cloud/wiki/portails-clients/assemblee-par-lien-personnel
+- Visio des assemblées (option payante « Visio des assemblées », avec Syndic ou Opérateur intégré, par cabinet et toutes copropriétés confondues) : salle de visio dans la page de l'assemblée, main levée, parole donnée ou retirée et exclusion par le gestionnaire, discussion écrite modérée, enregistrement de la séance. Détail : https://immotopia.cloud/wiki/syndic-copropriete/visio-des-assemblees
+- Paiement en ligne des charges par Mobile Money (inclus dans Syndic et Opérateur intégré, sans commission ImmoTopia) : le gestionnaire crée ou envoie au copropriétaire (WhatsApp ou e-mail, avec son consentement) un lien « Payer cet appel » ; le copropriétaire peut aussi payer depuis son portail. Le paiement est rattaché au bon lot, suivi dans l'écran Finances (statuts, vérification, paiements à trancher) et reversé vers le compte bancaire de la copropriété. Détail : https://immotopia.cloud/wiki/portails-clients/payer-un-appel-de-charges
 - Comptabilité de copropriété : plan de comptes, journaux, écritures en partie double verrouillables, grand livre et balance. Les spécifications du module la décrivent comme une comptabilité syndic conforme OHADA.
 - Comptes propriétaires (compte par lot) avec relevé, transactions et ajustements, et écran « Finances ».
 - Prestataires et contrats de maintenance, équipements des parties communes.
 - Incidents de copropriété avec imputation des coûts, et lien vers la maintenance.
 - Documents de copropriété (coffre documentaire) et fonds de la copropriété.
 - Procès-verbal d'assemblée générale : le syndic le génère en Word, le relit, puis le dépose dans les documents de la copropriété (type « procès-verbal »).
-- Portail copropriétaire : sur invitation du syndic, chaque copropriétaire consulte en lecture seule ses lots, le solde et l'historique de son compte, ses appels de charges, ses paiements, reçus et quittances, le relevé de compte en PDF, les assemblées (ses propres votes uniquement), le règlement de copropriété et les procès-verbaux. Il ne peut pas payer ses charges en ligne depuis ce portail. Détail : https://immotopia.cloud/wiki/portails-clients/portail-coproprietaire
+- Portail copropriétaire : sur invitation du syndic, chaque copropriétaire consulte en lecture seule ses lots, le solde et l'historique de son compte, ses appels de charges, ses paiements, reçus et quittances, le relevé de compte en PDF, les assemblées (ses propres votes uniquement), le règlement de copropriété et les procès-verbaux. Il peut régler un appel de charges par Mobile Money (portail ou lien « Payer cet appel »). Détail : https://immotopia.cloud/wiki/portails-clients/portail-coproprietaire
 - Fonds de la copropriété : fonds de roulement (avance de trésorerie pour les dépenses courantes) et fonds de travaux (réserve pour travaux futurs) sont des fonds distincts, avec leur solde et leur journal ; un poste du budget peut alimenter un fonds.
 
 ---
@@ -202,7 +219,9 @@ Le module Promoteur est disponible en production (confirmé par l'équipe le 13 
 - État du stock et journal des mouvements ; réceptions et sorties.
 - Règle : c'est la sortie de stock qui impute le chantier (au coût moyen pondéré du moment), pas la livraison.
 - Coût moyen pondéré par article et par lieu de stockage ; transferts entre lieux (qui ne sont pas des dépenses).
-- Inventaire physique et rapprochement.
+- Inventaire physique et rapprochement ; procès-verbal d'inventaire en PDF, justification ou écart des lignes, abandon d'un inventaire.
+- Contrôle du stock (packs Promoteur et Opérateur intégré) : alertes (écart, sortie ou rebut important, achat en espèces…), indicateurs par lieu et par mois, seuils réglables, rebuts et retours au fournisseur, photos et bons de stock en PDF. Écran Magasin pour le magasinier, utilisable au téléphone, sans voir les valeurs ni la comptabilité.
+- Inventaire de chantier par WhatsApp (option payante « Inventaire WhatsApp », avec Promoteur ou Opérateur intégré) : l'administrateur inscrit un chef de chantier (numéro WhatsApp et chantiers, code d'activation) ; le chef envoie la photo d'un article, l'IA propose l'article et le total, et le comptage arrive dans l'écran « Comptages terrain » avec sa photo comme preuve. Option vendue par blocs de 500 photos analysées par mois, cumulables. Détail : https://immotopia.cloud/wiki/promotion-et-chantiers/inventaire-par-whatsapp
 - Paramétrage : articles (code, unité, famille, poste proposé), lieux de stockage, méthode de valorisation.
 
 ### Personnel et sous-traitance
@@ -269,6 +288,32 @@ La clôture physique de caisse par caissier (montant attendu, compté, écart) n
 - Rendements brut, net et net-net, et projections pluriannuelles (d'après la présentation commerciale).
 - Relevés propriétaire et documents patrimoniaux.
 
+### Signature électronique
+
+- Documents concernés : bail, état des lieux, mandat de gestion, mandat de vente et compromis de vente. Envoi à signer à distance aux signataires ou signature sur place, côte à côte, sur l'appareil de l'agent.
+- Écran « Signatures » (menu Paramétrage) : toutes les demandes de l'agence avec leur statut (en cours, partiellement signée, terminée, refusée, expirée, annulée), relance, annulation, téléchargement du PDF (scellé quand la demande est terminée) et historique avec contrôle d'intégrité. Rappels automatiques aux signataires avant l'expiration.
+- Facturation : option payante « Signatures électroniques », par blocs de 50 signatures par mois, cumulables, avec tous les packs. Aucune signature n'est incluse dans un pack. Le prix figure dans la grille officielle.
+- Le lien et le code de signature peuvent aussi être envoyés par SMS (disponible). La signature électronique du compromis de vente est disponible : elle demande qu'un prestataire de signature qualifié soit en service pour l'agence ; ne nommer aucun fournisseur.
+- Détail : https://immotopia.cloud/wiki/gestion-locative/signature-electronique
+
+### Prélèvement bancaire des loyers
+
+- Inclus dans la gestion locative : packs Agence, Opérateur intégré, Patrimoine Essentiel et Patrimoine Pro. Sans commission ImmoTopia.
+- Créanciers (comptes bancaires de l'agence qui reçoivent les prélèvements), mandats de prélèvement par bail (contrôle de l'IBAN ou du RIB, autorisation en PDF à faire signer, dépôt du scan signé, activation, suspension, révocation), remises de prélèvements et prénotification. ImmoTopia prépare la remise, prévient les locataires et produit le fichier à déposer à la banque de l'agence, qui la marque ensuite comme déposée ; il ne débite pas lui-même les comptes. Le retour de la banque (règlements, rejets) n'est pas livré : ne pas le promettre.
+- Détail : https://immotopia.cloud/wiki/gestion-locative/prelevement-bancaire
+
+### Export des tableaux et application installable
+
+- Export des tableaux : un bouton « Exporter » au-dessus de chaque tableau ou liste propose Excel, CSV et PDF, avec les filtres en cours. Disponible pour tous les packs et tous les profils qui voient le tableau (agence, propriétaire, locataire, copropriétaire). Détail : https://immotopia.cloud/wiki/communication-et-documents/export-des-tableaux
+- Application installable : ImmoTopia s'installe sur l'écran d'accueil du téléphone ou de l'ordinateur depuis le navigateur (bouton « Installer l'application »), avec icône et plein écran, sans magasin d'applications. Ce n'est pas une application native des magasins, et une connexion Internet reste nécessaire. Détail : https://immotopia.cloud/wiki/administration-plateforme/application-installable
+
+### ImmoCopilot, l'assistant IA de l'application
+
+- ImmoCopilot est un assistant de conversation intégré à l'application, accessible depuis toutes les pages de l'agence (bouton flottant « Assistant » ou Ctrl/Cmd+J) et en pleine page. Il est disponible dans les six packs.
+- Il lit les données de l'agence dans la limite des droits de l'utilisateur et de son abonnement, répond en direct et produit des tableaux, des textes ou des graphiques affichés dans un panneau de résultats, téléchargeables (CSV, Excel, image).
+- Il peut proposer des écritures (modifier des données), mais rien n'est modifié sans l'accord explicite de l'utilisateur : une carte d'accord montre ce qui va changer, et les actions sensibles demandent de taper « CONFIRMER ». Il ne supprime rien.
+- Ne pas confondre avec l'assistant immotopIA du site vitrine. Détail : https://immotopia.cloud/wiki/communication-et-documents/assistant-ia-immocopilot
+
 ### Documents et modèles
 
 - Chaque agence téléverse ses propres modèles au format Word (DOCX), avec sa mise en page.
@@ -318,15 +363,15 @@ Les comptes propriétaires et locataires ne sont pas facturés au client ImmoTop
 - WhatsApp : envoi via un fournisseur de messagerie (la documentation cite Twilio), messages groupés, invitation automatique d'un nouveau contact au groupe WhatsApp de l'agence, diffusion automatique d'une annonce au groupe lorsqu'un bien est publié.
 - Newsletter : listes de diffusion, import de contacts par fichier CSV, modèles HTML avec variables, campagnes immédiates ou programmées, statistiques d'envoi, formulaire d'inscription public, double confirmation par e-mail et lien de désinscription dans chaque message.
 - Historique de toutes les communications, filtrable par type, canal, statut, période et destinataire ; un message en échec affiche sa raison, un message planifié peut être annulé.
-- Les SMS ne sont pas documentés comme canal d'envoi.
+- Les SMS ne sont pas documentés comme canal de notification ; seul l'envoi du lien et du code de signature électronique par SMS est disponible.
 - Facturation : les notifications e-mail ordinaires sont incluses ; l'usage de WhatsApp est facturé à la consommation (voir Tarification).
 
 ### Paiements Mobile Money : ce qui est établi
 
 - Le Mobile Money est un moyen de paiement reconnu partout dans l'application : saisie d'un paiement avec l'opérateur (Orange Money, MTN Mobile Money, Moov Money, Wave), déclaration de paiement par le locataire sur son portail, validation par l'agence, suivi dans le tableau de bord (répartition par moyen de paiement).
-- La documentation ne décrit pas, à ce jour, de paiement en ligne initié depuis ImmoTopia ni de connexion directe à un opérateur ou à un agrégateur (Wave, CinetPay, Orange Money, MTN MoMo) avec confirmation automatique et rapprochement automatique au bon dossier. Enregistrer un paiement Mobile Money, recevoir sa confirmation de l'opérateur et l'affecter automatiquement sont trois choses différentes : seule la première est établie.
-- La proposition commerciale prévoit que les frais d'un éventuel prestataire d'encaissement Mobile Money seraient présentés séparément.
-- Réponse recommandée à « Comment fonctionnent les paiements Mobile Money ? » : décrire l'enregistrement et la déclaration/validation, préciser que l'encaissement direct avec rapprochement automatique est à confirmer avec l'équipe, et proposer une démonstration.
+- Charges de copropriété : le paiement en ligne par Mobile Money est disponible (packs Syndic et Opérateur intégré, sans commission ImmoTopia) : lien « Payer cet appel » envoyé par le gestionnaire ou accessible depuis le portail copropriétaire, rattachement automatique au bon lot, suivi des paiements et reversements vers la banque de la copropriété. Les opérateurs précis acceptés par ce parcours et les frais éventuels de l'opérateur de paiement ne sont pas documentés : ne pas les chiffrer.
+- Loyers : l'enregistrement du paiement Mobile Money, la déclaration par le locataire et la validation par l'agence sont établis. Un paiement en ligne des loyers avec rapprochement automatique n'est pas décrit dans cette base : à confirmer avec l'équipe.
+- Réponse recommandée à « Comment fonctionnent les paiements Mobile Money ? » : décrire l'enregistrement et la déclaration/validation pour les loyers, le paiement en ligne pour les charges de copropriété, et proposer une démonstration pour le reste.
 
 ### Comptabilité
 
@@ -358,9 +403,9 @@ Dans les écrans financiers, des encadrés expliquent pourquoi une règle existe
 
 ## Accès et utilisation
 
-- ImmoTopia est une application web : on l'utilise depuis un navigateur, sans installation.
+- ImmoTopia est une application web : on l'utilise depuis un navigateur, sans rien à installer, et elle est installable sur l'écran d'accueil du téléphone ou de l'ordinateur si on le souhaite.
 - Connexion des clients existants : https://app.immotopia.cloud/login
-- Utilisable sur ordinateur, tablette et téléphone mobile via le navigateur. L'interface mobile propose une barre d'onglets (Accueil, Biens, Baux, Encaisser, Plus). Il n'existe pas d'application mobile native documentée (ni sur l'App Store ni sur Google Play).
+- Utilisable sur ordinateur, tablette et téléphone mobile via le navigateur. L'interface mobile propose une barre d'onglets (Accueil, Biens, Baux, Encaisser, Plus). Il n'existe pas d'application mobile native documentée (ni sur l'App Store ni sur Google Play), mais ImmoTopia est installable sur l'écran d'accueil du téléphone comme une application (bouton « Installer l'application », sans magasin d'applications).
 - Langues : interface en français, avec un sélecteur de langue permettant aussi l'anglais et l'arabe (l'arabe s'affiche de droite à gauche). Cet ajout date de septembre 2026 ; toute chaîne non traduite s'affiche en français.
 - Une connexion Internet est nécessaire : le fonctionnement hors ligne n'est pas documenté.
 
@@ -373,7 +418,7 @@ Les montants exacts des packs, capacités incluses, extensions et frais de mise 
 ### Principes
 
 - Prix mensuels en FCFA, hors taxes applicables.
-- Six packs : Agence, Syndic, Promoteur, Opérateur intégré, Patrimoine Essentiel et Patrimoine Pro, chacun avec une capacité incluse (lots sous mandat ; copropriétés et lots ; chantiers et lots de programme ; biens détenus en propre) et une extension au-delà. Le dépassement est facturé, pas bloqué.
+- Six packs : Agence, Syndic, Promoteur, Opérateur intégré, Patrimoine Essentiel et Patrimoine Pro (plus trois options payantes à la carte), chacun avec une capacité incluse (lots sous mandat ; copropriétés et lots ; chantiers et lots de programme ; biens détenus en propre) et une extension au-delà. Le dépassement est facturé, pas bloqué.
 - Factures émises par Alliance Consultants, TVA de 18 % ajoutée aux prix hors taxes.
 - Le mensuel est payé d'avance.
 - Offre de lancement : le premier mois d'abonnement est offert sur tous les packs, sans engagement (résiliable à tout moment). La mise en route accompagnée, si elle est choisie, reste facturée.
@@ -387,7 +432,8 @@ Les montants exacts des packs, capacités incluses, extensions et frais de mise 
 - Aucune commission ImmoTopia sur les loyers, aucun prélèvement d'un pourcentage du prix de vente.
 - Le socle et les notifications e-mail ordinaires sont inclus.
 - WhatsApp est facturé à la consommation, quel que soit le pack (crédits prépayés ou consommation refacturée selon une grille en FCFA). Aucun « WhatsApp illimité » n'est inclus. La grille de consommation WhatsApp n'est pas encore publiée.
-- Les frais d'un éventuel prestataire d'encaissement Mobile Money seraient présentés séparément.
+- Options payantes à la carte (montants dans la grille officielle) : Signatures électroniques (blocs de 50 signatures par mois, cumulables, avec tous les packs), Visio des assemblées (par cabinet, avec Syndic ou Opérateur intégré), Inventaire WhatsApp (blocs de 500 photos par mois, cumulables, avec Promoteur ou Opérateur intégré). Une option se souscrit en plus d'un pack et ne s'inclut dans aucun pack.
+- Le paiement en ligne des charges et le prélèvement bancaire des loyers ne donnent lieu à aucune commission d'ImmoTopia.
 - La mise en route accompagnée est facultative et facturée une fois (voir ci-dessous).
 
 ### Exemples de calcul (avant taxes et messages consommés, d'après la proposition commerciale)
@@ -578,19 +624,19 @@ Le site publie un comparatif sur https://immotopia.cloud/comparatif : ImmoTopia 
 
 Le site immotopia.cloud contient des accroches commerciales qui vont plus loin que la documentation de l'application. Tant que l'équipe ne l'a pas confirmé, l'assistant ne doit pas affirmer :
 
-- Une intégration directe du Mobile Money (Wave, CinetPay, Orange Money, MTN MoMo) avec paiement en ligne, confirmation par l'opérateur et rapprochement automatique « en temps réel ». Seuls l'enregistrement des paiements Mobile Money et la déclaration / validation par le locataire sont établis.
+- Pour les loyers, un paiement en ligne Mobile Money (Wave, CinetPay, Orange Money, MTN MoMo) avec confirmation par l'opérateur et rapprochement automatique « en temps réel » : seuls l'enregistrement des paiements et la déclaration / validation par le locataire sont établis. Pour les charges de copropriété, le paiement en ligne existe (lien « Payer cet appel », portail).
 - La génération et l'envoi automatiques d'une quittance à chaque paiement Mobile Money.
 - La conformité ou la certification SYSCOHADA des exports, ou des « comptes certifiés ». La comptabilité de copropriété en partie double et la comptabilité de l'agence avec ses exports (CSV, Excel) sont disponibles, mais aucune certification n'est documentée.
 - La séparation comptable des fonds de tiers (fonds des propriétaires) et de la trésorerie de l'agence : en cours de développement, non confirmée en production.
 - La clôture physique de caisse par caissier (montant attendu, compté, écart) : non décrite. Les pièces de caisse et la file de validation existent.
 - Le calcul automatique des commissions et du partage agence / agents / apporteurs d'affaires, et le net à reverser calculé dans le relevé de gérance : en cours de développement. Le compte courant du propriétaire et les reversements, eux, sont disponibles.
-- La signature électronique des baux (« baux signés numériquement ») : non documentée. La génération des contrats en Word depuis les modèles de l'agence est établie. La signature électronique de l'état des lieux, elle, existe.
+- La signature électronique est une option payante (« Signatures électroniques », blocs de 50 signatures par mois) : ne jamais dire qu'elle est incluse dans un pack. Elle couvre le bail, l'état des lieux, les mandats et le compromis de vente (ce dernier exige un prestataire de signature qualifié en service pour l'agence ; ne nommer aucun fournisseur).
 - Une API ouverte et des webhooks à disposition des clients : seule une interface publique de publication des annonces (pour un site vitrine) et la réception des messages WhatsApp entrants sont documentées.
-- Des SMS automatiques : non documentés (e-mail et WhatsApp le sont).
+- Des SMS automatiques de relance ou de notification : non documentés (e-mail et WhatsApp le sont). Seul l'envoi du lien et du code de signature par SMS est disponible.
 - Un site vitrine fourni à l'agence ou la diffusion automatique vers des portails d'annonces : non documentés.
 - Un fonctionnement hors ligne ou une installation locale : non documentés.
-- Une application mobile native : non documentée (application web utilisable sur mobile).
-- Un assistant d'intelligence artificielle dans l'application, ou une « automatisation par IA » (tri des e-mails, suggestions) : non documentés. L'ancien site en parlait ; ce n'est pas établi. L'assistant immotopIA du site n'est pas une fonction de l'application.
+- Une application mobile native des magasins d'applications : non documentée (application web installable sur l'écran d'accueil du téléphone).
+- Une « automatisation par IA » au-delà d'ImmoCopilot (tri des e-mails, suggestions automatiques) : non documentée. L'assistant immotopIA du site n'est pas une fonction de l'application : l'assistant de l'application s'appelle ImmoCopilot (voir « ImmoCopilot, l'assistant IA de l'application »).
 - Un portail de réservation ou de commercialisation pour les acquéreurs d'un programme : non documenté.
 
 ### Informations absentes des sources (répondre qu'elles ne sont pas disponibles et orienter vers l'équipe)
@@ -623,7 +669,7 @@ Alliance Consultants, éditeur de logiciels basé à Abidjan depuis 2003 (https:
 Non. C'est une application web accessible depuis un navigateur, sur ordinateur, tablette ou mobile. Les clients se connectent sur https://app.immotopia.cloud/login.
 
 **Existe-t-il une application mobile ?**
-Il n'existe pas d'application native documentée. L'application web s'utilise sur téléphone, avec une barre d'onglets mobile (Accueil, Biens, Baux, Encaisser, Plus).
+Il n'existe pas d'application native documentée dans les magasins d'applications. L'application web s'utilise sur téléphone, avec une barre d'onglets mobile (Accueil, Biens, Baux, Encaisser, Plus), et s'installe sur l'écran d'accueil comme une application (bouton « Installer l'application »). Une connexion Internet est nécessaire.
 
 **Combien coûte ImmoTopia ?**
 Six packs mensuels en FCFA hors taxes (Agence, Syndic, Promoteur, Opérateur intégré, Patrimoine Essentiel, Patrimoine Pro), avec capacité incluse et extensions. Voir la grille officielle et le simulateur sur https://immotopia.cloud/tarifs. Les prix sont en cours de validation ; le devis fait foi.
@@ -650,7 +696,7 @@ Non. Un client qui prépare et saisit lui-même ses données démarre sans frais
 La mise en route accompagnée inclut une reprise préparée dans un périmètre défini (par exemple 100 logements pour le pack Agence). L'application sait importer des pièces financières depuis un fichier Excel et des contacts de newsletter en CSV. Pour un historique complexe ou un autre logiciel, l'équipe étudie le cas et établit un devis.
 
 **Comment fonctionnent les paiements Mobile Money ?**
-Chaque paiement peut être enregistré avec le moyen « Mobile Money » et l'opérateur (Orange Money, MTN Mobile Money, Moov Money, Wave). Le locataire peut aussi déclarer son paiement depuis son portail, et l'agence le valide ; le tableau de bord suit les encaissements par moyen de paiement. Le paiement en ligne avec rapprochement automatique par l'opérateur est à confirmer avec l'équipe lors d'une démonstration.
+Chaque paiement peut être enregistré avec le moyen « Mobile Money » et l'opérateur (Orange Money, MTN Mobile Money, Moov Money, Wave). Le locataire peut aussi déclarer son paiement depuis son portail, et l'agence le valide ; le tableau de bord suit les encaissements par moyen de paiement. Pour les charges de copropriété, le copropriétaire peut payer en ligne par Mobile Money (lien « Payer cet appel » ou portail), sans commission ImmoTopia ; pour les loyers, le paiement en ligne avec rapprochement automatique est à confirmer avec l'équipe lors d'une démonstration.
 
 **Mes locataires peuvent-ils voir leurs paiements et documents ?**
 Oui. Le portail locataire affiche le bail, les échéances, le solde, l'historique des paiements, le dépôt de garantie et les documents (contrat, quittances, reçus). Le locataire peut aussi déclarer un paiement et ouvrir un ticket de maintenance avec photos.
@@ -662,7 +708,25 @@ Le portail propriétaire montre leurs biens, baux, échéances, paiements encais
 Oui. L'agence téléverse ses modèles Word avec ses variables (nom de l'agence, loyer, locataire…) ; les documents sont générés automatiquement et numérotés en continu.
 
 **Le module syndic gère-t-il les assemblées générales ?**
-Oui : ordre du jour, résolutions, votes et pouvoirs par lot, calcul du quorum et compte rendu archivé, en plus des tantièmes, budgets, appels de charges, relances et de la comptabilité de copropriété.
+Oui : ordre du jour, résolutions, votes et pouvoirs par lot, calcul du quorum et compte rendu archivé, avec une assemblée en direct (émargement et vote en ligne par lien personnel, incluse dans le pack Syndic) ; la visio est une option payante. S'ajoutent des tantièmes, budgets, appels de charges, relances et de la comptabilité de copropriété.
+
+**Peut-on signer les baux et les mandats électroniquement ?**
+Oui : bail, état des lieux et mandats s'envoient à signer à distance, avec un écran de suivi et des rappels. C'est une option payante (« Signatures électroniques », blocs de 50 signatures par mois, avec tous les packs) ; aucune signature n'est incluse dans un pack. Voir la grille tarifaire pour le prix.
+
+**Peut-on prélever les loyers sur le compte bancaire du locataire ?**
+Oui : le prélèvement bancaire des loyers est inclus dans la gestion locative (Agence, Opérateur intégré, Patrimoine Essentiel et Pro), sans commission ImmoTopia. ImmoTopia gère les mandats, prépare la remise, prévient les locataires (prénotification) et produit le fichier à déposer à la banque de l'agence ; il ne débite pas lui-même les comptes, et le retour de la banque n'est pas livré.
+
+**Peut-on tenir l'assemblée générale en visioconférence ?**
+Oui, avec l'option payante « Visio des assemblées » (salle de visio, discussion modérée, enregistrement), pour Syndic ou Opérateur intégré. L'assemblée en direct avec vote en ligne est, elle, incluse dans ces packs.
+
+**Les copropriétaires peuvent-ils payer leurs charges en ligne ?**
+Oui, par Mobile Money, via le lien « Payer cet appel » ou le portail copropriétaire, sans commission ImmoTopia (packs Syndic et Opérateur intégré).
+
+**Peut-on faire l'inventaire d'un chantier par WhatsApp ?**
+Oui, avec l'option payante « Inventaire WhatsApp » (blocs de 500 photos par mois, avec Promoteur ou Opérateur intégré) : le chef de chantier envoie la photo d'un article et l'IA propose l'article et le total.
+
+**Peut-on exporter les tableaux ?**
+Oui : tous les tableaux s'exportent en Excel, CSV ou PDF, pour tous les packs.
 
 **ImmoTopia fait-il la comptabilité ?**
 La comptabilité de copropriété (partie double, journaux, grand livre, balance) est intégrée au module Syndic. Pour la gestion locative, la comptabilité de l'agence (écritures, journal, grand livre, balance) et son export en CSV ou Excel pour le cabinet comptable sont disponibles ; elle couvre les biens gérés sous mandat (loyers, honoraires, dépenses, reversements) comme les biens détenus en propre, avec des paramètres financiers de l'agence (assujettissement et taux de TVA, comptes comptables). ImmoTopia n'est pas présenté comme un logiciel de comptabilité générale (bilan, liasse fiscale, paie).

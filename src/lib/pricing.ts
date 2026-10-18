@@ -41,7 +41,7 @@ export const packs: Pack[] = [
     available: true,
     highlights: [
       "CRM : contacts et prospects, ventes",
-      "Gestion locative : baux, échéances, paiements",
+      "Gestion locative : baux, échéances, paiements, prélèvement bancaire des loyers",
       "Portails propriétaire et locataire",
       "Patrimoine, biens et documents",
       "Finance, maintenance et communication",
@@ -60,7 +60,8 @@ export const packs: Pack[] = [
     highlights: [
       "Copropriétés, lots et tantièmes",
       "Appels de charges et relances",
-      "Assemblées générales",
+      "Assemblées générales, en direct avec vote en ligne",
+      "Paiement en ligne des charges par Mobile Money, sans commission ImmoTopia",
       "Portail copropriétaire",
       "Biens, contacts, documents et finance",
       "Maintenance, communication, rôles et audit",
@@ -111,7 +112,7 @@ export const packs: Pack[] = [
     limit: "Gestion locative directe de vos propres biens, sans mandat ni propriétaire tiers.",
     highlights: [
       "Vue patrimoniale : valeur des biens, emprunts, ratios bancaires, projections par bien",
-      "Gestion locative directe de vos propres biens : baux, loyers, quittances",
+      "Gestion locative directe de vos propres biens : baux, loyers, quittances, prélèvement bancaire des loyers",
       "Documents, finance, maintenance et communication",
       "Rôles et audit",
       "Valeur nette et projections consolidées : bientôt (en développement)",
@@ -129,7 +130,7 @@ export const packs: Pack[] = [
     limit: "Gestion locative directe de vos propres biens, sans mandat ni propriétaire tiers. Ne se cumule pas avec l'Essentiel : on change de pack.",
     highlights: [
       "Vue patrimoniale : valeur des biens, emprunts, ratios bancaires, projections par bien",
-      "Gestion locative directe de vos propres biens : baux, loyers, quittances",
+      "Gestion locative directe de vos propres biens : baux, loyers, quittances, prélèvement bancaire des loyers",
       "Documents, finance, maintenance et communication",
       "Rôles et audit",
       "Valeur nette et projections consolidées : bientôt (en développement)",
@@ -149,7 +150,7 @@ const packsEnText: Record<PackId, Pick<Pack, "name" | "audience" | "included" | 
     extension: "Block of 10 lots: 1,500 FCFA/month (150 FCFA per lot), 750 FCFA beyond the 300th lot",
     highlights: [
       "CRM: contacts and prospects, sales",
-      "Property management: leases, due dates, payments",
+      "Property management: leases, due dates, payments, bank direct debit of rent",
       "Owner and tenant portals",
       "Portfolio, properties and documents",
       "Finance, maintenance and communication",
@@ -164,7 +165,8 @@ const packsEnText: Record<PackId, Pick<Pack, "name" | "audience" | "included" | 
     highlights: [
       "Condominiums, lots and ownership shares",
       "Service charge calls and reminders",
-      "General meetings",
+      "General meetings, live with online voting",
+      "Online payment of service charges by Mobile Money, no ImmoTopia commission",
       "Co-owner portal",
       "Properties, contacts, documents and finance",
       "Maintenance, communication, roles and audit trail",
@@ -202,7 +204,7 @@ const packsEnText: Record<PackId, Pick<Pack, "name" | "audience" | "included" | 
     limit: "Direct rental management of your own properties, with no mandate and no third-party owner.",
     highlights: [
       "Portfolio view: property values, loans, bank ratios, per-property projections",
-      "Direct rental management of your own properties: leases, rent, receipts",
+      "Direct rental management of your own properties: leases, rent, receipts, bank direct debit of rent",
       "Documents, finance, maintenance and communication",
       "Roles and audit trail",
       "Consolidated net worth and projections: coming soon (in development)",
@@ -216,7 +218,7 @@ const packsEnText: Record<PackId, Pick<Pack, "name" | "audience" | "included" | 
     limit: "Direct rental management of your own properties, with no mandate and no third-party owner. Cannot be combined with Essential: switch packs instead.",
     highlights: [
       "Portfolio view: property values, loans, bank ratios, per-property projections",
-      "Direct rental management of your own properties: leases, rent, receipts",
+      "Direct rental management of your own properties: leases, rent, receipts, bank direct debit of rent",
       "Documents, finance, maintenance and communication",
       "Roles and audit trail",
       "Consolidated net worth and projections: coming soon (in development)",
@@ -242,16 +244,20 @@ const coverageAll: { label: string; en: string; cells: Cells; live: boolean }[] 
   { label: "Contacts, rôles, audit, tableaux de bord", en: "Contacts, roles, audit trail, dashboards", cells: [true, true, true, true, true, true], live: true },
   { label: "CRM, mandats, annonces, visites et suivi commercial", en: "CRM, mandates, listings, viewings and sales follow-up", cells: [true, false, true, true, false, false], live: true },
   { label: "Baux, loyers, échéances, paiements et quittances", en: "Leases, rent, due dates, payments and receipts", cells: [true, false, false, true, true, true], live: true },
+  { label: "Prélèvement bancaire des loyers, sans commission ImmoTopia", en: "Bank direct debit of rent, no ImmoTopia commission", cells: [true, false, false, true, true, true], live: true },
   { label: "Pénalités de retard et dépôts de garantie", en: "Late fees and security deposits", cells: [true, false, false, true, false, false], live: true },
   { label: "Portails propriétaire et locataire", en: "Owner and tenant portals", cells: [true, false, false, true, false, false], live: true },
   { label: "Maintenance et interventions", en: "Maintenance and work orders", cells: [true, true, true, true, true, true], live: true },
   { label: "Syndic : copropriétés, tantièmes, charges, impayés, AG", en: "Condominiums: ownership shares, service charges, arrears, general meetings", cells: [false, true, false, true, false, false], live: true },
+  { label: "Assemblée générale en direct : émargement et vote en ligne par lien personnel", en: "Live general meeting: online attendance and voting through a personal link", cells: [false, true, false, true, false, false], live: true },
+  { label: "Paiement en ligne des charges par Mobile Money, sans commission ImmoTopia", en: "Online payment of service charges by Mobile Money, no ImmoTopia commission", cells: [false, true, false, true, false, false], live: true },
   { label: "Comptabilité de copropriété et budgets", en: "Condominium accounting and budgets", cells: [false, true, false, true, false, false], live: true },
   { label: "Chantiers : budgets, coûts, achats, avancement, lots, clôture", en: "Construction sites: budgets, costs, purchasing, progress, lots, close-out", cells: [false, false, true, true, false, false], live: true },
   { label: "BTP : matériaux et stock, personnel, tâcherons, terrain", en: "Construction: materials and stock, staff, subcontractors, field work", cells: [false, false, true, true, false, false], live: true },
   { label: "Finance", en: "Finance", cells: [true, true, true, true, true, true], live: true },
   { label: "Patrimoine : valeur des biens, emprunts, ratios bancaires, projections par bien", en: "Portfolio: property values, loans, bank ratios, per-property projections", cells: [true, false, true, true, true, true], live: true },
   { label: "Communication : e-mail, modèles, rappels, WhatsApp, newsletter", en: "Communication: email, templates, reminders, WhatsApp, newsletter", cells: [true, true, true, true, true, true], live: true },
+  { label: "Export des tableaux (Excel, CSV, PDF) et application installable sur téléphone", en: "Table export (Excel, CSV, PDF) and installable phone app", cells: [true, true, true, true, true, true], live: true },
 ];
 
 const activeIdx = packs.map((p, i) => (p.available ? i : -1)).filter((i) => i >= 0);
@@ -293,6 +299,30 @@ export const extensions: { name: Record<Locale, string>; price: Record<Locale, s
     note: {
       fr: "990 FCFA le bien, avec Patrimoine Essentiel. Avec le Pro, le dépassement est facturé 2 990 FCFA le bloc de 10 (299 FCFA le bien).",
       en: "990 FCFA per property, with Portfolio Essential. With Pro, overage is billed 2,990 FCFA per block of 10 (299 FCFA per property).",
+    },
+  },
+  {
+    name: { fr: "Signatures électroniques — bloc de 50", en: "Electronic signatures — block of 50" },
+    price: { fr: "5 000 FCFA/mois", en: "5,000 FCFA/month" },
+    note: {
+      fr: "50 signatures par mois par bloc, cumulable, avec tous les packs. Aucune signature n'est incluse dans un pack. Baux, états des lieux et mandats.",
+      en: "50 signatures per month per block, stackable, with every pack. No signature is included in a pack. Leases, inspection reports and mandates.",
+    },
+  },
+  {
+    name: { fr: "Visio des assemblées", en: "Meeting video conferencing" },
+    price: { fr: "10 000 FCFA/mois", en: "10,000 FCFA/month" },
+    note: {
+      fr: "Par cabinet, toutes copropriétés confondues. Syndic ou Intégré. Salle de visio, discussion modérée et enregistrement des séances.",
+      en: "Per firm, all condominiums included. Condo Management or Integrated. Video room, moderated chat and meeting recording.",
+    },
+  },
+  {
+    name: { fr: "Inventaire WhatsApp — bloc de 500 photos", en: "WhatsApp inventory — block of 500 photos" },
+    price: { fr: "25 000 FCFA/mois", en: "25,000 FCFA/month" },
+    note: {
+      fr: "500 photos analysées par mois et par bloc, cumulable. Promoteur ou Intégré.",
+      en: "500 photos analysed per month per block, stackable. Developer or Integrated.",
     },
   },
 ];

@@ -365,6 +365,19 @@ export const agenceEtAbonnement: WikiDomain = {
       profiles: ["direction", "equipe"],
       menu: "Agence › Paramètres de l'agence",
       status: "disponible",
+      sections: [
+        {
+          title: "Les extensions payantes",
+          body: [
+            "En plus de votre pack, trois extensions s'ajoutent à la demande. Aucune n'est incluse dans un pack ; leurs prix sont sur la page [Tarifs](/tarifs).",
+            [
+              "Signatures électroniques : l'envoi pour signature des baux, états des lieux, mandats et compromis, par blocs de 50 signatures par mois, cumulables, avec les six packs. Voir la [signature électronique](/wiki/gestion-locative/signature-electronique).",
+              "Visio des assemblées : la salle de visioconférence des assemblées générales de copropriété, avec le pack Syndic ou Opérateur intégré. Voir la [visio des assemblées](/wiki/syndic-copropriete/visio-des-assemblees).",
+              "Inventaire WhatsApp : le comptage du stock de chantier par photo envoyée sur WhatsApp, par blocs de 500 photos par mois, avec le pack Promoteur ou Opérateur intégré. Voir l'[inventaire par WhatsApp](/wiki/promotion-et-chantiers/inventaire-par-whatsapp).",
+            ],
+          ],
+        },
+      ],
       actions: [
         {
           title: "Consulter son pack et ses limites",
@@ -377,7 +390,7 @@ export const agenceEtAbonnement: WikiDomain = {
           title: "Demander une extension",
           goal: "Demander plus de capacité ou un élément supplémentaire, sans quitter l'application.",
           input: "Ce que vous souhaitez ajouter, la quantité et un message.",
-          output: "La demande est enregistrée et l'équipe ImmoTopia en est prévenue par e-mail. Seules les extensions vendues avec votre pack sont proposées.",
+          output: "La demande est enregistrée et l'équipe ImmoTopia en est prévenue par e-mail. Seules les extensions vendues avec votre pack sont proposées, y compris les extensions Signatures électroniques, Visio des assemblées et Inventaire WhatsApp.",
         },
         {
           title: "Suivre ses demandes d'extension",
@@ -403,8 +416,15 @@ export const agenceEtAbonnement: WikiDomain = {
           q: "Comment augmenter une limite de mon abonnement ?",
           a: "Depuis les paramètres de l'agence, vous envoyez une demande d'extension avec un message. L'équipe ImmoTopia est prévenue par e-mail et vous suivez vos demandes dans l'historique.",
         },
+        {
+          q: "Les signatures électroniques sont-elles comprises dans mon pack ?",
+          a: "Non. Les signatures électroniques, la visio des assemblées et l'inventaire WhatsApp sont des extensions payantes, à ajouter à n'importe quel pack qui ouvre le module concerné. Les prix figurent sur la page Tarifs.",
+        },
       ],
-      related: ["agence-et-abonnement/factures-abonnement"],
+      related: [
+        "agence-et-abonnement/factures-abonnement",
+        "promotion-et-chantiers/inventaire-par-whatsapp",
+      ],
     },
     {
       slug: "factures-abonnement",

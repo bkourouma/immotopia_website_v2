@@ -192,7 +192,7 @@ export const biensEtPatrimoine: WikiDomain = {
       summary:
         "Prenez en gestion les biens de propriétaires privés : mandats datés, révocation avec historique, et quotes-parts de chaque propriétaire en indivision.",
       intro:
-        "Quand un propriétaire vous confie son bien, le mandat de gestion formalise cette prise en charge dans ImmoTopia. Vous suivez ses dates, son périmètre et l'ensemble des mandats en cours de l'agence. Pour un bien détenu à plusieurs, vous indiquez la quote-part de chaque propriétaire. Un mandat révoqué reste dans l'historique. Les packs Patrimoine couvrent la gestion locative directe de vos propres biens, sans mandat ni propriétaire tiers : un compte Patrimoine seul ne peut pas créer de mandat ni rattacher de propriétaire tiers.",
+        "Quand un propriétaire vous confie son bien, le mandat de gestion formalise cette prise en charge dans ImmoTopia. Vous suivez ses dates, son périmètre et l'ensemble des mandats en cours de l'agence. Pour un bien détenu à plusieurs, vous indiquez la quote-part de chaque propriétaire. Un mandat révoqué reste dans l'historique. Les packs Patrimoine couvrent la gestion locative directe de vos propres biens, sans mandat ni propriétaire tiers : un compte Patrimoine seul ne peut pas créer de mandat ni rattacher de propriétaire tiers. Un mandat actif peut être envoyé au propriétaire pour [signature électronique](/wiki/gestion-locative/signature-electronique) : cet envoi demande l'extension payante « Signatures électroniques » (voir les [Tarifs](/tarifs)).",
       packs: ["agence", "promoteur", "integre"],
       profiles: ["equipe"],
       menu: "Biens › Toutes les propriétés › fiche bien",
@@ -221,6 +221,34 @@ export const biensEtPatrimoine: WikiDomain = {
           output: "Le mandat devient inactif et reste dans l'historique, avec la date et l'auteur de la révocation.",
         },
         {
+          title: "Envoyer un mandat de gestion pour signature",
+          goal: "Faire signer le mandat de gestion par voie électronique, par le propriétaire mandant et par l'agent de l'agence, depuis le bouton « Signatures » de chaque mandat actif.",
+          input:
+            "Les signataires (le propriétaire, contact lié au bien, et l'agent qui envoie), le canal de chacun (e-mail, WhatsApp, SMS ou en face à face), l'ordre de signature si vous le souhaitez et une échéance de 1 à 30 jours.",
+          output:
+            "Une demande de signature envoyée avec le document du mandat généré à l'envoi. Chaque signataire reçoit son lien personnel.",
+          prereq:
+            "Le mandat est actif, pas encore signé et pas révoqué, il n'a pas déjà une demande en cours, et l'agence a l'extension payante « Signatures électroniques ».",
+        },
+        {
+          title: "Consulter les signatures d'un mandat de gestion",
+          goal: "Suivre la signature du mandat : demandes envoyées, statut de chaque signataire et historique, puis récupérer le document.",
+          output:
+            "Le statut de chaque signataire, l'historique de la demande, le PDF envoyé et, quand tout le monde a signé, le PDF signé.",
+          prereq: "Une demande de signature a été envoyée pour ce mandat.",
+        },
+        {
+          title: "Voir la date de signature d'un mandat de gestion",
+          goal: "Savoir d'un coup d'œil quels mandats sont signés, dans la colonne « Signature » de l'onglet du mandat.",
+          output: "« Signé le » suivi de la date quand la signature est terminée, « — » tant que le mandat n'est pas signé.",
+        },
+        {
+          title: "Annuler les demandes de signature en cours à la révocation du mandat",
+          goal: "Éviter qu'un mandat révoqué soit encore signé : ses demandes de signature en cours sont annulées automatiquement et leurs liens cessent d'agir.",
+          output: "Les demandes en cours sont annulées. Une demande déjà signée n'est pas annulée.",
+          prereq: "Une demande de signature était en cours au moment de la révocation.",
+        },
+        {
           title: "Consulter la répartition des quotes-parts",
           goal: "Voir les propriétaires d'un bien en indivision et la part de chacun.",
           output:
@@ -245,8 +273,12 @@ export const biensEtPatrimoine: WikiDomain = {
           q: "Que devient un mandat révoqué ?",
           a: "Il n'est plus actif, mais il reste dans l'historique avec la date et l'auteur de la révocation.",
         },
+        {
+          q: "Peut-on faire signer le mandat de gestion en ligne ?",
+          a: "Oui. Depuis le bouton « Signatures » d'un mandat actif, vous envoyez le mandat au propriétaire et à l'agent pour signature électronique. Cet envoi demande l'extension payante « Signatures électroniques », décrite dans la page Tarifs.",
+        },
       ],
-      related: ["biens-et-patrimoine/fiche-bien"],
+      related: ["biens-et-patrimoine/fiche-bien", "gestion-locative/signature-electronique"],
     },
     {
       slug: "visites-immobilieres",
