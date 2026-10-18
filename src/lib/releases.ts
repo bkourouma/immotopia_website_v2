@@ -17,6 +17,37 @@ export const isPatch = (r: Release) => !r.version.endsWith(".0");
 
 export const releases: Release[] = [
   {
+    version: "2.0.0",
+    date: "2026-10-17",
+    title: { fr: "Signature électronique, prélèvement bancaire et paiement des charges", en: "Electronic signature, bank direct debit and service charge payment" },
+    items: [
+      {
+        fr: "Signature électronique des baux, des états des lieux et des mandats, avec un écran Signatures pour suivre les demandes et des rappels automatiques aux signataires (option payante)",
+        en: "Electronic signature of leases, inspection reports and mandates, with a Signatures screen to follow requests and automatic reminders to signatories (paid option)",
+      },
+      {
+        fr: "Prélèvement bancaire des loyers : mandats de prélèvement, remises et prénotification",
+        en: "Bank direct debit of rent: direct debit mandates, batches and pre-notification",
+      },
+      {
+        fr: "Paiement en ligne des charges de copropriété par Mobile Money, depuis le lien « Payer cet appel » et le portail copropriétaire",
+        en: "Online payment of condominium service charges by Mobile Money, from the “Pay this call” link and the co-owner portal",
+      },
+      {
+        fr: "Visio des assemblées générales avec discussion modérée et enregistrement de la séance (option payante)",
+        en: "Video conferencing for general meetings, with moderated chat and meeting recording (paid option)",
+      },
+      {
+        fr: "Export en Excel, CSV et PDF de tous les tableaux",
+        en: "Export of every table to Excel, CSV and PDF",
+      },
+      {
+        fr: "Application installable sur le téléphone",
+        en: "App installable on your phone",
+      },
+    ],
+  },
+  {
     version: "1.13.0",
     date: "2026-10-15",
     title: { fr: "Assemblée générale en direct et modèles de documents", en: "Live general meetings and document templates" },

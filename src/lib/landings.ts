@@ -6,7 +6,7 @@
 
 import { fcfa } from "./format";
 import { frenchOnlyPaths } from "./french-only";
-import { packs, promoteurPrice, type PackId } from "./pricing";
+import { extensions, packs, promoteurPrice, type PackId } from "./pricing";
 
 export type LandingItem = { title: string; text: string };
 /** Tableau comparatif : la première colonne de chaque ligne sert d'en-tête de ligne. */
@@ -44,6 +44,10 @@ const promoteur = pack("promoteur");
 const integre = pack("integre");
 const chantierSup = promoteurPrice(3, 150) - promoteurPrice(2, 150); // un chantier actif de plus
 const blocLots = promoteurPrice(2, 160) - promoteurPrice(2, 150); // un bloc de 10 lots de plus
+const ext = (start: string) => extensions.find((e) => e.name.fr.startsWith(start))!;
+const extSignature = ext("Signatures"); // bloc de 50 signatures
+const extVisio = ext("Visio");
+const extInventaire = ext("Inventaire WhatsApp"); // bloc de 500 photos
 
 export const landings: Landing[] = [
   {
@@ -74,7 +78,15 @@ export const landings: Landing[] = [
           { title: "Cautions tracées", text: "Constitution, retenues et restitutions du dépôt de garantie, chaque mouvement étant conservé." },
           {
             title: "États des lieux d'entrée et de sortie",
-            text: "Pièces, compteurs, clés et photos par pièce, signature électronique et export PDF, depuis un ordinateur, un téléphone ou une tablette, avec la comparaison entrée / sortie. Voir la [fiche du wiki](/wiki/gestion-locative/etats-des-lieux) et le [guide des critères de choix](/guides/logiciel-etat-des-lieux-comparatif).",
+            text: "Pièces, compteurs, clés et photos par pièce, signature électronique (option payante) et export PDF, depuis un ordinateur, un téléphone ou une tablette, avec la comparaison entrée / sortie. Voir la [fiche du wiki](/wiki/gestion-locative/etats-des-lieux) et le [guide des critères de choix](/guides/logiciel-etat-des-lieux-comparatif).",
+          },
+          {
+            title: "Signature électronique des baux, états des lieux et mandats",
+            text: `Envoyez un bail, un état des lieux ou un mandat de gestion à signer à distance, suivez les demandes dans l'écran Signatures et laissez les rappels partir aux signataires. C'est une option payante, avec tous les packs : « ${extSignature.name.fr} », ${extSignature.price.fr} HT, aucune signature n'étant incluse dans un pack. Voir la [fiche du wiki](/wiki/gestion-locative/signature-electronique).`,
+          },
+          {
+            title: "Prélèvement bancaire des loyers",
+            text: "Mandats de prélèvement par bail, remises de prélèvement et prénotification : ImmoTopia prépare la remise, prévient les locataires et produit le fichier à déposer à la banque de l'agence, qui la marque ensuite comme déposée. Sans commission ImmoTopia. Inclus dans la gestion locative (packs Agence, Opérateur intégré, Patrimoine Essentiel et Pro). Voir la [fiche du wiki](/wiki/gestion-locative/prelevement-bancaire).",
           },
           { title: "Renouvellement, avenant et résiliation du bail", text: "Le bail se renouvelle, se modifie par avenant ou se résilie depuis l'application, avec l'historique conservé. Une échéance déjà réglée n'est jamais modifiée ; la résiliation contre-passe les échéances futures." },
           { title: "Honoraires, compte courant et reversements", text: "Honoraires de gestion à trois niveaux (le bail l'emporte sur le propriétaire, qui l'emporte sur l'agence ; pourcentage ou forfait), compte courant de chaque propriétaire visible dans son portail, et reversements numérotés, plafonnés au solde dû." },
@@ -94,6 +106,14 @@ export const landings: Landing[] = [
       {
         q: "Le Mobile Money est-il obligatoire ?",
         a: "Non. Tous les moyens de paiement sont acceptés. Pour le Mobile Money, l'opérateur est enregistré avec le paiement, et le locataire peut déclarer lui-même son règlement depuis son portail.",
+      },
+      {
+        q: "Les baux peuvent-ils être signés électroniquement ?",
+        a: `Oui : le bail, l'état des lieux et le mandat de gestion s'envoient à signer à distance, avec un suivi dans l'écran Signatures. C'est une option payante : « ${extSignature.name.fr} », ${extSignature.price.fr} HT, avec tous les packs.`,
+      },
+      {
+        q: "Peut-on prélever les loyers sur le compte bancaire du locataire ?",
+        a: "Oui, avec un mandat de prélèvement par bail. ImmoTopia prépare la remise, prévient les locataires (prénotification) et produit le fichier à déposer à la banque de l'agence, qui la marque ensuite comme déposée ; le suivi du retour de la banque n'est pas inclus. Le prélèvement bancaire est inclus dans la gestion locative et ImmoTopia ne prend aucune commission.",
       },
       {
         q: "Est-ce adapté à une petite agence ?",
@@ -117,8 +137,8 @@ export const landings: Landing[] = [
         items: [
           { title: "Transaction et CRM", text: "Un [logiciel CRM immobilier](/crm-immobilier-cote-divoire) complet : contacts, pipeline de ventes et de locations, visites, rapprochement entre la demande d'un client et les biens disponibles." },
           { title: "Biens et annonces", text: "Fiches par type de bien, médias, mandats, score de qualité de l'annonce et publication vers votre site grâce à l'API d'annonces." },
-          { title: "Gestion locative", text: "Baux, échéancier, paiements, pénalités, cautions, quittances et relevés de gérance." },
-          { title: "Syndic de copropriété", text: "Lots et tantièmes, budgets, appels de charges, recouvrement, assemblées générales et comptabilité de copropriété." },
+          { title: "Gestion locative", text: "Baux, échéancier, paiements, prélèvement bancaire des loyers, pénalités, cautions, quittances, relevés de gérance et signature électronique en option." },
+          { title: "Syndic de copropriété", text: "Lots et tantièmes, budgets, appels de charges payables par Mobile Money, recouvrement, assemblées générales en direct avec vote en ligne et comptabilité de copropriété." },
           { title: "Maintenance", text: "Tickets avec photos et priorités, prestataires, fil d'échange et notifications à chaque étape." },
           { title: "Communication", text: "Rappels et notifications par e-mail et WhatsApp, newsletter, historique de tous les messages." },
         ],
@@ -129,7 +149,8 @@ export const landings: Landing[] = [
           "Prix en FCFA, sans commission sur vos loyers.",
           "Mobile Money reconnu partout : Orange Money, MTN MoMo, Moov Money et Wave.",
           "WhatsApp intégré, le canal que vos clients lisent vraiment.",
-          "Application web : ordinateur, tablette et téléphone, sans installation.",
+          "Application web : ordinateur, tablette et téléphone, sans magasin d'applications, et installable sur l'écran d'accueil du téléphone.",
+          "Tous les tableaux s'exportent en Excel, CSV ou PDF.",
           "Équipe basée à Abidjan (Alliance Consultants).",
         ],
       },
@@ -143,7 +164,7 @@ export const landings: Landing[] = [
       },
     ],
     faq: [
-      { q: "Faut-il installer quelque chose ?", a: "Non. ImmoTopia s'utilise depuis un navigateur, sur ordinateur, tablette ou téléphone." },
+      { q: "Faut-il installer quelque chose ?", a: "Non. ImmoTopia s'utilise depuis un navigateur, sur ordinateur, tablette ou téléphone, et peut aussi s'installer sur l'écran d'accueil du téléphone comme une application, sans passer par un magasin d'applications." },
       { q: "Combien coûte ImmoTopia ?", a: "Le pack Agence commence à 29 900 FCFA HT par mois et le pack Syndic à 49 900 FCFA HT. Le premier mois est offert, sans engagement. Le détail et un simulateur sont sur la page Tarifs." },
       { q: "Puis-je reprendre mes fichiers Excel ?", a: "Oui : la mise en route accompagnée comprend la reprise de vos biens, contacts, baux ou copropriétés. Elle est facultative si vous saisissez vous-même vos données." },
     ],
@@ -216,14 +237,17 @@ export const landings: Landing[] = [
           { title: "Budget d'exercice", text: "Lignes budgétaires et clés de répartition ; les appels de charges par lot se génèrent depuis le budget." },
           { title: "Appels de charges", text: "Appels individuels ou en masse, encaissements et suivi du taux de recouvrement." },
           { title: "Recouvrement", text: "Vue des retards, relances individuelles ou groupées par e-mail et WhatsApp, pénalités et échéanciers de paiement." },
+          { title: "Paiement en ligne des charges", text: "Le copropriétaire règle son appel de charges par Mobile Money depuis le lien « Payer cet appel » ou son portail ; le paiement revient au bon lot et les fonds sont reversés vers le compte bancaire de la copropriété. ImmoTopia ne prend aucune commission. Voir [payer un appel de charges](/wiki/portails-clients/payer-un-appel-de-charges)." },
           { title: "Compte par lot", text: "Relevé, transactions et ajustements pour chaque copropriétaire." },
-          { title: "Portail copropriétaire", text: "Chaque copropriétaire invité suit en ligne, en lecture seule, ses lots, ses appels de charges, ses reçus et les procès-verbaux d'assemblée dans le [portail de la copropriété](/wiki/portails-clients/portail-coproprietaire)." },
+          { title: "Portail copropriétaire", text: "Chaque copropriétaire invité suit en ligne ses lots, ses appels de charges, ses reçus et les procès-verbaux d'assemblée dans le [portail de la copropriété](/wiki/portails-clients/portail-coproprietaire), et peut régler un appel de charges par Mobile Money." },
         ],
       },
       {
         title: "Assemblées générales et comptabilité",
         items: [
           { title: "Assemblées générales", text: "Ordre du jour, résolutions, votes et pouvoirs par lot, calcul du quorum et compte rendu archivé." },
+          { title: "Assemblée en direct et vote en ligne", text: "Émargement en ligne, quorum calculé en temps réel, vote de chaque copropriétaire par lien personnel, sans compte, et écran de projection pour la salle. Voir l'[assemblée par lien personnel](/wiki/portails-clients/assemblee-par-lien-personnel)." },
+          { title: "Visio des assemblées", text: `Salle de visio avec main levée et parole donnée par le gestionnaire, discussion écrite modérée et enregistrement de la séance. C'est une option payante : ${extVisio.price.fr} HT par cabinet, toutes copropriétés confondues. Voir la [fiche du wiki](/wiki/syndic-copropriete/visio-des-assemblees).` },
           { title: "Comptabilité de copropriété", text: "Plan de comptes, journaux, écritures en partie double verrouillables, grand livre et balance." },
           { title: "Parties communes", text: "Incidents avec imputation des coûts, prestataires, contrats de maintenance et équipements." },
         ],
@@ -232,6 +256,8 @@ export const landings: Landing[] = [
     faq: [
       { q: "Combien coûte le pack Syndic ?", a: "49 900 FCFA HT par mois pour 2 copropriétés et 100 lots, puis 10 000 FCFA par copropriété et 150 FCFA par lot supplémentaires. Le premier mois est offert, sans engagement." },
       { q: "Je fais aussi de la gestion locative : dois-je payer deux fois ?", a: "Les packs Agence et Syndic se combinent avec 10 % de remise sur le moins cher des deux, et vos contacts restent communs." },
+      { q: "Les copropriétaires peuvent-ils payer leurs charges en ligne ?", a: "Oui, par Mobile Money, depuis le lien « Payer cet appel » ou leur portail. Le paiement est rattaché au bon lot, les fonds sont reversés vers le compte bancaire de la copropriété et ImmoTopia ne prend aucune commission. Inclus dans les packs Syndic et Opérateur intégré." },
+      { q: "Peut-on tenir l'assemblée générale en visioconférence ?", a: `Oui. L'assemblée en direct, avec émargement et vote en ligne, est incluse dans le pack Syndic. La visio (salle, discussion modérée, enregistrement) est une option payante à ${extVisio.price.fr} HT par cabinet.` },
       { q: "Les copropriétaires reçoivent-ils les relances par WhatsApp ?", a: "Oui, par e-mail, WhatsApp ou les deux, selon les préférences et le consentement de chacun." },
     ],
     related: ["paiement-loyer-charges-mobile-money-cote-divoire", "maintenance-immobiliere-ticketing-cote-divoire", "tableaux-de-bord-kpi-immobilier-cote-divoire"],
@@ -458,6 +484,7 @@ export const landings: Landing[] = [
           { title: "Avancement et alertes", text: "Pourcentage d'avancement physique saisi à chaque point, courbe dans le temps et alertes quand les dépenses engagées dépassent un seuil du budget. Voir [avancement et tableau de bord](/wiki/promotion-et-chantiers/avancement-et-tableau-de-bord)." },
           { title: "Dépenses et pièces de caisse", text: "Dépenses suivies par poste, pièces de caisse émises, validées et imprimables. Voir les [dépenses de chantier](/wiki/promotion-et-chantiers/depenses-de-chantier)." },
           { title: "Stock, main-d'œuvre et tâcherons", text: "Réceptions et sorties de matériaux vers les chantiers, salaires, marchés et situations de travaux. Voir le [stock de matériaux](/wiki/promotion-et-chantiers/stock-de-materiaux) et les [tâcherons](/wiki/promotion-et-chantiers/tacherons)." },
+          { title: "Inventaire de chantier par WhatsApp", text: `Le chef de chantier envoie des photos du stock sur WhatsApp et l'IA propose le comptage, à valider. C'est une option payante : « ${extInventaire.name.fr} », ${extInventaire.price.fr} HT, cumulable. Voir l'[inventaire par WhatsApp](/wiki/promotion-et-chantiers/inventaire-par-whatsapp).` },
           { title: "Retenues de garantie", text: "Retenue d'un pourcentage sur les factures fournisseurs et les situations de tâcherons, suivi par chantier, libération à l'échéance. Voir les [retenues de garantie](/wiki/promotion-et-chantiers/retenues-de-garantie)." },
         ],
         note: "En fin de chantier, chaque lot achevé peut être transféré au patrimoine avec son coût de revient définitif, sans ressaisie.",
@@ -551,12 +578,14 @@ export const landings: Landing[] = [
           "La répartition des encaissements par moyen de paiement dans le tableau de bord.",
           "Des relances automatiques avant et après l'échéance.",
           "Le même fonctionnement pour les charges de copropriété.",
+          "Pour les charges de copropriété, le copropriétaire peut aussi payer en ligne par Mobile Money, sans commission ImmoTopia.",
         ],
-        note: "ImmoTopia enregistre et suit les paiements Mobile Money. L'encaissement en ligne avec confirmation automatique par l'opérateur n'est pas proposé aujourd'hui : parlez-en avec l'équipe en démonstration.",
+        note: "Pour les loyers, ImmoTopia enregistre et suit les paiements Mobile Money. Pour les appels de charges de copropriété, le paiement en ligne passe par le lien « Payer cet appel » (voir [payer un appel de charges](/wiki/portails-clients/payer-un-appel-de-charges)) ; pour les loyers, parlez-en avec l'équipe en démonstration.",
       },
     ],
     faq: [
       { q: "Quels opérateurs sont pris en charge ?", a: "Orange Money, MTN Mobile Money, Moov Money et Wave, ainsi que les espèces, virements, chèques et cartes." },
+      { q: "Les copropriétaires peuvent-ils payer leurs charges par Mobile Money ?", a: "Oui : depuis le lien « Payer cet appel » ou le portail copropriétaire, avec un rattachement automatique au bon lot et sans commission ImmoTopia. Inclus dans les packs Syndic et Opérateur intégré." },
       { q: "ImmoTopia prend-il une commission sur les loyers ?", a: "Non, aucune. Vous payez un abonnement mensuel en FCFA." },
     ],
     related: ["gestion-locative-cote-divoire", "logiciel-syndic-copropriete-cote-divoire", "tableaux-de-bord-kpi-immobilier-cote-divoire"],
@@ -668,7 +697,8 @@ export const landings: Landing[] = [
           "Mobile Money (Orange Money, MTN MoMo, Moov Money, Wave) reconnu partout.",
           "Relances et notifications par WhatsApp et e-mail.",
           "Interface en français, avec l'anglais et l'arabe disponibles.",
-          "Application web utilisable sur téléphone, sans installation.",
+          "Application web utilisable sur téléphone, installable sur l'écran d'accueil sans magasin d'applications.",
+          "Prélèvement bancaire des loyers : remises préparées dans l'application et déposées à la banque de l'agence.",
         ],
       },
     ],
@@ -708,7 +738,7 @@ export const landings: Landing[] = [
       },
     ],
     faq: [
-      { q: "Puis-je garder Excel pour certains tableaux ?", a: "Oui : les contacts s'exportent en CSV ou Excel, et les tableaux de bord intégrés remplacent la plupart des tableaux croisés." },
+      { q: "Puis-je garder Excel pour certains tableaux ?", a: "Oui : tous les tableaux s'exportent en Excel, CSV ou PDF, et les tableaux de bord intégrés remplacent la plupart des tableaux croisés." },
     ],
     related: ["gestion-locative-vs-excel", "logiciel-immobilier-cote-divoire", "meilleur-logiciel-immobilier-cote-divoire"],
   },
@@ -795,6 +825,10 @@ export const faqGroups: { title: string; items: { q: string; a: string }[] }[] =
         a: "Le dépassement est facturé, pas bloqué. Des extensions à la carte existent : bloc de 10 lots (1 500 FCFA par mois), copropriété supplémentaire (10 000), chantier supplémentaire (40 000), bloc de 10 biens détenus (9 900 avec Patrimoine Essentiel ; 2 990 de dépassement avec le Pro).",
       },
       {
+        q: "Quelles options payantes existent en plus des packs ?",
+        a: `Trois extensions à la carte : « ${extSignature.name.fr} » (${extSignature.price.fr} HT, avec tous les packs), « ${extVisio.name.fr} » (${extVisio.price.fr} HT par cabinet, avec Syndic ou Opérateur intégré) et « ${extInventaire.name.fr} » (${extInventaire.price.fr} HT, avec Promoteur ou Opérateur intégré). Le détail est sur la page [Tarifs](/tarifs).`,
+      },
+      {
         q: "Les prix incluent-ils la TVA ?",
         a: "Non : les prix sont hors taxes. Les factures sont émises par Alliance Consultants, avec une TVA de 18 % ajoutée.",
       },
@@ -813,23 +847,35 @@ export const faqGroups: { title: string; items: { q: string; a: string }[] }[] =
       },
       {
         q: "Comment sont gérés les paiements Mobile Money ?",
-        a: "Le paiement est enregistré avec son opérateur (Orange Money, MTN MoMo, Moov Money, Wave), ou déclaré par le locataire depuis son portail puis validé par l'agence.",
+        a: "Le paiement est enregistré avec son opérateur (Orange Money, MTN MoMo, Moov Money, Wave), ou déclaré par le locataire depuis son portail puis validé par l'agence. Pour les charges de copropriété, le copropriétaire peut aussi payer en ligne par Mobile Money depuis le lien « Payer cet appel », sans commission ImmoTopia.",
+      },
+      {
+        q: "Peut-on signer les baux et les mandats électroniquement ?",
+        a: `Oui : baux, états des lieux et mandats s'envoient à signer à distance, avec un écran de suivi et des rappels automatiques. C'est une option payante (« ${extSignature.name.fr} », ${extSignature.price.fr} HT), avec tous les packs.`,
+      },
+      {
+        q: "Peut-on prélever les loyers directement sur le compte bancaire du locataire ?",
+        a: "Oui : le prélèvement bancaire des loyers est inclus dans la gestion locative, sans commission ImmoTopia. ImmoTopia gère les mandats, prépare la remise, prévient les locataires (prénotification) et produit le fichier à déposer à la banque de l'agence ; il ne débite pas lui-même les comptes.",
+      },
+      {
+        q: "Peut-on exporter ses données ?",
+        a: "Oui : tous les tableaux de l'application s'exportent en Excel, CSV ou PDF.",
       },
       {
         q: "Le module syndic gère-t-il les assemblées générales ?",
-        a: "Oui : ordre du jour, résolutions, votes et pouvoirs par lot, quorum et compte rendu archivé, en plus des tantièmes, budgets, appels de charges et de la comptabilité de copropriété.",
+        a: "Oui : ordre du jour, résolutions, votes et pouvoirs par lot, quorum et compte rendu archivé, avec une assemblée en direct (émargement et vote en ligne par lien personnel) ; la visio est une option payante. S'y ajoutent les tantièmes, budgets, appels de charges et la comptabilité de copropriété.",
       },
       { q: "Peut-on publier des annonces ?", a: "Oui, et une API d'annonces alimente votre site internet. La publication d'un bien peut aussi être diffusée dans le groupe WhatsApp de l'agence." },
       {
         q: "Et le module Promoteur ?",
-        a: "Le module Promoteur est disponible : chantiers, lots et coût de revient, budget et avenants, avancement, dépenses, stock de matériaux, main-d'œuvre, tâcherons, retenues de garantie et transfert au patrimoine. Voir le [CRM pour promoteur immobilier](/crm-promoteur-immobilier-cote-divoire). La finance opérationnelle est, elle, en cours de déploiement : parlez-en avec l'équipe en démonstration.",
+        a: "Le module Promoteur est disponible : chantiers, lots et coût de revient, budget et avenants, avancement, dépenses, stock de matériaux, main-d'œuvre, tâcherons, retenues de garantie et transfert au patrimoine. Voir le [CRM pour promoteur immobilier](/crm-promoteur-immobilier-cote-divoire). L'inventaire de chantier par photos WhatsApp est une option payante. La finance opérationnelle est, elle, en cours de déploiement : parlez-en avec l'équipe en démonstration.",
       },
     ],
   },
   {
     title: "Utilisation et sécurité",
     items: [
-      { q: "Faut-il installer un logiciel ?", a: "Non. ImmoTopia s'utilise depuis un navigateur, sur ordinateur, tablette ou téléphone." },
+      { q: "Faut-il installer un logiciel ?", a: "Non. ImmoTopia s'utilise depuis un navigateur, sur ordinateur, tablette ou téléphone, et peut s'installer sur l'écran d'accueil du téléphone comme une application." },
       { q: "Puis-je gérer plusieurs collaborateurs ?", a: "Oui, avec des rôles (administrateur, manager, agent, comptable) et des permissions par domaine." },
       {
         q: "Mes données sont-elles protégées ?",
