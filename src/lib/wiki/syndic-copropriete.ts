@@ -7,7 +7,7 @@ export const syndicCopropriete: WikiDomain = {
   summary:
     "Logiciel de syndic en Côte d'Ivoire : lots et tantièmes, budget prévisionnel, appels de charges, impayés, assemblées générales et comptabilité de copropriété.",
   intro:
-    "Le module Syndic réunit tout ce qu'un cabinet de syndic gère au quotidien : la fiche de chaque copropriété, ses lots et leurs tantièmes, les copropriétaires et les occupants, les prestataires et les incidents. Côté finances, vous votez le budget prévisionnel, émettez les appels de charges, suivez les encaissements, relancez les impayés et tenez la comptabilité de la copropriété en partie double. Les assemblées générales se préparent et se tiennent dans le logiciel, jusqu'au procès-verbal. Il s'adresse aux cabinets de syndic et aux gestionnaires de copropriété en Côte d'Ivoire, et vos copropriétaires peuvent suivre leurs lots depuis leur portail copropriétaire.",
+    "Le module Syndic réunit tout ce qu'un cabinet de syndic gère au quotidien : la fiche de chaque copropriété, ses lots et leurs tantièmes, les copropriétaires et les occupants, les prestataires et les incidents. Côté finances, vous votez le budget prévisionnel, émettez les appels de charges, suivez les encaissements (y compris les paiements en ligne par mobile money), relancez les impayés et tenez la comptabilité de la copropriété en partie double. Les assemblées générales se préparent et se tiennent dans le logiciel : émargement et votes en direct, visio en option, jusqu'au procès-verbal. Il s'adresse aux cabinets de syndic et aux gestionnaires de copropriété en Côte d'Ivoire, et vos copropriétaires peuvent suivre leurs lots, rejoindre l'assemblée et payer leurs appels de charges en ligne depuis leur portail copropriétaire.",
   features: [
     {
       slug: "coproprietes",
@@ -91,7 +91,7 @@ export const syndicCopropriete: WikiDomain = {
       actions: [
         {
           title: "Consulter les lots d'une copropriété",
-          goal: "Afficher tous les lots d'une copropriété avec leur type et leurs tantièmes.",
+          goal: "Afficher tous les lots d'une copropriété avec leur type et leurs tantièmes. Une colonne « Portail » indique d'un coup d'œil si le copropriétaire a accès à son portail (voir la fonctionnalité Copropriétaires et occupants).",
           prereq: "La copropriété doit être créée.",
         },
         {
@@ -186,6 +186,13 @@ export const syndicCopropriete: WikiDomain = {
           output: "Le nombre de lots fermés sur son portail.",
         },
         {
+          title: "Voir l'accès au portail copropriétaire de chaque lot",
+          goal: "Savoir d'un coup d'œil quels copropriétaires ont accès au portail, dans la colonne « Portail » du résumé des lots de la fiche de la copropriété et dans le tableau des lots. Un indicateur compte aussi les lots dont le copropriétaire a accès au portail. Un lien « Gérer l'accès » mène à l'écran où inviter ou retirer l'accès.",
+          output:
+            "Pour chaque lot : « Actif » quand tous les propriétaires actuels ont accès, « Inactif » quand aucun n'a accès, « Partiel » avec le nombre d'accès (par exemple 1 sur 2) en cas d'indivision, avec le détail par nom au survol, et « Sans profil » quand le lot n'a aucun propriétaire actuel enregistré.",
+          prereq: "Le propriétaire du lot doit être enregistré.",
+        },
+        {
           title: "Affecter un locataire à un lot",
           goal: "Rattacher un locataire à un lot. L'affectation précédente du lot est automatiquement close.",
           input: "Le locataire, les dates de début et de fin, le bail concerné et des notes.",
@@ -217,6 +224,10 @@ export const syndicCopropriete: WikiDomain = {
           a: "Oui. Chaque propriétaire est enregistré avec sa quote-part en pourcentage et ses dates de détention.",
         },
         {
+          q: "Comment savoir quels copropriétaires ont accès au portail ?",
+          a: "Le résumé des lots de la fiche de la copropriété et le tableau des lots affichent une colonne « Portail » : accès actif, inactif, partiel en cas d'indivision, ou lot sans propriétaire enregistré.",
+        },
+        {
           q: "Peut-on facturer les charges au locataire plutôt qu'au propriétaire ?",
           a: "Vous l'indiquez sur la fiche du locataire du lot : une case précise si les charges lui sont facturées.",
         },
@@ -224,6 +235,7 @@ export const syndicCopropriete: WikiDomain = {
       related: [
         "syndic-copropriete/lots-et-tantiemes",
         "syndic-copropriete/encaissements-comptes-coproprietaires",
+        "portails-clients/portail-coproprietaire",
       ],
     },
     {
@@ -451,6 +463,12 @@ export const syndicCopropriete: WikiDomain = {
           prereq: "L'appel de charges doit exister.",
         },
         {
+          title: "Télécharger l'avis d'appel de charges en Word",
+          goal: "Récupérer l'avis d'appel dans un document Word que vous pouvez modifier avant de l'envoyer : en-tête, logos (agence mandante ou cabinet, copropriété), détail de l'appel, solde, montant en lettres et pied de page.",
+          output: "Un document Word « avis d'appel » du lot et de la période.",
+          prereq: "L'appel de charges doit exister. Bouton « Avis d'appel (Word) » dans la liste des appels.",
+        },
+        {
           title: "Affecter un appel de charges à un fonds",
           goal: "Désigner le fonds qui recevra en entier ce qui sera payé ensuite sur l'appel, par exemple pour un appel de fonds travaux. Vous pouvez aussi retirer l'affectation ; les paiements déjà reçus ne sont pas repris.",
           input: "L'appel de charges et le fonds.",
@@ -480,6 +498,14 @@ export const syndicCopropriete: WikiDomain = {
           a: "Oui. À l'émission d'un appel, ou d'une campagne générée depuis le budget, le copropriétaire reçoit un avis par e-mail ou WhatsApp.",
         },
         {
+          q: "Le copropriétaire peut-il payer son appel de charges en ligne ?",
+          a: "Oui. Depuis son portail, ou grâce à un lien « Payer cet appel » que le syndic lui envoie ou que l'avis d'appel et les relances portent, il règle en mobile money. Voir la fonctionnalité Paiement en ligne des charges.",
+        },
+        {
+          q: "Peut-on modifier l'avis d'appel avant de l'envoyer ?",
+          a: "Oui. Vous le téléchargez en Word, avec l'en-tête, les logos, le détail, le solde et le montant en lettres, puis vous le retouchez.",
+        },
+        {
           q: "Peut-on programmer des appels de charges trimestriels ?",
           a: "Oui. Un appel peut être récurrent : vous choisissez la fréquence et le nombre d'appels à émettre.",
         },
@@ -489,6 +515,7 @@ export const syndicCopropriete: WikiDomain = {
         "syndic-copropriete/programmation-appels-de-charges",
         "syndic-copropriete/encaissements-comptes-coproprietaires",
         "syndic-copropriete/impayes-et-relances",
+        "syndic-copropriete/paiement-en-ligne-des-charges",
       ],
     },
     {
@@ -702,6 +729,12 @@ export const syndicCopropriete: WikiDomain = {
           output: "Un document PDF.",
         },
         {
+          title: "Télécharger la quittance ou le reçu en Word",
+          goal: "Récupérer la quittance ou le reçu dans un document Word modifiable. Il reprend fidèlement ce qui a été enregistré à l'émission, sans jamais être recalculé.",
+          output: "Un document Word portant le numéro de la quittance.",
+          prereq: "La quittance ou le reçu doit avoir été émis. Bouton « Télécharger (Word) » dans la liste des quittances.",
+        },
+        {
           title: "Renvoyer une quittance ou un reçu par e-mail",
           goal: "Renvoyer au copropriétaire le PDF d'un reçu ou d'une quittance.",
           output: "La confirmation d'envoi, ou l'erreur éventuelle consignée sur le document.",
@@ -737,6 +770,7 @@ export const syndicCopropriete: WikiDomain = {
         "syndic-copropriete/encaissements-comptes-coproprietaires",
         "syndic-copropriete/programmation-appels-de-charges",
         "syndic-copropriete/identite-des-documents",
+        "syndic-copropriete/paiement-en-ligne-des-charges",
       ],
     },
     {
@@ -809,6 +843,10 @@ export const syndicCopropriete: WikiDomain = {
           a: "Oui. Une seule action relance tous les appels en retard et non soldés de la copropriété, en augmentant le niveau de relance à chaque fois, jusqu'au quatrième.",
         },
         {
+          q: "Le copropriétaire relancé peut-il payer directement depuis la relance ?",
+          a: "Oui, quand le paiement en ligne est ouvert pour la copropriété : la relance par e-mail ou WhatsApp porte un lien « Payer en ligne » vers l'appel concerné. Voir la fonctionnalité Paiement en ligne des charges.",
+        },
+        {
           q: "Peut-on annuler une pénalité de retard ?",
           a: "Oui. Vous remettez la pénalité en indiquant un motif, et le montant est recrédité sur le compte du lot.",
         },
@@ -820,6 +858,182 @@ export const syndicCopropriete: WikiDomain = {
       related: [
         "syndic-copropriete/encaissements-comptes-coproprietaires",
         "syndic-copropriete/appels-de-charges",
+        "syndic-copropriete/paiement-en-ligne-des-charges",
+      ],
+    },
+    {
+      slug: "paiement-en-ligne-des-charges",
+      title: "Paiement en ligne des charges",
+      h1: "Paiement en ligne des charges de copropriété par mobile money",
+      metaTitle: "Payer ses charges de copropriété en ligne : mobile money",
+      summary:
+        "Vos copropriétaires paient leurs appels de charges en mobile money, depuis leur portail ou un lien. Suivez les paiements, tranchez les cas douteux, reversez.",
+      intro:
+        "Le paiement en ligne permet à chaque copropriétaire de régler ses appels de charges avec son mobile money (Wave, Orange Money, MTN Money, Moov Money), depuis son [portail copropriétaire](/wiki/portails-clients/portail-coproprietaire) ou grâce à un lien « Payer cet appel » reçu du syndic. Chaque copropriété a son propre compte de paiement : l'argent encaissé lui revient, et l'encaissement est enregistré tout seul sur les appels, avec reçus et quittances. Cette fonction est incluse dans les packs Syndic et Opérateur intégré, sans commission ImmoTopia ([Tarifs](/tarifs)). Le copropriétaire qui reçoit un lien suit le parcours décrit dans [Payer un appel de charges par lien](/wiki/portails-clients/payer-un-appel-de-charges).",
+      sections: [
+        {
+          title: "Comment le paiement en ligne s'ouvre-t-il pour une copropriété ?",
+          body: [
+            "Le paiement en ligne n'est ouvert que lorsque le compte de paiement de la copropriété est renseigné, activé et utilisable. Il n'y a jamais de repli sur le compte de l'agence : tant que la configuration n'est pas utilisable, les copropriétaires ne voient ni bouton « Payer en ligne » ni lien de paiement, mais un message leur indique que le règlement en ligne n'est pas encore ouvert.",
+            [
+              "Le copropriétaire règle des appels entiers d'un seul lot à la fois. Le montant n'est jamais saisi : il est recalculé par ImmoTopia à partir du reste dû.",
+              "Si l'appel est soldé entre-temps, l'excédent devient une avance sur le compte du lot.",
+              "Le logiciel redemande régulièrement le statut des paiements en attente, enregistre ceux qui sont confirmés et fait expirer, après 48 heures, ceux qui n'ont pas abouti. Si le service de paiement est injoignable, aucun paiement n'expire.",
+            ],
+          ],
+        },
+        {
+          title: "Que veut dire « paiement à trancher » ?",
+          body: [
+            "Certains paiements encaissés ne peuvent pas être enregistrés automatiquement, et le syndic doit décider. C'est le cas quand le montant payé diffère du montant demandé, quand l'exercice est clos à la date du paiement, quand l'appel a disparu ou n'appartient pas au lot, quand la transaction est déjà enregistrée, ou quand un état contraire est rapporté après un succès. Le paiement apparaît dans un bandeau « paiement(s) à trancher », et le copropriétaire est informé que son paiement est en cours de vérification par le syndic : inutile de payer deux fois.",
+            "Accepter enregistre le montant reçu sur les appels encore ouverts (l'excédent devient une avance du lot, les reçus et quittances sont émis) ; refuser n'enregistre rien. Refuser ne rembourse pas le payeur : le remboursement se fait en dehors d'ImmoTopia.",
+          ],
+        },
+        {
+          title: "Où va l'argent encaissé ?",
+          body: [
+            "Les paiements en ligne alimentent un compte de collecte propre à la copropriété. Le service de paiement verse ensuite ces sommes sur le compte bancaire de la copropriété. ImmoTopia ne déclenche aucun virement : vous enregistrez le reversement une fois le virement arrivé, ce qui l'inscrit en comptabilité. Les frais éventuels retenus par le service de paiement ne sont pas comptabilisés dans ImmoTopia.",
+          ],
+        },
+      ],
+      packs: ["syndic", "integre"],
+      profiles: ["equipe"],
+      menu: "Syndic › Finances › Paiements en ligne",
+      status: "disponible",
+      actions: [
+        {
+          title: "Consulter la configuration du paiement en ligne",
+          goal: "Voir l'état du compte de paiement propre à la copropriété : activation, identifiant du compte, présence de la clé (jamais réaffichée, seulement ses quatre derniers caractères), compte utilisable ou non, résultat du dernier test, adresse de notification à communiquer au service de paiement, et solde comptable du compte de collecte.",
+          prereq: "La copropriété doit être créée.",
+        },
+        {
+          title: "Configurer le compte de paiement de la copropriété",
+          goal: "Renseigner le compte de paiement de la copropriété : activer le paiement en ligne, saisir l'identifiant du compte et la clé. La clé s'écrit mais ne se relit jamais ; le bouton « Remplacer la clé » permet de la changer, et un simple enregistrement ne l'efface pas.",
+          input: "L'activation, l'identifiant du compte et la clé de paiement.",
+          output: "La configuration enregistrée. Activer le paiement exige l'identifiant et la clé.",
+          prereq:
+            "Changer l'identifiant ou la clé est refusé tant qu'un paiement de la copropriété est en attente. Par défaut, cette action est réservée à l'administrateur de l'agence.",
+          profiles: ["direction"],
+        },
+        {
+          title: "Tester la connexion du compte de paiement",
+          goal: "Vérifier que le compte de paiement de la copropriété répond. Le résultat est enregistré et s'affiche sur la ligne « Dernier test » ; un service injoignable donne un échec clairement indiqué, jamais une erreur.",
+          output: "Un message de réussite ou d'échec et, si le service le fournit, le solde du compte.",
+          prereq: "Le compte de paiement doit être renseigné.",
+          profiles: ["direction"],
+        },
+        {
+          title: "Consulter le solde chez le service de paiement",
+          goal: "Afficher le solde du compte de paiement de la copropriété, à rapprocher du solde comptable du compte de collecte affiché juste au-dessus. Le bouton « Actualiser » relit le solde.",
+          output: "Le montant, la devise et l'heure de lecture, ou le motif pour lequel le solde n'est pas disponible.",
+          prereq: "Le compte de paiement doit être utilisable.",
+        },
+        {
+          title: "Suivre les paiements en ligne des copropriétaires",
+          goal: "Suivre toutes les tentatives de paiement de la copropriété, qu'elles viennent du portail ou d'un lien. Des pastilles filtrent par statut (en attente, payé, échoué, annulé, expiré, à trancher) et par origine, et un bandeau met en avant les paiements à trancher.",
+          output:
+            "Pour chaque paiement : date, code de paiement, lot, payeur, appels visés, montant demandé (et montant reçu s'il diffère), origine, moyen utilisé et statut. La liste est paginée par 20.",
+        },
+        {
+          title: "Vérifier un paiement en ligne",
+          goal: "Redemander au service de paiement le statut d'un paiement « en attente » ou « à trancher », par exemple si sa confirmation s'est perdue, et appliquer le résultat : encaissement, échec, annulation ou mise à trancher. Rejouer la vérification ne crée jamais de doublon. Sur un paiement déjà à trancher, elle met seulement le suivi à jour : seule votre décision enregistre l'encaissement.",
+          output: "Le paiement mis à jour, avec l'indication que son statut a changé ou non.",
+          prereq: "Le paiement doit être en attente ou à trancher.",
+        },
+        {
+          title: "Trancher un paiement en ligne à vérifier",
+          goal: "Décider du sort d'un paiement à trancher, encaissé chez le service de paiement mais non enregistré automatiquement. Accepter enregistre le montant reçu sur les appels ouverts à la date choisie (utile pour sortir d'un exercice clos) ; refuser n'enregistre rien et marque le paiement comme échoué.",
+          input: "La décision (accepter ou refuser), une note de 1 à 500 caractères obligatoire, et la date d'encaissement pour une acceptation (par défaut aujourd'hui, jamais dans le futur).",
+          output: "Le paiement tranché et, pour une acceptation, l'encaissement avec la part devenue avance et les reçus et quittances émis.",
+          prereq:
+            "Selon le motif, une option est désactivée : accepter est impossible pour une transaction déjà enregistrée, refuser pour un encaissement déjà existant. Refuser ne rembourse pas le payeur.",
+        },
+        {
+          title: "Créer et copier le lien « Payer cet appel »",
+          goal: "Générer un lien sécurisé « Payer cet appel » pour UN appel de charges, à transmettre vous-même : messagerie personnelle ou en main propre. Le lien complet n'est affiché qu'une seule fois, avec un bouton « Copier ». Il est valable de 1 à 30 jours (7 par défaut). Il ne contient aucun montant : le copropriétaire voit le reste dû recalculé à l'ouverture.",
+          input: "L'appel de charges et la durée de validité du lien.",
+          output: "Le lien à copier et sa date d'expiration.",
+          prereq:
+            "Le compte de paiement de la copropriété doit être utilisable et l'appel non soldé, en francs CFA. Le lot ne doit pas avoir changé de copropriétaire depuis l'appel. Bouton « Lien de paiement » dans la liste des appels de charges.",
+        },
+        {
+          title: "Envoyer le lien « Payer cet appel » au copropriétaire",
+          goal: "Envoyer le lien au copropriétaire actuel du lot, par son canal préféré, WhatsApp ou e-mail. Le destinataire est celui de la fiche du lot, jamais une adresse saisie à la main.",
+          input: "L'appel de charges et la durée de validité du lien, de 1 à 30 jours (7 par défaut).",
+          output:
+            "Le lien est envoyé avec le montant dû. Si aucun canal n'est possible ou si l'envoi échoue, aucun lien n'est conservé et la raison s'affiche.",
+          prereq:
+            "Le copropriétaire doit avoir donné son accord pour WhatsApp ou l'e-mail, et la notification « Lien de paiement d'un appel de charges » doit être activée (elle l'est par défaut).",
+        },
+        {
+          title: "Suivre les liens de paiement d'un appel",
+          goal: "Voir les liens « Payer cet appel » émis pour un appel de charges, leur état (actif, expiré, révoqué), leurs dates, le nombre de consultations, leur origine (gestionnaire, ou joint à un avis ou une relance) et l'état du dernier paiement associé. Par défaut, seuls les liens actifs s'affichent.",
+          output: "Un tableau « Liens de cet appel ». Jamais de lien complet ni de jeton. Un utilisateur en lecture seule voit la liste sans pouvoir créer ni révoquer.",
+        },
+        {
+          title: "Révoquer un lien de paiement",
+          goal: "Rendre un lien inutilisable tout de suite, s'il a été envoyé par erreur ou divulgué. Le lien affiche ensuite « Lien invalide ou expiré. ».",
+          output: "Le lien révoqué. Révoquer un lien déjà révoqué est sans effet.",
+          prereq: "Le lien doit être actif. Une confirmation est demandée.",
+        },
+        {
+          title: "Joindre automatiquement le lien de paiement aux avis et aux relances",
+          goal: "Quand l'avis d'appel (par e-mail et WhatsApp) ou la relance d'un appel part, le message porte un bloc « Payer en ligne » avec un lien « Payer cet appel » valable 30 jours. Le lien n'est joint que si le paiement en ligne est utilisable pour la copropriété, si l'appel a un reste dû en francs CFA et si le lot n'a pas changé de copropriétaire. Sinon le message part inchangé, et la création du lien ne fait jamais échouer l'envoi.",
+          output:
+            "Le message avec son bloc de paiement. Le lien apparaît ensuite dans la liste des liens de l'appel, avec l'origine « Joint à un avis ou une relance ». Chaque nouvel envoi remplace les liens automatiques encore actifs du même appel ; les liens créés par un gestionnaire sont conservés.",
+          prereq:
+            "Si votre agence a personnalisé ses modèles de message, elle peut y ajouter le lien de paiement pour qu'il y figure.",
+        },
+        {
+          title: "Consulter les reversements vers la banque",
+          goal: "Voir les reversements enregistrés quand le service de paiement a versé l'argent encaissé en ligne sur le compte bancaire de la copropriété. Les reversements annulés n'y figurent pas.",
+          output: "Pour chaque reversement : date, référence, montant et note, du plus récent au plus ancien.",
+        },
+        {
+          title: "Enregistrer un reversement vers la banque",
+          goal: "Constater en comptabilité qu'un virement du service de paiement est arrivé sur la banque de la copropriété : le montant passe du compte de collecte au compte bancaire. L'enregistrement ne déclenche aucun virement, et le rapprochement avec le relevé du service de paiement reste manuel.",
+          input: "Le montant, la date (jamais dans le futur), une référence unique pour la copropriété et une note facultative.",
+          output: "Le reversement enregistré et le solde restant du compte de collecte.",
+          prereq:
+            "Le solde du compte de collecte doit être positif, le montant ne peut pas le dépasser et l'exercice doit être ouvert. Le bouton « Enregistrer un reversement » est inactif tant que le solde est nul.",
+        },
+        {
+          title: "Configurer la notification du lien de paiement d'un appel",
+          goal: "Activer, désactiver ou personnaliser, pour votre agence, le message qui porte le lien « Payer cet appel » quand le gestionnaire l'envoie : un modèle par e-mail et un modèle par WhatsApp, tous deux actifs par défaut. Le texte peut reprendre le nom du copropriétaire, la copropriété, le lot, la période, le montant dû, l'échéance, le lien et sa date d'expiration.",
+          input: "L'activation du message et son texte pour chaque canal. Une action permet de revenir au modèle standard.",
+          output: "Le message configuré, utilisé pour les envois du lien de paiement.",
+          prereq: "Menu Communication › Notifications e-mail et Notifications WhatsApp.",
+        },
+      ],
+      faq: [
+        {
+          q: "Le paiement en ligne des charges est-il payant ?",
+          a: "Il est inclus dans les packs Syndic et Opérateur intégré, et ImmoTopia ne prélève aucune commission sur les paiements. Des frais du service de paiement peuvent s'ajouter selon le réglage de l'agence, et le copropriétaire en est informé avant de payer. Voir les tarifs.",
+        },
+        {
+          q: "Où va l'argent payé par le copropriétaire ?",
+          a: "Sur le compte de paiement propre à la copropriété, puis sur son compte bancaire par un reversement. Il n'y a jamais de mélange avec le compte de l'agence.",
+        },
+        {
+          q: "Peut-on payer seulement une partie d'un appel de charges ?",
+          a: "Non. Le paiement couvre les appels entiers d'un seul lot, pour leur reste dû. Il n'y a pas de montant libre.",
+        },
+        {
+          q: "Que se passe-t-il si le copropriétaire paie deux fois ou une somme différente ?",
+          a: "Un paiement dont le montant diffère de la demande est signalé « à trancher » : le syndic décide de l'accepter, auquel cas l'excédent devient une avance sur le compte du lot, ou de le refuser. Un refus ne rembourse pas le payeur.",
+        },
+        {
+          q: "Le copropriétaire a-t-il besoin d'un compte pour payer ?",
+          a: "Non. Avec le lien « Payer cet appel », il paie sans connexion. Avec un compte, il paie depuis son portail copropriétaire.",
+        },
+      ],
+      related: [
+        "syndic-copropriete/appels-de-charges",
+        "syndic-copropriete/encaissements-comptes-coproprietaires",
+        "syndic-copropriete/impayes-et-relances",
+        "syndic-copropriete/quittances-et-recus",
+        "portails-clients/payer-un-appel-de-charges",
+        "portails-clients/portail-coproprietaire",
       ],
     },
     {
@@ -968,10 +1182,23 @@ export const syndicCopropriete: WikiDomain = {
       h1: "Assemblée générale de copropriété : convocation, vote et procès-verbal",
       metaTitle: "Assemblée générale de copropriété : convocation, vote, PV",
       summary:
-        "Convoquez l'assemblée générale de copropriété, préparez l'ordre du jour, gérez les pouvoirs, saisissez les votes en tantièmes et générez le procès-verbal en Word.",
+        "Convoquez l'assemblée générale de copropriété, gérez les pouvoirs, suivez la séance en direct (émargement, votes en ligne) et générez le procès-verbal en Word.",
       intro:
-        "De la convocation au procès-verbal, l'assemblée générale se prépare et se tient dans le logiciel. Vous fixez l'ordre du jour et les résolutions, enregistrez les pouvoirs, puis saisissez le vote de chaque lot : le résultat en tantièmes et le quorum se recalculent aussitôt. À la fin, le compte rendu est généré en Word, prêt à être relu et diffusé.",
+        "De la convocation au procès-verbal, l'assemblée générale se prépare et se tient dans le logiciel. Vous fixez l'ordre du jour et les résolutions, enregistrez les pouvoirs, puis saisissez le vote de chaque lot : le résultat en tantièmes et le quorum se recalculent aussitôt. Pendant la séance, la console en direct vous montre la présence, le quorum et les votes, et chaque copropriétaire peut émarger et voter en ligne depuis son lien personnel. À la fin, le compte rendu est généré en Word, prêt à être relu et diffusé. Une visio de l'assemblée est proposée en option : voir [Visio des assemblées](/wiki/syndic-copropriete/visio-des-assemblees).",
       sections: [
+        {
+          title: "Comment tenir l'assemblée en direct ?",
+          body: [
+            "Une fois l'assemblée ouverte, la console « En direct » de la fiche de l'assemblée se rafraîchit toute seule. Elle affiche le quorum (présents, représentés, en ligne), l'émargement de chaque lot, l'état du vote et le décompte de chaque résolution, ainsi que la liste des participants. Cette fonction est incluse dans les packs Syndic et Opérateur intégré, sans visio.",
+            [
+              "Vous émargez les copropriétaires qui ne se connectent pas (présent en salle ou en ligne, représenté ou absent), un lot à la fois ou plusieurs lots d'un coup ; le quorum est recalculé.",
+              "Vous ouvrez le vote d'une résolution, puis vous le clôturez ; plusieurs résolutions peuvent être ouvertes en même temps. Tant que le vote est ouvert, la décision provisoire est masquée (« Vote en cours ») et les décomptes restent visibles.",
+              "Chaque participant reçoit un lien personnel, sans mot de passe, que vous créez, copiez et transmettez par téléphone ou par messagerie, et que vous pouvez révoquer. Le copropriétaire connecté depuis son [portail copropriétaire](/wiki/portails-clients/portail-coproprietaire) obtient lui-même son lien.",
+              "Avec son lien, le copropriétaire ou son mandataire émarge, suit le quorum et vote en ligne : voir [Assemblée générale par lien personnel](/wiki/portails-clients/assemblee-par-lien-personnel). Pendant un vote ouvert, il ne voit que le nombre de lots ayant voté ; le résultat n'apparaît qu'à la clôture du vote.",
+              "Un écran de projection affiche en plein écran le quorum, la résolution en cours de vote et sa participation, puis les résultats des résolutions closes.",
+            ],
+          ],
+        },
         {
           title: "Où retrouver le procès-verbal d'une assemblée générale ?",
           body: [
@@ -1004,6 +1231,13 @@ export const syndicCopropriete: WikiDomain = {
           output:
             "Le décompte des envois : copropriétaires, e-mails envoyés, échecs, et copropriétaires sans adresse comptés à part.",
           prereq: "L'assemblée doit être planifiée.",
+        },
+        {
+          title: "Télécharger la convocation d'un lot en Word",
+          goal: "Générer la convocation d'un copropriétaire dans un document Word que vous pouvez modifier : lot, tantièmes, date, heure, lieu, ordre du jour, quorum et date limite pour donner pouvoir.",
+          input: "Le lot concerné et, en option, la date limite pour donner pouvoir.",
+          output: "Un document Word « convocation à l'assemblée » du lot.",
+          prereq: "L'assemblée doit être convoquée. Bouton « Télécharger la convocation (Word) » sur la fiche de l'assemblée.",
         },
         {
           title: "Modifier ou faire avancer une assemblée",
@@ -1040,6 +1274,62 @@ export const syndicCopropriete: WikiDomain = {
           prereq: "L'assemblée ne doit être ni clôturée ni annulée.",
         },
         {
+          title: "Suivre l'assemblée en direct",
+          goal: "Voir en temps réel la présence et le quorum (présents, représentés, en ligne), l'émargement de chaque lot, l'état du vote et le décompte de chaque résolution, ainsi que les compteurs de participants. L'écran se rafraîchit toutes les quelques secondes pendant la séance.",
+          output:
+            "La console « En direct » : quorum, lots avec leurs votants, émargement et présence en ligne, résolutions avec l'état du vote, la participation, le décompte et l'origine de chaque vote. Tant qu'un vote est ouvert, la décision provisoire est masquée (« Vote en cours ») ; les décomptes restent visibles.",
+          prereq: "L'assemblée doit être convoquée.",
+        },
+        {
+          title: "Émarger un lot",
+          goal: "Enregistrer la présence d'un copropriétaire qui ne se connecte pas : présent en salle ou en ligne, représenté par un mandataire, ou absent. Le quorum est recalculé aussitôt.",
+          input: "Le lot, sa situation (présent, représenté, absent), le mode (en salle ou en ligne) et, si le lot est représenté, le mandataire.",
+          output: "La console à jour, avec le quorum recalculé.",
+          prereq: "L'assemblée doit être planifiée ou en cours.",
+        },
+        {
+          title: "Émarger plusieurs lots en une fois",
+          goal: "Marquer en masse des lots présents ou absents, par exemple à l'arrivée des copropriétaires en salle.",
+          input: "Les lots (jusqu'à 500 à la fois), leur situation et le mode.",
+          output: "La console à jour.",
+          prereq: "L'assemblée doit être planifiée ou en cours.",
+        },
+        {
+          title: "Ouvrir le vote d'une résolution",
+          goal: "Soumettre une résolution au vote des copropriétaires connectés. Plusieurs résolutions peuvent être ouvertes en même temps, et une résolution close peut être rouverte. Pendant le vote, la décision provisoire reste masquée.",
+          output: "La résolution passe en vote ouvert et la console se met à jour.",
+          prereq: "La résolution doit exister et l'assemblée doit être en cours.",
+        },
+        {
+          title: "Clore le vote d'une résolution",
+          goal: "Arrêter le vote en ligne d'une résolution. Son résultat devient alors visible des copropriétaires. La clôture de l'assemblée clôt aussi les votes encore ouverts.",
+          output: "La résolution passe en vote clos et la console se met à jour.",
+          prereq: "Le vote de la résolution doit être ouvert.",
+        },
+        {
+          title: "Consulter les participants",
+          goal: "Voir les copropriétaires et mandataires qui peuvent voter (leurs lots et leurs pouvoirs), s'ils ont rejoint l'assemblée, s'ils sont en ligne et s'ils ont des liens personnels actifs.",
+          output: "Pour chaque participant : contact, e-mail, téléphone, lots qu'il peut voter, heure d'arrivée, dernière présence et liens actifs.",
+          prereq: "L'assemblée doit être convoquée.",
+        },
+        {
+          title: "Créer et copier le lien personnel d'un participant",
+          goal: "Remettre à un copropriétaire ou à un mandataire un lien sans mot de passe qui ouvre directement l'assemblée en direct. Vous le transmettez par téléphone, messagerie ou en main propre. Il reste valable jusqu'à 7 jours après l'assemblée.",
+          output: "Le lien, affiché une seule fois pour être copié, et sa date d'expiration.",
+          prereq: "Le participant doit voter ou représenter un lot dans cette assemblée, qui ne doit être ni clôturée ni annulée.",
+        },
+        {
+          title: "Révoquer les liens personnels d'un participant",
+          goal: "Rendre inutilisables tous les liens déjà remis à un participant, par exemple s'ils ont été envoyés à la mauvaise personne.",
+          output: "Le nombre de liens révoqués.",
+          prereq: "Le participant doit avoir au moins un lien actif.",
+        },
+        {
+          title: "Projeter l'assemblée en salle",
+          goal: "Afficher en plein écran, pour la salle, le quorum, la résolution en cours de vote avec sa participation, et les résultats des résolutions closes. L'écran se rafraîchit tout seul.",
+          prereq: "La console de l'assemblée en direct doit être accessible.",
+        },
+        {
           title: "Consulter les pouvoirs",
           goal: "Voir les pouvoirs donnés pour une assemblée, avec le mandant et le mandataire.",
         },
@@ -1064,6 +1354,18 @@ export const syndicCopropriete: WikiDomain = {
       ],
       faq: [
         {
+          q: "Les copropriétaires peuvent-ils voter en ligne pendant l'assemblée ?",
+          a: "Oui. Le syndic remet à chaque participant un lien personnel, sans mot de passe. Le copropriétaire ou son mandataire émarge, puis vote Pour, Contre ou Abstention sur les résolutions ouvertes, pour tous ses lots ou lot par lot. Il peut revoter tant que le vote est ouvert.",
+        },
+        {
+          q: "Voit-on le résultat d'une résolution pendant le vote ?",
+          a: "Côté syndic, les décomptes restent visibles mais la décision provisoire est masquée (« Vote en cours »). Le copropriétaire voit seulement combien de lots ont voté, jamais le sens des votes des autres ; le résultat apparaît à la clôture du vote.",
+        },
+        {
+          q: "La visio de l'assemblée est-elle comprise ?",
+          a: "Non. L'assemblée en direct (console, émargement, votes en ligne, projection) est incluse dans les packs Syndic et Opérateur intégré. La visio est une extension payante, « Visio des assemblées » : voir les tarifs.",
+        },
+        {
           q: "Les votes sont-ils comptés en tantièmes ?",
           a: "Oui. Chaque lot vote pour, contre ou s'abstient, et le résultat de chaque résolution est décompté en tantièmes, avec le quorum recalculé aussitôt.",
         },
@@ -1081,9 +1383,170 @@ export const syndicCopropriete: WikiDomain = {
         },
       ],
       related: [
+        "syndic-copropriete/visio-des-assemblees",
+        "portails-clients/assemblee-par-lien-personnel",
         "portails-clients/portail-coproprietaire",
         "syndic-copropriete/budget-previsionnel",
         "syndic-copropriete/documents-copropriete",
+        "syndic-copropriete/coproprietaires-et-occupants",
+      ],
+    },
+    {
+      slug: "visio-des-assemblees",
+      title: "Visio des assemblées",
+      h1: "Visio des assemblées générales de copropriété",
+      metaTitle: "Visio d'assemblée générale de copropriété : parole et vote",
+      summary:
+        "Tenez l'assemblée générale en visio : salle micro et caméra, main levée, parole donnée ou retirée, discussion écrite modérée et enregistrement de la séance.",
+      intro:
+        "La visio des assemblées prolonge l'[assemblée générale en direct](/wiki/syndic-copropriete/assemblees-generales) : le gestionnaire anime une salle de visio, les copropriétaires la rejoignent depuis leur [lien personnel](/wiki/portails-clients/assemblee-par-lien-personnel) et votent à côté, sur la même page. Le gestionnaire donne la parole, modère la discussion écrite et peut enregistrer la séance. C'est une extension payante, « Visio des assemblées », qui s'ajoute aux packs Syndic ou Opérateur intégré : voir les [Tarifs](/tarifs).",
+      sections: [
+        {
+          title: "Comment se déroule une assemblée en visio ?",
+          body: [
+            "Le gestionnaire ouvre la salle depuis la console « En direct » de l'assemblée, avec son micro, sa caméra et le partage d'écran. Les copropriétaires entrent par leur lien personnel : ils voient et entendent le gestionnaire, sans micro ni caméra tant que la parole ne leur est pas donnée.",
+            [
+              "Un copropriétaire qui souhaite intervenir lève la main ; les mains levées s'affichent dans la console, les plus anciennes en tête.",
+              "Le gestionnaire donne la parole (micro et caméra s'ouvrent, la main est baissée), la retire, ou exclut un participant de la salle.",
+              "Le vote se fait à côté de la visio, dans les résolutions de la même page ; un message écrit dans la discussion ne vaut jamais vote.",
+            ],
+          ],
+        },
+        {
+          title: "Enregistrer la séance : ce que voient les participants",
+          body: [
+            "Quand l'enregistrement est disponible, la convocation envoyée aux copropriétaires, par e-mail ou WhatsApp, porte un avis : la séance pourra être enregistrée (image et son), y compris la voix et l'image des participants qui activent leur micro ou leur caméra, et un avis s'affichera à l'écran pendant l'enregistrement.",
+            "Pendant l'enregistrement, tous les participants voient « Cette assemblée est enregistrée », dans la salle comme sur la page de l'assemblée. L'enregistrement ne capte jamais le vote. Le fichier est conservé de façon privée jusqu'à ce que vous le supprimiez ; il se regarde ou se télécharge depuis la console, jamais en accès public.",
+          ],
+        },
+        {
+          title: "La discussion écrite modérée",
+          body: [
+            "La salle comprend une discussion écrite : messages courts en texte simple (500 caractères au plus), visibles de tous les participants. Le gestionnaire y écrit à tout moment, même quand elle est fermée aux copropriétaires. Il peut masquer un message sans le supprimer (les copropriétaires voient alors « Message masqué par le gestionnaire »), le rétablir, fermer ou rouvrir l'écriture à tous les copropriétaires, ou la couper pour un participant précis. Tous les messages, masqués compris, restent consultables par le syndic après la clôture de l'assemblée.",
+          ],
+        },
+      ],
+      packs: ["syndic", "integre"],
+      profiles: ["equipe"],
+      menu: "Syndic › Assemblées et documents › fiche de l'assemblée › En direct",
+      status: "disponible",
+      actions: [
+        {
+          title: "Suivre la visio de l'assemblée",
+          goal: "Voir qui est dans la salle de visio, quelles mains sont levées (les plus anciennes en tête), qui a la parole, et si un enregistrement est en cours.",
+          output:
+            "Pour chaque participant en visio : copropriétaire ou gestionnaire, nom, main levée, parole accordée, écriture coupée dans la discussion et heure d'entrée.",
+          prereq: "La visio doit être activée avec l'extension « Visio des assemblées ». L'assemblée en direct doit être accessible.",
+        },
+        {
+          title: "Ouvrir la salle de visio",
+          goal: "Entrer dans la salle en animateur, avec micro, caméra et partage d'écran. La salle est créée à l'ouverture si elle n'existe pas encore.",
+          prereq: "L'assemblée doit être planifiée ou en cours.",
+        },
+        {
+          title: "Donner ou retirer la parole",
+          goal: "Ouvrir à un copropriétaire présent dans la salle son micro et sa caméra (sa main est alors baissée), ou les lui retirer.",
+          input: "Le participant concerné.",
+          prereq: "Le participant doit être présent dans la salle.",
+        },
+        {
+          title: "Exclure un participant de la visio",
+          goal: "Retirer une personne de la salle. Vous pouvez aussi révoquer ses liens personnels : elle ne peut alors ni revenir ni voter avec eux.",
+          input: "Le participant et, en option, la révocation de ses liens.",
+          output: "La salle à jour et le nombre de liens révoqués.",
+        },
+        {
+          title: "Enregistrer la séance en visio",
+          goal: "Démarrer l'enregistrement vidéo de la salle. Tous les participants voient « Cette assemblée est enregistrée » tant qu'il dure.",
+          output: "Un enregistrement en cours, avec son heure de début.",
+          prereq:
+            "L'enregistrement doit être disponible dans votre abonnement et l'assemblée en cours. Un seul enregistrement peut tourner à la fois pour une assemblée.",
+        },
+        {
+          title: "Arrêter l'enregistrement",
+          goal: "Mettre fin à l'enregistrement en cours. Le fichier est ensuite traité puis rangé dans le stockage privé d'ImmoTopia.",
+          output: "L'enregistrement arrêté, en attente de la fin de son traitement. La clôture de l'assemblée l'arrête aussi.",
+          prereq: "Un enregistrement doit être en cours.",
+        },
+        {
+          title: "Consulter les enregistrements de l'assemblée",
+          goal: "Voir les enregistrements de la séance avec leur statut (en cours, en traitement, disponible, échec, supprimé), leur début, leur durée, leur taille et leur auteur.",
+          output: "La liste des enregistrements, le plus récent en premier.",
+        },
+        {
+          title: "Lire ou télécharger un enregistrement",
+          goal: "Regarder l'enregistrement dans le lecteur de la console ou le télécharger. Il n'est jamais servi en accès public, et chaque lecture ou téléchargement est consigné au journal d'audit.",
+          output: "Une vidéo MP4 à lire ou à enregistrer.",
+          prereq: "L'enregistrement doit être disponible.",
+        },
+        {
+          title: "Relancer le traitement d'un enregistrement",
+          goal: "Relancer la copie du fichier d'un enregistrement dont le traitement a échoué (bouton « Réessayer »).",
+          output: "L'enregistrement repasse en traitement, puis devient disponible ou signale un nouvel échec.",
+          prereq: "Le traitement de l'enregistrement doit avoir échoué.",
+        },
+        {
+          title: "Supprimer un enregistrement",
+          goal: "Effacer le fichier d'un enregistrement disponible ou en échec. La ligne reste dans la liste, au statut « supprimé », pour garder la trace.",
+          prereq: "L'enregistrement doit être disponible ou en échec.",
+        },
+        {
+          title: "Lire la discussion écrite de la visio",
+          goal: "Relire tous les messages de la discussion, y compris les messages masqués et après la clôture de l'assemblée. Vous voyez aussi si la discussion est ouverte aux copropriétaires et quels participants ne peuvent plus écrire.",
+          output: "Les 1 000 derniers messages dans l'ordre chronologique : auteur, marque « Gestionnaire », texte, message masqué ou non, heure.",
+        },
+        {
+          title: "Écrire dans la discussion de la visio",
+          goal: "Publier un message (annonce, réponse) visible de tous les participants de la salle, même quand la discussion est fermée aux copropriétaires.",
+          input: "Un texte simple de 1 à 500 caractères.",
+          output: "Le message, publié sous votre nom avec la marque « Gestionnaire ».",
+          prereq: "L'assemblée doit être en cours et la visio activée.",
+        },
+        {
+          title: "Masquer ou rétablir un message de la discussion",
+          goal: "Retirer un message de la vue de tous (« Message masqué par le gestionnaire ») sans le supprimer, ou le rétablir. Le texte masqué n'est plus jamais montré aux copropriétaires.",
+          input: "Le message concerné.",
+          output: "Le message mis à jour dans la salle.",
+        },
+        {
+          title: "Ouvrir ou fermer la discussion aux copropriétaires",
+          goal: "Suspendre ou rouvrir l'écriture de tous les copropriétaires dans la discussion. Elle est ouverte par défaut, et ils continuent de lire quand elle est fermée.",
+          output: "L'état de la discussion, mis à jour pour tous les participants.",
+          prereq: "L'assemblée ne doit être ni clôturée ni annulée.",
+        },
+        {
+          title: "Couper ou rétablir l'écriture d'un participant",
+          goal: "Empêcher un copropriétaire d'écrire dans la discussion pour toute l'assemblée, ou lui rendre ce droit. Il continue de lire et en est prévenu dans la salle.",
+          input: "Le participant concerné.",
+          output: "L'état « écriture coupée » du participant, visible dans la console.",
+        },
+      ],
+      faq: [
+        {
+          q: "La visio des assemblées est-elle incluse dans le pack Syndic ?",
+          a: "Non. C'est une extension payante, « Visio des assemblées », que l'on ajoute aux packs Syndic ou Opérateur intégré. L'assemblée en direct sans visio (console, émargement, votes en ligne, projection) est incluse dans ces packs.",
+        },
+        {
+          q: "Les copropriétaires peuvent-ils parler pendant l'assemblée ?",
+          a: "Oui, quand le gestionnaire leur donne la parole. Ils entrent sans micro ni caméra, lèvent la main pour demander la parole, et leur micro et leur caméra s'ouvrent quand le gestionnaire accepte.",
+        },
+        {
+          q: "Les participants sont-ils prévenus que la séance est enregistrée ?",
+          a: "Oui. La convocation le mentionne, et le bandeau « Cette assemblée est enregistrée » s'affiche à tous pendant l'enregistrement.",
+        },
+        {
+          q: "Combien de temps l'enregistrement est-il conservé ?",
+          a: "Jusqu'à ce que le gestionnaire le supprime : aucune suppression automatique. Le fichier reste privé et ne se regarde ou ne se télécharge que depuis la console.",
+        },
+        {
+          q: "Peut-on voter depuis la salle de visio ?",
+          a: "Le vote se fait à côté de la visio, dans les résolutions de la même page (en onglets sur téléphone). Un message dans la discussion ne vaut jamais vote.",
+        },
+      ],
+      related: [
+        "syndic-copropriete/assemblees-generales",
+        "portails-clients/assemblee-par-lien-personnel",
+        "portails-clients/portail-coproprietaire",
         "syndic-copropriete/coproprietaires-et-occupants",
       ],
     },
