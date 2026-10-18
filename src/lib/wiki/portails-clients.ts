@@ -7,7 +7,7 @@ export const portailsClients: WikiDomain = {
   summary:
     "Donnez à vos propriétaires, locataires et copropriétaires un espace en ligne : loyers, échéances, documents, incidents, appels de charges et assemblées.",
   intro:
-    "Les portails clients ouvrent à vos clients un accès en ligne à leurs propres informations, tenues par votre agence. Le propriétaire suit ses biens, ses revenus et ses documents ; le locataire consulte son bail, déclare ses paiements et signale ses incidents ; le copropriétaire suit ses lots, ses appels de charges et les assemblées générales. Chacun ne voit que ce qui le concerne. Des pages publiques sans compte complètent ces portails : paiement d'un loyer, rapport mensuel du propriétaire et accès en lecture seule pour un tiers de confiance. Votre équipe répond à moins d'appels pour une simple question de solde ou de document.",
+    "Les portails clients ouvrent à vos clients un accès en ligne à leurs propres informations, tenues par votre agence. Le propriétaire suit ses biens, ses revenus et ses documents ; le locataire consulte son bail, déclare ses paiements et signale ses incidents ; le copropriétaire suit ses lots, règle ses appels de charges en ligne et participe aux assemblées générales. Chacun ne voit que ce qui le concerne. Des pages publiques sans compte complètent ces portails : paiement d'un loyer ou d'un appel de charges, assemblée générale par lien personnel, rapport mensuel du propriétaire et accès en lecture seule pour un tiers de confiance. Votre équipe répond à moins d'appels pour une simple question de solde ou de document.",
   features: [
     {
       slug: "portail-proprietaire",
@@ -259,20 +259,20 @@ export const portailsClients: WikiDomain = {
       h1: "Portail copropriété : l'espace en ligne de chaque copropriétaire",
       metaTitle: "Portail copropriété en ligne : charges, AG, documents",
       summary:
-        "Portail copropriété : chaque copropriétaire suit en ligne ses lots, le solde de son compte, ses appels de charges, ses PV d'assemblée et ses documents.",
+        "Portail copropriété : chaque copropriétaire suit ses lots et appels de charges, les paie en ligne, rejoint l'assemblée et retrouve ses PV et documents.",
       intro:
-        "Le portail de la copropriété est l'espace en ligne que le syndic ouvre à chaque copropriétaire. Dans ce portail copropriétaire, chacun consulte ses propres lots, le solde de son compte et ses appels de charges, retrouve ses reçus et quittances, et télécharge le règlement de copropriété et les procès-verbaux d'assemblée. Le syndic reçoit ainsi moins de demandes de relevé ou de copie de PV.",
+        "Le portail de la copropriété est l'espace en ligne que le syndic ouvre à chaque copropriétaire. Dans ce portail copropriétaire, chacun consulte ses propres lots, le solde de son compte et ses appels de charges, retrouve ses reçus et quittances, et télécharge le règlement de copropriété et les procès-verbaux d'assemblée. Il peut aussi payer ses appels de charges en ligne par mobile money et rejoindre l'assemblée générale en direct. Le syndic reçoit ainsi moins de demandes de relevé, de copie de PV ou de rappel de paiement.",
       sections: [
         {
           title: "À quoi sert le portail de la copropriété ?",
           body: [
-            "Le portail évite au copropriétaire d'appeler le syndic pour connaître sa situation. Chaque copropriétaire invité y trouve, en lecture seule :",
+            "Le portail évite au copropriétaire d'appeler le syndic pour connaître sa situation. Chaque copropriétaire invité y trouve :",
             [
               "ses lots, avec le solde de chacun, l'historique de son compte et son suivi mois par mois ;",
-              "ses appels de charges (période, montant, payé, restant dû, échéance, statut y compris « en retard »), dont il télécharge l'avis en PDF ;",
+              "ses appels de charges (période, montant, payé, restant dû, échéance, statut y compris « en retard »), dont il télécharge l'avis en PDF, et qu'il peut payer en ligne par mobile money quand le [paiement en ligne des charges](/wiki/syndic-copropriete/paiement-en-ligne-des-charges) est ouvert pour sa copropriété ;",
               "ses paiements, ses reçus et ses quittances, et le relevé de compte d'un lot en PDF ;",
               "le règlement de copropriété et les procès-verbaux d'[assemblée générale](/wiki/syndic-copropriete/assemblees-generales) ;",
-              "les assemblées de sa copropriété et leur ordre du jour ; pour une assemblée clôturée, les résolutions, les résultats et ses propres votes ;",
+              "les assemblées de sa copropriété et leur ordre du jour ; pour une assemblée clôturée, les résolutions, les résultats et ses propres votes ; pour une assemblée en cours, un bouton pour la [rejoindre en direct](/wiki/portails-clients/assemblee-par-lien-personnel) ;",
               "la fiche de sa copropriété, avec le contact du syndic.",
             ],
             "L'accès se fait sur invitation : le syndic invite le copropriétaire depuis sa fiche ([copropriétaires et occupants](/wiki/syndic-copropriete/coproprietaires-et-occupants)) et peut le retirer, par exemple après la vente du lot. Les documents visibles sont ceux que le syndic dépose dans les [documents de copropriété](/wiki/syndic-copropriete/documents-copropriete).",
@@ -298,7 +298,7 @@ export const portailsClients: WikiDomain = {
         },
         {
           title: "Consulter mes appels de charges",
-          goal: "Voir, en lecture seule, les appels de charges de tous ses lots ou d'un seul.",
+          goal: "Voir les appels de charges de tous ses lots ou d'un seul, avant de les payer en ligne si le paiement est ouvert.",
           output:
             "Pour chaque appel : la période, le montant, le payé, le restant dû, l'échéance et le statut, y compris « en retard ».",
         },
@@ -312,13 +312,13 @@ export const portailsClients: WikiDomain = {
         },
         {
           title: "Consulter les assemblées générales",
-          goal: "Voir les assemblées de sa copropriété et leur ordre du jour, en lecture seule.",
+          goal: "Voir les assemblées de sa copropriété et leur ordre du jour.",
           output:
             "Le type, la date, le lieu, le statut et l'ordre du jour ; pour une assemblée clôturée, les résolutions, les résultats et ses propres votes, jamais ceux des autres lots.",
         },
         {
           title: "Consulter mes paiements",
-          goal: "Voir, en lecture seule, les paiements de charges versés sur ses lots, leur affectation aux appels et l'avance restante par lot.",
+          goal: "Voir les paiements de charges versés sur ses lots, leur affectation aux appels et l'avance restante par lot.",
           input: "Un lot ou une année, si besoin.",
           output: "Pour chaque paiement : la date, le montant, le mode, la référence, le lot et les reçus ou quittances liés.",
         },
@@ -354,6 +354,44 @@ export const portailsClients: WikiDomain = {
           goal: "Récupérer en PDF l'avis d'un appel de charges de l'un de ses lots, depuis la liste de ses appels.",
           prereq: "L'appel porte sur un lot qu'il détient et date d'après l'acquisition du lot.",
         },
+        {
+          title: "Savoir si le paiement en ligne est ouvert",
+          goal: "Voir, pour chaque copropriété où l'on a un lot, si le règlement en ligne des appels de charges est ouvert, qui paie les frais du service de paiement éventuels et quels moyens de paiement sont annoncés : Wave, Orange Money, MTN Money, Moov Money. Quand le paiement n'est pas ouvert, aucun bouton de paiement n'apparaît et un message précise que le règlement en ligne n'est pas encore ouvert pour la copropriété.",
+          output: "Un état par copropriété : paiement ouvert ou non, et les moyens de paiement.",
+          prereq: "Le syndic a configuré et activé le paiement en ligne de la copropriété (voir la fiche Paiement en ligne des charges).",
+        },
+        {
+          title: "Choisir les appels à régler en ligne",
+          goal: "Cocher les appels de charges à payer. Une case apparaît sur chaque appel payable (reste dû supérieur à zéro, en francs CFA, paiement ouvert pour la copropriété). Un paiement couvre des appels entiers d'un seul lot, de 1 à 24 : dès qu'un appel est coché, les appels des autres lots sont grisés. Un bandeau affiche le total, la mention des frais éventuels du service de paiement et les moyens de paiement.",
+          output:
+            "Le total à payer. Un appel déjà couvert par un paiement engagé est grisé, avec la mention « Paiement en cours » (et « Reprendre le paiement » si c'est lui qui l'a lancé) ou « Paiement en vérification ».",
+          prereq: "Consulter ses appels de charges, avec le paiement en ligne ouvert pour la copropriété.",
+        },
+        {
+          title: "Payer mes appels de charges en ligne",
+          goal: "Régler en mobile money les appels cochés, depuis la page de paiement sécurisée de l'opérateur. Le montant n'est jamais saisi : il est recalculé par ImmoTopia à partir du reste dû de chaque appel. Si un appel est soldé entre-temps, l'excédent devient une avance sur le compte du lot. Un paiement déjà en attente sur les mêmes appels, au même montant, est repris au lieu d'en créer un second.",
+          input: "Les appels à régler (d'un même lot), puis le bouton « Payer en ligne ».",
+          output: "La page de paiement de l'opérateur, puis, au succès, les reçus et quittances émis.",
+          prereq: "Choisir les appels à régler en ligne. Si un paiement est déjà en cours ou en vérification sur ces appels, le portail l'indique.",
+        },
+        {
+          title: "Reprendre un paiement en cours",
+          goal: "Revenir sur la page de paiement d'un paiement déjà ouvert plutôt que d'en créer un second : bouton « Reprendre le paiement » à côté de la mention « Paiement en cours », ou dans l'alerte affichée quand un paiement est déjà en cours. Le lien de la page de paiement n'est donné qu'à la personne qui a lancé le paiement.",
+          prereq: "Le paiement doit avoir été lancé depuis ce compte et être encore en attente.",
+        },
+        {
+          title: "Suivre un paiement après le retour de l'opérateur",
+          goal: "Au retour de la page de paiement, un bandeau interroge le serveur toutes les quelques secondes, pendant environ deux minutes, puis affiche le résultat : paiement confirmé (appels réglés et numéros des reçus ou quittances), échoué, annulé ou expiré, « en cours de vérification par le syndic » (inutile de payer deux fois), ou délai écoulé. Seul le statut enregistré par ImmoTopia fait foi, jamais l'adresse de retour.",
+          output: "Le statut du paiement et, au succès, les appels réglés avec leurs reçus ou quittances.",
+          prereq: "Avoir lancé un paiement en ligne.",
+        },
+        {
+          title: "Rejoindre l'assemblée générale en direct",
+          goal: "Obtenir son lien personnel et ouvrir l'assemblée en cours pour émarger et voter, sans mot de passe, depuis le bouton « Rejoindre l'AG en direct » de la page Assemblées. Voir la fiche Assemblée générale par lien personnel.",
+          output: "L'assemblée en direct, ouverte avec son lien personnel.",
+          prereq:
+            "Il doit voter ou représenter un lot dans l'assemblée de sa copropriété, qui ne doit être ni clôturée ni annulée.",
+        },
       ],
       faq: [
         {
@@ -362,11 +400,15 @@ export const portailsClients: WikiDomain = {
         },
         {
           q: "Le portail est-il sécurisé ? Que voit chaque copropriétaire ?",
-          a: "L'accès est personnel et se fait sur invitation. Chaque copropriétaire ne voit que ses propres lots, en lecture seule, et uniquement ses propres votes. Parmi les documents du syndic, seuls le règlement de copropriété et les procès-verbaux d'assemblée lui sont affichés.",
+          a: "L'accès est personnel et se fait sur invitation. Chaque copropriétaire ne voit que ses propres lots et uniquement ses propres votes. Parmi les documents du syndic, seuls le règlement de copropriété et les procès-verbaux d'assemblée lui sont affichés.",
         },
         {
           q: "Le copropriétaire peut-il payer ses charges en ligne ?",
-          a: "Non. Le portail affiche les appels de charges, le montant payé et le restant dû, en lecture seule. Il y retrouve ensuite ses paiements, ses reçus et ses quittances.",
+          a: "Oui, quand le syndic a ouvert le paiement en ligne pour sa copropriété. Il coche les appels à régler (entiers, d'un seul lot à la fois), paie en mobile money, puis suit le résultat dans un bandeau et retrouve ses reçus et ses quittances. Sans ouverture du paiement en ligne, le portail affiche les appels de charges, le montant payé et le restant dû, sans bouton de paiement.",
+        },
+        {
+          q: "Le copropriétaire peut-il participer à l'assemblée générale depuis son portail ?",
+          a: "Oui. Pendant une assemblée en cours, il clique sur « Rejoindre l'AG en direct » : son lien personnel s'ouvre et il peut émarger, voter et, si le syndic a la visio, suivre la séance en vidéo.",
         },
         {
           q: "Peut-on retrouver le procès-verbal d'une assemblée générale dans le portail ?",
@@ -386,7 +428,154 @@ export const portailsClients: WikiDomain = {
         "syndic-copropriete/assemblees-generales",
         "syndic-copropriete/documents-copropriete",
         "syndic-copropriete/appels-de-charges",
+        "syndic-copropriete/paiement-en-ligne-des-charges",
+        "portails-clients/assemblee-par-lien-personnel",
+        "portails-clients/payer-un-appel-de-charges",
         "portails-clients/portail-proprietaire",
+      ],
+    },
+    {
+      slug: "assemblee-par-lien-personnel",
+      title: "Assemblée générale par lien personnel",
+      h1: "Participer à l'assemblée générale par lien personnel",
+      metaTitle: "Assemblée générale en ligne : émarger et voter par lien",
+      summary:
+        "Côté copropriétaire : ouvrez votre lien personnel, émargez, votez sur les résolutions et rejoignez la visio de l'assemblée générale, sans mot de passe.",
+      intro:
+        "Le copropriétaire, ou son mandataire, reçoit du syndic un lien personnel qui ouvre directement l'assemblée en direct, sans compte ni mot de passe. La page lui montre l'ordre du jour, le quorum, ses lots et ceux qu'il représente, et l'état des votes, rafraîchis automatiquement. Il émarge en ligne et vote Pour, Contre ou Abstention. Si le syndic a la visio, il rejoint la salle depuis la même page. C'est la vue du participant ; la console de l'animateur est décrite dans [Assemblées générales](/wiki/syndic-copropriete/assemblees-generales) et [Visio des assemblées](/wiki/syndic-copropriete/visio-des-assemblees). La participation en ligne est incluse dans les packs Syndic et Opérateur intégré ; la visio est une extension payante (voir les [Tarifs](/tarifs)).",
+      sections: [
+        {
+          title: "Que voit le copropriétaire pendant un vote ?",
+          body: [
+            "Tant que le vote d'une résolution est ouvert, le copropriétaire voit seulement le nombre de lots qui ont déjà voté, jamais le sens des votes des autres. Le résultat de la résolution apparaît à la clôture du vote.",
+            "Il peut revoter tant que le vote est ouvert. Un vote saisi par le syndic ne peut pas être remplacé en ligne, et un mandataire ne peut pas remplacer le vote du copropriétaire lui-même.",
+          ],
+        },
+      ],
+      packs: ["syndic", "integre"],
+      profiles: ["coproprietaire", "visiteur"],
+      status: "disponible",
+      actions: [
+        {
+          title: "Ouvrir l'assemblée par mon lien personnel",
+          goal: "Ouvrir son lien, sans mot de passe, pour voir l'assemblée en direct : l'ordre du jour, la visio si elle est activée, le quorum, ses lots et ceux qu'il représente, et l'état des votes. La page se met à jour toute seule.",
+          output:
+            "L'assemblée, la personne connectée, ses lots, le quorum et les résolutions avec la participation, ses propres votes et le résultat seulement après la clôture du vote. Un avis « Cette assemblée est enregistrée » s'affiche quand la séance est enregistrée.",
+          prereq:
+            "Le syndic a transmis le lien personnel (ou le copropriétaire l'a obtenu depuis son portail). Un lien révoqué ou expiré n'ouvre rien.",
+        },
+        {
+          title: "Émarger en ligne",
+          goal: "Signaler sa présence en cliquant sur « Rejoindre l'assemblée » : ses lots passent présents en ligne, ceux de ses mandants représentés, et le quorum se met à jour.",
+          output: "La page à jour, avec ses lots présents.",
+          prereq: "L'assemblée doit être planifiée ou en cours.",
+        },
+        {
+          title: "Voter en ligne sur une résolution",
+          goal: "Voter Pour, Contre ou Abstention sur une résolution ouverte, pour tous ses lots d'un coup ou lot par lot, y compris les lots qu'il représente. Le revote est possible tant que le vote est ouvert.",
+          input: "Le sens du vote, pour chaque lot concerné.",
+          output: "Ses votes enregistrés, visibles sur la page.",
+          prereq:
+            "Il doit avoir rejoint l'assemblée, qui doit être en cours, et la résolution doit être ouverte au vote.",
+        },
+        {
+          title: "Rejoindre la visio de l'assemblée",
+          goal: "Entrer dans la salle de visio depuis la page de l'assemblée : voir et entendre le gestionnaire, sans micro ni caméra tant que la parole n'est pas donnée. Le vote et les résolutions restent à côté (en onglets sur téléphone).",
+          prereq: "Il doit avoir rejoint l'assemblée, en cours. La visio doit être activée par le syndic (extension « Visio des assemblées »).",
+        },
+        {
+          title: "Lever ou baisser la main en visio",
+          goal: "Demander la parole au gestionnaire pendant la visio. La main levée est visible de tous dans la salle et apparaît en tête de liste dans la console du gestionnaire.",
+          prereq: "Il doit être présent dans la salle de visio.",
+        },
+        {
+          title: "Lire la discussion de la visio",
+          goal: "Voir les messages de la salle (les 200 derniers à l'entrée, puis en direct) et savoir si l'on peut écrire. Les messages masqués par le gestionnaire apparaissent comme tels.",
+          output: "Les messages avec leur auteur, la marque « Gestionnaire » pour les messages du syndic, et l'heure. Aucune donnée de lot, de tantième ni de coordonnée n'est montrée.",
+          prereq: "Il doit être présent dans la salle de visio.",
+        },
+        {
+          title: "Écrire dans la discussion de la visio",
+          goal: "Envoyer un court message en texte simple (500 caractères au plus), visible de tous les participants de la salle sous son nom. Un message ne vaut pas vote.",
+          input: "Le texte du message.",
+          output: "Le message publié dans la salle.",
+          prereq:
+            "Il doit être présent dans la salle, la discussion doit être ouverte et son écriture ne doit pas avoir été coupée par le gestionnaire. Le nombre de messages par minute est limité.",
+        },
+      ],
+      faq: [
+        {
+          q: "Faut-il un compte pour participer à l'assemblée en ligne ?",
+          a: "Non. Le lien personnel remis par le syndic suffit. Un copropriétaire qui a un compte sur son portail peut aussi obtenir son lien depuis la page Assemblées.",
+        },
+        {
+          q: "Un mandataire peut-il voter pour le compte d'un copropriétaire ?",
+          a: "Oui. Son lien lui donne accès aux lots qu'il représente, qu'il vote en ligne comme les siens. Il ne peut pas remplacer le vote que le copropriétaire a lui-même exprimé.",
+        },
+        {
+          q: "Que se passe-t-il si le lien est révoqué ?",
+          a: "Il n'ouvre plus rien. Le syndic peut en remettre un nouveau au participant.",
+        },
+      ],
+      related: [
+        "syndic-copropriete/assemblees-generales",
+        "syndic-copropriete/visio-des-assemblees",
+        "portails-clients/portail-coproprietaire",
+      ],
+    },
+    {
+      slug: "payer-un-appel-de-charges",
+      title: "Page de paiement d'un appel de charges",
+      h1: "Payer un appel de charges de copropriété par lien",
+      metaTitle: "Payer un appel de charges en ligne par lien, sans compte",
+      summary:
+        "Côté copropriétaire : ouvrez le lien « Payer cet appel » reçu de votre syndic, vérifiez le reste dû, payez en mobile money sans compte, puis suivez le statut.",
+      intro:
+        "Le copropriétaire reçoit de son syndic, par WhatsApp, par e-mail ou en main propre, un lien vers un seul appel de charges. La page lui montre la copropriété, le lot, la période, l'échéance et le reste dû, puis lance le paiement en mobile money. Au retour, une page lui indique si le règlement est reçu, en cours de vérification, échoué ou annulé. C'est le parcours du copropriétaire ; la création et le suivi des liens se font côté syndic, dans [Paiement en ligne des charges](/wiki/syndic-copropriete/paiement-en-ligne-des-charges). Cette fonction est incluse dans les packs Syndic et Opérateur intégré.",
+      packs: ["syndic", "integre"],
+      profiles: ["coproprietaire", "visiteur"],
+      status: "disponible",
+      actions: [
+        {
+          title: "Consulter l'appel à payer depuis le lien reçu",
+          goal: "Afficher, sans connexion, la copropriété, le lot, la période, l'échéance et le reste dû de l'appel, recalculé à chaque ouverture, ainsi que les moyens de paiement et la mention des frais éventuels. La page signale un paiement déjà en cours ou en vérification par le syndic.",
+          output:
+            "Le nom de la copropriété, le lot, la période, l'échéance, le montant dû et la date d'expiration du lien. Ni le nom du copropriétaire ni ses coordonnées ne sont affichés.",
+          prereq:
+            "Le lien est valide et l'appel reste à payer. Un lien inconnu, expiré, révoqué ou dont le lot a changé de copropriétaire affiche « Lien invalide ou expiré. ».",
+        },
+        {
+          title: "Payer l'appel de charges depuis le lien",
+          goal: "Lancer le paiement en mobile money (Wave, Orange Money, MTN Money, Moov Money) avec le bouton « Payer ». Le montant est celui du reste dû de l'appel, calculé par ImmoTopia : il n'est jamais saisi. Si un paiement est déjà en attente pour le même appel, il est repris.",
+          output: "La page de paiement de l'opérateur choisi.",
+          prereq:
+            "Consulter l'appel depuis le lien. Si un paiement est déjà en cours, ou en vérification par le syndic, la page l'indique : inutile de payer deux fois.",
+        },
+        {
+          title: "Suivre le statut du paiement",
+          goal: "Savoir, au retour de la page de paiement, si le règlement est reçu, en cours de vérification, échoué ou annulé. La page se met à jour toute seule pendant environ deux minutes, et un rechargement reprend la vérification.",
+          output: "Le statut, le montant, la copropriété et la période.",
+          prereq: "Avoir lancé le paiement depuis le lien.",
+        },
+      ],
+      faq: [
+        {
+          q: "Le copropriétaire a-t-il besoin d'un compte pour payer ?",
+          a: "Non. Le lien lui ouvre directement la page de paiement de l'appel concerné.",
+        },
+        {
+          q: "Le montant peut-il être modifié par le copropriétaire ?",
+          a: "Non. Le montant est le reste dû de l'appel, calculé par ImmoTopia à l'ouverture, et non une saisie.",
+        },
+        {
+          q: "Pendant combien de temps le lien reste-t-il valable ?",
+          a: "Entre 1 et 30 jours selon le choix du syndic. Un lien joint automatiquement à un avis ou à une relance reste valable 30 jours, et le syndic peut le révoquer à tout moment.",
+        },
+      ],
+      related: [
+        "syndic-copropriete/paiement-en-ligne-des-charges",
+        "portails-clients/portail-coproprietaire",
+        "syndic-copropriete/appels-de-charges",
       ],
     },
     {
