@@ -7,7 +7,7 @@ export const communicationEtDocuments: WikiDomain = {
   summary:
     "Notifications e-mail et WhatsApp, newsletters, campagnes et modèles Word de l'agence : communiquez avec vos clients et générez baux et quittances en un clic.",
   intro:
-    "Ce domaine réunit tout ce que l'agence envoie à ses clients et tout ce qu'elle produit comme documents. Côté communication : notifications automatiques par e-mail et WhatsApp, diffusion dans votre groupe WhatsApp, listes de diffusion et campagnes de newsletter. Côté documents : vos propres modèles Word pour les baux, quittances et relevés, remplis automatiquement. Un assistant IA, ImmoCopilot, est présent dans l'application mais désactivé par défaut. Il s'adresse à la direction et à tous les collaborateurs qui échangent avec les propriétaires, locataires et prospects.",
+    "Ce domaine réunit tout ce que l'agence envoie à ses clients et tout ce qu'elle produit comme documents. Côté communication : notifications automatiques par e-mail et WhatsApp, diffusion dans votre groupe WhatsApp, listes de diffusion et campagnes de newsletter. Côté documents : vos propres modèles Word pour les baux, quittances et relevés, remplis automatiquement. Un assistant IA, ImmoCopilot, répond à vos questions, affiche ses résultats dans un panneau et propose des modifications que vous validez vous-même. Chaque tableau de l'application s'exporte en Excel, CSV ou PDF, et les documents produits portent l'en-tête de l'agence. Il s'adresse à la direction et à tous les collaborateurs qui échangent avec les propriétaires, locataires et prospects.",
   features: [
     {
       slug: "notifications-email-whatsapp",
@@ -354,13 +354,13 @@ export const communicationEtDocuments: WikiDomain = {
       title: "Assistant IA ImmoCopilot",
       metaTitle: "Assistant IA ImmoCopilot pour agence immobilière",
       summary:
-        "Posez vos questions en français à l'assistant : il retrouve biens et baux, liste leurs documents et prépare quittances et relevés que vous confirmez vous-même.",
+        "Posez vos questions à l'assistant : il consulte vos données, affiche tableaux et graphiques, et propose des modifications qu'il n'exécute qu'avec votre accord.",
       intro:
-        "ImmoCopilot est un assistant de conversation accessible depuis toutes les pages de l'agence, par un bouton flottant ou le raccourci Ctrl/Cmd+J. Il répond par écrit en direct, présente les biens, baux et documents trouvés sous forme de cartes et s'adapte à l'écran que vous consultez. Il ne modifie rien de lui-même : un document n'est produit qu'après votre confirmation. Il est désactivé par défaut et ne propose que les outils permis par vos droits et par votre abonnement.",
+        "ImmoCopilot est un assistant de conversation accessible depuis toutes les pages de l'agence, par un bouton flottant ou le raccourci Ctrl/Cmd+J. Il répond par écrit en direct, présente les biens, baux et documents trouvés sous forme de cartes et s'adapte à l'écran que vous consultez. Il peut aussi afficher ses résultats dans un panneau (tableau, texte, graphique) que vous téléchargez. Il ne modifie rien de lui-même : toute modification est d'abord présentée sur une carte, et n'est exécutée qu'après votre accord. Il ne propose que les outils permis par vos droits et par votre abonnement.",
       packs: ["agence", "syndic", "promoteur", "integre", "patrimoine-essentiel", "patrimoine-pro"],
       profiles: ["equipe"],
       menu: "Bouton flottant « Assistant » (Ctrl/Cmd+J), sur toutes les pages de l'agence",
-      status: "deploiement",
+      status: "disponible",
       actions: [
         {
           title: "Savoir si l'assistant est disponible",
@@ -423,15 +423,79 @@ export const communicationEtDocuments: WikiDomain = {
           output: "Le fichier Word (.docx).",
           prereq: "Le document a été généré.",
         },
+        {
+          title: "Consulter un résultat dans le panneau",
+          goal: "Voir à droite de la page Assistant les tableaux, textes et graphiques que l'assistant publie à partir de ses recherches. Sur un petit écran, le panneau s'ouvre en plein écran depuis le message ou le bouton « Résultats ».",
+          input: "Aucune : le panneau s'ouvre tout seul quand l'assistant publie un résultat. S'il y en a plusieurs, un sélecteur permet de passer de l'un à l'autre.",
+          output: "Un tableau triable par colonne et paginé, un texte mis en forme, ou un graphique (barres, courbes, secteurs) accompagné de ses données. Les nombres, dates et montants suivent la langue. Un résultat très long est tronqué, avec une mention. Une nouvelle conversation vide le panneau.",
+          prereq: "Une discussion avec l'assistant, sur la page Assistant.",
+        },
+        {
+          title: "Télécharger un résultat de l'assistant",
+          goal: "Garder le tableau, le texte ou le graphique affiché dans le panneau.",
+          input: "Le format, choisi dans le menu « Télécharger ».",
+          output: "Un tableau en CSV ou en Excel ; un texte en fichier .md ; un graphique en image PNG ou en CSV de ses données. Le fichier est préparé dans votre navigateur et porte le titre du résultat.",
+          prereq: "Un résultat affiché dans le panneau.",
+        },
+        {
+          title: "Chercher une consultation disponible",
+          goal: "L'assistant cherche, parmi les consultations que l'application permet, celle qui répond à votre question : finance, location, CRM, syndic, patrimoine…",
+          input: "Votre question, en langage courant.",
+          output: "Au plus 20 consultations possibles, filtrées selon vos droits. L'assistant ne propose jamais de suppression ni d'accès à un secret ou à un moyen de paiement.",
+        },
+        {
+          title: "Consulter une donnée de l'application",
+          goal: "L'assistant lit pour vous l'information demandée, avec exactement vos droits : il ne voit que ce que vous pourriez ouvrir vous-même.",
+          output: "La réponse en texte, ou publiée dans le panneau. Les informations secrètes sont masquées et les très longues listes sont raccourcies.",
+          prereq: "Une consultation disponible trouvée par l'assistant.",
+        },
+        {
+          title: "Recevoir un plan d'écriture à valider",
+          goal: "Quand vous lui demandez de créer ou de modifier une donnée, l'assistant prépare un plan et le présente sur une carte « Action à valider ». Rien n'est modifié à ce stade.",
+          input: "Votre demande, par exemple « change le loyer de ce bail ».",
+          output: "Une carte avec ce que l'assistant va faire, l'enregistrement visé et un tableau « avant / après » calculé par l'application, ainsi que les avertissements. Elle compte à rebours sa durée de validité. L'assistant ne propose jamais de supprimer une donnée.",
+          prereq: "Une discussion avec l'assistant ; vos droits couvrent la modification demandée.",
+        },
+        {
+          title: "Donner son accord à un plan d'écriture",
+          goal: "Valider vous-même la carte pour que la modification soit faite. Rien ne se fait sans votre clic.",
+          input: "Un clic sur « Approuver et exécuter ».",
+          output: "La carte se fige avec le résultat, l'heure et un aperçu de ce qui a été fait. Si l'application refuse ou si la carte a expiré, la raison est expliquée.",
+          prereq: "Un plan d'écriture reçu et encore valable.",
+        },
+        {
+          title: "Confirmer un plan sensible en saisissant CONFIRMER",
+          goal: "Pour un plan sensible (paiement, envoi d'e-mail ou de SMS, signature, droits d'accès, clôture, grand nombre de changements), une alerte rouge en donne la raison et vous devez taper le mot CONFIRMER pour approuver.",
+          input: "Le mot CONFIRMER, en majuscules, dans le champ de la carte. La touche Entrée n'approuve jamais.",
+          output: "Le bouton « Approuver et exécuter » s'active, puis la modification est faite comme pour un plan ordinaire.",
+          prereq: "Un plan d'écriture sensible reçu.",
+        },
+        {
+          title: "Refuser un plan d'écriture",
+          goal: "Écarter une proposition de l'assistant sans rien modifier.",
+          input: "Un clic sur « Refuser ».",
+          output: "La carte passe à « Action refusée — rien n'a été modifié » et ne peut plus être exécutée. La conversation continue ; vous pouvez dire à l'assistant que vous avez refusé.",
+          prereq: "Un plan d'écriture reçu.",
+        },
+        {
+          title: "Exécuter une écriture après accord",
+          goal: "Après votre accord, l'application fait la modification demandée sous votre identité : vos droits et votre abonnement s'appliquent comme si vous l'aviez faite vous-même.",
+          output: "La modification est enregistrée. En cas de refus de l'application, la carte indique les champs en cause. Une même carte ne s'exécute qu'une fois.",
+          prereq: "Votre accord sur le plan, et saisie de CONFIRMER si la carte l'exige.",
+        },
       ],
       faq: [
         {
           q: "L'assistant peut-il modifier mes données ?",
-          a: "Non. Il cherche, présente et prépare des propositions. Un document n'est produit qu'après votre confirmation sur la carte.",
+          a: "Seulement avec votre accord. Il prépare une proposition sur une carte, montre ce qui changerait, et n'agit qu'après votre clic sur « Approuver et exécuter », avec vos droits. Il ne supprime jamais rien.",
+        },
+        {
+          q: "À quoi sert le mot CONFIRMER ?",
+          a: "C'est une sécurité supplémentaire pour les actions sensibles : paiement, envoi de message, signature, droits d'accès, clôture ou modification en grand nombre. Tant que vous ne l'avez pas saisi, rien ne s'exécute.",
         },
         {
           q: "Pourquoi ne vois-je pas le bouton « Assistant » ?",
-          a: "L'assistant est désactivé par défaut. Le bouton n'apparaît que s'il est activé pour la plateforme et si au moins un de ses outils vous est permis.",
+          a: "Le bouton n'apparaît que si l'assistant est activé pour votre agence et si au moins un de ses outils vous est permis.",
         },
         {
           q: "Que voit l'assistant de mes données ?",
@@ -441,6 +505,120 @@ export const communicationEtDocuments: WikiDomain = {
       related: [
         "communication-et-documents/generation-baux-quittances",
         "communication-et-documents/modeles-de-documents-word",
+        "communication-et-documents/export-des-tableaux",
+      ],
+    },
+    {
+      slug: "export-des-tableaux",
+      title: "Export des tableaux",
+      h1: "Exporter un tableau en Excel, CSV ou PDF",
+      metaTitle: "Exporter un tableau en Excel, CSV ou PDF dans ImmoTopia",
+      summary:
+        "Chaque liste d'ImmoTopia s'exporte en Excel, CSV ou PDF d'un clic, avec vos filtres en cours : retravaillez-la dans un tableur ou imprimez-la.",
+      intro:
+        "Au-dessus de chaque tableau ou liste de l'application, un bouton « Exporter » vous donne la liste telle que vous la voyez : mêmes filtres, même recherche, toutes les pages. Vous la retravaillez dans un tableur, la réutilisez dans un autre outil ou l'imprimez. L'export est inclus dans tous les packs et ne demande aucun droit en plus de celui de voir le tableau.",
+      sections: [
+        {
+          title: "Ce que contient un export",
+          body: [
+            [
+              "Toutes les lignes correspondant à vos filtres et à votre recherche, y compris celles des autres pages, jusqu'à 10 000 lignes.",
+              "Les colonnes d'action (boutons, menus) ne sont pas exportées.",
+              "Le fichier s'appelle comme la liste, suivi de la date du jour.",
+            ],
+          ],
+        },
+      ],
+      packs: ["agence", "syndic", "promoteur", "integre", "patrimoine-essentiel", "patrimoine-pro"],
+      profiles: ["equipe", "proprietaire", "locataire", "coproprietaire", "visiteur"],
+      menu: "Bouton « Exporter » au-dessus de chaque tableau ou liste",
+      status: "disponible",
+      actions: [
+        {
+          title: "Exporter un tableau en Excel",
+          goal: "Retravailler une liste dans un tableur : tri, sommes, filtres.",
+          input: "Un clic sur Exporter, puis Excel. Les filtres et la recherche en cours sont repris.",
+          output: "Un fichier .xlsx avec toutes les lignes filtrées, une ligne d'en-tête figée avec un filtre automatique, et les montants et quantités en vrais nombres.",
+          prereq: "Le tableau est affiché.",
+        },
+        {
+          title: "Exporter un tableau en CSV",
+          goal: "Réutiliser une liste dans un autre outil.",
+          input: "Un clic sur Exporter, puis CSV. Les filtres et la recherche en cours sont repris.",
+          output: "Un fichier .csv au séparateur « ; », lisible directement par Excel avec les accents, les nombres sans séparateur de milliers. Une cellule qui commencerait comme une formule est neutralisée.",
+          prereq: "Le tableau est affiché.",
+        },
+        {
+          title: "Exporter un tableau en PDF",
+          goal: "Imprimer ou transmettre une liste lisible.",
+          input: "Un clic sur Exporter, puis PDF (proposé jusqu'à 12 colonnes).",
+          output: "Un PDF A4 avec le titre, la date de génération et la pagination, en paysage au-delà de 6 colonnes. En arabe, le navigateur ouvre sa boîte d'impression : choisissez « Enregistrer en PDF ».",
+          prereq: "Le tableau est affiché.",
+        },
+      ],
+      faq: [
+        {
+          q: "Peut-on exporter uniquement ce que j'ai filtré ?",
+          a: "Oui. L'export reprend les filtres et la recherche en cours, sur toutes les pages du tableau.",
+        },
+        {
+          q: "L'export est-il réservé à certains packs ?",
+          a: "Non. Il est disponible dans tous les packs, pour toute personne qui voit le tableau, y compris sur les portails des propriétaires, locataires et copropriétaires.",
+        },
+      ],
+      related: [
+        "communication-et-documents/assistant-ia-immocopilot",
+        "communication-et-documents/listes-de-diffusion-newsletter",
+      ],
+    },
+    {
+      slug: "documents-a-en-tete",
+      title: "Documents à en-tête",
+      h1: "Documents PDF et Word à l'en-tête de l'agence",
+      metaTitle: "Documents PDF et Word à en-tête de l'agence ou de la copropriété",
+      summary:
+        "Reçus, relevés, rapports et courriers sortent en PDF ou en Word avec le logo et l'identité de l'agence ou de la copropriété, et un pied de page paginé.",
+      intro:
+        "Les documents que produit ImmoTopia portent tous le même en-tête : le logo et l'identité de l'agence ou du propriétaire mandant, et pour un syndic le nom, l'adresse et le logo de la copropriété. Un pied de page numérote les pages. Pour les contrats et les courriers, des modèles Word standard se remplissent tout seuls des informations du dossier ; vous pouvez aussi déposer [vos propres modèles](/wiki/communication-et-documents/modeles-de-documents-word). Ces documents sont inclus dans les packs Agence, Syndic, Promoteur et Opérateur intégré.",
+      packs: ["agence", "syndic", "promoteur", "integre"],
+      profiles: ["equipe"],
+      menu: "Selon le document : depuis la fiche d'un bail, d'un paiement, d'une copropriété ou d'un propriétaire",
+      status: "disponible",
+      actions: [
+        {
+          title: "Émettre un document PDF à l'en-tête de l'agence",
+          goal: "Produire un reçu de charges, une facture d'abonnement, un relevé de compte, un bon de caisse ou un rapport propriétaire qui porte l'identité de l'agence.",
+          input: "Rien de plus que le document demandé : le logo et l'identité viennent des paramètres de l'agence ou du propriétaire mandant ; pour une copropriété, son nom, son adresse, son logo et ses références ; pour un copropriétaire, ses coordonnées et son lot.",
+          output: "Un PDF avec l'en-tête, le contenu du document et un pied de page paginé. Une information absente laisse simplement la zone vide.",
+          prereq: "L'identité de l'agence est renseignée et son logo déposé dans les paramètres de l'agence.",
+        },
+        {
+          title: "Émettre un document Word à l'en-tête de l'agence",
+          goal: "Obtenir le même document en Word, pour le retoucher avant de l'envoyer : avis d'appel de charges, quittance de charges, convocation d'assemblée générale.",
+          output: "Un fichier .docx avec le logo inséré dans l'en-tête et les informations du dossier.",
+          prereq: "L'identité de l'agence est renseignée et son logo déposé.",
+        },
+        {
+          title: "Utiliser un modèle Word standard",
+          goal: "Partir d'un modèle livré avec l'application, dont les champs à compléter sont remplis automatiquement : baux, reçu et relevé locatifs, compte rendu et convocation d'assemblée, avis d'appel de charges, quittance de charges.",
+          input: "Le dossier concerné (bail, paiement, assemblée, appel de charges).",
+          output: "Un document Word complété. Un champ dont l'information manque reste vide plutôt que de bloquer la production.",
+        },
+      ],
+      faq: [
+        {
+          q: "D'où vient le logo du document ?",
+          a: "Du logo déposé dans les paramètres de l'agence, ou de celui du propriétaire mandant pour ses documents. Pour un syndic, l'en-tête reprend aussi le logo de la copropriété.",
+        },
+        {
+          q: "Peut-on garder ses propres modèles ?",
+          a: "Oui. Les modèles standard sont des points de départ : vos propres modèles Word, déposés dans l'application, ne sont jamais remplacés.",
+        },
+      ],
+      related: [
+        "communication-et-documents/modeles-de-documents-word",
+        "communication-et-documents/generation-baux-quittances",
+        "agence-et-abonnement/parametres-agence",
       ],
     },
   ],
