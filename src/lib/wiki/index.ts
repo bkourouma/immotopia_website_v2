@@ -19,7 +19,7 @@ import type { WikiPackId, WikiAction, WikiDomain, WikiFeature, WikiProfile, Wiki
 export type * from "./types";
 
 /** Date de l'inventaire dont le wiki est tiré. */
-export const WIKI_UPDATED_ON = "2 octobre 2026";
+export const WIKI_UPDATED_ON = "18 octobre 2026";
 
 export const wikiDomains: WikiDomain[] = [
   gestionLocative,

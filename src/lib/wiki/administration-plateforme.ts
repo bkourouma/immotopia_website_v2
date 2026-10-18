@@ -1,6 +1,7 @@
 import type { WikiDomain } from "./types";
 
 // Console de l'éditeur ImmoTopia : réservée au super-administrateur, donc aucun pack n'y donne accès.
+// Exception : « application-installable » concerne tous les utilisateurs et tous les packs.
 // Les écrans que voit une agence (collaborateurs, rôles, paramètres, abonnement, factures) sont dans agence-et-abonnement.ts.
 
 export const administrationPlateforme: WikiDomain = {
@@ -10,7 +11,7 @@ export const administrationPlateforme: WikiDomain = {
   summary:
     "La console de l'éditeur ImmoTopia : agences, catalogue des packs, abonnements, facturation, rôles, statistiques, journal d'audit, Assistant IA et SMS.",
   intro:
-    "Ce domaine décrit la console d'administration de la plateforme. C'est l'outil de l'éditeur ImmoTopia, réservé au super-administrateur : aucune agence n'y a accès et aucun pack ne l'ouvre. Il sert à créer et suivre les agences, gérer le catalogue des packs et les abonnements, émettre les factures, régler les droits et les menus, suivre l'activité et configurer l'Assistant IA. Ce que voit une agence dans son propre espace est décrit dans « Agence, équipe et abonnement ».",
+    "Ce domaine décrit la console d'administration de la plateforme. C'est l'outil de l'éditeur ImmoTopia, réservé au super-administrateur : aucune agence n'y a accès et aucun pack ne l'ouvre. Il sert à créer et suivre les agences, gérer le catalogue des packs et les abonnements, émettre les factures, régler les droits et les menus, suivre l'activité et configurer l'Assistant IA. Ce que voit une agence dans son propre espace est décrit dans « Agence, équipe et abonnement ». Une fonction y est ouverte à tous les utilisateurs : l'installation d'ImmoTopia comme application sur le téléphone ou l'ordinateur.",
   features: [
     {
       slug: "catalogue-et-devis",
@@ -291,7 +292,7 @@ export const administrationPlateforme: WikiDomain = {
       summary:
         "Définissez les permissions de chaque rôle et choisissez les entrées de menu visibles par rôle, y compris pour les portails propriétaire et locataire.",
       intro:
-        "Le super-administrateur règle ce que chaque rôle permet de faire et ce qu'il voit dans le menu. Il dispose d'une vue d'ensemble des menus coupés par rôle. Les changements s'appliquent aux utilisateurs concernés dès leur prochaine action.",
+        "Le super-administrateur règle ce que chaque rôle permet de faire et ce qu'il voit dans le menu. Il dispose d'une vue d'ensemble des menus coupés par rôle, par défaut pour toutes les agences ou propres à une agence. Côté agence, un collaborateur ne voit que les menus dont il a la permission. Les changements s'appliquent aux utilisateurs concernés dès leur prochaine action.",
       packs: [],
       profiles: ["equipe"],
       menu: "Administration › Rôles et permissions",
@@ -304,7 +305,9 @@ export const administrationPlateforme: WikiDomain = {
         },
         {
           title: "Consulter la carte des menus par rôle",
-          goal: "Voir quels menus sont coupés pour quel rôle.",
+          goal: "Voir d'un coup d'œil quels menus sont coupés pour quel rôle : soit le réglage par défaut de toutes les agences (et celui des rôles de la plateforme), soit les réglages propres à une agence.",
+          input: "Le périmètre : « Toutes les agences (défaut) » ou une agence en particulier.",
+          output: "Pour chaque rôle, la liste des menus désactivés dans ce périmètre.",
         },
         {
           title: "Remplacer les menus d'un rôle",
@@ -315,6 +318,12 @@ export const administrationPlateforme: WikiDomain = {
           title: "Consulter ses menus coupés",
           goal: "L'application lit les menus masqués pour adapter l'écran de chaque utilisateur.",
           profiles: ["equipe"],
+        },
+        {
+          title: "Masquer les menus sans permission",
+          goal: "Ne montrer à un collaborateur que les entrées de menu dont il a le droit : locatif, finance, stock… Il ne tombe plus sur un écran qui lui répond « accès refusé ».",
+          output: "Un menu allégé : un groupe sans aucune entrée permise disparaît, et un groupe dont l'entrée principale est masquée ouvre sa première entrée visible. Les administrateurs de l'agence voient tous les menus de leur pack.",
+          prereq: "Les rôles du collaborateur sont attribués.",
         },
       ],
       related: ["agence-et-abonnement/roles-et-permissions"],
@@ -435,6 +444,46 @@ export const administrationPlateforme: WikiDomain = {
         },
       ],
       related: ["agence-et-abonnement/reglages-sms-agence"],
+    },
+    {
+      slug: "application-installable",
+      title: "Application installable",
+      h1: "Installer ImmoTopia comme une application sur téléphone ou ordinateur",
+      metaTitle: "Installer ImmoTopia sur l'écran d'accueil du téléphone",
+      summary:
+        "Installez ImmoTopia comme une application, avec son icône et en plein écran, depuis le navigateur du téléphone ou de l'ordinateur, sans magasin d'applications.",
+      intro:
+        "ImmoTopia s'installe comme une application sur l'écran d'accueil d'un téléphone, d'une tablette ou d'un ordinateur. Vous gardez son icône sous la main et l'ouvrez en plein écran, sans passer par un magasin d'applications. L'installation est ouverte à tous les utilisateurs et incluse dans tous les packs. Quand l'appareil n'a plus de réseau, une page vous l'indique clairement.",
+      packs: ["agence", "syndic", "promoteur", "integre", "patrimoine-essentiel", "patrimoine-pro"],
+      profiles: ["equipe", "proprietaire", "locataire", "coproprietaire"],
+      menu: "Page de connexion ; menu utilisateur › Installer l'application",
+      status: "disponible",
+      actions: [
+        {
+          title: "Installer l'application sur l'écran d'accueil",
+          goal: "Installer ImmoTopia comme une application, avec son icône et en plein écran, depuis votre navigateur.",
+          input: "Un clic sur « Installer l'application », proposé sur la page de connexion et dans le menu utilisateur quand le navigateur le permet. Sur iPhone et iPad, utilisez « Partager › Sur l'écran d'accueil ».",
+          output: "ImmoTopia apparaît sur l'écran d'accueil avec son icône et s'ouvre comme une application.",
+          prereq: "Un compte ImmoTopia et un navigateur récent.",
+        },
+        {
+          title: "Voir une page claire quand le réseau manque",
+          goal: "Quand l'appareil n'a pas de connexion, l'application affiche une page qui l'explique, en français, en anglais ou en arabe, au lieu d'une erreur du navigateur.",
+          output: "Une page « hors ligne ». L'application ne conserve pas vos données pour les consulter sans réseau : revenez dès que la connexion est rétablie.",
+          prereq: "L'application est installée ou ouverte dans le navigateur.",
+        },
+      ],
+      faq: [
+        {
+          q: "Faut-il passer par un magasin d'applications ?",
+          a: "Non. L'installation se fait directement depuis le navigateur, sur le téléphone comme sur l'ordinateur.",
+        },
+        {
+          q: "Peut-on consulter ses données sans connexion ?",
+          a: "Non. Seule une page d'information s'affiche quand le réseau manque : les données de l'agence ne sont pas gardées sur l'appareil.",
+        },
+      ],
+      related: ["agence-et-abonnement/connexion-et-mot-de-passe", "administration-plateforme/sessions-et-erreurs"],
     },
     {
       slug: "sessions-et-erreurs",
