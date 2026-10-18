@@ -315,7 +315,7 @@ export const crmEtVentes: WikiDomain = {
       summary:
         "Enregistrez vos mandats de vente avec prix demandé, prix plancher et commission, suivez-les par statut et révoquez-les proprement si le vendeur se retire.",
       intro:
-        "Le mandat de vente formalise l'engagement du vendeur envers l'agence. Vous y fixez le prix demandé, le prix plancher, la commission et le négociateur. Chaque mandat reçoit un numéro par année, et la fiche réunit les co-vendeurs, les offres, le compromis et la commission. Un bien ne peut avoir qu'un seul mandat actif à la fois.",
+        "Le mandat de vente formalise l'engagement du vendeur envers l'agence. Vous y fixez le prix demandé, le prix plancher, la commission et le négociateur. Chaque mandat reçoit un numéro par année, et la fiche réunit les co-vendeurs, les offres, le compromis et la commission. Un bien ne peut avoir qu'un seul mandat actif à la fois. Le mandat peut être envoyé au vendeur pour [signature électronique](/wiki/gestion-locative/signature-electronique) : cet envoi demande l'extension payante « Signatures électroniques » (voir les [Tarifs](/tarifs)).",
       packs: ["agence", "promoteur", "integre"],
       profiles: ["equipe"],
       menu: "Ventes › Mandats de vente",
@@ -351,6 +351,34 @@ export const crmEtVentes: WikiDomain = {
           prereq:
             "Le mandat est actif, sans compromis signé et sans offre acceptée en cours (à retirer d'abord).",
         },
+        {
+          title: "Envoyer un mandat de vente pour signature",
+          goal: "Faire signer le mandat de vente par voie électronique depuis l'onglet « Signatures » de la fiche du mandat.",
+          input:
+            "Les signataires proposés (le vendeur, les co-vendeurs du bien en indivision, puis le négociateur du mandat), le canal de chacun (e-mail, WhatsApp, SMS ou en face à face), l'ordre de signature si vous le souhaitez et une échéance de 1 à 30 jours.",
+          output:
+            "Une demande de signature envoyée avec le document du mandat, généré à l'envoi. Le prix plancher n'y figure jamais. Chaque signataire reçoit son lien personnel.",
+          prereq:
+            "Le mandat est actif et pas encore signé, il n'a pas déjà une demande en cours, et l'agence a l'extension payante « Signatures électroniques ».",
+        },
+        {
+          title: "Consulter les signatures d'un mandat de vente",
+          goal: "Suivre la signature du mandat : demandes envoyées, statut de chaque signataire et historique, puis récupérer le document.",
+          output:
+            "Le statut de chaque signataire, l'historique de la demande, le PDF envoyé et, quand tout le monde a signé, le PDF signé.",
+          prereq: "Une demande de signature a été envoyée pour ce mandat.",
+        },
+        {
+          title: "Voir la date de signature d'un mandat de vente",
+          goal: "Savoir si le mandat est signé, dans le champ « Signature » de l'onglet « Informations » de la fiche du mandat.",
+          output: "« Signé le » suivi de la date quand la signature est terminée, « Non signé » sinon.",
+        },
+        {
+          title: "Annuler les demandes de signature en cours en cas de révocation ou de modification",
+          goal: "Éviter de signer un document devenu faux : les demandes en cours sont annulées automatiquement, et leurs liens cessent d'agir, quand le mandat est révoqué ou quand un champ imprimé dans le document est modifié après l'envoi.",
+          output: "Les demandes en cours sont annulées. Enregistrer la fiche sans rien changer n'annule rien.",
+          prereq: "Une demande de signature était en cours au moment de la révocation ou de la modification.",
+        },
       ],
       faq: [
         {
@@ -361,11 +389,16 @@ export const crmEtVentes: WikiDomain = {
           q: "Peut-on modifier un mandat après la signature du compromis ?",
           a: "Non. Le mandat se modifie tant qu'il est actif et qu'aucun compromis n'est signé ou conclu.",
         },
+        {
+          q: "Peut-on faire signer le mandat de vente en ligne ?",
+          a: "Oui. Depuis l'onglet « Signatures » du mandat, vous l'envoyez au vendeur, aux co-vendeurs et au négociateur pour signature électronique. Cet envoi demande l'extension payante « Signatures électroniques », décrite dans la page Tarifs. Le prix plancher n'apparaît jamais dans le document.",
+        },
       ],
       related: [
         "crm-et-ventes/offres-et-compromis-de-vente",
         "crm-et-ventes/commissions-de-vente",
         "crm-et-ventes/rapprochement-de-biens",
+        "gestion-locative/signature-electronique",
       ],
     },
     {
@@ -375,7 +408,7 @@ export const crmEtVentes: WikiDomain = {
       summary:
         "Enregistrez les offres d'achat, négociez par contre-offre, puis passez au compromis de vente jusqu'à la conclusion à l'acte, étape par étape dans ImmoTopia.",
       intro:
-        "Depuis la fiche d'un mandat, vous enregistrez les offres des acquéreurs, faites des contre-offres, acceptez ou refusez. L'offre acceptée devient un compromis : prix, dépôt, notaire, date d'acte prévue. À la conclusion, le bien passe en vendu, le mandat se termine, l'affaire est gagnée et la commission est créée. Chaque étape met à jour le statut du bien pour toute l'équipe.",
+        "Depuis la fiche d'un mandat, vous enregistrez les offres des acquéreurs, faites des contre-offres, acceptez ou refusez. L'offre acceptée devient un compromis : prix, dépôt, notaire, date d'acte prévue. À la conclusion, le bien passe en vendu, le mandat se termine, l'affaire est gagnée et la commission est créée. Chaque étape met à jour le statut du bien pour toute l'équipe. Le compromis peut aussi être envoyé pour [signature électronique](/wiki/gestion-locative/signature-electronique) : il exige alors un prestataire de signature qualifié, et l'envoi demande l'extension payante « Signatures électroniques » (voir les [Tarifs](/tarifs)).",
       packs: ["agence", "promoteur", "integre"],
       profiles: ["equipe"],
       menu: "Ventes › Mandats de vente",
@@ -432,6 +465,36 @@ export const crmEtVentes: WikiDomain = {
           prereq: "Le compromis est en brouillon.",
         },
         {
+          title: "Envoyer un compromis de vente pour signature",
+          goal: "Faire signer le compromis par voie électronique, depuis la carte « Signatures » de sa fiche, avec un prestataire de signature qualifié.",
+          input:
+            "Les signataires (le vendeur, l'acquéreur et l'agent du mandat), qui reçoivent leur invitation par e-mail, et une échéance de 1 à 30 jours.",
+          output: "Une demande de signature envoyée avec le compromis généré à l'envoi.",
+          prereq:
+            "Le compromis est en brouillon, sans demande déjà en cours, l'agence a l'extension payante « Signatures électroniques » et un prestataire de signature qualifié est en service. Sans lui, l'envoi est refusé et la carte l'indique.",
+        },
+        {
+          title: "Consulter les signatures d'un compromis",
+          goal: "Suivre la signature du compromis : demandes envoyées, statut de chaque signataire et historique, puis récupérer le document.",
+          output:
+            "Le statut de chaque signataire, l'historique de la demande, le PDF envoyé et, quand tout le monde a signé, le PDF signé.",
+          prereq: "Une demande de signature a été envoyée pour ce compromis.",
+        },
+        {
+          title: "Passer le compromis à « Signé » à la dernière signature",
+          goal: "Éviter une saisie en double : quand le dernier signataire a signé, le compromis passe tout seul de brouillon à signé.",
+          output:
+            "Le compromis est signé, comme avec la signature manuelle, et le bien passe « sous offre ». Un compromis modifié ou annulé depuis l'envoi n'est pas marqué signé et la demande est annulée.",
+          prereq: "Une demande de signature a été envoyée pour ce compromis.",
+        },
+        {
+          title: "Annuler les demandes de signature en cours si le compromis change",
+          goal: "Éviter de signer un compromis devenu faux : les demandes en cours sont annulées automatiquement, et leurs liens cessent d'agir.",
+          output:
+            "Les demandes sont annulées quand un champ imprimé change, qu'une condition suspensive est ajoutée, que l'échéancier change, ou que le compromis est signé à la main ou annulé.",
+          prereq: "Une demande de signature était en cours au moment de la modification.",
+        },
+        {
           title: "Conclure la vente à l'acte",
           goal: "Clore la vente une fois l'acte passé.",
           input: "La date de l'acte.",
@@ -456,11 +519,16 @@ export const crmEtVentes: WikiDomain = {
           q: "Peut-on conclure la vente si le prêt de l'acquéreur n'est pas encore obtenu ?",
           a: "Non. Toutes les conditions suspensives du compromis doivent être levées, satisfaites ou abandonnées, avant de conclure à l'acte.",
         },
+        {
+          q: "Peut-on faire signer le compromis en ligne ?",
+          a: "Oui, avec un prestataire de signature qualifié : les signataires sont invités par e-mail depuis la carte « Signatures » du compromis. Cet envoi demande l'extension payante « Signatures électroniques », décrite dans la page Tarifs. Sans prestataire qualifié, l'envoi est refusé.",
+        },
       ],
       related: [
         "crm-et-ventes/mandats-de-vente",
         "crm-et-ventes/conditions-suspensives-et-echeancier",
         "crm-et-ventes/commissions-de-vente",
+        "gestion-locative/signature-electronique",
       ],
     },
     {

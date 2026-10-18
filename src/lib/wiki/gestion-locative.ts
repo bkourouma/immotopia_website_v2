@@ -7,7 +7,7 @@ export const gestionLocative: WikiDomain = {
   summary:
     "Baux, échéances, encaissement des loyers en espèces ou Mobile Money, pénalités, caution et quittances : la gestion locative d'ImmoTopia expliquée en détail.",
   intro:
-    "Le domaine gestion locative couvre tout le cycle d'un bail : sa création, la vie du bail, les états des lieux, l'échéancier des loyers, l'encaissement, les pénalités de retard, le dépôt de garantie et les documents remis au locataire. Il s'adresse aux agences et aux administrateurs de biens, Les packs Patrimoine ouvrent la gestion locative directe de vos propres biens, sans mandat ni propriétaire tiers. Les relevés de gérance, les reversements, les honoraires et les accès en lecture seule pour les tiers de confiance concernent la gestion pour le compte de propriétaires. Les liens de paiement d'un loyer et les envois automatiques au propriétaire sont en cours de déploiement.",
+    "Le domaine gestion locative couvre tout le cycle d'un bail : sa création, la vie du bail, les états des lieux, l'échéancier des loyers, l'encaissement, les pénalités de retard, le dépôt de garantie et les documents remis au locataire. Il s'adresse aux agences et aux administrateurs de biens, Les packs Patrimoine ouvrent la gestion locative directe de vos propres biens, sans mandat ni propriétaire tiers. Les relevés de gérance, les reversements, les honoraires et les accès en lecture seule pour les tiers de confiance concernent la gestion pour le compte de propriétaires. Les liens de paiement d'un loyer et les envois automatiques au propriétaire sont en cours de déploiement. La signature électronique des baux, des états des lieux et des mandats, et le prélèvement bancaire des loyers complètent le domaine.",
   features: [
     {
       slug: "gestion-des-baux",
@@ -16,7 +16,7 @@ export const gestionLocative: WikiDomain = {
       summary:
         "Créez vos baux en quelques minutes : bien, locataire, loyer, jour d'échéance, caution et règles de pénalité. Colocataires, statuts et fiche bail complète.",
       intro:
-        "Le bail est le point de départ de toute la gestion locative : échéances, paiements, pénalités et dépôt de garantie s'y rattachent. Vos collaborateurs créent un bail sur un bien de l'agence, y ajoutent les colocataires et suivent son statut. Toute l'information du contrat tient sur une seule fiche : plus besoin de chercher dans les classeurs.",
+        "Le bail est le point de départ de toute la gestion locative : échéances, paiements, pénalités et dépôt de garantie s'y rattachent. Vos collaborateurs créent un bail sur un bien de l'agence, y ajoutent les colocataires et suivent son statut. Toute l'information du contrat tient sur une seule fiche : plus besoin de chercher dans les classeurs. Le contrat peut être envoyé aux locataires pour [signature électronique](/wiki/gestion-locative/signature-electronique).",
       packs: ["agence", "integre", "patrimoine-essentiel", "patrimoine-pro"],
       profiles: ["equipe"],
       menu: "Baux",
@@ -77,6 +77,7 @@ export const gestionLocative: WikiDomain = {
         "gestion-locative/echeancier-des-loyers",
         "gestion-locative/depot-de-garantie",
         "gestion-locative/vie-du-bail",
+        "gestion-locative/signature-electronique",
       ],
     },
     {
@@ -159,7 +160,7 @@ export const gestionLocative: WikiDomain = {
       summary:
         "Logiciel d'état des lieux d'entrée et de sortie : pièces, photos, compteurs, signature électronique et PDF, sur téléphone ou tablette, avec comparaison.",
       intro:
-        "Ce logiciel d'état des lieux permet à votre agence de réaliser l'état des lieux d'entrée et l'état des lieux de sortie de chaque bail, pièce par pièce, depuis un ordinateur, une tablette ou un téléphone. Votre agent décrit chaque élément, ajoute des photos par pièce, relève les compteurs et les clés, puis fait signer l'état des lieux par voie électronique. Les états des lieux se rangent avec le bail, s'exportent ou s'impriment en PDF, et celui de sortie se compare à celui d'entrée pour repérer les dégradations.",
+        "Ce logiciel d'état des lieux permet à votre agence de réaliser l'état des lieux d'entrée et l'état des lieux de sortie de chaque bail, pièce par pièce, depuis un ordinateur, une tablette ou un téléphone. Votre agent décrit chaque élément, ajoute des photos par pièce, relève les compteurs et les clés, puis fait signer l'état des lieux par voie électronique. Les états des lieux se rangent avec le bail, s'exportent ou s'impriment en PDF, et celui de sortie se compare à celui d'entrée pour repérer les dégradations. Tant qu'il est en brouillon, la signature se saisit dans l'état des lieux lui-même (action « Faire signer l'état des lieux ») ; une fois finalisé, il peut en plus être envoyé aux signataires pour [signature électronique](/wiki/gestion-locative/signature-electronique), ou signé sur place.",
       sections: [
         {
           title: "Pourquoi utiliser un logiciel pour vos états des lieux ?",
@@ -221,6 +222,14 @@ export const gestionLocative: WikiDomain = {
           prereq: "L'état des lieux n'est pas encore finalisé.",
         },
         {
+          title: "Proposer les retenues depuis les dégradations et manquants",
+          goal: "Préremplir les retenues sur le dépôt de garantie à partir de ce qui est dégradé ou manquant, au lieu de les saisir une à une.",
+          input: "Un clic sur l'état des lieux de sortie, tant qu'il est en brouillon.",
+          output:
+            "Des lignes de retenue proposées, que vous pouvez toutes modifier. Un élément dégradé reçoit un montant à compléter, un élément manquant est valorisé à sa valeur de remplacement multipliée par la quantité, et une clé manquante reçoit un montant à compléter.",
+          prereq: "L'état des lieux est en brouillon, donc encore modifiable.",
+        },
+        {
           title: "Faire signer l'état des lieux",
           goal: "Recueillir la signature électronique de l'agence et du locataire sur l'état des lieux, sans exemplaire papier à faire circuler.",
           input: "Le nom du signataire de l'agence et celui du locataire s'il est présent.",
@@ -270,7 +279,7 @@ export const gestionLocative: WikiDomain = {
         },
         {
           q: "Peut-on le signer et l'envoyer au locataire ?",
-          a: "Oui pour la signature : elle se fait par voie électronique, avec le nom des signataires de l'agence et du locataire. Pour l'envoi, vous exportez l'état des lieux en PDF (ou vous l'imprimez), puis vous le transmettez vous-même au locataire.",
+          a: "Oui pour la signature : elle se fait par voie électronique, avec le nom des signataires de l'agence et du locataire. Une fois finalisé, l'état des lieux peut aussi être envoyé aux signataires pour signature électronique, ou signé sur place : cet envoi demande l'extension payante « Signatures électroniques », décrite dans la page Tarifs. Vous pouvez aussi l'exporter en PDF (ou l'imprimer) pour le transmettre vous-même au locataire.",
         },
         {
           q: "Peut-on le faire depuis un téléphone ?",
@@ -285,6 +294,7 @@ export const gestionLocative: WikiDomain = {
         "gestion-locative/vie-du-bail",
         "gestion-locative/depot-de-garantie",
         "gestion-locative/gestion-des-baux",
+        "gestion-locative/signature-electronique",
       ],
     },
     {
@@ -447,7 +457,7 @@ export const gestionLocative: WikiDomain = {
       summary:
         "Enregistrez les loyers reçus en espèces, virement, chèque ou Mobile Money, affectez-les aux échéances et validez les paiements déclarés par vos locataires.",
       intro:
-        "Chaque règlement reçu d'un locataire est saisi avec son moyen de paiement, y compris Mobile Money avec l'opérateur et le numéro utilisés. Vous l'affectez ensuite à une ou plusieurs échéances ; le surplus reste en avance au compte du locataire. Les paiements déclarés par les locataires depuis leur portail arrivent dans une liste où votre équipe les approuve ou les rejette.",
+        "Chaque règlement reçu d'un locataire est saisi avec son moyen de paiement, y compris Mobile Money avec l'opérateur et le numéro utilisés. Vous l'affectez ensuite à une ou plusieurs échéances ; le surplus reste en avance au compte du locataire. Les paiements déclarés par les locataires depuis leur portail arrivent dans une liste où votre équipe les approuve ou les rejette. Les loyers peuvent aussi être prélevés sur le compte bancaire du locataire : voir [Prélèvement bancaire des loyers](/wiki/gestion-locative/prelevement-bancaire).",
       packs: ["agence", "integre", "patrimoine-essentiel", "patrimoine-pro"],
       profiles: ["equipe"],
       menu: "Encaisser › Paiements",
@@ -516,7 +526,236 @@ export const gestionLocative: WikiDomain = {
         "gestion-locative/echeancier-des-loyers",
         "gestion-locative/penalites-de-retard",
         "gestion-locative/liens-de-paiement-loyer",
+        "gestion-locative/prelevement-bancaire",
         "portails-clients/portail-locataire",
+      ],
+    },
+    {
+      slug: "prelevement-bancaire",
+      title: "Prélèvement bancaire des loyers",
+      h1: "Prélever les loyers par prélèvement bancaire",
+      metaTitle: "Prélèvement bancaire des loyers : mandats et remises",
+      summary:
+        "Prélevez les loyers par la banque : créanciers, mandats signés, remises mensuelles, prénotification des locataires et fichier à charger, sans commission.",
+      intro:
+        "Le prélèvement bancaire est inclus dans la gestion locative, sans commission d'ImmoTopia. Votre agence déclare un compte bancaire comme créancier, enregistre l'autorisation de prélèvement signée de chaque locataire, prépare chaque mois une remise des loyers à prélever, prévient les locataires avant la date, puis produit le fichier qu'elle charge sur sa banque en ligne. Pour les autres moyens de paiement, voir [Encaissement des loyers](/wiki/gestion-locative/encaissement-des-loyers).",
+      sections: [
+        {
+          title: "Les étapes d'un prélèvement",
+          body: [
+            [
+              "Le créancier : vous déclarez le compte bancaire de l'agence qui reçoit les prélèvements, avec son numéro d'émetteur et son jour de collecte.",
+              "Le mandat : vous enregistrez l'IBAN du locataire sur son bail, imprimez l'autorisation, la faites signer et déposez le scan, puis vous activez le mandat.",
+              "La remise : chaque mois, vous préparez la liste des loyers à prélever à une date donnée et vous la vérifiez ligne par ligne.",
+              "La validation : vous arrêtez la remise, et chaque locataire est prévenu par e-mail avant le prélèvement.",
+              "Le fichier : vous produisez le fichier de remise, vous le chargez sur la banque en ligne de l'agence, puis vous marquez la remise comme déposée.",
+            ],
+          ],
+        },
+        {
+          title: "Où trouver chaque écran",
+          body: [
+            [
+              "Les créanciers : Paramètres › Paramètres financiers › Prélèvement bancaire.",
+              "Les mandats : Baux › Détail du bail › Prélèvements, et la liste de tous les mandats dans Encaisser › Prélèvements.",
+              "Les remises : Encaisser › Prélèvements › Remises.",
+              "La notification envoyée aux locataires : Communication › Notifications e-mail.",
+            ],
+          ],
+        },
+        {
+          title: "La prénotification du locataire",
+          body: [
+            "Avant tout prélèvement, chaque locataire reçoit un e-mail qui indique le montant, la date, la référence du mandat, le numéro d'émetteur et son IBAN masqué. Le délai de prénotification se règle sur le créancier, en jours ouvrés, et une remise ne peut plus être validée une fois sa date limite de prénotification passée.",
+            "Chaque ligne de la remise indique si la prénotification est envoyée, impossible faute d'adresse e-mail, désactivée ou en échec. Vous pouvez renvoyer celles qui n'ont pas pu partir.",
+          ],
+        },
+        {
+          title: "Confidentialité de l'IBAN",
+          body: [
+            "L'IBAN d'un locataire n'est jamais affiché en entier dans les listes ni dans les e-mails. Il n'apparaît complet que sur l'autorisation de prélèvement à faire signer et dans le fichier de remise destiné à votre banque.",
+          ],
+        },
+      ],
+      packs: ["agence", "integre", "patrimoine-essentiel", "patrimoine-pro"],
+      profiles: ["equipe"],
+      menu: "Encaisser › Prélèvements",
+      status: "disponible",
+      actions: [
+        {
+          title: "Lister les créanciers de prélèvement",
+          goal: "Voir les comptes bancaires de l'agence qui reçoivent les prélèvements.",
+          output:
+            "Pour chaque créancier : le compte bancaire, le numéro d'émetteur, le jour de collecte, le délai de prénotification, les frais de rejet, le seuil de suspension, son état actif ou non et le nombre de mandats ouverts.",
+        },
+        {
+          title: "Créer un créancier",
+          goal: "Déclarer un compte bancaire de l'agence comme créancier de prélèvement.",
+          input:
+            "Le compte bancaire de l'agence, un libellé, le numéro d'émetteur, le jour de collecte dans le mois (de 1 à 28, le 5 par défaut), le délai de prénotification en jours ouvrés (5 par défaut), les frais de rejet et le seuil de suspension, en nombre de rejets consécutifs (2 par défaut).",
+          output: "Un créancier prêt à recevoir des mandats. Un compte bancaire n'a qu'un seul créancier.",
+          prereq: "Un compte bancaire actif de l'agence est enregistré en trésorerie.",
+        },
+        {
+          title: "Modifier ou désactiver un créancier",
+          goal: "Changer les réglages d'un créancier ou le désactiver.",
+          input: "Les mêmes informations que pour la création, sauf le compte bancaire, et l'état actif ou non.",
+          output: "Le créancier mis à jour.",
+        },
+        {
+          title: "Contrôler un IBAN ou un RIB",
+          goal: "Vérifier la saisie d'un compte bancaire avant de créer le mandat.",
+          input: "Un IBAN ivoirien (28 caractères) ou un RIB (24 caractères).",
+          output: "La validité, l'IBAN masqué, le code de la banque et, le cas échéant, l'erreur ou les avertissements, par exemple sur la clé du RIB.",
+        },
+        {
+          title: "Lister les mandats de prélèvement",
+          goal: "Retrouver les mandats de l'agence, ou ceux d'un bail seulement.",
+          input: "Des filtres par bail, locataire, créancier ou statut, et une recherche.",
+          output:
+            "Les mandats avec leur référence (de la forme MDT-année-numéro), leur statut, le locataire, le bail, l'IBAN masqué, le plafond et le jour de collecte.",
+        },
+        {
+          title: "Créer un mandat de prélèvement",
+          goal: "Enregistrer l'autorisation de prélèvement d'un locataire sur un bail.",
+          input:
+            "Le créancier, le bail, le locataire concerné (principal ou colocataire), l'IBAN, le nom du titulaire du compte, un plafond, un jour de collecte et des notes.",
+          output: "Un mandat en brouillon, avec les avertissements éventuels. Un bail n'a qu'un seul mandat ouvert par créancier.",
+          prereq: "Un créancier existe et le bail n'est pas terminé.",
+        },
+        {
+          title: "Modifier un mandat",
+          goal: "Changer le plafond, le jour de collecte ou les notes d'un mandat.",
+          input: "Le plafond, le jour de collecte, les notes. L'IBAN ne se modifie pas : il faut révoquer le mandat puis en créer un nouveau.",
+          output: "Le mandat mis à jour.",
+          prereq: "Le mandat n'est pas révoqué.",
+        },
+        {
+          title: "Télécharger l'autorisation de prélèvement en PDF",
+          goal: "Imprimer l'autorisation préremplie, à faire signer par le locataire puis à déposer à sa banque.",
+          output: "Un PDF avec le créancier, le locataire, l'IBAN complet, la référence et le plafond. Il est produit à la demande et n'est pas conservé.",
+          prereq: "Le mandat est créé.",
+        },
+        {
+          title: "Déposer ou consulter le scan signé",
+          goal: "Archiver l'autorisation signée avec le mandat, et la retrouver au besoin.",
+          input: "Le scan de l'autorisation signée (PDF, JPEG ou PNG, 10 Mo au plus).",
+          output: "Un scan privé, consultable seulement par les collaborateurs connectés.",
+          prereq: "Le mandat est créé et n'est pas révoqué.",
+        },
+        {
+          title: "Activer un mandat",
+          goal: "Rendre le mandat utilisable une fois l'autorisation signée.",
+          input: "La date de signature, qui ne peut pas être dans le futur.",
+          output: "Un mandat actif, dont les loyers peuvent entrer dans une remise.",
+          prereq: "Le scan signé est déposé.",
+        },
+        {
+          title: "Suspendre ou réactiver un mandat",
+          goal: "Interrompre les prélèvements d'un locataire, puis les reprendre.",
+          input: "Le motif de la suspension.",
+          output: "Le mandat suspendu, ou de nouveau actif.",
+          prereq: "Le mandat est actif pour le suspendre, suspendu pour le réactiver.",
+        },
+        {
+          title: "Révoquer un mandat",
+          goal: "Mettre fin définitivement à l'autorisation de prélèvement.",
+          input: "Le motif et, si besoin, la date de révocation.",
+          output: "Le mandat révoqué, définitivement. Un nouveau mandat peut ensuite être créé sur le bail.",
+          prereq: "Le mandat n'est pas déjà révoqué.",
+        },
+        {
+          title: "Lister et consulter les remises",
+          goal: "Suivre les remises de loyers prélevés d'un créancier et leur avancement.",
+          input: "Des filtres par créancier et par statut.",
+          output:
+            "Les remises avec leur référence (de la forme PRL-année-numéro), leur statut, la date de prélèvement, la période, le total et la date limite de prénotification. Le détail donne, ligne par ligne, le locataire, le bail, le mandat avec l'IBAN masqué, le reste dû, le montant prélevé, le plafond et l'état de la prénotification.",
+          prereq: "Un créancier existe et au moins un mandat est actif.",
+        },
+        {
+          title: "Préparer une remise de prélèvement",
+          goal: "Créer le brouillon des loyers à prélever pour un créancier à une date donnée.",
+          input: "Le créancier, la date de prélèvement (assez éloignée pour laisser le temps de prénotifier) et des notes.",
+          output:
+            "Un brouillon avec une ligne par mandat actif dont le jour de collecte est atteint. Le montant est le reste dû de l'échéance du mois, hors pénalités, plafonné par le mandat. Les mandats non retenus sont listés avec la raison.",
+          prereq: "Un mandat est actif et l'échéance du mois est générée.",
+        },
+        {
+          title: "Actualiser une remise en brouillon",
+          goal: "Recalculer les montants et ajouter les mandats devenus éligibles, avant de valider.",
+          output: "Le brouillon recalculé : les lignes devenues sans objet sont retirées et les montants mis à jour.",
+          prereq: "La remise est en brouillon.",
+        },
+        {
+          title: "Retirer une ligne d'une remise",
+          goal: "Exclure une échéance de la remise avant la production du fichier.",
+          input: "Un motif, facultatif.",
+          output: "La ligne est annulée et les totaux recalculés. L'échéance pourra entrer dans une autre remise.",
+          prereq: "La remise est en brouillon ou validée.",
+        },
+        {
+          title: "Valider une remise et prénotifier les locataires",
+          goal: "Arrêter la remise, après votre vérification, et prévenir chaque locataire avant le prélèvement.",
+          output:
+            "Une remise validée, avec le créancier et son numéro d'émetteur figés. Chaque locataire reçoit un e-mail de prénotification, et chaque ligne indique si l'envoi est fait, impossible faute d'e-mail, désactivé ou en échec.",
+          prereq: "Le numéro d'émetteur du créancier est renseigné et la date limite de prénotification n'est pas passée.",
+        },
+        {
+          title: "Renvoyer les prénotifications d'une remise",
+          goal: "Relancer les prénotifications qui n'ont pas pu partir.",
+          output: "Les prénotifications renvoyées aux lignes pas encore prévenues, avec un résumé par état.",
+          prereq: "La remise est validée.",
+        },
+        {
+          title: "Produire le fichier de remise",
+          goal: "Obtenir le fichier à charger sur la banque en ligne de l'agence.",
+          output:
+            "Un fichier CSV à séparateur point-virgule, avec une ligne par prélèvement : référence d'opération, mandat, titulaire, IBAN, montant, date d'échéance et libellé. Le fichier n'est pas conservé, et la remise passe à « fichier produit ».",
+          prereq: "La remise est validée.",
+        },
+        {
+          title: "Marquer une remise comme déposée à la banque",
+          goal: "Garder la trace du chargement du fichier sur la banque en ligne.",
+          output: "La remise est marquée « déposée à la banque », avec sa date.",
+          prereq: "Le fichier de remise est produit.",
+        },
+        {
+          title: "Annuler une remise",
+          goal: "Abandonner une remise qui n'a pas encore été déposée à la banque.",
+          input: "Le motif, obligatoire.",
+          output: "La remise est annulée et toutes ses lignes sont libérées.",
+          prereq: "La remise n'est pas déposée à la banque.",
+        },
+        {
+          title: "Configurer la notification « Prénotification de prélèvement »",
+          goal: "Activer, désactiver ou personnaliser l'e-mail qui prévient le locataire d'un prochain prélèvement. Cette notification part par e-mail seulement, pas par WhatsApp.",
+          input: "L'activation, l'objet et le texte de l'e-mail, qu'un retour au texte d'origine permet d'annuler.",
+          output: "La notification réglée pour votre agence. Elle reprend le montant, la date, le mandat, le numéro d'émetteur et l'IBAN masqué.",
+        },
+      ],
+      faq: [
+        {
+          q: "ImmoTopia prend-il une commission sur les prélèvements ?",
+          a: "Non. Le prélèvement bancaire est inclus dans la gestion locative, sans commission d'ImmoTopia.",
+        },
+        {
+          q: "ImmoTopia débite-t-il lui-même le compte du locataire ?",
+          a: "Non. ImmoTopia prépare la remise et produit le fichier ; c'est votre agence qui le charge sur sa banque en ligne, puis marque la remise comme déposée.",
+        },
+        {
+          q: "Le locataire est-il prévenu avant le prélèvement ?",
+          a: "Oui. Quand la remise est validée, chaque locataire reçoit un e-mail de prénotification avec le montant, la date et son IBAN masqué. Vous pouvez renvoyer ceux qui n'ont pas pu partir.",
+        },
+        {
+          q: "Peut-on corriger l'IBAN d'un mandat ?",
+          a: "Non. L'IBAN ne se modifie pas : vous révoquez le mandat, puis vous en créez un nouveau avec la bonne coordonnée bancaire.",
+        },
+      ],
+      related: [
+        "gestion-locative/encaissement-des-loyers",
+        "gestion-locative/echeancier-des-loyers",
+        "gestion-locative/gestion-des-baux",
+        "communication-et-documents/notifications-email-whatsapp",
       ],
     },
     {
@@ -983,6 +1222,256 @@ export const gestionLocative: WikiDomain = {
         },
       ],
       related: ["gestion-locative/releves-de-gerance", "portails-clients/rapport-mensuel-proprietaire"],
+    },
+    {
+      slug: "signature-electronique",
+      title: "Signature électronique",
+      h1: "Signature électronique des baux, mandats et états des lieux",
+      metaTitle: "Signature électronique de bail, mandat et état des lieux",
+      summary:
+        "Faites signer baux, états des lieux, mandats et compromis en ligne, suivez chaque signataire depuis un écran unique et téléchargez le PDF signé.",
+      intro:
+        "La signature électronique évite les allers-retours de papier : l'agence envoie un document, chaque signataire reçoit un lien personnel, signe depuis son téléphone ou en face à face avec un collaborateur, et l'agence récupère le PDF signé. Elle s'applique au bail, à l'état des lieux, au [mandat de gestion](/wiki/biens-et-patrimoine/mandats-de-gestion), au [mandat de vente](/wiki/crm-et-ventes/mandats-de-vente) et au [compromis de vente](/wiki/crm-et-ventes/offres-et-compromis-de-vente). Un écran « Signatures » réunit les demandes de tous ces documents. L'envoi pour signature demande l'extension payante « Signatures électroniques » : voir les [Tarifs](/tarifs).",
+      sections: [
+        {
+          title: "Quels documents peuvent être signés ?",
+          body: [
+            [
+              "Le bail, depuis l'onglet « Signatures » de sa fiche ([Gestion des baux](/wiki/gestion-locative/gestion-des-baux)).",
+              "L'état des lieux finalisé, depuis le bouton « Signatures » de l'état affiché ([États des lieux](/wiki/gestion-locative/etats-des-lieux)).",
+              "Le mandat de gestion d'un bien, depuis l'onglet du mandat sur la fiche du bien.",
+              "Le mandat de vente, depuis l'onglet « Signatures » de sa fiche.",
+              "Le compromis de vente, depuis la carte « Signatures » de sa fiche, avec un prestataire de signature qualifié.",
+            ],
+          ],
+        },
+        {
+          title: "Comment se déroule une signature ?",
+          body: [
+            "Vous choisissez de 1 à 10 signataires et le canal de chacun : e-mail, WhatsApp, SMS ou en face à face avec un collaborateur. Vous pouvez imposer un ordre de signature, et vous fixez une échéance de 1 à 30 jours.",
+            "Le signataire ouvre son lien personnel, sans compte ni connexion, lit le document, reçoit un code de confirmation, puis signe en cochant son consentement et en tapant son nom ou en dessinant sa signature. Il peut aussi refuser de signer, avec un motif. En face à face, aucun code n'est demandé et la signature dessinée est obligatoire.",
+            "Quand tout le monde a signé, le document est scellé : l'agence télécharge le PDF signé, et l'historique de la demande garde la trace de chaque étape. Une demande dont l'échéance est passée devient « Expirée » et l'émetteur en est prévenu.",
+          ],
+        },
+        {
+          title: "Une extension payante, par blocs de 50 signatures",
+          body: [
+            "L'envoi pour signature demande l'extension « Signatures électroniques », vendue par blocs de 50 signatures par mois, cumulables. Elle s'ajoute à chacun des six packs : aucune signature n'est incluse dans un pack. Une demande compte pour une signature, quel que soit le nombre de signataires, et annuler une demande ne rend pas sa place. Sans l'extension, ou une fois le quota du mois atteint, l'envoi est refusé et le message propose d'ajouter l'extension. Les conditions figurent sur la page [Tarifs](/tarifs).",
+          ],
+        },
+        {
+          title: "Prestataire de signature externe et SMS",
+          body: [
+            "Certains documents, comme le compromis de vente, exigent un prestataire de signature qualifié. Le prestataire invite alors lui-même les signataires par e-mail seulement, gère ses propres relances et est prévenu de toute annulation. Sans prestataire qualifié, l'envoi d'un compromis est refusé et l'écran d'envoi l'indique.",
+            "Le canal SMS invite le signataire et lui envoie son code par SMS. Il demande que le signataire soit lié à un contact du CRM de l'agence, avec un numéro au format international, et le nombre de SMS de signature par jour et par agence est plafonné.",
+          ],
+        },
+      ],
+      packs: ["agence", "syndic", "promoteur", "integre", "patrimoine-essentiel", "patrimoine-pro"],
+      profiles: ["equipe"],
+      menu: "Paramétrage › Signatures",
+      status: "disponible",
+      actions: [
+        {
+          title: "Suivre toutes les demandes de signature",
+          goal: "Suivre sur un seul écran les demandes de signature de tous les documents de l'agence : baux, états des lieux, mandats et compromis.",
+          input:
+            "Au choix : un statut, un type de document, une recherche sur le titre du document ou le nom d'un signataire, une période, et le tri.",
+          output:
+            "Une liste de 25 demandes par page avec le document, son statut, les dates de création et d'échéance et le nombre de signataires qui ont signé sur le total. Vous ne voyez que les types de document que vous avez le droit de consulter.",
+          prereq: "Au moins une demande de signature a été envoyée.",
+        },
+        {
+          title: "Voir les compteurs par statut",
+          goal: "Voir d'un coup d'œil combien de demandes sont en brouillon, envoyées, partiellement signées, terminées, refusées, expirées ou annulées.",
+          output: "Un compteur par statut. Un clic sur un compteur filtre la liste sur ce statut.",
+        },
+        {
+          title: "Relancer les signataires en attente depuis la liste",
+          goal: "Relancer sans ouvrir le document, avec le bouton « Relancer » d'une demande en cours.",
+          output:
+            "Un nouveau lien est envoyé aux signataires qui n'ont encore rien ouvert, sauf en face à face. Un message dit combien ont été relancés, ou qu'aucun signataire n'était à relancer.",
+          prereq:
+            "La demande est en cours et aucune relance, manuelle ou automatique, n'est partie depuis moins de 10 minutes. Avec un prestataire de signature externe, c'est lui qui relance.",
+        },
+        {
+          title: "Annuler une demande depuis la liste",
+          goal: "Interrompre une demande en cours, après confirmation, sans ouvrir le document.",
+          output: "La demande passe à « Annulée » et ses liens cessent d'agir. Le prestataire externe, s'il y en a un, est prévenu. La place consommée n'est pas rendue.",
+          prereq: "La demande est encore en cours.",
+        },
+        {
+          title: "Télécharger le PDF d'une demande",
+          goal: "Récupérer le document depuis la liste.",
+          output: "Le PDF signé si la demande est terminée, sinon le PDF tel qu'il a été envoyé.",
+        },
+        {
+          title: "Consulter le détail d'une demande",
+          goal: "Ouvrir une demande depuis la liste pour voir où elle en est et ce qui s'est passé.",
+          output:
+            "Le type de document, le statut, les dates, chaque signataire avec son rôle, son canal, son contact masqué et son statut, l'historique chronologique, la pastille « Piste de preuve intacte » (ou « altérée ») et le lien « Ouvrir le document ».",
+        },
+        {
+          title: "Envoyer un bail pour signature",
+          goal: "Lancer la signature du contrat de bail auprès du locataire, des colocataires, du bailleur ou de l'agent, depuis l'onglet « Signatures » de la fiche du bail.",
+          input:
+            "Les signataires (de 1 à 10) avec leur rôle, leur nom, leur canal (e-mail, WhatsApp, SMS ou en face à face) et leur contact, l'ordre de signature si vous le souhaitez et l'échéance, de 1 à 30 jours (14 par défaut).",
+          output:
+            "Une demande de signature envoyée, avec le contrat figé tel qu'il est envoyé. Chaque signataire reçoit son lien personnel. Si aucun lien ne peut partir et qu'aucun signataire n'est en face à face, la demande est annulée.",
+          prereq:
+            "Le bail existe, il n'a pas déjà une demande en cours, et l'agence a l'extension payante « Signatures électroniques » avec des signatures disponibles ce mois-ci. Pour WhatsApp, le signataire doit être un contact du CRM qui a donné son accord.",
+        },
+        {
+          title: "Consulter les signatures d'un bail",
+          goal: "Voir, sur la fiche du bail, les demandes envoyées, leur statut et celui de chaque signataire.",
+          output: "Pour chaque signataire : en attente, lien ouvert, signé ou refusé, avec son contact masqué et la date de signature. Le détail donne l'historique de la demande.",
+          prereq: "Un bail a été envoyé pour signature.",
+        },
+        {
+          title: "Relancer les signataires d'un bail",
+          goal: "Renvoyer le lien aux signataires qui n'ont encore rien ouvert.",
+          output:
+            "Un nouveau lien envoyé à chacun d'eux. En mode ordonné, seul le signataire dont c'est le tour est relancé. Les signataires en face à face ne sont pas relancés.",
+          prereq: "La demande est en cours, sans relance depuis moins de 10 minutes.",
+        },
+        {
+          title: "Annuler la signature d'un bail",
+          goal: "Interrompre la demande de signature d'un bail encore en cours.",
+          output: "La demande est annulée et les liens déjà envoyés cessent d'agir.",
+          prereq: "La demande est en cours.",
+        },
+        {
+          title: "Télécharger le PDF source ou signé du bail",
+          goal: "Récupérer le contrat tel qu'il a été envoyé, ou, une fois toutes les signatures réunies, le contrat signé.",
+          output: "Un PDF, avec les boutons « PDF source » et « PDF signé ». Le PDF signé n'apparaît que lorsque la demande est terminée.",
+          prereq: "Un bail a été envoyé pour signature.",
+        },
+        {
+          title: "Signer le bail sur place",
+          goal: "Faire signer un signataire présent à côté d'un collaborateur, avec le bouton « Signer sur place » de la fiche du bail.",
+          input: "Le consentement du signataire et sa signature dessinée.",
+          output:
+            "La signature est enregistrée avec la mention qu'elle a eu lieu en face à face, et le nom du collaborateur qui assistait. Si c'était la dernière, le document est scellé. Chaque ouverture génère un nouveau lien : l'ancien cesse d'agir.",
+          prereq: "Un signataire est prévu en face à face et n'a pas encore signé ni refusé.",
+        },
+        {
+          title: "Lire le document à signer",
+          goal: "Ouvrir le lien reçu pour voir le titre du document, l'échéance et son rôle de signataire, puis lire ou télécharger le document.",
+          output:
+            "La fiche de la demande et le PDF à lire. Un message explique les cas particuliers : déjà signé, refusé, expiré, annulé, entièrement signé, ou pas encore votre tour quand l'ordre est imposé. Un lien inconnu ou expiré n'affiche rien.",
+          prereq: "Vous avez reçu un lien de signature valide.",
+          profiles: ["visiteur"],
+        },
+        {
+          title: "Recevoir un code de confirmation",
+          goal: "Confirmer son identité avant de signer, avec un code à 6 chiffres envoyé sur son e-mail ou son WhatsApp.",
+          output:
+            "Un code valable quelques minutes, envoyé au contact masqué affiché. Le nombre d'essais et de renvois est limité, avec un délai entre deux envois. Aucun code n'est demandé en face à face.",
+          prereq: "Le lien de signature est ouvert.",
+          profiles: ["visiteur"],
+        },
+        {
+          title: "Signer le document",
+          goal: "Signer le document depuis son téléphone ou son ordinateur.",
+          input:
+            "Le consentement, le code de confirmation reçu (sauf en face à face) et la signature : son nom tapé (de 2 à 120 caractères) ou une signature dessinée.",
+          output:
+            "La signature est enregistrée et la demande passe à « Partiellement signée », puis à « Terminée » à la dernière signature, qui scelle le document. La signature est refusée si le document a changé depuis l'envoi.",
+          prereq: "Le code de confirmation a été reçu, et c'est votre tour quand l'ordre est imposé.",
+          profiles: ["visiteur"],
+        },
+        {
+          title: "Refuser de signer",
+          goal: "Décliner la signature d'un document.",
+          input: "Un motif, facultatif.",
+          output: "Le signataire passe à « Refusé », aucune signature n'est enregistrée et un message le confirme.",
+          prereq: "Le lien de signature est ouvert.",
+          profiles: ["visiteur"],
+        },
+        {
+          title: "Envoyer un état des lieux finalisé pour signature",
+          goal: "Faire signer l'état des lieux par voie électronique, avec le bouton « Signatures » de l'état affiché.",
+          input:
+            "Les signataires proposés (locataire principal, colocataires, bailleur et agent), leur canal et l'échéance, de 1 à 30 jours. L'agent est préréglé en face à face, et le locataire aussi s'il est présent.",
+          output: "Une demande de signature envoyée avec l'état des lieux en PDF, photos comprises.",
+          prereq:
+            "L'état des lieux est finalisé : un brouillon est refusé. Il n'a pas déjà une signature aboutie ni une demande en cours, et l'agence a l'extension payante « Signatures électroniques ».",
+        },
+        {
+          title: "Signer un état des lieux sur place",
+          goal: "Faire signer l'agent et le locataire présent côte à côte, sur le même appareil.",
+          input: "Le consentement et la signature dessinée de chacun.",
+          output: "Les signatures sont enregistrées en face à face et, à la dernière, l'état des lieux signé est scellé.",
+          prereq: "Une demande est envoyée avec des signataires en face à face.",
+        },
+        {
+          title: "Consulter les signatures d'un état des lieux et télécharger les PDF",
+          goal: "Suivre la signature de l'état des lieux depuis la fenêtre « Signatures » de l'état, et récupérer les documents.",
+          output: "Le statut de chaque signataire, l'historique, le PDF envoyé et, quand tout le monde a signé, le PDF signé.",
+          prereq: "Un état des lieux a été envoyé pour signature.",
+        },
+        {
+          title: "Rappeler automatiquement les signataires avant l'expiration",
+          goal: "Relancer sans y penser les signataires qui n'ont pas signé quand l'échéance approche.",
+          output:
+            "Par défaut, un rappel part trois jours puis un jour avant l'échéance, par le canal de chaque signataire, avec un nouveau lien. Le rappel apparaît dans l'historique de la demande. Les signataires en face à face ne sont pas rappelés, et en mode ordonné seul le premier signataire qui n'a pas signé l'est.",
+          prereq: "Une demande est en cours et son échéance approche.",
+        },
+        {
+          title: "Faire signer avec un prestataire de signature externe",
+          goal: "Faire signer un document qui exige un prestataire qualifié, comme le compromis de vente.",
+          input: "Les signataires, joignables par e-mail seulement, comme pour un envoi ordinaire.",
+          output:
+            "Le prestataire invite lui-même les signataires et gère ses relances. La signature est suivie, annulée et téléchargée depuis ImmoTopia comme les autres. WhatsApp, SMS et face à face ne sont pas proposés.",
+          prereq: "Un prestataire de signature qualifié est en service pour l'agence et l'extension « Signatures électroniques » est active.",
+        },
+        {
+          title: "Envoyer le lien de signature par SMS",
+          goal: "Inviter un signataire par un SMS court qui contient le lien de signature.",
+          input: "Le canal « SMS » pour le signataire, son numéro de téléphone et le contact du CRM auquel il correspond.",
+          output:
+            "Un SMS envoyé. Les relances, manuelles ou automatiques, repassent par le même canal. Un SMS ne consomme pas de signature supplémentaire : le quota compte les demandes.",
+          prereq:
+            "Le signataire est un contact du CRM de l'agence, son numéro est celui de la fiche et il est d'un pays pris en charge. Le plafond quotidien de SMS de signature de l'agence n'est pas atteint. Avec un prestataire externe, le SMS n'est pas proposé.",
+        },
+        {
+          title: "Recevoir le code de confirmation par SMS",
+          goal: "Recevoir son code à usage unique par SMS quand son canal est le SMS.",
+          output:
+            "Un SMS court avec l'agence, le code, sa durée de validité et la consigne de ne le communiquer à personne. Les limites d'essais, de renvois et de délai sont celles des autres canaux.",
+          prereq: "Le lien de signature a été envoyé par SMS et la page de signature est ouverte.",
+          profiles: ["visiteur"],
+        },
+      ],
+      faq: [
+        {
+          q: "Le signataire a-t-il besoin d'un compte ImmoTopia ?",
+          a: "Non. Il reçoit un lien personnel, l'ouvre sans se connecter, lit le document, saisit son code de confirmation puis signe.",
+        },
+        {
+          q: "Combien de signatures peut-on envoyer ?",
+          a: "Autant que l'extension « Signatures électroniques » le permet : elle se vend par blocs de 50 signatures par mois, cumulables, avec chacun des six packs. Aucune signature n'est incluse dans un pack. Voir la page Tarifs.",
+        },
+        {
+          q: "Que se passe-t-il si un signataire ne signe pas à temps ?",
+          a: "Par défaut, il est rappelé automatiquement trois jours puis un jour avant l'échéance. Passé ce délai, la demande devient « Expirée » et l'émetteur en est prévenu. Vous pouvez aussi relancer vous-même, au plus une fois toutes les 10 minutes.",
+        },
+        {
+          q: "Peut-on annuler une demande de signature ?",
+          a: "Oui, tant qu'elle est en cours, depuis l'écran « Signatures » ou depuis le document. Les liens déjà envoyés cessent d'agir. La demande est aussi annulée automatiquement si le document change après l'envoi.",
+        },
+        {
+          q: "Peut-on faire signer un compromis de vente en ligne ?",
+          a: "Oui, avec un prestataire de signature qualifié, qui invite les signataires par e-mail. Sans prestataire qualifié, l'envoi d'un compromis est refusé.",
+        },
+      ],
+      related: [
+        "gestion-locative/gestion-des-baux",
+        "gestion-locative/etats-des-lieux",
+        "biens-et-patrimoine/mandats-de-gestion",
+        "crm-et-ventes/mandats-de-vente",
+        "crm-et-ventes/offres-et-compromis-de-vente",
+      ],
     },
   ],
 };
