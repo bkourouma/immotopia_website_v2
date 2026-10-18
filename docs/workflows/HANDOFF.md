@@ -41,6 +41,22 @@ Pièges et décisions :
 
 ---
 
+## Branche `claude/stoic-goldberg-jrcsmh` — 2026-10-18
+
+**État :** prêt à relire (PR brouillon vers `main`)
+**Dernier commit :** voir `git log`
+
+Fait :
+
+- Skill `chef-orchestre` installé au niveau projet (`.claude/skills/chef-orchestre/`) avec ses cinq agents (`.claude/agents/` : `chef-de-lot`, `executant`, `executant-rapide`, `expert`, `verificateur`), copiés tels quels depuis l'archive fournie par l'utilisateur.
+
+Pièges et décisions :
+
+- Installé dans le dépôt plutôt que dans `~/.claude` (prévu par `installer.ps1`) : les sessions cloud sont éphémères.
+- Écarts du skill avec AGENTS.md, qui prime : il copie les fichiers `.env` dans les worktrees (interdit sans « oui » explicite), suppose `gh` (absent en session cloud : passer par les outils GitHub MCP) et nomme ses branches `orch/…`.
+
+---
+
 ## Branche `claude/admiring-fermat-b2y2rr` — 2026-10-15
 
 **État :** prêt à relire (PR brouillon vers `main`)
