@@ -41,6 +41,45 @@ Pièges et décisions :
 
 ---
 
+## Branche `claude/beautiful-volta-r4u2ul` — 2026-10-18
+
+**État :** prêt à relire (PR brouillon vers `main`)
+**Dernier commit :** voir `git log`
+
+Fait :
+
+- Nouveautés de l'application `bkourouma/immotopia` du 2026-10-02 au 2026-10-17 reportées dans le wiki. Source : classeur `docs/fonctionnalites/ImmoTopia_Wiki_Fonctionnalites.xlsx` (849 → 1046 lignes). Wiki daté du 2026-10-18.
+- 10 nouvelles fiches : signature électronique, prélèvement bancaire, visio des assemblées, paiement en ligne des charges, AG par lien personnel, paiement d'un appel de charges, inventaire par WhatsApp, export des tableaux, documents à en-tête, application installable.
+- Actions ajoutées aux fiches existantes : AG en direct, stock de chantier, ImmoCopilot, mandats, compromis, états des lieux, portail copropriétaire.
+- Facturation décidée par l'utilisateur le 2026-10-18 :
+  - Signatures électroniques : extension par bloc de 50 par mois, 5 000 FCFA HT, tous les packs. Aucune signature incluse.
+  - Visio des assemblées : 10 000 FCFA HT par mois et par cabinet, Syndic ou Intégré.
+  - Inventaire WhatsApp : bloc de 500 photos, 25 000 FCFA HT par mois, Promoteur ou Intégré.
+  - Inclus sans commission : paiement en ligne des charges et prélèvement bancaire.
+  - Inclus : export, application installable, documents à en-tête, AG en direct, contrôle du stock.
+- Toutes les nouveautés affichées « disponible », ImmoCopilot compris (décision de l'utilisateur).
+- Tarifs, accueil, écosystème, pages thématiques, FAQ et assistant immotopIA (`knowledge.md`, `prompt.ts`) alignés.
+- Page `/versions` : version 2.0.0 datée du 2026-10-17.
+- Vérifications : `tsc`, `lint`, `check-comparatif-en` et `npm run build` OK. Pas de tests automatisés.
+
+Reste à faire :
+
+- Aligner le catalogue de l'application (`packages/api/src/lib/subscription/catalog.ts`, dépôt `bkourouma/immotopia`). Il porte encore des quotas de signatures inclus provisoires (Agence 20, Syndic 50, Promoteur 20, Intégré 100), un bloc de 50 sans prix et non vendable, et pas d'extension Visio des assemblées. Ce dépôt n'est pas modifiable depuis cette session.
+- Créer le tag `v2.0.0` côté application, comme pour les versions précédentes.
+- Paiement de loyer par lien (`portails-clients/paiement-loyer-par-lien`, `portail-locataire`) : encore en « déploiement », non traité.
+- Points non bloquants relevés en relecture :
+  - 14 résumés (summary) hors de la plage 140-160 caractères, dans des fiches non touchées.
+  - Packs d'ImmoCopilot : 6 dans le wiki, 4 dans le classeur, à confirmer.
+  - « courriers » dans la fiche documents-a-en-tete : la source cite avis, convocations, quittances et comptes rendus.
+
+Pièges et décisions :
+
+- Chantier orchestré (skill chef-orchestre) : lots dans des copies de travail locales, fusionnés dans la branche avec `--no-ff`.
+- `package.json` et `package-lock.json` modifiés par l'installation de l'environnement cloud. Marqués `assume-unchanged` en local. Jamais commités.
+- Le wiki ne cite aucun prix : il renvoie vers /tarifs. `pricing.ts` reste la source.
+
+---
+
 ## Branche `claude/stoic-goldberg-jrcsmh` — 2026-10-18
 
 **État :** prêt à relire (PR brouillon vers `main`)
