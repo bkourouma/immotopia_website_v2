@@ -230,10 +230,10 @@ export function Ecosystem() {
           <Bento className="md:col-span-2" spot="rgba(29,200,255,0.2)">
             <CardHead
               icon={<Smartphone className="size-5" />}
-              title={t("Mobile Money suivi", "Mobile Money tracking")}
+              title={t("Mobile Money suivi et paiement des charges", "Mobile Money tracking and charge payment")}
               text={t(
-                "Paiements enregistrés par opérateur (Wave, Orange Money, MTN, Moov), déclarations des locataires validées par l'agence.",
-                "Payments recorded by operator (Wave, Orange Money, MTN, Moov), with tenant-reported payments validated by the agency.",
+                "Paiements enregistrés par opérateur (Wave, Orange Money, MTN, Moov), déclarations des locataires validées par l'agence, et paiement en ligne des charges par les copropriétaires.",
+                "Payments recorded by operator (Wave, Orange Money, MTN, Moov), tenant-reported payments validated by the agency, and online payment of service charges by co-owners.",
               )}
             />
             <div className="mt-5 flex -space-x-2">

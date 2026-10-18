@@ -48,8 +48,8 @@ const heroCardsSource: HeroCardSource[] = [
     eyebrow: { fr: "Loyers et encaissements", en: "Rent & collections" },
     title: { fr: "Chaque loyer suivi, du rappel à la quittance.", en: "Every rent tracked, from reminder to receipt." },
     description: {
-      fr: "Échéances générées depuis le bail, paiements enregistrés par moyen de règlement (espèces, virement, Wave, Orange Money, MTN, Moov) et déclarations des locataires validées en un clic.",
-      en: "Due dates generated from the lease, payments recorded by method (cash, bank transfer, Wave, Orange Money, MTN, Moov) and tenant payment notices approved in one click.",
+      fr: "Échéances générées depuis le bail, paiements enregistrés par moyen de règlement (espèces, virement, Wave, Orange Money, MTN, Moov), prélèvement bancaire des loyers sans commission ImmoTopia et déclarations des locataires validées en un clic.",
+      en: "Due dates generated from the lease, payments recorded by method (cash, bank transfer, Wave, Orange Money, MTN, Moov), bank direct debit of rent with no ImmoTopia commission and tenant payment notices approved in one click.",
     },
     cta: { fr: "Voir le suivi des loyers", en: "See rent tracking" },
     href: "#roles-comptable",
@@ -99,8 +99,8 @@ const heroCardsSource: HeroCardSource[] = [
     eyebrow: { fr: "L'ERP tout-en-un", en: "The all-in-one ERP" },
     title: { fr: "Retrouvez vos biens, baux et encaissements au même endroit.", en: "Find your properties, leases and collections in one place." },
     description: {
-      fr: "Biens, baux, encaissements, CRM, syndic, maintenance et communication sur une plateforme rapide, accessible depuis un navigateur, sur ordinateur comme sur mobile.",
-      en: "Properties, leases, collections, CRM, condominium management, maintenance and communication on one fast platform, right in your browser, on desktop or mobile.",
+      fr: "Biens, baux, encaissements, CRM, syndic, maintenance et communication sur une plateforme rapide, accessible depuis un navigateur, sur ordinateur comme sur mobile, et installable sur le téléphone comme une application.",
+      en: "Properties, leases, collections, CRM, condominium management, maintenance and communication on one fast platform, right in your browser, on desktop or mobile, and installable on your phone like an app.",
     },
     cta: { fr: "Découvrir la suite complète", en: "Explore the full suite" },
     href: "#ecosysteme",
@@ -138,8 +138,8 @@ const heroCardsSource: HeroCardSource[] = [
     eyebrow: { fr: "Gestion de syndic", en: "condominium management" },
     title: { fr: "La copropriété gérée d'une main de maître.", en: "Condominium, masterfully managed." },
     description: {
-      fr: "Budgets et appels de charges par lot selon les tantièmes, relances des impayés, assemblées générales avec votes et quorum, comptabilité de copropriété.",
-      en: "Budgets and service charge calls per unit based on ownership shares, arrears follow-ups, general meetings with voting and quorum, and condominium accounting.",
+      fr: "Budgets et appels de charges par lot selon les tantièmes, relances des impayés, paiement des charges par Mobile Money, assemblées générales en direct avec vote en ligne (visio en option payante), comptabilité de copropriété.",
+      en: "Budgets and service charge calls per unit based on ownership shares, arrears follow-ups, service charges paid by Mobile Money, live general meetings with online voting (video conferencing as a paid option), and condominium accounting.",
     },
     cta: { fr: "Découvrir le module Syndic", en: "Explore the Condo module" },
     href: "#tarifs",
@@ -156,8 +156,8 @@ const heroCardsSource: HeroCardSource[] = [
     eyebrow: { fr: "E-mail & WhatsApp", en: "Email & WhatsApp" },
     title: { fr: "Des rappels qui partent tout seuls.", en: "Reminders that send themselves." },
     description: {
-      fr: "Rappels d'échéance, confirmations de paiement, baux arrivant à terme : locataires et propriétaires sont prévenus par e-mail ou WhatsApp, selon leurs préférences.",
-      en: "Due-date reminders, payment confirmations, leases nearing expiry: tenants and landlords are notified by email or WhatsApp, according to their preferences.",
+      fr: "Rappels d'échéance, confirmations de paiement, baux arrivant à terme : locataires et propriétaires sont prévenus par e-mail ou WhatsApp, selon leurs préférences. Sur les chantiers, l'inventaire se fait en envoyant des photos sur WhatsApp (option payante).",
+      en: "Due-date reminders, payment confirmations, leases nearing expiry: tenants and landlords are notified by email or WhatsApp, according to their preferences. On building sites, inventory is done by sending photos over WhatsApp (paid option).",
     },
     cta: { fr: "Voir les rappels automatiques", en: "See automated reminders" },
     href: "#ecosysteme",
@@ -234,7 +234,7 @@ export const roles: Record<Locale, Role[]> = {
       label: "Directeur d'agence",
       headline: "Pilotez la croissance, même à distance.",
       pitch:
-        "Un tableau de bord qui va à l'essentiel : impayés, encaissements du mois face à l'objectif, taux d'occupation et file de travail du jour. Des droits par rôle et un journal d'audit pour garder le contrôle.",
+        "Un tableau de bord qui va à l'essentiel : impayés, encaissements du mois face à l'objectif, taux d'occupation et file de travail du jour. Des droits par rôle et un journal d'audit pour garder le contrôle, et tous les tableaux s'exportent en Excel, CSV ou PDF.",
       features: [
         { title: "Tableau de bord", text: "Impayés, encaissé du mois, occupation, en un écran." },
         { title: "Rôles et permissions", text: "Chacun voit uniquement ce qui le concerne." },
@@ -248,7 +248,7 @@ export const roles: Record<Locale, Role[]> = {
       pitch:
         "Baux, états des lieux, échéanciers, relevés de gérance et tickets de maintenance : le quotidien de la gestion locative se pilote depuis un seul endroit, sans ressaisie.",
       features: [
-        { title: "Baux et états des lieux", text: "Création, renouvellement, avenants, entrée et sortie." },
+        { title: "Baux et états des lieux", text: "Création, renouvellement, avenants, entrée et sortie, avec signature électronique (option payante)." },
         { title: "Relevés de gérance", text: "Générés par période et envoyés au propriétaire." },
         { title: "Maintenance", text: "Incidents signalés, suivis et commentés jusqu'à leur clôture." },
       ],
@@ -260,7 +260,7 @@ export const roles: Record<Locale, Role[]> = {
       pitch:
         "Les échéances sont générées depuis les baux, chaque paiement est affecté à ses échéances, les pénalités de retard se calculent seules et chaque dépôt de garantie est tracé. Côté syndic, une comptabilité de copropriété complète.",
       features: [
-        { title: "Échéances et paiements", text: "Statut, reste à encaisser, historique par locataire." },
+        { title: "Échéances et paiements", text: "Statut, reste à encaisser, prélèvement bancaire des loyers." },
         { title: "Pénalités automatiques", text: "Montant fixe ou pourcentage, avec délai de grâce." },
         { title: "Comptabilité syndic", text: "Journaux, grand livre et balance de copropriété." },
       ],
@@ -270,7 +270,7 @@ export const roles: Record<Locale, Role[]> = {
       label: "Agent commercial",
       headline: "Toute l'agence dans votre poche.",
       pitch:
-        "Pipeline CRM, agenda des visites, contrats générés depuis vos modèles et rappels automatiques par e-mail ou WhatsApp : l'outil pensé pour le terrain, utilisable sur mobile.",
+        "Pipeline CRM, agenda des visites, contrats générés depuis vos modèles et rappels automatiques par e-mail ou WhatsApp : l'outil pensé pour le terrain, utilisable sur mobile et installable sur le téléphone comme une application.",
       features: [
         { title: "Contrats générés", text: "Baux, avenants et quittances depuis vos modèles Word." },
         { title: "Rappels WhatsApp", text: "Échéances rappelées automatiquement aux locataires." },
@@ -309,8 +309,8 @@ export const roles: Record<Locale, Role[]> = {
         "Côté syndic, le copropriétaire consulte ses lots, le compte de chaque lot, ses appels de charges, ses paiements, les documents de la copropriété et les assemblées générales.",
       features: [
         { title: "Lots et comptes", text: "Compte, relevé et suivi mensuel par lot." },
-        { title: "Appels de charges", text: "Avis à télécharger, paiements et quittances." },
-        { title: "Documents et assemblées", text: "Pièces de la copropriété et assemblées générales." },
+        { title: "Appels de charges", text: "Avis à télécharger, paiement par Mobile Money et quittances." },
+        { title: "Documents et assemblées", text: "Pièces de la copropriété, assemblées en direct et vote en ligne." },
       ],
     },
   ],
@@ -320,7 +320,7 @@ export const roles: Record<Locale, Role[]> = {
       label: "Agency director",
       headline: "Drive growth, even from afar.",
       pitch:
-        "A dashboard that cuts straight to what matters: arrears, monthly collections against target, occupancy rate and today's work queue. Role-based permissions and an audit log keep you in control.",
+        "A dashboard that cuts straight to what matters: arrears, monthly collections against target, occupancy rate and today's work queue. Role-based permissions and an audit log keep you in control, and every table can be exported to Excel, CSV or PDF.",
       features: [
         { title: "Dashboard", text: "Arrears, monthly collections and occupancy on one screen." },
         { title: "Roles & permissions", text: "Everyone sees only what concerns them." },
@@ -334,7 +334,7 @@ export const roles: Record<Locale, Role[]> = {
       pitch:
         "Leases, inspections, payment schedules, management statements and maintenance tickets: day-to-day rental management runs from one place, with no double entry.",
       features: [
-        { title: "Leases & inspections", text: "Creation, renewal, amendments, move-in and move-out." },
+        { title: "Leases & inspections", text: "Creation, renewal, amendments, move-in and move-out, with electronic signature (paid option)." },
         { title: "Management statements", text: "Generated by period and sent to the landlord." },
         { title: "Maintenance", text: "Incidents reported, tracked and commented until closed." },
       ],
@@ -346,7 +346,7 @@ export const roles: Record<Locale, Role[]> = {
       pitch:
         "Due dates are generated from leases, each payment is allocated to its installments, late fees calculate themselves and every security deposit is tracked. For condominium management, full condominium accounting.",
       features: [
-        { title: "Due dates & payments", text: "Status, outstanding balance and history per tenant." },
+        { title: "Due dates & payments", text: "Status, outstanding balance, bank direct debit of rent." },
         { title: "Automatic late fees", text: "Fixed amount or percentage, with a grace period." },
         { title: "Condominium accounting", text: "Journals, general ledger and condominium trial balance." },
       ],
@@ -356,7 +356,7 @@ export const roles: Record<Locale, Role[]> = {
       label: "Sales agent",
       headline: "Your whole agency in your pocket.",
       pitch:
-        "CRM pipeline, viewing calendar, contracts generated from your templates and automatic reminders by email or WhatsApp: a tool built for the field, ready on mobile.",
+        "CRM pipeline, viewing calendar, contracts generated from your templates and automatic reminders by email or WhatsApp: a tool built for the field, ready on mobile and installable on your phone like an app.",
       features: [
         { title: "Generated contracts", text: "Leases, amendments and receipts from your Word templates." },
         { title: "WhatsApp reminders", text: "Tenants automatically reminded of due dates." },
@@ -395,8 +395,8 @@ export const roles: Record<Locale, Role[]> = {
         "For condominium management, co-owners view their units, each unit's account, service charge calls, payments, condominium documents and general meetings.",
       features: [
         { title: "Units & accounts", text: "Account, statement and monthly follow-up per unit." },
-        { title: "Charge calls", text: "Notices to download, payments and receipts." },
-        { title: "Documents & meetings", text: "Condominium files and general meetings." },
+        { title: "Charge calls", text: "Notices to download, Mobile Money payment and receipts." },
+        { title: "Documents & meetings", text: "Condominium files, live meetings and online voting." },
       ],
     },
   ],

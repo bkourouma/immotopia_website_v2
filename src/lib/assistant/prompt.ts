@@ -9,6 +9,12 @@ import { APP_LOGIN_URL, contact, legal, SITE_URL } from "../site";
 import { tools } from "../tools";
 import { KNOWLEDGE } from "./knowledge.generated";
 
+/** Nom et prix d'une extension à la carte, repris de pricing.ts */
+const extLabel = (start: string) => {
+  const e = extensions.find((x) => x.name.fr.startsWith(start));
+  return e ? `« ${e.name.fr} » (${e.price.fr} HT)` : start;
+};
+
 function pricingSection() {
   const lines = activePacks.map(
     (p) =>
@@ -27,6 +33,8 @@ function pricingSection() {
     "Extensions à la carte :",
     ...extensions.map((e) => `- ${e.name.fr} : ${e.price.fr}. ${e.note.fr}`),
     "Règles commerciales : " + commercialRules.fr.join(" "),
+    `Options payantes récentes : ${extLabel("Signatures")} avec tous les packs (aucune signature n'est incluse dans un pack ; baux, états des lieux et mandats) ; ${extLabel("Visio")} avec Syndic ou Opérateur intégré ; ${extLabel("Inventaire WhatsApp")} avec Promoteur ou Opérateur intégré. Elles se cumulent avec un pack et ne sont jamais incluses dedans.`,
+    "Fonctions récentes incluses, sans commission ImmoTopia : paiement en ligne des charges de copropriété par Mobile Money (lien « Payer cet appel » et portail copropriétaire ; Syndic, Opérateur intégré), prélèvement bancaire des loyers (gestion locative : Agence, Opérateur intégré, Patrimoine Essentiel et Pro), assemblée générale en direct avec vote en ligne par lien personnel (Syndic, Opérateur intégré). Export des tableaux en Excel, CSV et PDF et application installable sur le téléphone : tous les packs. Ces fonctions sont disponibles ; détail dans la base de connaissances.",
     "Les packs Patrimoine (particuliers et diaspora, entreprises et institutionnels) servent à suivre et louer ses propres biens, sans mandat ni propriétaire tiers. La valeur nette et les projections consolidées sont en développement : dis « bientôt, en développement », sans date. Une fonction « Patrimoine particulier gratuit » ou « plus » n'est pas disponible : ne l'annonce pas.",
     "",
     "Offre de lancement : le premier mois d'abonnement est offert sur tous les packs, sans engagement (résiliable à tout moment) ; la mise en route accompagnée reste facturée si elle est choisie. Règles : paiement mensuel d'avance ; l'annuel payé d'avance coûte 11 mensualités (12 mois pour le prix de 11). Packs combinables avec 10 % de remise sur le prix de base du pack le moins cher ; avec les trois métiers, on compare au forfait Opérateur intégré et on applique le moins cher. Aucune commission ImmoTopia sur les loyers. Les comptes collaborateurs, propriétaires et locataires ne sont pas facturés. WhatsApp est facturé à la consommation. Mise en route gratuite si le client prépare et saisit lui-même ses données. Au-delà des capacités, le dépassement est facturé (extensions ci-dessus), jamais bloqué ; grand réseau : devis sur mesure. Les prix sont hors taxes (TVA 18 % ajoutée sur les factures d'Alliance Consultants).",
