@@ -41,6 +41,28 @@ Pièges et décisions :
 
 ---
 
+## Branche `seo/pages-patrimoine-promoteur` — 2026-10-23
+
+**État :** prêt à relire
+**Dernier commit :** aucun (rien commité)
+
+Fait :
+
+- Deux landings SEO dans `src/lib/landings.ts` : `/logiciel-gestion-patrimoine-immobilier-cote-divoire` (mot-clé « logiciel gestion de patrimoine immobilier ») et `/logiciel-promoteur-immobilier-cote-divoire` (« logiciel promoteur immobilier »). Déclarées dans `french-only.ts`, sitemap automatique, liens depuis les wiki correspondants, la landing CRM promoteur et la landing « logiciel immobilier » ; ajout dans `knowledge.md`.
+- `scripts/check-landings.mjs` : contrôle des landings (non branché dans `package.json` ni la CI).
+
+Volontairement omis :
+
+- Patrimoine : pénalités de retard, cautions et dépôt de garantie, répartition des fonctions SCI par pack, espace particulier et ses paliers (pas de prix publié). Promoteur : rien sur la réservation de lots, l'échéancier ou le portail acquéreur, hors une réponse de FAQ qui le dit.
+
+À arbitrer par le propriétaire :
+
+- Contradiction entre `pricing.ts` (pénalités et dépôts de garantie réservés à Agence et Intégré) et le wiki / `knowledge.md` (qui les attribuent aussi aux packs Patrimoine).
+- Les packs qui incluent entités détentrices, consolidation, fiscalité et export (wiki : Agence, Promoteur, Intégré) face à la cible SCI et diaspora.
+- Le tableau de prix de la page patrimoine (3 colonnes) n'a pas été vérifié sur mobile ; gabarit commun non modifié.
+
+---
+
 ## Branche `seo/ga4-consentement` — 2026-10-23
 
 **État :** prêt à relire (non commité)

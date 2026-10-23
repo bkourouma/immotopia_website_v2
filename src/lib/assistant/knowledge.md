@@ -596,6 +596,8 @@ Le site publie un wiki des fonctionnalités sur https://immotopia.cloud/wiki (en
 
 - https://immotopia.cloud/crm-immobilier-cote-divoire : le logiciel CRM immobilier pour agences et promoteurs (contacts, pipeline, rapprochement, mandats, offres et compromis de vente sous mandat, relances et notifications e-mail / WhatsApp, tableau comparatif avec Excel et un CRM généraliste, FAQ).
 - https://immotopia.cloud/crm-promoteur-immobilier-cote-divoire : le CRM pour promoteur immobilier (prospects, contacts, pipeline, visites, relances, puis lots, coût de revient, budget, avancement, tableau de bord de chantier). Renvoyer vers ces pages quand un visiteur demande un CRM, en rappelant les limites de la section « Limites » (pas d'offre ni de compromis pour la vente des lots d'un promoteur).
+- https://immotopia.cloud/logiciel-promoteur-immobilier-cote-divoire : le logiciel pour promoteur immobilier (chantiers, lots et coût de revient, budget, avancement, stock, salaires, tâcherons, retenues de garantie, tarifs du pack Promoteur). Pas de réservation de lots, d'échéancier acquéreur ni de portail acquéreur pour les lots d'un promoteur.
+- https://immotopia.cloud/logiciel-gestion-patrimoine-immobilier-cote-divoire : le logiciel de gestion de patrimoine immobilier (valeur des biens, emprunts, gestion locative directe des biens en propre, trésorerie, assurances, entretien ; les entités détentrices, SCI et fiscalité sont décrites dans le wiki). Valeur nette consolidée et projections sur 30 ans : en développement.
 - L'ancienne adresse /fonctionnalites/crm-immobilier redirige vers la page du CRM pour promoteur.
 
 ---
