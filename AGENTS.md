@@ -70,9 +70,10 @@ npm run lint                         # ESLint 9, configuration eslint-config-nex
 node scripts/check-comparatif-en.mjs # traduction anglaise du comparatif alignée sur le français
 ```
 
-Il n'y a **aucun test automatisé** (pas de script `test`, pas de framework) :
-un changement de comportement se vérifie par `build`, puis dans le navigateur
-(compétence `run-site`). Ne pas prétendre avoir « lancé les tests ».
+Les tests automatisés se limitent à `npm test` (`node --test`, sans dépendance :
+consentement GA4, bandeau, politique de confidentialité). Pour le reste, un
+changement de comportement se vérifie par `build`, puis dans le navigateur
+(compétence `run-site`). Ne pas prétendre avoir « lancé les tests » sans `npm test`.
 
 ## Règles propres au projet
 

@@ -2,6 +2,7 @@
 
 import { ArrowRight, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 import type { ReactNode } from "react";
+import { ManageCookiesButton } from "./consent/manage-cookies-button";
 import { footerColumns } from "@/lib/content";
 import { contact, legal, whatsappLink } from "@/lib/site";
 import { LanguageSwitcher } from "./language-switcher";
@@ -80,6 +81,7 @@ export function FinalCta() {
             <SmartLink href="/confidentialite" className="transition-colors hover:text-ink-900">
               {t("Confidentialité", "Privacy")}
             </SmartLink>
+            <ManageCookiesButton className="text-left transition-colors hover:text-ink-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500" />
           </FooterCol>
           <FooterCol title={t("Nous joindre", "Get in touch")}>
             <a href={contact.phoneHref} className="inline-flex items-center gap-2 transition-colors hover:text-ink-900">

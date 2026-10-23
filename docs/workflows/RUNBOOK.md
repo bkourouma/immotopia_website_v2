@@ -71,7 +71,7 @@ npm run build                         # ~20 s, 50 pages générées
 node scripts/check-comparatif-en.mjs  # après toute retouche du comparatif
 ```
 
-Pas de tests automatisés.
+Tests : `npm test` (`node --test`, sans dépendance ; consentement GA4 et politique de confidentialité). Pas d'autre framework de test.
 
 ## Bus d'agents
 

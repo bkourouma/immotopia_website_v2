@@ -63,6 +63,28 @@ Volontairement omis :
 
 ---
 
+## Branche `seo/ga4-consentement` — 2026-10-23
+
+**État :** prêt à relire (non commité)
+
+Fait :
+
+- Google Analytics 4 avec bandeau de consentement FR/EN (`src/components/consent/`, `src/lib/consent.ts`, `src/lib/ga.ts`). Identifiant de mesure `G-W0VCK0DK70`. Aucun appel à Google ni cookie `_ga` avant « Accepter » ; chargé seulement en production, sur `immotopia.cloud` et `www.immotopia.cloud` (jamais sur l'application ni un autre sous-domaine). Umami inchangé.
+- Choix mémorisé 182 jours (clé `im_consent`), bouton « Gérer mes cookies » / « Manage cookies » dans le pied de page, retrait = drapeau `ga-disable-<ID>` + effacement des cookies `_ga*`, `_gid`, `_gat*`.
+- Politique de confidentialité FR et EN mise à jour (Google Ireland Limited, cookies de 13 mois, destinataires), date 23 octobre 2026.
+- `npm test` ajouté (`node --test`, 29 tests) et étape CI correspondante.
+
+Reste à faire :
+
+- Après déploiement : ouvrir le site en navigation privée, vérifier dans l'onglet Réseau qu'aucune requête vers googletagmanager.com ni cookie `_ga` n'existe avant « Accepter », puis qu'ils apparaissent après, et disparaissent après retrait via « Gérer mes cookies » ; contrôler le temps réel dans GA4. Vérifier l'affichage à 375 px.
+- Faire valider le rôle de Google (sous-traitant ou non) dans la politique.
+
+Pièges et décisions :
+
+- Libellé EN du refus : « Decline » (choix prudent).
+
+---
+
 ## Branche `claude/beautiful-volta-r4u2ul` — 2026-10-18
 
 **État :** prêt à relire (PR brouillon vers `main`)
