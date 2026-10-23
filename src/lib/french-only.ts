@@ -16,6 +16,8 @@ export const frenchOnlyPaths = [
   "/logiciel-immobilier-afrique",
   "/immotopia-vs-excel",
   "/gestion-locative-vs-excel",
+  "/logiciel-gestion-patrimoine-immobilier-cote-divoire",
+  "/logiciel-promoteur-immobilier-cote-divoire",
 ];
 
 // Rubriques entières en français seulement (toutes leurs sous-pages) : le wiki des fonctionnalités et les guides.

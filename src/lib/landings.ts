@@ -41,12 +41,15 @@ export type Landing = {
 const pack = (id: PackId) => packs.find((p) => p.id === id)!;
 const agence = pack("agence");
 const promoteur = pack("promoteur");
+const patrimoineEssentiel = pack("patrimoine-essentiel");
+const patrimoinePro = pack("patrimoine-pro");
 const integre = pack("integre");
 const chantierSup = promoteurPrice(3, 150) - promoteurPrice(2, 150); // un chantier actif de plus
 const blocLots = promoteurPrice(2, 160) - promoteurPrice(2, 150); // un bloc de 10 lots de plus
 const ext = (start: string) => extensions.find((e) => e.name.fr.startsWith(start))!;
 const extSignature = ext("Signatures"); // bloc de 50 signatures
 const extVisio = ext("Visio");
+const extBiens = ext("Bloc de 10 biens");
 const extInventaire = ext("Inventaire WhatsApp"); // bloc de 500 photos
 
 export const landings: Landing[] = [
@@ -140,6 +143,8 @@ export const landings: Landing[] = [
           { title: "Gestion locative", text: "Baux, échéancier, paiements, prélèvement bancaire des loyers, pénalités, cautions, quittances, relevés de gérance et signature électronique en option." },
           { title: "Syndic de copropriété", text: "Lots et tantièmes, budgets, appels de charges payables par Mobile Money, recouvrement, assemblées générales en direct avec vote en ligne et comptabilité de copropriété." },
           { title: "Maintenance", text: "Tickets avec photos et priorités, prestataires, fil d'échange et notifications à chaque étape." },
+          { title: "Patrimoine", text: "Suivi des biens détenus en propre : valeur, emprunts, assurances, trésorerie. Voir le [logiciel de gestion de patrimoine immobilier](/logiciel-gestion-patrimoine-immobilier-cote-divoire)." },
+          { title: "Promotion", text: "Chantiers, lots, budget, stock et tâcherons du module Promoteur. Voir le [logiciel promoteur immobilier](/logiciel-promoteur-immobilier-cote-divoire)." },
           { title: "Communication", text: "Rappels et notifications par e-mail et WhatsApp, newsletter, historique de tous les messages." },
         ],
       },
@@ -550,7 +555,7 @@ export const landings: Landing[] = [
         a: "Vous pouvez saisir vous-même vos données, sans frais. La mise en route accompagnée du pack Promoteur couvre deux chantiers, la nomenclature des coûts et des stocks et la formation des équipes ; un historique plus complexe fait l'objet d'un devis.",
       },
     ],
-    related: ["crm-immobilier-cote-divoire", "immotopia-vs-excel", "tableaux-de-bord-kpi-immobilier-cote-divoire"],
+    related: ["crm-immobilier-cote-divoire", "logiciel-promoteur-immobilier-cote-divoire", "immotopia-vs-excel"],
   },
   {
     slug: "paiement-loyer-charges-mobile-money-cote-divoire",
@@ -778,6 +783,236 @@ export const landings: Landing[] = [
       { q: "À partir de combien de logements un logiciel est-il rentable ?", a: "Dès que les relances et la recherche de paiements vous prennent plus de quelques heures par mois. Le pack Agence inclut 100 logements pour 29 900 FCFA HT par mois." },
     ],
     related: ["gestion-locative-cote-divoire", "immotopia-vs-excel", "paiement-loyer-charges-mobile-money-cote-divoire"],
+  },
+  {
+    slug: "logiciel-gestion-patrimoine-immobilier-cote-divoire",
+    metaTitle: "Logiciel de gestion de patrimoine immobilier en Côte d'Ivoire",
+    metaDescription: `Logiciel de gestion de patrimoine immobilier pour propriétaires bailleurs et diaspora : biens, baux, emprunts, trésorerie, assurances. Dès ${fcfa(patrimoineEssentiel.monthly)} HT/mois.`,
+    eyebrow: "Gestion de patrimoine",
+    h1: "Logiciel de gestion de patrimoine immobilier en Côte d'Ivoire",
+    intro:
+      "Biens, baux, loyers, emprunts, travaux, assurances, titres de propriété : ImmoTopia réunit dans une seule application le suivi du patrimoine immobilier que vous détenez en propre. Il s'adresse aux propriétaires bailleurs, aux familles qui détiennent des biens en société civile immobilière (SCI) et à la diaspora ivoirienne qui suit ses biens depuis l'étranger.",
+    sections: [
+      {
+        title: "Les difficultés d'un patrimoine immobilier suivi sans outil",
+        items: [
+          { title: "Des papiers et des chiffres éparpillés", text: "Titre de propriété, acte notarié, contrat d'assurance, tableau d'amortissement du prêt : chaque pièce vit dans un dossier, un classeur ou une boîte mail différente." },
+          { title: "Des échéances qu'on découvre trop tard", text: "Une assurance qui expire, un bail qui se termine, un entretien oublié ou une garantie de travaux qui s'achève : sans rappel, on s'en aperçoit après coup." },
+          { title: "Des loyers suivis à la main", text: "Quittances retapées, paiements notés dans un tableur, relances faites de mémoire : à distance, le suivi des locataires devient vite un casse-tête." },
+        ],
+      },
+      {
+        title: "Pour qui ?",
+        items: [
+          { title: "Propriétaires bailleurs", text: "Vous louez vous-même vos biens : baux, échéances, quittances et dépenses de chaque bien sont suivis au même endroit." },
+          { title: "SCI et holdings familiales", text: "La société qui détient les biens se décrit une seule fois dans ImmoTopia. Voir plus bas la section dédiée." },
+          { title: "Diaspora ivoirienne", text: "L'application est en ligne : elle s'ouvre depuis un navigateur, sur ordinateur, tablette ou téléphone, et les rappels partent par e-mail ou WhatsApp." },
+          { title: "Entreprises et institutionnels", text: "Le pack Patrimoine Pro suit un parc plus étendu de biens détenus en propre, loués ou non." },
+        ],
+        note: "Un propriétaire dont les biens sont gérés par une agence qui utilise ImmoTopia dispose, de son côté, d'un [portail propriétaire](/wiki/portails-clients/portail-proprietaire) pour consulter ses biens, ses baux, ses loyers et ses documents. Les comptes propriétaires ne sont pas facturés.",
+      },
+      {
+        title: "Suivre chaque bien et l'ensemble du patrimoine",
+        intro: "Tout part de la fiche du bien : sa valeur, ses prêts, ses dépenses, ses travaux et ses documents y sont rattachés. La [vue consolidée](/wiki/biens-et-patrimoine/vue-consolidee-du-patrimoine) donne ensuite le total.",
+        items: [
+          { title: "Valeur et historique des estimations", text: "Chaque estimation (manuelle, de marché ou d'expertise) est enregistrée avec sa date, ainsi que le coût et la date d'acquisition. Voir la [valorisation des biens](/wiki/biens-et-patrimoine/valorisation-des-biens)." },
+          { title: "Rendement et plus-value latente", text: "Valeur totale du patrimoine, rendement brut, net et net-net de chaque bien, plus-value latente et projection sur plusieurs années selon vos propres hypothèses." },
+          { title: "Emprunts", text: "Banque, capital emprunté et restant dû, taux, mensualité et statut de chaque prêt, rattachés au bien qu'il finance. Voir les [emprunts immobiliers](/wiki/biens-et-patrimoine/emprunts-immobiliers)." },
+          { title: "Charges et dépenses", text: "Réparations, taxes, assurances : chaque dépense est saisie avec son fournisseur et son justificatif, pour savoir ce que coûte réellement chaque bien. Voir les [charges et dépenses](/wiki/biens-et-patrimoine/charges-et-depenses)." },
+          { title: "Travaux", text: "Programmes de travaux par bien, avec coût estimé puis réel, dates prévues et statut. Voir les [programmes de travaux](/wiki/biens-et-patrimoine/programmes-de-travaux)." },
+          { title: "Titres et documents patrimoniaux", text: "Titre de propriété, acte notarié, assurance, diagnostic, plan ou permis sont classés sur la fiche du bien, avec leur date d'expiration et une alerte par e-mail avant l'échéance. Voir les [documents patrimoniaux](/wiki/biens-et-patrimoine/documents-patrimoniaux)." },
+          { title: "Régularisation foncière", text: "Un dossier par bien, étape par étape : échéances, frais engagés, pièces justificatives et relance par e-mail des étapes en retard. La filière proposée est une trame de travail à faire valider par un juriste local. Voir la [régularisation foncière](/wiki/patrimoine-multi-actifs/regularisation-fonciere)." },
+          { title: "Import depuis Excel ou CSV", text: "Un gabarit guide la reprise de vos biens et de leurs valorisations, avec un aperçu ligne par ligne avant tout enregistrement. Les baux et les locataires ne s'importent pas par cet écran. Voir l'[import du patrimoine](/wiki/patrimoine-multi-actifs/importer-mon-patrimoine)." },
+        ],
+      },
+      {
+        title: "Louer vos propres biens et anticiper la trésorerie",
+        items: [
+          { title: "Baux et échéancier", text: "Chaque bail génère son échéancier (loyer, charges, statut, reste à encaisser), avec renouvellement, avenant, révision de loyer et résiliation. Voir la [gestion locative](/gestion-locative-cote-divoire) et les [baux](/wiki/gestion-locative/gestion-des-baux)." },
+          { title: "Encaissement des loyers", text: "Loyers reçus en espèces, virement, chèque ou Mobile Money, affectés aux échéances du bail. Voir l'[encaissement des loyers](/wiki/gestion-locative/encaissement-des-loyers)." },
+          { title: "Quittances et états des lieux", text: "Quittances et contrats générés depuis vos modèles Word, états des lieux d'entrée et de sortie avec photos et export PDF. Voir les [états des lieux](/wiki/gestion-locative/etats-des-lieux)." },
+          { title: "Prélèvement bancaire des loyers", text: "ImmoTopia prépare la remise et le fichier à déposer à la banque, sans commission ImmoTopia. Voir le [prélèvement bancaire](/wiki/gestion-locative/prelevement-bancaire)." },
+          { title: "Lien de paiement Mobile Money (en cours de déploiement)", text: "Un lien de paiement par échéance, envoyé au locataire par WhatsApp ou e-mail, lui permet de payer son loyer en Mobile Money. Cette fonction est en cours de déploiement. Voir les [liens de paiement de loyer](/wiki/gestion-locative/liens-de-paiement-loyer)." },
+          { title: "Plan de trésorerie sur 12 ou 24 mois", text: "Loyers attendus, mensualités d'emprunt, travaux, dépenses périodiques et taxe foncière estimée, avec le solde cumulé mois par mois et une alerte au premier mois où il passerait sous zéro. Voir la [trésorerie prévisionnelle](/wiki/patrimoine-multi-actifs/tresorerie-previsionnelle)." },
+        ],
+      },
+      {
+        title: "Assurances, entretien et alertes",
+        items: [
+          { title: "Polices d'assurance", text: "Assureur, couverture, dates et prime annuelle de chaque police, avec un statut calculé (à venir, active, expire bientôt, expirée). Voir les [polices d'assurance](/wiki/patrimoine-multi-actifs/polices-d-assurance)." },
+          { title: "Sinistres", text: "Déclaration et suivi d'un sinistre jusqu'à la clôture : montant réclamé, franchise, montant indemnisé, reste à charge et pièces jointes. Voir les [sinistres d'un bien](/wiki/patrimoine-multi-actifs/sinistres-d-un-bien)." },
+          { title: "Carnet d'entretien", text: "Historique des interventions de chaque bien, prestataires, coûts, garanties et prochaines échéances, exportable en CSV. Voir le [carnet d'entretien](/wiki/patrimoine-multi-actifs/carnet-d-entretien)." },
+          { title: "Alertes par e-mail", text: "Un rappel part 30 jours avant la fin d'une police d'assurance, une échéance d'entretien ou la fin d'une garantie de travaux. Voir les [alertes d'assurance et d'entretien](/wiki/patrimoine-multi-actifs/alertes-assurance-et-entretien)." },
+        ],
+      },
+      {
+        title: "SCI, holdings et fiscalité",
+        intro: "Pour un patrimoine détenu par une ou plusieurs sociétés, ImmoTopia sépare ce qui appartient à chaque détenteur.",
+        items: [
+          { title: "Entités détentrices", text: "SCI, holdings, sociétés ou personnes physiques, décrites une seule fois avec leur forme juridique, leur pays (Côte d'Ivoire ou Mali), leur numéro RCCM, leur identifiant fiscal et, au besoin, leur entité mère. Voir les [entités détentrices](/wiki/patrimoine-multi-actifs/entites-detentrices)." },
+          { title: "Quotes-parts par bien", text: "Un bien peut être détenu par plusieurs entités, chacune pour une quote-part, dans la limite de 100 %. Voir le [rattachement d'un bien à une entité](/wiki/patrimoine-multi-actifs/rattachement-bien-entite)." },
+          { title: "Consolidation par entité", text: "Valeur, dette, flux de trésorerie et rendement de tout ce que détient une SCI ou une holding, pondérés par ses parts, avec le détail bien par bien." },
+          { title: "Fiscalité Côte d'Ivoire et Mali", text: "Estimation de l'impôt foncier et de l'impôt sur les revenus fonciers, répartie entre les détenteurs. Ces montants sont des estimations indicatives, à valider par un conseil fiscal avant toute déclaration. Voir la [fiscalité](/wiki/patrimoine-multi-actifs/fiscalite-cote-d-ivoire-mali)." },
+          { title: "Export PDF ou Excel", text: "Une synthèse PDF ou un classeur Excel de tout le patrimoine immobilier, ou d'un seul bien, à partager avec un banquier, un notaire ou un associé. Voir l'[export du patrimoine](/wiki/patrimoine-multi-actifs/export-du-patrimoine)." },
+        ],
+        note: "Le détail de ces fonctions est dans le [wiki du patrimoine multi-actifs](/wiki/patrimoine-multi-actifs). Pour les voir appliquées à votre structure, [réservez une démonstration](/contact).",
+      },
+      {
+        title: "Ce qui est en cours de développement",
+        intro: "Ces fonctions ne sont pas encore disponibles ; elles sont signalées pour que vous sachiez où va le produit, sans date annoncée.",
+        bullets: [
+          "Le suivi de tous les actifs au-delà de l'immobilier : parts de sociétés, épargne, véhicules, créances.",
+          "Les dettes personnelles et les parts détenues dans un actif.",
+          "La valeur nette consolidée, sa répartition par classe d'actif et son évolution mois par mois.",
+          "Les projections de la valeur nette sur 1 à 30 ans, selon trois scénarios, et les simulations de vente, d'achat ou d'emprunt.",
+        ],
+        note: "Le détail de chacune est dans le [wiki du patrimoine multi-actifs](/wiki/patrimoine-multi-actifs).",
+      },
+      {
+        title: "Tarifs des packs Patrimoine",
+        table: {
+          caption: "Comparaison des packs Patrimoine Essentiel et Patrimoine Pro",
+          head: ["", patrimoineEssentiel.name, patrimoinePro.name],
+          rows: [
+            ["Public", patrimoineEssentiel.audience, patrimoinePro.audience],
+            ["Prix mensuel", `${fcfa(patrimoineEssentiel.monthly)} HT`, `${fcfa(patrimoinePro.monthly)} HT`],
+            ["Biens inclus", patrimoineEssentiel.included, patrimoinePro.included],
+            ["Au-delà", patrimoineEssentiel.extension, patrimoinePro.extension],
+            ["Mise en route accompagnée (facultative)", `${fcfa(patrimoineEssentiel.setup)} HT, facturés une fois`, `${fcfa(patrimoinePro.setup)} HT, facturés une fois`],
+          ],
+        },
+        paragraphs: [
+          "Les packs Patrimoine offrent la gestion locative directe de vos propres biens, sans mandat ni propriétaire tiers. Le premier mois est offert, sans engagement. Voir [tous les tarifs](/tarifs).",
+        ],
+      },
+    ],
+    faq: [
+      {
+        q: "À qui s'adresse ce logiciel de gestion de patrimoine immobilier ?",
+        a: "Aux propriétaires bailleurs, aux familles qui détiennent des biens en SCI, à la diaspora ivoirienne, aux entreprises et aux institutionnels qui suivent des biens détenus en propre. Pour gérer les biens de clients sous mandat, voir plutôt la [gestion locative](/gestion-locative-cote-divoire).",
+      },
+      {
+        q: "Puis-je louer mes biens sans passer par une agence ?",
+        a: "Oui. Les packs Patrimoine offrent la gestion locative directe de vos propres biens : baux, échéances, encaissements, quittances et prélèvement bancaire des loyers, sans mandat ni propriétaire tiers.",
+      },
+      {
+        q: "Le logiciel convient-il à une SCI ?",
+        a: "ImmoTopia sait décrire une SCI ou une holding comme entité détentrice, répartir les quotes-parts de chaque bien, consolider les biens d'une entité et estimer l'impôt par détenteur (voir le [wiki](/wiki/patrimoine-multi-actifs/entites-detentrices)). Pour voir ces fonctions appliquées à votre structure et à votre abonnement, demandez une [démonstration](/contact).",
+      },
+      {
+        q: "Puis-je suivre mes biens depuis l'étranger ?",
+        a: "ImmoTopia est une application en ligne, accessible depuis un navigateur sur ordinateur, tablette ou téléphone. Les rappels (échéances de loyer, assurances, entretien) partent par e-mail ou WhatsApp selon les cas. Si une agence gère vos biens avec ImmoTopia, son portail propriétaire vous donne accès à vos baux, loyers et documents.",
+      },
+      {
+        q: "La valeur nette et les projections sur 30 ans sont-elles disponibles ?",
+        a: "Pas encore : la valeur nette consolidée et les projections sur 1 à 30 ans sont en cours de développement. Sont disponibles aujourd'hui la valeur de chaque bien, le rendement brut, net et net-net, la plus-value latente, une projection selon vos hypothèses et le plan de trésorerie sur 12 ou 24 mois.",
+      },
+      {
+        q: "Combien coûte le pack Patrimoine Essentiel ?",
+        a: `${fcfa(patrimoineEssentiel.monthly)} HT par mois pour ${patrimoineEssentiel.included}. Chaque bloc de 10 biens détenus de plus coûte ${extBiens.price.fr} HT. Le premier mois est offert, sans engagement. Le pack Patrimoine Pro est à ${fcfa(patrimoinePro.monthly)} HT par mois pour ${patrimoinePro.included}. Voir les [tarifs](/tarifs).`,
+      },
+      {
+        q: "Puis-je reprendre mes biens depuis un fichier Excel ?",
+        a: "Oui : un gabarit Excel guide l'import de vos biens et de leurs valorisations, avec un aperçu ligne par ligne avant enregistrement et un rapport final. Les baux et les locataires ne s'importent pas par cet écran.",
+      },
+    ],
+    related: ["gestion-locative-cote-divoire", "logiciel-immobilier-cote-divoire", "tableaux-de-bord-kpi-immobilier-cote-divoire"],
+  },
+  {
+    slug: "logiciel-promoteur-immobilier-cote-divoire",
+    metaTitle: "Logiciel promoteur immobilier : chantier et lots | ImmoTopia",
+    metaDescription: `Logiciel promoteur immobilier : chantiers, lots et coût de revient, budget, avancement, stock, tâcherons et CRM. Pack Promoteur dès ${fcfa(promoteur.monthly)} HT/mois.`,
+    eyebrow: "Promotion immobilière",
+    h1: "Logiciel promoteur immobilier en Côte d'Ivoire : du chantier aux lots",
+    intro:
+      "Budget, dépenses en espèces, matériaux, tâcherons, avancement, coût de revient de chaque lot : le module Promoteur d'ImmoTopia suit un programme de la première dépense à la clôture du chantier. Il s'adresse aux promoteurs et aux groupes immobiliers ivoiriens qui construisent, et se relie au CRM pour le suivi commercial.",
+    sections: [
+      {
+        title: "Les difficultés de la promotion immobilière sur le terrain",
+        items: [
+          { title: "Un budget qui dérape sans qu'on le voie", text: "Quand les dépenses sont saisies en fin de mois dans un tableur, le dépassement se constate après coup, quand il est difficile de corriger." },
+          { title: "Des dépenses en espèces, des matériaux, des tâcherons", text: "Pièces de caisse, sorties de stock, situations de travaux et salaires circulent sur papier ou dans des fichiers séparés, et le coût réel d'un chantier se reconstitue à la main." },
+          { title: "Un coût de revient par lot incertain", text: "Sans règle de répartition du coût réel entre les lots, le prix de revient de chaque villa ou appartement reste une estimation." },
+        ],
+        note: "La comparaison complète avec le tableur est dans [ImmoTopia vs Excel](/immotopia-vs-excel).",
+      },
+      {
+        title: "Piloter chaque chantier de l'ouverture à la clôture",
+        items: [
+          { title: "Registre des chantiers", text: "Statut, coût réel et avancement de chaque chantier. Avant la clôture, le logiciel montre ce qui reste à régler. Voir le [suivi des chantiers](/wiki/promotion-et-chantiers/suivi-des-chantiers)." },
+          { title: "Budget et avenants", text: "Budget prévisionnel poste par poste, validé comme référence de pilotage, puis révisé par des avenants tracés et validés. Voir le [budget de chantier](/wiki/promotion-et-chantiers/budget-de-chantier)." },
+          { title: "Avancement et alertes de dépassement", text: "Budget, montants engagés, coût réel, avancement et écart par chantier, avec la courbe d'avancement dans le temps et des alertes quand un chantier consomme son budget plus vite que prévu. Voir l'[avancement et le tableau de bord](/wiki/promotion-et-chantiers/avancement-et-tableau-de-bord)." },
+          { title: "Dépenses et pièces de caisse", text: "Dépenses par poste, pièces de caisse émises, validées, imprimables et annulables proprement, avec le lien vers le compte comptable. Voir les [dépenses de chantier](/wiki/promotion-et-chantiers/depenses-de-chantier)." },
+          { title: "Bons de commande par chantier", text: "Commandes aux fournisseurs par chantier, rapprochées des factures reçues, pour suivre l'engagé. Voir les [bons de commande](/wiki/finance-et-comptabilite/bons-de-commande)." },
+          { title: "Baux de terrain", text: "Quand le programme est construit sur un terrain loué, chaque bail est enregistré avec ses chantiers, ses loyers fonciers et la charge constatée mois par mois. Voir les [baux de terrain](/wiki/promotion-et-chantiers/baux-de-terrain)." },
+        ],
+      },
+      {
+        title: "Lots et coût de revient",
+        paragraphs: [
+          "Un programme se vend ou se loue lot par lot. Chaque chantier se découpe en lots (villa, appartement, local) ; le coût réel est réparti entre eux à la surface ou par quote-part, et chaque lot affiche alors son coût de revient. Voir [lots et coût de revient](/wiki/promotion-et-chantiers/lots-et-cout-de-revient).",
+          "En fin de chantier, chaque lot achevé peut être transféré au patrimoine avec son coût de revient définitif, sans ressaisie.",
+        ],
+      },
+      {
+        title: "Matériaux, main-d'œuvre et tâcherons",
+        items: [
+          { title: "Stock de matériaux", text: "Articles, magasins et lieux de stockage de chantier, quantités restantes et valeur au coût moyen pondéré, historique de tous les mouvements. Voir le [stock de matériaux](/wiki/promotion-et-chantiers/stock-de-materiaux)." },
+          { title: "Entrées et sorties", text: "Réception des matériaux achetés, sortie vers un chantier au coût moyen, transfert entre dépôts et rapprochement entre acheté, consommé et restant. Voir les [entrées et sorties de stock](/wiki/promotion-et-chantiers/entrees-et-sorties-de-stock)." },
+          { title: "Inventaire de stock", text: "Comptage physique par magasin ou par chantier, justification de chaque écart, puis validation pour ajuster le stock et la comptabilité. Voir l'[inventaire de stock](/wiki/promotion-et-chantiers/inventaire-de-stock)." },
+          { title: "Inventaire par photo WhatsApp", text: `Pour compter depuis le chantier, le chef envoie une photo sur WhatsApp ; l'IA reconnaît l'article parmi ceux de l'entreprise et propose un total, qu'il valide. Option payante : « ${extInventaire.name.fr} », ${extInventaire.price.fr} HT, cumulable. Voir l'[inventaire par WhatsApp](/wiki/promotion-et-chantiers/inventaire-par-whatsapp).` },
+          { title: "Salaires et main-d'œuvre", text: "Registre des employés, salaire dû chaque mois imputé au bon chantier et règlements suivis. Voir les [salaires](/wiki/promotion-et-chantiers/salaires-main-d-oeuvre)." },
+          { title: "Tâcherons et situations de travaux", text: "Marché par chantier, situations de travaux validées, puis règlements : ce qui a été convenu, facturé et payé. Voir les [tâcherons](/wiki/promotion-et-chantiers/tacherons)." },
+          { title: "Retenues de garantie", text: "Une retenue se pose sur une facture fournisseur ou une situation de tâcheron ; les sommes retenues se suivent chantier par chantier, et la somme devient due quand la retenue est libérée. Voir les [retenues de garantie](/wiki/promotion-et-chantiers/retenues-de-garantie)." },
+        ],
+      },
+      {
+        title: "Le suivi commercial du programme",
+        paragraphs: [
+          "Le suivi commercial se fait dans le CRM, qui partage les contacts et la base du module Promoteur : prospects, contacts, pipeline des affaires, visites, relances et rapprochement entre la demande d'un client et les biens disponibles. Tout est détaillé dans la page [CRM pour promoteur immobilier](/crm-promoteur-immobilier-cote-divoire).",
+        ],
+      },
+      {
+        title: "Après la livraison : location et copropriété",
+        paragraphs: [
+          "Les baux, les loyers, les états des lieux et la copropriété ne font pas partie du pack Promoteur seul. Ils se gèrent avec le pack Opérateur intégré, qui réunit les modules Agence, Syndic et Promoteur dans un seul compte, un même lot n'étant compté qu'une fois, du chantier à la gestion. Pour la seule location, voir la [gestion locative](/gestion-locative-cote-divoire) (pack Agence) ; pour la copropriété, le [logiciel de syndic](/logiciel-syndic-copropriete-cote-divoire) (pack Syndic).",
+        ],
+      },
+      {
+        title: "Tarifs du pack Promoteur",
+        paragraphs: [
+          `Le pack Promoteur démarre à ${fcfa(promoteur.monthly)} HT par mois et couvre ${promoteur.included}. Pour aller plus loin, comptez ${fcfa(chantierSup)} HT par mois pour chaque chantier actif de plus et ${fcfa(blocLots)} HT par mois pour chaque bloc de 10 lots de plus.`,
+          `Une mise en route accompagnée est proposée en option (${fcfa(promoteur.setup)} HT, une seule fois), et le premier mois est offert, sans engagement. Le pack Opérateur intégré (${fcfa(integre.monthly)} HT par mois) s'adresse aux groupes qui construisent, vendent, louent et gèrent. Voir [tous les tarifs](/tarifs) ou [réserver une démonstration](/contact).`,
+        ],
+      },
+    ],
+    faq: [
+      {
+        q: "Que comprend le module Promoteur ?",
+        a: "Les chantiers et leurs lots, le budget et les avenants, l'avancement et les alertes de dépassement, les dépenses et pièces de caisse, les baux de terrain, le stock de matériaux avec inventaire, les salaires, les tâcherons et leurs situations de travaux, et les retenues de garantie. Il est disponible avec les packs Promoteur et Opérateur intégré.",
+      },
+      {
+        q: "Combien coûte le pack Promoteur ?",
+        a: `À partir de ${fcfa(promoteur.monthly)} HT par mois pour ${promoteur.included}, plus ${fcfa(chantierSup)} HT par mois par chantier actif de plus et ${fcfa(blocLots)} HT par mois par bloc de 10 lots de plus. Le simulateur de la page [Tarifs](/tarifs) donne le total pour votre programme.`,
+      },
+      {
+        q: "Peut-on suivre plusieurs chantiers en même temps ?",
+        a: `Oui. Le pack Promoteur comprend ${promoteur.included}, et le tableau de bord présente les chantiers côte à côte, avec leur budget, leur coût réel, leur avancement et leur écart.`,
+      },
+      {
+        q: "Comment est établi le coût de revient d'un lot ?",
+        a: "Le coût réel d'un chantier se compose des dépenses imputées (factures, pièces de caisse, salaires, sorties de stock). Vous choisissez la clé de répartition, à la surface ou par quote-part, puis chaque lot affiche son coût de revient. À la clôture, le lot peut rejoindre le patrimoine à ce coût définitif.",
+      },
+      {
+        q: "Peut-on gérer la vente des lots jusqu'à l'acte ?",
+        a: "Le suivi commercial (prospects, contacts, pipeline, visites, relances, rapprochement) se fait dans le [CRM](/crm-promoteur-immobilier-cote-divoire). Pour la vente des lots d'un promoteur, ImmoTopia ne propose ni réservation de lots, ni échéancier de l'acquéreur, ni portail acquéreur : le parcours offre, compromis et échéancier de l'acquéreur existe seulement pour une vente sous mandat d'agence, pour le compte d'un propriétaire.",
+      },
+      {
+        q: "Le chef de chantier peut-il travailler depuis son téléphone ?",
+        a: `L'application est en ligne et s'ouvre depuis un navigateur sur téléphone. Pour compter le stock, le chef de chantier peut aussi envoyer des photos sur WhatsApp, avec l'option payante « ${extInventaire.name.fr} » (${extInventaire.price.fr} HT) : l'IA propose le comptage, et l'ajustement du stock se valide au bureau.`,
+      },
+    ],
+    related: ["crm-promoteur-immobilier-cote-divoire", "gestion-locative-cote-divoire", "logiciel-syndic-copropriete-cote-divoire"],
   },
 ];
 
