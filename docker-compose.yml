@@ -3,7 +3,7 @@ services:
     build:
       context: .
       args:
-        NEXT_PUBLIC_BOOKING_URL: ${NEXT_PUBLIC_BOOKING_URL:-https://calendly.com/immotopia/30min}
+        NEXT_PUBLIC_BOOKING_URL: ${NEXT_PUBLIC_BOOKING_URL:-https://calendly.com/immotopia/consultation-alliance-computer-consultants}
     image: immotopia-site:latest
     container_name: immotopia-site
     restart: unless-stopped

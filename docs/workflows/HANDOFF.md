@@ -41,6 +41,16 @@ Pièges et décisions :
 
 ---
 
+## Branche `docs/handoff-packs-patrimoine` — 2026-10-23
+
+- Fait : lien Calendly corrigé (`consultation-alliance-computer-consultants`, l'ancien `30min` était
+  désactivé : plan gratuit = un seul type d'événement) dans `.env.example`, `docker-compose.yml`,
+  `knowledge.md` ; repli avec les contacts (WhatsApp, téléphone, e-mail) quand le lien est invalide,
+  via `src/app/api/booking/route.ts` (vérification serveur, cache 5 min).
+- Reste : reconstruire l'image et redéployer (variable figée au build, déploiement seulement sur « oui »
+  explicite) ; `npm run build` et le repli en anglais non vérifiés ; côté Calendly, fuseau Abidjan et
+  renommage de l'événement.
+
 ## Branche `feat/packs-patrimoine-wiki` — 2026-10-02
 
 **État :** fusionnée (PR n°1) dans `feat/accueil-audit-marketing`, déployée en production le 2026-10-02
