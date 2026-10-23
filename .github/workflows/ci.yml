@@ -1,8 +1,9 @@
 # Intégration continue du site vitrine ImmoTopia, posée par acc-standard (seed :
-# propriété du projet après création), adaptée le 2026-09-27 puis le 2026-10-13.
+# propriété du projet après création), adaptée le 2026-09-27 puis le 2026-10-13, puis le 2026-10-23 (tests).
 # Aucun secret : les routes API lisent OPENROUTER_* et N8N_WEBHOOK_URL à
-# l'exécution, le build n'en a pas besoin. Pas de tests automatisés dans ce
-# projet (pas de script « test ») : types, lint, contrôle du comparatif et build.
+# l'exécution, le build n'en a pas besoin. Tests unitaires légers (node --test, sans
+# dépendance : consentement GA4, bandeau, politique de confidentialité), puis types, lint,
+# contrôle du comparatif et build.
 #
 # Ce workflow tourne sur chaque pull request, et il est aussi appelé par
 # deploy.yml (workflow_call) à chaque poussée sur main : les vérifications
@@ -49,6 +50,9 @@ jobs:
         run: |
           node scripts/build-knowledge.mjs
           npx next typegen
+
+      - name: Tests unitaires
+        run: npm test
 
       - name: Typecheck
         run: npx tsc --noEmit

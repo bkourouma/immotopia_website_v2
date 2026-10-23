@@ -70,7 +70,7 @@ si possible, une recherche mécanique (`grep`) qui repère l'écart.
 
 ## Tests obligatoires
 
-- Pas de framework de test. Exiger à la place : `npx tsc --noEmit` et
+- `npm test` (node --test, sans dépendance : consentement et politique de confidentialité) doit passer ; pas d'autre framework de test. Exiger aussi : `npx tsc --noEmit` et
   `npm run lint` à 0 erreur, `npm run build` réussi, et une vérification en
   navigateur en français **et** sous `/en` décrite dans la PR.
 - Comparatif modifié (`src/lib/comparatif-data*.ts`) :
