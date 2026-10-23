@@ -3,6 +3,8 @@ import { Bricolage_Grotesque, Inter } from "next/font/google";
 import { notFound } from "next/navigation";
 import "./globals.css";
 import { Analytics } from "@/components/analytics";
+import { CookieConsent } from "@/components/consent/cookie-consent";
+import { GoogleAnalytics } from "@/components/consent/google-analytics";
 import { OrganizationJsonLd } from "@/components/json-ld";
 import { Providers } from "@/components/providers";
 import { alternates, hasLocale, htmlLang, locales, ogLocale, translator } from "@/lib/i18n";
@@ -60,8 +62,13 @@ export default async function RootLayout({ children, params }: LayoutProps<"/[la
     <html lang={htmlLang[lang]} data-scroll-behavior="smooth" className={`${inter.variable} ${bricolage.variable} antialiased`}>
       <body className="min-h-dvh font-sans">
         <OrganizationJsonLd />
-        <Providers locale={lang}>{children}</Providers>
+        <Providers locale={lang}>
+          {children}
+          <CookieConsent />
+        </Providers>
         <Analytics />
+        {/* Google Analytics 4 : seulement en production, sur le vrai site et après « Accepter » (Umami reste ci-dessus, sans cookie) */}
+        <GoogleAnalytics />
       </body>
     </html>
   );
