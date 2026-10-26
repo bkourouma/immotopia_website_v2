@@ -41,6 +41,27 @@ Pièges et décisions :
 
 ---
 
+## Branche `claude/tender-thompson-jwiooc` — 2026-10-26
+
+**État :** prêt à relire
+**Dernier commit :** voir `git log` (prix en euros)
+
+Fait :
+
+- Équivalent en euros à côté des prix FCFA, à la parité fixe 1 € = 655,957 FCFA (`eur()` et `XOF_PER_EUR` dans `src/lib/format.ts`) : cartes des packs, mise en route, extensions (nouveau champ `amount` dans `extensions` de `pricing.ts`), simulateur, titre et description de `/tarifs`. Mention « facturation en FCFA, euros indicatifs ».
+- Assistant : la grille du prompt donne aussi les euros ; consigne de les présenter comme indicatifs.
+- `tests/unit/format.test.ts` (4 tests). Vérifié en FR, sous `/en` et à 375 px.
+
+Volontairement non modifié :
+
+- Pages thématiques (`landings.ts`), wiki, `knowledge.md` et textes `extension` des packs : restent en FCFA. JSON-LD : `priceCurrency` reste `XOF` (devise de facturation).
+
+Pièges :
+
+- `npm run build` réécrit `package.json` et `package-lock.json` (épingle `@types/*`) : ne pas commiter ces changements. Le lockfile est déjà désynchronisé (`npm ci` échoue sur `@emnapi/runtime`).
+
+---
+
 ## Branche `seo/pages-patrimoine-promoteur` — 2026-10-23
 
 **État :** prêt à relire

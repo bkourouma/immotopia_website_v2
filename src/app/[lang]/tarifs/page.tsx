@@ -14,8 +14,8 @@ export async function generateMetadata({ params }: PageProps<"/[lang]/tarifs">):
   return {
     title: t("Tarifs — 6 packs, de l'agence au particulier | ImmoTopia", "Pricing — 6 packs, from agencies to individuals | ImmoTopia"),
     description: t(
-      "Tarifs ImmoTopia en FCFA HT/mois : Patrimoine dès 9 900, Agence dès 29 900, Syndic dès 49 900, Promoteur dès 149 900. Premier mois offert, sans engagement.",
-      "ImmoTopia pricing, FCFA excl. VAT/month: Portfolio from 9,900, Agency from 29,900, Condo Management from 49,900, Developer from 149,900. First month free.",
+      "Tarifs ImmoTopia en FCFA HT/mois, avec l'équivalent en euros : Patrimoine dès 9 900, Agence dès 29 900, Syndic dès 49 900, Promoteur dès 149 900. Premier mois offert, sans engagement.",
+      "ImmoTopia pricing, FCFA excl. VAT/month with euro equivalents: Portfolio from 9,900, Agency from 29,900, Condo Management from 49,900, Developer from 149,900. First month free.",
     ),
     alternates: alternates(lang, "/tarifs"),
   };
@@ -28,7 +28,7 @@ export default async function TarifsPage() {
       <Navbar />
       <SoftwareJsonLd />
       <main>
-        <PageHero eyebrow={t("Tarifs", "Pricing")} title={t("Des tarifs clairs, en FCFA.", "Clear pricing, in FCFA.")}>
+        <PageHero eyebrow={t("Tarifs", "Pricing")} title={t("Des tarifs clairs, en FCFA et en euros.", "Clear pricing, in FCFA and euros.")}>
           {t(
             "Professionnels de l'immobilier ou particuliers : choisissez votre pack, estimez votre abonnement en quelques secondes, et réservez une démonstration.",
             "Real estate professionals or individuals: pick your pack, estimate your subscription in seconds, and book a demo.",

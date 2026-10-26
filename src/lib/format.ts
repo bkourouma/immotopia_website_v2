@@ -5,6 +5,19 @@ export function fcfa(n: number) {
   return `${Math.round(n).toLocaleString("fr-FR").replace(/[\u202f\u00a0]/g, " ")} FCFA`;
 }
 
+/** Parit\u00e9 fixe du franc CFA (UEMOA) : 1 \u20ac = 655,957 FCFA */
+export const XOF_PER_EUR = 655.957;
+
+/** \u00c9quivalent en euros d'un montant en FCFA : au centime sous 100 \u20ac, \u00e0 l'euro au-del\u00e0. 29 900 \u2192 \u00ab 45,58 \u20ac \u00bb / \u00ab \u20ac45.58 \u00bb */
+export function eur(fcfaAmount: number, locale: "fr" | "en" = "fr") {
+  if (!Number.isFinite(fcfaAmount)) return "\u2014";
+  const value = fcfaAmount / XOF_PER_EUR;
+  const digits = value < 100 ? 2 : 0;
+  return value
+    .toLocaleString(locale === "en" ? "en-GB" : "fr-FR", { style: "currency", currency: "EUR", minimumFractionDigits: digits, maximumFractionDigits: digits })
+    .replace(/[\u202f\u00a0]/g, " ");
+}
+
 export function pct(n: number, digits = 2) {
   if (!Number.isFinite(n)) return "—";
   return `${n.toLocaleString("fr-FR", { minimumFractionDigits: digits, maximumFractionDigits: digits })} %`.replace(/[\u202f\u00a0]/g, " ");

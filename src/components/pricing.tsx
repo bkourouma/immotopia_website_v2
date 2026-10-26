@@ -3,7 +3,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { BadgePercent, CalendarRange, Calculator, Check, ChevronDown, Gift, Minus, Sparkles, Users, Wallet } from "lucide-react";
 import { useState, type ReactNode } from "react";
-import { fcfa } from "@/lib/format";
+import { eur, fcfa } from "@/lib/format";
 import {
   agencePrice,
   ANNUAL_MONTHS,
@@ -77,8 +77,8 @@ export function Pricing({ comparisonOpen = false }: { comparisonOpen?: boolean }
 
         <p className="mt-6 text-center text-xs text-ink-900/60">
           {t(
-            "Prix hors taxes (TVA 18 % ajoutée sur les factures émises par Alliance Consultants). Premier mois d'abonnement offert (essai de 30 jours) sur tous les packs, résiliable à tout moment. Mise en route facultative si vous préparez et saisissez vos données vous-même. WhatsApp facturé à la consommation.",
-            "Prices excl. VAT (18% VAT added on invoices issued by Alliance Consultants). First month free (30-day trial) on every pack, cancel anytime. Onboarding is optional if you prepare and enter your data yourself. WhatsApp billed per use.",
+            "Prix hors taxes (TVA 18 % ajoutée sur les factures émises par Alliance Consultants). Premier mois d'abonnement offert (essai de 30 jours) sur tous les packs, résiliable à tout moment. Mise en route facultative si vous préparez et saisissez vos données vous-même. WhatsApp facturé à la consommation. Facturation en FCFA ; les montants en euros sont indicatifs, à la parité fixe 1 € = 655,957 FCFA.",
+            "Prices excl. VAT (18% VAT added on invoices issued by Alliance Consultants). First month free (30-day trial) on every pack, cancel anytime. Onboarding is optional if you prepare and enter your data yourself. WhatsApp billed per use. Invoiced in FCFA; euro amounts are indicative, at the fixed rate of €1 = 655.957 FCFA.",
           )}
         </p>
 
@@ -121,13 +121,15 @@ function BillingToggle({ value, onChange }: { value: Billing; onChange: (b: Bill
 function Price({ monthly, billing, dark }: { monthly: number; billing: Billing; dark?: boolean }) {
   const amount = billing === "monthly" ? monthly : monthly * ANNUAL_MONTHS;
   const muted = dark ? "text-white/50" : "text-ink-900/45";
-  const { t } = useI18n();
+  const { locale, t } = useI18n();
   return (
     <div className="mt-6 min-h-[88px]">
       <AnimatePresence mode="wait" initial={false}>
         <motion.div key={billing} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.25 }}>
           <p className="font-display text-[2rem] leading-none font-bold tracking-tight tabular-nums">{fcfa(amount).replace(" FCFA", "")}</p>
-          <p className={`mt-1.5 text-sm ${muted}`}>{t("FCFA HT", "FCFA excl. VAT")} / {billing === "monthly" ? t("mois", "month") : t("an", "year")}</p>
+          <p className={`mt-1.5 text-sm ${muted}`}>
+            {t("FCFA HT", "FCFA excl. VAT")} / {billing === "monthly" ? t("mois", "month") : t("an", "year")} · ≈ {eur(amount, locale)}
+          </p>
           {billing === "annual" && (
             <p className={`mt-1 text-xs ${muted}`}>
               {t("soit", "i.e.")} {fcfa(Math.round(amount / 12))} / {t("mois", "month")}
@@ -194,7 +196,7 @@ function PackCard({ pack, billing, onCta }: { pack: Pack; billing: Billing; onCt
           {t("Demander une démonstration", "Request a demo")}
         </MagneticButton>
         <p className={`mt-3 text-center text-[11px] ${dark ? "text-white/45" : "text-ink-900/40"}`}>
-          {t("Mise en route accompagnée :", "Guided onboarding:")} {fcfa(pack.setup)} {t("HT", "excl. VAT")}
+          {t("Mise en route accompagnée :", "Guided onboarding:")} {fcfa(pack.setup)} (≈ {eur(pack.setup, locale)}) {t("HT", "excl. VAT")}
         </p>
       </div>
     </motion.div>
@@ -213,7 +215,10 @@ function Extensions() {
           <div key={e.name.fr} className="rounded-xl bg-brand-500/[0.05] p-4">
             <dt className="flex flex-wrap items-baseline justify-between gap-2">
               <span className="font-semibold">{e.name[locale]}</span>
-              <span className="font-display font-bold tabular-nums">{e.price[locale]}</span>
+              <span className="text-right">
+                <span className="font-display font-bold tabular-nums">{e.price[locale]}</span>
+                <span className="block text-xs text-ink-900/55 tabular-nums">≈ {eur(e.amount, locale)}</span>
+              </span>
             </dt>
             <dd className="mt-1.5 text-sm text-ink-900/65">{e.note[locale]}</dd>
           </div>
@@ -390,7 +395,7 @@ function Simulator({ billing }: { billing: Billing }) {
               {fcfa(shown).replace(" FCFA", "")}
             </motion.p>
             <p className="mt-1 text-sm text-white/55">
-              {t("FCFA HT", "FCFA excl. VAT")} / {billing === "monthly" ? t("mois", "month") : t("an (12 mois pour 11)", "year (12 months for 11)")}
+              {t("FCFA HT", "FCFA excl. VAT")} / {billing === "monthly" ? t("mois", "month") : t("an (12 mois pour 11)", "year (12 months for 11)")} · ≈ {eur(shown, locale)}
             </p>
             <p className="mt-2 inline-flex items-center gap-1.5 text-sm font-semibold text-mint-400"><Gift className="size-4" /> {trialText[locale]}</p>
 
@@ -402,7 +407,7 @@ function Simulator({ billing }: { billing: Billing }) {
               {integrated !== null && (
                 <div className={`mt-3 rounded-xl p-3 ring-1 ${useIntegrated ? "bg-mint-400/10 ring-mint-400/40" : "bg-white/5 ring-white/10"}`}>
                   <p className="font-semibold">
-                    {t("Opérateur intégré :", "Integrated Operator:")} {fcfa(integrated)} / {t("mois", "month")}{" "}
+                    {t("Opérateur intégré :", "Integrated Operator:")} {fcfa(integrated)} (≈ {eur(integrated, locale)}) / {t("mois", "month")}{" "}
                     {useIntegrated && <span className="text-mint-400">· {t("le plus avantageux", "best value")}</span>}
                   </p>
                   <p className="mt-1 text-xs text-white/50">
@@ -416,8 +421,8 @@ function Simulator({ billing }: { billing: Billing }) {
             </div>
             <p className="mt-6 text-xs text-white/60">
               {t(
-                "Hors taxes, mise en route et messages WhatsApp consommés. Les packs Patrimoine ne sont pas simulés ici. Estimation indicative, devis sur demande.",
-                "Excl. VAT, onboarding and WhatsApp messages used. Portfolio packs are not simulated here. Indicative estimate, quote on request.",
+                "Hors taxes, mise en route et messages WhatsApp consommés. Les packs Patrimoine ne sont pas simulés ici. Estimation indicative, devis sur demande. Facturation en FCFA ; euros à la parité fixe 1 € = 655,957 FCFA.",
+                "Excl. VAT, onboarding and WhatsApp messages used. Portfolio packs are not simulated here. Indicative estimate, quote on request. Invoiced in FCFA; euros at the fixed rate of €1 = 655.957 FCFA.",
               )}
             </p>
           </div>

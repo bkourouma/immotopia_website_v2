@@ -274,10 +274,12 @@ export const coverageByLocale: Record<Locale, [string, ...boolean[]][]> = {
 };
 
 /** Extensions à la carte, affichées sous la grille et connues de l'assistant */
-export const extensions: { name: Record<Locale, string>; price: Record<Locale, string>; note: Record<Locale, string> }[] = [
+/** `amount` : prix mensuel en FCFA, d'où l'équivalent en euros affiché à côté de `price` */
+export const extensions: { name: Record<Locale, string>; price: Record<Locale, string>; amount: number; note: Record<Locale, string> }[] = [
   {
     name: { fr: "Bloc de 10 lots", en: "Block of 10 lots" },
     price: { fr: "1 500 FCFA/mois", en: "1,500 FCFA/month" },
+    amount: 1_500,
     note: {
       fr: "150 FCFA le lot. 1 000 avec Promoteur ou Intégré ; 750 pour l'Agence seule au-delà du 300e lot. Réservé aux packs Agence, Syndic, Promoteur et Intégré.",
       en: "150 FCFA per lot. 1,000 with Developer or Integrated; 750 for Agency alone beyond the 300th lot. Agency, Condo Management, Developer and Integrated packs only.",
@@ -286,16 +288,19 @@ export const extensions: { name: Record<Locale, string>; price: Record<Locale, s
   {
     name: { fr: "Copropriété supplémentaire", en: "Additional condominium" },
     price: { fr: "10 000 FCFA/mois", en: "10,000 FCFA/month" },
+    amount: 10_000,
     note: { fr: "+1 copropriété active. Syndic ou Intégré.", en: "+1 active condominium. Condo Management or Integrated." },
   },
   {
     name: { fr: "Chantier supplémentaire", en: "Additional site" },
     price: { fr: "40 000 FCFA/mois", en: "40,000 FCFA/month" },
+    amount: 40_000,
     note: { fr: "+1 chantier actif. 35 000 avec l'Intégré. Promoteur ou Intégré.", en: "+1 active site. 35,000 with Integrated. Developer or Integrated." },
   },
   {
     name: { fr: "Bloc de 10 biens détenus", en: "Block of 10 owned properties" },
     price: { fr: "9 900 FCFA/mois", en: "9,900 FCFA/month" },
+    amount: 9_900,
     note: {
       fr: "990 FCFA le bien, avec Patrimoine Essentiel. Avec le Pro, le dépassement est facturé 2 990 FCFA le bloc de 10 (299 FCFA le bien).",
       en: "990 FCFA per property, with Portfolio Essential. With Pro, overage is billed 2,990 FCFA per block of 10 (299 FCFA per property).",
@@ -304,6 +309,7 @@ export const extensions: { name: Record<Locale, string>; price: Record<Locale, s
   {
     name: { fr: "Signatures électroniques — bloc de 50", en: "Electronic signatures — block of 50" },
     price: { fr: "5 000 FCFA/mois", en: "5,000 FCFA/month" },
+    amount: 5_000,
     note: {
       fr: "50 signatures par mois par bloc, cumulable, avec tous les packs. Aucune signature n'est incluse dans un pack. Baux, états des lieux et mandats.",
       en: "50 signatures per month per block, stackable, with every pack. No signature is included in a pack. Leases, inspection reports and mandates.",
@@ -312,6 +318,7 @@ export const extensions: { name: Record<Locale, string>; price: Record<Locale, s
   {
     name: { fr: "Visio des assemblées", en: "Meeting video conferencing" },
     price: { fr: "10 000 FCFA/mois", en: "10,000 FCFA/month" },
+    amount: 10_000,
     note: {
       fr: "Par cabinet, toutes copropriétés confondues. Syndic ou Intégré. Salle de visio, discussion modérée et enregistrement des séances.",
       en: "Per firm, all condominiums included. Condo Management or Integrated. Video room, moderated chat and meeting recording.",
@@ -320,6 +327,7 @@ export const extensions: { name: Record<Locale, string>; price: Record<Locale, s
   {
     name: { fr: "Inventaire WhatsApp — bloc de 500 photos", en: "WhatsApp inventory — block of 500 photos" },
     price: { fr: "25 000 FCFA/mois", en: "25,000 FCFA/month" },
+    amount: 25_000,
     note: {
       fr: "500 photos analysées par mois et par bloc, cumulable. Promoteur ou Intégré.",
       en: "500 photos analysed per month per block, stackable. Developer or Integrated.",
