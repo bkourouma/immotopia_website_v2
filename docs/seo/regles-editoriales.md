@@ -30,11 +30,11 @@ Le site s'adresse aux professionnels de l'immobilier en Côte d'Ivoire (Abidjan 
 
 ## 3. Longueurs
 
-Certaines limites sont vérifiées à la construction du site : une pull request qui les dépasse ne passe pas la CI.
+Certaines limites sont vérifiées par la CI : une pull request qui les dépasse ne passe pas.
 
 | Type de page | Fichier | Title | Meta description | Contrôle |
 | --- | --- | --- | --- | --- |
-| Pages thématiques | `src/lib/landings.ts` | 66 caractères au plus | 110 à 165 caractères | `scripts/check-landings.mjs` |
+| Pages thématiques | `src/lib/landings.ts` | 66 caractères au plus | 110 à 165 caractères | `scripts/check-landings.mjs`, dans la CI |
 | Guides | `src/lib/guides.ts` | 60 caractères au plus | 160 caractères au plus | à la construction |
 | Outils gratuits | `src/lib/tools.ts` (`seoTitle`, `seoDescription`) | 60 caractères au plus | 160 caractères au plus | aucun : à respecter quand même |
 

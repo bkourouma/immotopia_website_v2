@@ -63,6 +63,10 @@ jobs:
       - name: Traduction du comparatif
         run: node scripts/check-comparatif-en.mjs
 
+      # Longueur des balises, unicité, liens et FAQ des pages thématiques (voir docs/seo/regles-editoriales.md).
+      - name: Pages thématiques
+        run: node scripts/check-landings.mjs
+
       # prebuild génère src/lib/assistant/knowledge.generated.ts
       - name: Build
         run: npm run build
