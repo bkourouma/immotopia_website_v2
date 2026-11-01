@@ -269,9 +269,9 @@ export const landings: Landing[] = [
   },
   {
     slug: "meilleur-logiciel-immobilier-cote-divoire",
-    metaTitle: "Meilleur logiciel immobilier en Côte d'Ivoire : les critères",
+    metaTitle: "Meilleur logiciel immobilier en Côte d'Ivoire : 6 critères",
     metaDescription:
-      "Comment choisir le meilleur logiciel immobilier en Côte d'Ivoire : métiers couverts, Mobile Money, WhatsApp, portails, prix en FCFA, reprise des données.",
+      "Quel est le meilleur logiciel immobilier en Côte d'Ivoire ? 6 critères et une checklist : métiers, Mobile Money, WhatsApp, portails, prix en FCFA, mise en route.",
     eyebrow: "Guide de choix",
     h1: "Meilleur logiciel immobilier en Côte d'Ivoire : comment choisir ?",
     intro:
@@ -307,6 +307,8 @@ export const landings: Landing[] = [
     faq: [
       { q: "ImmoTopia propose-t-il un essai ?", a: "Le premier mois d'abonnement est offert sur tous les packs, sans engagement." },
       { q: "Où voir la comparaison avec les autres logiciels ?", a: "Sur la page Comparatif du site, domaine par domaine et avec les sources." },
+      { q: "Quels critères pour choisir un logiciel immobilier en Côte d'Ivoire ?", a: "Six critères : couvrir tous vos métiers (transaction, gestion locative, syndic, promotion), reconnaître le Mobile Money, envoyer les rappels sur WhatsApp, offrir des portails aux propriétaires et locataires, afficher des prix clairs en FCFA et proposer une équipe proche pour la mise en route." },
+      { q: "Puis-je reprendre mes fichiers Excel ?", a: "Oui : la mise en route accompagnée comprend la reprise de vos biens, contacts, baux ou copropriétés. Elle est facultative si vous saisissez vous-même vos données." },
     ],
     related: ["logiciel-immobilier-cote-divoire", "immotopia-vs-excel", "logiciel-immobilier-afrique"],
   },
