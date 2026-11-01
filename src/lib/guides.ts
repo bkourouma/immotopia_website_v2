@@ -57,14 +57,14 @@ export type Guide = {
 
 const crmChoisir: Guide = {
   slug: "crm-immobilier-bonnes-pratiques",
-  metaTitle: "Comment choisir son CRM immobilier : 10 critères | ImmoTopia",
+  metaTitle: "CRM immobilier : définition, fonctions et 10 critères",
   metaDescription:
-    "Dix critères pour choisir un CRM immobilier : pipeline, relances, rapprochement, agence ou promoteur, bonnes pratiques et tableau de critères à utiliser.",
-  h1: "Comment choisir son CRM immobilier : 10 critères",
+    "Qu'est-ce qu'un CRM immobilier ? Fonctions clés, différence agence / promoteur et 10 critères pour choisir le bon logiciel CRM, avec tableau d'essai.",
+  h1: "CRM immobilier : comment choisir le bon logiciel (10 critères)",
   eyebrow: "Guide CRM immobilier",
   summary: "Dix critères, la différence entre agence et promoteur, les bonnes pratiques de pipeline et de relance, et un tableau pour comparer vos essais.",
   intro:
-    "Un CRM immobilier remplace le carnet de notes, le fichier Excel et les messages dispersés dans les téléphones par un historique partagé par toute l'équipe. Encore faut-il choisir un outil adapté à son métier : une agence qui vend et gère pour des propriétaires n'a pas les mêmes besoins qu'un promoteur qui commercialise un programme pendant que le chantier avance. Ce guide propose dix critères de choix, explique la différence entre agence et promoteur, donne des bonnes pratiques de pipeline et de relance, et se termine par un tableau à utiliser pendant vos essais.",
+    "Un logiciel CRM immobilier remplace le carnet de notes, le fichier Excel et les messages dispersés dans les téléphones par un historique partagé par toute l'équipe. Encore faut-il l'adapter à son métier : une agence qui vend et gère pour des propriétaires n'a pas les mêmes besoins qu'un CRM pour promoteur, qui doit suivre un programme vendu pendant que le chantier avance. Ce guide propose dix critères de choix, explique la différence entre agence et promoteur, donne des bonnes pratiques de pipeline et de relance, et se termine par un tableau à utiliser pendant vos essais.",
   published: "2026-10-13",
   updated: "2026-10-13",
   sections: [
