@@ -74,11 +74,62 @@ const crmChoisir: Guide = {
       blocks: [
         {
           type: "p",
-          text: "Un CRM (gestion de la relation client) garde au même endroit chaque contact, chaque projet d'achat ou de location, chaque appel et chaque visite. Il répond à trois questions qu'un tableur tient mal : qui faut-il rappeler aujourd'hui, où en est chaque dossier, et quel bien correspond à quelle demande.",
+          text: "Un CRM immobilier (gestion de la relation client) est un logiciel qui garde au même endroit chaque contact, chaque projet d'achat ou de location, chaque appel et chaque visite. Il sert à suivre chaque dossier de la première demande jusqu'à l'affaire gagnée ou perdue, avec un historique partagé par toute l'équipe.",
+        },
+        {
+          type: "p",
+          text: "Il répond à trois questions qu'un tableur tient mal : qui faut-il rappeler aujourd'hui, où en est chaque dossier, et quel bien correspond à quelle demande.",
         },
         {
           type: "p",
           text: "Il ne remplace pas un logiciel de gestion locative ou de syndic, mais il doit s'y relier : un prospect devenu locataire ou propriétaire ne se ressaisit pas. C'est l'un des dix critères ci-dessous.",
+        },
+      ],
+    },
+    {
+      id: "fonctionnalites",
+      title: "Fonctionnalités d'un CRM immobilier",
+      blocks: [
+        { type: "p", text: "Un CRM immobilier réunit en général les fonctions suivantes ; chacune correspond à l'un des dix critères plus bas." },
+        {
+          type: "ul",
+          items: [
+            { title: "Fichier de contacts", text: "une fiche par personne, avec ses rôles (prospect, propriétaire, locataire, acquéreur) et son historique." },
+            { title: "Pipeline d'affaires", text: "des étapes de la nouvelle demande à l'affaire gagnée ou perdue, avec un motif de clôture." },
+            { title: "Activités et relances", text: "appels, e-mails, messages WhatsApp, visites et notes, chacun avec la date de la prochaine action." },
+            { title: "Rapprochement demandes et biens", text: "comparaison du budget, de la zone, du nombre de pièces et de la surface avec les biens disponibles." },
+            { title: "Calendrier et visites", text: "visites planifiées, collaborateur affecté, agenda partagé." },
+            { title: "Tableau de bord", text: "nouveaux prospects, affaires par étape, relances en retard." },
+          ],
+        },
+        { type: "p", text: "Les fonctions du CRM d'ImmoTopia sont décrites une à une dans le [wiki CRM et ventes](/wiki/crm-et-ventes)." },
+      ],
+    },
+    {
+      id: "agent-agence-courtier",
+      title: "CRM pour agent immobilier, agence et courtier",
+      blocks: [
+        {
+          type: "p",
+          text: "Un agent, une agence ou un courtier travaillent avec beaucoup de petits dossiers en parallèle : demandes de location, de vente, mandats. Le CRM leur sert à ne jamais laisser une demande sans réponse, à savoir quel bien proposer à quel client et à retrouver l'historique d'un contact en quelques secondes.",
+        },
+        {
+          type: "p",
+          text: "Pour la vente sous mandat, vérifiez que l'outil suit les mandats, les offres et les compromis. Pour une équipe, vérifiez aussi les rôles, le responsable de chaque affaire et le calendrier partagé. Voir le [CRM immobilier pour agences](/crm-immobilier-cote-divoire).",
+        },
+      ],
+    },
+    {
+      id: "promoteur-suivi-programmes",
+      title: "CRM pour promoteur immobilier : le suivi des programmes",
+      blocks: [
+        {
+          type: "p",
+          text: "Un promoteur vend moins de produits, mais sur plusieurs mois pendant que le chantier avance. Son CRM doit suivre de nombreux prospects pour un même programme, planifier des relances longues et garder le lien avec les lots, le budget et l'avancement des travaux.",
+        },
+        {
+          type: "p",
+          text: "Le suivi commercial (contacts, pipeline, visites, relances, rapprochement) est le même que pour une agence ; le module Promoteur d'ImmoTopia le prolonge côté construction. Voir le [CRM pour promoteur immobilier](/crm-promoteur-immobilier-cote-divoire).",
         },
       ],
     },
@@ -190,6 +241,18 @@ const crmChoisir: Guide = {
     {
       q: "Quelle différence entre un CRM immobilier et un fichier Excel ?",
       a: "Un tableur convient pour quelques contacts. Dès que plusieurs agents appellent et visitent en parallèle, il ne garde ni l'historique partagé, ni les relances en retard, ni la correspondance entre une demande et les biens. Le CRM centralise ces trois éléments.",
+    },
+    {
+      q: "Quel CRM pour un agent immobilier indépendant ?",
+      a: "Celui qui couvre l'essentiel sans vous obliger à tout paramétrer : un fichier de contacts, un pipeline court, des relances datées et le rapprochement entre vos demandes et vos biens. Testez-le sur vos propres contacts avec le tableau de critères ci-dessus, et voyez le [CRM immobilier pour agences](/crm-immobilier-cote-divoire).",
+    },
+    {
+      q: "Combien coûte un CRM immobilier ?",
+      a: "Cela dépend de l'outil et de son mode de tarification (par utilisateur ou par capacité). Les prix d'ImmoTopia sont publiés sur la page [tarifs](/tarifs), qui reste la seule référence.",
+    },
+    {
+      q: "CRM ou tableur Excel ?",
+      a: "Un tableur suffit pour quelques contacts ; au-delà, un CRM garde l'historique partagé, les relances et le rapprochement avec les biens. Le point par point est détaillé dans [ImmoTopia vs Excel](/immotopia-vs-excel).",
     },
     {
       q: "Un CRM d'agence convient-il à un promoteur ?",
