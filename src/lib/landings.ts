@@ -269,9 +269,9 @@ export const landings: Landing[] = [
   },
   {
     slug: "meilleur-logiciel-immobilier-cote-divoire",
-    metaTitle: "Meilleur logiciel immobilier en Côte d'Ivoire : 6 critères | ImmoTopia",
+    metaTitle: "Meilleur logiciel immobilier en Côte d'Ivoire : 6 critères",
     metaDescription:
-      "Quel est le meilleur logiciel immobilier en Côte d'Ivoire ? 6 critères et une checklist : métiers couverts, Mobile Money, WhatsApp, portails, prix en FCFA, reprise des données.",
+      "Quel est le meilleur logiciel immobilier en Côte d'Ivoire ? 6 critères et une checklist : métiers, Mobile Money, WhatsApp, portails, prix en FCFA, mise en route.",
     eyebrow: "Guide de choix",
     h1: "Meilleur logiciel immobilier en Côte d'Ivoire : comment choisir ?",
     intro:
