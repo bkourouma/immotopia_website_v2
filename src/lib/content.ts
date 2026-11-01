@@ -59,6 +59,9 @@ const heroCardsSource: HeroCardSource[] = [
       en: "Smiling young woman paying her rent on her smartphone, on a balcony in Abidjan",
     },
     accent: "#2EE6A8",
+    links: [
+      { label: "Logiciel de gestion locative", href: "/gestion-locative-cote-divoire" },
+    ],
   },
   {
     id: "owners",
@@ -110,6 +113,9 @@ const heroCardsSource: HeroCardSource[] = [
       en: "Smiling businesswoman using the app on a tablet at her desk",
     },
     accent: "#FF8A3D",
+    links: [
+      { label: "Logiciel immobilier tout-en-un", href: "/logiciel-immobilier-cote-divoire" },
+    ],
   },
   {
     id: "crm",
@@ -150,6 +156,9 @@ const heroCardsSource: HeroCardSource[] = [
     },
     imageClass: "object-bottom",
     accent: "#FACC15",
+    links: [
+      { label: "Logiciel de syndic de copropriété", href: "/logiciel-syndic-copropriete-cote-divoire" },
+    ],
   },
   {
     id: "commissions",
