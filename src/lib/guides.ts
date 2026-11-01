@@ -57,7 +57,7 @@ export type Guide = {
 
 const crmChoisir: Guide = {
   slug: "crm-immobilier-bonnes-pratiques",
-  metaTitle: "CRM immobilier : définition, fonctions et 10 critères pour choisir | ImmoTopia",
+  metaTitle: "CRM immobilier : définition, fonctions et 10 critères",
   metaDescription:
     "Qu'est-ce qu'un CRM immobilier ? Fonctions clés, différence agence / promoteur et 10 critères pour choisir le bon logiciel CRM, avec tableau d'essai.",
   h1: "CRM immobilier : comment choisir le bon logiciel (10 critères)",
