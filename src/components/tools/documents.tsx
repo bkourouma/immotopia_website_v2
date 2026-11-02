@@ -13,11 +13,11 @@ function Layout({ form, doc, upsell }: { form: ReactNode; doc: Doc; upsell: stri
   const { t } = useI18n();
   return (
     <div className="grid items-start gap-6 lg:grid-cols-[1fr_1.05fr]">
-      <div className="space-y-6">{form}</div>
-      <div className="space-y-4 lg:sticky lg:top-24">
+      <div className="min-w-0 space-y-6">{form}</div>
+      <div className="min-w-0 space-y-4 lg:sticky lg:top-24">
         <DownloadButton doc={doc} />
         <DocLanguageNote />
-        <div className="max-h-[70vh] overflow-y-auto rounded-[22px] bg-[#e9eaf3] p-3 md:p-5">
+        <div className="max-h-[70vh] overflow-x-hidden overflow-y-auto rounded-[22px] bg-[#e9eaf3] p-2 sm:p-3 md:p-5">
           <p className="mb-3 text-center text-xs font-semibold tracking-[0.14em] text-ink-900/40 uppercase">
             {t("Aperçu en direct", "Live preview")}
           </p>
