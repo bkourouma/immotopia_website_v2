@@ -18,7 +18,7 @@ export async function ToolShell({ tool, children, about }: { tool: ToolMeta; chi
     <>
       <Navbar />
       <main className="bg-paper">
-        <section className="relative isolate overflow-hidden bg-ink-950 pt-32 pb-16 text-white">
+        <section className="relative isolate overflow-hidden bg-ink-950 pt-28 pb-12 text-white sm:pt-32 sm:pb-16">
           <div className="grid-lines absolute inset-0 -z-10 [mask-image:radial-gradient(ellipse_at_50%_0%,black,transparent_70%)]" />
           <div
             aria-hidden
@@ -28,27 +28,27 @@ export async function ToolShell({ tool, children, about }: { tool: ToolMeta; chi
             }}
           />
           <div className="mx-auto max-w-6xl px-5">
-            <nav aria-label={tr("Fil d'Ariane", "Breadcrumb")} className="flex items-center gap-1.5 text-sm text-white/50">
-              <Link href={localizeHref(locale, "/")} className="hover:text-white">
+            <nav aria-label={tr("Fil d'Ariane", "Breadcrumb")} className="flex flex-wrap items-center gap-x-1.5 text-sm text-white/50">
+              <Link href={localizeHref(locale, "/")} className="inline-flex min-h-11 items-center hover:text-white md:min-h-0">
                 {tr("Accueil", "Home")}
               </Link>
               <ChevronRight className="size-3.5" />
-              <Link href={localizeHref(locale, "/outils")} className="hover:text-white">
+              <Link href={localizeHref(locale, "/outils")} className="inline-flex min-h-11 items-center hover:text-white md:min-h-0">
                 {tr("Outils gratuits", "Free tools")}
               </Link>
             </nav>
-            <div className="mt-6 flex items-start gap-4">
+            <div className="mt-2 flex items-start gap-4 sm:mt-6">
               <span
                 className="hidden size-14 shrink-0 place-items-center rounded-2xl ring-1 ring-white/15 sm:grid"
                 style={{ background: `${tool.accent}22`, color: tool.accent }}
               >
                 <ToolIcon name={tool.icon} className="size-7" />
               </span>
-              <div>
+              <div className="min-w-0">
                 <p className="text-xs font-bold tracking-[0.18em] uppercase" style={{ color: tool.accent }}>
                   {tool.category} · {tr("Gratuit, sans inscription", "Free, no sign-up")}
                 </p>
-                <h1 className="mt-2 font-display text-3xl leading-tight font-bold tracking-tight text-balance md:text-5xl">{tool.title}</h1>
+                <h1 className="mt-2 font-display text-3xl leading-tight font-bold tracking-tight text-balance break-words md:text-5xl">{tool.title}</h1>
                 <p className="mt-4 max-w-2xl text-white/65 md:text-lg">{tool.description}</p>
                 <p className="mt-4 inline-flex items-center gap-2 text-xs text-white/45">
                   <Lock className="size-3.5" />{" "}
@@ -62,15 +62,15 @@ export async function ToolShell({ tool, children, about }: { tool: ToolMeta; chi
           </div>
         </section>
 
-        <section className="mx-auto max-w-6xl px-5 py-12 md:py-16">{children}</section>
+        <section className="mx-auto max-w-6xl px-4 py-8 sm:px-5 md:py-16">{children}</section>
 
         {about && (
-          <section className="mx-auto max-w-3xl px-5 pb-8 text-ink-900/75 [&_h2]:mt-8 [&_h2]:mb-3 [&_h2]:font-display [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:text-ink-900 [&_li]:ml-5 [&_li]:list-disc [&_p]:mb-3 [&_ul]:mb-3 [&_ul]:space-y-1">
+          <section className="mx-auto max-w-3xl px-4 pb-8 sm:px-5 text-ink-900/75 [&_h2]:mt-8 [&_h2]:mb-3 [&_h2]:font-display [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:text-ink-900 [&_li]:ml-5 [&_li]:list-disc [&_p]:mb-3 [&_ul]:mb-3 [&_ul]:space-y-1">
             {about}
           </section>
         )}
 
-        <section className="mx-auto max-w-6xl px-5 py-16">
+        <section className="mx-auto max-w-6xl px-4 py-12 sm:px-5 md:py-16">
           <h2 className="font-display text-2xl font-bold">{tr("Autres outils gratuits", "Other free tools")}</h2>
           <div className="mt-6 grid gap-4 md:grid-cols-3">
             {others.map((t) => (
