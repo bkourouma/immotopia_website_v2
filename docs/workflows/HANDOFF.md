@@ -238,3 +238,9 @@ Pièges et décisions :
 - Worktree avec `node_modules` en jonction : Turbopack refuse de construire.
 - Le bloc `BEGIN:nextjs-agent-rules` d'`AGENTS.md` est réécrit par
   `next dev` : ne pas y toucher.
+
+## 2026-11-02 — Refonte mobile-first (branche `orch/2026-11-02-mobile-first`)
+
+- Fait : socle (navbar/menu, modales, chat, flottants, globals.css), accueil (hero, maquettes, tarifs, rôles, écosystème), outils/comparatif/wiki/FAQ/légal. Principe : mobile d'abord, desktop (≥ md) inchangé (préfixes `max-md:`, `md:min-h-0`…).
+- Vérifié : `tsc`, `lint`, `build`, `check-comparatif-en` OK. **Non vérifié** : aucun rendu navigateur (360/390 px, 768 px, desktop) — recette visuelle à faire.
+- À surveiller : règle `font-size:16px !important` des champs sous 640 px ; maquettes du hero en mode compact (hauteur < 300) ; carte tarifaire recommandée non remontée en premier sur mobile (décision éditoriale).

@@ -23,7 +23,7 @@ export function LanguageSwitcher({ className = "", onLight = false }: { classNam
     <div
       role="group"
       aria-label={current === "en" ? "Language" : "Langue"}
-      className={`inline-flex items-center rounded-full p-0.5 text-xs font-semibold ${onLight ? "bg-ink-900/[0.06]" : "bg-white/[0.08] ring-1 ring-white/10"} ${className}`}
+      className={`inline-flex items-center rounded-full p-0.5 text-sm font-semibold md:text-xs ${onLight ? "bg-ink-900/[0.06]" : "bg-white/[0.08] ring-1 ring-white/10"} ${className}`}
     >
       {locales.map((l) => {
         const active = l === current;
@@ -35,7 +35,7 @@ export function LanguageSwitcher({ className = "", onLight = false }: { classNam
             lang={l}
             aria-current={active ? "true" : undefined}
             title={localeLabel[l].name}
-            className={`rounded-full px-2.5 py-1 transition-colors ${
+            className={`inline-flex min-h-11 min-w-11 items-center justify-center rounded-full px-3.5 py-2 transition-colors md:min-h-0 md:min-w-0 md:px-2.5 md:py-1 ${
               active
                 ? onLight
                   ? "bg-white text-ink-900 shadow-sm"

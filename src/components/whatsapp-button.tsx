@@ -40,10 +40,10 @@ export function WhatsAppButton() {
           exit={{ opacity: 0, scale: 0.6, y: 20 }}
           whileHover={{ scale: 1.08 }}
           whileTap={{ scale: 0.94 }}
-          className="group fixed right-4 bottom-[5.25rem] z-40 flex items-center gap-2 rounded-full bg-[#25D366] p-3 text-white shadow-[0_12px_40px_-8px_rgba(37,211,102,0.7)] md:right-6 md:bottom-[6.25rem]"
+          className="group fixed right-[max(1rem,env(safe-area-inset-right))] bottom-[calc(max(1rem,env(safe-area-inset-bottom))+4.25rem)] z-40 flex size-14 items-center justify-center gap-2 rounded-full bg-[#25D366] text-white shadow-[0_12px_40px_-8px_rgba(37,211,102,0.7)] md:right-6 md:bottom-[6.25rem] sm:size-auto sm:p-3"
         >
-          <span className="absolute inset-0 -z-10 animate-ping rounded-full bg-[#25D366]/40 [animation-duration:2.8s]" />
-          <WhatsAppIcon className="size-6" />
+          <span className="absolute inset-0 -z-10 hidden animate-ping sm:block motion-reduce:hidden rounded-full bg-[#25D366]/40 [animation-duration:2.8s]" />
+          <WhatsAppIcon className="size-7 sm:size-6" />
           <span className="hidden max-w-0 overflow-hidden text-sm font-semibold whitespace-nowrap transition-all duration-300 group-hover:max-w-40 group-hover:pr-1 md:inline">
             {t("Écrivez-nous", "Chat with us")}
           </span>

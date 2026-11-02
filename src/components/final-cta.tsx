@@ -16,10 +16,10 @@ export function FinalCta() {
   return (
     <section className="bg-paper px-3 pb-3">
       <Reveal>
-        <div className="relative isolate overflow-hidden rounded-[36px] bg-ink-950 px-6 py-20 text-center text-white md:py-28">
+        <div className="relative isolate overflow-hidden rounded-[28px] bg-ink-950 px-5 py-14 text-center text-white sm:rounded-[36px] sm:px-6 sm:py-20 md:py-28">
           <div className="grid-lines absolute inset-0 -z-10 [mask-image:radial-gradient(ellipse_at_50%_50%,black,transparent_70%)]" />
           <div aria-hidden className="absolute top-1/2 left-1/2 -z-10 h-[720px] w-[1200px] -translate-x-1/2 -translate-y-1/2" style={{ background: "radial-gradient(closest-side, rgba(91,91,247,0.45), rgba(255,138,61,0.22) 55%, transparent)" }} />
-          <h2 className="mx-auto max-w-3xl font-display text-4xl leading-[1.05] font-bold tracking-tight text-balance md:text-6xl">
+          <h2 className="mx-auto max-w-3xl font-display text-3xl leading-[1.05] font-bold tracking-tight text-balance sm:text-4xl md:text-6xl">
             {t(
               <>
                 Voyez ImmoTopia <span className="text-gradient">appliqué à votre activité</span>
@@ -29,7 +29,7 @@ export function FinalCta() {
               </>,
             )}
           </h2>
-          <p className="mx-auto mt-5 max-w-xl text-lg text-white/65">
+          <p className="mx-auto mt-5 max-w-xl text-base sm:text-lg text-white/65">
             {t(
               "30 minutes pour voir ImmoTopia appliqué à votre portefeuille. Sans engagement.",
               "30 minutes to see ImmoTopia applied to your own portfolio. No commitment.",
@@ -37,15 +37,15 @@ export function FinalCta() {
           </p>
           <MagneticButton
             onClick={open}
-            className="mt-9 bg-white px-8 py-4 text-base text-ink-950 shadow-[0_0_50px_-8px_rgba(255,255,255,0.6)]"
+            className="mt-9 min-h-12 w-full justify-center bg-white px-6 py-4 text-base text-ink-950 sm:w-auto sm:px-8 shadow-[0_0_50px_-8px_rgba(255,255,255,0.6)]"
           >
             {t("Réserver une démo de 30 min", "Book a 30-min demo")} <ArrowRight className="size-5" />
           </MagneticButton>
         </div>
       </Reveal>
 
-      <footer className="mx-auto max-w-6xl px-5 pt-14 pb-10 text-sm text-ink-900/60">
-        <div className="grid gap-10 md:grid-cols-[1.3fr_1fr_1fr_1.2fr]">
+      <footer className="mx-auto max-w-6xl px-5 pt-14 pb-24 text-sm text-ink-900/60 sm:pb-10">
+        <div className="grid gap-10 sm:grid-cols-2 md:grid-cols-[1.3fr_1fr_1fr_1.2fr]">
           <div>
             <Logo onLight full />
             <p className="mt-4 max-w-xs">
@@ -57,30 +57,30 @@ export function FinalCta() {
           </div>
           <FooterCol title={t("Produit", "Product")}>
             {footerProductLinks(locale).map((l) => (
-              <SmartLink key={l.href} href={l.href} className="transition-colors hover:text-ink-900">
+              <SmartLink key={l.href} href={l.href} className="inline-flex min-h-11 items-center md:min-h-0 transition-colors hover:text-ink-900">
                 {l.label}
               </SmartLink>
             ))}
           </FooterCol>
           <FooterCol title={t("Entreprise", "Company")}>
-            <SmartLink href="/contact" className="transition-colors hover:text-ink-900">
+            <SmartLink href="/contact" className="inline-flex min-h-11 items-center md:min-h-0 transition-colors hover:text-ink-900">
               Contact
             </SmartLink>
-            <SmartLink href="/mentions-legales" className="transition-colors hover:text-ink-900">
+            <SmartLink href="/mentions-legales" className="inline-flex min-h-11 items-center md:min-h-0 transition-colors hover:text-ink-900">
               {t("Mentions légales", "Legal notice")}
             </SmartLink>
-            <SmartLink href="/confidentialite" className="transition-colors hover:text-ink-900">
+            <SmartLink href="/confidentialite" className="inline-flex min-h-11 items-center md:min-h-0 transition-colors hover:text-ink-900">
               {t("Confidentialité", "Privacy")}
             </SmartLink>
           </FooterCol>
           <FooterCol title={t("Nous joindre", "Get in touch")}>
-            <a href={contact.phoneHref} className="inline-flex items-center gap-2 transition-colors hover:text-ink-900">
+            <a href={contact.phoneHref} className="inline-flex min-h-11 items-center md:min-h-0 gap-2 transition-colors hover:text-ink-900">
               <Phone className="size-4" /> {contact.phone}
             </a>
-            <a href={whatsappLink(locale)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 transition-colors hover:text-ink-900">
+            <a href={whatsappLink(locale)} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center md:min-h-0 gap-2 transition-colors hover:text-ink-900">
               <MessageCircle className="size-4" /> WhatsApp
             </a>
-            <a href={`mailto:${contact.email}`} className="inline-flex items-center gap-2 break-all transition-colors hover:text-ink-900">
+            <a href={`mailto:${contact.email}`} className="inline-flex min-h-11 items-center md:min-h-0 gap-2 break-all transition-colors hover:text-ink-900">
               <Mail className="size-4 shrink-0" /> {contact.email}
             </a>
             <span className="inline-flex items-center gap-2">
@@ -88,7 +88,7 @@ export function FinalCta() {
             </span>
           </FooterCol>
         </div>
-        <div className="mt-12 flex flex-wrap items-center justify-between gap-4 border-t border-ink-900/[0.07] pt-6 text-xs text-ink-900/60">
+        <div className="mt-12 flex flex-col items-start justify-between gap-4 sm:flex-row sm:flex-wrap sm:items-center border-t border-ink-900/[0.07] pt-6 text-xs text-ink-900/60">
           <p>
             © {new Date().getFullYear()} ImmoTopia · {t("Une solution", "A solution by")} {legal.publisher}
           </p>
@@ -103,7 +103,7 @@ function FooterCol({ title, children }: { title: string; children: ReactNode }) 
   return (
     <div>
       <p className="mb-4 text-xs font-semibold tracking-[0.14em] text-ink-900/60 uppercase">{title}</p>
-      <div className="flex flex-col items-start gap-2.5">{children}</div>
+      <div className="flex flex-col items-start gap-0.5 md:gap-2.5">{children}</div>
     </div>
   );
 }
