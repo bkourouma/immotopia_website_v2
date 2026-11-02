@@ -9,7 +9,7 @@ import { WhatsAppIcon } from "./whatsapp-button";
 
 // Calendrier de réservation (Calendly ou Cal.com) intégré dans la page.
 // À n'afficher que côté navigateur : l'adresse d'intégration utilise le domaine courant.
-export function BookingFrame({ url, onDone, className = "h-[72dvh]" }: { url: string; onDone?: () => void; className?: string }) {
+export function BookingFrame({ url, onDone, className = "h-[calc(100dvh-7rem)] sm:h-[72dvh]" }: { url: string; onDone?: () => void; className?: string }) {
   const [booked, setBooked] = useState(false);
   const [available, setAvailable] = useState(true);
   const { t } = useI18n();
@@ -50,15 +50,15 @@ export function BookingFrame({ url, onDone, className = "h-[72dvh]" }: { url: st
     src.searchParams.set("embed_type", "Inline");
     src.searchParams.set("hide_gdpr_banner", "1");
   }
-  return <iframe src={src.toString()} title={t("Réserver une démonstration", "Book a demo")} className={`w-full bg-white ${className}`} />;
+  return <iframe src={src.toString()} title={t("Réserver une démonstration", "Book a demo")} loading="lazy" referrerPolicy="strict-origin-when-cross-origin" className={`block w-full max-w-full border-0 bg-white ${className}`} />;
 }
 
 function ContactFallback() {
   const { locale, t } = useI18n();
-  const link = "flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold transition hover:bg-white/10";
+  const link = "flex min-h-12 items-center gap-3 rounded-2xl sm:min-h-0 border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold transition hover:bg-white/10";
   return (
-    <div className="p-8 text-center">
-      <h3 className="font-display text-xl font-bold">{t("Le calendrier est momentanément indisponible", "The booking calendar is temporarily unavailable")}</h3>
+    <div className="p-5 text-center sm:p-8">
+      <h3 className="font-display text-lg font-bold sm:text-xl">{t("Le calendrier est momentanément indisponible", "The booking calendar is temporarily unavailable")}</h3>
       <p className="mx-auto mt-2 max-w-md text-sm text-white/65">
         {t("Contactez-nous directement, nous fixons la démonstration avec vous.", "Contact us directly and we will schedule the demo with you.")}
       </p>
@@ -80,14 +80,14 @@ function ContactFallback() {
 export function Thanks({ text, onDone }: { text: string; onDone?: () => void }) {
   const { t } = useI18n();
   return (
-    <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="flex flex-col items-center p-10 text-center">
+    <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="flex flex-col items-center p-5 text-center sm:p-10">
       <span className="grid size-16 place-items-center rounded-full bg-mint-400 text-ink-950">
         <CalendarCheck className="size-8" />
       </span>
-      <h3 className="mt-5 font-display text-2xl font-bold">{t("C'est noté !", "You're all set!")}</h3>
+      <h3 className="mt-5 font-display text-xl font-bold sm:text-2xl">{t("C'est noté !", "You're all set!")}</h3>
       <p className="mt-2 max-w-md text-white/65">{text}</p>
       {onDone && (
-        <button onClick={onDone} className="mt-6 cursor-pointer rounded-full bg-white px-6 py-3 text-sm font-semibold text-ink-950">
+        <button onClick={onDone} className="mt-6 min-h-11 cursor-pointer rounded-full bg-white px-6 py-3 text-sm font-semibold text-ink-950">
           {t("Fermer", "Close")}
         </button>
       )}
