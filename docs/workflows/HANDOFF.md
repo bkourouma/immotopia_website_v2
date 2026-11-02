@@ -49,7 +49,7 @@ Pièges et décisions :
 Fait :
 
 - Deux landings SEO dans `src/lib/landings.ts` : `/logiciel-gestion-patrimoine-immobilier-cote-divoire` (mot-clé « logiciel gestion de patrimoine immobilier ») et `/logiciel-promoteur-immobilier-cote-divoire` (« logiciel promoteur immobilier »). Déclarées dans `french-only.ts`, sitemap automatique, liens depuis les wiki correspondants, la landing CRM promoteur et la landing « logiciel immobilier » ; ajout dans `knowledge.md`.
-- `scripts/check-landings.mjs` : contrôle des landings (non branché dans `package.json` ni la CI).
+- `scripts/check-landings.mjs` : contrôle des landings (étape « Pages thématiques » de la CI ; pas de script dans `package.json`).
 
 Volontairement omis :
 
