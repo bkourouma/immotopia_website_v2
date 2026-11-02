@@ -1,6 +1,6 @@
 "use client";
 
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { BadgePercent, CalendarRange, Calculator, Check, ChevronDown, Gift, Minus, Sparkles, Users, Wallet } from "lucide-react";
 import { useState, type ReactNode } from "react";
 import { fcfa } from "@/lib/format";
@@ -40,15 +40,15 @@ export function Pricing({ comparisonOpen = false }: { comparisonOpen?: boolean }
   const activePacks = getActivePacks(locale);
 
   return (
-    <section id="tarifs" className="relative bg-paper py-24 md:py-32">
+    <section id="tarifs" className="relative bg-paper py-16 md:py-32">
       <div className="mx-auto max-w-6xl px-5">
         <Reveal className="mx-auto max-w-3xl text-center">
           <Eyebrow>{t("Tarifs", "Pricing")}</Eyebrow>
-          <h2 className="mt-5 font-display text-4xl leading-[1.05] font-bold tracking-tight text-balance md:text-6xl">
+          <h2 className="mt-5 font-display text-3xl leading-[1.05] font-bold tracking-tight text-balance sm:text-4xl md:text-6xl">
             {t("Un pack par profil, ", "One pack per profile, ")}
             <span className="text-gradient-dark">{t("sans surprise.", "no surprises.")}</span>
           </h2>
-          <p className="mt-5 text-lg text-ink-900/60">
+          <p className="mt-5 text-base text-ink-900/60 md:text-lg">
             {t(
               "Agence, syndic, promoteur, opérateur intégré, ou simple propriétaire de patrimoine : vous payez le processus de votre métier, pas une liste de menus. Et si votre activité s'élargit, les packs se combinent.",
               "Agency, condo management, developer, integrated operator, or simply a property owner: you pay for the workflow of your trade, not a list of menus. And as your business grows, packs can be combined.",
@@ -56,18 +56,18 @@ export function Pricing({ comparisonOpen = false }: { comparisonOpen?: boolean }
           </p>
         </Reveal>
 
-        <Reveal delay={0.1} className="mt-10 flex flex-col items-center gap-6">
+        <Reveal delay={0.1} className="mt-8 flex flex-col items-center gap-5 md:mt-10 md:gap-6">
           <BillingToggle value={billing} onChange={setBilling} />
-          <ul className="flex flex-wrap justify-center gap-2">
+          <ul className="flex w-full flex-wrap justify-center gap-2">
             {perks.map(({ icon: Icon, fr, en }) => (
-              <li key={fr} className="inline-flex items-center gap-2 rounded-full bg-white px-3.5 py-2 text-sm text-ink-900/70 ring-1 ring-ink-900/[0.07]">
-                <Icon className="size-4 text-brand-600" /> {t(fr, en)}
+              <li key={fr} className="inline-flex min-w-0 items-center gap-2 rounded-full bg-white px-3.5 py-2 text-left text-xs text-ink-900/70 sm:text-sm ring-1 ring-ink-900/[0.07]">
+                <Icon className="size-4 shrink-0 text-brand-600" /> {t(fr, en)}
               </li>
             ))}
           </ul>
         </Reveal>
 
-        <div className={`mx-auto mt-14 grid items-stretch gap-5 md:grid-cols-2 ${activePacks.length > 2 ? "lg:grid-cols-3" : "max-w-4xl"}`}>
+        <div className={`mx-auto mt-12 grid items-stretch gap-6 md:mt-14 md:gap-5 md:grid-cols-2 ${activePacks.length > 2 ? "lg:grid-cols-3" : "max-w-4xl"}`}>
           {activePacks.map((p, i) => (
             <Reveal key={p.id} delay={i * 0.08} className="h-full">
               <PackCard pack={p} billing={billing} onCta={open} />
@@ -93,7 +93,7 @@ export function Pricing({ comparisonOpen = false }: { comparisonOpen?: boolean }
 function BillingToggle({ value, onChange }: { value: Billing; onChange: (b: Billing) => void }) {
   const { t } = useI18n();
   return (
-    <div role="radiogroup" aria-label={t("Période de facturation", "Billing period")} className="inline-flex rounded-full border border-ink-900/10 bg-white p-1.5 shadow-sm">
+    <div role="radiogroup" aria-label={t("Période de facturation", "Billing period")} className="flex w-full max-w-sm rounded-full border border-ink-900/10 bg-white p-1.5 shadow-sm sm:inline-flex sm:w-auto sm:max-w-none">
       {(
         [
           ["monthly", t("Mensuel", "Monthly")],
@@ -105,12 +105,12 @@ function BillingToggle({ value, onChange }: { value: Billing; onChange: (b: Bill
           role="radio"
           aria-checked={value === id}
           onClick={() => onChange(id)}
-          className={`relative cursor-pointer rounded-full px-5 py-2.5 text-sm font-semibold transition-colors ${value === id ? "text-white" : "text-ink-900/60 hover:text-ink-900"}`}
+          className={`relative max-md:min-h-11 flex-1 cursor-pointer rounded-full px-4 py-2.5 text-sm font-semibold transition-colors sm:flex-none sm:px-5 ${value === id ? "text-white" : "text-ink-900/60 hover:text-ink-900"}`}
         >
           {value === id && <motion.span layoutId="billing-pill" className="absolute inset-0 rounded-full bg-ink-900" transition={{ type: "spring", stiffness: 380, damping: 32 }} />}
-          <span className="relative flex items-center gap-2">
+          <span className="relative flex items-center justify-center gap-2">
             {label}
-            {id === "annual" && <span className="rounded-full bg-mint-400 px-2 py-0.5 text-[10px] font-bold text-ink-950">{t("12 MOIS POUR 11", "12 MONTHS FOR 11")}</span>}
+            {id === "annual" && <span className="rounded-full bg-mint-400 px-2 py-0.5 text-[10px] leading-tight font-bold text-ink-950">{t("12 MOIS POUR 11", "12 MONTHS FOR 11")}</span>}
           </span>
         </button>
       ))}
@@ -142,11 +142,12 @@ function Price({ monthly, billing, dark }: { monthly: number; billing: Billing; 
 function PackCard({ pack, billing, onCta }: { pack: Pack; billing: Billing; onCta: () => void }) {
   const dark = !!pack.featured;
   const { locale, t } = useI18n();
+  const reduce = useReducedMotion();
   return (
     <motion.div
-      whileHover={{ y: -6 }}
+      whileHover={reduce ? undefined : { y: -6 }}
       onMouseMove={dark ? undefined : trackSpotlight}
-      className={`relative flex h-full flex-col rounded-[28px] p-7 ${
+      className={`relative flex h-full flex-col rounded-[28px] p-5 sm:p-7 ${
         dark
           ? "glow-border text-white shadow-[0_40px_120px_-30px_rgba(91,91,247,0.8)]"
           : "spotlight border border-ink-900/[0.08] bg-white shadow-sm transition-shadow hover:shadow-xl"
@@ -189,7 +190,7 @@ function PackCard({ pack, billing, onCta }: { pack: Pack; billing: Billing; onCt
         <MagneticButton
           onClick={onCta}
           strength={0.18}
-          className={`mt-7 w-full py-3.5 text-sm ${dark ? "bg-white text-ink-950 hover:shadow-[0_0_40px_-6px_rgba(255,255,255,0.6)]" : "bg-ink-900 text-white hover:bg-ink-800"}`}
+          className={`mt-7 max-md:min-h-12 w-full py-3.5 text-sm ${dark ? "bg-white text-ink-950 hover:shadow-[0_0_40px_-6px_rgba(255,255,255,0.6)]" : "bg-ink-900 text-white hover:bg-ink-800"}`}
         >
           {t("Demander une démonstration", "Request a demo")}
         </MagneticButton>
@@ -206,7 +207,7 @@ function PackCard({ pack, billing, onCta }: { pack: Pack; billing: Billing; onCt
 function Extensions() {
   const { locale, t } = useI18n();
   return (
-    <div className="mt-14 rounded-[28px] bg-white p-7 ring-1 ring-ink-900/[0.07] md:p-9">
+    <div className="mt-12 rounded-[28px] bg-white p-5 ring-1 ring-ink-900/[0.07] sm:p-7 md:mt-14 md:p-9">
       <h3 className="font-display text-2xl font-bold">{t("Extensions à la carte", "Add-ons")}</h3>
       <dl className="mt-5 grid gap-5 md:grid-cols-2">
         {extensions.map((e) => (
@@ -238,12 +239,12 @@ function Comparison({ defaultOpen }: { defaultOpen: boolean }) {
   const { locale, t } = useI18n();
   const activePacks = getActivePacks(locale);
   return (
-    <div className="mt-14">
+    <div className="mt-12 md:mt-14">
       <div className="flex justify-center">
         <button
           onClick={() => setOpen((o) => !o)}
           aria-expanded={open}
-          className="inline-flex cursor-pointer items-center gap-2 rounded-full border border-ink-900/15 bg-white px-5 py-3 text-sm font-semibold transition hover:border-ink-900/40"
+          className="inline-flex max-md:min-h-11 w-full cursor-pointer items-center justify-center gap-2 rounded-full border border-ink-900/15 bg-white px-5 py-3 sm:w-auto text-sm font-semibold transition hover:border-ink-900/40"
         >
           {t("Comparer les packs en détail", "Compare packs in detail")}
           <ChevronDown className={`size-4 transition-transform duration-300 ${open ? "rotate-180" : ""}`} />
@@ -258,11 +259,11 @@ function Comparison({ defaultOpen }: { defaultOpen: boolean }) {
             transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
             className="overflow-hidden"
           >
-            <div className="mt-6 overflow-x-auto rounded-[24px] bg-white ring-1 ring-ink-900/[0.07]">
+            <div tabIndex={0} role="region" aria-label={t("Comparatif détaillé des packs", "Detailed pack comparison")} className="mt-6 snap-x overflow-x-auto rounded-[24px] bg-white ring-1 ring-ink-900/[0.07] [mask-image:linear-gradient(to_right,black_calc(100%-20px),transparent)] max-md:[scrollbar-width:none] md:[mask-image:none] max-md:[&::-webkit-scrollbar]:hidden">
               <table className="w-full min-w-[960px] text-sm">
                 <thead>
                   <tr className="border-b border-ink-900/[0.07] text-left">
-                    <th className="p-4 font-medium text-ink-900/50">{t("Domaine fonctionnel", "Functional area")}</th>
+                    <th className="max-md:sticky left-0 z-10 max-md:min-w-[9rem] max-md:bg-white p-3 font-medium text-ink-900/50 md:p-4">{t("Domaine fonctionnel", "Functional area")}</th>
                     {activePacks.map((p) => (
                       <th key={p.id} className={`p-4 text-center font-display font-bold ${p.featured ? "text-brand-600" : ""}`}>
                         {p.name}
@@ -273,7 +274,7 @@ function Comparison({ defaultOpen }: { defaultOpen: boolean }) {
                 <tbody>
                   {coverageByLocale[locale].map(([label, ...cells]) => (
                     <tr key={label} className="border-b border-ink-900/[0.05] last:border-0 hover:bg-brand-500/[0.03]">
-                      <td className="p-4 text-ink-900/75">{label}</td>
+                      <td className="max-md:sticky left-0 z-10 max-md:min-w-[9rem] max-md:bg-white p-3 text-ink-900/75 md:p-4">{label}</td>
                       {cells.map((ok, i) => (
                         <td key={i} className={`p-4 text-center ${activePacks[i]?.featured ? "bg-brand-500/[0.04]" : ""}`}>
                           {ok ? (
@@ -336,13 +337,13 @@ function Simulator({ billing }: { billing: Billing }) {
   const shown = billing === "monthly" ? monthly : monthly * ANNUAL_MONTHS;
 
   return (
-    <div className="mt-16 overflow-hidden rounded-[32px] bg-ink-950 text-white">
+    <div className="mt-12 overflow-hidden rounded-[28px] md:mt-16 md:rounded-[32px] bg-ink-950 text-white">
       <div className="grid lg:grid-cols-[1.2fr_1fr]">
-        <div className="p-7 md:p-10">
+        <div className="p-5 sm:p-7 md:p-10">
           <p className="inline-flex items-center gap-2 text-xs font-bold tracking-[0.16em] text-mint-400 uppercase">
             <Calculator className="size-4" /> {t("Simulateur", "Simulator")}
           </p>
-          <h3 className="mt-3 font-display text-3xl font-bold">{t("Estimez votre abonnement", "Estimate your subscription")}</h3>
+          <h3 className="mt-3 font-display text-2xl font-bold sm:text-3xl">{t("Estimez votre abonnement", "Estimate your subscription")}</h3>
           <p className="mt-2 text-white/60">{t("Choisissez vos métiers et vos volumes.", "Choose your business lines and volumes.")}</p>
 
           <div className="mt-6 flex flex-wrap gap-2">
@@ -359,7 +360,7 @@ function Simulator({ billing }: { billing: Billing }) {
                 key={id}
                 onClick={() => toggle(id)}
                 aria-pressed={has(id)}
-                className={`cursor-pointer rounded-full px-4 py-2 text-sm font-semibold ring-1 transition ${
+                className={`max-md:min-h-11 cursor-pointer rounded-full px-4 py-2 text-sm font-semibold ring-1 transition ${
                   has(id) ? "bg-white text-ink-950 ring-white" : "bg-white/5 text-white/70 ring-white/15 hover:bg-white/10"
                 }`}
               >
@@ -382,11 +383,11 @@ function Simulator({ billing }: { billing: Billing }) {
           </div>
         </div>
 
-        <div className="relative border-t border-white/10 bg-white/[0.03] p-7 md:p-10 lg:border-t-0 lg:border-l">
-          <div aria-hidden className="absolute -top-20 -right-20 size-64 rounded-full bg-brand-500/30 blur-3xl" />
+        <div className="relative overflow-hidden border-t border-white/10 bg-white/[0.03] p-5 sm:p-7 md:p-10 lg:border-t-0 lg:border-l">
+          <div aria-hidden className="absolute -top-20 -right-20 size-64 rounded-full bg-brand-500/30 blur-2xl md:blur-3xl" />
           <div className="relative">
             <p className="text-sm text-white/55">{useIntegrated ? t("Forfait Opérateur intégré", "Integrated Operator plan") : t("Votre estimation", "Your estimate")}</p>
-            <motion.p key={`${shown}-${billing}`} initial={{ opacity: 0.3, y: 6 }} animate={{ opacity: 1, y: 0 }} className="mt-1 font-display text-5xl font-bold tracking-tight tabular-nums">
+            <motion.p key={`${shown}-${billing}`} initial={{ opacity: 0.3, y: 6 }} animate={{ opacity: 1, y: 0 }} className="mt-1 font-display text-4xl font-bold sm:text-5xl tracking-tight tabular-nums">
               {fcfa(shown).replace(" FCFA", "")}
             </motion.p>
             <p className="mt-1 text-sm text-white/55">
@@ -445,7 +446,7 @@ function Field({ label, value, onChange, max }: { label: string; value: number; 
       exit={{ opacity: 0, scale: 0.95 }}
       className="block"
     >
-      <span className="flex items-baseline justify-between text-sm text-white/70">
+      <span className="flex items-center justify-between gap-3 text-sm text-white/70 md:items-baseline">
         {label}
         <input
           type="number"
@@ -453,7 +454,7 @@ function Field({ label, value, onChange, max }: { label: string; value: number; 
           max={max * 5}
           value={value}
           onChange={(e) => onChange(Math.max(0, Math.floor(Number(e.target.value) || 0)))}
-          className="w-20 rounded-lg bg-white/10 px-2 py-1 text-right font-semibold text-white tabular-nums outline-none focus:ring-2 focus:ring-brand-400"
+          className="w-20 shrink-0 max-md:min-h-11 max-md:w-24 rounded-lg bg-white/10 px-2 py-1 text-right font-semibold text-white tabular-nums outline-none focus:ring-2 focus:ring-brand-400"
         />
       </span>
       <input
@@ -462,7 +463,7 @@ function Field({ label, value, onChange, max }: { label: string; value: number; 
         max={max}
         value={Math.min(value, max)}
         onChange={(e) => onChange(Number(e.target.value))}
-        className="mt-3 w-full cursor-pointer accent-[#8b8bff]"
+        className="mt-1 w-full max-md:h-11 md:mt-3 cursor-pointer accent-[#8b8bff]"
         aria-label={label}
       />
     </motion.label>

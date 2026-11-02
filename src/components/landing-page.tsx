@@ -33,26 +33,26 @@ export function LandingPage({ landing }: { landing: Landing }) {
       <main className="bg-paper">
         <PageHero eyebrow={landing.eyebrow} title={landing.h1}>
           <p>{landing.intro}</p>
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+          <div className="mt-8 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:flex-wrap sm:items-center max-md:[&>button]:min-h-11 [&>button]:w-full [&>button]:justify-center sm:[&>button]:w-auto">
             <DemoButton />
             <SmartLink
               href="/tarifs"
-              className="inline-flex items-center gap-2 rounded-full border border-white/20 px-6 py-3.5 text-sm font-semibold text-white transition hover:border-white/50"
+              className="inline-flex max-md:min-h-11 items-center justify-center gap-2 rounded-full border border-white/20 px-6 py-3.5 text-sm font-semibold text-white transition hover:border-white/50"
             >
               Voir les tarifs
             </SmartLink>
           </div>
         </PageHero>
 
-        <div className="mx-auto max-w-5xl px-5 py-16 md:py-20">
+        <div className="mx-auto max-w-5xl px-5 py-12 md:py-20">
           {landing.sections.map((s) => (
-            <section key={s.title} className="mb-16 last:mb-0">
-              <h2 className="font-display text-3xl font-bold tracking-tight text-balance md:text-4xl">{s.title}</h2>
-              {s.intro && <p className="mt-4 max-w-3xl text-lg text-ink-900/65">{s.intro}</p>}
+            <section key={s.title} className="mb-12 last:mb-0 md:mb-16">
+              <h2 className="font-display text-2xl font-bold tracking-tight text-balance sm:text-3xl md:text-4xl">{s.title}</h2>
+              {s.intro && <p className="mt-4 max-w-3xl text-base md:text-lg text-ink-900/65">{s.intro}</p>}
               {s.items && (
                 <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                   {s.items.map((it) => (
-                    <div key={it.title} className="rounded-[22px] bg-white p-6 ring-1 ring-ink-900/[0.07]">
+                    <div key={it.title} className="rounded-[22px] bg-white p-5 ring-1 ring-ink-900/[0.07] md:p-6">
                       <h3 className="font-display text-lg font-bold">{it.title}</h3>
                       <p className="mt-2 text-sm leading-relaxed text-ink-900/65">{it.text}</p>
                     </div>
@@ -74,12 +74,12 @@ export function LandingPage({ landing }: { landing: Landing }) {
           ))}
 
           {landing.faq.length > 0 && (
-            <section className="mt-16">
-              <h2 className="font-display text-3xl font-bold tracking-tight md:text-4xl">Questions fréquentes</h2>
+            <section className="mt-12 md:mt-16">
+              <h2 className="font-display text-2xl font-bold tracking-tight sm:text-3xl md:text-4xl">Questions fréquentes</h2>
               <div className="mt-6 divide-y divide-ink-900/[0.07] rounded-[22px] bg-white ring-1 ring-ink-900/[0.07]">
                 {landing.faq.map((f) => (
-                  <details key={f.q} className="group p-6">
-                    <summary className="cursor-pointer list-none font-semibold marker:hidden">
+                  <details key={f.q} className="group p-5 md:p-6">
+                    <summary className="max-md:min-h-11 cursor-pointer list-none font-semibold marker:hidden">
                       <span className="flex items-center justify-between gap-4">
                         {f.q}
                         <span className="text-brand-600 transition-transform group-open:rotate-45" aria-hidden>
@@ -105,7 +105,7 @@ export function LandingPage({ landing }: { landing: Landing }) {
             </section>
           )}
 
-          <section className="mt-16">
+          <section className="mt-12 md:mt-16">
             <h2 className="font-display text-2xl font-bold tracking-tight">À lire aussi</h2>
             <div className="mt-5 grid gap-4 sm:grid-cols-3">
               {landing.related

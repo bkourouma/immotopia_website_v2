@@ -1,6 +1,6 @@
 "use client";
 
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { ArrowRight, Bell, Calendar, CheckCheck, Download, FileSpreadsheet, MessageCircle, TrendingUp } from "lucide-react";
 import { useEffect, useState } from "react";
 import { roles, type RoleId } from "@/lib/content";
@@ -30,6 +30,7 @@ export function Roles() {
   const [tab, setTab] = useState<RoleId>("directeur");
   const { locale, t } = useI18n();
   const list = roles[locale];
+  const reduce = useReducedMotion();
 
   useEffect(() => {
     const onSelect = (e: Event) => setTab((e as CustomEvent<RoleId>).detail);
@@ -40,11 +41,11 @@ export function Roles() {
   const role = list.find((r) => r.id === tab)!;
 
   return (
-    <section id="roles" className="relative bg-paper py-24 md:py-32">
+    <section id="roles" className="relative bg-paper py-16 md:py-32">
       <div className="mx-auto max-w-6xl px-5">
         <Reveal className="mx-auto max-w-3xl text-center">
           <Eyebrow>{t("Une interface par métier", "One interface per job")}</Eyebrow>
-          <h2 className="mt-5 font-display text-4xl leading-[1.05] font-bold tracking-tight text-balance md:text-6xl">
+          <h2 className="mt-5 font-display text-3xl leading-[1.05] font-bold tracking-tight text-balance sm:text-4xl md:text-6xl">
             {t(
               <>
                 À chaque rôle, <span className="text-gradient-dark">son interface.</span>
@@ -54,7 +55,7 @@ export function Roles() {
               </>,
             )}
           </h2>
-          <p className="mt-5 text-lg text-ink-900/60">
+          <p className="mt-5 text-base text-ink-900/60 md:text-lg">
             {t(
               "Directeur, comptable ou agent : chacun voit exactement ce dont il a besoin, rien de plus.",
               "Director, accountant or agent: everyone sees exactly what they need, nothing more.",
@@ -62,15 +63,15 @@ export function Roles() {
           </p>
         </Reveal>
 
-        <Reveal delay={0.1} className="mt-12 flex justify-center">
-          <div role="tablist" aria-label={t("Rôles", "Roles")} className="inline-flex max-w-full overflow-x-auto rounded-full border border-ink-900/10 bg-white p-1.5 shadow-sm">
+        <Reveal delay={0.1} className="mt-8 flex justify-center md:mt-12">
+          <div role="tablist" aria-label={t("Rôles", "Roles")} className="[mask-image:linear-gradient(to_right,black_calc(100%-20px),transparent)] md:[mask-image:none] inline-flex max-w-full snap-x snap-mandatory overflow-x-auto rounded-full border border-ink-900/10 bg-white p-1.5 shadow-sm max-md:[scrollbar-width:none] max-md:[&::-webkit-scrollbar]:hidden">
             {list.map((r) => (
               <button
                 key={r.id}
                 role="tab"
                 aria-selected={tab === r.id}
                 onClick={() => setTab(r.id)}
-                className={`relative cursor-pointer rounded-full px-4 py-2.5 text-sm font-semibold whitespace-nowrap transition-colors md:px-6 ${
+                className={`relative max-md:min-h-11 shrink-0 cursor-pointer snap-center rounded-full px-4 py-2.5 text-sm font-semibold whitespace-nowrap transition-colors md:px-6 ${
                   tab === r.id ? "text-white" : "text-ink-900/60 hover:text-ink-900"
                 }`}
               >
@@ -87,19 +88,19 @@ export function Roles() {
           </div>
         </Reveal>
 
-        <div className="mt-12 min-h-[560px] md:min-h-[480px]">
+        <div className="mt-8 min-h-[560px] md:mt-12 md:min-h-[480px]">
           <AnimatePresence mode="wait">
             <motion.div
               key={tab}
               role="tabpanel"
-              initial={{ opacity: 0, y: 16, filter: "blur(6px)" }}
-              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-              exit={{ opacity: 0, y: -10, filter: "blur(6px)" }}
-              transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-              className="grid items-center gap-10 md:grid-cols-[1fr_1.1fr]"
+              initial={reduce ? { opacity: 0 } : { opacity: 0, y: 16, filter: "blur(6px)" }}
+              animate={reduce ? { opacity: 1 } : { opacity: 1, y: 0, filter: "blur(0px)" }}
+              exit={reduce ? { opacity: 0 } : { opacity: 0, y: -10, filter: "blur(6px)" }}
+              transition={{ duration: reduce ? 0.15 : 0.45, ease: [0.16, 1, 0.3, 1] }}
+              className="grid items-center gap-8 md:grid-cols-[1fr_1.1fr] md:gap-10"
             >
               <div>
-                <h3 className="font-display text-3xl leading-tight font-bold tracking-tight md:text-4xl">{role.headline}</h3>
+                <h3 className="font-display text-2xl leading-tight font-bold tracking-tight sm:text-3xl md:text-4xl">{role.headline}</h3>
                 <p className="mt-4 text-ink-900/65 md:text-lg">{role.pitch}</p>
                 <div className="mt-8 grid gap-3 sm:grid-cols-3 md:grid-cols-1 lg:grid-cols-3">
                   {role.features.map((f, i) => (
@@ -119,7 +120,7 @@ export function Roles() {
                 </div>
                 <SmartLink
                   href={comparatifHref(compareFor[tab].domain)}
-                  className="group mt-6 inline-flex items-center gap-2 text-sm font-semibold text-brand-600 hover:text-brand-500"
+                  className="group mt-6 inline-flex max-md:min-h-11 items-center gap-2 text-sm font-semibold text-brand-600 hover:text-brand-500"
                 >
                   {compareFor[tab].label[locale]}
                   <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
@@ -136,7 +137,7 @@ export function Roles() {
 
 function Panel({ children }: { children: React.ReactNode }) {
   return (
-    <div className="relative rounded-[28px] border border-ink-900/[0.07] bg-gradient-to-br from-white to-[#eef0ff] p-4 shadow-[0_30px_80px_-30px_rgba(40,40,120,0.35)] md:p-6">
+    <div className="relative min-w-0 rounded-[28px] border border-ink-900/[0.07] bg-gradient-to-br from-white to-[#eef0ff] p-3 shadow-[0_30px_80px_-30px_rgba(40,40,120,0.35)] sm:p-4 md:p-6">
       {children}
     </div>
   );
@@ -148,7 +149,7 @@ function RoleVisual({ id }: { id: RoleId }) {
     const bars = [42, 55, 48, 66, 72, 61, 84, 90];
     return (
       <Panel>
-        <div className="grid grid-cols-3 gap-3">
+        <div className="grid grid-cols-1 gap-3 min-[420px]:grid-cols-3">
           {[
             [t("Loyers encaissés", "Rent collected"), t("48,2 M", "48.2M"), "+12 %"],
             [t("Taux d'occupation", "Occupancy rate"), "94 %", "+3 pts"],
@@ -187,7 +188,7 @@ function RoleVisual({ id }: { id: RoleId }) {
             <p className="font-semibold">{t("Déclaration de paiement · Wave", "Payment notice · Wave")}</p>
             <p className="truncate text-xs text-white/60">{t("Studio 3, Angré · 150 000 FCFA · à valider", "Studio 3, Angré · 150,000 FCFA · to approve")}</p>
           </div>
-          <button className="shine cursor-pointer rounded-full bg-mint-400 px-4 py-2 text-xs font-bold text-ink-950">{t("Valider", "Approve")}</button>
+          <button className="shine max-md:min-h-11 shrink-0 cursor-pointer rounded-full bg-mint-400 px-4 py-2 text-xs font-bold text-ink-950">{t("Valider", "Approve")}</button>
         </motion.div>
       </Panel>
     );
@@ -210,11 +211,11 @@ function RoleVisual({ id }: { id: RoleId }) {
     return (
       <Panel>
         <div className="overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-ink-900/5">
-          <div className="flex items-center justify-between border-b border-ink-900/5 px-4 py-3">
+          <div className="flex flex-wrap items-center justify-between gap-2 border-b border-ink-900/5 px-4 py-3">
             <p className="text-sm font-semibold">{t("Échéancier · septembre", "Payment schedule · September")}</p>
             <span className="rounded-full bg-amber-50 px-2.5 py-1 text-[11px] font-semibold text-amber-700">{t("Reste à encaisser : 247 500", "Outstanding: 247,500")}</span>
           </div>
-          <div className="overflow-x-auto">
+          <div tabIndex={0} role="region" aria-label={t("Échéancier", "Payment schedule")} className="[mask-image:linear-gradient(to_right,black_calc(100%-20px),transparent)] md:[mask-image:none] overflow-x-auto max-md:[scrollbar-width:none] max-md:[&::-webkit-scrollbar]:hidden">
             <table className="w-full min-w-[440px] text-left text-xs">
               <thead className="text-ink-900/45">
                 <tr>
@@ -245,7 +246,7 @@ function RoleVisual({ id }: { id: RoleId }) {
             </table>
           </div>
         </div>
-        <div className="mt-3 grid grid-cols-2 gap-3">
+        <div className="mt-3 grid gap-3 min-[480px]:grid-cols-2">
           {[
             [FileSpreadsheet, t("Quittance", "Rent receipt"), t("Générée depuis votre modèle Word", "Generated from your Word template")],
             [Download, t("Relevé de compte", "Account statement"), t("Historique du locataire", "Tenant history")],
@@ -255,7 +256,7 @@ function RoleVisual({ id }: { id: RoleId }) {
               <motion.button
                 key={t as string}
                 whileHover={{ y: -3 }}
-                className="flex cursor-pointer items-center gap-3 rounded-2xl bg-white p-3 text-left shadow-sm ring-1 ring-ink-900/5"
+                className="flex max-md:min-h-11 cursor-pointer items-center gap-3 rounded-2xl bg-white p-3 text-left shadow-sm ring-1 ring-ink-900/5"
               >
                 <span className="grid size-10 place-items-center rounded-xl bg-brand-500/10 text-brand-600">
                   <I className="size-5" />
@@ -274,8 +275,8 @@ function RoleVisual({ id }: { id: RoleId }) {
 
   return (
     <Panel>
-      <div className="flex justify-center gap-4">
-        <div className="w-[260px] shrink-0 rounded-[34px] border-[6px] border-ink-900 bg-[#0b141a] p-3 shadow-2xl">
+      <div className="flex justify-center gap-4 [&>div:first-child]:mx-auto sm:[&>div:first-child]:mx-0">
+        <div className="w-full max-w-[260px] shrink-0 rounded-[34px] border-[6px] border-ink-900 bg-[#0b141a] p-3 shadow-2xl">
           <div className="mx-auto mb-3 h-1.5 w-16 rounded-full bg-white/20" />
           <div className="flex items-center gap-2 border-b border-white/10 pb-2 text-white">
             <span className="grid size-8 place-items-center rounded-full bg-[#25D366]">
