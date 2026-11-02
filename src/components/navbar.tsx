@@ -2,7 +2,7 @@
 
 import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "framer-motion";
 import { ArrowRight, ChevronDown, Menu, X } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import { navLinks } from "@/lib/content";
 import { APP_LOGIN_URL } from "@/lib/site";
 import { LanguageSwitcher } from "./language-switcher";
@@ -21,10 +21,35 @@ export function Navbar() {
   const { locale, t } = useI18n();
   const links = navLinks[locale];
 
+  const panelId = useId();
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
+
   useMotionValueEvent(scrollY, "change", (v) => setScrolled(v > 24));
 
+  // Menu mobile : Échap ferme (le focus revient au bouton), le fond ne défile plus tant qu'il est ouvert,
+  // et il se ferme si la fenêtre passe en affichage large (>= 1024 px) où le menu mobile n'existe plus.
+  useEffect(() => {
+    if (!menu) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== "Escape") return;
+      setMenu(false);
+      menuButtonRef.current?.focus();
+    };
+    const wide = window.matchMedia("(min-width: 1024px)");
+    const onWide = () => wide.matches && setMenu(false);
+    window.addEventListener("keydown", onKey);
+    wide.addEventListener("change", onWide);
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      wide.removeEventListener("change", onWide);
+      document.body.style.overflow = prev;
+    };
+  }, [menu]);
+
   return (
-    <header className="fixed inset-x-0 top-0 z-50 flex justify-center px-3 pt-3">
+    <header className="fixed inset-x-0 top-0 z-50 flex justify-center px-3 pt-[max(0.75rem,env(safe-area-inset-top))]">
       <motion.nav
         initial={{ y: -40, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
@@ -35,7 +60,7 @@ export function Navbar() {
             : "border-transparent bg-transparent"
         }`}
       >
-        <SmartLink href="#top" className="shrink-0 text-white" aria-label={t("ImmoTopia — accueil", "ImmoTopia — home")}>
+        <SmartLink href="#top" onClick={() => setMenu(false)} className="shrink-0 text-white" aria-label={t("ImmoTopia — accueil", "ImmoTopia — home")}>
           <Logo />
         </SmartLink>
 
@@ -114,10 +139,12 @@ export function Navbar() {
             </MagneticButton>
           </div>
           <button
-            className="grid size-10 cursor-pointer place-items-center rounded-xl text-white hover:bg-white/10 lg:hidden"
+            ref={menuButtonRef}
+            className="grid size-11 shrink-0 cursor-pointer place-items-center rounded-xl text-white hover:bg-white/10 lg:hidden"
             onClick={() => setMenu((m) => !m)}
             aria-label={menu ? t("Fermer le menu", "Close menu") : t("Ouvrir le menu", "Open menu")}
             aria-expanded={menu}
+            aria-controls={panelId}
           >
             {menu ? <X className="size-5" /> : <Menu className="size-5" />}
           </button>
@@ -126,11 +153,23 @@ export function Navbar() {
 
       <AnimatePresence>
         {menu && (
+          <>
           <motion.div
+            key="scrim"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            aria-hidden
+            onClick={() => setMenu(false)}
+            className="fixed inset-0 -z-10 bg-ink-950/50 lg:hidden"
+          />
+          <motion.div
+            key="panel"
+            id={panelId}
             initial={{ opacity: 0, y: -12, scale: 0.98 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -12, scale: 0.98 }}
-            className="absolute inset-x-3 top-[76px] max-h-[calc(100dvh-90px)] overflow-y-auto rounded-2xl border border-white/10 bg-ink-950/90 p-3 text-white backdrop-blur-xl lg:hidden"
+            className="absolute inset-x-3 top-[calc(max(0.75rem,env(safe-area-inset-top))+4rem)] max-h-[calc(100dvh-max(0.75rem,env(safe-area-inset-top))-5rem)] overflow-y-auto overscroll-contain rounded-2xl border border-white/10 bg-ink-950/95 p-3 pb-0 text-white backdrop-blur-xl lg:hidden"
           >
             {links.map((l) =>
               l.children ? (
@@ -138,7 +177,7 @@ export function Navbar() {
                   <button
                     onClick={() => setSub((s) => (s === l.href ? null : l.href))}
                     aria-expanded={sub === l.href}
-                    className="flex w-full cursor-pointer items-center justify-between rounded-xl px-4 py-3 text-base font-medium hover:bg-white/10"
+                    className="flex min-h-11 w-full cursor-pointer items-center justify-between rounded-xl px-4 py-3 text-base font-medium hover:bg-white/10"
                   >
                     {l.label}
                     <ChevronDown className={`size-4 transition-transform ${sub === l.href ? "rotate-180" : ""}`} />
@@ -146,9 +185,9 @@ export function Navbar() {
                   <AnimatePresence initial={false}>
                     {sub === l.href && (
                       <motion.div initial={{ height: 0 }} animate={{ height: "auto" }} exit={{ height: 0 }} className="overflow-hidden">
-                        <div className={`grid gap-1 ps-3 pb-2 ${l.wide ? "grid-cols-2" : ""}`}>
+                        <div className={`grid gap-1 ps-3 pb-2 ${l.wide ? "sm:grid-cols-2" : ""}`}>
                           {[...(l.footer ? [l.footer] : []), ...l.children].map((c) => (
-                            <SmartLink key={c.href} href={c.href} onClick={() => setMenu(false)} className="rounded-lg px-3 py-2 text-sm text-white/75 hover:bg-white/10 hover:text-white">
+                            <SmartLink key={c.href} href={c.href} onClick={() => setMenu(false)} className="flex min-h-11 items-center rounded-lg px-3 py-3 text-[15px] text-white/75 hover:bg-white/10 hover:text-white">
                               {c.label}
                             </SmartLink>
                           ))}
@@ -162,28 +201,31 @@ export function Navbar() {
                   key={l.href}
                   href={l.href}
                   onClick={() => setMenu(false)}
-                  className="block rounded-xl px-4 py-3 text-base font-medium hover:bg-white/10"
+                  className="flex min-h-11 items-center rounded-xl px-4 py-3 text-base font-medium hover:bg-white/10"
                 >
                   {l.label}
                 </SmartLink>
               ),
             )}
-            <a href={APP_LOGIN_URL} className="block rounded-xl px-4 py-3 text-base font-medium text-white/70 hover:bg-white/10">
+            <a href={APP_LOGIN_URL} className="flex min-h-11 items-center rounded-xl px-4 py-3 text-base font-medium text-white/70 hover:bg-white/10">
               {t("Connexion clients", "Client log in")}
             </a>
             <div className="px-4 py-3">
               <LanguageSwitcher />
             </div>
-            <button
-              onClick={() => {
-                setMenu(false);
-                open();
-              }}
-              className="mt-2 w-full cursor-pointer rounded-xl bg-brand-500 py-3 font-semibold"
-            >
-              {t("Demander une démo", "Book a demo")}
-            </button>
+            <div className="sticky bottom-0 -mx-3 rounded-b-2xl bg-ink-950 px-3 pt-2 pb-[max(0.75rem,env(safe-area-inset-bottom))]">
+              <button
+                onClick={() => {
+                  setMenu(false);
+                  open();
+                }}
+                className="min-h-12 w-full cursor-pointer rounded-xl bg-brand-500 py-3 text-base font-semibold"
+              >
+                {t("Demander une démo", "Book a demo")}
+              </button>
+            </div>
           </motion.div>
+          </>
         )}
       </AnimatePresence>
     </header>
