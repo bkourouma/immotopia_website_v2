@@ -19,7 +19,7 @@ import type { WikiPackId, WikiAction, WikiDomain, WikiFeature, WikiProfile, Wiki
 export type * from "./types";
 
 /** Date de l'inventaire dont le wiki est tiré. */
-export const WIKI_UPDATED_ON = "2 octobre 2026";
+export const WIKI_UPDATED_ON = "18 octobre 2026";
 
 export const wikiDomains: WikiDomain[] = [
   gestionLocative,
@@ -146,6 +146,13 @@ for (const d of wikiDomains) {
     }
     for (const r of f.related ?? []) {
       if (!featureByRef(r)) throw new Error(`Wiki : lien « ${r} » introuvable dans ${d.slug}/${f.slug}`);
+    }
+    // Liens « [texte](/wiki/domaine/fonctionnalite) » écrits dans l'introduction et les sections.
+    const texts = [f.intro, ...(f.sections ?? []).flatMap((s) => s.body.flat())];
+    for (const t of texts) {
+      for (const m of t.matchAll(/\]\(\/wiki\/([a-z0-9-]+)\/([a-z0-9-]+)\)/g)) {
+        if (!featureBySlug(m[1], m[2])) throw new Error(`Wiki : lien « /wiki/${m[1]}/${m[2]} » introuvable dans ${d.slug}/${f.slug}`);
+      }
     }
   }
 }

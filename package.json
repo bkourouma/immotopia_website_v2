@@ -9,6 +9,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "test": "node --test \"tests/unit/*.test.ts\"",
     "prepare": "node scripts/install-git-hooks.cjs",
     "agent-bus": "node scripts/agent-bus.cjs",
     "repomix": "repomix"

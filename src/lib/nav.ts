@@ -6,7 +6,7 @@ export const ROLE_EVENT = "immotopia:select-role";
 export function goTo(href: string) {
   if (!href.startsWith("#")) return;
   let target = href.slice(1);
-  const role = target.match(/^roles-(directeur|comptable|agent)$/)?.[1] as RoleId | undefined;
+  const role = target.match(/^roles-(directeur|gestionnaire|comptable|agent|proprietaire|locataire|coproprietaire)$/)?.[1] as RoleId | undefined;
   if (role) {
     window.dispatchEvent(new CustomEvent<RoleId>(ROLE_EVENT, { detail: role }));
     target = "roles";

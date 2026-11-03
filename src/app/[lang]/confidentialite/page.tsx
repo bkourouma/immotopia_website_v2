@@ -25,7 +25,7 @@ export default async function ConfidentialitePage() {
 
 function ConfidentialiteFr() {
   return (
-    <LegalPage title="Politique de confidentialité" updated="2 octobre 2026">
+    <LegalPage title="Politique de confidentialité" updated="23 octobre 2026">
       <p>
         {legal.publisher}, éditeur d&apos;ImmoTopia, s&apos;engage à protéger vos données personnelles conformément à la loi ivoirienne
         n° 2013-450 du 19 juin 2013 relative à la protection des données à caractère personnel.
@@ -75,7 +75,8 @@ function ConfidentialiteFr() {
       <p>
         Les données sont destinées à l&apos;équipe commerciale d&apos;ImmoTopia. Elles peuvent être traitées, pour notre compte, par
         des prestataires techniques : Calendly (prise de rendez-vous), OpenRouter et DeepSeek (assistant immotopIA), notre hébergeur {legal.host}, et nos outils internes de suivi
-        des demandes. Certains de ces prestataires peuvent être situés hors de Côte d&apos;Ivoire.
+        des demandes. Si vous acceptez les cookies de mesure d&apos;audience, Google Ireland Limited (Google Analytics 4) reçoit
+        également des données de navigation pour notre compte. Certains de ces prestataires peuvent être situés hors de Côte d&apos;Ivoire.
       </p>
 
       <h2>Durée de conservation</h2>
@@ -84,13 +85,29 @@ function ConfidentialiteFr() {
         clients sont conservées pendant la durée de la relation contractuelle et les délais légaux qui s&apos;y appliquent.
       </p>
 
-      <h2>Cookies</h2>
+      <h2 id="cookies">Cookies</h2>
       <p>
-        Le site n&apos;utilise pas de cookies publicitaires. Il mesure sa fréquentation avec Umami, un outil libre que nous
-        hébergeons nous-mêmes : sans cookie, sans conserver votre adresse IP, et sans envoyer de données à un service de mesure
-        d&apos;audience tiers. Il enregistre les pages consultées, la page d&apos;origine, le pays, la région et la ville
-        approximatifs, ainsi que le type d&apos;appareil, de navigateur et d&apos;écran. Le calendrier de réservation Calendly,
-        affiché dans la page, peut déposer ses propres cookies nécessaires à son fonctionnement.
+        Le site n&apos;utilise pas de cookies publicitaires. Il mesure sa fréquentation avec deux outils.
+      </p>
+      <ul>
+        <li>
+          <strong>Umami</strong>, un outil libre que nous hébergeons nous-mêmes : sans cookie et sans conserver votre adresse IP.
+          Il enregistre les pages consultées, la page d&apos;origine, le pays, la région et la ville approximatifs, ainsi que le
+          type d&apos;appareil, de navigateur et d&apos;écran.
+        </li>
+        <li>
+          <strong>Google Analytics 4</strong> (Google Ireland Limited), qui n&apos;est activé qu&apos;avec votre consentement : un
+          bandeau vous propose d&apos;accepter ou de refuser, et tant que vous n&apos;avez pas accepté, aucun cookie Google n&apos;est
+          déposé et aucune donnée n&apos;est envoyée à Google. Si vous acceptez, il dépose les cookies{" "}
+          <strong>_ga</strong> et <strong>_ga_&lt;identifiant&gt;</strong>, d&apos;une durée de 13 mois au plus, pour mesurer
+          l&apos;audience du site. Vous pouvez retirer votre consentement à tout moment avec le bouton « Gérer mes cookies » en bas
+          de chaque page : les cookies Google Analytics sont alors effacés et la mesure s&apos;arrête.
+        </li>
+      </ul>
+      <p>
+        Votre choix est mémorisé dans votre navigateur pendant 6 mois (stockage strictement nécessaire, qui ne sert qu&apos;à
+        retenir ce choix). Le calendrier de réservation Calendly, affiché dans la page, peut déposer ses propres cookies
+        nécessaires à son fonctionnement.
       </p>
 
       <h2>Vos droits</h2>
@@ -106,7 +123,7 @@ function ConfidentialiteFr() {
 
 function PrivacyPolicyEn() {
   return (
-    <LegalPage title="Privacy policy" updated="October 2, 2026">
+    <LegalPage title="Privacy policy" updated="October 23, 2026">
       <p>
         {legal.publisher}, publisher of ImmoTopia, is committed to protecting your personal data in accordance with Ivorian Law
         No. 2013-450 of June 19, 2013 on the protection of personal data.
@@ -152,7 +169,8 @@ function PrivacyPolicyEn() {
       <h2>Recipients and processors</h2>
       <p>
         The data is intended for the ImmoTopia sales team. It may be processed on our behalf by technical providers: Calendly
-        (scheduling), OpenRouter and DeepSeek (immotopIA assistant), our host {legal.host}, and our internal request-tracking tools. Some
+        (scheduling), OpenRouter and DeepSeek (immotopIA assistant), our host {legal.host}, and our internal request-tracking tools. If you accept audience measurement cookies, Google Ireland
+        Limited (Google Analytics 4) also receives browsing data on our behalf. Some
         of these providers may be located outside Côte d&apos;Ivoire.
       </p>
 
@@ -162,12 +180,25 @@ function PrivacyPolicyEn() {
         the contractual relationship and the applicable legal periods.
       </p>
 
-      <h2>Cookies</h2>
+      <h2 id="cookies">Cookies</h2>
+      <p>The website uses no advertising cookies. It measures its traffic with two tools.</p>
+      <ul>
+        <li>
+          <strong>Umami</strong>, an open-source tool that we host ourselves: no cookies and no storage of your IP address. It
+          records the pages viewed, the referring page, the approximate country, region and city, and the type of device, browser
+          and screen.
+        </li>
+        <li>
+          <strong>Google Analytics 4</strong> (Google Ireland Limited), which is enabled only with your consent: a banner lets you
+          accept or decline, and until you accept, no Google cookie is set and no data is sent to Google. If you accept, it sets
+          the <strong>_ga</strong> and <strong>_ga_&lt;identifier&gt;</strong> cookies, which last 13 months at most, to measure
+          the site&apos;s audience. You can withdraw your consent at any time with the &ldquo;Manage cookies&rdquo; button at the
+          bottom of every page: the Google Analytics cookies are then deleted and measurement stops.
+        </li>
+      </ul>
       <p>
-        The website uses no advertising cookies. It measures its traffic with Umami, an open-source tool that we host ourselves:
-        no cookies, no storage of your IP address, and no data sent to a third-party audience measurement service. It records the
-        pages viewed, the referring page, the approximate country, region and city, and the type of device, browser and screen. The
-        Calendly booking calendar embedded in the page may set its own cookies required for it to work.
+        Your choice is remembered in your browser for 6 months (strictly necessary storage, used only to remember this choice).
+        The Calendly booking calendar embedded in the page may set its own cookies required for it to work.
       </p>
 
       <h2>Your rights</h2>

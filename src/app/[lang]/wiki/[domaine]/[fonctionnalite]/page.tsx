@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { FinalCta } from "@/components/final-cta";
+import { InlineLinks } from "@/components/inline-links";
 import { JsonLd } from "@/components/json-ld";
 import { Navbar } from "@/components/navbar";
 import { PageHero } from "@/components/page-hero";
@@ -40,6 +41,8 @@ export async function generateMetadata({ params }: PageProps<"/[lang]/wiki/[doma
     description: feature.summary,
     alternates: { canonical: url },
     openGraph: { title, description: feature.summary, url, locale: "fr_CI", type: "article" },
+    // Hors sitemap (src/app/sitemap.ts) mais toujours indexable : on ne la passe pas en noindex
+    ...(domaine === "administration-plateforme" ? { robots: { index: true } } : {}),
   };
 }
 
@@ -68,7 +71,7 @@ export default async function WikiFeaturePage({ params }: PageProps<"/[lang]/wik
     breadcrumbLd(crumbs),
     {
       "@type": "TechArticle",
-      headline: feature.title,
+      headline: feature.h1 ?? feature.title,
       description: feature.summary,
       url: `${SITE_URL}${url}`,
       inLanguage: "fr-CI",
@@ -88,8 +91,10 @@ export default async function WikiFeaturePage({ params }: PageProps<"/[lang]/wik
       <Navbar />
       <JsonLd data={{ "@context": "https://schema.org", "@graph": graph }} />
       <main className="bg-paper">
-        <PageHero eyebrow={domain.title} title={feature.title}>
-          <p>{feature.intro}</p>
+        <PageHero eyebrow={domain.title} title={feature.h1 ?? feature.title}>
+          <p>
+            <InlineLinks text={feature.intro} linkClassName="font-medium text-white underline underline-offset-2 hover:text-mint-400" />
+          </p>
         </PageHero>
 
         <div className="mx-auto grid max-w-6xl gap-8 px-5 py-10 md:py-16 lg:grid-cols-[250px_1fr] md:gap-10">
@@ -155,6 +160,30 @@ export default async function WikiFeaturePage({ params }: PageProps<"/[lang]/wik
                 </div>
               )}
             </dl>
+
+            {/* Sections éditoriales (facultatives) */}
+            {feature.sections?.map((section) => (
+              <section key={section.title} className="mt-12">
+                <h2 className="font-display text-2xl font-bold tracking-tight text-balance md:text-3xl">{section.title}</h2>
+                <div className="mt-4 max-w-3xl space-y-4 leading-relaxed text-ink-900/70">
+                  {section.body.map((block, i) =>
+                    typeof block === "string" ? (
+                      <p key={i}>
+                        <InlineLinks text={block} />
+                      </p>
+                    ) : (
+                      <ul key={i} className="list-disc space-y-2 pl-5 marker:text-brand-500">
+                        {block.map((item) => (
+                          <li key={item}>
+                            <InlineLinks text={item} />
+                          </li>
+                        ))}
+                      </ul>
+                    ),
+                  )}
+                </div>
+              </section>
+            ))}
 
             {/* Actions */}
             <section className="mt-12">

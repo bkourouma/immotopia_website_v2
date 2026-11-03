@@ -10,7 +10,7 @@ plusieurs étapes (règle posée dans AGENTS.md et CLAUDE.md).
   branche au lieu d'empiler des entrées : ce fichier décrit l'état présent, pas
   l'historique (l'historique, c'est `git log`).
 - Supprimer la section d'une branche une fois fusionnée dans
-  `master`.
+  `main`.
 - Dates absolues (`AAAA-MM-JJ`), jamais « hier ».
 - Chaque worktree a sa copie : en cas de conflit à la fusion, garder les deux
   sections de branche, elles sont indépendantes.
@@ -50,6 +50,161 @@ Pièges et décisions :
 - Reste : reconstruire l'image et redéployer (variable figée au build, déploiement seulement sur « oui »
   explicite) ; `npm run build` et le repli en anglais non vérifiés ; côté Calendly, fuseau Abidjan et
   renommage de l'événement.
+
+## Branche `seo/pages-patrimoine-promoteur` — 2026-10-23
+
+**État :** prêt à relire
+**Dernier commit :** aucun (rien commité)
+
+Fait :
+
+- Deux landings SEO dans `src/lib/landings.ts` : `/logiciel-gestion-patrimoine-immobilier-cote-divoire` (mot-clé « logiciel gestion de patrimoine immobilier ») et `/logiciel-promoteur-immobilier-cote-divoire` (« logiciel promoteur immobilier »). Déclarées dans `french-only.ts`, sitemap automatique, liens depuis les wiki correspondants, la landing CRM promoteur et la landing « logiciel immobilier » ; ajout dans `knowledge.md`.
+- `scripts/check-landings.mjs` : contrôle des landings (non branché dans `package.json` ni la CI).
+
+Volontairement omis :
+
+- Patrimoine : pénalités de retard, cautions et dépôt de garantie, répartition des fonctions SCI par pack, espace particulier et ses paliers (pas de prix publié). Promoteur : rien sur la réservation de lots, l'échéancier ou le portail acquéreur, hors une réponse de FAQ qui le dit.
+
+À arbitrer par le propriétaire :
+
+- Contradiction entre `pricing.ts` (pénalités et dépôts de garantie réservés à Agence et Intégré) et le wiki / `knowledge.md` (qui les attribuent aussi aux packs Patrimoine).
+- Les packs qui incluent entités détentrices, consolidation, fiscalité et export (wiki : Agence, Promoteur, Intégré) face à la cible SCI et diaspora.
+- Le tableau de prix de la page patrimoine (3 colonnes) n'a pas été vérifié sur mobile ; gabarit commun non modifié.
+
+---
+
+## Branche `seo/ga4-consentement` — 2026-10-23
+
+**État :** prêt à relire (non commité)
+
+Fait :
+
+- Google Analytics 4 avec bandeau de consentement FR/EN (`src/components/consent/`, `src/lib/consent.ts`, `src/lib/ga.ts`). Identifiant de mesure `G-W0VCK0DK70`. Aucun appel à Google ni cookie `_ga` avant « Accepter » ; chargé seulement en production, sur `immotopia.cloud` et `www.immotopia.cloud` (jamais sur l'application ni un autre sous-domaine). Umami inchangé.
+- Choix mémorisé 182 jours (clé `im_consent`), bouton « Gérer mes cookies » / « Manage cookies » dans le pied de page, retrait = drapeau `ga-disable-<ID>` + effacement des cookies `_ga*`, `_gid`, `_gat*`.
+- Politique de confidentialité FR et EN mise à jour (Google Ireland Limited, cookies de 13 mois, destinataires), date 23 octobre 2026.
+- `npm test` ajouté (`node --test`, 29 tests) et étape CI correspondante.
+
+Reste à faire :
+
+- Après déploiement : ouvrir le site en navigation privée, vérifier dans l'onglet Réseau qu'aucune requête vers googletagmanager.com ni cookie `_ga` n'existe avant « Accepter », puis qu'ils apparaissent après, et disparaissent après retrait via « Gérer mes cookies » ; contrôler le temps réel dans GA4. Vérifier l'affichage à 375 px.
+- Faire valider le rôle de Google (sous-traitant ou non) dans la politique.
+
+Pièges et décisions :
+
+- Libellé EN du refus : « Decline » (choix prudent).
+
+---
+
+## Branche `claude/beautiful-volta-r4u2ul` — 2026-10-18
+
+**État :** prêt à relire (PR brouillon vers `main`)
+**Dernier commit :** voir `git log`
+
+Fait :
+
+- Nouveautés de l'application `bkourouma/immotopia` du 2026-10-02 au 2026-10-17 reportées dans le wiki. Source : classeur `docs/fonctionnalites/ImmoTopia_Wiki_Fonctionnalites.xlsx` (849 → 1046 lignes). Wiki daté du 2026-10-18.
+- 10 nouvelles fiches : signature électronique, prélèvement bancaire, visio des assemblées, paiement en ligne des charges, AG par lien personnel, paiement d'un appel de charges, inventaire par WhatsApp, export des tableaux, documents à en-tête, application installable.
+- Actions ajoutées aux fiches existantes : AG en direct, stock de chantier, ImmoCopilot, mandats, compromis, états des lieux, portail copropriétaire.
+- Facturation décidée par l'utilisateur le 2026-10-18 :
+  - Signatures électroniques : extension par bloc de 50 par mois, 5 000 FCFA HT, tous les packs. Aucune signature incluse.
+  - Visio des assemblées : 10 000 FCFA HT par mois et par cabinet, Syndic ou Intégré.
+  - Inventaire WhatsApp : bloc de 500 photos, 25 000 FCFA HT par mois, Promoteur ou Intégré.
+  - Inclus sans commission : paiement en ligne des charges et prélèvement bancaire.
+  - Inclus : export, application installable, documents à en-tête, AG en direct, contrôle du stock.
+- Toutes les nouveautés affichées « disponible », ImmoCopilot compris (décision de l'utilisateur).
+- Tarifs, accueil, écosystème, pages thématiques, FAQ et assistant immotopIA (`knowledge.md`, `prompt.ts`) alignés.
+- Page `/versions` : version 2.0.0 datée du 2026-10-17.
+- Vérifications : `tsc`, `lint`, `check-comparatif-en` et `npm run build` OK. Pas de tests automatisés.
+
+Reste à faire :
+
+- Aligner le catalogue de l'application (`packages/api/src/lib/subscription/catalog.ts`, dépôt `bkourouma/immotopia`). Il porte encore des quotas de signatures inclus provisoires (Agence 20, Syndic 50, Promoteur 20, Intégré 100), un bloc de 50 sans prix et non vendable, et pas d'extension Visio des assemblées. Ce dépôt n'est pas modifiable depuis cette session.
+- Créer le tag `v2.0.0` côté application, comme pour les versions précédentes.
+- Paiement de loyer par lien (`portails-clients/paiement-loyer-par-lien`, `portail-locataire`) : encore en « déploiement », non traité.
+- Points non bloquants relevés en relecture :
+  - 14 résumés (summary) hors de la plage 140-160 caractères, dans des fiches non touchées.
+  - Packs d'ImmoCopilot : 6 dans le wiki, 4 dans le classeur, à confirmer.
+  - « courriers » dans la fiche documents-a-en-tete : la source cite avis, convocations, quittances et comptes rendus.
+
+Pièges et décisions :
+
+- Chantier orchestré (skill chef-orchestre) : lots dans des copies de travail locales, fusionnés dans la branche avec `--no-ff`.
+- `package.json` et `package-lock.json` modifiés par l'installation de l'environnement cloud. Marqués `assume-unchanged` en local. Jamais commités.
+- Le wiki ne cite aucun prix : il renvoie vers /tarifs. `pricing.ts` reste la source.
+
+---
+
+## Branche `claude/stoic-goldberg-jrcsmh` — 2026-10-18
+
+**État :** prêt à relire (PR brouillon vers `main`)
+**Dernier commit :** voir `git log`
+
+Fait :
+
+- Skill `chef-orchestre` installé au niveau projet (`.claude/skills/chef-orchestre/`) avec ses cinq agents (`.claude/agents/` : `chef-de-lot`, `executant`, `executant-rapide`, `expert`, `verificateur`), copiés tels quels depuis l'archive fournie par l'utilisateur.
+
+Pièges et décisions :
+
+- Installé dans le dépôt plutôt que dans `~/.claude` (prévu par `installer.ps1`) : les sessions cloud sont éphémères.
+- Écarts du skill avec AGENTS.md, qui prime : il copie les fichiers `.env` dans les worktrees (interdit sans « oui » explicite), suppose `gh` (absent en session cloud : passer par les outils GitHub MCP) et nomme ses branches `orch/…`.
+
+---
+
+## Branche `claude/admiring-fermat-b2y2rr` — 2026-10-15
+
+**État :** prêt à relire (PR brouillon vers `main`)
+**Dernier commit :** voir `git log`
+
+Fait :
+
+- Page bilingue `/versions` (historique des versions de l'application), données dans `src/lib/releases.ts`, ajoutée au sitemap.
+- Pied de page : colonne « Produit » scindée en « Produit » et « Ressources » (`footerColumns` de `content.ts`, champ `footerColumn` de `NavLink`) ; « Historique des versions » ajouté au menu Ressources (FR et EN).
+- Versions validées par l'utilisateur : v1.0.0 datée du 2025-04-15, v1.1.0 du 2026-04-15, v1.2.0 et v1.3.0 placées entre les deux, dates réelles à partir de v1.4.0.
+
+Reste à faire :
+
+- Tags et releases de `bkourouma/immotopia` : la poussée de tags est refusée (403) par le proxy de la session cloud ; l'utilisateur lance le script `creer-releases-immotopia.sh` fourni dans la conversation.
+- Nouvelle version de l'application : ajouter une entrée en tête de `src/lib/releases.ts` et le tag correspondant.
+
+Pièges et décisions :
+
+- `package.json` / `package-lock.json` modifiés par l'installation de l'environnement cloud : non commités.
+
+---
+
+## Branche `ci/deploiement-auto` — 2026-10-13
+
+**État :** prêt à relire (PR vers `main`) ; la fusion déclenche le premier déploiement automatique
+**Dernier commit :** voir `git log`
+
+Fait :
+
+- Branche `main` créée à partir de `feat/accueil-audit-marketing` (qui contient toutes les autres branches), devenue la branche par défaut.
+- `ci.yml` : sur pull request, et appelé par `deploy.yml` ; `deploy.yml` : vérifications puis déploiement sur le runner `immotopia-site` du serveur alliance (rsync hors `.env`, `docker compose up -d --build`, contrôle de santé, retour arrière automatique). `deploy/install-runner.sh` installe le runner.
+- README, RUNBOOK et AGENTS.md à jour (retour arrière, secours manuel).
+
+Pièges et décisions :
+
+- La production tournait sur le code de la PR n°2 ; la PR n°3 (7 rôles sur l'accueil) n'était pas déployée : elle part au premier déploiement automatique.
+- Protection de branche : exiger une PR pour `main` est un réglage GitHub à faire par l'utilisateur.
+
+---
+
+## Branche `claude/lucid-turing-ug7vub` — 2026-10-02
+
+**État :** prêt à relire
+**Dernier commit :** voir `git log`
+
+Fait :
+
+- Section « À chaque rôle » de l'accueil : 7 onglets au lieu de 3 (ajout Gestionnaire, Propriétaire, Locataire, Copropriétaire) dans `content.ts` (`roles`, FR/EN), `roles.tsx` (aperçu `ListVisual`, lien de comparatif) et `nav.ts` (ancres `#roles-…`). Contenus tirés du wiki (portails « disponible »).
+- `tsc`, `lint` et `build` OK ; 7 onglets cliqués en FR et EN, bureau et mobile (Playwright), sans débordement.
+
+Reste à faire :
+
+- Relire les textes.
+
+---
 
 ## Branche `feat/packs-patrimoine-wiki` — 2026-10-02
 

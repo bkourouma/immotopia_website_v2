@@ -7,7 +7,7 @@ export const patrimoineMultiActifs: WikiDomain = {
   summary:
     "Suivez vos biens et actifs détenus en propre : SCI, fiscalité, trésorerie, entretien, assurances. Valeur nette et projections en développement.",
   intro:
-    "Ce domaine s'adresse aux particuliers, à la diaspora, aux entreprises, aux institutionnels et aux agences qui suivent leurs biens détenus en propre. Disponibles aujourd'hui : les entités détentrices (SCI, holdings) et la consolidation par entité, la fiscalité Côte d'Ivoire et Mali (estimations indicatives), le plan de trésorerie prévisionnel, l'import en masse et l'export, la régularisation foncière, le carnet d'entretien, les assurances et les sinistres, ainsi que les alertes d'échéance. En développement : le suivi de tous les actifs (parts de sociétés, épargne, véhicules, créances), les dettes, les parts détenues, la valeur nette consolidée et son évolution, les projections sur 1 à 30 ans, les simulations et l'espace particulier. Les packs Patrimoine offrent la gestion locative directe de vos propres biens, sans mandat ni propriétaire tiers.",
+    "Ce domaine s'adresse aux particuliers, à la diaspora, aux entreprises, aux institutionnels et aux agences qui suivent leurs biens détenus en propre. Disponibles aujourd'hui : les entités détentrices (SCI, holdings) et la consolidation par entité, la fiscalité Côte d'Ivoire et Mali (estimations indicatives), le plan de trésorerie prévisionnel, l'import en masse et l'export, la régularisation foncière, le carnet d'entretien, les assurances et les sinistres, ainsi que les alertes d'échéance. En développement : le suivi de tous les actifs (parts de sociétés, épargne, véhicules, créances), les dettes, les parts détenues, la valeur nette consolidée et son évolution, les projections sur 1 à 30 ans, les simulations et l'espace particulier. Les packs Patrimoine offrent la gestion locative directe de vos propres biens, sans mandat ni propriétaire tiers. Pour une vue d'ensemble, voir le [logiciel de gestion de patrimoine immobilier](/logiciel-gestion-patrimoine-immobilier-cote-divoire).",
   features: [
     {
       slug: "actifs-du-patrimoine",
@@ -357,11 +357,12 @@ export const patrimoineMultiActifs: WikiDomain = {
     {
       slug: "espace-particulier",
       title: "Espace particulier",
-      metaTitle: "Espace particulier : suivre son patrimoine, palier gratuit et plus",
+      h1: "Espace particulier : suivre son patrimoine immobilier sans agence",
+      metaTitle: "Suivre son patrimoine immobilier : espace particulier",
       summary:
-        "Créez votre espace personnel pour suivre votre patrimoine : valeur nette, biens, baux. Un palier gratuit limité et un palier plus. En développement.",
+        "Suivez votre patrimoine depuis un espace personnel : valeur nette, biens, baux et limite d'actifs par palier. Fonction en cours de développement.",
       intro:
-        "L'espace particulier est pensé pour une personne qui suit son propre patrimoine, sans agence. Vous le créez vous-même en quelques champs. Le menu est réduit à l'essentiel : accueil sur la valeur nette, biens, baux, paramètres et abonnement. Le palier gratuit limite le nombre d'actifs suivis à dix, le palier plus relève ce plafond. Cette fonction est en cours de développement. Un espace particulier suit ses propres biens, jamais ceux d'un tiers.",
+        "Cette fiche décrit l'usage de l'espace au quotidien ; sa création et son abonnement sont dans [Créer son espace particulier et choisir son palier](/wiki/agence-et-abonnement/espace-particulier). L'espace particulier est pensé pour une personne qui suit son propre patrimoine, sans agence. Vous le créez vous-même en quelques champs. Le menu est réduit à l'essentiel : accueil sur la valeur nette, biens, baux, paramètres et abonnement. Le palier gratuit limite le nombre d'actifs suivis à dix, le palier plus relève ce plafond. Cette fonction est en cours de développement. Un espace particulier suit ses propres biens, jamais ceux d'un tiers.",
       packs: ["particulier-gratuit", "particulier-plus"],
       profiles: ["visiteur", "direction"],
       menu: "Créer mon espace ; Paramètres › Abonnement",
@@ -397,7 +398,11 @@ export const patrimoineMultiActifs: WikiDomain = {
           output: "Un lien de paiement. Le palier ne change qu'une fois le paiement confirmé. Le tarif affiché est provisoire.",
         },
       ],
-      related: ["patrimoine-multi-actifs/valeur-nette", "patrimoine-multi-actifs/actifs-du-patrimoine"],
+      related: [
+        "patrimoine-multi-actifs/valeur-nette",
+        "patrimoine-multi-actifs/actifs-du-patrimoine",
+        "agence-et-abonnement/espace-particulier",
+      ],
     },
     {
       slug: "entites-detentrices",

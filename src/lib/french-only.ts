@@ -9,16 +9,19 @@ export const frenchOnlyPaths = [
   "/logiciel-syndic-copropriete-cote-divoire",
   "/meilleur-logiciel-immobilier-cote-divoire",
   "/crm-immobilier-cote-divoire",
+  "/crm-promoteur-immobilier-cote-divoire",
   "/paiement-loyer-charges-mobile-money-cote-divoire",
   "/maintenance-immobiliere-ticketing-cote-divoire",
   "/tableaux-de-bord-kpi-immobilier-cote-divoire",
   "/logiciel-immobilier-afrique",
   "/immotopia-vs-excel",
   "/gestion-locative-vs-excel",
+  "/logiciel-gestion-patrimoine-immobilier-cote-divoire",
+  "/logiciel-promoteur-immobilier-cote-divoire",
 ];
 
-// Rubriques entières en français seulement (toutes leurs sous-pages) : le wiki des fonctionnalités.
-export const frenchOnlyPrefixes = ["/wiki"];
+// Rubriques entières en français seulement (toutes leurs sous-pages) : le wiki des fonctionnalités et les guides.
+export const frenchOnlyPrefixes = ["/wiki", "/guides"];
 
 export const isFrenchOnly = (path: string) =>
   frenchOnlyPaths.includes(path) || frenchOnlyPrefixes.some((p) => path === p || path.startsWith(`${p}/`));

@@ -70,9 +70,10 @@ npm run lint                         # ESLint 9, configuration eslint-config-nex
 node scripts/check-comparatif-en.mjs # traduction anglaise du comparatif alignée sur le français
 ```
 
-Il n'y a **aucun test automatisé** (pas de script `test`, pas de framework) :
-un changement de comportement se vérifie par `build`, puis dans le navigateur
-(compétence `run-site`). Ne pas prétendre avoir « lancé les tests ».
+Les tests automatisés se limitent à `npm test` (`node --test`, sans dépendance :
+consentement GA4, bandeau, politique de confidentialité). Pour le reste, un
+changement de comportement se vérifie par `build`, puis dans le navigateur
+(compétence `run-site`). Ne pas prétendre avoir « lancé les tests » sans `npm test`.
 
 ## Règles propres au projet
 
@@ -129,11 +130,12 @@ aucun HTML injecté).
   impose de reconstruire l'image.
 - `next build` charge `.env.local` s'il existe ; la CI construit sans aucun
   secret (les routes API lisent leurs variables à l'exécution).
-- Le déploiement (`ssh alliance`, `scp … alliance:`) n'est plus refusé par
-  le hook, mais un agent ne déploie qu'après avoir demandé, dans la
-  conversation, l'autorisation de l'utilisateur et obtenu un « oui » explicite
-  pour ce déploiement (décision du 2026-10-02) ; l'accord ne vaut que pour
-  l'opération demandée.
+- Le déploiement est automatique : fusionner une PR dans `main` met le site en
+  production (`.github/workflows/deploy.yml`, runner auto-hébergé sur `alliance`).
+  Un agent ne fusionne dans `main` qu'avec un « oui » explicite de l'utilisateur,
+  demandé dans la conversation pour cette fusion. Le déploiement manuel
+  (`ssh alliance`, `scp … alliance:`) reste un secours, soumis au même accord
+  explicite ; procédure et retour arrière dans `docs/workflows/RUNBOOK.md`.
 - La dette mesurée le 2026-09-27 est nulle (`tsc` : 0 erreur, `lint` :
   0 erreur) : toute nouvelle erreur est une régression.
 - Sur un checkout neuf, `npx tsc --noEmit` échoue (`PageProps` introuvable,

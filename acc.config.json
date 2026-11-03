@@ -30,13 +30,13 @@
     "build": "npm run build",
     "typecheck": "npx tsc --noEmit",
     "lint": "npm run lint",
-    "test": ""
+    "test": "npm test"
   },
   "ports": {
     "web": 3000
   },
   "git": {
-    "mainBranch": "master",
+    "mainBranch": "main",
     "protectedBranches": [
       "main",
       "master"

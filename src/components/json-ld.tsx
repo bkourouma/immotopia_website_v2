@@ -26,8 +26,7 @@ function Script({ data }: { data: object }) {
   );
 }
 
-export async function OrganizationJsonLd() {
-  const { locale } = await getI18n();
+export function OrganizationJsonLd() {
   return (
     <Script
       data={{
@@ -61,7 +60,8 @@ export async function OrganizationJsonLd() {
           {
             "@type": "WebSite",
             "@id": `${SITE_URL}/#website`,
-            url: absolute(locale, "/"),
+            // Toujours l'accueil français (langue par défaut, x-default) : y mettre /en ferait préférer l'anglais pour la marque
+            url: SITE_URL,
             name: "ImmoTopia",
             inLanguage: ["fr-CI", "en"],
             publisher: { "@id": `${SITE_URL}/#organization` },

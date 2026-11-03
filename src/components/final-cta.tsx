@@ -2,7 +2,8 @@
 
 import { ArrowRight, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 import type { ReactNode } from "react";
-import { footerProductLinks } from "@/lib/content";
+import { ManageCookiesButton } from "./consent/manage-cookies-button";
+import { footerColumns } from "@/lib/content";
 import { contact, legal, whatsappLink } from "@/lib/site";
 import { LanguageSwitcher } from "./language-switcher";
 import { useI18n } from "./locale-provider";
@@ -13,6 +14,7 @@ import { Logo, MagneticButton, Reveal } from "./ui";
 export function FinalCta() {
   const { open } = useDemo();
   const { locale, t } = useI18n();
+  const { product, resources } = footerColumns(locale);
   return (
     <section className="bg-paper px-3 pb-3">
       <Reveal>
@@ -45,7 +47,7 @@ export function FinalCta() {
       </Reveal>
 
       <footer className="mx-auto max-w-6xl px-5 pt-14 pb-24 text-sm text-ink-900/60 sm:pb-10">
-        <div className="grid gap-10 sm:grid-cols-2 md:grid-cols-[1.3fr_1fr_1fr_1.2fr]">
+        <div className="grid gap-10 sm:grid-cols-2 md:grid-cols-[1.3fr_1fr_1fr_1fr_1.2fr]">
           <div>
             <Logo onLight full />
             <p className="mt-4 max-w-xs">
@@ -56,7 +58,14 @@ export function FinalCta() {
             </p>
           </div>
           <FooterCol title={t("Produit", "Product")}>
-            {footerProductLinks(locale).map((l) => (
+            {product.map((l) => (
+              <SmartLink key={l.href} href={l.href} className="inline-flex min-h-11 items-center md:min-h-0 transition-colors hover:text-ink-900">
+                {l.label}
+              </SmartLink>
+            ))}
+          </FooterCol>
+          <FooterCol title={t("Ressources", "Resources")}>
+            {resources.map((l) => (
               <SmartLink key={l.href} href={l.href} className="inline-flex min-h-11 items-center md:min-h-0 transition-colors hover:text-ink-900">
                 {l.label}
               </SmartLink>
@@ -72,6 +81,7 @@ export function FinalCta() {
             <SmartLink href="/confidentialite" className="inline-flex min-h-11 items-center md:min-h-0 transition-colors hover:text-ink-900">
               {t("Confidentialité", "Privacy")}
             </SmartLink>
+            <ManageCookiesButton className="text-left transition-colors hover:text-ink-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500" />
           </FooterCol>
           <FooterCol title={t("Nous joindre", "Get in touch")}>
             <a href={contact.phoneHref} className="inline-flex min-h-11 items-center md:min-h-0 gap-2 transition-colors hover:text-ink-900">

@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ArrowRight } from "lucide-react";
 import { FinalCta } from "@/components/final-cta";
+import { InlineLinks } from "@/components/inline-links";
 import { JsonLd } from "@/components/json-ld";
+
 import { Navbar } from "@/components/navbar";
 import { PageHero } from "@/components/page-hero";
 import { SmartLink } from "@/components/smart-link";
@@ -27,6 +29,8 @@ export async function generateMetadata({ params }: PageProps<"/[lang]/wiki/[doma
     description: d.summary,
     alternates: { canonical: url },
     openGraph: { title, description: d.summary, url, locale: "fr_CI" },
+    // Hors sitemap (src/app/sitemap.ts) mais toujours indexable : on ne la passe pas en noindex
+    ...(d.slug === "administration-plateforme" ? { robots: { index: true } } : {}),
   };
 }
 
@@ -47,7 +51,9 @@ export default async function WikiDomainPage({ params }: PageProps<"/[lang]/wiki
       <JsonLd data={{ "@context": "https://schema.org", ...breadcrumbLd(crumbs) }} />
       <main className="bg-paper">
         <PageHero eyebrow="Wiki des fonctionnalités" title={d.title}>
-          <p>{d.intro}</p>
+          <p>
+            <InlineLinks text={d.intro} linkClassName="font-medium text-white underline underline-offset-2 hover:text-mint-400" />
+          </p>
         </PageHero>
 
         <div className="mx-auto max-w-6xl px-5 py-10 md:py-16">
