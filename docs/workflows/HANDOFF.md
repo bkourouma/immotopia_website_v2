@@ -41,6 +41,17 @@ Pièges et décisions :
 
 ---
 
+
+## Branche `claude/issue-78` (PR #79) — 2026-11-04
+
+**État :** conflits résolus, prêt pour la CI.
+**Dernier commit :** résolution dans le commit courant (voir git log).
+
+- Main intégré ; section existante conservée avec les précisions Mobile Money et consentement, ajout des portails, usage navigateur/PWA et prix publics, deux FAQ ajoutées sans doublon.
+- Contrôles : check-landings et npm test (30 tests) passent ; build, types, lint et navigateur restent à vérifier sur la chaîne consolidée #79 → #83 → #91 → #93.
+- Aucun déploiement ni fusion dans main. Conserver les changements main et fusionner les PR dans cet ordre, ou utiliser une fusion conservant l'historique de #93 qui inclut les branches précédentes.
+
+
 ## Branche `docs/handoff-packs-patrimoine` — 2026-10-23
 
 - Fait : lien Calendly corrigé (`consultation-alliance-computer-consultants`, l'ancien `30min` était

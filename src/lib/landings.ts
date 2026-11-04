@@ -359,6 +359,9 @@ export const landings: Landing[] = [
           { title: "Mobile Money et paiements", text: "Pour les loyers, l'opérateur est enregistré avec le paiement et le locataire déclare son règlement depuis son portail ; l'agence le valide en un clic. Pour les charges de copropriété, le paiement en ligne par Mobile Money existe, sans commission d'ImmoTopia. Détail dans [paiement des loyers et charges](/paiement-loyer-charges-mobile-money-cote-divoire)." },
           { title: "Relances par e-mail et WhatsApp", text: "Les relances partent par e-mail, WhatsApp ou les deux, selon les préférences et le consentement de chacun." },
           { title: "Assemblées générales en direct", text: "Émargement en ligne, quorum calculé en temps réel et vote de chaque copropriétaire par lien personnel, sans compte." },
+          { title: "Portails propriétaire et locataire", text: "Le propriétaire et le locataire consultent leurs documents depuis un portail en libre-service, sans abonnement à souscrire de leur côté. Les portails sont inclus dans les packs Agence et Opérateur intégré." },
+          { title: "Un usage simple au quotidien", text: "ImmoTopia s'utilise dans le navigateur, sur ordinateur, tablette ou téléphone, et s'installe sur l'écran d'accueil sans passer par un magasin d'applications." },
+          { title: "Des prix publics", text: "Les packs et leurs prix en FCFA hors taxes sont affichés sur la page [tarifs](/tarifs), avec un premier mois offert et sans engagement." },
         ],
       },
       {
@@ -393,6 +396,8 @@ export const landings: Landing[] = [
       { q: "Le Mobile Money est-il géré pour les loyers ?", a: "Tous les moyens de paiement sont acceptés. Pour le Mobile Money, l'opérateur est enregistré avec le paiement, et le locataire peut déclarer lui-même son règlement depuis son portail ; l'agence le valide en un clic." },
       { q: "Les copropriétaires peuvent-ils payer leurs charges en ligne ?", a: "Oui, par Mobile Money, depuis le lien « Payer cet appel » ou leur portail. ImmoTopia ne prend aucune commission." },
       { q: "Puis-je reprendre mes fichiers Excel ?", a: "Oui : la mise en route accompagnée comprend la reprise de vos biens, contacts, baux ou copropriétés. Elle est facultative si vous saisissez vous-même vos données." },
+      { q: "Faut-il installer ImmoTopia sur chaque poste ?", a: "Non. ImmoTopia est une application web : elle s'utilise depuis un navigateur, sur ordinateur, tablette ou téléphone, et peut s'installer sur l'écran d'accueil si vous le souhaitez." },
+      { q: "Les propriétaires et les locataires doivent-ils payer un abonnement ?", a: "Non. Ils disposent de portails en libre-service, sans abonnement à souscrire : seul le cabinet abonné paie son pack." },
     ],
     related: ["logiciel-immobilier-cote-divoire", "immotopia-vs-excel", "logiciel-immobilier-afrique"],
   },
