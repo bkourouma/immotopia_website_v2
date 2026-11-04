@@ -10,6 +10,7 @@ import { PageHero } from "@/components/page-hero";
 import { SmartLink } from "@/components/smart-link";
 import { breadcrumbLd, PackChips, StatusBadge, WikiBreadcrumb, WikiCta } from "@/components/wiki/wiki-ui";
 import { actionAnchor, domainBySlug, wikiDomains, wikiHref } from "@/lib/wiki";
+import { wikiMetaTitle } from "@/lib/wiki/meta-title";
 
 // Wiki en français seulement : une page par domaine, générée au build.
 export const dynamicParams = false;
@@ -22,7 +23,7 @@ export async function generateMetadata({ params }: PageProps<"/[lang]/wiki/[doma
   const { lang, domaine } = await params;
   const d = domainBySlug(domaine);
   if (lang !== "fr" || !d) return {};
-  const title = `${d.metaTitle} | ImmoTopia`;
+  const title = wikiMetaTitle(d.metaTitle);
   const url = wikiHref(d.slug);
   return {
     title: { absolute: title },

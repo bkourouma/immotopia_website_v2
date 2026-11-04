@@ -22,6 +22,7 @@ const legacyRedirects: [string, string][] = [
   ["/vision/:slug", "/"],
   // Pages produit et pages métier → accueil (les pages thématiques gardent leur URL : src/lib/landings.ts)
   ["/fonctionnalites/crm-immobilier", "/crm-promoteur-immobilier-cote-divoire"],
+  ["/fonctionnalites/gestion-locative", "/gestion-locative-cote-divoire"],
   ["/fonctionnalites/:slug", "/"],
   ["/fonctionnalites", "/"],
   ["/la-solution/:slug", "/"],

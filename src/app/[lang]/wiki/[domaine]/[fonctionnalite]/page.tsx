@@ -9,6 +9,7 @@ import { PageHero } from "@/components/page-hero";
 import { SmartLink } from "@/components/smart-link";
 import { breadcrumbLd, PackChips, StatusBadge, WikiBreadcrumb, WikiCta } from "@/components/wiki/wiki-ui";
 import { SITE_URL } from "@/lib/site";
+import { wikiMetaTitle } from "@/lib/wiki/meta-title";
 import {
   actionAnchor,
   actionStatus,
@@ -34,7 +35,7 @@ export async function generateMetadata({ params }: PageProps<"/[lang]/wiki/[doma
   const found = featureBySlug(domaine, fonctionnalite);
   if (lang !== "fr" || !found) return {};
   const { feature } = found;
-  const title = `${feature.metaTitle} | ImmoTopia`;
+  const title = wikiMetaTitle(feature.metaTitle);
   const url = wikiHref(domaine, fonctionnalite);
   return {
     title: { absolute: title },
@@ -92,6 +93,12 @@ export default async function WikiFeaturePage({ params }: PageProps<"/[lang]/wik
       <JsonLd data={{ "@context": "https://schema.org", "@graph": graph }} />
       <main className="bg-paper">
         <PageHero eyebrow={domain.title} title={feature.h1 ?? feature.title}>
+          {feature.enBref && (
+            <p>
+              <strong className="font-semibold text-white">En bref : </strong>
+              <InlineLinks text={feature.enBref} linkClassName="font-medium text-white underline underline-offset-2 hover:text-mint-400" />
+            </p>
+          )}
           <p>
             <InlineLinks text={feature.intro} linkClassName="font-medium text-white underline underline-offset-2 hover:text-mint-400" />
           </p>

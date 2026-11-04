@@ -29,6 +29,7 @@ const fail = (msg) => {
 
 const slugs = landings.map((l) => l.slug);
 const guideSlugs = [...readFileSync(lib("guides.ts"), "utf8").matchAll(/^\s+slug: "([\w-]+)"/gm)].map((m) => m[1]);
+const toolSlugs = [...readFileSync(lib("tools.ts"), "utf8").matchAll(/^\s+slug: "([\w-]+)"/gm)].map((m) => m[1]);
 const staticRoutes = ["/", "/tarifs", "/contact", "/faq", "/comparatif", "/outils", "/versions", "/wiki", "/guides"];
 
 const textsOf = (l) => [
@@ -70,6 +71,8 @@ for (const l of landings) {
         if (b && !wikiLinkOk(b, c)) fail(`${at} : lien wiki cassé ${path}`);
       } else if (a === "guides") {
         if (b && !guideSlugs.includes(b)) fail(`${at} : lien guide cassé ${path}`);
+      } else if (a === "outils" && b) {
+        if (!toolSlugs.includes(b)) fail(`${at} : lien outil cassé ${path}`);
       } else if (!staticRoutes.includes(path) && !slugs.includes(path.slice(1))) fail(`${at} : lien interne inconnu ${path}`);
     }
   }

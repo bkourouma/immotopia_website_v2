@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Bricolage_Grotesque, Inter } from "next/font/google";
+import localFont from "next/font/local";
 import { notFound } from "next/navigation";
 import "./globals.css";
 import { Analytics } from "@/components/analytics";
@@ -10,11 +10,17 @@ import { Providers } from "@/components/providers";
 import { alternates, hasLocale, htmlLang, locales, ogLocale, translator } from "@/lib/i18n";
 import { SITE_URL } from "@/lib/site";
 
-const inter = Inter({ variable: "--font-inter", subsets: ["latin"] });
-const bricolage = Bricolage_Grotesque({
+const inter = localFont({
+  src: "../fonts/inter-latin-100-900.woff2",
+  weight: "100 900",
+  display: "swap",
+  variable: "--font-inter",
+});
+const bricolage = localFont({
+  src: "../fonts/bricolage-grotesque-latin-500-800.woff2",
+  weight: "500 800",
+  display: "swap",
   variable: "--font-bricolage",
-  subsets: ["latin"],
-  weight: ["500", "600", "700", "800"],
 });
 
 export function generateStaticParams() {
