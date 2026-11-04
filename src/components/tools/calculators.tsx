@@ -10,8 +10,8 @@ import { Card, Choice, Line, Num, Stat, Text, UpsellCta, Warning } from "./tool-
 function Layout({ inputs, results }: { inputs: ReactNode; results: ReactNode }) {
   return (
     <div className="grid items-start gap-6 lg:grid-cols-[1.15fr_1fr]">
-      <div className="space-y-6">{inputs}</div>
-      <div className="space-y-4 lg:sticky lg:top-24">{results}</div>
+      <div className="min-w-0 space-y-6">{inputs}</div>
+      <div className="min-w-0 space-y-4 lg:sticky lg:top-24">{results}</div>
     </div>
   );
 }
@@ -86,7 +86,7 @@ export function CautionCalculator() {
             value={fcfa(total)}
             sub={t(`soit ${months} mois de loyer`, `i.e. ${months} months of rent`)}
           />
-          <div className="rounded-2xl bg-white p-5 ring-1 ring-ink-900/[0.07]">
+          <div className="rounded-2xl bg-white p-4 ring-1 sm:p-5 ring-ink-900/[0.07]">
             <StackBar
               parts={[
                 { label: t("Caution", "Deposit"), value: d, color: "#5B5BF7" },
@@ -189,7 +189,7 @@ export function YieldCalculator() {
       }
       results={
         <>
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid gap-3 min-[480px]:grid-cols-2">
             <Stat label={t("Rendement brut", "Gross yield")} value={pct(gross)} sub={t("loyers annuels / prix", "annual rent / price")} />
             <Stat
               highlight
@@ -198,7 +198,7 @@ export function YieldCalculator() {
               sub={t("après frais et charges", "after costs and charges")}
             />
           </div>
-          <div className="rounded-2xl bg-white p-5 ring-1 ring-ink-900/[0.07]">
+          <div className="rounded-2xl bg-white p-4 ring-1 sm:p-5 ring-ink-900/[0.07]">
             <div className="divide-y divide-ink-900/[0.06]">
               <Line label={t("Coût total de l'investissement", "Total investment cost")} value={fcfa(invest)} />
               <Line label={t("Loyers encaissés sur l'année", "Rent collected over the year")} value={fcfa(collected)} />
@@ -288,7 +288,7 @@ export function CommissionCalculator() {
       }
       results={
         <>
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid gap-3 min-[480px]:grid-cols-2">
             <Stat
               label={t("Commission TTC", "Commission incl. VAT")}
               value={fcfa(ttc)}
@@ -296,7 +296,7 @@ export function CommissionCalculator() {
             />
             <Stat highlight label={t("Net à reverser", "Net payable")} value={fcfa(net)} sub={t("au propriétaire", "to the landlord")} />
           </div>
-          <div className="rounded-2xl bg-white p-5 ring-1 ring-ink-900/[0.07]">
+          <div className="rounded-2xl bg-white p-4 ring-1 sm:p-5 ring-ink-900/[0.07]">
             <StackBar
               parts={[
                 {
@@ -362,8 +362,8 @@ export function ChargesCalculator() {
               )}
             />
           </Card>
-          <div className="rounded-[24px] border border-ink-900/[0.07] bg-white p-5 shadow-sm md:p-6">
-            <div className="mb-4 flex items-center justify-between">
+          <div className="rounded-[24px] border border-ink-900/[0.07] bg-white p-4 shadow-sm sm:p-5 md:p-6">
+            <div className="mb-4 flex flex-wrap items-center justify-between gap-x-3 gap-y-1">
               <h2 className="font-display text-lg font-bold">{t("Les lots", "Units")}</h2>
               <span className="text-sm text-ink-900/50">
                 {total.toLocaleString("fr-FR")} {t("tantièmes au total", "shares in total")}
@@ -378,9 +378,9 @@ export function ChargesCalculator() {
                     initial={{ opacity: 0, height: 0 }}
                     animate={{ opacity: 1, height: "auto" }}
                     exit={{ opacity: 0, height: 0 }}
-                    className="grid grid-cols-[auto_1fr_8.5rem_auto] items-end gap-2"
+                    className="grid grid-cols-[1fr_8.5rem] items-end gap-2 rounded-xl border border-ink-900/[0.07] p-3 sm:grid-cols-[auto_1fr_8.5rem_auto] sm:border-0 sm:p-0"
                   >
-                    <span className="mb-3.5 size-2.5 rounded-full" style={{ background: COLORS[i % COLORS.length] }} />
+                    <span className="mb-3.5 hidden size-2.5 rounded-full sm:block" style={{ background: COLORS[i % COLORS.length] }} />
                     <Text label={i === 0 ? lotLabel : ""} value={l.name} onChange={(v) => update(l.id, { name: v })} />
                     <Num
                       label={i === 0 ? t("Tantièmes", "Shares") : ""}
@@ -392,7 +392,7 @@ export function ChargesCalculator() {
                       onClick={() => setLots((ls) => ls.filter((x) => x.id !== l.id))}
                       disabled={lots.length <= 1}
                       aria-label={t(`Supprimer ${l.name}`, `Remove ${l.name}`)}
-                      className="mb-1 grid size-10 cursor-pointer place-items-center rounded-xl text-ink-900/40 transition hover:bg-rose-50 hover:text-rose-600 disabled:opacity-30"
+                      className="col-span-2 grid size-11 cursor-pointer justify-self-end sm:col-span-1 sm:mb-1 sm:size-10 sm:justify-self-auto place-items-center rounded-xl text-ink-900/40 transition hover:bg-rose-50 hover:text-rose-600 disabled:opacity-30"
                     >
                       <Trash2 className="size-4" />
                     </button>
@@ -411,7 +411,7 @@ export function ChargesCalculator() {
                   },
                 ])
               }
-              className="mt-4 inline-flex cursor-pointer items-center gap-2 rounded-full border border-dashed border-ink-900/20 px-4 py-2 text-sm font-semibold text-ink-900/70 transition hover:border-brand-500 hover:text-brand-600"
+              className="mt-4 inline-flex min-h-11 md:min-h-0 w-full cursor-pointer items-center justify-center gap-2 rounded-full border border-dashed sm:w-auto border-ink-900/20 px-4 py-2 text-sm font-semibold text-ink-900/70 transition hover:border-brand-500 hover:text-brand-600"
             >
               <Plus className="size-4" /> {t("Ajouter un lot", "Add a unit")}
             </button>
@@ -427,7 +427,7 @@ export function ChargesCalculator() {
             sub={`${fcfa(budget)} ${t("par an", "per year")}`}
           />
           <div className="overflow-hidden rounded-2xl bg-white ring-1 ring-ink-900/[0.07]">
-            <div className="grid grid-cols-[1fr_auto_auto] gap-x-4 border-b border-ink-900/[0.06] px-4 py-2.5 text-xs font-medium text-ink-900/45">
+            <div className="grid grid-cols-[1fr_auto_auto] gap-x-3 border-b border-ink-900/[0.06] px-3 py-2.5 sm:gap-x-4 sm:px-4 text-xs font-medium text-ink-900/45">
               <span>{lotLabel}</span>
               <span className="text-right">{t("Quote-part", "Share")}</span>
               <span className="text-right">{t("Par mois", "Per month")}</span>
@@ -435,7 +435,7 @@ export function ChargesCalculator() {
             {lots.map((l, i) => {
               const share = total ? l.shares / total : 0;
               return (
-                <div key={l.id} className="relative grid grid-cols-[1fr_auto_auto] gap-x-4 px-4 py-3 text-sm">
+                <div key={l.id} className="relative grid grid-cols-[1fr_auto_auto] gap-x-3 px-3 py-3 text-sm sm:gap-x-4 sm:px-4">
                   <motion.span
                     aria-hidden
                     className="absolute inset-y-0 left-0 opacity-10"
@@ -443,7 +443,7 @@ export function ChargesCalculator() {
                     initial={false}
                     animate={{ width: `${share * 100}%` }}
                   />
-                  <span className="relative truncate font-medium">{l.name || t("Sans nom", "Unnamed")}</span>
+                  <span className="relative min-w-0 truncate font-medium">{l.name || t("Sans nom", "Unnamed")}</span>
                   <span className="relative text-right text-ink-900/60 tabular-nums">{pct(share * 100, 1)}</span>
                   <span className="relative text-right font-semibold tabular-nums">{fcfa((budget * share) / 12)}</span>
                 </div>

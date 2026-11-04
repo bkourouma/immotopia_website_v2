@@ -63,7 +63,7 @@ export function ComparatifView() {
             role="radio"
             aria-checked={rival === i}
             onClick={() => setRival(i)}
-            className={`cursor-pointer rounded-full px-3 py-1.5 transition-colors ${rival === i ? "bg-brand-500 text-white" : "text-ink-900/60 hover:text-ink-900"}`}
+            className={`min-h-11 cursor-pointer rounded-full px-3.5 py-1.5 transition-colors md:min-h-0 md:px-3 ${rival === i ? "bg-brand-500 text-white" : "text-ink-900/60 hover:text-ink-900"}`}
           >
             {label}
           </button>
@@ -72,7 +72,7 @@ export function ComparatifView() {
       <button
         onClick={() => setOnlyExclusive((v) => !v)}
         aria-pressed={onlyExclusive}
-        className={`inline-flex cursor-pointer items-center gap-1.5 rounded-full border px-3.5 py-2 text-xs font-semibold transition-colors ${
+        className={`inline-flex min-h-11 cursor-pointer items-center gap-1.5 rounded-full border px-3.5 py-2 text-xs md:min-h-0 font-semibold transition-colors ${
           onlyExclusive ? "border-sun-500 bg-sun-500 text-ink-950" : "border-ink-900/10 bg-white text-ink-900/70 hover:text-ink-900"
         }`}
       >
@@ -86,7 +86,7 @@ export function ComparatifView() {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder={t("Chercher : caisse, WhatsApp, bail…", "Search: cash desk, WhatsApp, lease…")}
-          className="w-full rounded-full border border-ink-900/10 bg-white py-2 ps-9 pe-4 text-sm shadow-sm outline-none focus:border-brand-500"
+          className="min-h-11 w-full rounded-full border border-ink-900/10 bg-white py-2 ps-9 pe-4 text-base shadow-sm md:min-h-0 md:text-sm outline-none focus:border-brand-500"
         />
       </label>
     </div>
@@ -97,7 +97,7 @@ export function ComparatifView() {
   return (
     <>
       {/* ——— En-tête : le score et la carte ——— */}
-      <section className="relative isolate overflow-hidden bg-ink-950 pt-36 pb-20 text-white">
+      <section className="relative isolate overflow-hidden bg-ink-950 pt-28 pb-16 text-white md:pt-36 md:pb-20">
         <div className="grid-lines absolute inset-0 -z-10 [mask-image:radial-gradient(ellipse_at_50%_20%,black,transparent_70%)]" />
         <div aria-hidden className="absolute -top-40 left-1/2 -z-10 h-[800px] w-[1300px] -translate-x-1/2" style={{ background: "radial-gradient(closest-side, rgba(91,91,247,0.32), rgba(255,138,61,0.12) 55%, transparent)" }} />
         <div className="mx-auto max-w-6xl px-5">
@@ -109,7 +109,7 @@ export function ComparatifView() {
               {t("ImmoTopia face à", "ImmoTopia versus")}{" "}
               <span className="text-gradient">{t("trois logiciels similaires.", "three similar software products.")}</span>
             </h1>
-            <p className="mx-auto mt-6 max-w-2xl text-lg text-white/65">
+            <p className="mx-auto mt-5 max-w-2xl text-base text-white/65 md:mt-6 md:text-lg">
               {t(
                 `${rows.length} fonctionnalités passées au crible, domaine par domaine, à partir des pages publiques de chaque éditeur, consultées le ${CONSULTED_ON.fr}. Chaque case renvoie à sa source.`,
                 `${rows.length} features examined, domain by domain, based on each vendor's public pages, consulted on ${CONSULTED_ON.en}. Every cell links to its source.`,
@@ -117,7 +117,7 @@ export function ComparatifView() {
             </p>
           </div>
 
-          <div className="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-10 grid grid-cols-2 gap-2.5 sm:gap-3 md:mt-12 lg:grid-cols-4">
             {products.map((p, i) => (
               <ScoreCard key={p.id} name={p.name} color={p.color} value={total[i]} max={rows.length} lead={i === 0} />
             ))}
@@ -129,7 +129,7 @@ export function ComparatifView() {
             )}
           </p>
 
-          <div className="mt-14 grid items-start gap-8 lg:grid-cols-[1fr_1.5fr]">
+          <div className="mt-12 grid items-start gap-8 md:mt-14 lg:grid-cols-[1fr_1.5fr]">
             <div>
               <h2 className="font-display text-3xl leading-tight font-bold tracking-tight md:text-4xl">{t("La carte, en un coup d'œil.", "The map, at a glance.")}</h2>
               <p className="mt-4 text-white/60">
@@ -156,7 +156,7 @@ export function ComparatifView() {
 
       {/* ——— Barre de navigation collante ——— */}
       <div className="sticky top-[76px] z-30 border-b border-ink-900/[0.07] bg-paper/85 backdrop-blur-xl">
-        <div className="mx-auto flex max-w-6xl flex-col gap-3 px-5 py-3">
+        <div className="mx-auto flex max-w-6xl flex-col gap-3 px-5 py-2 md:py-3">
           <nav aria-label={t("Domaines du comparatif", "Comparison domains")} className="mask-fade-x relative -mx-5 flex gap-1.5 overflow-x-auto px-5 [scrollbar-width:none]">
             {domains.map((d) => (
               <a
@@ -168,7 +168,7 @@ export function ComparatifView() {
                   if (el && bar && active === d.id) bar.scrollTo({ left: el.offsetLeft - bar.clientWidth / 2 + el.clientWidth / 2, behavior: "smooth" });
                 }}
                 aria-current={active === d.id ? "true" : undefined}
-                className={`relative shrink-0 rounded-full px-3.5 py-1.5 text-sm font-semibold whitespace-nowrap transition-colors ${
+                className={`relative inline-flex min-h-11 shrink-0 items-center rounded-full md:min-h-0 px-3.5 py-1.5 text-sm font-semibold whitespace-nowrap transition-colors ${
                   active === d.id ? "text-white" : "text-ink-900/60 hover:text-ink-900"
                 }`}
               >
@@ -202,7 +202,7 @@ export function ComparatifView() {
       {/* ——— Méthode et sources ——— */}
       <section id="sources" className="bg-paper pb-20">
         <div className="mx-auto max-w-6xl px-5">
-          <div className="rounded-[28px] border border-ink-900/[0.07] bg-white p-6 shadow-sm md:p-10">
+          <div className="rounded-[28px] border border-ink-900/[0.07] bg-white p-5 shadow-sm sm:p-6 md:p-10">
             <h2 className="font-display text-2xl font-bold tracking-tight md:text-3xl">{t("Méthode et sources", "Method and sources")}</h2>
             <p className="mt-3 max-w-3xl text-ink-900/60">
               {t(
@@ -217,7 +217,7 @@ export function ComparatifView() {
                   <span className="min-w-0">
                     <span className="font-semibold">{s.editor}</span> · {s.page}
                     {s.url.startsWith("http") && (
-                      <a href={s.url} target="_blank" rel="noopener noreferrer" className="mt-0.5 flex items-center gap-1 truncate text-xs text-brand-600 hover:underline">
+                      <a href={s.url} target="_blank" rel="noopener noreferrer" className="mt-0.5 flex min-h-11 items-center md:min-h-0 gap-1 truncate text-xs text-brand-600 hover:underline">
                         <ExternalLink className="size-3 shrink-0" /> <span className="truncate">{s.url.replace(/^https?:\/\//, "")}</span>
                       </a>
                     )}
@@ -243,12 +243,12 @@ function ScoreCard({ name, color, value, max, lead }: { name: string; color: str
     return () => c.stop();
   }, [inView, value]);
   return (
-    <div ref={ref} className={`rounded-3xl p-5 ${lead ? "glow-border" : "border border-white/10 bg-white/[0.035]"}`}>
-      <p className="flex items-center gap-2 text-sm font-semibold text-white/80">
+    <div ref={ref} className={`rounded-3xl p-4 sm:p-5 ${lead ? "glow-border" : "border border-white/10 bg-white/[0.035]"}`}>
+      <p className="flex min-w-0 items-center gap-2 text-sm font-semibold text-white/80">
         <span className="size-2.5 rounded-full" style={{ background: color, boxShadow: `0 0 12px ${color}` }} />
         {name}
       </p>
-      <p className="mt-3 font-display text-5xl font-bold tabular-nums">
+      <p className="mt-3 font-display text-4xl font-bold tabular-nums sm:text-5xl">
         {n}
         <span className="text-lg font-semibold text-white/40"> / {max}</span>
       </p>
@@ -269,15 +269,15 @@ function DomainBlock({ id, label, pitch, list, cols }: { id: DomainId; label: st
   const { t } = useI18n();
   const s = scores(list);
   return (
-    <section id={id} className="scroll-mt-16 py-8 first:pt-0 md:scroll-mt-28">
+    <section id={id} className="scroll-mt-36 py-8 first:pt-0 md:scroll-mt-28">
       <div className="flex flex-col justify-between gap-4 md:flex-row md:items-end">
-        <div>
+        <div className="min-w-0">
           <h2 className="font-display text-3xl font-bold tracking-tight md:text-4xl">{label}</h2>
           <p className="mt-1.5 text-ink-900/55">{pitch}</p>
         </div>
-        <div className="flex gap-4" aria-label={t("Fonctions annoncées dans ce domaine", "Features advertised in this domain")}>
+        <div className="grid grid-cols-2 gap-x-4 gap-y-3 sm:flex sm:gap-4" aria-label={t("Fonctions annoncées dans ce domaine", "Features advertised in this domain")}>
           {cols.map((i) => (
-            <div key={i} className="w-20 text-xs">
+            <div key={i} className="min-w-0 text-xs sm:w-20">
               <p className="truncate font-semibold text-ink-900/70">{products[i].name}</p>
               <div className="mt-1 h-1.5 overflow-hidden rounded-full bg-ink-900/[0.07]">
                 <motion.div
@@ -323,14 +323,14 @@ function Row({ row, cols }: { row: CompareRow; cols: number[] }) {
   const exclusive = isExclusive(row);
   return (
     <li className="border-t border-ink-900/[0.05] first:border-t-0">
-      <button onClick={() => setOpen((o) => !o)} aria-expanded={open} className="flex w-full cursor-pointer flex-col gap-3 px-5 py-3.5 text-start transition-colors hover:bg-brand-500/[0.03] md:flex-row md:items-center">
-        <span className="flex flex-1 items-center gap-2 font-medium">
+      <button onClick={() => setOpen((o) => !o)} aria-expanded={open} className="flex min-h-11 w-full cursor-pointer flex-col gap-3 md:min-h-0 px-4 py-3.5 sm:px-5 text-start transition-colors hover:bg-brand-500/[0.03] md:flex-row md:items-center">
+        <span className="flex min-w-0 flex-1 flex-wrap items-center gap-x-2 gap-y-1 md:flex-nowrap md:gap-y-0 font-medium break-words">
           {row.feature}
           {exclusive && (
             <span className="shrink-0 rounded-full bg-sun-500/15 px-2 py-0.5 text-[10px] font-bold tracking-wide text-[#b45309] uppercase">{t("Exclusif", "Exclusive")}</span>
           )}
         </span>
-        <span className="flex items-start gap-3 md:items-center">
+        <span className="flex min-w-0 items-start gap-3 md:items-center">
           {/* Mobile : grille 2 × 2 avec le nom de l'éditeur ; ordinateur : une colonne par éditeur */}
           <span className="grid flex-1 grid-cols-2 gap-x-3 gap-y-2 md:flex md:flex-none md:gap-3">
             {cols.map((i) => (
@@ -346,7 +346,7 @@ function Row({ row, cols }: { row: CompareRow; cols: number[] }) {
       <AnimatePresence initial={false}>
         {open && (
           <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }} className="overflow-hidden">
-            <div className="mx-5 mb-4 rounded-2xl bg-paper p-4 text-sm">
+            <div className="mx-4 mb-4 min-w-0 rounded-2xl bg-paper p-4 text-sm break-words sm:mx-5">
               <p className="text-ink-900/70">{row.note}</p>
               <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1.5 text-xs text-ink-900/50">
                 {cols.map((i) => (
@@ -360,7 +360,7 @@ function Row({ row, cols }: { row: CompareRow; cols: number[] }) {
               <p className="mt-3 flex flex-wrap items-center gap-1.5 text-xs text-ink-900/50">
                 {t("Sources :", "Sources:")}
                 {row.sources.map((s) => (
-                  <a key={s} href={`#src-${s}`} className="rounded-md bg-white px-1.5 py-0.5 font-mono font-semibold text-brand-600 ring-1 ring-ink-900/10 hover:bg-brand-500 hover:text-white">
+                  <a key={s} href={`#src-${s}`} className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-md bg-white px-2 py-1 font-mono md:min-h-0 md:min-w-0 md:px-1.5 md:py-0.5 font-semibold text-brand-600 ring-1 ring-ink-900/10 hover:bg-brand-500 hover:text-white">
                     {s}
                   </a>
                 ))}

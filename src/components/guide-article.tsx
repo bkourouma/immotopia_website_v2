@@ -31,7 +31,7 @@ function Item({ item }: { item: GuideListItem }) {
   );
 }
 
-function Block({ block }: { block: GuideBlock }) {
+export function Block({ block }: { block: GuideBlock }) {
   switch (block.type) {
     case "p":
       return (
