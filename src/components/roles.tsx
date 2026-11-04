@@ -112,7 +112,7 @@ export function Roles() {
               animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
               exit={{ opacity: 0, y: -10, filter: "blur(6px)" }}
               transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-              className="grid items-center gap-10 md:grid-cols-[1fr_1.1fr]"
+              className="grid grid-cols-1 items-center gap-10 md:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)]"
             >
               <div>
                 <h3 className="font-display text-3xl leading-tight font-bold tracking-tight md:text-4xl">{role.headline}</h3>
@@ -164,7 +164,7 @@ function RoleVisual({ id }: { id: RoleId }) {
     const bars = [42, 55, 48, 66, 72, 61, 84, 90];
     return (
       <Panel>
-        <div className="grid grid-cols-3 gap-3">
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-3 md:grid-cols-1 lg:grid-cols-3">
           {[
             [t("Loyers encaissés", "Rent collected"), t("48,2 M", "48.2M"), "+12 %"],
             [t("Taux d'occupation", "Occupancy rate"), "94 %", "+3 pts"],
@@ -294,8 +294,8 @@ function RoleVisual({ id }: { id: RoleId }) {
 
   return (
     <Panel>
-      <div className="flex justify-center gap-4">
-        <div className="w-[260px] shrink-0 rounded-[34px] border-[6px] border-ink-900 bg-[#0b141a] p-3 shadow-2xl">
+      <div className="flex flex-wrap justify-center gap-4">
+        <div className="w-full max-w-[260px] shrink-0 rounded-[34px] border-[6px] border-ink-900 bg-[#0b141a] p-3 shadow-2xl">
           <div className="mx-auto mb-3 h-1.5 w-16 rounded-full bg-white/20" />
           <div className="flex items-center gap-2 border-b border-white/10 pb-2 text-white">
             <span className="grid size-8 place-items-center rounded-full bg-[#25D366]">
@@ -342,7 +342,7 @@ function RoleVisual({ id }: { id: RoleId }) {
             </motion.div>
           </div>
         </div>
-        <div className="hidden flex-1 flex-col gap-2 sm:flex">
+        <div className="hidden min-w-40 flex-1 flex-col gap-2 sm:flex">
           <p className="flex items-center gap-2 text-sm font-semibold">
             <Calendar className="size-4 text-brand-600" /> {t("Visites du jour", "Today's viewings")}
           </p>
