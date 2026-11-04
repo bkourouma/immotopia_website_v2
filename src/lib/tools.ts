@@ -131,16 +131,16 @@ const sources: ToolSource[] = [
       en: "Residential lease template (Côte d'Ivoire)",
     },
     short: {
-      fr: "Un contrat de location prêt à signer, adapté au droit ivoirien.",
-      en: "A ready-to-sign rental agreement, tailored to Ivorian law.",
+      fr: "Un contrat de bail ivoirien prêt à signer, adapté au droit ivoirien.",
+      en: "A ready-to-sign Ivorian lease agreement, tailored to Ivorian law.",
     },
     description: {
       fr: "Générez un contrat de bail à usage d'habitation inspiré du Code de la construction et de l'habitat ivoirien, puis téléchargez-le en PDF.",
       en: "Generate a residential lease agreement based on the Ivorian Construction and Housing Code, then download it as a PDF.",
     },
     seoTitle: {
-      fr: "Modèle de bail d'habitation (Côte d'Ivoire) | ImmoTopia",
-      en: "Residential lease template (Côte d'Ivoire) | ImmoTopia",
+      fr: "Modèle de bail d'habitation Côte d'Ivoire (PDF) | ImmoTopia",
+      en: "Residential lease template Côte d'Ivoire (PDF) | ImmoTopia",
     },
     faq: [
       {
@@ -161,6 +161,46 @@ const sources: ToolSource[] = [
         a: {
           fr: "Le bail doit être enregistré auprès des services des impôts, comme le rappelle le contrat généré. Renseignez-vous auprès de l'administration fiscale ou d'un professionnel du droit sur les droits et délais applicables.",
           en: "The lease must be registered with the tax authorities, as the generated agreement points out. Check the applicable fees and deadlines with the tax administration or a legal professional.",
+        },
+      },
+      {
+        q: {
+          fr: "Un bail verbal est-il valable ?",
+          en: "Is a verbal lease valid?",
+        },
+        a: {
+          fr: "Nous ne tranchons pas la validité juridique d'un accord oral. Un contrat écrit reste le meilleur moyen de prouver le loyer, la durée, la caution et l'avance convenus : mieux vaut donc formaliser le bail par écrit et le faire relire par un professionnel du droit.",
+          en: "We do not rule on the legal validity of an oral agreement. A written contract remains the best way to prove the agreed rent, term, deposit and advance rent, so it is best to put the lease in writing and have a legal professional review it.",
+        },
+      },
+      {
+        q: {
+          fr: "Quelles mentions un bail d'habitation doit-il contenir ?",
+          en: "What must a residential lease contain?",
+        },
+        a: {
+          fr: "Un bon contrat précise au minimum la désignation du logement, la durée, le loyer et son échéance, la caution et l'avance, ainsi que les obligations de chaque partie. Le modèle couvre ces points.",
+          en: "A sound agreement sets out at least a description of the property, the term, the rent and its due date, the deposit and advance rent, and each party's obligations. The template covers these points.",
+        },
+      },
+      {
+        q: {
+          fr: "Peut-on télécharger le modèle de bail en Word ?",
+          en: "Can the lease template be downloaded in Word?",
+        },
+        a: {
+          fr: "Non : le modèle se télécharge en PDF, généré dans votre navigateur. Il n'existe pas de version Word sur cette page.",
+          en: "No: the template downloads as a PDF, generated in your browser. There is no Word version on this page.",
+        },
+      },
+      {
+        q: {
+          fr: "Faut-il faire un état des lieux avec le bail ?",
+          en: "Should a check-in inventory go with the lease?",
+        },
+        a: {
+          fr: "Un état des lieux contradictoire à l'entrée et à la sortie évite la plupart des litiges sur la caution. ImmoTopia propose aussi un modèle d'état des lieux gratuit.",
+          en: "A joint check-in and check-out inventory prevents most disputes over the deposit. ImmoTopia also offers a free inventory template.",
         },
       },
       {
