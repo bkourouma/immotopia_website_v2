@@ -2,12 +2,13 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ReceiptGenerator } from "@/components/tools/client-tools";
 import { ToolShell } from "@/components/tools/tool-shell";
-import { hasLocale } from "@/lib/i18n";
+import { hasLocale, localizeHref } from "@/lib/i18n";
 import { getI18n } from "@/lib/i18n-server";
 import { getTool, toolMetadata } from "@/lib/tools";
 
 const SLUG = "quittance-de-loyer";
 // Le wiki est publié en français seulement : le lien est identique dans les deux langues.
+const MOBILE_MONEY_PAGE = "/paiement-loyer-charges-mobile-money-cote-divoire";
 const WIKI_QUITTANCES = "/wiki/gestion-locative/quittances-et-documents-locatifs";
 const GUIDE_MOBILE_MONEY = "/paiement-loyer-charges-mobile-money-cote-divoire";
 
@@ -31,7 +32,7 @@ export default async function Page() {
             désaccord sur un paiement, c&apos;est la première pièce que l&apos;on demande.
           </p>
 
-          <h2>Mentions obligatoires d&apos;une quittance de loyer</h2>
+          <h2>Que doit contenir une quittance de loyer ivoirienne ?</h2>
           <p>
             Nous n&apos;avons pas relevé de formulaire officiel unique pour la Côte d&apos;Ivoire : votre bail peut d&apos;ailleurs
             prévoir ses propres exigences. Voici les mentions que l&apos;on retrouve habituellement et que ce générateur remplit pour vous :
@@ -44,7 +45,7 @@ export default async function Page() {
             <li>le lieu, la date d&apos;émission et la signature du bailleur.</li>
           </ul>
 
-          <h2>Quittance de loyer et reçu de paiement : quelle différence ?</h2>
+          <h2>Quittance ou reçu de paiement : quelle différence ?</h2>
           <p>
             La <strong>quittance</strong> atteste que le loyer et les charges d&apos;une période ont été payés en totalité : elle solde la
             période et libère le locataire pour ce mois. Le <strong>reçu</strong> se contente de constater qu&apos;une somme a été remise,
@@ -52,10 +53,11 @@ export default async function Page() {
             partie du loyer, remettez-lui un reçu du montant réellement encaissé, et gardez la quittance pour le solde.
           </p>
 
-          <h2>Quittance de loyer en Côte d&apos;Ivoire (Mobile Money, espèces)</h2>
+          <h2>Quittance pour un paiement par Mobile Money</h2>
           <p>
             En Côte d&apos;Ivoire, le loyer se règle souvent par Mobile Money (Wave, Orange Money, MTN MoMo, Moov Money) ou en espèces.
-            Dans les deux cas, la quittance garde tout son intérêt :
+            Dans les deux cas, la quittance garde tout son intérêt (voir aussi{" "}
+            <Link href={MOBILE_MONEY_PAGE}>le paiement du loyer par Mobile Money</Link>) :
           </p>
           <ul>
             <li>
@@ -73,6 +75,14 @@ export default async function Page() {
           <p>
             Pour le détail du parcours côté locataire et côté agence, lisez notre{" "}
             <Link href={GUIDE_MOBILE_MONEY}>guide du paiement du loyer par Mobile Money en Côte d&apos;Ivoire</Link> (page en français).
+          </p>
+
+          <h2>Le propriétaire est-il obligé d&apos;en délivrer une ?</h2>
+          <p>
+            Nous n&apos;affirmons aucune règle précise ici, faute de source à citer. Pour savoir ce qui s&apos;applique à votre contrat,
+            reportez-vous à votre bail (voir notre{" "}
+            <Link href={localizeHref(locale, "/outils/bail-habitation")}>modèle de bail d&apos;habitation</Link>) ou demandez conseil à
+            un professionnel du droit. Dans la pratique, la quittance reste la preuve de paiement du locataire.
           </p>
 
           <h2>Aller plus loin</h2>
@@ -115,7 +125,8 @@ export default async function Page() {
           <h2>Rent receipts in Côte d&apos;Ivoire (Mobile Money, cash)</h2>
           <p>
             In Côte d&apos;Ivoire, rent is often paid by Mobile Money (Wave, Orange Money, MTN MoMo, Moov Money) or in cash. In both
-            cases the receipt is just as useful:
+            cases the receipt is just as useful (see also{" "}
+            <Link href={MOBILE_MONEY_PAGE}>paying rent by Mobile Money</Link>, page in French):
           </p>
           <ul>
             <li>
@@ -131,6 +142,13 @@ export default async function Page() {
           <p>
             For the tenant and agency steps in detail, read our{" "}
             <Link href={GUIDE_MOBILE_MONEY}>guide to paying rent by Mobile Money in Côte d&apos;Ivoire</Link> (page in French).
+          </p>
+
+          <h2>Is the landlord required to issue one?</h2>
+          <p>
+            We do not state a specific rule here, as we have no source to cite. To know what applies to your lease, check your agreement
+            (see our <Link href={localizeHref(locale, "/outils/bail-habitation")}>residential lease template</Link>) or ask a legal
+            professional. In practice, the receipt remains the tenant&apos;s proof of payment.
           </p>
 
           <h2>Going further</h2>
