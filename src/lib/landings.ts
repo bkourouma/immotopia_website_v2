@@ -308,6 +308,18 @@ export const landings: Landing[] = [
         ],
       },
       {
+        title: "Comment ImmoTopia répond à ces critères",
+        intro:
+          "Chaque critère se vérifie sur les pages du site. Voici où retrouver le détail, métier par métier.",
+        items: [
+          { title: "Tous les métiers, une seule application", text: "Transaction, gestion locative, syndic de copropriété et promotion immobilière partagent les mêmes contacts et les mêmes biens. Voir le [logiciel immobilier en Côte d'Ivoire](/logiciel-immobilier-cote-divoire), la [gestion locative](/gestion-locative-cote-divoire), le [syndic de copropriété](/logiciel-syndic-copropriete-cote-divoire) et le [logiciel pour promoteur](/logiciel-promoteur-immobilier-cote-divoire)." },
+          { title: "Mobile Money et WhatsApp", text: "Les relances partent par e-mail et par WhatsApp, et les charges de copropriété se paient en ligne par Mobile Money. Le détail est dans la page [paiement des loyers et charges par Mobile Money](/paiement-loyer-charges-mobile-money-cote-divoire)." },
+          { title: "Portails propriétaire et locataire", text: "Le propriétaire et le locataire consultent leurs documents depuis un portail en libre-service, sans abonnement à souscrire de leur côté. Les portails sont inclus dans les packs Agence et Opérateur intégré." },
+          { title: "Un usage simple au quotidien", text: "ImmoTopia s'utilise dans le navigateur, sur ordinateur, tablette ou téléphone, et s'installe sur l'écran d'accueil sans passer par un magasin d'applications." },
+          { title: "Des prix publics", text: "Les packs et leurs prix en FCFA hors taxes sont affichés sur la page [tarifs](/tarifs), avec un premier mois offert et sans engagement." },
+        ],
+      },
+      {
         title: "Checklist avant de signer",
         bullets: [
           "Demandez une démonstration sur vos propres cas : un bail, une copropriété, un impayé.",
@@ -328,6 +340,8 @@ export const landings: Landing[] = [
       { q: "Où voir la comparaison avec les autres logiciels ?", a: "Sur la page Comparatif du site, domaine par domaine et avec les sources." },
       { q: "Quels critères pour choisir un logiciel immobilier en Côte d'Ivoire ?", a: "Six critères : couvrir tous vos métiers (transaction, gestion locative, syndic, promotion), reconnaître le Mobile Money, envoyer les rappels sur WhatsApp, offrir des portails aux propriétaires et locataires, afficher des prix clairs en FCFA et proposer une équipe proche pour la mise en route." },
       { q: "Puis-je reprendre mes fichiers Excel ?", a: "Oui : la mise en route accompagnée comprend la reprise de vos biens, contacts, baux ou copropriétés. Elle est facultative si vous saisissez vous-même vos données." },
+      { q: "Faut-il installer ImmoTopia sur chaque poste ?", a: "Non. ImmoTopia est une application web : elle s'utilise depuis un navigateur, sur ordinateur, tablette ou téléphone, et peut s'installer sur l'écran d'accueil si vous le souhaitez." },
+      { q: "Les propriétaires et les locataires doivent-ils payer un abonnement ?", a: "Non. Ils disposent de portails en libre-service, sans abonnement à souscrire : seul le cabinet abonné paie son pack." },
     ],
     related: ["logiciel-immobilier-cote-divoire", "immotopia-vs-excel", "logiciel-immobilier-afrique"],
   },
