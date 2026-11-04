@@ -168,6 +168,33 @@ export const communicationEtDocuments: WikiDomain = {
       intro:
         "La newsletter d'une agence immobilière sert à tenir clients, propriétaires et prospects informés : nouveaux biens, rappels, actualités de l'agence. Vous choisissez une liste de diffusion, partez d'un modèle à vos couleurs, rédigez et prévisualisez le message, puis l'envoyez tout de suite ou à la date choisie. Chaque message porte un lien de désinscription, et l'envoi par WhatsApp ne concerne que les destinataires qui ont donné leur accord. Vous voyez ensuite qui l'a reçu et qui l'a ouvert. Les destinataires se constituent dans les [listes de diffusion](/wiki/communication-et-documents/listes-de-diffusion-newsletter).",
       packs: ["agence", "syndic", "promoteur", "integre", "patrimoine-essentiel", "patrimoine-pro"],
+      sections: [
+        {
+          title: "Que mettre dans la newsletter d'une agence immobilière ?",
+          body: [
+            "Une bonne newsletter d'agence donne une raison de l'ouvrir : une information utile, claire, qui parle à la personne qui la reçoit. Voici cinq idées de rubriques, à combiner selon la liste de diffusion choisie.",
+            [
+              "Nouveaux biens : une sélection courte des biens récemment mis en ligne, avec une photo, le quartier, le type de bien et un lien vers l'annonce.",
+              "Conseils aux propriétaires : un conseil pratique par numéro, par exemple pour préparer un bien à la visite ou à la remise des clés.",
+              "Actualités du marché abidjanais : ce que vous observez sur le terrain dans les quartiers où l'agence travaille, présenté simplement et sans chiffre que vous ne pourriez pas justifier.",
+              "Avis clients : un retour d'expérience d'un client qui a accepté qu'il soit publié.",
+              "Calendrier de visites : les prochaines visites ou portes ouvertes, avec la date, le lieu et la façon de s'inscrire.",
+            ],
+            "Exemple de plan de newsletter : un objet court qui annonce le sujet principal ; une phrase d'introduction personnalisée avec le prénom ; la rubrique principale (nouveaux biens ou actualité du marché) ; une rubrique secondaire (conseil propriétaire ou avis client) ; le calendrier de visites ; un appel à l'action unique, comme appeler l'agence ou répondre au message ; le lien de désinscription.",
+            "Exemple de texte, à adapter avec vos informations :",
+            [
+              "Objet : [Nombre] nouveaux biens à [quartier] et nos prochaines visites",
+              "Bonjour [prénom], voici les nouveautés de [nom de l'agence] ce mois-ci.",
+              "Nouveaux biens : [description courte du bien, quartier, lien vers l'annonce].",
+              "Le conseil du mois : [un conseil en deux ou trois phrases].",
+              "Nos prochaines visites : [date, lieu, comment s'inscrire].",
+              "Une question sur un bien ou sur votre projet ? Répondez simplement à ce message ou contactez-nous au [numéro de l'agence].",
+              "À bientôt, l'équipe de [nom de l'agence]. Pour ne plus recevoir nos messages : [lien de désinscription].",
+            ],
+            "Avant l'envoi, utilisez la prévisualisation pour relire l'objet et le message tels que les recevront les destinataires.",
+          ],
+        },
+      ],
       profiles: ["equipe"],
       menu: "Communication › Newsletter — Campagnes",
       status: "disponible",
@@ -575,7 +602,7 @@ export const communicationEtDocuments: WikiDomain = {
       slug: "documents-a-en-tete",
       title: "Documents à en-tête",
       h1: "Documents PDF et Word à l'en-tête de l'agence",
-      metaTitle: "Documents PDF et Word à en-tête de l'agence ou de la copropriété",
+      metaTitle: "Documents PDF et Word à en-tête de l'agence ou copropriété",
       summary:
         "Reçus, relevés, rapports et courriers sortent en PDF ou en Word avec le logo et l'identité de l'agence ou de la copropriété, et un pied de page paginé.",
       intro:
