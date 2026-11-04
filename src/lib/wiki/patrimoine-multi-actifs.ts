@@ -187,7 +187,7 @@ export const patrimoineMultiActifs: WikiDomain = {
       title: "Valorisation et fiabilité",
       metaTitle: "Fiabilité d'une valeur : suggestion, ancienneté, statut juridique",
       summary:
-        "Faites calculer une valeur selon la classe d'actif et sachez dans quelle mesure elle est fiable : méthode, source, ancienneté, statut juridique. En développement.",
+        "Faites calculer une valeur selon la classe d'actif et sachez si elle est fiable : méthode, source, ancienneté, statut juridique. En développement.",
       intro:
         "Une valeur n'a pas le même poids selon qu'elle vient d'une expertise ou d'une simple saisie ancienne. Chaque valorisation reçoit un niveau de fiabilité (élevée, moyenne ou faible) avec ses raisons. Vous pouvez aussi demander une valeur calculée à partir des caractéristiques de l'actif, sans rien enregistrer tant que vous ne confirmez pas. Les valeurs trop anciennes pour leur classe sont signalées. Cette fonction est en cours de développement.",
       packs: ["agence", "promoteur", "integre", "patrimoine-essentiel", "patrimoine-pro"],
