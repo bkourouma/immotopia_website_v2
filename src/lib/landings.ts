@@ -950,8 +950,16 @@ export const landings: Landing[] = [
     eyebrow: "Promotion immobilière",
     h1: "Logiciel promoteur immobilier en Côte d'Ivoire : du chantier aux lots",
     intro:
-      "Budget, dépenses en espèces, matériaux, tâcherons, avancement, coût de revient de chaque lot : le module Promoteur d'ImmoTopia suit un programme de la première dépense à la clôture du chantier. Il s'adresse aux promoteurs et aux groupes immobiliers ivoiriens qui construisent, et se relie au CRM pour le suivi commercial.",
+      "Logiciel promoteur immobilier pour piloter chantier, lots et suivi commercial. Budget, dépenses en espèces, matériaux, tâcherons, avancement, coût de revient de chaque lot : le module Promoteur d'ImmoTopia suit un programme de la première dépense à la clôture du chantier. Il s'adresse aux promoteurs et aux groupes immobiliers ivoiriens qui construisent, et se relie au CRM pour le suivi commercial.",
     sections: [
+      {
+        title: "Pour qui ?",
+        items: [
+          { title: "Promoteurs en Côte d'Ivoire", text: "Le module Promoteur s'adresse aux promoteurs et aux groupes immobiliers ivoiriens qui construisent et suivent leurs chantiers." },
+          { title: "Programmes de logements", text: "Villas, appartements, locaux : chaque chantier se découpe en lots, avec leur coût de revient. Voir [lots et coût de revient](/wiki/promotion-et-chantiers/lots-et-cout-de-revient)." },
+        ],
+        note: "Pour le suivi commercial, voir le [CRM pour promoteur immobilier](/crm-promoteur-immobilier-cote-divoire) ; pour le détail du module, le domaine [Promotion et chantiers](/wiki/promotion-et-chantiers).",
+      },
       {
         title: "Les difficultés de la promotion immobilière sur le terrain",
         items: [
