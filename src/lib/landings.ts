@@ -288,7 +288,7 @@ export const landings: Landing[] = [
   },
   {
     slug: "meilleur-logiciel-immobilier-cote-divoire",
-    metaTitle: "Meilleur logiciel immobilier en Côte d'Ivoire : 6 critères",
+    metaTitle: "Meilleur logiciel immobilier en Côte d'Ivoire : comparatif 2026",
     metaDescription:
       "Quel est le meilleur logiciel immobilier en Côte d'Ivoire ? 6 critères et une checklist : métiers, Mobile Money, WhatsApp, portails, prix en FCFA, mise en route.",
     eyebrow: "Guide de choix",
@@ -306,6 +306,24 @@ export const landings: Landing[] = [
           { title: "5. Des prix clairs en FCFA", text: "Sans commission sur les loyers, et sans facturer chaque propriétaire ou locataire." },
           { title: "6. Une équipe proche", text: "Mise en route, reprise des données et formation par une équipe qui connaît le marché local." },
         ],
+      },
+      {
+        title: "Les critères en tableau : que vérifier, et ce que propose ImmoTopia",
+        intro: "Posez les mêmes questions à chaque éditeur que vous comparez. Voici la grille, avec la réponse d'ImmoTopia.",
+        table: {
+          caption: "Critères de choix d'un logiciel immobilier en Côte d'Ivoire et réponse d'ImmoTopia",
+          head: ["Critère", "À vérifier chez chaque éditeur", "ImmoTopia"],
+          rows: [
+            ["Métiers couverts", "Transaction, gestion locative, syndic, promotion dans un même outil", "Transaction, gestion locative, syndic et promotion dans la même base"],
+            ["Mobile Money", "Orange Money, MTN MoMo, Moov Money, Wave reconnus comme moyens de paiement", "Les quatre opérateurs sont reconnus ; paiement en ligne des charges de copropriété ; pour les loyers, enregistrement du paiement et déclaration du locataire validée par l'agence"],
+            ["WhatsApp", "Rappels envoyés sur WhatsApp, et son coût", "Relances par e-mail, WhatsApp ou les deux, avec le consentement du contact ; WhatsApp est facturé à la consommation"],
+            ["Syndic de copropriété", "Appels de charges, assemblées, comptabilité de copropriété", "Pack Syndic : appels de charges, assemblées générales avec vote en ligne, comptabilité de copropriété"],
+            ["Promoteur", "Suivi des programmes et des ventes", "Pack Promoteur dédié ; pas de portail acquéreur ni de réservation de lots"],
+            ["Prix en FCFA", "Prix affichés, commissions, facturation par propriétaire ou locataire", `Pack Agence à partir de ${fcfa(agence.monthly)} HT par mois, sans commission sur les loyers`],
+            ["Mise en route", "Reprise des données, formation, engagement", "Mise en route accompagnée avec reprise de vos fichiers (facultative), premier mois offert, sans engagement"],
+          ],
+        },
+        note: "Pour une comparaison fonction par fonction avec d'autres logiciels, à partir des pages publiques de chaque éditeur et avec les sources, voyez la page [Comparatif](/comparatif).",
       },
       {
         title: "Checklist avant de signer",
@@ -328,6 +346,7 @@ export const landings: Landing[] = [
       { q: "Où voir la comparaison avec les autres logiciels ?", a: "Sur la page Comparatif du site, domaine par domaine et avec les sources." },
       { q: "Quels critères pour choisir un logiciel immobilier en Côte d'Ivoire ?", a: "Six critères : couvrir tous vos métiers (transaction, gestion locative, syndic, promotion), reconnaître le Mobile Money, envoyer les rappels sur WhatsApp, offrir des portails aux propriétaires et locataires, afficher des prix clairs en FCFA et proposer une équipe proche pour la mise en route." },
       { q: "Puis-je reprendre mes fichiers Excel ?", a: "Oui : la mise en route accompagnée comprend la reprise de vos biens, contacts, baux ou copropriétés. Elle est facultative si vous saisissez vous-même vos données." },
+      { q: "Le Mobile Money est-il géré pour les loyers ?", a: "Orange Money, MTN MoMo, Moov Money et Wave sont reconnus comme moyens de paiement. Pour les loyers, l'agence enregistre le paiement, ou le locataire le déclare depuis son portail et l'agence le valide. Le paiement en ligne existe pour les charges de copropriété." },
     ],
     related: ["logiciel-immobilier-cote-divoire", "immotopia-vs-excel", "logiciel-immobilier-afrique"],
   },
