@@ -88,6 +88,16 @@ export function ChatWidget() {
     if (open) setTimeout(() => inputRef.current?.focus(), 250);
   }, [open]);
 
+  // Verrouille le défilement de la page tant que le chat est plein écran (mobile)
+  useEffect(() => {
+    if (!open || !window.matchMedia("(max-width: 639px)").matches) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prev;
+    };
+  }, [open]);
+
   useEffect(() => {
     if (!open) return;
     const onKey = (e: globalThis.KeyboardEvent) => e.key === "Escape" && setOpen(false);
@@ -185,12 +195,12 @@ export function ChatWidget() {
             whileHover={{ scale: 1.06 }}
             whileTap={{ scale: 0.94 }}
             aria-label={t("Ouvrir l'assistant immotopIA", "Open the immotopIA assistant")}
-            className="fixed right-4 bottom-4 z-40 flex cursor-pointer items-center gap-2 rounded-full bg-gradient-to-br from-brand-500 via-brand-600 to-sun-500 py-3 pr-5 pl-3.5 text-white shadow-[0_14px_40px_-10px_rgba(91,91,247,0.9)] md:right-6 md:bottom-6"
+            className="fixed right-[max(1rem,env(safe-area-inset-right))] bottom-[max(1rem,env(safe-area-inset-bottom))] z-40 flex size-14 cursor-pointer items-center justify-center gap-2 rounded-full bg-gradient-to-br from-brand-500 via-brand-600 to-sun-500 text-white shadow-[0_14px_40px_-10px_rgba(91,91,247,0.9)] sm:size-auto sm:py-3 sm:pr-5 sm:pl-3.5 md:right-6 md:bottom-6"
           >
-            <span className="grid size-8 place-items-center rounded-full bg-white/20">
-              <Sparkles className="size-4.5" />
+            <span className="grid size-10 place-items-center rounded-full bg-white/20 sm:size-8">
+              <Sparkles className="size-5 sm:size-4.5" />
             </span>
-            <span className="text-sm font-semibold">{t("Une question ?", "Got a question?")}</span>
+            <span className="sr-only text-sm font-semibold sm:not-sr-only">{t("Une question ?", "Got a question?")}</span>
           </motion.button>
         )}
       </AnimatePresence>
@@ -206,9 +216,9 @@ export function ChatWidget() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 30, scale: 0.97 }}
             transition={{ type: "spring", stiffness: 300, damping: 30 }}
-            className="fixed inset-0 z-[90] flex flex-col overflow-hidden bg-ink-950 text-white sm:inset-auto sm:right-6 sm:bottom-6 sm:h-[min(640px,calc(100dvh-3rem))] sm:w-[400px] sm:rounded-[28px] sm:border sm:border-white/10 sm:shadow-[0_30px_100px_-20px_rgba(0,0,0,0.8)]"
+            className="fixed inset-0 z-[90] flex h-dvh flex-col overflow-hidden bg-ink-950 text-white sm:inset-auto sm:right-6 sm:bottom-6 sm:h-[min(640px,calc(100dvh-3rem))] sm:w-[400px] sm:rounded-[28px] sm:border sm:border-white/10 sm:shadow-[0_30px_100px_-20px_rgba(0,0,0,0.8)]"
           >
-            <header className="relative flex items-center gap-3 border-b border-white/10 px-4 py-3.5">
+            <header className="relative flex items-center gap-3 border-b border-white/10 px-4 pt-[max(0.875rem,env(safe-area-inset-top))] pb-3.5">
               <div aria-hidden className="absolute inset-0 -z-10" style={{ background: "radial-gradient(120% 140% at 0% 0%, rgba(91,91,247,0.35), transparent 60%)" }} />
               <span className="relative grid size-10 place-items-center rounded-2xl bg-gradient-to-br from-brand-500 to-sun-500">
                 <Sparkles className="size-5" />
@@ -223,16 +233,16 @@ export function ChatWidget() {
                   onClick={reset}
                   aria-label={t("Nouvelle conversation", "New conversation")}
                   title={t("Nouvelle conversation", "New conversation")}
-                  className="grid size-9 cursor-pointer place-items-center rounded-full text-white/60 transition hover:bg-white/10 hover:text-white">
+                  className="grid size-11 cursor-pointer place-items-center rounded-full text-white/60 sm:size-9 transition hover:bg-white/10 hover:text-white">
                   <RotateCcw className="size-4" />
                 </button>
               )}
-              <button onClick={() => setOpen(false)} aria-label={t("Fermer l'assistant", "Close the assistant")} className="grid size-9 cursor-pointer place-items-center rounded-full bg-white/10 transition hover:bg-white/20">
+              <button onClick={() => setOpen(false)} aria-label={t("Fermer l'assistant", "Close the assistant")} className="grid size-11 cursor-pointer place-items-center rounded-full bg-white/10 sm:size-9 transition hover:bg-white/20">
                 <X className="size-4.5" />
               </button>
             </header>
 
-            <div ref={scrollRef} className="flex-1 space-y-3 overflow-y-auto px-4 py-4" aria-live="polite">
+            <div ref={scrollRef} className="flex-1 space-y-3 overflow-y-auto overscroll-contain px-4 py-4" aria-live="polite">
               <Bubble role="assistant" content={WELCOME[locale]} />
               {messages.length === 0 && (
                 <div className="flex flex-wrap gap-2 pt-1">
@@ -240,7 +250,7 @@ export function ChatWidget() {
                     <button
                       key={s}
                       onClick={() => send(s)}
-                      className="cursor-pointer rounded-full border border-white/15 bg-white/[0.04] px-3 py-1.5 text-left text-[13px] text-white/80 transition hover:border-brand-400 hover:bg-brand-500/20 hover:text-white"
+                      className="min-h-11 cursor-pointer rounded-full border border-white/15 bg-white/[0.04] px-4 py-2 text-left text-sm text-white/80 sm:min-h-0 sm:px-3 sm:py-1.5 sm:text-[13px] transition hover:border-brand-400 hover:bg-brand-500/20 hover:text-white"
                     >
                       {s}
                     </button>
@@ -264,7 +274,7 @@ export function ChatWidget() {
               {lastIsEmptyAssistant && <Typing />}
             </div>
 
-            <form onSubmit={onSubmit} className="border-t border-white/10 p-3">
+            <form onSubmit={onSubmit} className="border-t border-white/10 p-3 pb-[max(0.75rem,env(safe-area-inset-bottom))]">
               <div className="flex items-end gap-2 rounded-2xl border border-white/10 bg-white/[0.05] p-1.5 pl-3.5 focus-within:border-brand-400">
                 <textarea
                   ref={inputRef}
@@ -274,18 +284,18 @@ export function ChatWidget() {
                   rows={1}
                   placeholder={t("Posez votre question…", "Ask your question…")}
                   aria-label={t("Votre question", "Your question")}
-                  className="max-h-32 min-h-[36px] flex-1 resize-none bg-transparent py-2 text-[15px] text-white outline-none placeholder:text-white/35"
+                  className="max-h-32 min-h-[36px] flex-1 resize-none bg-transparent py-2 text-base text-white outline-none sm:text-[15px] placeholder:text-white/35"
                 />
                 <button
                   type="submit"
                   disabled={!input.trim() || streaming}
                   aria-label={t("Envoyer", "Send")}
-                  className="grid size-9 shrink-0 cursor-pointer place-items-center rounded-xl bg-brand-500 transition hover:bg-brand-400 disabled:cursor-not-allowed disabled:opacity-40"
+                  className="grid size-11 shrink-0 cursor-pointer place-items-center rounded-xl bg-brand-500 sm:size-9 transition hover:bg-brand-400 disabled:cursor-not-allowed disabled:opacity-40"
                 >
                   <ArrowUp className="size-4.5" />
                 </button>
               </div>
-              <p className="mt-2 text-center text-[11px] text-white/50">
+              <p className="mt-2 text-center text-xs text-white/50 sm:text-[11px]">
                 {t(
                   "Réponses générées par IA, à vérifier. Ne partagez pas d'informations sensibles.",
                   "AI-generated answers, please double-check. Don't share sensitive information.",
@@ -303,7 +313,7 @@ function Bubble({ role, content, onDemo, showAction = true }: { role: Msg["role"
   if (role === "user") {
     return (
       <div className="flex justify-end">
-        <p className="max-w-[85%] rounded-2xl rounded-br-md bg-brand-500 px-3.5 py-2.5 text-[14px] leading-relaxed whitespace-pre-wrap">{content}</p>
+        <p className="max-w-[85%] rounded-2xl rounded-br-md bg-brand-500 px-3.5 py-2.5 text-[15px] leading-relaxed whitespace-pre-wrap sm:text-[14px]">{content}</p>
       </div>
     );
   }
@@ -315,16 +325,16 @@ function AssistantBubble({ content, onDemo, showAction }: { content: string; onD
   const { body, action } = splitAction(content);
   return (
     <motion.div initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} className="max-w-[92%]">
-      <div className="rounded-2xl rounded-bl-md bg-white/[0.07] px-3.5 py-2.5 text-[14px] leading-relaxed text-white/90 ring-1 ring-white/[0.06]">
+      <div className="rounded-2xl rounded-bl-md bg-white/[0.07] px-3.5 py-2.5 text-[15px] leading-relaxed text-white/90 sm:text-[14px] ring-1 ring-white/[0.06]">
         <RichText text={body} />
       </div>
       {showAction && action === "demo" && onDemo && (
-        <button onClick={onDemo} className="shine mt-2 inline-flex cursor-pointer items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-semibold text-ink-950">
+        <button onClick={onDemo} className="shine mt-2 inline-flex min-h-11 cursor-pointer sm:min-h-0 items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-semibold text-ink-950">
           <CalendarCheck className="size-4" /> {t("Réserver une démonstration", "Book a demo")}
         </button>
       )}
       {showAction && action === "whatsapp" && (
-        <a href={whatsappLink(locale)} target="_blank" rel="noopener noreferrer" className="mt-2 inline-flex items-center gap-2 rounded-full bg-[#25D366] px-4 py-2 text-sm font-semibold text-white">
+        <a href={whatsappLink(locale)} target="_blank" rel="noopener noreferrer" className="mt-2 inline-flex min-h-11 items-center gap-2 rounded-full bg-[#25D366] sm:min-h-0 px-4 py-2 text-sm font-semibold text-white">
           <WhatsAppIcon className="size-4" /> {t("Écrire sur WhatsApp", "Message us on WhatsApp")}
         </a>
       )}

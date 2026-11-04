@@ -104,7 +104,7 @@ export default async function WikiFeaturePage({ params }: PageProps<"/[lang]/wik
           </p>
         </PageHero>
 
-        <div className="mx-auto grid max-w-6xl gap-10 px-5 py-12 md:py-16 lg:grid-cols-[250px_1fr]">
+        <div className="mx-auto grid max-w-6xl gap-8 px-5 py-10 md:py-16 lg:grid-cols-[250px_1fr] md:gap-10">
           {/* Sommaire du domaine */}
           <aside className="order-last lg:order-first">
             <nav aria-label={`Fonctionnalités : ${domain.title}`} className="lg:sticky lg:top-28">
@@ -119,7 +119,7 @@ export default async function WikiFeaturePage({ params }: PageProps<"/[lang]/wik
                       <SmartLink
                         href={wikiHref(domain.slug, f.slug)}
                         aria-current={current ? "page" : undefined}
-                        className={`-ml-px block border-l-2 py-1.5 pl-4 text-sm transition ${
+                        className={`-ml-px block border-l-2 py-2.5 pl-4 text-sm transition md:py-1.5 ${
                           current ? "border-brand-500 font-semibold text-ink-900" : "border-transparent text-ink-900/60 hover:text-ink-900"
                         }`}
                       >
@@ -129,7 +129,7 @@ export default async function WikiFeaturePage({ params }: PageProps<"/[lang]/wik
                   );
                 })}
               </ul>
-              <SmartLink href="/wiki" className="mt-6 inline-flex items-center gap-1.5 text-sm font-medium text-brand-600 hover:underline">
+              <SmartLink href="/wiki" className="mt-6 inline-flex min-h-11 items-center gap-1.5 md:min-h-0 text-sm font-medium text-brand-600 hover:underline">
                 <ArrowLeft className="size-4" aria-hidden /> Tout le wiki
               </SmartLink>
             </nav>
@@ -139,7 +139,7 @@ export default async function WikiFeaturePage({ params }: PageProps<"/[lang]/wik
             <WikiBreadcrumb items={crumbs} />
 
             {/* Fiche d'identité */}
-            <dl className="mt-6 grid gap-5 rounded-[22px] bg-white p-6 ring-1 ring-ink-900/[0.07] sm:grid-cols-2">
+            <dl className="mt-6 grid gap-5 rounded-[22px] bg-white p-5 ring-1 ring-ink-900/[0.07] sm:grid-cols-2 sm:p-6">
               <div>
                 <dt className="text-xs font-semibold tracking-[0.14em] text-ink-900/45 uppercase">Statut</dt>
                 <dd className="mt-2">
@@ -194,7 +194,7 @@ export default async function WikiFeaturePage({ params }: PageProps<"/[lang]/wik
 
             {/* Actions */}
             <section className="mt-12">
-              <h2 className="font-display text-2xl font-bold tracking-tight md:text-3xl">
+              <h2 className="font-display text-xl font-bold tracking-tight sm:text-2xl md:text-3xl">
                 Ce que vous pouvez faire <span className="text-ink-900/35">({feature.actions.length})</span>
               </h2>
               <ul className="mt-5 flex flex-wrap gap-2">
@@ -202,7 +202,7 @@ export default async function WikiFeaturePage({ params }: PageProps<"/[lang]/wik
                   <li key={a.title}>
                     <a
                       href={`#${actionAnchor(a)}`}
-                      className="inline-block rounded-full bg-white px-3.5 py-1.5 text-sm text-ink-900/70 ring-1 ring-ink-900/[0.08] transition hover:text-brand-600 hover:ring-brand-500/30"
+                      className="inline-flex min-h-11 items-center rounded-full md:inline-block md:min-h-0 bg-white px-3.5 py-1.5 text-sm text-ink-900/70 ring-1 ring-ink-900/[0.08] transition hover:text-brand-600 hover:ring-brand-500/30"
                     >
                       {a.title}
                     </a>
@@ -217,13 +217,13 @@ export default async function WikiFeaturePage({ params }: PageProps<"/[lang]/wik
                     <article
                       key={a.title}
                       id={actionAnchor(a)}
-                      className="scroll-mt-28 rounded-[22px] bg-white p-6 ring-1 ring-ink-900/[0.07] target:ring-2 target:ring-brand-500/50"
+                      className="scroll-mt-28 rounded-[22px] bg-white p-5 ring-1 ring-ink-900/[0.07] target:ring-2 target:ring-brand-500/50 sm:p-6"
                     >
                       <div className="flex flex-wrap items-start justify-between gap-3">
                         <h3 className="font-display text-lg font-bold">{a.title}</h3>
                         {status !== feature.status && <StatusBadge status={status} />}
                       </div>
-                      <p className="mt-2 leading-relaxed text-ink-900/70">{a.goal}</p>
+                      <p className="mt-2 text-[15px] leading-relaxed break-words text-ink-900/70 md:text-[length:inherit]">{a.goal}</p>
                       {(a.input || a.output || a.prereq || a.profiles) && (
                         <dl className="mt-4 grid gap-3 border-t border-ink-900/[0.06] pt-4 text-sm sm:grid-cols-2">
                           {details.map(([key, label]) =>
@@ -249,20 +249,20 @@ export default async function WikiFeaturePage({ params }: PageProps<"/[lang]/wik
             </section>
 
             {feature.faq && feature.faq.length > 0 && (
-              <section className="mt-14">
-                <h2 className="font-display text-2xl font-bold tracking-tight md:text-3xl">Questions fréquentes</h2>
+              <section className="mt-12 md:mt-14">
+                <h2 className="font-display text-xl font-bold tracking-tight sm:text-2xl md:text-3xl">Questions fréquentes</h2>
                 <div className="mt-5 divide-y divide-ink-900/[0.07] rounded-[22px] bg-white ring-1 ring-ink-900/[0.07]">
                   {feature.faq.map((f) => (
-                    <details key={f.q} className="group p-6">
-                      <summary className="cursor-pointer list-none font-semibold marker:hidden">
-                        <span className="flex items-center justify-between gap-4">
+                    <details key={f.q} className="group px-4 md:p-6">
+                      <summary className="flex min-h-12 cursor-pointer list-none items-center py-3 font-semibold marker:hidden md:min-h-0 md:py-0">
+                        <span className="flex w-full items-center justify-between gap-4 break-words">
                           {f.q}
-                          <span className="text-brand-600 transition-transform group-open:rotate-45" aria-hidden>
+                          <span className="shrink-0 text-xl leading-none text-brand-600 md:text-[length:inherit] md:leading-[inherit] transition-transform group-open:rotate-45" aria-hidden>
                             +
                           </span>
                         </span>
                       </summary>
-                      <p className="mt-3 text-ink-900/65">{f.a}</p>
+                      <p className="pb-4 text-[15px] leading-relaxed break-words text-ink-900/65 md:mt-3 md:pb-0 md:text-[length:inherit] md:leading-[inherit]">{f.a}</p>
                     </details>
                   ))}
                 </div>
@@ -270,8 +270,8 @@ export default async function WikiFeaturePage({ params }: PageProps<"/[lang]/wik
             )}
 
             {related.length > 0 && (
-              <section className="mt-14">
-                <h2 className="font-display text-2xl font-bold tracking-tight">À lire aussi</h2>
+              <section className="mt-12 md:mt-14">
+                <h2 className="font-display text-xl font-bold tracking-tight sm:text-2xl">À lire aussi</h2>
                 <div className="mt-5 grid gap-3 sm:grid-cols-2">
                   {related.map(({ domain: d, feature: f }) => (
                     <SmartLink
@@ -287,7 +287,7 @@ export default async function WikiFeaturePage({ params }: PageProps<"/[lang]/wik
               </section>
             )}
 
-            <nav aria-label="Fiche précédente et suivante" className="mt-14 grid gap-3 sm:grid-cols-2">
+            <nav aria-label="Fiche précédente et suivante" className="mt-12 md:mt-14 grid gap-3 sm:grid-cols-2">
               {prev ? (
                 <SmartLink
                   href={wikiHref(prev.domain.slug, prev.feature.slug)}
@@ -314,7 +314,7 @@ export default async function WikiFeaturePage({ params }: PageProps<"/[lang]/wik
               )}
             </nav>
 
-            <div className="mt-14">
+            <div className="mt-12 md:mt-14">
               <WikiCta title={`${feature.title} : voyez-le en démonstration`} />
             </div>
           </div>

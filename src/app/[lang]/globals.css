@@ -40,13 +40,35 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 88px;
+  scroll-padding-top: 72px;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  -webkit-tap-highlight-color: rgba(91, 91, 247, 0.12);
+}
+@media (min-width: 768px) {
+  html { scroll-padding-top: 88px; }
 }
 
 body {
   background: var(--color-paper);
   color: var(--color-ink-900);
+  font-size: 1rem;
+  line-height: 1.5;
+  /* clip (et non hidden) : pas de défilement horizontal sans casser position: sticky */
+  overflow-x: clip;
   -webkit-font-smoothing: antialiased;
+}
+
+/* Cibles tactiles : pas de délai ni de zoom au double appui */
+button, a, [role="button"], summary, label[for] {
+  touch-action: manipulation;
+}
+
+/* iOS zoome sur les champs < 16 px : on force 16 px sur mobile */
+@media (max-width: 639px) {
+  input, textarea, select {
+    font-size: 16px !important;
+  }
 }
 
 ::selection {
@@ -69,8 +91,10 @@ body {
   transform: translateX(-120%);
   transition: transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
-.shine:hover::after {
-  transform: translateX(120%);
+@media (hover: hover) {
+  .shine:hover::after {
+    transform: translateX(120%);
+  }
 }
 
 /* Carte avec halo lumineux qui suit la souris (variables --mx / --my posées en JS) */
@@ -89,8 +113,10 @@ body {
   transition: opacity 0.35s;
   background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), var(--spot, rgba(91, 91, 247, 0.18)), transparent 60%);
 }
-.spotlight:hover::before {
-  opacity: 1;
+@media (hover: hover) {
+  .spotlight:hover::before {
+    opacity: 1;
+  }
 }
 
 .mask-fade-x {
@@ -101,7 +127,10 @@ body {
   background-image:
     linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-  background-size: 56px 56px;
+  background-size: 40px 40px;
+}
+@media (min-width: 768px) {
+  .grid-lines { background-size: 56px 56px; }
 }
 
 .text-gradient {
@@ -134,6 +163,13 @@ body {
 @keyframes rotate-angle {
   to { --angle: 360deg; }
 }
+/* Animation conic-gradient coûteuse : réservée aux écrans larges */
+@media (max-width: 767px) {
+  .glow-border { animation: none; }
+  .hero-word { animation-duration: 0.7s; }
+  .hero-fade { animation-duration: 0.6s; }
+  .hero-stage { animation-duration: 0.9s; animation-delay: 0.15s; }
+}
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
@@ -141,5 +177,14 @@ body {
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
+    transition-delay: 0ms !important;
+    scroll-behavior: auto !important;
   }
+  /* Marquee : contenu statique et lisible, défilement manuel possible */
+  .animate-marquee { animation: none !important; transform: none !important; }
+  .animate-ping, .animate-pulse, .animate-spin-slow, .animate-spin { animation: none !important; }
+  .glow-border { animation: none; }
+  .shine::after { display: none; }
+  /* Intro du hero : texte visible d'emblée (les délais inline le garderaient invisible sinon) */
+  .hero-word, .hero-fade, .hero-stage { animation: none !important; opacity: 1; transform: none; }
 }

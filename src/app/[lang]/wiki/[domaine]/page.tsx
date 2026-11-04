@@ -57,12 +57,12 @@ export default async function WikiDomainPage({ params }: PageProps<"/[lang]/wiki
           </p>
         </PageHero>
 
-        <div className="mx-auto max-w-6xl px-5 py-12 md:py-16">
+        <div className="mx-auto max-w-6xl px-5 py-10 md:py-16">
           <WikiBreadcrumb items={crumbs} />
 
-          <div className="mt-8 grid gap-5 md:grid-cols-2">
+          <div className="mt-6 grid gap-4 sm:mt-8 sm:gap-5 md:grid-cols-2">
             {d.features.map((f) => (
-              <article key={f.slug} className="flex flex-col rounded-[22px] bg-white p-6 ring-1 ring-ink-900/[0.07] md:p-7">
+              <article key={f.slug} className="flex min-w-0 flex-col rounded-[22px] bg-white p-5 ring-1 ring-ink-900/[0.07] sm:p-6 md:p-7">
                 <div className="flex flex-wrap items-start justify-between gap-3">
                   <h2 className="font-display text-xl font-bold tracking-tight">
                     <SmartLink href={wikiHref(d.slug, f.slug)} className="hover:text-brand-600">
@@ -75,7 +75,7 @@ export default async function WikiDomainPage({ params }: PageProps<"/[lang]/wiki
                 <ul className="mt-4 space-y-1.5 text-sm">
                   {f.actions.slice(0, 5).map((a) => (
                     <li key={a.title}>
-                      <SmartLink href={`${wikiHref(d.slug, f.slug)}#${actionAnchor(a)}`} className="text-ink-900/75 hover:text-brand-600">
+                      <SmartLink href={`${wikiHref(d.slug, f.slug)}#${actionAnchor(a)}`} className="inline-block py-3 text-ink-900/75 md:py-0 hover:text-brand-600">
                         {a.title}
                       </SmartLink>
                     </li>
@@ -86,7 +86,7 @@ export default async function WikiDomainPage({ params }: PageProps<"/[lang]/wiki
                   <PackChips packs={f.packs} />
                   <SmartLink
                     href={wikiHref(d.slug, f.slug)}
-                    className="inline-flex items-center gap-1.5 text-sm font-semibold text-ink-900 hover:text-brand-600"
+                    className="inline-flex min-h-11 items-center gap-1.5 text-sm font-semibold md:min-h-0 text-ink-900 hover:text-brand-600"
                   >
                     Lire la fiche <ArrowRight className="size-4" aria-hidden />
                   </SmartLink>
@@ -95,18 +95,18 @@ export default async function WikiDomainPage({ params }: PageProps<"/[lang]/wiki
             ))}
           </div>
 
-          <div className="mt-16">
+          <div className="mt-12 sm:mt-16">
             <WikiCta title={`${d.title} : voyez-le en démonstration`} />
           </div>
 
-          <section className="mt-16">
-            <h2 className="font-display text-2xl font-bold tracking-tight">Les autres domaines</h2>
+          <section className="mt-12 sm:mt-16">
+            <h2 className="font-display text-xl sm:text-2xl font-bold tracking-tight">Les autres domaines</h2>
             <ul className="mt-5 flex flex-wrap gap-2">
               {others.map((x) => (
                 <li key={x.slug}>
                   <SmartLink
                     href={wikiHref(x.slug)}
-                    className="inline-block rounded-full bg-white px-4 py-2 text-sm font-medium text-ink-900/75 ring-1 ring-ink-900/[0.08] transition hover:text-brand-600 hover:ring-brand-500/30"
+                    className="inline-flex min-h-11 items-center rounded-full md:inline-block md:min-h-0 bg-white px-4 py-2 text-sm font-medium text-ink-900/75 ring-1 ring-ink-900/[0.08] transition hover:text-brand-600 hover:ring-brand-500/30"
                   >
                     {x.title}
                   </SmartLink>

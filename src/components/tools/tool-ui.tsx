@@ -27,13 +27,13 @@ export function ToolIcon({ name, className = "size-5" }: { name: ToolMeta["icon"
 /* ------------------------------------------------------------------ champs */
 
 const inputCls =
-  "w-full rounded-xl border border-ink-900/10 bg-white px-3.5 py-2.5 text-[15px] text-ink-900 outline-none transition placeholder:text-ink-900/30 focus:border-brand-500 focus:ring-4 focus:ring-brand-500/15";
+  "w-full rounded-xl border border-ink-900/10 bg-white min-h-11 px-3.5 py-2.5 text-base md:min-h-0 text-ink-900 sm:text-[15px] outline-none transition placeholder:text-ink-900/30 focus:border-brand-500 focus:ring-4 focus:ring-brand-500/15";
 
 export function Card({ title, children, className = "" }: { title?: string; children: ReactNode; className?: string }) {
   return (
-    <div className={`rounded-[24px] border border-ink-900/[0.07] bg-white p-5 shadow-sm md:p-6 ${className}`}>
+    <div className={`rounded-[24px] border border-ink-900/[0.07] bg-white p-4 shadow-sm sm:p-5 md:p-6 ${className}`}>
       {title && <h2 className="mb-4 font-display text-lg font-bold">{title}</h2>}
-      <div className="grid gap-4 sm:grid-cols-2">{children}</div>
+      <div className="grid min-w-0 gap-4 sm:grid-cols-2">{children}</div>
     </div>
   );
 }
@@ -55,7 +55,7 @@ export function Text({
 }) {
   const id = useId();
   return (
-    <div className={wide ? "sm:col-span-2" : ""}>
+    <div className={`min-w-0 ${wide ? "sm:col-span-2" : ""}`}>
       <label htmlFor={id} className="mb-1.5 block text-sm font-medium text-ink-900/70">
         {label}
       </label>
@@ -94,7 +94,7 @@ export function Num({
   const decimals = step !== undefined && step < 1;
   const shown = decimals ? String(value) : value ? value.toLocaleString("fr-FR").replace(/[\u202f\u00a0]/g, " ") : "";
   return (
-    <div className={wide ? "sm:col-span-2" : ""}>
+    <div className={`min-w-0 ${wide ? "sm:col-span-2" : ""}`}>
       <label htmlFor={id} className="mb-1.5 block text-sm font-medium text-ink-900/70">
         {label}
       </label>
@@ -109,9 +109,9 @@ export function Num({
             const n = decimals ? parseFloat(raw) : parseInt(raw.replace(/\D/g, ""), 10);
             onChange(Number.isFinite(n) ? Math.max(0, n) : 0);
           }}
-          className={`${inputCls} pr-16 tabular-nums`}
+          className={`${inputCls} pr-20 tabular-nums md:pr-16`}
         />
-        <span className="pointer-events-none absolute inset-y-0 right-3.5 flex items-center text-sm font-medium text-ink-900/40">
+        <span className="pointer-events-none absolute inset-y-0 right-3.5 flex items-center text-sm whitespace-nowrap font-medium text-ink-900/40">
           {suffix}
         </span>
       </div>
@@ -134,7 +134,7 @@ export function Choice<T extends string>({
   wide?: boolean;
 }) {
   return (
-    <fieldset className={wide ? "sm:col-span-2" : ""}>
+    <fieldset className={`min-w-0 ${wide ? "sm:col-span-2" : ""}`}>
       <legend className="mb-1.5 text-sm font-medium text-ink-900/70">{label}</legend>
       <div className="flex flex-wrap gap-1.5">
         {options.map((o) => (
@@ -143,7 +143,7 @@ export function Choice<T extends string>({
             key={o.value}
             onClick={() => onChange(o.value)}
             aria-pressed={value === o.value}
-            className={`cursor-pointer rounded-full border px-3.5 py-2 text-sm font-medium transition ${
+            className={`min-h-11 cursor-pointer rounded-full border px-4 py-2 text-sm md:min-h-0 md:px-3.5 font-medium transition ${
               value === o.value
                 ? "border-ink-900 bg-ink-900 text-white"
                 : "border-ink-900/10 bg-white text-ink-900/70 hover:border-ink-900/30"
@@ -202,14 +202,14 @@ export function Stat({ label, value, highlight, sub }: { label: string; value: s
   return (
     <motion.div
       layout
-      className={`rounded-2xl p-4 ${highlight ? "bg-ink-900 text-white shadow-[0_20px_50px_-20px_rgba(91,91,247,0.8)]" : "bg-white ring-1 ring-ink-900/[0.07]"}`}
+      className={`min-w-0 rounded-2xl p-4 ${highlight ? "bg-ink-900 text-white shadow-[0_20px_50px_-20px_rgba(91,91,247,0.8)]" : "bg-white ring-1 ring-ink-900/[0.07]"}`}
     >
       <p className={`text-xs font-medium ${highlight ? "text-white/60" : "text-ink-900/50"}`}>{label}</p>
       <motion.p
         key={value}
         initial={{ opacity: 0.4, y: 4 }}
         animate={{ opacity: 1, y: 0 }}
-        className="mt-1 font-display text-2xl font-bold tabular-nums"
+        className="mt-1 font-display text-xl font-bold tabular-nums break-words sm:text-2xl"
       >
         {value}
       </motion.p>
@@ -220,9 +220,9 @@ export function Stat({ label, value, highlight, sub }: { label: string; value: s
 
 export function Line({ label, value, strong }: { label: string; value: string; strong?: boolean }) {
   return (
-    <div className={`flex items-baseline justify-between gap-4 py-2.5 text-sm ${strong ? "font-semibold" : "text-ink-900/70"}`}>
-      <span>{label}</span>
-      <span className="tabular-nums">{value}</span>
+    <div className={`flex items-baseline justify-between gap-3 py-2.5 text-sm sm:gap-4 ${strong ? "font-semibold" : "text-ink-900/70"}`}>
+      <span className="min-w-0 break-words">{label}</span>
+      <span className="shrink-0 text-right tabular-nums">{value}</span>
     </div>
   );
 }
@@ -239,7 +239,7 @@ export function DocPreview({ blocks }: { blocks: Block[] }) {
     <div
       role="region"
       aria-label={t("Aperçu du document généré", "Preview of the generated document")}
-      className="rounded-[20px] bg-white p-6 text-[13px] leading-relaxed text-ink-900 shadow-[0_30px_80px_-30px_rgba(20,23,41,0.45)] ring-1 ring-ink-900/[0.06] md:p-9">
+      className="overflow-hidden rounded-[20px] bg-white p-4 text-[13px] leading-relaxed break-words sm:p-6 text-ink-900 shadow-[0_30px_80px_-30px_rgba(20,23,41,0.45)] ring-1 ring-ink-900/[0.06] md:p-9">
       {blocks.map((b, i) => {
         switch (b.t) {
           case "title":
@@ -287,15 +287,15 @@ export function DocPreview({ blocks }: { blocks: Block[] }) {
             return (
               <div key={i} className="mb-4">
                 {b.rows.map(([k, v]) => (
-                  <div key={k} className="flex justify-between border-b border-ink-900/[0.07] px-2 py-2">
-                    <span>{k}</span>
-                    <span className="tabular-nums">{v}</span>
+                  <div key={k} className="flex justify-between gap-3 border-b border-ink-900/[0.07] px-2 py-2">
+                    <span className="min-w-0">{k}</span>
+                    <span className="shrink-0 text-right tabular-nums">{v}</span>
                   </div>
                 ))}
                 {b.total && (
-                  <div className="mt-1.5 flex justify-between rounded-lg bg-ink-900 px-3 py-2.5 font-semibold text-white">
-                    <span>{b.total[0]}</span>
-                    <span className="tabular-nums">{b.total[1]}</span>
+                  <div className="mt-1.5 flex justify-between gap-3 rounded-lg bg-ink-900 px-3 py-2.5 font-semibold text-white">
+                    <span className="min-w-0">{b.total[0]}</span>
+                    <span className="shrink-0 text-right tabular-nums">{b.total[1]}</span>
                   </div>
                 )}
               </div>
@@ -304,11 +304,11 @@ export function DocPreview({ blocks }: { blocks: Block[] }) {
             return (
               <div key={i} className="mt-6">
                 <p>{b.place}</p>
-                <div className="mt-4 grid grid-cols-2 gap-4">
+                <div className="mt-4 grid grid-cols-1 gap-4 min-[420px]:grid-cols-2">
                   {[b.left, b.right]
                     .filter((s): s is string => !!s)
                     .map((s) => (
-                      <div key={s}>
+                      <div key={s} className="min-w-0">
                         <p className="font-semibold">{s}</p>
                         <p className="text-[11px] text-ink-900/45 italic">Signature précédée de « Lu et approuvé »</p>
                         <div className="mt-3 h-14 rounded-lg border border-dashed border-ink-900/15" />
@@ -338,7 +338,7 @@ export function DownloadButton({ doc, label }: { doc: Doc; label?: string }) {
           setBusy(false);
         }
       }}
-      className="w-full bg-gradient-to-r from-brand-500 to-brand-600 py-4 text-white shadow-[0_14px_40px_-12px_rgba(91,91,247,0.9)] disabled:opacity-70"
+      className="min-h-12 w-full bg-gradient-to-r from-brand-500 to-brand-600 py-4 text-white shadow-[0_14px_40px_-12px_rgba(91,91,247,0.9)] disabled:opacity-70"
     >
       {busy ? <Loader2 className="size-5 animate-spin" /> : <Download className="size-5" />}
       {label ?? t("Télécharger le PDF", "Download PDF")}
@@ -362,12 +362,12 @@ export function UpsellCta({ text }: { text: string }) {
   const { open } = useDemo();
   const { t } = useI18n();
   return (
-    <div className="relative overflow-hidden rounded-[24px] bg-ink-950 p-6 text-white">
+    <div className="relative overflow-hidden rounded-[24px] bg-ink-950 p-5 text-white sm:p-6">
       <div aria-hidden className="absolute -top-16 -right-10 size-48 rounded-full bg-brand-500/40 blur-3xl" />
       <p className="relative font-display text-lg leading-snug font-bold">{text}</p>
       <button
         onClick={open}
-        className="shine relative mt-4 inline-flex cursor-pointer items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-ink-950"
+        className="shine relative mt-4 inline-flex min-h-11 w-full cursor-pointer items-center justify-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-ink-950 sm:w-auto md:min-h-0"
       >
         {t("Demander une démonstration", "Request a demo")}
       </button>
