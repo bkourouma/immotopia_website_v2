@@ -12,15 +12,15 @@ export function ComparatifTeaser() {
   const { locale, t } = useI18n();
   const total = scores();
   return (
-    <section id="comparatif" className="bg-paper py-24 md:py-32">
+    <section id="comparatif" className="bg-paper py-16 md:py-32">
       <div className="mx-auto max-w-6xl px-5">
         <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
           <Reveal className="max-w-2xl">
             <Eyebrow>{t("Comparatif", "Comparison")}</Eyebrow>
-            <h2 className="mt-5 font-display text-4xl leading-[1.05] font-bold tracking-tight text-balance md:text-6xl">
+            <h2 className="mt-5 font-display text-3xl leading-[1.05] sm:text-4xl font-bold tracking-tight text-balance md:text-6xl">
               {t("Comparez", "Compare")} <span className="text-gradient-dark">{t("avant de choisir.", "before you choose.")}</span>
             </h2>
-            <p className="mt-5 text-lg text-ink-900/60">
+            <p className="mt-5 text-base text-ink-900/60 md:text-lg">
               {t(
                 `${rows.length} fonctionnalités, face à ChezvousBO, Logestimmo et WIMMO, d'après ce que chaque éditeur annonce publiquement.`,
                 `${rows.length} features, compared with ChezvousBO, Logestimmo and WIMMO, based on what each vendor publicly advertises.`,
@@ -29,24 +29,26 @@ export function ComparatifTeaser() {
           </Reveal>
           <SmartLink
             href={comparatifHref()}
-            className="group inline-flex shrink-0 items-center gap-2 rounded-full border border-ink-900/15 px-5 py-3 text-sm font-semibold transition hover:bg-ink-900 hover:text-white"
+            className="group inline-flex max-md:min-h-11 w-full shrink-0 items-center justify-center gap-2 rounded-full border border-ink-900/15 px-5 py-3 text-sm font-semibold transition hover:bg-ink-900 md:w-auto hover:text-white"
           >
             {t("Tout le comparatif", "Full comparison")} <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
           </SmartLink>
         </div>
 
-        <Reveal delay={0.05} className="mt-10 flex flex-wrap gap-2">
+        <Reveal delay={0.05} className="-mx-5 mt-8 sm:mx-0 sm:mt-10">
+          <div tabIndex={0} role="region" aria-label={t("Scores par produit", "Scores by product")} className="flex snap-x snap-proximity gap-2 overflow-x-auto px-5 max-sm:pt-1 max-sm:pb-1 [mask-image:linear-gradient(to_right,black_calc(100%-2rem),transparent)] max-sm:[scrollbar-width:none] sm:flex-wrap sm:overflow-visible sm:px-0 sm:[mask-image:none] max-sm:[&::-webkit-scrollbar]:hidden">
           {products.map((p, i) => (
-            <span key={p.id} className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm ${i === 0 ? "bg-ink-900 text-white" : "bg-white text-ink-900/70 ring-1 ring-ink-900/10"}`}>
+            <span key={p.id} className={`inline-flex shrink-0 snap-start items-center gap-2 rounded-full px-4 py-2 text-sm ${i === 0 ? "bg-ink-900 text-white" : "bg-white text-ink-900/70 ring-1 ring-ink-900/10"}`}>
               <span className="size-2 rounded-full" style={{ background: p.color }} />
               {p.name}
               <strong className="tabular-nums">{total[i]}</strong>
               <span className={i === 0 ? "text-white/50" : "text-ink-900/40"}>/ {rows.length}</span>
             </span>
           ))}
+          </div>
         </Reveal>
 
-        <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-6 grid gap-3 sm:mt-8 sm:grid-cols-2 lg:grid-cols-4">
           {domains.map((d, k) => {
             const list = rowsOf(d.id, locale);
             const s = scores(list);

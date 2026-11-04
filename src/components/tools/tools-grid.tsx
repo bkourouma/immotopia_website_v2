@@ -31,7 +31,7 @@ export function ToolsGrid({ dark = false }: { dark?: boolean }) {
             href={href(`/outils/${t.slug}`)}
             onMouseMove={trackSpotlight}
             style={{ ["--spot" as string]: `${t.accent}33` }}
-            className={`spotlight group flex h-full flex-col rounded-[24px] border p-6 transition duration-500 hover:-translate-y-1 ${
+            className={`spotlight group flex h-full flex-col rounded-[24px] border p-5 transition sm:p-6 duration-500 hover:-translate-y-1 ${
               dark ? "border-white/10 bg-white/[0.04] text-white hover:border-white/25" : "border-ink-900/[0.07] bg-white hover:shadow-xl"
             }`}
           >

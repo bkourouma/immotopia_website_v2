@@ -35,37 +35,45 @@ export function Ecosystem() {
 
   useGSAP(
     () => {
-      // Impulsions lumineuses qui parcourent les pistes
-      gsap.utils.toArray<SVGPathElement>("[data-pulse]").forEach((p, i) => {
-        const len = p.getTotalLength();
-        gsap.set(p, { strokeDasharray: `36 ${len}`, strokeDashoffset: 36 });
-        gsap.to(p, {
-          strokeDashoffset: -len,
-          duration: 2.2,
-          ease: "none",
-          repeat: -1,
-          delay: i * 0.37,
-          repeatDelay: 0.6,
+      const mm = gsap.matchMedia();
+
+      // Mouvement réduit : pistes statiques, pas d'impulsions
+      mm.add("(prefers-reduced-motion: reduce)", () => {
+        gsap.set("[data-pulse]", { opacity: 0 });
+      });
+
+      mm.add("(prefers-reduced-motion: no-preference)", () => {
+        // Impulsions lumineuses qui parcourent les pistes
+        gsap.utils.toArray<SVGPathElement>("[data-pulse]").forEach((p, i) => {
+          const len = p.getTotalLength();
+          gsap.set(p, { strokeDasharray: `36 ${len}`, strokeDashoffset: 36 });
+          gsap.to(p, {
+            strokeDashoffset: -len,
+            duration: 2.2,
+            ease: "none",
+            repeat: -1,
+            delay: i * 0.37,
+            repeatDelay: 0.6,
+          });
+        });
+
+        // Tracé progressif des pistes à l'entrée dans l'écran
+        gsap.utils.toArray<SVGPathElement>("[data-track]").forEach((p) => {
+          const len = p.getTotalLength();
+          gsap.fromTo(
+            p,
+            { strokeDasharray: len, strokeDashoffset: len },
+            {
+              strokeDashoffset: 0,
+              duration: 1.6,
+              ease: "power2.out",
+              scrollTrigger: { trigger: "[data-circuit]", start: "top 80%", once: true },
+            },
+          );
         });
       });
 
-      // Tracé progressif des pistes à l'entrée dans l'écran
-      gsap.utils.toArray<SVGPathElement>("[data-track]").forEach((p) => {
-        const len = p.getTotalLength();
-        gsap.fromTo(
-          p,
-          { strokeDasharray: len, strokeDashoffset: len },
-          {
-            strokeDashoffset: 0,
-            duration: 1.6,
-            ease: "power2.out",
-            scrollTrigger: { trigger: "[data-circuit]", start: "top 80%", once: true },
-          },
-        );
-      });
-
       // Apparition en cascade des cartes du bento
-      const mm = gsap.matchMedia();
       mm.add("(prefers-reduced-motion: no-preference)", () => {
         ScrollTrigger.batch("[data-bento]", {
           start: "top 88%",
@@ -83,14 +91,14 @@ export function Ecosystem() {
   );
 
   return (
-    <section ref={root} id="ecosysteme" className="relative overflow-hidden bg-ink-950 py-24 text-white md:py-32">
+    <section ref={root} id="ecosysteme" className="relative overflow-hidden bg-ink-950 py-16 text-white md:py-32">
       <div className="grid-lines absolute inset-0 [mask-image:radial-gradient(ellipse_at_50%_0%,black,transparent_65%)]" />
-      <div aria-hidden className="absolute -top-60 left-1/2 h-[800px] w-[1300px] -translate-x-1/2" style={{ background: "radial-gradient(closest-side, rgba(91,91,247,0.22), transparent)" }} />
+      <div aria-hidden className="absolute -top-40 left-1/2 h-[500px] w-[700px] max-md:max-w-full -translate-x-1/2 md:-top-60 md:h-[800px] md:w-[1300px]" style={{ background: "radial-gradient(closest-side, rgba(91,91,247,0.22), transparent)" }} />
 
       <div className="relative mx-auto max-w-6xl px-5">
         <div className="mx-auto max-w-3xl text-center">
           <Eyebrow dark>{t("Écosystème connecté", "Connected ecosystem")}</Eyebrow>
-          <h2 className="mt-5 font-display text-4xl leading-[1.05] font-bold tracking-tight text-balance md:text-6xl">
+          <h2 className="mt-5 font-display text-3xl leading-[1.05] font-bold tracking-tight text-balance sm:text-4xl md:text-6xl">
             {t(
               <>
                 Vos outils parlent enfin <span className="text-gradient">le même langage.</span>
@@ -100,7 +108,7 @@ export function Ecosystem() {
               </>,
             )}
           </h2>
-          <p className="mt-5 text-lg text-white/60">
+          <p className="mt-5 text-base text-white/60 md:text-lg">
             {t(
               "Portails, e-mail, WhatsApp et API d'annonces : chaque échange passe par la même plateforme, sans ressaisie.",
               "Portals, email, WhatsApp and a listings API: every interaction runs through one platform, with no double entry.",
@@ -117,7 +125,7 @@ export function Ecosystem() {
               <SmartLink
                 key={d}
                 href={comparatifHref(d)}
-                className="group inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-white/[0.04] px-4 py-2 text-white/80 transition hover:border-white/30 hover:text-white"
+                className="group inline-flex max-md:min-h-11 items-center gap-1.5 rounded-full border border-white/15 bg-white/[0.04] px-4 py-2 text-white/80 transition hover:border-white/30 hover:text-white"
               >
                 {label} <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-0.5" />
               </SmartLink>
@@ -125,7 +133,7 @@ export function Ecosystem() {
           </div>
         </div>
 
-        <div className="mt-14 grid auto-rows-[minmax(200px,auto)] gap-4 md:grid-cols-6">
+        <div className="mt-10 grid auto-rows-[minmax(0,auto)] md:mt-14 md:auto-rows-[minmax(200px,auto)] gap-4 md:grid-cols-6">
           {/* Grande carte : le circuit */}
           <Bento className="md:col-span-6 lg:col-span-4 lg:row-span-2" spot="rgba(91,91,247,0.25)">
             <CardHead
@@ -167,7 +175,7 @@ export function Ecosystem() {
                 style={{ left: `${(C.x / 600) * 100}%`, top: `${(C.y / 340) * 100}%` }}
               >
                 <Logo className="scale-75 text-white sm:scale-100" />
-                <span className="absolute inset-0 -z-10 animate-ping rounded-2xl bg-brand-500/20 [animation-duration:2.5s]" />
+                <span className="absolute inset-0 -z-10 animate-ping rounded-2xl bg-brand-500/20 motion-reduce:hidden [animation-duration:2.5s]" />
               </div>
             </div>
           </Bento>
@@ -178,7 +186,7 @@ export function Ecosystem() {
               title={t("API d'annonces", "Listings API")}
               text={t("Alimentez le site vitrine de votre agence avec vos biens publiés.", "Feed your agency website with your published properties.")}
             />
-            <pre className="mt-5 overflow-hidden rounded-xl bg-black/40 p-3 font-mono text-[11px] leading-relaxed text-white/70 ring-1 ring-white/10">
+            <pre tabIndex={0} role="region" aria-label={t("Exemple de réponse de l'API", "API response example")} className="mt-5 overflow-x-auto rounded-xl bg-black/40 p-3 font-mono text-[11px] leading-relaxed text-white/70 ring-1 ring-white/10">
               <span className="text-mint-400">GET</span> /annonces{"\n"}
               {"{"}{"\n"}
               {"  "}<span className="text-brand-300">&quot;titre&quot;</span>: <span className="text-sun-400">&quot;Villa 5 pièces, Cocody&quot;</span>,{"\n"}
@@ -252,9 +260,9 @@ export function Ecosystem() {
                 "Granular role-based permissions and a trail of sensitive actions: who, what, when.",
               )}
             />
-            <div className="mt-5 flex gap-2 text-xs">
+            <div className="mt-5 flex flex-wrap gap-2 text-xs">
               {["Admin", "Manager", "Agent", t("Comptable", "Accountant")].map((s) => (
-                <span key={s} className="flex-1 rounded-lg bg-white/[0.06] py-2 text-center font-semibold text-white/80 ring-1 ring-white/10">
+                <span key={s} className="max-md:min-w-[5rem] flex-1 rounded-lg bg-white/[0.06] py-2 text-center font-semibold text-white/80 ring-1 ring-white/10">
                   ✓ {s}
                 </span>
               ))}
@@ -272,7 +280,7 @@ function Bento({ children, className = "", spot }: { children: ReactNode; classN
       data-bento
       onMouseMove={trackSpotlight}
       style={{ ["--spot" as string]: spot }}
-      className={`spotlight group relative overflow-hidden rounded-[26px] border border-white/10 bg-white/[0.035] p-6 backdrop-blur-sm transition-[border-color,transform] duration-500 hover:-translate-y-1 hover:border-white/20 ${className}`}
+      className={`spotlight group relative overflow-hidden rounded-[26px] border border-white/10 bg-white/[0.035] p-5 backdrop-blur-sm md:p-6 transition-[border-color,transform] duration-500 hover:-translate-y-1 hover:border-white/20 ${className}`}
     >
       <div className="relative">{children}</div>
     </div>

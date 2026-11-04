@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { localizeHref, locales } from "@/lib/i18n";
 import { SITE_URL } from "@/lib/site";
+import { blogHref, posts } from "@/lib/blog";
 import { guideHref, guides } from "@/lib/guides";
 import { landings } from "@/lib/landings";
 import { tools } from "@/lib/tools";
@@ -49,6 +50,23 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     },
     ...guides.map((g) => ({ url: url(guideHref(g.slug)), lastModified: new Date(g.updated), changeFrequency: "monthly" as const, priority: 0.7 })),
+    // Blog : français et anglais, chaque article daté de sa dernière mise à jour réelle
+    ...locales.map((locale) => ({
+      url: url(localizeHref(locale, blogHref())),
+      lastModified: new Date(Math.max(...posts.map((p) => Date.parse(p.updated)))),
+      changeFrequency: "weekly" as const,
+      priority: 0.7,
+      alternates: { languages: { ...Object.fromEntries(locales.map((l) => [l, url(localizeHref(l, blogHref()))])), "x-default": url(blogHref()) } },
+    })),
+    ...posts.flatMap((p) =>
+      locales.map((locale) => ({
+        url: url(localizeHref(locale, blogHref(p.slug))),
+        lastModified: new Date(p.updated),
+        changeFrequency: "monthly" as const,
+        priority: 0.7,
+        alternates: { languages: { ...Object.fromEntries(locales.map((l) => [l, url(localizeHref(l, blogHref(p.slug)))])), "x-default": url(blogHref(p.slug)) } },
+      })),
+    ),
     ...page("/mentions-legales", 0.2, "yearly"),
     ...page("/confidentialite", 0.2, "yearly"),
   ];
