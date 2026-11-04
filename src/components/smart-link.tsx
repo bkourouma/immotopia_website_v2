@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { ComponentProps } from "react";
-import { localizeHref, splitPath } from "@/lib/i18n";
+import { localizeLink, splitPath } from "@/lib/i18n";
 import { goTo } from "@/lib/nav";
 import { useLocale } from "./locale-provider";
 
@@ -20,7 +20,7 @@ export function SmartLink({ href, onClick, ...props }: Omit<ComponentProps<typeo
   return (
     <Link
       {...props}
-      href={localizeHref(locale, isAnchor && !onHome ? `/${href}` : href)}
+      href={localizeLink(locale, isAnchor && !onHome ? `/${href}` : href)}
       onClick={(e) => {
         onClick?.(e);
         if (isAnchor && onHome) {
