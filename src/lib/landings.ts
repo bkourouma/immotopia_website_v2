@@ -308,6 +308,17 @@ export const landings: Landing[] = [
         ],
       },
       {
+        title: "Comment ImmoTopia répond à ces critères",
+        intro:
+          "Plutôt que de promettre, voici ce que l'on peut vérifier dans le produit, critère par critère.",
+        items: [
+          { title: "Vos métiers dans un seul outil", text: "Gestion locative, syndic de copropriété, CRM et annonces partagent les mêmes contacts et les mêmes biens. Voir la [gestion locative](/gestion-locative-cote-divoire), le [logiciel de syndic](/logiciel-syndic-copropriete-cote-divoire) et le [CRM immobilier](/crm-immobilier-cote-divoire)." },
+          { title: "Mobile Money et paiements", text: "Pour les loyers, l'opérateur est enregistré avec le paiement et le locataire déclare son règlement depuis son portail ; l'agence le valide en un clic. Pour les charges de copropriété, le paiement en ligne par Mobile Money existe, sans commission d'ImmoTopia. Détail dans [paiement des loyers et charges](/paiement-loyer-charges-mobile-money-cote-divoire)." },
+          { title: "Relances par e-mail et WhatsApp", text: "Les relances partent par e-mail, WhatsApp ou les deux, selon les préférences et le consentement de chacun." },
+          { title: "Assemblées générales en direct", text: "Émargement en ligne, quorum calculé en temps réel et vote de chaque copropriétaire par lien personnel, sans compte." },
+        ],
+      },
+      {
         title: "Checklist avant de signer",
         bullets: [
           "Demandez une démonstration sur vos propres cas : un bail, une copropriété, un impayé.",
@@ -327,6 +338,8 @@ export const landings: Landing[] = [
       { q: "ImmoTopia propose-t-il un essai ?", a: "Le premier mois d'abonnement est offert sur tous les packs, sans engagement." },
       { q: "Où voir la comparaison avec les autres logiciels ?", a: "Sur la page Comparatif du site, domaine par domaine et avec les sources." },
       { q: "Quels critères pour choisir un logiciel immobilier en Côte d'Ivoire ?", a: "Six critères : couvrir tous vos métiers (transaction, gestion locative, syndic, promotion), reconnaître le Mobile Money, envoyer les rappels sur WhatsApp, offrir des portails aux propriétaires et locataires, afficher des prix clairs en FCFA et proposer une équipe proche pour la mise en route." },
+      { q: "Le Mobile Money est-il géré pour les loyers ?", a: "Tous les moyens de paiement sont acceptés. Pour le Mobile Money, l'opérateur est enregistré avec le paiement, et le locataire peut déclarer lui-même son règlement depuis son portail ; l'agence le valide en un clic." },
+      { q: "Les copropriétaires peuvent-ils payer leurs charges en ligne ?", a: "Oui, par Mobile Money, depuis le lien « Payer cet appel » ou leur portail. ImmoTopia ne prend aucune commission." },
       { q: "Puis-je reprendre mes fichiers Excel ?", a: "Oui : la mise en route accompagnée comprend la reprise de vos biens, contacts, baux ou copropriétés. Elle est facultative si vous saisissez vous-même vos données." },
     ],
     related: ["logiciel-immobilier-cote-divoire", "immotopia-vs-excel", "logiciel-immobilier-afrique"],
