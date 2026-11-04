@@ -30,18 +30,18 @@ export default async function NotFound() {
             "It may have moved during the website redesign. Here's where to go next:",
           )}
         </PageHero>
-        <section className="mx-auto grid max-w-4xl gap-4 px-5 py-14 sm:grid-cols-2">
+        <section className="mx-auto grid max-w-4xl gap-3 px-5 py-10 sm:grid-cols-2 sm:gap-4 sm:py-14">
           {links.map((l) => (
             <Link
               key={l.href}
               href={localizeHref(locale, l.href)}
-              className="group flex items-center justify-between rounded-[22px] border border-ink-900/[0.07] bg-white p-5 transition hover:-translate-y-0.5 hover:shadow-lg"
+              className="group flex min-h-11 items-center justify-between gap-3 md:min-h-0 md:gap-0 rounded-[22px] border border-ink-900/[0.07] bg-white p-5 transition hover:-translate-y-0.5 hover:shadow-lg"
             >
-              <span>
+              <span className="min-w-0">
                 <span className="block font-display text-lg font-bold">{l.label}</span>
                 <span className="block text-sm text-ink-900/60">{l.text}</span>
               </span>
-              <ArrowRight className="size-5 text-brand-600 transition-transform group-hover:translate-x-1" />
+              <ArrowRight className="size-5 shrink-0 text-brand-600 transition-transform group-hover:translate-x-1" />
             </Link>
           ))}
         </section>

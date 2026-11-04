@@ -16,6 +16,8 @@ export function MagneticButton({
   const y = useSpring(useMotionValue(0), { stiffness: 260, damping: 18, mass: 0.4 });
 
   function onMove(e: MouseEvent<HTMLButtonElement>) {
+    // Pas d'effet magnétique sans survol réel (tactile)
+    if (typeof window !== "undefined" && !window.matchMedia("(hover: hover)").matches) return;
     const r = ref.current?.getBoundingClientRect();
     if (!r) return;
     x.set((e.clientX - (r.left + r.width / 2)) * strength);
@@ -32,7 +34,7 @@ export function MagneticButton({
       }}
       whileTap={{ scale: 0.96 }}
       style={{ x, y }}
-      className={`shine inline-flex cursor-pointer items-center justify-center gap-2 rounded-full font-semibold transition-shadow ${className}`}
+      className={`shine inline-flex cursor-pointer items-center justify-center min-h-11 gap-2 sm:min-h-0 rounded-full font-semibold transition-shadow ${className}`}
       {...props}
     >
       {children}
@@ -76,7 +78,7 @@ export function Reveal({
 export function Eyebrow({ children, dark = false }: { children: ReactNode; dark?: boolean }) {
   return (
     <span
-      className={`inline-flex items-center gap-2 rounded-full border px-3.5 py-1.5 text-xs font-semibold tracking-[0.14em] uppercase ${
+      className={`inline-flex items-center gap-2 max-w-full rounded-full border px-3.5 py-1.5 text-[11px] font-semibold tracking-[0.1em] uppercase sm:text-xs sm:tracking-[0.14em] ${
         dark ? "border-white/15 bg-white/5 text-white/80" : "border-brand-500/20 bg-brand-500/5 text-brand-600"
       }`}
     >

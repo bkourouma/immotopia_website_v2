@@ -1,6 +1,6 @@
 "use client";
 
-import { AnimatePresence, LayoutGroup, motion, animate } from "framer-motion";
+import { AnimatePresence, LayoutGroup, motion, animate, useReducedMotion } from "framer-motion";
 import {
   ArrowDownLeft,
   Building2,
@@ -13,7 +13,7 @@ import {
   Wallet,
   Wrench,
 } from "lucide-react";
-import { useEffect, useLayoutEffect, useRef, useState, type ReactNode } from "react";
+import { createContext, useContext, useEffect, useLayoutEffect, useRef, useState, type ReactNode } from "react";
 import type { MockupKind } from "@/lib/content";
 import type { Locale } from "@/lib/i18n";
 import { useI18n } from "./locale-provider";
@@ -29,35 +29,46 @@ function num(n: number, locale: Locale) {
   return locale === "en" ? n.toLocaleString("en-US") : n.toLocaleString("fr-FR").replace(/[\u202f\u00a0]/g, " ");
 }
 
-/** Fait défiler des étapes en boucle, uniquement quand la carte est active. */
-function useLoop(active: boolean, steps: number, ms: number) {
+/** Vrai quand la maquette est rendue dans un petit volet (mobile) : version allégée. */
+const CompactCtx = createContext(false);
+const useCompact = () => useContext(CompactCtx);
+
+/**
+ * Fait défiler des étapes en boucle, uniquement quand la carte est active.
+ * Avec prefers-reduced-motion : aucune boucle, on fige l'étape `rest` (état final lisible).
+ */
+function useLoop(active: boolean, steps: number, ms: number, rest = 0) {
+  const reduce = useReducedMotion();
   const [step, setStep] = useState(0);
   useEffect(() => {
-    if (!active) return;
+    if (!active || reduce) return;
     const id = setInterval(() => setStep((s) => (s + 1) % steps), ms);
     return () => {
       clearInterval(id);
       setStep(0);
     };
-  }, [active, steps, ms]);
+  }, [active, reduce, steps, ms]);
+  if (reduce) return rest;
   return active ? step : 0;
 }
 
 function useCountUp(target: number, active: boolean, duration = 1.4) {
+  const reduce = useReducedMotion();
   const [v, setV] = useState(target);
   useEffect(() => {
-    if (!active) return;
+    if (!active || reduce) return;
     const c = animate(target * 0.55, target, {
       duration,
       ease: [0.16, 1, 0.3, 1],
       onUpdate: setV,
     });
     return () => c.stop();
-  }, [target, active, duration]);
-  return active ? v : target;
+  }, [target, active, duration, reduce]);
+  return active && !reduce ? v : target;
 }
 
 function Window({ title, children, badge }: { title: string; children: ReactNode; badge?: ReactNode }) {
+  const compact = useCompact();
   return (
     <div className="flex h-full w-full flex-col overflow-hidden rounded-2xl border border-white/10 bg-ink-900/90 shadow-2xl shadow-black/50">
       <div className="flex items-center gap-2 border-b border-white/[0.07] px-4 py-2.5">
@@ -67,7 +78,7 @@ function Window({ title, children, badge }: { title: string; children: ReactNode
         <span className="ml-2 truncate text-[11px] font-medium text-white/50">{title}</span>
         <span className="ml-auto">{badge}</span>
       </div>
-      <div className="relative min-h-0 flex-1 p-4">{children}</div>
+      <div className={`relative min-h-0 flex-1 ${compact ? "overflow-hidden p-3" : "p-4"}`}>{children}</div>
     </div>
   );
 }
@@ -99,9 +110,10 @@ const rentRows = [
 function PaymentsMockup({ active }: { active: boolean }) {
   const { locale, t } = useI18n();
   // 0: en attente, 1: notification Wave, 2: payé, 3: payé (pause)
-  const step = useLoop(active, 4, 1500);
+  const step = useLoop(active, 4, 1500, 3);
   const paid = step >= 2;
   const total = useCountUp(paid ? 1750000 : 1600000, active, 1);
+  const compact = useCompact();
 
   return (
     <Window title={t("Encaissements · Septembre", "Collections · September")} badge={<Pill tone="green">{t("Portail locataire", "Tenant portal")}</Pill>}>
@@ -116,7 +128,7 @@ function PaymentsMockup({ active }: { active: boolean }) {
         </div>
       </div>
       <div className="space-y-1.5">
-        {rentRows.map((r, i) => {
+        {rentRows.slice(0, compact ? 3 : rentRows.length).map((r, i) => {
           const isTarget = i === 2;
           const rowPaid = !isTarget || paid;
           return (
@@ -202,6 +214,7 @@ export function Donut({
   size?: number;
   children?: ReactNode;
 }) {
+  const reduce = useReducedMotion();
   const r = 42;
   const c = 2 * Math.PI * r;
   // début de chaque part, en pourcentage cumulé
@@ -225,7 +238,7 @@ export function Donut({
               strokeDasharray={`${len} ${c}`}
               initial={false}
               animate={{ strokeDashoffset: active ? -offset : -offset + len, opacity: active ? 1 : 0.4 }}
-              transition={{ duration: 1.1, delay: active ? 0.15 * i : 0, ease: [0.16, 1, 0.3, 1] }}
+              transition={reduce ? { duration: 0 } : { duration: 1.1, delay: active ? 0.15 * i : 0, ease: [0.16, 1, 0.3, 1] }}
             />
           );
         })}
@@ -238,6 +251,7 @@ export function Donut({
 function OwnersMockup({ active }: { active: boolean }) {
   const net = useCountUp(1640000, active);
   const { locale, t } = useI18n();
+  const compact = useCompact();
   return (
     <Window title={t("Portail propriétaire · M. Konan Yao", "Landlord portal · Mr. Konan Yao")} badge={<Pill tone="violet">{t("Août 2026", "August 2026")}</Pill>}>
       <div className="flex items-center gap-4">
@@ -257,7 +271,7 @@ function OwnersMockup({ active }: { active: boolean }) {
           ))}
         </ul>
       </div>
-      <div className="mt-4 space-y-1.5 text-[11px]">
+      <div className={`mt-4 space-y-1.5 text-[11px] ${compact ? "hidden" : ""}`}>
         {[
           [t("Villa Cocody Ambassades", "Villa · Cocody Ambassades"), num(900000, locale)],
           [t("Immeuble Marcory · 3 lots", "Marcory building · 3 units"), num(740000, locale)],
@@ -268,7 +282,7 @@ function OwnersMockup({ active }: { active: boolean }) {
           </div>
         ))}
       </div>
-      <div className="mt-3 flex items-center justify-between rounded-xl bg-gradient-to-r from-brand-500/25 to-brand-500/5 px-3 py-2.5 ring-1 ring-brand-400/30">
+      <div className="mt-3 flex items-center justify-between gap-2 rounded-xl bg-gradient-to-r from-brand-500/25 to-brand-500/5 px-3 py-2.5 ring-1 ring-brand-400/30">
         <div>
           <p className="text-[10px] text-brand-300">{t("Relevé de gérance · loyers encaissés", "Management statement · rent collected")}</p>
           <p className="font-display text-lg font-bold text-white tabular-nums">{money(net, locale)}</p>
@@ -303,10 +317,12 @@ const todo = [
 
 function AccountingMockup({ active }: { active: boolean }) {
   // les tâches du jour sont traitées une à une, puis la boucle recommence
-  const step = useLoop(active, 5, 1200);
+  const step = useLoop(active, 5, 1200, 3);
   const done = Math.min(step, 3);
   const cashed = useCountUp(48_200_000, active, 1.6);
   const { locale, t } = useI18n();
+  const compact = useCompact();
+  const reduce = useReducedMotion();
   return (
     <Window title={t("Tableau de bord · Agence Plateau", "Dashboard · Plateau branch")} badge={<Pill tone="blue">{t("Septembre 2026", "September 2026")}</Pill>}>
       <div className="grid grid-cols-3 gap-2 text-[10px]">
@@ -335,15 +351,15 @@ function AccountingMockup({ active }: { active: boolean }) {
           <motion.div
             className="h-full rounded-full bg-gradient-to-r from-brand-500 to-mint-400"
             initial={false}
-            animate={{ width: active ? "88%" : "40%" }}
-            transition={{ duration: 1.6, ease: [0.16, 1, 0.3, 1] }}
+            animate={{ width: active || reduce ? "88%" : "40%" }}
+            transition={reduce ? { duration: 0 } : { duration: 1.6, ease: [0.16, 1, 0.3, 1] }}
           />
         </div>
-        <p className="mt-1.5 text-[10px] text-white/45">{t("Objectif mensuel : 55 000 000 FCFA", "Monthly target: 55,000,000 FCFA")}</p>
+        <p className={`mt-1.5 text-[10px] text-white/45 ${compact ? "hidden" : ""}`}>{t("Objectif mensuel : 55 000 000 FCFA", "Monthly target: 55,000,000 FCFA")}</p>
       </div>
       <p className="mt-3 mb-1.5 text-[10px] font-semibold tracking-wide text-white/45 uppercase">{t("À traiter aujourd'hui", "To do today")}</p>
       <div className="space-y-1.5">
-        {todo.map((t, i) => (
+        {todo.slice(0, compact ? 2 : todo.length).map((t, i) => (
           <motion.div
             key={t.label.fr}
             animate={{ opacity: i < done ? 0.45 : 1 }}
@@ -379,11 +395,15 @@ const modules = [
 
 function EcosystemMockup({ active }: { active: boolean }) {
   const { locale, t } = useI18n();
+  const compact = useCompact();
+  const reduce = useReducedMotion();
+  // rotation et pulsation infinies : coupées en mouvement réduit et sur petit volet
+  const spin = active && !reduce && !compact;
   return (
     <div className="relative grid h-full w-full place-items-center overflow-hidden rounded-2xl border border-white/10 bg-[radial-gradient(circle_at_50%_45%,rgba(91,91,247,0.35),transparent_60%)]">
       <motion.div
         className="absolute size-[260px] rounded-full border border-dashed border-white/15"
-        animate={active ? { rotate: 360 } : { rotate: 0 }}
+        animate={spin ? { rotate: 360 } : { rotate: 0 }}
         transition={{ duration: 40, ease: "linear", repeat: Infinity }}
       >
         {modules.map((m, i) => {
@@ -394,7 +414,7 @@ function EcosystemMockup({ active }: { active: boolean }) {
               key={m.label.fr}
               className="absolute grid size-11 place-items-center rounded-2xl border border-white/15 bg-ink-800/90 text-white shadow-lg"
               style={{ left: Math.round(108 + Math.cos(a) * 130), top: Math.round(108 + Math.sin(a) * 130) }}
-              animate={active ? { rotate: -360 } : { rotate: 0 }}
+              animate={spin ? { rotate: -360 } : { rotate: 0 }}
               transition={{ duration: 40, ease: "linear", repeat: Infinity }}
               title={m.label[locale]}
             >
@@ -405,7 +425,7 @@ function EcosystemMockup({ active }: { active: boolean }) {
       </motion.div>
       <div className="relative z-10 flex flex-col items-center text-center text-white">
         <motion.div
-          animate={active ? { scale: [1, 1.04, 1] } : { scale: 1 }}
+          animate={spin ? { scale: [1, 1.04, 1] } : { scale: 1 }}
           transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
           className="rounded-2xl border border-white/15 bg-ink-900/70 px-5 py-4 backdrop-blur-md"
         >
@@ -440,7 +460,7 @@ const columnLabel: Record<Column, { fr: string; en: string }> = {
 
 function CrmMockup({ active }: { active: boolean }) {
   // la carte vedette glisse de colonne en colonne
-  const step = useLoop(active, 5, 1300);
+  const step = useLoop(active, 5, 1300, 3);
   const col = Math.min(step, 3);
   const { locale, t } = useI18n();
   const others: Record<Column, string[]> = {
@@ -452,7 +472,7 @@ function CrmMockup({ active }: { active: boolean }) {
   return (
     <Window title={t("Pipeline commercial", "Sales pipeline")} badge={<Pill tone="violet">{t("12 opportunités", "12 opportunities")}</Pill>}>
       <LayoutGroup>
-        <div className="grid h-full grid-cols-4 gap-2">
+        <div className="grid h-full grid-cols-4 gap-1.5 sm:gap-2">
           {columns.map((c, ci) => (
             <div
               key={c}
@@ -506,8 +526,9 @@ const charges = [
 ];
 
 function SyndicMockup({ active }: { active: boolean }) {
-  const step = useLoop(active, 3, 1600);
+  const step = useLoop(active, 3, 1600, 2);
   const { locale, t } = useI18n();
+  const compact = useCompact();
   type TicketStatus = "resolved" | "inProgress" | "planned" | "new";
   const statusLabel: Record<TicketStatus, string> = {
     resolved: t("Résolu", "Resolved"),
@@ -524,7 +545,7 @@ function SyndicMockup({ active }: { active: boolean }) {
   return (
     <Window title={t("Résidence Les Cocotiers · 48 lots", "Les Cocotiers Residence · 48 units")} badge={<Pill tone="amber">{t("Exercice 2026", "FY 2026")}</Pill>}>
       <div className="flex items-center gap-4">
-        <Donut slices={charges} active={active} size={120}>
+        <Donut slices={charges} active={active} size={compact ? 100 : 120}>
           <div>
             <p className="text-[9px] text-white/50">Budget</p>
             <p className="font-display text-sm font-bold text-white">{t("38,4 M", "38.4M")}</p>
@@ -542,9 +563,9 @@ function SyndicMockup({ active }: { active: boolean }) {
       </div>
       <p className="mt-4 mb-1.5 text-[10px] font-semibold uppercase tracking-wide text-white/45">{t("Tickets d'intervention", "Work orders")}</p>
       <div className="space-y-1.5">
-        {tickets.map((tk) => (
+        {tickets.slice(0, compact ? 2 : tickets.length).map((tk) => (
           <div key={tk.t} className="flex items-center gap-2 rounded-lg bg-white/[0.03] px-3 py-2 text-[11px] ring-1 ring-white/[0.05]">
-            <Wrench className="size-3.5 text-white/40" />
+            <Wrench className="size-3.5 shrink-0 text-white/40" />
             <span className="truncate text-white/80">{tk.t}</span>
             <span className="ml-auto">
               <AnimatePresence mode="wait" initial={false}>
@@ -581,8 +602,10 @@ function CommissionsMockup({ active }: { active: boolean }) {
   // les notifications apparaissent une à une, comme dans l'historique des communications
   const { locale, t } = useI18n();
   const list = reminders[locale];
-  const step = useLoop(active, list.length + 2, 1100);
-  const shown = active ? Math.min(step + 1, list.length) : list.length;
+  const compact = useCompact();
+  const max = compact ? 2 : list.length;
+  const step = useLoop(active, list.length + 2, 1100, list.length);
+  const shown = active ? Math.min(step + 1, max) : max;
   return (
     <Window title={t("Communications · Historique", "Communications · History")} badge={<Pill tone="green">{t("Automatique", "Automated")}</Pill>}>
       <div className="space-y-2">
@@ -620,33 +643,45 @@ function CommissionsMockup({ active }: { active: boolean }) {
   );
 }
 
-// Taille de conception des interfaces : elles sont ensuite mises à l'échelle pour remplir le volet.
-const DESIGN_W = 460;
-const DESIGN_H = 390;
+// Tailles de conception : les interfaces sont dessinées à cette taille puis mises à l'échelle
+// pour remplir le volet. Sur petit volet (mobile), la version « compacte » est plus petite et
+// plus allégée, ce qui garde un texte lisible une fois réduit.
+const DESIGN = { full: { w: 460, h: 390 }, compact: { w: 400, h: 330 } };
 
 const useIsoLayoutEffect = typeof window === "undefined" ? useEffect : useLayoutEffect;
 
 /** Réduit (ou agrandit légèrement) son contenu pour tenir dans le conteneur, sans reflow interne. */
 function FitScale({ children }: { children: ReactNode }) {
   const ref = useRef<HTMLDivElement>(null);
-  const [scale, setScale] = useState(1);
+  const [fit, setFit] = useState<{ scale: number; compact: boolean } | null>(null);
   useIsoLayoutEffect(() => {
     const el = ref.current;
     if (!el) return;
     const ro = new ResizeObserver(([e]) => {
       const { width, height } = e.contentRect;
-      setScale(Math.min(width / DESIGN_W, height / DESIGN_H, 1.2));
+      if (!width || !height) return;
+      const compact = height < 300;
+      const d = compact ? DESIGN.compact : DESIGN.full;
+      const scale = Math.min(width / d.w, height / d.h, 1.2);
+      setFit((p) => (p && p.compact === compact && Math.abs(p.scale - scale) < 0.001 ? p : { scale, compact }));
     });
     ro.observe(el);
     return () => ro.disconnect();
   }, []);
+  const compact = fit?.compact ?? false;
+  const d = compact ? DESIGN.compact : DESIGN.full;
   return (
-    <div ref={ref} className="relative size-full">
+    <div ref={ref} className={`relative size-full ${compact ? "overflow-hidden" : ""}`}>
       <div
         className="absolute top-1/2 left-1/2"
-        style={{ width: DESIGN_W, height: DESIGN_H, transform: `translate(-50%, -50%) scale(${scale})` }}
+        style={{
+          width: d.w,
+          height: d.h,
+          opacity: fit ? 1 : 0, // masqué tant que l'échelle n'est pas mesurée : pas de saut visible
+          transform: `translate(-50%, -50%) scale(${fit?.scale ?? 1})`,
+        }}
       >
-        {children}
+        <CompactCtx.Provider value={compact}>{children}</CompactCtx.Provider>
       </div>
     </div>
   );

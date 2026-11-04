@@ -1,6 +1,6 @@
 "use client";
 
-import { AnimatePresence, motion, type PanInfo } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion, type PanInfo } from "framer-motion";
 import Image from "next/image";
 import { ArrowRight, ChevronLeft, ChevronRight, Play } from "lucide-react";
 import { Fragment, useCallback, useEffect, useRef, useState } from "react";
@@ -28,6 +28,7 @@ export function Hero() {
   const dragging = useRef(false);
   const root = useRef<HTMLElement>(null);
   const { open } = useDemo();
+  const reduce = !!useReducedMotion();
   const { locale, t } = useI18n();
   const cards = heroCards[locale];
 
@@ -47,10 +48,10 @@ export function Hero() {
 
   // Lecture automatique, en pause au survol ou quand l'onglet est caché
   useEffect(() => {
-    if (paused) return;
+    if (paused || reduce) return;
     const id = setTimeout(() => go(1), AUTOPLAY_MS);
     return () => clearTimeout(id);
-  }, [active, paused, go]);
+  }, [active, paused, reduce, go]);
 
   useEffect(() => {
     const onVis = () => setPaused(document.hidden);
@@ -74,7 +75,7 @@ export function Hero() {
     <section
       ref={root}
       id="top"
-      className="relative isolate overflow-hidden bg-ink-950 pt-28 pb-16 text-white md:pt-32 md:pb-20"
+      className="relative isolate overflow-hidden bg-ink-950 pt-24 pb-12 text-white sm:pt-28 sm:pb-16 md:pt-32 md:pb-20"
       onKeyDown={(e) => {
         if (e.key === "ArrowRight") go(1);
         if (e.key === "ArrowLeft") go(-1);
@@ -87,16 +88,16 @@ export function Hero() {
         <motion.div
           key={accent}
           aria-hidden
-          className="absolute top-[22%] left-1/2 -z-10 h-[760px] w-[1300px] -translate-x-1/2"
+          className="absolute top-[22%] left-1/2 -z-10 h-[420px] w-[720px] -translate-x-1/2 sm:h-[760px] sm:w-[1300px]"
           style={{ background: `radial-gradient(closest-side, ${accent}59, transparent)` }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 1.2 }}
+          transition={{ duration: reduce ? 0 : 1.2 }}
         />
       </AnimatePresence>
-      <div aria-hidden className="absolute -top-72 -left-72 -z-10 size-[900px]" style={{ background: "radial-gradient(closest-side, rgba(91,91,247,0.3), transparent)" }} />
-      <div aria-hidden className="absolute -top-60 right-[-25%] -z-10 size-[760px]" style={{ background: "radial-gradient(closest-side, rgba(255,138,61,0.14), transparent)" }} />
+      <div aria-hidden className="absolute -top-40 -left-40 -z-10 size-[520px] md:-top-72 md:-left-72 md:size-[900px]" style={{ background: "radial-gradient(closest-side, rgba(91,91,247,0.3), transparent)" }} />
+      <div aria-hidden className="absolute -top-32 right-[-40%] -z-10 size-[460px] md:-top-60 md:right-[-25%] md:size-[760px]" style={{ background: "radial-gradient(closest-side, rgba(255,138,61,0.14), transparent)" }} />
 
       <div className="mx-auto max-w-5xl px-5 text-center">
         <div className="hero-fade inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs text-white/75 backdrop-blur-md">
@@ -107,7 +108,7 @@ export function Hero() {
 
       {/* Titre, accroche et appels à l'action : premier écran */}
       <div className="mx-auto mt-6 max-w-4xl px-5 text-center">
-        <h1 className="font-display text-[2.35rem] leading-[1.02] font-bold tracking-tight text-balance sm:text-5xl md:text-6xl">
+        <h1 className="font-display text-[2rem] leading-[1.05] font-bold tracking-tight text-balance min-[400px]:text-[2.35rem] sm:text-5xl md:text-6xl">
           {title.split(" ").map((w, i) => (
             <span key={i} className="inline-block overflow-hidden pb-1 align-bottom">
               <span className={`hero-word inline-block ${i >= gradientFrom ? "text-gradient" : ""}`} style={{ animationDelay: `${i * 60}ms` }}>
@@ -122,16 +123,16 @@ export function Hero() {
             "Real estate software for agencies and condominium managers in Côte d'Ivoire. Manage leases, collections, reminders and landlord communication from a platform built for your business.",
           )}
         </p>
-        <div className="hero-fade mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row" style={{ animationDelay: "500ms" }}>
+        <div className="hero-fade mt-8 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center" style={{ animationDelay: "500ms" }}>
           <MagneticButton
             onClick={open}
-            className="bg-white px-7 py-3.5 text-sm text-ink-950 shadow-[0_0_40px_-8px_rgba(255,255,255,0.5)] hover:shadow-[0_0_60px_-6px_rgba(255,255,255,0.7)]"
+            className="max-md:min-h-11 w-full bg-white px-7 py-3.5 text-sm sm:w-auto text-ink-950 shadow-[0_0_40px_-8px_rgba(255,255,255,0.5)] hover:shadow-[0_0_60px_-6px_rgba(255,255,255,0.7)]"
           >
             <Play className="size-4 fill-current" /> {t("Réserver une démo de 30 min", "Book a 30-min demo")}
           </MagneticButton>
           <MagneticButton
             onClick={() => goTo("#tarifs")}
-            className="border border-white/25 bg-white/5 px-7 py-3.5 text-sm text-white backdrop-blur-md hover:bg-white/15"
+            className="max-md:min-h-11 w-full border border-white/25 bg-white/5 px-7 py-3.5 text-sm sm:w-auto text-white backdrop-blur-md hover:bg-white/15"
           >
             {t("Voir les tarifs", "See pricing")}
           </MagneticButton>
@@ -140,7 +141,7 @@ export function Hero() {
 
       {/* Scène Coverflow 3D */}
       <div
-        className="hero-stage relative mx-auto mt-8 h-[680px] w-full [perspective:1800px] sm:h-[600px] md:mt-10 md:h-[540px]"
+        className="hero-stage relative mx-auto mt-8 h-[640px] w-full [perspective:1800px] sm:h-[600px] md:mt-10 md:h-[540px]"
         onMouseEnter={() => setPaused(true)}
         onMouseLeave={() => setPaused(false)}
         role="region"
@@ -166,11 +167,11 @@ export function Hero() {
                 animate={{
                   x: `${-50 + d * 64}%`,
                   scale: 1 - abs * 0.14,
-                  rotateY: d * -9,
+                  rotateY: reduce ? 0 : d * -9,
                   opacity: abs >= 3 ? 0 : 1,
                   zIndex: 10 - abs,
                 }}
-                transition={{ type: "spring", stiffness: 170, damping: 26, mass: 0.9 }}
+                transition={reduce ? { duration: 0 } : { type: "spring", stiffness: 170, damping: 26, mass: 0.9 }}
                 style={{ pointerEvents: abs >= 3 ? "none" : "auto" }}
                 onClick={() => {
                   if (!dragging.current && d !== 0) setActive(i);
@@ -183,7 +184,7 @@ export function Hero() {
                   className="pointer-events-none absolute inset-0 rounded-[28px] bg-ink-950"
                   initial={false}
                   animate={{ opacity: abs === 0 ? 0 : abs === 1 ? 0.55 : 0.78 }}
-                  transition={{ duration: 0.5 }}
+                  transition={{ duration: reduce ? 0 : 0.5 }}
                 />
               </motion.div>
             );
@@ -204,7 +205,7 @@ export function Hero() {
                 onClick={() => setActive(i)}
                 aria-label={c.eyebrow}
                 aria-current={i === active}
-                className="group relative flex h-6 cursor-pointer items-center transition-all duration-500"
+                className="group relative flex h-11 cursor-pointer md:h-6 items-center transition-all duration-500"
                 style={{ width: i === active ? 56 : 24 }}
               >
                 <span className={`absolute h-2 overflow-hidden rounded-full bg-white/15 ${i === active ? "inset-x-0" : "inset-x-2"}`}>
@@ -213,9 +214,9 @@ export function Hero() {
                     key={`${active}-${paused}`}
                     className="absolute inset-y-0 left-0 rounded-full"
                     style={{ background: c.accent }}
-                    initial={{ width: paused ? "100%" : "0%" }}
+                    initial={{ width: paused || reduce ? "100%" : "0%" }}
                     animate={{ width: "100%" }}
-                    transition={{ duration: paused ? 0 : AUTOPLAY_MS / 1000, ease: "linear" }}
+                    transition={{ duration: paused || reduce ? 0 : AUTOPLAY_MS / 1000, ease: "linear" }}
                   />
                 )}
                 </span>
@@ -282,11 +283,11 @@ function Card({ card, active, near }: { card: HeroCard; active: boolean; near: b
           />
         )}
         <div className="absolute inset-0 bg-gradient-to-t from-ink-950 via-ink-950/60 to-transparent" />
-        <div className="absolute inset-x-0 bottom-0 p-6 md:p-8">
+        <div className="absolute inset-x-0 bottom-0 p-5 sm:p-6 md:p-8">
           <p className="text-[11px] font-bold tracking-[0.18em] uppercase" style={{ color: card.accent }}>
             {card.eyebrow}
           </p>
-          <h2 className="mt-2 font-display text-2xl leading-tight font-bold text-balance md:text-[2.1rem]">{card.title}</h2>
+          <h2 className="mt-2 font-display text-xl leading-tight sm:text-2xl font-bold text-balance md:text-[2.1rem]">{card.title}</h2>
           <p className="mt-3 line-clamp-2 text-sm text-white/70 sm:line-clamp-3 md:line-clamp-none md:text-[15px]">{card.description}</p>
           <button
             tabIndex={active ? 0 : -1}
@@ -295,7 +296,7 @@ function Card({ card, active, near }: { card: HeroCard; active: boolean; near: b
               e.stopPropagation();
               goTo(card.href);
             }}
-            className="shine group mt-5 inline-flex cursor-pointer items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-ink-950 transition-transform hover:scale-[1.03]"
+            className="shine group mt-4 inline-flex max-md:min-h-11 cursor-pointer md:mt-5 items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-ink-950 transition-transform hover:scale-[1.03]"
           >
             {card.cta}
             <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
@@ -323,10 +324,10 @@ function Card({ card, active, near }: { card: HeroCard; active: boolean; near: b
       </div>
 
       {/* Volet droit : interface de l'application */}
-      <div className="relative h-[300px] shrink-0 overflow-hidden bg-[linear-gradient(160deg,#111729,#05070f)] p-4 sm:h-[280px] md:h-auto md:flex-[0.54] md:p-8">
+      <div className="relative h-[260px] shrink-0 overflow-hidden bg-[linear-gradient(160deg,#111729,#05070f)] p-3 sm:h-[280px] sm:p-4 md:h-auto md:flex-[0.54] md:p-8">
         <div
           aria-hidden
-          className="absolute -right-40 -bottom-40 size-[28rem]"
+          className="absolute -right-24 -bottom-24 size-[20rem] md:-right-40 md:-bottom-40 md:size-[28rem]"
           style={{ background: `radial-gradient(closest-side, ${card.accent}4d, transparent)` }}
         />
         <div className="relative flex h-full items-center justify-center">

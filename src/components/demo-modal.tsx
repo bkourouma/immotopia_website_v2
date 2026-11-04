@@ -31,12 +31,12 @@ export function DemoModal({ open, onClose }: { open: boolean; onClose: () => voi
     <AnimatePresence>
       {open && (
         <motion.div
-          className="fixed inset-0 z-[100] flex items-end justify-center p-0 sm:items-center sm:p-6"
+          className="fixed inset-0 z-[100] flex items-stretch justify-center p-0 sm:items-center sm:p-6"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
         >
-          <div className="absolute inset-0 bg-ink-950/60 backdrop-blur-xl" onClick={onClose} />
+          <div className="absolute inset-0 bg-ink-950/60 backdrop-blur-none sm:backdrop-blur-xl" onClick={onClose} />
           <motion.div
             ref={dialogRef}
             tabIndex={-1}
@@ -47,24 +47,24 @@ export function DemoModal({ open, onClose }: { open: boolean; onClose: () => voi
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 40, scale: 0.97 }}
             transition={{ type: "spring", stiffness: 260, damping: 28 }}
-            className="relative flex max-h-[92dvh] w-full max-w-3xl flex-col overflow-hidden rounded-t-[28px] border border-white/10 bg-ink-900 text-white shadow-2xl outline-none sm:rounded-[28px]"
+            className="relative flex h-dvh max-h-dvh w-full max-w-3xl flex-col overflow-hidden rounded-none border border-white/10 bg-ink-900 text-white shadow-2xl outline-none sm:h-auto sm:max-h-[92dvh] sm:rounded-[28px]"
           >
-            <div className="flex items-start justify-between gap-4 border-b border-white/10 p-6">
+            <div className="sticky top-0 z-10 flex shrink-0 items-start justify-between gap-4 border-b border-white/10 bg-ink-900 p-4 pt-[max(1rem,env(safe-area-inset-top))] sm:p-6">
               <div>
                 <p className="text-xs font-bold tracking-[0.16em] text-mint-400 uppercase">{t("Démonstration personnalisée · 30 min", "Personalized demo · 30 min")}</p>
-                <h2 id="demo-title" className="mt-1 font-display text-2xl font-bold md:text-3xl">
+                <h2 id="demo-title" className="mt-1 font-display text-xl font-bold sm:text-2xl md:text-3xl">
                   {t("Voyez ImmoTopia tourner sur vos propres cas.", "See ImmoTopia at work on your own portfolio.")}
                 </h2>
               </div>
               <button
                 onClick={onClose}
                 aria-label={t("Fermer", "Close")}
-                className="grid size-10 shrink-0 cursor-pointer place-items-center rounded-full bg-white/10 transition hover:rotate-90 hover:bg-white/20"
+                className="grid size-11 shrink-0 cursor-pointer place-items-center rounded-full bg-white/10 transition hover:rotate-90 sm:size-10 hover:bg-white/20"
               >
                 <X className="size-5" />
               </button>
             </div>
-            <div className="min-h-0 flex-1 overflow-y-auto">
+            <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain pb-[env(safe-area-inset-bottom)]">
               {BOOKING_URL ? (
                 <BookingFrame url={BOOKING_URL} onDone={onClose} />
               ) : (
@@ -132,7 +132,7 @@ function LeadForm({ onDone }: { onDone: () => void }) {
   }
 
   return (
-    <form onSubmit={submit} className="grid gap-5 p-6 md:grid-cols-2">
+    <form onSubmit={submit} className="grid gap-5 p-4 sm:p-6 md:grid-cols-2">
       <Choice name="structure" label={t("Vous êtes…", "You are…")} options={structures} />
       <Choice name="volume" label={t("Nombre de lots gérés", "Units under management")} options={volumes} />
       <Choice name="role" label={t("Votre fonction", "Your role")} options={roles} className="md:col-span-2" />
@@ -146,7 +146,7 @@ function LeadForm({ onDone }: { onDone: () => void }) {
         <button
           type="submit"
           disabled={state === "sending"}
-          className="shine flex w-full cursor-pointer items-center justify-center gap-2 rounded-full bg-gradient-to-r from-brand-500 to-brand-600 py-4 font-semibold shadow-[0_10px_40px_-10px_rgba(91,91,247,0.9)] disabled:opacity-70"
+          className="shine flex w-full cursor-pointer min-h-12 items-center justify-center gap-2 rounded-full bg-gradient-to-r from-brand-500 to-brand-600 py-4 font-semibold shadow-[0_10px_40px_-10px_rgba(91,91,247,0.9)] disabled:opacity-70"
         >
           {state === "sending" ? <Loader2 className="size-5 animate-spin" /> : <CalendarCheck className="size-5" />}
           {t("Réserver ma démonstration", "Book my demo")}
@@ -156,7 +156,7 @@ function LeadForm({ onDone }: { onDone: () => void }) {
             {t("L'envoi a échoué. Vérifiez votre connexion et réessayez.", "Something went wrong. Please check your connection and try again.")}
           </p>
         )}
-        <p className="mt-3 text-center text-xs text-white/40">
+        <p className="mt-3 text-center text-xs text-white/55">
           {t("Vos informations servent uniquement à organiser la démonstration.", "Your details are used only to arrange your demo.")}
         </p>
       </div>
@@ -171,7 +171,7 @@ function Field({ label, ...props }: React.InputHTMLAttributes<HTMLInputElement> 
       <input
         {...props}
         maxLength={120}
-        className="mt-1.5 w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-white outline-none transition placeholder:text-white/30 focus:border-brand-400 focus:bg-white/[0.08] focus:ring-4 focus:ring-brand-500/20"
+        className="mt-1.5 w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3.5 text-base text-white sm:py-3 outline-none transition placeholder:text-white/30 focus:border-brand-400 focus:bg-white/[0.08] focus:ring-4 focus:ring-brand-500/20"
       />
     </label>
   );
@@ -186,7 +186,7 @@ function Choice({ name, label, options, className = "" }: { name: string; label:
         {options.map((o, i) => (
           <label key={o.value} className="cursor-pointer">
             <input type="radio" name={name} value={o.value} required={i === 0} className="peer sr-only" />
-            <span className="block rounded-full border border-white/12 bg-white/5 px-3.5 py-2 text-sm text-white/75 transition peer-checked:border-brand-400 peer-checked:bg-brand-500 peer-checked:text-white peer-focus-visible:ring-4 peer-focus-visible:ring-brand-500/30 hover:bg-white/10">
+            <span className="flex min-h-11 items-center rounded-full border border-white/12 bg-white/5 px-4 py-2.5 text-base text-white/75 sm:min-h-0 sm:px-3.5 sm:py-2 sm:text-sm transition peer-checked:border-brand-400 peer-checked:bg-brand-500 peer-checked:text-white peer-focus-visible:ring-4 peer-focus-visible:ring-brand-500/30 hover:bg-white/10">
               {locale === "en" ? o.en : o.value}
             </span>
           </label>
