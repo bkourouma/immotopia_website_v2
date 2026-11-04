@@ -1105,7 +1105,7 @@ export const gestionLocative: WikiDomain = {
     {
       slug: "acces-partages-tiers-de-confiance",
       title: "Accès partagés pour tiers de confiance",
-      h1: "Partager un dossier avec un notaire, un banquier ou un expert-comptable",
+      h1: "Partager un dossier avec un notaire ou un banquier",
       metaTitle: "Partager un dossier avec un notaire ou un banquier",
       summary:
         "Côté agence : créez, modifiez et révoquez l'accès en lecture seule d'un notaire, banquier ou expert-comptable, avec échéance et journal des consultations.",

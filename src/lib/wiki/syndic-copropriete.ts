@@ -366,7 +366,7 @@ export const syndicCopropriete: WikiDomain = {
     {
       slug: "budget-previsionnel",
       title: "Budget prévisionnel",
-      h1: "Budget prévisionnel de copropriété : préparation et répartition par lot",
+      h1: "Budget prévisionnel de copropriété : répartition par lot",
       metaTitle: "Budget prévisionnel de copropriété : logiciel syndic",
       summary:
         "Préparez le budget prévisionnel de la copropriété ligne par ligne, faites-le approuver en assemblée générale et obtenez la quote-part de chaque lot selon les tantièmes.",

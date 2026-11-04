@@ -150,7 +150,7 @@ export const landings: Landing[] = [
     metaDescription:
       "Logiciel immobilier en ligne pour les professionnels en Côte d'Ivoire : CRM, gestion locative, syndic, portails clients, maintenance, e-mail et WhatsApp.",
     eyebrow: "ERP immobilier",
-    h1: "Logiciel immobilier en Côte d'Ivoire : un ERP complet pour les professionnels",
+    h1: "Logiciel immobilier en Côte d'Ivoire : un ERP complet",
     intro:
       "ImmoTopia est un logiciel de gestion immobilière en ligne, conçu à Abidjan pour les agences, gestionnaires, syndics et promoteurs. Un seul fichier de clients, un seul parc de biens, et chaque métier activé selon votre activité.",
     sections: [
@@ -200,7 +200,7 @@ export const landings: Landing[] = [
     metaDescription:
       "Gérez votre stock de biens et vos annonces : fiches par type de bien, statuts, médias, score de qualité, API d'annonces et diffusion WhatsApp.",
     eyebrow: "Biens et annonces",
-    h1: "Logiciel d'annonces immobilières en Côte d'Ivoire : stock, publication et prospects",
+    h1: "Logiciel d'annonces immobilières en Côte d'Ivoire : stock et prospects",
     intro:
       "Un stock de biens à jour, des annonces complètes et des demandes qui arrivent directement dans votre CRM : ImmoTopia relie vos biens, vos annonces et votre suivi commercial.",
     sections: [
@@ -626,7 +626,7 @@ export const landings: Landing[] = [
     metaDescription:
       "Maintenance en Côte d'Ivoire : tickets avec photos et priorités, prestataires, fil d'échange et notifications, en location comme en copropriété.",
     eyebrow: "Maintenance",
-    h1: "Maintenance immobilière en Côte d'Ivoire : tickets, prestataires et suivi centralisé",
+    h1: "Maintenance immobilière en Côte d'Ivoire : tickets et suivi",
     intro:
       "Une fuite, une panne, une porte qui ferme mal : avec ImmoTopia, chaque demande devient un ticket suivi de bout en bout, visible par l'agence, le locataire et le propriétaire.",
     sections: [
@@ -743,7 +743,7 @@ export const landings: Landing[] = [
     metaDescription:
       "Excel suffit pour démarrer, pas pour piloter une agence. Comparez Excel et ImmoTopia : CRM, loyers, syndic, Mobile Money, relances et tableaux de bord.",
     eyebrow: "Comparaison",
-    h1: "ImmoTopia vs Excel : quel outil pour gérer l'immobilier en Côte d'Ivoire ?",
+    h1: "ImmoTopia vs Excel : quel outil choisir en Côte d'Ivoire ?",
     intro:
       "Excel est gratuit, souple et connu de tous. Mais au-delà de quelques dizaines de biens, les fichiers se multiplient, les versions divergent et les impayés passent entre les mailles.",
     sections: [
