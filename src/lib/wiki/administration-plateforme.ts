@@ -18,7 +18,7 @@ export const administrationPlateforme: WikiDomain = {
       title: "Catalogue des packs et devis",
       metaTitle: "Catalogue des packs et estimation de prix (console éditeur)",
       summary:
-        "Consultez le catalogue des packs, extensions et mises en route, modifiez une offre et estimez le coût d'une composition de packs avant de la proposer à une agence.",
+        "Consultez le catalogue des packs, extensions et mises en route, modifiez une offre et estimez le coût d'une composition de packs avant de la proposer.",
       intro:
         "Le catalogue réunit les packs, les extensions et les mises en route proposés aux agences. Le super-administrateur le consulte, ajuste une offre et simule le coût d'une combinaison avant de la souscrire pour une agence. Modifier une offre n'affecte pas les abonnements en cours : les conditions sont figées à la souscription.",
       packs: [],
@@ -411,7 +411,7 @@ export const administrationPlateforme: WikiDomain = {
       title: "Fournisseur SMS",
       metaTitle: "Fournisseur SMS Orange CI : réglages par agence et test",
       summary:
-        "Surveillez le compte SMS de la plateforme, réglez l'activation, le nom d'expéditeur et le quota mensuel de chaque agence et envoyez un SMS de test. En développement.",
+        "Surveillez le compte SMS de la plateforme, réglez l'activation, le nom d'expéditeur et le quota mensuel de chaque agence. SMS de test. En développement.",
       intro:
         "Les SMS passent par un compte d'envoi unique au nom d'ImmoTopia chez Orange Côte d'Ivoire. Chaque agence a ses réglages : activation, nom d'expéditeur et quota mensuel, que seul le super-administrateur modifie. Cette fonction est en cours de développement : aucun SMS métier n'est encore envoyé par les notifications.",
       packs: [],
@@ -490,7 +490,7 @@ export const administrationPlateforme: WikiDomain = {
       title: "Sessions, connexion Google et messages d'erreur",
       metaTitle: "Sessions, connexion Google et erreurs lisibles",
       summary:
-        "Renouvellement automatique de la session, bouton de connexion Google affiché selon la configuration et messages d'erreur clairs, traduits et sans détail technique.",
+        "Renouvellement automatique de la session, bouton de connexion Google affiché selon la configuration, messages d'erreur clairs, traduits, sans détail technique.",
       intro:
         "Quelques mécanismes de fond servent toute la plateforme : la session se renouvelle toute seule, la connexion Google n'apparaît que si elle est configurée, et les erreurs sont présentées dans la langue de l'utilisateur, sans détail technique.",
       packs: [],

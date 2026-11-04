@@ -26,7 +26,13 @@ function Script({ data }: { data: object }) {
   );
 }
 
-export function OrganizationJsonLd() {
+export async function OrganizationJsonLd() {
+  const { t } = await getI18n();
+  // Même description que SoftwareJsonLd (déjà publiée sur le site)
+  const description = t(
+    "ERP immobilier pour la Côte d'Ivoire : gestion locative, syndic de copropriété, CRM, portails propriétaire et locataire, maintenance et rappels e-mail / WhatsApp.",
+    "Real estate ERP for Côte d'Ivoire: property management, condominium management, CRM, owner and tenant portals, maintenance, and email / WhatsApp reminders.",
+  );
   return (
     <Script
       data={{
@@ -36,6 +42,7 @@ export function OrganizationJsonLd() {
             "@type": "Organization",
             "@id": `${SITE_URL}/#organization`,
             name: "ImmoTopia",
+            description,
             url: SITE_URL,
             logo: `${SITE_URL}/apple-icon.png`,
             parentOrganization: {
@@ -63,6 +70,7 @@ export function OrganizationJsonLd() {
             // Toujours l'accueil français (langue par défaut, x-default) : y mettre /en ferait préférer l'anglais pour la marque
             url: SITE_URL,
             name: "ImmoTopia",
+            description,
             inLanguage: ["fr-CI", "en"],
             publisher: { "@id": `${SITE_URL}/#organization` },
           },
