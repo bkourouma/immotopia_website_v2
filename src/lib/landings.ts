@@ -476,9 +476,8 @@ export const landings: Landing[] = [
   },
   {
     slug: "crm-promoteur-immobilier-cote-divoire",
-    metaTitle: "CRM promoteur immobilier : prospects et lots | ImmoTopia",
-    metaDescription:
-      "CRM pour promoteur immobilier en Côte d'Ivoire : prospects, visites et relances, puis lots, coût de revient, budget et avancement du chantier.",
+    metaTitle: "CRM promoteur immobilier en Côte d'Ivoire | Lots et chantier",
+    metaDescription: `CRM pour promoteur immobilier en Côte d'Ivoire : prospects, visites, relances, lots, coût de revient et chantier réunis. Pack Promoteur dès ${fcfa(promoteur.monthly)} HT/mois.`,
     eyebrow: "CRM promoteur",
     h1: "CRM pour promoteur immobilier en Côte d'Ivoire",
     intro:
@@ -507,7 +506,7 @@ export const landings: Landing[] = [
       },
       {
         title: "Du commercial au chantier : lots, coût de revient, budget, avancement",
-        intro: "Le module Promoteur prolonge le CRM côté construction. Chaque chantier se découpe en lots, se budgète et se suit jusqu'à la clôture.",
+        intro: "Le module Promoteur prolonge le CRM côté construction. Chaque chantier se découpe en lots, se budgète et se suit jusqu'à la clôture. Pour le détail du module, voir le [logiciel promoteur immobilier](/logiciel-promoteur-immobilier-cote-divoire).",
         items: [
           { title: "Lots et coût de revient", text: "Découpez le chantier en lots, répartissez le coût réel à la surface ou par quote-part et connaissez le coût de revient de chaque lot. Voir [lots et coût de revient](/wiki/promotion-et-chantiers/lots-et-cout-de-revient)." },
           { title: "Budget et avenants", text: "Budget prévisionnel poste par poste, validé comme référence, puis révisé par des avenants datés et motivés. Voir le [budget de chantier](/wiki/promotion-et-chantiers/budget-de-chantier)." },
