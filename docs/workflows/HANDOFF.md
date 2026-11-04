@@ -41,21 +41,20 @@ Pièges et décisions :
 
 ---
 
-## Branche `claude/issue-38` — 2026-11-04
+## Branche `codex/polices-locales` — 2026-11-04
 
-**État :** correction préparée pour la PR #39, sans fusion ni déploiement.
-**Dernier commit :** `43d8d5a` synchronisation avec `main` (la suite CI `Vérifications` est verte sur ce commit).
+**État :** correctif des polices préparé sur le `main` actuel, sans fusion ni déploiement par cette session.
+**Dernier commit avant ce lot :** `e9d3c8b` fusion de la PR #39 par `bkourouma`, le 4 novembre à 11:03:04 UTC.
 
 Fait :
 
-- `main` intégré sans conflit ; les ajouts éditoriaux de la PR sont conservés.
-- La redirection demandée par la PR manquait : ajout de `/fonctionnalites/gestion-locative` vers `/gestion-locative-cote-divoire`, avant la règle générique, avec statut explicite 301.
-- Test du contrat de redirection et de sa priorité ; `npm test` sous Linux Node 24 : 30 tests réussis.
-- L'échec initial de police ne provenait pas d'un changement de police dans cette PR : layout et configuration étaient identiques à `main`, et la CI a réussi après la synchronisation sans modification des polices.
+- Les ajouts éditoriaux, la redirection 301 et son test de la PR #39 sont désormais dans `main` (30 tests réussis sur `daaa687`).
+- HTTP 301 vérifié avec et sans paramètres ; qualification complète dans l'image candidate du superviseur : installation, build, démarrage, pages FR/EN, robots et sitemap, 0 erreur et 0 avertissement SEO (Mission Control run 41816508995).
+- Les essais répétés ont ensuite reproduit le défaut intermittent Google Fonts/Turbopack (Next #99114). Inter et Bricolage Grotesque sont maintenant incluses en WOFF2 latin avec `next/font/local`, mêmes variables et graisses. Fichiers Google non modifiés, licences et manifeste SHA-256 dans `src/app/fonts` ; axes variables et caractères français contrôlés.
 
 Reste à faire :
 
-- Suivre la CI du commit contenant la redirection ; vérifier la réponse HTTP du site construit.
+- Suivre la CI du nouveau commit des polices, puis la recette Linux et le navigateur.
 - La fusion de la PR reste hors de cette intervention.
 
 Pièges :
