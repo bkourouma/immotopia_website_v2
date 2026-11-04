@@ -9,6 +9,7 @@ import { getTool, toolMetadata } from "@/lib/tools";
 const SLUG = "quittance-de-loyer";
 // Le wiki est publié en français seulement : le lien est identique dans les deux langues.
 const WIKI_QUITTANCES = "/wiki/gestion-locative/quittances-et-documents-locatifs";
+const GUIDE_MOBILE_MONEY = "/paiement-loyer-charges-mobile-money-cote-divoire";
 
 export async function generateMetadata({ params }: PageProps<"/[lang]/outils/quittance-de-loyer">): Promise<Metadata> {
   const { lang } = await params;
@@ -69,6 +70,10 @@ export default async function Page() {
               <strong>virement ou chèque :</strong> indiquez la date à laquelle les fonds ont réellement été reçus, pas celle de l&apos;ordre de paiement.
             </li>
           </ul>
+          <p>
+            Pour le détail du parcours côté locataire et côté agence, lisez notre{" "}
+            <Link href={GUIDE_MOBILE_MONEY}>guide du paiement du loyer par Mobile Money en Côte d&apos;Ivoire</Link> (page en français).
+          </p>
 
           <h2>Aller plus loin</h2>
           <p>
@@ -123,6 +128,10 @@ export default async function Page() {
               <strong>bank transfer or cheque:</strong> state the date the funds were actually received, not the date of the payment order.
             </li>
           </ul>
+          <p>
+            For the tenant and agency steps in detail, read our{" "}
+            <Link href={GUIDE_MOBILE_MONEY}>guide to paying rent by Mobile Money in Côte d&apos;Ivoire</Link> (page in French).
+          </p>
 
           <h2>Going further</h2>
           <p>
