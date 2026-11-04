@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { ResidentialLeaseGenerator } from "@/components/tools/client-tools";
+import { GoFurther } from "@/components/tools/go-further";
 import { ToolShell } from "@/components/tools/tool-shell";
 import { hasLocale } from "@/lib/i18n";
 import { getI18n } from "@/lib/i18n-server";
@@ -31,6 +32,7 @@ export default async function Page() {
             <li>Un état des lieux contradictoire à l&apos;entrée et à la sortie évite la plupart des litiges sur la caution.</li>
             <li>Le bail doit être enregistré auprès des services des impôts.</li>
           </ul>
+          <GoFurther />
           <p>Ce modèle est un point de départ : faites-le relire par un professionnel du droit pour les situations particulières.</p>
         </>,
         <>
@@ -45,6 +47,7 @@ export default async function Page() {
             <li>A joint check-in and check-out inventory prevents most disputes over the deposit.</li>
             <li>The lease must be registered with the tax authorities.</li>
           </ul>
+          <GoFurther />
           <p>
             This template is a starting point: have it reviewed by a legal professional for specific situations. The generated lease is in
             French, the legal language in Côte d&apos;Ivoire.
