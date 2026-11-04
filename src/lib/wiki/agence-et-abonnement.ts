@@ -358,7 +358,7 @@ export const agenceEtAbonnement: WikiDomain = {
       title: "Abonnement par pack",
       metaTitle: "Abonnement par pack : modules, limites et extensions",
       summary:
-        "Consultez les modules et fonctions inclus dans votre pack, vos limites et votre consommation, puis demandez une extension et suivez l'historique de vos demandes.",
+        "Consultez les modules et fonctions inclus dans votre pack, vos limites et votre consommation, puis demandez une extension et suivez vos demandes.",
       intro:
         "Votre abonnement fixe les modules et fonctions auxquels l'agence a accès, ainsi que ses limites. Vous voyez à tout moment ce qui est inclus, ce que vous avez consommé et l'état de votre abonnement. Quand l'agence grandit, vous demandez une extension directement depuis l'application ; pour le détail des packs, voir les tarifs.",
       packs: ["agence", "syndic", "promoteur", "integre", "patrimoine-essentiel", "patrimoine-pro"],

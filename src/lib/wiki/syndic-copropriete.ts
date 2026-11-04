@@ -243,7 +243,7 @@ export const syndicCopropriete: WikiDomain = {
       title: "Incidents de copropriété",
       metaTitle: "Suivi des incidents de copropriété : pannes, fuites",
       summary:
-        "Déclarez et suivez les incidents de copropriété (pannes, fuites, vandalisme, sécurité), affectez un prestataire et répartissez le coût entre budget, assurance ou tiers.",
+        "Déclarez et suivez les incidents de copropriété (pannes, fuites, vandalisme, sécurité), affectez un prestataire et répartissez le coût.",
       intro:
         "Une panne d'ascenseur, une fuite dans les parties communes, un acte de vandalisme : chaque incident est déclaré, suivi jusqu'à sa résolution et confié à un prestataire. Vous décidez ensuite qui paie : le budget de la copropriété, l'assurance, un copropriétaire ou un tiers. Les demandes de maintenance déjà ouvertes peuvent être rattachées à la copropriété.",
       packs: ["syndic", "integre"],
@@ -369,7 +369,7 @@ export const syndicCopropriete: WikiDomain = {
       h1: "Budget prévisionnel de copropriété : préparation et répartition par lot",
       metaTitle: "Budget prévisionnel de copropriété : logiciel syndic",
       summary:
-        "Préparez le budget prévisionnel de la copropriété ligne par ligne, faites-le approuver en assemblée générale et obtenez la quote-part de chaque lot selon les tantièmes.",
+        "Préparez le budget prévisionnel de la copropriété ligne par ligne, faites-le approuver en assemblée générale et obtenez la quote-part de chaque lot.",
       intro:
         "Le budget prévisionnel de copropriété se prépare dans le [logiciel syndic de copropriété](/logiciel-syndic-copropriete-cote-divoire), ligne par ligne, avec une clé de répartition pour chacune. Le logiciel calcule aussitôt la part de chaque lot selon ses tantièmes. Une fois le budget approuvé, et relié si vous le souhaitez à la résolution d'[assemblée générale](/wiki/syndic-copropriete/assemblees-generales) qui l'a voté, il sert de base aux [appels de charges](/wiki/syndic-copropriete/appels-de-charges).",
       packs: ["syndic", "integre"],
@@ -431,7 +431,7 @@ export const syndicCopropriete: WikiDomain = {
       title: "Appels de charges",
       metaTitle: "Appels de charges de copropriété en Côte d'Ivoire",
       summary:
-        "Émettez les appels de charges de copropriété pour un lot ou tout l'immeuble, ponctuels ou récurrents, ou générez-les depuis le budget voté. Avis par e-mail et WhatsApp.",
+        "Émettez les appels de charges pour un lot ou tout l'immeuble, ponctuels ou récurrents, ou générez-les depuis le budget voté. Avis par e-mail et WhatsApp.",
       intro:
         "Fini les appels de charges calculés à la main dans un tableur : avec le [logiciel syndic de copropriété](/logiciel-syndic-copropriete-cote-divoire), vous émettez un appel pour un lot, plusieurs lots ou toute la copropriété, une seule fois ou de façon récurrente, ou vous générez en un clic la campagne complète depuis le budget approuvé. Les copropriétaires sont prévenus par e-mail ou WhatsApp, et chaque appel est inscrit au compte du lot.",
       packs: ["syndic", "integre"],
@@ -621,7 +621,7 @@ export const syndicCopropriete: WikiDomain = {
       title: "Encaissements et comptes copropriétaires",
       metaTitle: "Encaissement des charges et compte de chaque copropriétaire",
       summary:
-        "Enregistrez les paiements de charges et suivez le compte de chaque lot : appels, règlements, pénalités, ajustements. Relevé de compte en PDF pour le copropriétaire.",
+        "Enregistrez les paiements de charges et suivez le compte de chaque lot : appels, règlements, pénalités, ajustements. Relevé de compte en PDF.",
       intro:
         "Chaque lot a son compte : les appels de charges y sont débités, les paiements crédités, les pénalités et les remises inscrites. Vous enregistrez un règlement en quelques secondes et le statut de l'appel se met à jour tout seul. En cas de réclamation, vous sortez le relevé du copropriétaire en PDF sur la période demandée.",
       packs: ["syndic", "integre"],
@@ -1042,7 +1042,7 @@ export const syndicCopropriete: WikiDomain = {
       h1: "Fonds de roulement et fonds travaux de copropriété",
       metaTitle: "Fonds de roulement et fonds travaux de copropriété",
       summary:
-        "Suivez les fonds de chaque copropriété (fonds de roulement, fonds travaux) et sa synthèse financière : total appelé, payé, restant dû et retards en un coup d'œil.",
+        "Suivez les fonds de chaque copropriété (fonds de roulement, fonds travaux) et sa synthèse financière : total appelé, payé, restant dû et retards.",
       intro:
         "La synthèse financière vous donne l'état d'une copropriété en un écran : soldes des fonds, total appelé, total payé, restant dû et retards. Vous créez les fonds dont la copropriété a besoin, comme le fonds de roulement ou le fonds travaux, et vous ajustez leur solde avec un motif. Chaque opération sur un fonds est tracée dans le journal d'audit.",
       sections: [
@@ -1598,7 +1598,7 @@ export const syndicCopropriete: WikiDomain = {
       title: "Agences mandantes",
       metaTitle: "Agences mandantes : gérer des copropriétés pour un tiers",
       summary:
-        "Enregistrez les agences mandantes pour le compte desquelles votre cabinet gère des copropriétés, avec leur logo, leur signature et leur cachet sur les documents.",
+        "Enregistrez les agences mandantes pour lesquelles votre cabinet gère des copropriétés, avec leur logo, leur signature et leur cachet sur les documents.",
       intro:
         "Quand votre cabinet gère des copropriétés pour le compte d'une autre agence, vous enregistrez cette agence comme mandant. Ses coordonnées, son logo, sa signature et son cachet sont repris sur les documents des copropriétés qu'elle mandate : relevés, procès-verbaux, reçus et quittances.",
       packs: ["syndic", "integre"],
@@ -1652,7 +1652,7 @@ export const syndicCopropriete: WikiDomain = {
       title: "Documents de copropriété",
       metaTitle: "Documents de copropriété : règlement, PV, assurance",
       summary:
-        "Classez les documents de chaque copropriété (règlement, procès-verbaux, diagnostics, assurance, budget) avec leur date d'expiration, et retrouvez-les en un clic.",
+        "Classez les documents de chaque copropriété (règlement, procès-verbaux, diagnostics, assurance, budget) avec leur date d'expiration.",
       intro:
         "Règlement de copropriété, procès-verbaux d'assemblée, diagnostics, attestations d'assurance : tous les documents d'une copropriété sont rangés au même endroit, classés par type. Vous notez leur date d'expiration et les retrouvez en un clic.",
       sections: [
