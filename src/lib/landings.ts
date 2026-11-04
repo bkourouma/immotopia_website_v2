@@ -294,10 +294,10 @@ export const landings: Landing[] = [
     eyebrow: "Guide de choix",
     h1: "Meilleur logiciel immobilier en Côte d'Ivoire : comment choisir ?",
     intro:
-      "Le « meilleur » logiciel est celui qui couvre vos métiers réels, parle le langage de vos clients et que votre équipe utilisera vraiment. Voici les critères qui comptent en Côte d'Ivoire, et la façon dont ImmoTopia y répond.",
+      "Le « meilleur » logiciel est celui qui couvre vos métiers réels, parle le langage de vos clients et que votre équipe utilisera vraiment. Voici les critères qui comptent en Côte d'Ivoire, et la façon dont ImmoTopia y répond. Pour le détail des fonctions, voyez le [logiciel immobilier en Côte d'Ivoire](/logiciel-immobilier-cote-divoire) ; pour les prix en FCFA, la page [tarifs](/tarifs).",
     sections: [
       {
-        title: "Les critères qui comptent",
+        title: "Les critères qui comptent pour choisir un logiciel immobilier",
         items: [
           { title: "1. Couvrir tous vos métiers", text: "Transaction, gestion locative, syndic, promotion : un seul outil évite les doubles saisies entre logiciels." },
           { title: "2. Le Mobile Money", text: "Orange Money, MTN MoMo, Moov Money et Wave doivent être des moyens de paiement reconnus, pas des « autres »." },
@@ -320,7 +320,15 @@ export const landings: Landing[] = [
       {
         title: "Comparer en toute transparence",
         intro:
-          "Notre page Comparatif met ImmoTopia face à trois logiciels similaires, sur une centaine de fonctionnalités, à partir des pages publiques de chaque éditeur et avec les sources.",
+          "Notre page [Comparatif](/comparatif) met ImmoTopia face à trois logiciels similaires, sur une centaine de fonctionnalités, à partir des pages publiques de chaque éditeur et avec les sources. Vous gérez encore vos biens sur un tableur ? Lisez [ImmoTopia vs Excel](/immotopia-vs-excel).",
+      },
+      {
+        title: "Aller plus loin selon votre métier",
+        bullets: [
+          "Gestion locative : [logiciel de gestion locative](/gestion-locative-cote-divoire).",
+          "Syndic de copropriété : [logiciel de syndic](/logiciel-syndic-copropriete-cote-divoire).",
+          "Encaissement des loyers et charges : [paiement par Mobile Money](/paiement-loyer-charges-mobile-money-cote-divoire).",
+        ],
       },
     ],
     faq: [
