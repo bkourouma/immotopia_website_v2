@@ -246,7 +246,7 @@ export const landings: Landing[] = [
     eyebrow: "Syndic de copropriété",
     h1: "Logiciel syndic de copropriété en Côte d'Ivoire",
     intro:
-      "Le logiciel syndic de copropriété d'ImmoTopia : tantièmes, appels de charges, relances, assemblées générales et comptabilité : le module Syndic d'ImmoTopia donne aux cabinets de copropriété un outil complet, en FCFA, avec les relances WhatsApp que les copropriétaires lisent.",
+      "Le module Syndic d'ImmoTopia est un logiciel de syndic de copropriété pensé pour les cabinets de Côte d'Ivoire : lots et tantièmes, budgets, appels de charges, relances par e-mail et WhatsApp, paiement par Mobile Money, assemblées générales et comptabilité de copropriété, le tout en FCFA. Pour aller plus loin, consultez le [wiki du syndic de copropriété](/wiki/syndic-copropriete) et les [tarifs](/tarifs).",
     sections: [
       {
         title: "Copropriétés et lots",
@@ -278,6 +278,7 @@ export const landings: Landing[] = [
       },
     ],
     faq: [
+      { q: "Que fait un logiciel de syndic de copropriété comme ImmoTopia ?", a: "Il tient les fiches de copropriété, les lots et les tantièmes, prépare le budget d'exercice, génère les appels de charges par lot, suit le recouvrement et les relances, organise les assemblées générales (quorum, votes, pouvoirs, compte rendu) et tient la comptabilité de copropriété." },
       { q: "Combien coûte le pack Syndic ?", a: "49 900 FCFA HT par mois pour 2 copropriétés et 100 lots, puis 10 000 FCFA par copropriété et 150 FCFA par lot supplémentaires. Le premier mois est offert, sans engagement." },
       { q: "Je fais aussi de la gestion locative : dois-je payer deux fois ?", a: "Les packs Agence et Syndic se combinent avec 10 % de remise sur le moins cher des deux, et vos contacts restent communs." },
       { q: "Les copropriétaires peuvent-ils payer leurs charges en ligne ?", a: "Oui, par Mobile Money, depuis le lien « Payer cet appel » ou leur portail. Le paiement est rattaché au bon lot, les fonds sont reversés vers le compte bancaire de la copropriété et ImmoTopia ne prend aucune commission. Inclus dans les packs Syndic et Opérateur intégré." },
