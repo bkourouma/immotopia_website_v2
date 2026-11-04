@@ -657,7 +657,7 @@ export const portailsClients: WikiDomain = {
       summary:
         "Côté locataire : ouvrez le lien de paiement reçu de votre agence, voyez le reste dû de votre loyer et payez en Mobile Money, sans compte, puis suivez le statut.",
       intro:
-        "Le locataire reçoit de son agence un lien vers une seule échéance de loyer. La page lui montre l'agence, la période, la date d'échéance et le reste dû, puis lance le paiement Mobile Money. Au retour, une page lui indique si le règlement est confirmé, en cours, échoué ou annulé. C'est le parcours du locataire ; la création et le suivi des liens se font côté agence, dans [Générer des liens de paiement de loyer](/wiki/gestion-locative/liens-de-paiement-loyer). Cette fonction est en cours de déploiement : elle est éprouvée en mode simulation, et le paiement réel n'est pas encore validé.",
+        "Le locataire reçoit de son agence un lien vers une seule échéance de loyer. La page lui montre l'agence, la période, la date d'échéance et le reste dû, puis lance le paiement Mobile Money. Au retour, une page lui indique si le règlement est confirmé, en cours, échoué ou annulé. C'est le parcours du locataire ; la création et le suivi des liens se font côté agence, dans [Générer des liens de paiement de loyer](/wiki/gestion-locative/liens-de-paiement-loyer). Cette fonction est en cours de déploiement : elle est éprouvée en mode simulation, et le paiement réel n'est pas encore validé. Pour une vue d'ensemble des loyers réglés par Mobile Money, voir le [guide du paiement du loyer par Mobile Money](/paiement-loyer-charges-mobile-money-cote-divoire).",
       packs: ["agence", "integre", "patrimoine-essentiel", "patrimoine-pro"],
       profiles: ["locataire", "visiteur"],
       status: "deploiement",

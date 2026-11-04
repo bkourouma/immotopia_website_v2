@@ -583,7 +583,7 @@ export const landings: Landing[] = [
   },
   {
     slug: "paiement-loyer-charges-mobile-money-cote-divoire",
-    metaTitle: "Loyers et charges par Mobile Money en Côte d'Ivoire",
+    metaTitle: "Loyer par Mobile Money en Côte d'Ivoire | Orange, MTN, Moov, Wave",
     metaDescription:
       "Suivez les loyers payés par Orange Money, MTN MoMo, Moov Money et Wave : enregistrement, déclaration du locataire, validation et relances dans ImmoTopia.",
     eyebrow: "Mobile Money",
@@ -592,7 +592,7 @@ export const landings: Landing[] = [
       "En Côte d'Ivoire, une grande partie des loyers passe par le Mobile Money. ImmoTopia en fait un moyen de paiement à part entière : chaque règlement est rattaché au bon bail et à la bonne échéance, avec son opérateur.",
     sections: [
       {
-        title: "Comment ça fonctionne",
+        title: "Comment payer son loyer par Orange Money, MTN MoMo, Moov Money ou Wave",
         items: [
           { title: "1. Le locataire paie", text: "Par Orange Money, MTN MoMo, Moov Money ou Wave, comme il en a l'habitude." },
           { title: "2. Il déclare son paiement", text: "Depuis son portail, il indique le montant, l'opérateur et la référence de la transaction." },
@@ -611,8 +611,38 @@ export const landings: Landing[] = [
         ],
         note: "Pour les loyers, ImmoTopia enregistre et suit les paiements Mobile Money. Pour les appels de charges de copropriété, le paiement en ligne passe par le lien « Payer cet appel » (voir [payer un appel de charges](/wiki/portails-clients/payer-un-appel-de-charges)) ; pour les loyers, parlez-en avec l'équipe en démonstration.",
       },
+      {
+        title: "Quittance et preuve de paiement",
+        paragraphs: [
+          "Chaque paiement enregistré est rattaché au bail et à l'échéance concernés, avec l'opérateur utilisé : l'historique des règlements sert de preuve côté agence comme côté locataire. Le locataire est prévenu de la confirmation par e-mail ou WhatsApp.",
+          "Les quittances se génèrent depuis la fiche du bail (voir [quittances et documents locatifs](/wiki/gestion-locative/quittances-et-documents-locatifs)). Pour une quittance ponctuelle, le [générateur de quittance de loyer](/outils/quittance-de-loyer) gratuit propose Wave, Orange Money, MTN MoMo et Moov Money comme mode de paiement ; conservez aussi le message de confirmation de l'opérateur.",
+        ],
+      },
+      {
+        title: "Frais et sécurité",
+        bullets: [
+          "ImmoTopia ne prend aucune commission sur les loyers : l'agence paie un abonnement mensuel en FCFA.",
+          "Les éventuels frais de transaction relèvent de l'opérateur Mobile Money choisi : renseignez-vous auprès de lui.",
+          "Dans le paiement par lien, le montant est celui du reste dû de l'échéance, calculé par ImmoTopia : le locataire ne le saisit pas.",
+          "Le locataire n'a pas de compte à créer pour payer depuis un lien.",
+        ],
+        note: "Le paiement par lien est en cours de déploiement : il est éprouvé en mode simulation, et le paiement réel n'est pas encore validé (voir [payer son loyer en ligne par lien](/wiki/portails-clients/paiement-loyer-par-lien)).",
+      },
+      {
+        title: "Pour les agences : encaisser les loyers en Mobile Money et rapprocher automatiquement",
+        bullets: [
+          "Chaque paiement est rattaché à son bail et à ses échéances, même partiel, avec son opérateur.",
+          "Les déclarations des locataires arrivent dans la file « À traiter aujourd'hui » ; une fois validées, l'échéance est soldée.",
+          "Le tableau de bord montre la répartition des encaissements par moyen de paiement.",
+          "Des relances automatiques partent avant et après l'échéance.",
+          "Côté agence, la création des liens de paiement est décrite dans [générer des liens de paiement de loyer](/wiki/gestion-locative/liens-de-paiement-loyer).",
+        ],
+      },
     ],
     faq: [
+      { q: "Le locataire reçoit-il une quittance ?", a: "Il est prévenu de la confirmation de son paiement par e-mail ou WhatsApp, et l'agence peut générer sa quittance depuis la fiche du bail. Une quittance ponctuelle peut aussi se produire avec le [générateur gratuit](/outils/quittance-de-loyer)." },
+      { q: "Qui paie les frais ?", a: "ImmoTopia ne prend aucune commission sur les loyers ; l'agence paie un abonnement mensuel en FCFA. Les éventuels frais de transaction dépendent de l'opérateur Mobile Money : renseignez-vous auprès de lui." },
+      { q: "Le locataire doit-il créer un compte pour payer ?", a: "Non : depuis le lien de paiement reçu de son agence, il paie sans compte. Cette fonction est en cours de déploiement." },
       { q: "Quels opérateurs sont pris en charge ?", a: "Orange Money, MTN Mobile Money, Moov Money et Wave, ainsi que les espèces, virements, chèques et cartes." },
       { q: "Les copropriétaires peuvent-ils payer leurs charges par Mobile Money ?", a: "Oui : depuis le lien « Payer cet appel » ou le portail copropriétaire, avec un rattachement automatique au bon lot et sans commission ImmoTopia. Inclus dans les packs Syndic et Opérateur intégré." },
       { q: "ImmoTopia prend-il une commission sur les loyers ?", a: "Non, aucune. Vous payez un abonnement mensuel en FCFA." },
