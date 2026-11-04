@@ -476,8 +476,8 @@ export const landings: Landing[] = [
   },
   {
     slug: "crm-promoteur-immobilier-cote-divoire",
-    metaTitle: "CRM promoteur immobilier en Côte d'Ivoire | Prospects, lots, chantier",
-    metaDescription: `CRM pour promoteur immobilier en Côte d'Ivoire : prospects, visites, relances, lots, coût de revient et chantier dans un seul outil. Pack Promoteur dès ${fcfa(promoteur.monthly)} HT/mois.`,
+    metaTitle: "CRM promoteur immobilier en Côte d'Ivoire | Lots et chantier",
+    metaDescription: `CRM pour promoteur immobilier en Côte d'Ivoire : prospects, visites, relances, lots, coût de revient et chantier réunis. Pack Promoteur dès ${fcfa(promoteur.monthly)} HT/mois.`,
     eyebrow: "CRM promoteur",
     h1: "CRM pour promoteur immobilier en Côte d'Ivoire",
     intro:
