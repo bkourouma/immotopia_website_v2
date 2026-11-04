@@ -44,16 +44,16 @@ Pièges et décisions :
 
 ## Branche `claude/issue-92` (PR #93) — 2026-11-04
 
-**État :** prêt à relire ; vérifications locales réussies, CI à suivre après poussée.
-**Dernier commit :** résolution dans le commit courant (voir git log).
+**État :** fusion explicitement autorisée le 2026-11-04 ; nouvelle CI à vérifier avant fusion.
+**Dernier commit :** voir git log ; resynchronisation avec main d231662 pour la résolution consolidée.
 
 - Intègre #91, #83, #79 et main, avec conservation des ajouts des quatre PR. Introduction main préservée, une seule section par sujet et aucune question FAQ en double.
 - check-landings (15 pages), npm test (30 tests), tsc, lint, check-comparatif-en (105 lignes/19 sources), npm run build (217 pages) réussis.
 - Navigateur sur build local, port 3293 : titre/H1 corrects, tableau 7 lignes, 9 FAQ uniques ; à 375 px, aucun débordement global, tableau à défilement horizontal (640 px dans 320 px).
 - /en fonctionne en anglais ; /en/meilleur-logiciel-immobilier-cote-divoire renvoie 404, conforme à cette page française uniquement. Aucun ajout de traduction non prévue.
 - Relecture indépendante : aucun blocage. Prix, consentement WhatsApp et distinction loyers/charges restent sourcés et précis.
-- Ordre recommandé : #79 → #83 → #91 → #93 en conservant les commits de fusion. Ne pas faire de squash entre ces PR liées : les branches suivantes incluent déjà les précédentes.
-- Aucun déploiement ni fusion dans main effectué ; la fusion exige un accord explicite et déclenche la production.
+- #79 déjà fusionnée en squash (22988ee). #93 inclut les têtes de #83 et #91 ; fusionner #93 avec un commit de fusion permet de conserver ces historiques sans trois déploiements successifs.
+- Autorisation explicite « fusionne » reçue dans ce chat. Fusion de #93 et suivi du déploiement à effectuer après nouvelle CI verte.
 
 
 ## Branche `claude/issue-90` (PR #91) — 2026-11-04
