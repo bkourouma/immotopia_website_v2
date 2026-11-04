@@ -584,7 +584,7 @@ export const landings: Landing[] = [
   },
   {
     slug: "paiement-loyer-charges-mobile-money-cote-divoire",
-    metaTitle: "Paiement du loyer par Mobile Money en Côte d'Ivoire | Orange, MTN, Moov, Wave",
+    metaTitle: "Loyer par Mobile Money en Côte d'Ivoire | Orange, MTN, Moov, Wave",
     metaDescription:
       "Suivez les loyers payés par Orange Money, MTN MoMo, Moov Money et Wave : enregistrement, déclaration du locataire, validation et relances dans ImmoTopia.",
     eyebrow: "Mobile Money",
