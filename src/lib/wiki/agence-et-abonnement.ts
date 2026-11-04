@@ -429,7 +429,7 @@ export const agenceEtAbonnement: WikiDomain = {
     {
       slug: "factures-abonnement",
       title: "Factures d'abonnement",
-      metaTitle: "Factures d'abonnement : consultation, PDF et paiement en ligne",
+      metaTitle: "Factures d'abonnement : consultation, PDF, paiement en ligne",
       summary:
         "Retrouvez les factures d'abonnement de votre agence, consultez leur détail et téléchargez-les en PDF ; leur paiement en ligne est en cours de déploiement.",
       intro:

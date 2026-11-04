@@ -846,7 +846,7 @@ export const promotionEtChantiers: WikiDomain = {
       slug: "inventaire-par-whatsapp",
       title: "Inventaire par WhatsApp",
       h1: "Inventaire de chantier par WhatsApp : compter le stock par photo",
-      metaTitle: "Inventaire de chantier par WhatsApp : comptage par photo et IA",
+      metaTitle: "Inventaire de chantier par WhatsApp : comptage photo et IA",
       summary:
         "Comptez le stock de vos chantiers par photo envoyée sur WhatsApp : l'IA propose l'article et le total, le chef valide. Extension payante, Promoteur et Intégré.",
       intro:

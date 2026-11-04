@@ -3,7 +3,7 @@ import type { WikiDomain } from "./types";
 export const patrimoineMultiActifs: WikiDomain = {
   slug: "patrimoine-multi-actifs",
   title: "Patrimoine multi-actifs",
-  metaTitle: "Patrimoine multi-actifs : suivi, valeur nette, SCI, fiscalité",
+  metaTitle: "Patrimoine multi-actifs : suivi, valeur nette, SCI",
   summary:
     "Suivez vos biens et actifs détenus en propre : SCI, fiscalité, trésorerie, entretien, assurances. Valeur nette et projections en développement.",
   intro:
@@ -12,7 +12,7 @@ export const patrimoineMultiActifs: WikiDomain = {
     {
       slug: "actifs-du-patrimoine",
       title: "Actifs du patrimoine",
-      metaTitle: "Suivre tous ses actifs : immobilier, parts, épargne, véhicules",
+      metaTitle: "Suivre tous ses actifs : immobilier, parts, épargne",
       summary:
         "Recensez tout ce que vous possédez dans dix classes d'actifs : immobilier, parts de sociétés, stocks, véhicules, comptes, épargne, créances. En développement.",
       intro:
@@ -185,7 +185,7 @@ export const patrimoineMultiActifs: WikiDomain = {
     {
       slug: "fiabilite-des-valeurs",
       title: "Valorisation et fiabilité",
-      metaTitle: "Fiabilité d'une valeur : suggestion, ancienneté, statut juridique",
+      metaTitle: "Fiabilité d'une valeur : suggestion, ancienneté, statut",
       summary:
         "Faites calculer une valeur selon la classe d'actif et sachez dans quelle mesure elle est fiable : méthode, source, ancienneté, statut juridique. En développement.",
       intro:

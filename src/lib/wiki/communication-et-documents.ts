@@ -575,7 +575,7 @@ export const communicationEtDocuments: WikiDomain = {
       slug: "documents-a-en-tete",
       title: "Documents à en-tête",
       h1: "Documents PDF et Word à l'en-tête de l'agence",
-      metaTitle: "Documents PDF et Word à en-tête de l'agence ou de la copropriété",
+      metaTitle: "Documents PDF et Word à en-tête de l'agence ou copropriété",
       summary:
         "Reçus, relevés, rapports et courriers sortent en PDF ou en Word avec le logo et l'identité de l'agence ou de la copropriété, et un pied de page paginé.",
       intro:

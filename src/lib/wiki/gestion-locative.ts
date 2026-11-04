@@ -1189,7 +1189,7 @@ export const gestionLocative: WikiDomain = {
     {
       slug: "notifications-proprietaire",
       title: "Envois automatiques au propriétaire",
-      metaTitle: "Rapport mensuel et alertes d'échéance envoyés au propriétaire",
+      metaTitle: "Rapport mensuel et alertes d'échéance au propriétaire",
       summary:
         "Envoyez automatiquement chaque mois le rapport au propriétaire et prévenez-le des fins de bail et des documents à renouveler, par WhatsApp ou e-mail.",
       intro:
