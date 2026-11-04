@@ -294,7 +294,7 @@ export const landings: Landing[] = [
     eyebrow: "Guide de choix",
     h1: "Meilleur logiciel immobilier en Côte d'Ivoire : comment choisir ?",
     intro:
-      "Le « meilleur » logiciel est celui qui couvre vos métiers réels, parle le langage de vos clients et que votre équipe utilisera vraiment. Voici les critères qui comptent en Côte d'Ivoire, et la façon dont ImmoTopia y répond.",
+      "Le « meilleur » logiciel est celui qui couvre vos métiers réels, parle le langage de vos clients et que votre équipe utilisera vraiment. Voici les critères qui comptent en Côte d'Ivoire, et la façon dont ImmoTopia y répond. Pour vérifier chaque point, consultez le [comparatif](/comparatif) et les [tarifs](/tarifs) en FCFA.",
     sections: [
       {
         title: "Les critères qui comptent",
@@ -327,6 +327,7 @@ export const landings: Landing[] = [
       { q: "ImmoTopia propose-t-il un essai ?", a: "Le premier mois d'abonnement est offert sur tous les packs, sans engagement." },
       { q: "Où voir la comparaison avec les autres logiciels ?", a: "Sur la page Comparatif du site, domaine par domaine et avec les sources." },
       { q: "Quels critères pour choisir un logiciel immobilier en Côte d'Ivoire ?", a: "Six critères : couvrir tous vos métiers (transaction, gestion locative, syndic, promotion), reconnaître le Mobile Money, envoyer les rappels sur WhatsApp, offrir des portails aux propriétaires et locataires, afficher des prix clairs en FCFA et proposer une équipe proche pour la mise en route." },
+      { q: "Quel est le meilleur logiciel immobilier en Côte d'Ivoire ?", a: "Celui qui couvre vos métiers réels (transaction, gestion locative, syndic, promotion), reconnaît le Mobile Money, envoie les rappels sur WhatsApp et affiche des prix clairs en FCFA. ImmoTopia répond à ces critères : comparez-le aux autres logiciels sur la page Comparatif, puis profitez du premier mois offert, sans engagement." },
       { q: "Puis-je reprendre mes fichiers Excel ?", a: "Oui : la mise en route accompagnée comprend la reprise de vos biens, contacts, baux ou copropriétés. Elle est facultative si vous saisissez vous-même vos données." },
     ],
     related: ["logiciel-immobilier-cote-divoire", "immotopia-vs-excel", "logiciel-immobilier-afrique"],
