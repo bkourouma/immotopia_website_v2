@@ -63,6 +63,8 @@ export type WikiFeature = {
   summary: string;
   /** Deux à quatre phrases : à quoi sert la fonctionnalité, pour qui, ce qu'elle change au quotidien. Accepte les liens « [texte](/chemin) ». */
   intro: string;
+  /** Résumé « En bref » facultatif, affiché juste sous le H1 (trois phrases). */
+  enBref?: string;
   /** Sections éditoriales facultatives (H2) : usage, définitions, contenu attendu… Avant la liste des actions. */
   sections?: WikiSection[];
   packs: WikiPackId[];
