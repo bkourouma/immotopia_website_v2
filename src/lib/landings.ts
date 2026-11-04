@@ -57,9 +57,9 @@ export const landings: Landing[] = [
     slug: "gestion-locative-cote-divoire",
     metaTitle: "Logiciel de gestion locative en Côte d'Ivoire | ImmoTopia",
     metaDescription:
-      "Gestion locative en Côte d'Ivoire : baux, échéances, Mobile Money, pénalités, cautions, quittances et portails propriétaire et locataire dans ImmoTopia.",
+      "Logiciel de gestion locative en Côte d'Ivoire : baux, échéances, Mobile Money, pénalités, cautions, quittances et portails propriétaire et locataire.",
     eyebrow: "Gestion locative",
-    h1: "Gestion locative en Côte d'Ivoire",
+    h1: "Logiciel de gestion locative en Côte d'Ivoire",
     intro:
       "Baux, loyers, relances, cautions et relevés de gérance : ImmoTopia réunit tout le cycle de la gestion locative dans une seule application, pensée pour les agences et administrateurs de biens d'Abidjan et de toute la Côte d'Ivoire.",
     sections: [
@@ -98,6 +98,25 @@ export const landings: Landing[] = [
           { title: "Quittances et documents", text: "Quittances, reçus, contrats et avenants générés depuis vos propres modèles Word, avec numérotation continue." },
           { title: "Relances e-mail et WhatsApp", text: "Rappel avant l'échéance, confirmation de paiement, alerte de fin de bail : les messages partent seuls, selon le consentement de chaque destinataire." },
           { title: "Portails propriétaire et locataire", text: "Chacun consulte ses baux, échéances, paiements et documents. Les comptes propriétaires et locataires ne sont pas facturés." },
+        ],
+      },
+      {
+        title: "Automatiser la gestion locative : rappels, quittances, relances",
+        intro: "Ce qui revient chaque mois se fait seul, pour que l'équipe garde son temps pour les situations qui demandent un échange.",
+        items: [
+          { title: "Rappels par e-mail et WhatsApp", text: "Rappel avant l'échéance, confirmation de paiement et alerte de fin de bail partent seuls, selon le consentement de chaque destinataire. WhatsApp est facturé à la consommation." },
+          { title: "Pénalités calculées automatiquement", text: "Montant fixe ou pourcentage, avec période de grâce : le calcul se fait seul et reste ajustable." },
+          { title: "Prélèvement bancaire des loyers", text: "ImmoTopia prépare la remise, prévient les locataires et produit le fichier à déposer à la banque de l'agence. Voir la [fiche du wiki](/wiki/gestion-locative/prelevement-bancaire)." },
+          { title: "Mobile Money enregistré et déclaré", text: "L'opérateur est enregistré avec le paiement, et le locataire déclare son règlement depuis son portail ; l'agence le valide en un clic." },
+          { title: "Quittances et documents générés", text: "Quittances, reçus, contrats et avenants sortent de vos modèles Word, avec numérotation continue." },
+          { title: "Assistant IA ImmoCopilot", text: "Intégré à l'application et disponible dans tous les packs, il répond en direct à partir des données de l'agence et produit tableaux, textes ou graphiques. Rien n'est modifié sans l'accord explicite de l'utilisateur. Voir la [fiche du wiki](/wiki/communication-et-documents/assistant-ia-immocopilot)." },
+        ],
+      },
+      {
+        title: "Logiciel de gestion locative en ligne (SaaS)",
+        paragraphs: [
+          "ImmoTopia est un logiciel en ligne vendu en abonnement (SaaS) : il s'utilise depuis un navigateur, sur ordinateur, tablette ou téléphone, sans rien installer et sans magasin d'applications. Il peut aussi s'ajouter à l'écran d'accueil du téléphone.",
+          "Les prix sont en FCFA, sans commission ImmoTopia sur vos loyers. Voir les [tarifs](/tarifs).",
         ],
       },
     ],
