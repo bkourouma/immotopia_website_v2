@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { CommercialLeaseGenerator } from "@/components/tools/client-tools";
+import { GoFurther } from "@/components/tools/go-further";
 import { ToolShell } from "@/components/tools/tool-shell";
 import { hasLocale, localizeHref } from "@/lib/i18n";
 import { getI18n } from "@/lib/i18n-server";
@@ -34,6 +35,7 @@ export default async function Page() {
             <Link href={GUIDE_BAIL_COMMERCIAL}>guide du bail commercial OHADA en Côte d&apos;Ivoire</Link> : il explique le cadre juridique,
             tandis que cette page sert à générer le document.
           </p>
+          <GoFurther />
           <h2>Bail commercial ou bail à usage professionnel : quelle différence en Côte d&apos;Ivoire ?</h2>
           <p>
             Dans l&apos;Acte uniforme OHADA, il n&apos;existe qu&apos;un seul régime : le « bail à usage professionnel ». Il s&apos;applique
@@ -166,6 +168,7 @@ export default async function Page() {
             <Link href={GUIDE_BAIL_COMMERCIAL}>guide to the OHADA commercial lease in Côte d&apos;Ivoire</Link> (in French): it explains the
             legal framework, while this page is for generating the document.
           </p>
+          <GoFurther />
           <h2>Commercial lease or business lease: what is the difference in Côte d&apos;Ivoire?</h2>
           <p>
             Under the OHADA Uniform Act there is only one regime: the &quot;business lease&quot; (&quot;bail à usage professionnel&quot;).
