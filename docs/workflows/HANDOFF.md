@@ -41,6 +41,28 @@ Pièges et décisions :
 
 ---
 
+## Branche `claude/issue-38` — 2026-11-04
+
+**État :** correction préparée pour la PR #39, sans fusion ni déploiement.
+**Dernier commit :** `43d8d5a` synchronisation avec `main` (la suite CI `Vérifications` est verte sur ce commit).
+
+Fait :
+
+- `main` intégré sans conflit ; les ajouts éditoriaux de la PR sont conservés.
+- La redirection demandée par la PR manquait : ajout de `/fonctionnalites/gestion-locative` vers `/gestion-locative-cote-divoire`, avant la règle générique, avec statut explicite 301.
+- Test du contrat de redirection et de sa priorité ; `npm test` sous Linux Node 24 : 30 tests réussis.
+- L'échec initial de police ne provenait pas d'un changement de police dans cette PR : layout et configuration étaient identiques à `main`, et la CI a réussi après la synchronisation sans modification des polices.
+
+Reste à faire :
+
+- Suivre la CI du commit contenant la redirection ; vérifier la réponse HTTP du site construit.
+- La fusion de la PR reste hors de cette intervention.
+
+Pièges :
+
+- Le clone local est sous un dossier nommé `node_modules` : Node refuse d'y retirer les types TypeScript. Les tests tournent dans Docker avec le clone monté en `/site`.
+- Installation locale Linux ralentie par le réseau ; ne pas confondre une erreur de téléchargement avec un défaut du diff.
+
 ## Branche `seo/pages-patrimoine-promoteur` — 2026-10-23
 
 **État :** prêt à relire
