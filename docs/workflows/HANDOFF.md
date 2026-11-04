@@ -41,21 +41,22 @@ Pièges et décisions :
 
 ---
 
-## Branche `claude/issue-38` — 2026-11-04
+## Branche `codex/polices-locales` — 2026-11-04
 
-**État :** correction préparée pour la PR #39, sans fusion ni déploiement.
-**Dernier commit :** `43d8d5a` synchronisation avec `main` (la suite CI `Vérifications` est verte sur ce commit).
+**État :** PR #57 prête à relire, contrôles réussis, sans fusion ni déploiement par cette session.
+**Dernier commit fonctionnel :** `385bc17` polices locales ; base `e9d3c8b` (fusion de #39 par `bkourouma` le 4 novembre à 11:03:04 UTC). Le présent lot ne modifie que cette passation.
 
 Fait :
 
-- `main` intégré sans conflit ; les ajouts éditoriaux de la PR sont conservés.
-- La redirection demandée par la PR manquait : ajout de `/fonctionnalites/gestion-locative` vers `/gestion-locative-cote-divoire`, avant la règle générique, avec statut explicite 301.
-- Test du contrat de redirection et de sa priorité ; `npm test` sous Linux Node 24 : 30 tests réussis.
-- L'échec initial de police ne provenait pas d'un changement de police dans cette PR : layout et configuration étaient identiques à `main`, et la CI a réussi après la synchronisation sans modification des polices.
+- Les ajouts éditoriaux, la redirection 301 et son test de la PR #39 sont désormais dans `main` (30 tests réussis sur `daaa687`).
+- HTTP 301 vérifié avec et sans paramètres ; qualification complète dans l'image candidate du superviseur : installation, build, démarrage, pages FR/EN, robots et sitemap, 0 erreur et 0 avertissement SEO (Mission Control run 41816508995).
+- Les essais répétés ont ensuite reproduit le défaut intermittent Google Fonts/Turbopack (Next #99114). Inter et Bricolage Grotesque sont maintenant incluses en WOFF2 latin avec `next/font/local`, mêmes variables et graisses. Fichiers Google non modifiés, licences et manifeste SHA-256 dans `src/app/fonts` ; axes variables et caractères français contrôlés.
+- Sur `385bc17`, CI du site réussie (41822509509) et recette Linux complète du superviseur réussie (Mission Control 41822568651), 0 erreur et 0 avertissement du contrôleur SEO ; `sites.json` de Mission Control épingle cette révision fonctionnelle.
+- Installation neuve et build Windows réussis. Playwright vérifie Inter/Bricolage chargées, graisses attendues et absence de débordement horizontal à 1440 et 390 px, en FR/EN ; captures relues. L'anglais est servi par Next ; la vue française utilise le HTML préconstruit à cause de la limite Windows ci-dessous.
 
 Reste à faire :
 
-- Suivre la CI du commit contenant la redirection ; vérifier la réponse HTTP du site construit.
+- Investiguer séparément la boucle de redirection FR observée sous Windows (`/` et `/tarifs` renvoient 308 vers eux-mêmes, également en standalone). Elle n'est pas reproduite dans le serveur Linux de la recette. Le contrôle visuel du HTML FR n'est pas une validation de ce routage Windows. Aucun changement du proxy dans cette correction.
 - La fusion de la PR reste hors de cette intervention.
 
 Pièges :
