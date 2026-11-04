@@ -158,6 +158,7 @@ const heroCardsSource: HeroCardSource[] = [
     accent: "#FACC15",
     links: [
       { label: "Logiciel de syndic de copropriété", href: "/logiciel-syndic-copropriete-cote-divoire" },
+      { label: "Portail copropriété", href: "/wiki/portails-clients/portail-coproprietaire" },
     ],
   },
   {
