@@ -57,17 +57,44 @@ export type Guide = {
 
 const crmChoisir: Guide = {
   slug: "crm-immobilier-bonnes-pratiques",
-  metaTitle: "CRM immobilier : définition, fonctions et 10 critères",
+  metaTitle: "Comment choisir son CRM immobilier : 10 critères (2026)",
   metaDescription:
-    "Qu'est-ce qu'un CRM immobilier ? Fonctions clés, différence agence / promoteur et 10 critères pour choisir le bon logiciel CRM, avec tableau d'essai.",
-  h1: "CRM immobilier : comment choisir le bon logiciel (10 critères)",
+    "Qu'est-ce qu'un CRM immobilier ? Définition, fonctions clés et 10 critères pour choisir le bon logiciel CRM, avec un tableau de critères pour vos essais.",
+  h1: "Comment choisir son CRM immobilier : 10 critères et tableau comparatif",
   eyebrow: "Guide CRM immobilier",
-  summary: "Dix critères, la différence entre agence et promoteur, les bonnes pratiques de pipeline et de relance, et un tableau pour comparer vos essais.",
+  summary: "Définition, dix critères de choix, bonnes pratiques de pipeline et de relance, et un tableau pour comparer vos essais.",
   intro:
-    "Un logiciel CRM immobilier remplace le carnet de notes, le fichier Excel et les messages dispersés dans les téléphones par un historique partagé par toute l'équipe. Encore faut-il choisir un outil adapté à son métier : une agence qui vend et gère pour des propriétaires n'a pas les mêmes besoins qu'un promoteur, et un CRM pour promoteur doit suivre un programme vendu pendant que le chantier avance. Ce guide propose dix critères de choix, explique la différence entre agence et promoteur, donne des bonnes pratiques de pipeline et de relance, et se termine par un tableau à utiliser pendant vos essais.",
+    "Un logiciel CRM immobilier remplace le carnet de notes, le fichier Excel et les messages dispersés dans les téléphones par un historique partagé par toute l'équipe. Encore faut-il choisir un outil adapté à son métier. Ce guide vous aide à choisir : une définition, dix critères, des bonnes pratiques de pipeline et de relance, et un tableau à utiliser pendant vos essais. Pour découvrir le CRM d'ImmoTopia lui-même, voyez notre [CRM immobilier pour agences](/crm-immobilier-cote-divoire).",
   published: "2026-10-13",
   updated: "2026-10-13",
   sections: [
+    {
+      id: "reponse-en-3-lignes",
+      title: "La réponse en 3 lignes",
+      blocks: [
+        {
+          type: "note",
+          text: "Un CRM immobilier garde au même endroit chaque contact, chaque affaire et chaque relance, avec un historique partagé par l'équipe. Pour choisir, vérifiez dix critères : pipeline, contacts, relances, rapprochement, visites, suite de la vente, canaux, indicateurs, équipe, lien avec le reste. Testez l'outil sur vos propres contacts avec le tableau de critères de ce guide.",
+        },
+      ],
+    },
+    {
+      id: "definition-exemples",
+      title: "CRM immobilier : définition et exemples",
+      blocks: [
+        {
+          type: "p",
+          text: "CRM signifie « Customer Relationship Management », c'est-à-dire gestion de la relation client. Un CRM immobilier applique cette idée au métier : il conserve les contacts, les demandes d'achat ou de location, les appels, les visites et l'état de chaque dossier.",
+        },
+        {
+          type: "ul",
+          items: [
+            { title: "Exemple pour une agence", text: "une demande de location arrive : on crée la fiche du contact, on ouvre une affaire, on note les critères (budget, zone, pièces), on programme la visite puis la relance." },
+            { title: "Exemple pour un courtier ou un agent indépendant", text: "on retrouve en quelques secondes l'historique d'un contact et on sait quel bien proposer à quel client." },
+          ],
+        },
+      ],
+    },
     {
       id: "a-quoi-sert-un-crm",
       title: "À quoi sert un CRM immobilier ?",
@@ -120,40 +147,12 @@ const crmChoisir: Guide = {
       ],
     },
     {
-      id: "promoteur-suivi-programmes",
-      title: "CRM pour promoteur immobilier : le suivi des programmes",
-      blocks: [
-        {
-          type: "p",
-          text: "Un promoteur vend moins de produits, mais sur plusieurs mois pendant que le chantier avance. Son CRM doit suivre de nombreux prospects pour un même programme, planifier des relances longues et garder le lien avec les lots, le budget et l'avancement des travaux.",
-        },
-        {
-          type: "p",
-          text: "Le suivi commercial (contacts, pipeline, visites, relances, rapprochement) est le même que pour une agence ; le module Promoteur d'ImmoTopia le prolonge côté construction. Voir le [CRM pour promoteur immobilier](/crm-promoteur-immobilier-cote-divoire).",
-        },
-      ],
-    },
-    {
       id: "agence-ou-promoteur",
-      title: "Agence ou promoteur : deux métiers, deux besoins",
+      title: "Vous êtes promoteur ?",
       blocks: [
-        { type: "p", text: "Le même mot, « CRM », recouvre deux façons de vendre. Avant de comparer des outils, notez laquelle est la vôtre." },
-        {
-          type: "ul",
-          items: [
-            {
-              title: "Agence immobilière",
-              text: "beaucoup de petits dossiers en parallèle (locations, ventes, mandats de gestion). Il faut un fichier de contacts à plusieurs rôles (prospect, propriétaire, locataire, acquéreur), un rapprochement entre les demandes et le portefeuille, des visites planifiées et, pour la vente sous mandat, le suivi des mandats, des offres et des compromis.",
-            },
-            {
-              title: "Promoteur",
-              text: "moins de produits, mais une vente qui dure des mois pendant que le chantier avance. Il faut suivre de nombreux prospects pour un même programme, planifier des relances longues et garder le lien avec les lots, le budget et l'avancement des travaux.",
-            },
-          ],
-        },
         {
           type: "p",
-          text: "ImmoTopia propose le même CRM aux deux métiers : voir le [CRM immobilier pour agences](/crm-immobilier-cote-divoire) et le [CRM pour promoteur immobilier](/crm-promoteur-immobilier-cote-divoire), où le module Promoteur prolonge le suivi commercial côté construction.",
+          text: "Ce guide porte sur le choix d'un CRM pour une agence ou un agent. Le suivi d'un programme neuf est détaillé sur la page [CRM pour promoteur immobilier](/crm-promoteur-immobilier-cote-divoire).",
         },
       ],
     },
@@ -169,7 +168,7 @@ const crmChoisir: Guide = {
             { title: "Des relances datées", text: "chaque échange se termine par la date de la prochaine action, visible dans un calendrier et signalée quand elle est en retard." },
             { title: "Le rapprochement entre demandes et biens", text: "l'outil compare le budget, la zone, le nombre de pièces et la surface recherchés avec les biens disponibles, et explique son résultat." },
             { title: "Les visites et l'agenda", text: "visites planifiées, collaborateur affecté, calendrier partagé par l'équipe." },
-            { title: "La suite de la vente", text: "pour une agence, les mandats, offres, compromis et commissions ; pour un promoteur, le lien avec les lots et le chantier." },
+            { title: "La suite de la vente", text: "pour une agence, les mandats, offres, compromis et commissions." },
             { title: "Les canaux de contact", text: "appels, e-mails et WhatsApp consignés dans l'historique, notifications paramétrables, respect du consentement du contact." },
             { title: "Les indicateurs", text: "nouveaux prospects, conversions, affaires par étape, relances en retard : la direction voit où agir sans réunion de point." },
             { title: "Le travail en équipe", text: "rôles et droits, responsable de chaque affaire, avertissement quand deux personnes modifient le même dossier, journal des actions sensibles." },
@@ -184,19 +183,19 @@ const crmChoisir: Guide = {
       blocks: [
         {
           type: "table",
-          caption: "Les dix critères de choix d'un CRM immobilier, pour une agence et pour un promoteur",
-          head: ["Critère", "À vérifier pendant l'essai", "Pour une agence", "Pour un promoteur"],
+          caption: "Les dix critères de choix d'un CRM immobilier",
+          head: ["Critère", "À vérifier pendant l'essai", "Pour une agence"],
           rows: [
-            ["1. Pipeline", "Étapes lisibles, motif de clôture", "Location, vente et mandat de gestion", "Prospects d'un même programme"],
-            ["2. Contacts", "Fiche unique, rôles multiples, doublons", "Propriétaires, locataires, acquéreurs", "Prospects, acquéreurs, partenaires"],
-            ["3. Relances", "Prochaine action datée, retards signalés", "Beaucoup de petits dossiers à rappeler", "Relances longues, sur plusieurs mois"],
-            ["4. Rapprochement", "Budget, zone, pièces, surface", "Demandes face au portefeuille", "Demandes face aux biens disponibles du programme"],
-            ["5. Visites", "Planification, collaborateur, calendrier", "Plusieurs visites par semaine", "Visites regroupées sur le programme"],
-            ["6. Suite de la vente", "Ce qui suit la visite", "Mandat, offre, compromis, commission", "Lots, budget et avancement du chantier"],
-            ["7. Canaux", "Appel, e-mail, WhatsApp, consentement", "Échanges quotidiens avec les clients", "Informations envoyées à de nombreux prospects"],
-            ["8. Indicateurs", "Conversions, retards, activité", "Activité par agent", "Conversions par programme"],
-            ["9. Équipe", "Droits, responsable, alerte de conflit, journal", "Plusieurs agents sur les mêmes contacts", "Équipe commerciale et direction de projet"],
-            ["10. Lien avec le reste", "Reprise des données, prix, sortie", "Du prospect au bail ou au propriétaire", "Du CRM au chantier, puis au patrimoine"],
+            ["1. Pipeline", "Étapes lisibles, motif de clôture", "Location, vente et mandat de gestion"],
+            ["2. Contacts", "Fiche unique, rôles multiples, doublons", "Propriétaires, locataires, acquéreurs"],
+            ["3. Relances", "Prochaine action datée, retards signalés", "Beaucoup de petits dossiers à rappeler"],
+            ["4. Rapprochement", "Budget, zone, pièces, surface", "Demandes face au portefeuille"],
+            ["5. Visites", "Planification, collaborateur, calendrier", "Plusieurs visites par semaine"],
+            ["6. Suite de la vente", "Ce qui suit la visite", "Mandat, offre, compromis, commission"],
+            ["7. Canaux", "Appel, e-mail, WhatsApp, consentement", "Échanges quotidiens avec les clients"],
+            ["8. Indicateurs", "Conversions, retards, activité", "Activité par agent"],
+            ["9. Équipe", "Droits, responsable, alerte de conflit, journal", "Plusieurs agents sur les mêmes contacts"],
+            ["10. Lien avec le reste", "Reprise des données, prix, sortie", "Du prospect au bail ou au propriétaire"],
           ],
         },
       ],
@@ -232,7 +231,7 @@ const crmChoisir: Guide = {
         },
         {
           type: "p",
-          text: "Pour une vente sous mandat, l'agence y ajoute les mandats de vente, les offres et les compromis. Le CRM partage les mêmes contacts et les mêmes biens que la gestion locative, le syndic et le module Promoteur. Toutes les fonctions sont décrites dans le [wiki CRM et ventes](/wiki/crm-et-ventes).",
+          text: "Pour une vente sous mandat, l'agence y ajoute les mandats de vente, les offres et les compromis. Le CRM partage les mêmes contacts et les mêmes biens que la gestion locative, le syndic et le module Promoteur. Pour une présentation complète, voyez notre [CRM immobilier pour agences](/crm-immobilier-cote-divoire) ; toutes les fonctions sont décrites dans le [wiki CRM et ventes](/wiki/crm-et-ventes).",
         },
       ],
     },
@@ -256,7 +255,7 @@ const crmChoisir: Guide = {
     },
     {
       q: "Un CRM d'agence convient-il à un promoteur ?",
-      a: "Pour le suivi commercial (contacts, pipeline, visites, relances, rapprochement), oui. Le chantier demande en plus un module dédié : lots, coût de revient, budget, avancement. La vente sous mandat (mandat, offre, compromis) concerne l'agence qui vend pour un propriétaire.",
+      a: "Pour le suivi commercial (contacts, pipeline, visites, relances, rapprochement), oui. Pour le suivi d'un programme, voyez la page [CRM pour promoteur immobilier](/crm-promoteur-immobilier-cote-divoire).",
     },
     {
       q: "Comment tester un CRM avant de choisir ?",
