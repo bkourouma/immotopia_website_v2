@@ -13,6 +13,7 @@ const OHADA_PAGE = "https://www.ohada.org/droit-commercial-general/";
 const OHADA_TEXT = "https://faolex.fao.org/docs/pdf/oha195620.pdf";
 // Les guides sont publiés en français seulement : le lien est identique dans les deux langues.
 const GUIDE_BAIL_COMMERCIAL = "/guides/bail-commercial-ohada-cote-divoire";
+const GESTION_LOCATIVE = "/gestion-locative-cote-divoire";
 const REGISTRATION_PROCEDURE = "https://cotedivoire.eregulations.org/procedure/99/5/step/29?l=fr";
 
 export async function generateMetadata({ params }: PageProps<"/[lang]/outils/bail-commercial">): Promise<Metadata> {
@@ -29,6 +30,18 @@ export default async function Page() {
       tool={getTool(SLUG, locale)}
       about={t(
         <>
+          <aside className="mb-8 rounded-2xl border border-brand-600/20 bg-white p-5">
+            <h2 className="!mt-0">Gérez vos baux commerciaux dans ImmoTopia</h2>
+            <p>
+              Une fois le bail signé, ImmoTopia en assure le suivi : chaque bail génère son échéancier (loyer, charges, statut et reste à
+              encaisser), les rappels partent avant l&apos;échéance par e-mail et WhatsApp, et les quittances sortent de vos modèles, avec
+              une numérotation continue.
+            </p>
+            <p className="!mb-0">
+              Découvrez le <Link href={GESTION_LOCATIVE}>logiciel de gestion locative en Côte d&apos;Ivoire</Link> et consultez les{" "}
+              <Link href={localizeHref(locale, "/tarifs")}>tarifs</Link> pour demander une démonstration.
+            </p>
+          </aside>
           <p>
             Pour comprendre la règle avant de remplir le modèle, lisez notre{" "}
             <Link href={GUIDE_BAIL_COMMERCIAL}>guide du bail commercial OHADA en Côte d&apos;Ivoire</Link> : il explique le cadre juridique,
@@ -161,6 +174,18 @@ export default async function Page() {
           </p>
         </>,
         <>
+          <aside className="mb-8 rounded-2xl border border-brand-600/20 bg-white p-5">
+            <h2 className="!mt-0">Manage your commercial leases in ImmoTopia</h2>
+            <p>
+              Once the lease is signed, ImmoTopia tracks it: each lease generates its payment schedule (rent, charges, status and balance
+              to collect), reminders go out before the due date by e-mail and WhatsApp, and receipts are produced from your templates with
+              continuous numbering.
+            </p>
+            <p className="!mb-0">
+              Discover our <Link href={GESTION_LOCATIVE}>rental management software for Côte d&apos;Ivoire</Link> (in French) and see the{" "}
+              <Link href={localizeHref(locale, "/tarifs")}>pricing</Link> to request a demo.
+            </p>
+          </aside>
           <p>
             To understand the rules before filling in the template, read our{" "}
             <Link href={GUIDE_BAIL_COMMERCIAL}>guide to the OHADA commercial lease in Côte d&apos;Ivoire</Link> (in French): it explains the
