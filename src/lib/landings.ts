@@ -146,14 +146,32 @@ export const landings: Landing[] = [
   },
   {
     slug: "logiciel-immobilier-cote-divoire",
-    metaTitle: "Logiciel immobilier en Côte d'Ivoire | ERP ImmoTopia",
+    metaTitle: "Logiciel de gestion immobilière en Côte d'Ivoire | ImmoTopia",
     metaDescription:
       "Logiciel immobilier en ligne pour les professionnels en Côte d'Ivoire : CRM, gestion locative, syndic, portails clients, maintenance, e-mail et WhatsApp.",
     eyebrow: "ERP immobilier",
-    h1: "Logiciel immobilier en Côte d'Ivoire : un ERP complet pour les professionnels",
+    h1: "Logiciel immobilier en Côte d'Ivoire : un ERP complet",
     intro:
       "ImmoTopia est un logiciel de gestion immobilière en ligne, conçu à Abidjan pour les agences, gestionnaires, syndics et promoteurs. Un seul fichier de clients, un seul parc de biens, et chaque métier activé selon votre activité.",
     sections: [
+      {
+        title: "Logiciel de gestion immobilière : ce que couvre ImmoTopia",
+        intro: "Chaque métier de l'immobilier professionnel a ses fonctions, et chacun renvoie à une page détaillée. Tous partagent les mêmes contacts, les mêmes biens et les mêmes documents.",
+        table: {
+          caption: "Les métiers couverts par ImmoTopia, leurs fonctions et la page détaillée de chacun",
+          head: ["Métier", "Fonctions", "Page détaillée"],
+          rows: [
+            ["Transaction et CRM", "Contacts, pipeline de ventes et de locations, visites, rapprochement entre la demande et les biens", "[Logiciel CRM immobilier](/crm-immobilier-cote-divoire)"],
+            ["Annonces", "Fiches de biens, médias, mandats, score de qualité, publication vers votre site", "[Logiciel d'annonces immobilières](/logiciel-annonces-immobilieres-cote-divoire)"],
+            ["Gestion locative", "Baux, échéancier, paiements, pénalités, cautions, quittances, relevés de gérance", "[Gestion locative](/gestion-locative-cote-divoire)"],
+            ["Syndic de copropriété", "Lots et tantièmes, appels de charges, assemblées générales, comptabilité de copropriété", "[Logiciel de syndic](/logiciel-syndic-copropriete-cote-divoire)"],
+            ["Promotion", "Chantiers, lots, budget, stock de matériaux, tâcherons", "[Logiciel promoteur immobilier](/logiciel-promoteur-immobilier-cote-divoire)"],
+            ["Patrimoine", "Valeur des biens détenus en propre, emprunts, assurances, trésorerie", "[Gestion de patrimoine immobilier](/logiciel-gestion-patrimoine-immobilier-cote-divoire)"],
+            ["Maintenance", "Tickets avec photos et priorités, prestataires, notifications", "[Maintenance immobilière](/maintenance-immobiliere-ticketing-cote-divoire)"],
+          ],
+        },
+        note: "Les fonctions communes (finance, documents, communication par e-mail et WhatsApp, rôles et journal d'audit) sont disponibles pour tous les métiers.",
+      },
       {
         title: "Un seul outil pour tous vos métiers",
         items: [
@@ -186,6 +204,30 @@ export const landings: Landing[] = [
           { title: "Données cloisonnées", text: "Les données de chaque organisation sont strictement séparées de celles des autres." },
         ],
       },
+      {
+        title: "Combien coûte un logiciel de gestion immobilière en Côte d'Ivoire ?",
+        paragraphs: [
+          `ImmoTopia est vendu en abonnement mensuel, en FCFA hors taxes, sans commission ImmoTopia sur vos loyers. Trois packs correspondent aux trois grands métiers : le pack Agence, à partir de ${fcfa(agence.monthly)} HT par mois, le pack Syndic, à partir de ${fcfa(pack("syndic").monthly)} HT par mois, et le pack Promoteur, à partir de ${fcfa(promoteur.monthly)} HT par mois.`,
+          `Chaque pack inclut un volume de départ : ${agence.included} pour l'Agence, ${pack("syndic").included} pour le Syndic, ${promoteur.included} pour le Promoteur. Le premier mois est offert, sans engagement. Une mise en route accompagnée, facultative, permet de reprendre vos fichiers existants. Le détail, les extensions et un simulateur sont sur la page [Tarifs](/tarifs).`,
+        ],
+      },
+      {
+        title: "Comparer avec Excel et avec un logiciel étranger",
+        items: [
+          { title: "Excel", text: "Un tableur convient pour démarrer, mais un retard de loyer, une quittance ou un reversement dépendent alors de la vigilance de chacun. Voir [ImmoTopia ou Excel](/immotopia-vs-excel). La reprise de vos fichiers Excel fait partie de la mise en route accompagnée, facultative." },
+          { title: "Un logiciel étranger", text: "Les logiciels européens sont solides, mais pensés pour d'autres usages : prélèvement bancaire, courrier recommandé, comptabilité française. ImmoTopia est conçu à Abidjan, avec des prix en FCFA, le Mobile Money et WhatsApp. Voir [logiciel immobilier en Afrique : local ou étranger](/logiciel-immobilier-afrique)." },
+        ],
+      },
+      {
+        title: "Pour qui ? Agence, syndic, promoteur, propriétaire",
+        items: [
+          { title: "Agence et administrateur de biens", text: "Transaction, CRM et gestion locative dans le pack Agence, avec des portails pour les propriétaires et les locataires, qui ne sont pas facturés." },
+          { title: "Syndic de copropriété", text: "Copropriétés, lots et tantièmes, appels de charges payables par Mobile Money et assemblées générales avec vote en ligne, dans le pack Syndic." },
+          { title: "Promoteur", text: "Chantiers, lots, budget, stock et tâcherons dans le pack Promoteur. Un groupe qui construit, vend, loue et gère peut choisir le pack Opérateur intégré." },
+          { title: "Propriétaire", text: "Un propriétaire dont l'agence utilise ImmoTopia consulte ses baux, échéances, paiements et documents dans son portail. Un particulier qui gère ses propres biens trouve les packs Patrimoine : voir le [logiciel de gestion de patrimoine immobilier](/logiciel-gestion-patrimoine-immobilier-cote-divoire)." },
+        ],
+        note: "Une question sur le choix du pack ? [Contactez l'équipe](/contact).",
+      },
     ],
     faq: [
       { q: "Faut-il installer quelque chose ?", a: "Non. ImmoTopia s'utilise depuis un navigateur, sur ordinateur, tablette ou téléphone, et peut aussi s'installer sur l'écran d'accueil du téléphone comme une application, sans passer par un magasin d'applications." },
@@ -200,7 +242,7 @@ export const landings: Landing[] = [
     metaDescription:
       "Gérez votre stock de biens et vos annonces : fiches par type de bien, statuts, médias, score de qualité, API d'annonces et diffusion WhatsApp.",
     eyebrow: "Biens et annonces",
-    h1: "Logiciel d'annonces immobilières en Côte d'Ivoire : stock, publication et prospects",
+    h1: "Logiciel d'annonces immobilières en Côte d'Ivoire : stock et prospects",
     intro:
       "Un stock de biens à jour, des annonces complètes et des demandes qui arrivent directement dans votre CRM : ImmoTopia relie vos biens, vos annonces et votre suivi commercial.",
     sections: [
@@ -246,7 +288,7 @@ export const landings: Landing[] = [
     eyebrow: "Syndic de copropriété",
     h1: "Logiciel syndic de copropriété en Côte d'Ivoire",
     intro:
-      "Le logiciel syndic de copropriété d'ImmoTopia : tantièmes, appels de charges, relances, assemblées générales et comptabilité : le module Syndic d'ImmoTopia donne aux cabinets de copropriété un outil complet, en FCFA, avec les relances WhatsApp que les copropriétaires lisent.",
+      "Le module Syndic d'ImmoTopia est un logiciel de syndic de copropriété pensé pour les cabinets de Côte d'Ivoire : lots et tantièmes, budgets, appels de charges, relances par e-mail et WhatsApp, paiement par Mobile Money, assemblées générales et comptabilité de copropriété, le tout en FCFA. Pour aller plus loin, consultez le [wiki du syndic de copropriété](/wiki/syndic-copropriete) et les [tarifs](/tarifs).",
     sections: [
       {
         title: "Copropriétés et lots",
@@ -278,6 +320,7 @@ export const landings: Landing[] = [
       },
     ],
     faq: [
+      { q: "Que fait un logiciel de syndic de copropriété comme ImmoTopia ?", a: "Il tient les fiches de copropriété, les lots et les tantièmes, prépare le budget d'exercice, génère les appels de charges par lot, suit le recouvrement et les relances, organise les assemblées générales (quorum, votes, pouvoirs, compte rendu) et tient la comptabilité de copropriété." },
       { q: "Combien coûte le pack Syndic ?", a: "49 900 FCFA HT par mois pour 2 copropriétés et 100 lots, puis 10 000 FCFA par copropriété et 150 FCFA par lot supplémentaires. Le premier mois est offert, sans engagement." },
       { q: "Je fais aussi de la gestion locative : dois-je payer deux fois ?", a: "Les packs Agence et Syndic se combinent avec 10 % de remise sur le moins cher des deux, et vos contacts restent communs." },
       { q: "Les copropriétaires peuvent-ils payer leurs charges en ligne ?", a: "Oui, par Mobile Money, depuis le lien « Payer cet appel » ou leur portail. Le paiement est rattaché au bon lot, les fonds sont reversés vers le compte bancaire de la copropriété et ImmoTopia ne prend aucune commission. Inclus dans les packs Syndic et Opérateur intégré." },
@@ -294,7 +337,7 @@ export const landings: Landing[] = [
     eyebrow: "Guide de choix",
     h1: "Meilleur logiciel immobilier en Côte d'Ivoire : comment choisir ?",
     intro:
-      "Le « meilleur » logiciel est celui qui couvre vos métiers réels, parle le langage de vos clients et que votre équipe utilisera vraiment. Voici les critères qui comptent en Côte d'Ivoire, et la façon dont ImmoTopia y répond.",
+      "Le « meilleur » logiciel est celui qui couvre vos métiers réels, parle le langage de vos clients et que votre équipe utilisera vraiment. Voici les critères qui comptent en Côte d'Ivoire, et la façon dont ImmoTopia y répond. Pour passer à la pratique, consultez les [tarifs en FCFA](/tarifs), le [comparatif](/comparatif) ou [demandez une démonstration](/contact).",
     sections: [
       {
         title: "Les critères qui comptent",
@@ -310,10 +353,12 @@ export const landings: Landing[] = [
       {
         title: "Comment ImmoTopia répond à ces critères",
         intro:
-          "Chaque critère se vérifie sur les pages du site. Voici où retrouver le détail, métier par métier.",
+          "Plutôt que de promettre, voici ce que l'on peut vérifier dans le produit, critère par critère.",
         items: [
-          { title: "Tous les métiers, une seule application", text: "Transaction, gestion locative, syndic de copropriété et promotion immobilière partagent les mêmes contacts et les mêmes biens. Voir le [logiciel immobilier en Côte d'Ivoire](/logiciel-immobilier-cote-divoire), la [gestion locative](/gestion-locative-cote-divoire), le [syndic de copropriété](/logiciel-syndic-copropriete-cote-divoire) et le [logiciel pour promoteur](/logiciel-promoteur-immobilier-cote-divoire)." },
-          { title: "Mobile Money et WhatsApp", text: "Les relances partent par e-mail et par WhatsApp, et les charges de copropriété se paient en ligne par Mobile Money. Le détail est dans la page [paiement des loyers et charges par Mobile Money](/paiement-loyer-charges-mobile-money-cote-divoire)." },
+          { title: "Vos métiers dans un seul outil", text: "Gestion locative, syndic de copropriété, CRM et annonces partagent les mêmes contacts et les mêmes biens. Voir la [gestion locative](/gestion-locative-cote-divoire), le [logiciel de syndic](/logiciel-syndic-copropriete-cote-divoire) et le [CRM immobilier](/crm-immobilier-cote-divoire)." },
+          { title: "Mobile Money et paiements", text: "Pour les loyers, l'opérateur est enregistré avec le paiement et le locataire déclare son règlement depuis son portail ; l'agence le valide en un clic. Pour les charges de copropriété, le paiement en ligne par Mobile Money existe, sans commission d'ImmoTopia. Détail dans [paiement des loyers et charges](/paiement-loyer-charges-mobile-money-cote-divoire)." },
+          { title: "Relances par e-mail et WhatsApp", text: "Les relances partent par e-mail, WhatsApp ou les deux, selon les préférences et le consentement de chacun." },
+          { title: "Assemblées générales en direct", text: "Émargement en ligne, quorum calculé en temps réel et vote de chaque copropriétaire par lien personnel, sans compte." },
           { title: "Portails propriétaire et locataire", text: "Le propriétaire et le locataire consultent leurs documents depuis un portail en libre-service, sans abonnement à souscrire de leur côté. Les portails sont inclus dans les packs Agence et Opérateur intégré." },
           { title: "Un usage simple au quotidien", text: "ImmoTopia s'utilise dans le navigateur, sur ordinateur, tablette ou téléphone, et s'installe sur l'écran d'accueil sans passer par un magasin d'applications." },
           { title: "Des prix publics", text: "Les packs et leurs prix en FCFA hors taxes sont affichés sur la page [tarifs](/tarifs), avec un premier mois offert et sans engagement." },
@@ -334,11 +379,22 @@ export const landings: Landing[] = [
         intro:
           "Notre page Comparatif met ImmoTopia face à trois logiciels similaires, sur une centaine de fonctionnalités, à partir des pages publiques de chaque éditeur et avec les sources.",
       },
+      {
+        title: "Aller plus loin selon votre métier",
+        items: [
+          { title: "Agence et gestion locative", text: "Baux, loyers, propriétaires et locataires : voir le [logiciel de gestion locative en Côte d'Ivoire](/gestion-locative-cote-divoire)." },
+          { title: "Syndic de copropriété", text: "Appels de charges, assemblées générales et comptabilité : voir le [logiciel de syndic en Côte d'Ivoire](/logiciel-syndic-copropriete-cote-divoire)." },
+          { title: "Vue d'ensemble", text: "Tous les métiers dans un seul outil : voir le [logiciel immobilier en Côte d'Ivoire](/logiciel-immobilier-cote-divoire)." },
+          { title: "Prix et démonstration", text: "Consultez les [tarifs en FCFA](/tarifs) ou [demandez une démonstration](/contact) sur vos propres cas." },
+        ],
+      },
     ],
     faq: [
       { q: "ImmoTopia propose-t-il un essai ?", a: "Le premier mois d'abonnement est offert sur tous les packs, sans engagement." },
       { q: "Où voir la comparaison avec les autres logiciels ?", a: "Sur la page Comparatif du site, domaine par domaine et avec les sources." },
       { q: "Quels critères pour choisir un logiciel immobilier en Côte d'Ivoire ?", a: "Six critères : couvrir tous vos métiers (transaction, gestion locative, syndic, promotion), reconnaître le Mobile Money, envoyer les rappels sur WhatsApp, offrir des portails aux propriétaires et locataires, afficher des prix clairs en FCFA et proposer une équipe proche pour la mise en route." },
+      { q: "Le Mobile Money est-il géré pour les loyers ?", a: "Tous les moyens de paiement sont acceptés. Pour le Mobile Money, l'opérateur est enregistré avec le paiement, et le locataire peut déclarer lui-même son règlement depuis son portail ; l'agence le valide en un clic." },
+      { q: "Les copropriétaires peuvent-ils payer leurs charges en ligne ?", a: "Oui, par Mobile Money, depuis le lien « Payer cet appel » ou leur portail. ImmoTopia ne prend aucune commission." },
       { q: "Puis-je reprendre mes fichiers Excel ?", a: "Oui : la mise en route accompagnée comprend la reprise de vos biens, contacts, baux ou copropriétés. Elle est facultative si vous saisissez vous-même vos données." },
       { q: "Faut-il installer ImmoTopia sur chaque poste ?", a: "Non. ImmoTopia est une application web : elle s'utilise depuis un navigateur, sur ordinateur, tablette ou téléphone, et peut s'installer sur l'écran d'accueil si vous le souhaitez." },
       { q: "Les propriétaires et les locataires doivent-ils payer un abonnement ?", a: "Non. Ils disposent de portails en libre-service, sans abonnement à souscrire : seul le cabinet abonné paie son pack." },
@@ -347,7 +403,7 @@ export const landings: Landing[] = [
   },
   {
     slug: "crm-immobilier-cote-divoire",
-    metaTitle: "CRM immobilier en Côte d'Ivoire : prospects, visites | ImmoTopia",
+    metaTitle: "CRM immobilier en Côte d'Ivoire : prospects et visites",
     metaDescription:
       "Logiciel CRM immobilier pour agences et promoteurs en Côte d'Ivoire : contacts, pipeline, visites, mandats, offres, relances. Essai offert.",
     eyebrow: "CRM immobilier",
@@ -490,9 +546,8 @@ export const landings: Landing[] = [
   },
   {
     slug: "crm-promoteur-immobilier-cote-divoire",
-    metaTitle: "CRM promoteur immobilier : prospects et lots | ImmoTopia",
-    metaDescription:
-      "CRM pour promoteur immobilier en Côte d'Ivoire : prospects, visites et relances, puis lots, coût de revient, budget et avancement du chantier.",
+    metaTitle: "CRM promoteur immobilier en Côte d'Ivoire | Lots et chantier",
+    metaDescription: `CRM pour promoteur immobilier en Côte d'Ivoire : prospects, visites, relances, lots, coût de revient et chantier réunis. Pack Promoteur dès ${fcfa(promoteur.monthly)} HT/mois.`,
     eyebrow: "CRM promoteur",
     h1: "CRM pour promoteur immobilier en Côte d'Ivoire",
     intro:
@@ -521,7 +576,7 @@ export const landings: Landing[] = [
       },
       {
         title: "Du commercial au chantier : lots, coût de revient, budget, avancement",
-        intro: "Le module Promoteur prolonge le CRM côté construction. Chaque chantier se découpe en lots, se budgète et se suit jusqu'à la clôture.",
+        intro: "Le module Promoteur prolonge le CRM côté construction. Chaque chantier se découpe en lots, se budgète et se suit jusqu'à la clôture. Pour le détail du module, voir le [logiciel promoteur immobilier](/logiciel-promoteur-immobilier-cote-divoire).",
         items: [
           { title: "Lots et coût de revient", text: "Découpez le chantier en lots, répartissez le coût réel à la surface ou par quote-part et connaissez le coût de revient de chaque lot. Voir [lots et coût de revient](/wiki/promotion-et-chantiers/lots-et-cout-de-revient)." },
           { title: "Budget et avenants", text: "Budget prévisionnel poste par poste, validé comme référence, puis révisé par des avenants datés et motivés. Voir le [budget de chantier](/wiki/promotion-et-chantiers/budget-de-chantier)." },
@@ -598,7 +653,7 @@ export const landings: Landing[] = [
   },
   {
     slug: "paiement-loyer-charges-mobile-money-cote-divoire",
-    metaTitle: "Loyers et charges par Mobile Money en Côte d'Ivoire",
+    metaTitle: "Loyer par Mobile Money en Côte d'Ivoire | Orange, MTN, Moov, Wave",
     metaDescription:
       "Suivez les loyers payés par Orange Money, MTN MoMo, Moov Money et Wave : enregistrement, déclaration du locataire, validation et relances dans ImmoTopia.",
     eyebrow: "Mobile Money",
@@ -607,7 +662,7 @@ export const landings: Landing[] = [
       "En Côte d'Ivoire, une grande partie des loyers passe par le Mobile Money. ImmoTopia en fait un moyen de paiement à part entière : chaque règlement est rattaché au bon bail et à la bonne échéance, avec son opérateur.",
     sections: [
       {
-        title: "Comment ça fonctionne",
+        title: "Comment payer son loyer par Orange Money, MTN MoMo, Moov Money ou Wave",
         items: [
           { title: "1. Le locataire paie", text: "Par Orange Money, MTN MoMo, Moov Money ou Wave, comme il en a l'habitude." },
           { title: "2. Il déclare son paiement", text: "Depuis son portail, il indique le montant, l'opérateur et la référence de la transaction." },
@@ -626,8 +681,38 @@ export const landings: Landing[] = [
         ],
         note: "Pour les loyers, ImmoTopia enregistre et suit les paiements Mobile Money. Pour les appels de charges de copropriété, le paiement en ligne passe par le lien « Payer cet appel » (voir [payer un appel de charges](/wiki/portails-clients/payer-un-appel-de-charges)) ; pour les loyers, parlez-en avec l'équipe en démonstration.",
       },
+      {
+        title: "Quittance et preuve de paiement",
+        paragraphs: [
+          "Chaque paiement enregistré est rattaché au bail et à l'échéance concernés, avec l'opérateur utilisé : l'historique des règlements sert de preuve côté agence comme côté locataire. Le locataire est prévenu de la confirmation par e-mail ou WhatsApp.",
+          "Les quittances se génèrent depuis la fiche du bail (voir [quittances et documents locatifs](/wiki/gestion-locative/quittances-et-documents-locatifs)). Pour une quittance ponctuelle, le [générateur de quittance de loyer](/outils/quittance-de-loyer) gratuit propose Wave, Orange Money, MTN MoMo et Moov Money comme mode de paiement ; conservez aussi le message de confirmation de l'opérateur.",
+        ],
+      },
+      {
+        title: "Frais et sécurité",
+        bullets: [
+          "ImmoTopia ne prend aucune commission sur les loyers : l'agence paie un abonnement mensuel en FCFA.",
+          "Les éventuels frais de transaction relèvent de l'opérateur Mobile Money choisi : renseignez-vous auprès de lui.",
+          "Dans le paiement par lien, le montant est celui du reste dû de l'échéance, calculé par ImmoTopia : le locataire ne le saisit pas.",
+          "Le locataire n'a pas de compte à créer pour payer depuis un lien.",
+        ],
+        note: "Le paiement par lien est en cours de déploiement : il est éprouvé en mode simulation, et le paiement réel n'est pas encore validé (voir [payer son loyer en ligne par lien](/wiki/portails-clients/paiement-loyer-par-lien)).",
+      },
+      {
+        title: "Pour les agences : encaisser les loyers en Mobile Money et rapprocher automatiquement",
+        bullets: [
+          "Chaque paiement est rattaché à son bail et à ses échéances, même partiel, avec son opérateur.",
+          "Les déclarations des locataires arrivent dans la file « À traiter aujourd'hui » ; une fois validées, l'échéance est soldée.",
+          "Le tableau de bord montre la répartition des encaissements par moyen de paiement.",
+          "Des relances automatiques partent avant et après l'échéance.",
+          "Côté agence, la création des liens de paiement est décrite dans [générer des liens de paiement de loyer](/wiki/gestion-locative/liens-de-paiement-loyer).",
+        ],
+      },
     ],
     faq: [
+      { q: "Le locataire reçoit-il une quittance ?", a: "Il est prévenu de la confirmation de son paiement par e-mail ou WhatsApp, et l'agence peut générer sa quittance depuis la fiche du bail. Une quittance ponctuelle peut aussi se produire avec le [générateur gratuit](/outils/quittance-de-loyer)." },
+      { q: "Qui paie les frais ?", a: "ImmoTopia ne prend aucune commission sur les loyers ; l'agence paie un abonnement mensuel en FCFA. Les éventuels frais de transaction dépendent de l'opérateur Mobile Money : renseignez-vous auprès de lui." },
+      { q: "Le locataire doit-il créer un compte pour payer ?", a: "Non : depuis le lien de paiement reçu de son agence, il paie sans compte. Cette fonction est en cours de déploiement." },
       { q: "Quels opérateurs sont pris en charge ?", a: "Orange Money, MTN Mobile Money, Moov Money et Wave, ainsi que les espèces, virements, chèques et cartes." },
       { q: "Les copropriétaires peuvent-ils payer leurs charges par Mobile Money ?", a: "Oui : depuis le lien « Payer cet appel » ou le portail copropriétaire, avec un rattachement automatique au bon lot et sans commission ImmoTopia. Inclus dans les packs Syndic et Opérateur intégré." },
       { q: "ImmoTopia prend-il une commission sur les loyers ?", a: "Non, aucune. Vous payez un abonnement mensuel en FCFA." },
@@ -640,7 +725,7 @@ export const landings: Landing[] = [
     metaDescription:
       "Maintenance en Côte d'Ivoire : tickets avec photos et priorités, prestataires, fil d'échange et notifications, en location comme en copropriété.",
     eyebrow: "Maintenance",
-    h1: "Maintenance immobilière en Côte d'Ivoire : tickets, prestataires et suivi centralisé",
+    h1: "Maintenance immobilière en Côte d'Ivoire : tickets et suivi",
     intro:
       "Une fuite, une panne, une porte qui ferme mal : avec ImmoTopia, chaque demande devient un ticket suivi de bout en bout, visible par l'agence, le locataire et le propriétaire.",
     sections: [
@@ -757,7 +842,7 @@ export const landings: Landing[] = [
     metaDescription:
       "Excel suffit pour démarrer, pas pour piloter une agence. Comparez Excel et ImmoTopia : CRM, loyers, syndic, Mobile Money, relances et tableaux de bord.",
     eyebrow: "Comparaison",
-    h1: "ImmoTopia vs Excel : quel outil pour gérer l'immobilier en Côte d'Ivoire ?",
+    h1: "ImmoTopia vs Excel : quel outil choisir en Côte d'Ivoire ?",
     intro:
       "Excel est gratuit, souple et connu de tous. Mais au-delà de quelques dizaines de biens, les fichiers se multiplient, les versions divergent et les impayés passent entre les mailles.",
     sections: [
@@ -825,7 +910,7 @@ export const landings: Landing[] = [
   },
   {
     slug: "logiciel-gestion-patrimoine-immobilier-cote-divoire",
-    metaTitle: "Logiciel de gestion de patrimoine immobilier en Côte d'Ivoire",
+    metaTitle: "Logiciel de gestion de patrimoine immobilier, Côte d'Ivoire",
     metaDescription: `Logiciel de gestion de patrimoine immobilier pour propriétaires bailleurs et diaspora : biens, baux, emprunts, trésorerie, assurances. Dès ${fcfa(patrimoineEssentiel.monthly)} HT/mois.`,
     eyebrow: "Gestion de patrimoine",
     h1: "Logiciel de gestion de patrimoine immobilier en Côte d'Ivoire",
@@ -964,8 +1049,16 @@ export const landings: Landing[] = [
     eyebrow: "Promotion immobilière",
     h1: "Logiciel promoteur immobilier en Côte d'Ivoire : du chantier aux lots",
     intro:
-      "Budget, dépenses en espèces, matériaux, tâcherons, avancement, coût de revient de chaque lot : le module Promoteur d'ImmoTopia suit un programme de la première dépense à la clôture du chantier. Il s'adresse aux promoteurs et aux groupes immobiliers ivoiriens qui construisent, et se relie au CRM pour le suivi commercial.",
+      "Logiciel promoteur immobilier pour piloter chantier, lots et suivi commercial. Budget, dépenses en espèces, matériaux, tâcherons, avancement, coût de revient de chaque lot : le module Promoteur d'ImmoTopia suit un programme de la première dépense à la clôture du chantier. Il s'adresse aux promoteurs et aux groupes immobiliers ivoiriens qui construisent, et se relie au CRM pour le suivi commercial.",
     sections: [
+      {
+        title: "Pour qui ?",
+        items: [
+          { title: "Promoteurs en Côte d'Ivoire", text: "Le module Promoteur s'adresse aux promoteurs et aux groupes immobiliers ivoiriens qui construisent et suivent leurs chantiers." },
+          { title: "Programmes de logements", text: "Villas, appartements, locaux : chaque chantier se découpe en lots, avec leur coût de revient. Voir [lots et coût de revient](/wiki/promotion-et-chantiers/lots-et-cout-de-revient)." },
+        ],
+        note: "Pour le suivi commercial, voir le [CRM pour promoteur immobilier](/crm-promoteur-immobilier-cote-divoire) ; pour le détail du module, le domaine [Promotion et chantiers](/wiki/promotion-et-chantiers).",
+      },
       {
         title: "Les difficultés de la promotion immobilière sur le terrain",
         items: [

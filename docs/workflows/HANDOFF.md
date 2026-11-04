@@ -41,27 +41,39 @@ Pièges et décisions :
 
 ---
 
-## Branche `claude/issue-38` — 2026-11-04
 
-**État :** correction préparée pour la PR #39, sans fusion ni déploiement.
-**Dernier commit :** `43d8d5a` synchronisation avec `main` (la suite CI `Vérifications` est verte sur ce commit).
+## Branche `claude/issue-78` (PR #79) — 2026-11-04
+
+**État :** conflits résolus, prêt pour la CI.
+**Dernier commit :** résolution dans le commit courant (voir git log).
+
+- Main intégré ; section existante conservée avec les précisions Mobile Money et consentement, ajout des portails, usage navigateur/PWA et prix publics, deux FAQ ajoutées sans doublon.
+- Contrôles : check-landings et npm test (30 tests) passent ; build, types, lint et navigateur restent à vérifier sur la chaîne consolidée #79 → #83 → #91 → #93.
+- Aucun déploiement ni fusion dans main. Conserver les changements main et fusionner les PR dans cet ordre, ou utiliser une fusion conservant l'historique de #93 qui inclut les branches précédentes.
+
+## Branche `codex/correction-debordement-mobile` — 2026-11-04
+
+**État :** correctif validé ; fusion et déploiement explicitement autorisés dans la conversation. Résultat opérationnel courant : [PR #98](https://github.com/bkourouma/immotopia_website_v2/pull/98).
+**Dernier commit fonctionnel :** `9c24803` correction des grilles et maquettes de rôles, basé sur `82a1e89` (PR des polices locales #57 déjà fusionnée et déployée). Le présent lot ne modifie que cette passation.
 
 Fait :
 
-- `main` intégré sans conflit ; les ajouts éditoriaux de la PR sont conservés.
-- La redirection demandée par la PR manquait : ajout de `/fonctionnalites/gestion-locative` vers `/gestion-locative-cote-divoire`, avant la règle générique, avec statut explicite 301.
-- Test du contrat de redirection et de sa priorité ; `npm test` sous Linux Node 24 : 30 tests réussis.
-- L'échec initial de police ne provenait pas d'un changement de police dans cette PR : layout et configuration étaient identiques à `main`, et la CI a réussi après la synchronisation sans modification des polices.
+- Cause reproduite sur l'accueil FR : maquette du directeur de 430 px dans un espace de 335 px ; document 450 px pour un viewport de 390 px, zone cliente 375 px. Une colonne bornée ramène le document à 375 px, sans masquer le débordement global.
+- Grille mobile explicite, pistes desktop à minimum nul ; indicateurs empilés lorsque l'espace est étroit. Téléphone réductible et colonne de visites qui revient à la ligne : cela corrige aussi le débordement transitoire du rôle Sales agent en anglais à 768 px.
+- **84 contrôles navigateur réussis** sur le vrai build préconstruit : FR/EN à 320, 360, 390, 430, 768, 1024, 1440 px ; les sept onglets de rôles sont réellement activés à 320, 390, 768, 1024, 1440 px. Largeur du document égale à la largeur cliente dans chaque cas. Les tableaux larges restent défilables dans leur conteneur.
+- 30 tests unitaires, lint, build de production et TypeScript réussis. [CI fonctionnelle 41857711896](https://github.com/bkourouma/immotopia_website_v2/actions/runs/41857711896) réussie sur `9c24803`.
 
-Reste à faire :
+Suite de reprise :
 
-- Suivre la CI du commit contenant la redirection ; vérifier la réponse HTTP du site construit.
-- La fusion de la PR reste hors de cette intervention.
+- Consulter le statut de fusion, le déploiement et les mesures HTTPS finales dans la PR #98 ; ne pas relancer une PR déjà fusionnée.
+- Pour une nouvelle recette : comparer `document.documentElement.scrollWidth` et `clientWidth`, puis changer les rôles. Vérifier aussi le défilement interne du tableau du comptable, et le téléphone/les visites en anglais à 768 px.
 
 Pièges :
 
-- Le clone local est sous un dossier nommé `node_modules` : Node refuse d'y retirer les types TypeScript. Les tests tournent dans Docker avec le clone monté en `/site`.
-- Installation locale Linux ralentie par le réseau ; ne pas confondre une erreur de téléchargement avec un défaut du diff.
+- Next 16.3.6 sous Windows présente toujours une boucle du proxy FR, non reproduite dans les serveurs Linux. La recette locale utilise le HTML et les assets du vrai build préconstruit, avec hydratation et activation des onglets vérifiées. Le routage complet est vérifié par la CI Linux et en production après déploiement.
+- Un clone placé sous un répertoire `node_modules` empêche Node de retirer les types TypeScript des tests ; la copie de travail de cette intervention a été déplacée hors de ce répertoire.
+- Ne pas utiliser `overflow-x:hidden` sur toute la page comme substitut au dimensionnement des grilles : les données des tableaux doivent rester accessibles.
+
 
 ## Branche `seo/pages-patrimoine-promoteur` — 2026-10-23
 

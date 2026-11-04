@@ -260,6 +260,8 @@ export const portailsClients: WikiDomain = {
       metaTitle: "Portail copropriété en ligne : charges, AG, documents",
       summary:
         "Portail copropriété : chaque copropriétaire suit ses lots et appels de charges, les paie en ligne, rejoint l'assemblée et retrouve ses PV et documents.",
+      enBref:
+        "Le copropriétaire invité voit ses lots, le solde de son compte, ses appels de charges, ses reçus, le règlement de copropriété et les procès-verbaux d'assemblée. Il peut payer ses appels de charges en ligne par mobile money, quand le paiement en ligne est ouvert pour sa copropriété, et rejoindre l'assemblée en direct. Le syndic active l'accès en invitant le copropriétaire depuis sa fiche, et peut le retirer ensuite.",
       intro:
         "Le portail de la copropriété est l'espace en ligne que le syndic ouvre à chaque copropriétaire. Dans ce portail copropriétaire, chacun consulte ses propres lots, le solde de son compte et ses appels de charges, retrouve ses reçus et quittances, et télécharge le règlement de copropriété et les procès-verbaux d'assemblée. Il peut aussi payer ses appels de charges en ligne par mobile money et rejoindre l'assemblée générale en direct. Le syndic reçoit ainsi moins de demandes de relevé, de copie de PV ou de rappel de paiement.",
       sections: [
@@ -581,7 +583,7 @@ export const portailsClients: WikiDomain = {
     {
       slug: "vue-patrimoine-proprietaire",
       title: "Patrimoine dans le portail propriétaire",
-      metaTitle: "Valeur et rendement de ses biens dans le portail propriétaire",
+      metaTitle: "Valeur et rendement des biens dans le portail propriétaire",
       summary:
         "Le propriétaire suit en ligne la valeur de ses biens, sa plus-value latente, ses rendements, ses emprunts et les documents de chaque bien, en lecture seule.",
       intro:
@@ -621,7 +623,7 @@ export const portailsClients: WikiDomain = {
     {
       slug: "rapport-mensuel-proprietaire",
       title: "Rapport mensuel par lien sécurisé",
-      metaTitle: "Rapport mensuel du propriétaire consultable par lien sécurisé",
+      metaTitle: "Rapport mensuel du propriétaire par lien sécurisé",
       summary:
         "Le propriétaire ouvre son rapport mensuel de gérance depuis un lien reçu par WhatsApp ou e-mail, sans compte, et l'imprime ou l'enregistre en PDF.",
       intro:
@@ -655,7 +657,7 @@ export const portailsClients: WikiDomain = {
       summary:
         "Côté locataire : ouvrez le lien de paiement reçu de votre agence, voyez le reste dû de votre loyer et payez en Mobile Money, sans compte, puis suivez le statut.",
       intro:
-        "Le locataire reçoit de son agence un lien vers une seule échéance de loyer. La page lui montre l'agence, la période, la date d'échéance et le reste dû, puis lance le paiement Mobile Money. Au retour, une page lui indique si le règlement est confirmé, en cours, échoué ou annulé. C'est le parcours du locataire ; la création et le suivi des liens se font côté agence, dans [Générer des liens de paiement de loyer](/wiki/gestion-locative/liens-de-paiement-loyer). Cette fonction est en cours de déploiement : elle est éprouvée en mode simulation, et le paiement réel n'est pas encore validé.",
+        "Le locataire reçoit de son agence un lien vers une seule échéance de loyer. La page lui montre l'agence, la période, la date d'échéance et le reste dû, puis lance le paiement Mobile Money. Au retour, une page lui indique si le règlement est confirmé, en cours, échoué ou annulé. C'est le parcours du locataire ; la création et le suivi des liens se font côté agence, dans [Générer des liens de paiement de loyer](/wiki/gestion-locative/liens-de-paiement-loyer). Cette fonction est en cours de déploiement : elle est éprouvée en mode simulation, et le paiement réel n'est pas encore validé. Pour une vue d'ensemble des loyers réglés par Mobile Money, voir le [guide du paiement du loyer par Mobile Money](/paiement-loyer-charges-mobile-money-cote-divoire).",
       packs: ["agence", "integre", "patrimoine-essentiel", "patrimoine-pro"],
       profiles: ["locataire", "visiteur"],
       status: "deploiement",
