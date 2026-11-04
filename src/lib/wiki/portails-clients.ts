@@ -583,7 +583,7 @@ export const portailsClients: WikiDomain = {
     {
       slug: "vue-patrimoine-proprietaire",
       title: "Patrimoine dans le portail propriétaire",
-      metaTitle: "Valeur et rendement de ses biens dans le portail propriétaire",
+      metaTitle: "Valeur et rendement des biens dans le portail propriétaire",
       summary:
         "Le propriétaire suit en ligne la valeur de ses biens, sa plus-value latente, ses rendements, ses emprunts et les documents de chaque bien, en lecture seule.",
       intro:
@@ -623,7 +623,7 @@ export const portailsClients: WikiDomain = {
     {
       slug: "rapport-mensuel-proprietaire",
       title: "Rapport mensuel par lien sécurisé",
-      metaTitle: "Rapport mensuel du propriétaire consultable par lien sécurisé",
+      metaTitle: "Rapport mensuel du propriétaire par lien sécurisé",
       summary:
         "Le propriétaire ouvre son rapport mensuel de gérance depuis un lien reçu par WhatsApp ou e-mail, sans compte, et l'imprime ou l'enregistre en PDF.",
       intro:

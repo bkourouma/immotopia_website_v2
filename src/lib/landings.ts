@@ -356,7 +356,7 @@ export const landings: Landing[] = [
   },
   {
     slug: "crm-immobilier-cote-divoire",
-    metaTitle: "CRM immobilier en Côte d'Ivoire : prospects, visites | ImmoTopia",
+    metaTitle: "CRM immobilier en Côte d'Ivoire : prospects et visites",
     metaDescription:
       "Logiciel CRM immobilier pour agences et promoteurs en Côte d'Ivoire : contacts, pipeline, visites, mandats, offres, relances. Essai offert.",
     eyebrow: "CRM immobilier",
@@ -863,7 +863,7 @@ export const landings: Landing[] = [
   },
   {
     slug: "logiciel-gestion-patrimoine-immobilier-cote-divoire",
-    metaTitle: "Logiciel de gestion de patrimoine immobilier en Côte d'Ivoire",
+    metaTitle: "Logiciel de gestion de patrimoine immobilier, Côte d'Ivoire",
     metaDescription: `Logiciel de gestion de patrimoine immobilier pour propriétaires bailleurs et diaspora : biens, baux, emprunts, trésorerie, assurances. Dès ${fcfa(patrimoineEssentiel.monthly)} HT/mois.`,
     eyebrow: "Gestion de patrimoine",
     h1: "Logiciel de gestion de patrimoine immobilier en Côte d'Ivoire",

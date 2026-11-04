@@ -9,6 +9,7 @@ import { PageHero } from "@/components/page-hero";
 import { SmartLink } from "@/components/smart-link";
 import { breadcrumbLd, PackChips, StatusBadge, WikiBreadcrumb, WikiCta } from "@/components/wiki/wiki-ui";
 import { SITE_URL } from "@/lib/site";
+import { wikiMetaTitle } from "@/lib/wiki/meta-title";
 import {
   actionAnchor,
   actionStatus,
@@ -34,7 +35,7 @@ export async function generateMetadata({ params }: PageProps<"/[lang]/wiki/[doma
   const found = featureBySlug(domaine, fonctionnalite);
   if (lang !== "fr" || !found) return {};
   const { feature } = found;
-  const title = `${feature.metaTitle} | ImmoTopia`;
+  const title = wikiMetaTitle(feature.metaTitle);
   const url = wikiHref(domaine, fonctionnalite);
   return {
     title: { absolute: title },
