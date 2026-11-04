@@ -371,7 +371,7 @@ export const syndicCopropriete: WikiDomain = {
       summary:
         "Préparez le budget prévisionnel de la copropriété ligne par ligne, faites-le approuver en assemblée générale et obtenez la quote-part de chaque lot selon les tantièmes.",
       intro:
-        "Le budget prévisionnel de copropriété se prépare dans le logiciel, ligne par ligne, avec une clé de répartition pour chacune. Le logiciel calcule aussitôt la part de chaque lot selon ses tantièmes. Une fois le budget approuvé, et relié si vous le souhaitez à la résolution d'[assemblée générale](/wiki/syndic-copropriete/assemblees-generales) qui l'a voté, il sert de base aux [appels de charges](/wiki/syndic-copropriete/appels-de-charges).",
+        "Le budget prévisionnel de copropriété se prépare dans le [logiciel syndic de copropriété](/logiciel-syndic-copropriete-cote-divoire), ligne par ligne, avec une clé de répartition pour chacune. Le logiciel calcule aussitôt la part de chaque lot selon ses tantièmes. Une fois le budget approuvé, et relié si vous le souhaitez à la résolution d'[assemblée générale](/wiki/syndic-copropriete/assemblees-generales) qui l'a voté, il sert de base aux [appels de charges](/wiki/syndic-copropriete/appels-de-charges).",
       packs: ["syndic", "integre"],
       profiles: ["equipe"],
       menu: "Syndic › Finances",
@@ -433,7 +433,7 @@ export const syndicCopropriete: WikiDomain = {
       summary:
         "Émettez les appels de charges de copropriété pour un lot ou tout l'immeuble, ponctuels ou récurrents, ou générez-les depuis le budget voté. Avis par e-mail et WhatsApp.",
       intro:
-        "Fini les appels de charges calculés à la main dans un tableur. Vous émettez un appel pour un lot, plusieurs lots ou toute la copropriété, une seule fois ou de façon récurrente, ou vous générez en un clic la campagne complète depuis le budget approuvé. Les copropriétaires sont prévenus par e-mail ou WhatsApp, et chaque appel est inscrit au compte du lot.",
+        "Fini les appels de charges calculés à la main dans un tableur : avec le [logiciel syndic de copropriété](/logiciel-syndic-copropriete-cote-divoire), vous émettez un appel pour un lot, plusieurs lots ou toute la copropriété, une seule fois ou de façon récurrente, ou vous générez en un clic la campagne complète depuis le budget approuvé. Les copropriétaires sont prévenus par e-mail ou WhatsApp, et chaque appel est inscrit au compte du lot.",
       packs: ["syndic", "integre"],
       profiles: ["equipe"],
       menu: "Syndic › Finances",
@@ -780,7 +780,7 @@ export const syndicCopropriete: WikiDomain = {
       summary:
         "Repérez les charges de copropriété en retard, relancez les copropriétaires un par un ou tous en un clic, appliquez des pénalités et accordez des échéanciers.",
       intro:
-        "Les impayés sont le premier souci d'un syndic. Un tableau des retards vous donne le nombre d'appels impayés et le montant en jeu. Vous relancez un copropriétaire précis ou tous les retardataires d'un coup, avec un niveau de relance qui monte à chaque envoi. Selon le cas, vous appliquez une pénalité de retard, vous la remettez, ou vous accordez un échéancier pour étaler la dette.",
+        "Les impayés sont le premier souci d'un syndic, et le [logiciel syndic de copropriété](/logiciel-syndic-copropriete-cote-divoire) les suit. Un tableau des retards vous donne le nombre d'appels impayés et le montant en jeu. Vous relancez un copropriétaire précis ou tous les retardataires d'un coup, avec un niveau de relance qui monte à chaque envoi. Selon le cas, vous appliquez une pénalité de retard, vous la remettez, ou vous accordez un échéancier pour étaler la dette.",
       packs: ["syndic", "integre"],
       profiles: ["equipe"],
       menu: "Syndic › Finances",

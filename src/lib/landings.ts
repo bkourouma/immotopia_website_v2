@@ -221,13 +221,13 @@ export const landings: Landing[] = [
   },
   {
     slug: "logiciel-syndic-copropriete-cote-divoire",
-    metaTitle: "Logiciel de syndic de copropriété en Côte d'Ivoire",
+    metaTitle: "Logiciel syndic de copropriété en Côte d'Ivoire",
     metaDescription:
-      "Syndic en Côte d'Ivoire : lots et tantièmes, budgets, appels de charges, recouvrement, assemblées générales. Pack Syndic dès 49 900 FCFA HT/mois.",
+      "Logiciel syndic de copropriété en Côte d'Ivoire : lots et tantièmes, budgets, appels de charges, assemblées générales. Pack Syndic dès 49 900 FCFA HT/mois.",
     eyebrow: "Syndic de copropriété",
-    h1: "Logiciel de syndic de copropriété en Côte d'Ivoire",
+    h1: "Logiciel syndic de copropriété en Côte d'Ivoire",
     intro:
-      "Tantièmes, appels de charges, relances, assemblées générales et comptabilité : le module Syndic d'ImmoTopia donne aux cabinets de copropriété un outil complet, en FCFA, avec les relances WhatsApp que les copropriétaires lisent.",
+      "Le logiciel syndic de copropriété d'ImmoTopia : tantièmes, appels de charges, relances, assemblées générales et comptabilité : le module Syndic d'ImmoTopia donne aux cabinets de copropriété un outil complet, en FCFA, avec les relances WhatsApp que les copropriétaires lisent.",
     sections: [
       {
         title: "Copropriétés et lots",
