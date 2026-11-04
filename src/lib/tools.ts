@@ -194,11 +194,11 @@ const sources: ToolSource[] = [
       en: "Generate a commercial lease agreement (business lease) based on the OHADA Uniform Act, then download it as a free PDF. This template also serves as a business lease agreement.",
     },
     seoTitle: {
-      fr: "Modèle de bail commercial et professionnel OHADA (PDF)",
+      fr: "Modèle de bail commercial OHADA (PDF) – Côte d'Ivoire",
       en: "OHADA commercial lease template (PDF) – Côte d'Ivoire",
     },
     seoDescription: {
-      fr: "Modèle de contrat de bail commercial ou à usage professionnel OHADA pour la Côte d'Ivoire : remplissez, téléchargez en PDF, faites-le valider par un avocat.",
+      fr: "Modèle de contrat de bail commercial ou à usage professionnel OHADA, gratuit, en PDF, pour la Côte d'Ivoire : remplissez, téléchargez, faites valider par un avocat.",
       en: "Free OHADA commercial lease agreement template (PDF) for Côte d'Ivoire: fill in, check the preview, download. Have a lawyer or notary review it.",
     },
     faq: [

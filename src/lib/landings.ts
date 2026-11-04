@@ -240,13 +240,13 @@ export const landings: Landing[] = [
   },
   {
     slug: "logiciel-syndic-copropriete-cote-divoire",
-    metaTitle: "Logiciel de syndic de copropriété en Côte d'Ivoire",
+    metaTitle: "Logiciel syndic de copropriété en Côte d'Ivoire",
     metaDescription:
-      "Syndic en Côte d'Ivoire : lots et tantièmes, budgets, appels de charges, recouvrement, assemblées générales. Pack Syndic dès 49 900 FCFA HT/mois.",
+      "Logiciel syndic de copropriété en Côte d'Ivoire : lots et tantièmes, budgets, appels de charges, assemblées générales. Pack Syndic dès 49 900 FCFA HT/mois.",
     eyebrow: "Syndic de copropriété",
-    h1: "Logiciel de syndic de copropriété en Côte d'Ivoire",
+    h1: "Logiciel syndic de copropriété en Côte d'Ivoire",
     intro:
-      "Tantièmes, appels de charges, relances, assemblées générales et comptabilité : le module Syndic d'ImmoTopia donne aux cabinets de copropriété un outil complet, en FCFA, avec les relances WhatsApp que les copropriétaires lisent.",
+      "Le logiciel syndic de copropriété d'ImmoTopia : tantièmes, appels de charges, relances, assemblées générales et comptabilité : le module Syndic d'ImmoTopia donne aux cabinets de copropriété un outil complet, en FCFA, avec les relances WhatsApp que les copropriétaires lisent.",
     sections: [
       {
         title: "Copropriétés et lots",
@@ -333,13 +333,13 @@ export const landings: Landing[] = [
   },
   {
     slug: "crm-immobilier-cote-divoire",
-    metaTitle: "Logiciel CRM immobilier pour agences à Abidjan | ImmoTopia",
+    metaTitle: "CRM immobilier en Côte d'Ivoire : prospects, visites | ImmoTopia",
     metaDescription:
       "Logiciel CRM immobilier pour agences et promoteurs en Côte d'Ivoire : contacts, pipeline, visites, mandats, offres, relances. Essai offert.",
     eyebrow: "CRM immobilier",
-    h1: "Logiciel CRM immobilier pour agences et promoteurs en Côte d'Ivoire",
+    h1: "CRM immobilier pour agences en Côte d'Ivoire",
     intro:
-      "Chaque appel, chaque visite, chaque affaire au même endroit. ImmoTopia est un logiciel CRM immobilier conçu à Abidjan pour les agences et les promoteurs : il remplace le fichier Excel et le carnet de notes par un pipeline partagé par toute l'équipe, relié à vos biens et à votre gestion locative. Un prospect devenu locataire ou propriétaire ne se ressaisit jamais.",
+      "ImmoTopia est un logiciel CRM immobilier conçu à Abidjan pour les agences et les promoteurs : chaque appel, chaque visite et chaque affaire au même endroit. Il remplace le fichier Excel et le carnet de notes par un pipeline partagé par toute l'équipe, avec des relances datées et le rapprochement entre la demande d'un client et vos biens. Il est relié à votre gestion locative : un prospect devenu locataire ou propriétaire ne se ressaisit jamais. Pour choisir, voyez le guide [Comment choisir son CRM immobilier](/guides/crm-immobilier-bonnes-pratiques) et les [tarifs](/tarifs).",
     sections: [
       {
         title: "Pourquoi un CRM immobilier plutôt qu'un fichier Excel ?",
@@ -454,6 +454,10 @@ export const landings: Landing[] = [
       {
         q: "Puis-je reprendre mon fichier de contacts Excel ?",
         a: `Vous pouvez saisir vous-même vos contacts, sans frais de prestation. La mise en route accompagnée, facultative (${fcfa(agence.setup)} HT pour le pack Agence, facturés une fois), comprend une reprise préparée de vos données dans un périmètre défini. Pour votre fichier précis, l'équipe l'étudie en démonstration.`,
+      },
+      {
+        q: "Le CRM fonctionne-t-il avec WhatsApp ?",
+        a: "Les notifications du CRM peuvent partir par e-mail et par WhatsApp, et vos campagnes atteignent par WhatsApp les contacts qui ont un numéro et ont donné leur accord. WhatsApp est facturé à la consommation et suppose que le service soit configuré pour votre agence. Voir le [guide des relances](/guides/crm-immobilier-relances).",
       },
       {
         q: "Combien d'utilisateurs peut-on créer ?",

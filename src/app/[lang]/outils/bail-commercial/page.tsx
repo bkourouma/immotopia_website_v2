@@ -29,6 +29,11 @@ export default async function Page() {
       tool={getTool(SLUG, locale)}
       about={t(
         <>
+          <p>
+            Pour comprendre la règle avant de remplir le modèle, lisez notre{" "}
+            <Link href={GUIDE_BAIL_COMMERCIAL}>guide du bail commercial OHADA en Côte d&apos;Ivoire</Link> : il explique le cadre juridique,
+            tandis que cette page sert à générer le document.
+          </p>
           <h2>Bail commercial ou bail à usage professionnel : quelle différence en Côte d&apos;Ivoire ?</h2>
           <p>
             Dans l&apos;Acte uniforme OHADA, il n&apos;existe qu&apos;un seul régime : le « bail à usage professionnel ». Il s&apos;applique
@@ -43,7 +48,13 @@ export default async function Page() {
             <Link href={localizeHref(locale, "/outils/bail-habitation")}>modèle de bail d&apos;habitation</Link>.
           </p>
 
-          <h2>Les clauses indispensables d&apos;un bail commercial</h2>
+          <h2>Bail à usage professionnel : modèle PDF</h2>
+          <p>
+            Le même modèle sert de bail à usage professionnel : renseignez les parties, le local, le loyer et les clauses, vérifiez
+            l&apos;aperçu, puis téléchargez le contrat en PDF.
+          </p>
+
+          <h2>Contrat de bail à usage commercial : mentions à prévoir</h2>
           <p>Le modèle généré couvre les points suivants. Adaptez chacun à votre situation avant de signer.</p>
           <ul>
             <li>
@@ -150,6 +161,11 @@ export default async function Page() {
           </p>
         </>,
         <>
+          <p>
+            To understand the rules before filling in the template, read our{" "}
+            <Link href={GUIDE_BAIL_COMMERCIAL}>guide to the OHADA commercial lease in Côte d&apos;Ivoire</Link> (in French): it explains the
+            legal framework, while this page is for generating the document.
+          </p>
           <h2>Commercial lease or business lease: what is the difference in Côte d&apos;Ivoire?</h2>
           <p>
             Under the OHADA Uniform Act there is only one regime: the &quot;business lease&quot; (&quot;bail à usage professionnel&quot;).
@@ -163,7 +179,13 @@ export default async function Page() {
             <Link href={localizeHref(locale, "/outils/bail-habitation")}>residential lease template</Link> instead.
           </p>
 
-          <h2>The essential clauses of a commercial lease</h2>
+          <h2>Business lease: PDF template</h2>
+          <p>
+            The same template works as a business lease: enter the parties, the premises, the rent and the clauses, check the preview, then
+            download the lease as a PDF.
+          </p>
+
+          <h2>Commercial lease agreement: points to include</h2>
           <p>The generated template covers the following points. Adapt each one to your situation before signing.</p>
           <ul>
             <li>
