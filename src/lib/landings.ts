@@ -294,7 +294,7 @@ export const landings: Landing[] = [
     eyebrow: "Guide de choix",
     h1: "Meilleur logiciel immobilier en Côte d'Ivoire : comment choisir ?",
     intro:
-      "Le « meilleur » logiciel est celui qui couvre vos métiers réels, parle le langage de vos clients et que votre équipe utilisera vraiment. Voici les critères qui comptent en Côte d'Ivoire, et la façon dont ImmoTopia y répond.",
+      "Le « meilleur » logiciel est celui qui couvre vos métiers réels, parle le langage de vos clients et que votre équipe utilisera vraiment. Voici les critères qui comptent en Côte d'Ivoire, et la façon dont ImmoTopia y répond. Pour passer à la pratique, consultez les [tarifs en FCFA](/tarifs), le [comparatif](/comparatif) ou [demandez une démonstration](/contact).",
     sections: [
       {
         title: "Les critères qui comptent",
