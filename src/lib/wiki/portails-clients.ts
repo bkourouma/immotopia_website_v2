@@ -260,6 +260,8 @@ export const portailsClients: WikiDomain = {
       metaTitle: "Portail copropriété en ligne : charges, AG, documents",
       summary:
         "Portail copropriété : chaque copropriétaire suit ses lots et appels de charges, les paie en ligne, rejoint l'assemblée et retrouve ses PV et documents.",
+      enBref:
+        "Le copropriétaire invité voit ses lots, le solde de son compte, ses appels de charges, ses reçus, le règlement de copropriété et les procès-verbaux d'assemblée. Il peut payer ses appels de charges en ligne par mobile money, quand le paiement en ligne est ouvert pour sa copropriété, et rejoindre l'assemblée en direct. Le syndic active l'accès en invitant le copropriétaire depuis sa fiche, et peut le retirer ensuite.",
       intro:
         "Le portail de la copropriété est l'espace en ligne que le syndic ouvre à chaque copropriétaire. Dans ce portail copropriétaire, chacun consulte ses propres lots, le solde de son compte et ses appels de charges, retrouve ses reçus et quittances, et télécharge le règlement de copropriété et les procès-verbaux d'assemblée. Il peut aussi payer ses appels de charges en ligne par mobile money et rejoindre l'assemblée générale en direct. Le syndic reçoit ainsi moins de demandes de relevé, de copie de PV ou de rappel de paiement.",
       sections: [

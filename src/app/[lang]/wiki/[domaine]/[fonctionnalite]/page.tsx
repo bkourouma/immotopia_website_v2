@@ -92,6 +92,12 @@ export default async function WikiFeaturePage({ params }: PageProps<"/[lang]/wik
       <JsonLd data={{ "@context": "https://schema.org", "@graph": graph }} />
       <main className="bg-paper">
         <PageHero eyebrow={domain.title} title={feature.h1 ?? feature.title}>
+          {feature.enBref && (
+            <p>
+              <strong className="font-semibold text-white">En bref : </strong>
+              <InlineLinks text={feature.enBref} linkClassName="font-medium text-white underline underline-offset-2 hover:text-mint-400" />
+            </p>
+          )}
           <p>
             <InlineLinks text={feature.intro} linkClassName="font-medium text-white underline underline-offset-2 hover:text-mint-400" />
           </p>

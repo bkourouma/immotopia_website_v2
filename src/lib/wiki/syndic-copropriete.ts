@@ -7,7 +7,7 @@ export const syndicCopropriete: WikiDomain = {
   summary:
     "Logiciel de syndic en Côte d'Ivoire : lots et tantièmes, budget prévisionnel, appels de charges, impayés, assemblées générales et comptabilité de copropriété.",
   intro:
-    "Le module Syndic réunit tout ce qu'un cabinet de syndic gère au quotidien : la fiche de chaque copropriété, ses lots et leurs tantièmes, les copropriétaires et les occupants, les prestataires et les incidents. Côté finances, vous votez le budget prévisionnel, émettez les appels de charges, suivez les encaissements (y compris les paiements en ligne par mobile money), relancez les impayés et tenez la comptabilité de la copropriété en partie double. Les assemblées générales se préparent et se tiennent dans le logiciel : émargement et votes en direct, visio en option, jusqu'au procès-verbal. Il s'adresse aux cabinets de syndic et aux gestionnaires de copropriété en Côte d'Ivoire, et vos copropriétaires peuvent suivre leurs lots, rejoindre l'assemblée et payer leurs appels de charges en ligne depuis leur portail copropriétaire.",
+    "Le module Syndic réunit tout ce qu'un cabinet de syndic gère au quotidien : la fiche de chaque copropriété, ses lots et leurs tantièmes, les copropriétaires et les occupants, les prestataires et les incidents. Côté finances, vous votez le budget prévisionnel, émettez les appels de charges, suivez les encaissements (y compris les paiements en ligne par mobile money), relancez les impayés et tenez la comptabilité de la copropriété en partie double. Les assemblées générales se préparent et se tiennent dans le logiciel : émargement et votes en direct, visio en option, jusqu'au procès-verbal. Il s'adresse aux cabinets de syndic et aux gestionnaires de copropriété en Côte d'Ivoire, et vos copropriétaires peuvent suivre leurs lots, rejoindre l'assemblée et payer leurs appels de charges en ligne depuis leur [portail copropriété](/wiki/portails-clients/portail-coproprietaire).",
   features: [
     {
       slug: "coproprietes",
@@ -433,7 +433,7 @@ export const syndicCopropriete: WikiDomain = {
       summary:
         "Émettez les appels de charges de copropriété pour un lot ou tout l'immeuble, ponctuels ou récurrents, ou générez-les depuis le budget voté. Avis par e-mail et WhatsApp.",
       intro:
-        "Fini les appels de charges calculés à la main dans un tableur : avec le [logiciel syndic de copropriété](/logiciel-syndic-copropriete-cote-divoire), vous émettez un appel pour un lot, plusieurs lots ou toute la copropriété, une seule fois ou de façon récurrente, ou vous générez en un clic la campagne complète depuis le budget approuvé. Les copropriétaires sont prévenus par e-mail ou WhatsApp, et chaque appel est inscrit au compte du lot.",
+        "Fini les appels de charges calculés à la main dans un tableur : avec le [logiciel syndic de copropriété](/logiciel-syndic-copropriete-cote-divoire), vous émettez un appel pour un lot, plusieurs lots ou toute la copropriété, une seule fois ou de façon récurrente, ou vous générez en un clic la campagne complète depuis le budget approuvé. Les copropriétaires sont prévenus par e-mail ou WhatsApp, retrouvent leurs appels dans le [portail copropriété](/wiki/portails-clients/portail-coproprietaire), et chaque appel est inscrit au compte du lot.",
       packs: ["syndic", "integre"],
       profiles: ["equipe"],
       menu: "Syndic › Finances",
