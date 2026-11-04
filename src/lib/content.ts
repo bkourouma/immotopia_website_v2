@@ -115,6 +115,7 @@ const heroCardsSource: HeroCardSource[] = [
     accent: "#FF8A3D",
     links: [
       { label: "Logiciel immobilier tout-en-un", href: "/logiciel-immobilier-cote-divoire" },
+      { label: "logiciel de gestion immobilière", href: "/logiciel-immobilier-cote-divoire" },
     ],
   },
   {
