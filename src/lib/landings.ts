@@ -334,6 +334,15 @@ export const landings: Landing[] = [
         intro:
           "Notre page Comparatif met ImmoTopia face à trois logiciels similaires, sur une centaine de fonctionnalités, à partir des pages publiques de chaque éditeur et avec les sources.",
       },
+      {
+        title: "Aller plus loin selon votre métier",
+        items: [
+          { title: "Agence et gestion locative", text: "Baux, loyers, propriétaires et locataires : voir le [logiciel de gestion locative en Côte d'Ivoire](/gestion-locative-cote-divoire)." },
+          { title: "Syndic de copropriété", text: "Appels de charges, assemblées générales et comptabilité : voir le [logiciel de syndic en Côte d'Ivoire](/logiciel-syndic-copropriete-cote-divoire)." },
+          { title: "Vue d'ensemble", text: "Tous les métiers dans un seul outil : voir le [logiciel immobilier en Côte d'Ivoire](/logiciel-immobilier-cote-divoire)." },
+          { title: "Prix et démonstration", text: "Consultez les [tarifs en FCFA](/tarifs) ou [demandez une démonstration](/contact) sur vos propres cas." },
+        ],
+      },
     ],
     faq: [
       { q: "ImmoTopia propose-t-il un essai ?", a: "Le premier mois d'abonnement est offert sur tous les packs, sans engagement." },
