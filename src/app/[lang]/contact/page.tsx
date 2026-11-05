@@ -58,9 +58,46 @@ export default async function ContactPage() {
             <BookingEmbed />
           </div>
         </section>
+        <section className="mx-auto max-w-6xl px-5 pb-16 sm:pb-20">
+          <h2 className="font-display text-2xl font-bold tracking-tight text-ink-900 md:text-3xl">
+            {t("Que se passe-t-il pendant la démonstration ?", "What happens during the demo?")}
+          </h2>
+          <div className="mt-6 grid gap-4 md:grid-cols-3">
+            <Point
+              title={t("30 minutes, sans engagement", "30 minutes, no commitment")}
+              text={t(
+                "La démonstration dure environ 30 minutes et elle est gratuite.",
+                "The demo lasts about 30 minutes and is free.",
+              )}
+            />
+            <Point
+              title={t("Appliquée à votre portefeuille", "Applied to your portfolio")}
+              text={t(
+                "Nous montrons ImmoTopia à partir de votre activité, en visio ou dans vos locaux.",
+                "We show ImmoTopia using your own business, by video call or at your office.",
+              )}
+            />
+            <Point
+              title={t("Vos questions, y compris sur les tarifs", "Your questions, including pricing")}
+              text={t(
+                "Pour un devis précis (volumes, packs, reprise de données), l'équipe vous répond pendant l'échange.",
+                "For a precise quote (volumes, packs, data migration), the team answers during the call.",
+              )}
+            />
+          </div>
+        </section>
       </main>
       <FinalCta />
     </>
+  );
+}
+
+function Point({ title, text }: { title: string; text: string }) {
+  return (
+    <div className="rounded-[22px] border border-ink-900/[0.07] bg-white p-5 sm:p-6">
+      <h3 className="font-semibold text-ink-900">{title}</h3>
+      <p className="mt-2 text-[15px] text-ink-900/65 sm:text-sm">{text}</p>
+    </div>
   );
 }
 
