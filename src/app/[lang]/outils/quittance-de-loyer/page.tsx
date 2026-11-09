@@ -91,6 +91,11 @@ export default async function Page() {
             <Link href={WIKI_QUITTANCES}>générer les quittances depuis la fiche du bail, numérotées à la suite et classées avec chaque bail</Link>{" "}
             avec ImmoTopia, sans ressaisir les informations à chaque mois.
           </p>
+          <p>
+            Autres outils gratuits utiles au bailleur : le{" "}
+            <Link href={localizeHref(locale, "/outils/etat-des-lieux")}>modèle d&apos;état des lieux</Link> et le calcul de la{" "}
+            <Link href={localizeHref(locale, "/outils/caution-et-avance")}>caution et des avances de loyer</Link>.
+          </p>
         </>,
         <>
           <h2>What is a rent receipt for?</h2>
@@ -156,6 +161,11 @@ export default async function Page() {
             This generator is for a one-off receipt. If you manage several properties, ImmoTopia lets you{" "}
             <Link href={WIKI_QUITTANCES}>generate receipts from the lease record, numbered in sequence and filed with each lease</Link> (page
             in French), with no need to re-enter the details every month.
+          </p>
+          <p>
+            Other free tools for landlords: the{" "}
+            <Link href={localizeHref(locale, "/outils/etat-des-lieux")}>inventory of fixtures template</Link> and the{" "}
+            <Link href={localizeHref(locale, "/outils/caution-et-avance")}>deposit and advance rent calculator</Link>.
           </p>
           <p>The receipt is generated in French, the legal language in Côte d&apos;Ivoire.</p>
         </>,
