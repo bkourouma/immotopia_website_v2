@@ -45,6 +45,17 @@ export default async function Page() {
             <li>le lieu, la date d&apos;émission et la signature du bailleur.</li>
           </ul>
 
+          <h2>Comment établir une quittance de loyer en PDF</h2>
+          <ol>
+            <li>remplissez le formulaire : bailleur, locataire, logement, période, loyer, charges et mode de paiement ;</li>
+            <li>vérifiez l&apos;aperçu, où le montant total apparaît aussi en lettres ;</li>
+            <li>téléchargez la quittance de loyer au format PDF, puis remettez-la au locataire.</li>
+          </ol>
+          <p>
+            Le générateur est gratuit et sans inscription, et rien n&apos;est enregistré. Pensez à en garder un exemplaire pour votre
+            propre suivi.
+          </p>
+
           <h2>Quittance ou reçu de paiement : quelle différence ?</h2>
           <p>
             La <strong>quittance</strong> atteste que le loyer et les charges d&apos;une période ont été payés en totalité : elle solde la
@@ -112,6 +123,16 @@ export default async function Page() {
             <li>the payment date and method;</li>
             <li>the place, the date of issue and the landlord&apos;s signature.</li>
           </ul>
+
+          <h2>How to make a rent receipt as a PDF</h2>
+          <ol>
+            <li>fill in the form: landlord, tenant, property, period, rent, charges and payment method;</li>
+            <li>check the preview, where the total also appears in words;</li>
+            <li>download the rent receipt as a PDF, then hand it to the tenant.</li>
+          </ol>
+          <p>
+            The generator is free, needs no sign-up, and nothing is saved. Keep a copy for your own records.
+          </p>
 
           <h2>Rent receipt or payment receipt: what is the difference?</h2>
           <p>
