@@ -61,7 +61,7 @@ export const landings: Landing[] = [
     eyebrow: "Gestion locative",
     h1: "Logiciel de gestion locative en Côte d'Ivoire",
     intro:
-      "Baux, loyers, relances, cautions et relevés de gérance : ImmoTopia réunit tout le cycle de la gestion locative dans une seule application, pensée pour les agences et administrateurs de biens d'Abidjan et de toute la Côte d'Ivoire.",
+      "Baux, loyers, relances, cautions et relevés de gérance : ImmoTopia réunit tout le cycle de la gestion locative dans une seule application, pensée pour les agences et administrateurs de biens d'Abidjan et de toute la Côte d'Ivoire. La gestion locative fait partie de notre [logiciel de gestion immobilière en Côte d'Ivoire](/logiciel-immobilier-cote-divoire), qui couvre aussi le CRM, le syndic et la promotion.",
     sections: [
       {
         title: "Les réalités du terrain",
