@@ -57,7 +57,7 @@ export const landings: Landing[] = [
     slug: "gestion-locative-cote-divoire",
     metaTitle: "Logiciel de gestion locative en Côte d'Ivoire | ImmoTopia",
     metaDescription:
-      "Logiciel de gestion locative en Côte d'Ivoire : baux, échéances, Mobile Money, pénalités, cautions, quittances et portails propriétaire et locataire.",
+      "Logiciel de gestion locative en Côte d'Ivoire pour agences et administrateurs de biens : baux, échéances, Mobile Money, pénalités, cautions, quittances, portails. Prix en FCFA.",
     eyebrow: "Gestion locative",
     h1: "Logiciel de gestion locative en Côte d'Ivoire",
     intro:
@@ -121,6 +121,10 @@ export const landings: Landing[] = [
       },
     ],
     faq: [
+      {
+        q: "Que fait un logiciel de gestion locative en Côte d'Ivoire ?",
+        a: "Il suit chaque bail et son échéancier, enregistre les paiements (espèces, virement, chèque, carte ou Mobile Money), calcule les pénalités de retard, trace les cautions, génère les quittances et relève les comptes des propriétaires. ImmoTopia réunit ces fonctions dans une seule application en ligne, avec des prix en FCFA. Voir les [tarifs](/tarifs).",
+      },
       {
         q: "La gestion locative est-elle un module séparé ?",
         a: "Non. Elle partage les mêmes contacts, biens et documents que le CRM, le syndic et le patrimoine : un propriétaire saisi une fois est bailleur, destinataire des relevés et copropriétaire sans double saisie.",
