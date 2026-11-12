@@ -60,8 +60,8 @@ const sources: ToolSource[] = [
       en: "Fill in the form, check the preview and download a rent receipt as a PDF. Free, no sign-up, nothing is stored.",
     },
     seoTitle: {
-      fr: "Modèle de quittance de loyer en Côte d'Ivoire (PDF gratuit) | Générateur ImmoTopia",
-      en: "Rent receipt generator — Free tool | ImmoTopia",
+      fr: "Quittance de loyer Côte d'Ivoire : modèle PDF gratuit",
+      en: "Rent receipt in Côte d'Ivoire: free PDF generator",
     },
     h1: {
       fr: "Quittance de loyer en Côte d'Ivoire : générateur et modèle PDF",
