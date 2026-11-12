@@ -25,11 +25,16 @@ export default async function Page() {
       tool={getTool(SLUG, locale)}
       about={t(
         <>
-          <h2>À quoi sert une quittance de loyer ?</h2>
+          <h2>À quoi sert une quittance de loyer en Côte d&apos;Ivoire ?</h2>
           <p>
             La quittance est le reçu que le bailleur remet au locataire pour attester qu&apos;un loyer a bien été payé. Elle protège les
             deux parties : le locataire prouve qu&apos;il est à jour, le bailleur garde une trace claire de chaque encaissement. En cas de
             désaccord sur un paiement, c&apos;est la première pièce que l&apos;on demande.
+          </p>
+          <p>
+            Ce modèle de quittance de loyer pour la Côte d&apos;Ivoire est gratuit : vous remplissez le formulaire, vérifiez l&apos;aperçu
+            et téléchargez le PDF, montant en lettres inclus. Tout est calculé dans votre navigateur, sans inscription, et rien n&apos;est
+            enregistré.
           </p>
 
           <h2>Que doit contenir une quittance de loyer ivoirienne ?</h2>
@@ -93,11 +98,15 @@ export default async function Page() {
           </p>
         </>,
         <>
-          <h2>What is a rent receipt for?</h2>
+          <h2>What is a rent receipt for in Côte d&apos;Ivoire?</h2>
           <p>
             A rent receipt (&quot;quittance de loyer&quot;) is the document a landlord gives the tenant to confirm that rent has been paid.
             It protects both parties: the tenant can prove they are up to date, and the landlord keeps a clear record of every payment. If a
             payment is ever disputed, it is the first document anyone will ask for.
+          </p>
+          <p>
+            This rent receipt template for Côte d&apos;Ivoire is free: fill in the form, check the preview and download the PDF, amount in
+            words included. Everything is computed in your browser, with no sign-up, and nothing is stored.
           </p>
 
           <h2>Mandatory details on a rent receipt</h2>
