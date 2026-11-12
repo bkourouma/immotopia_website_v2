@@ -673,7 +673,7 @@ export const landings: Landing[] = [
   },
   {
     slug: "paiement-loyer-charges-mobile-money-cote-divoire",
-    metaTitle: "Loyer par Mobile Money en Côte d'Ivoire | Orange, MTN, Moov, Wave",
+    metaTitle: "Paiement loyer Mobile Money en Côte d'Ivoire | Orange, MTN, Wave",
     metaDescription:
       "Suivez les loyers payés par Orange Money, MTN MoMo, Moov Money et Wave : enregistrement, déclaration du locataire, validation et relances dans ImmoTopia.",
     eyebrow: "Mobile Money",
@@ -719,7 +719,7 @@ export const landings: Landing[] = [
         note: "Le paiement par lien est en cours de déploiement : il est éprouvé en mode simulation, et le paiement réel n'est pas encore validé (voir [payer son loyer en ligne par lien](/wiki/portails-clients/paiement-loyer-par-lien)).",
       },
       {
-        title: "Pour les agences : encaisser les loyers en Mobile Money et rapprocher automatiquement",
+        title: "Pour les agences : encaisser les loyers en Mobile Money et suivre chaque paiement",
         bullets: [
           "Chaque paiement est rattaché à son bail et à ses échéances, même partiel, avec son opérateur.",
           "Les déclarations des locataires arrivent dans la file « À traiter aujourd'hui » ; une fois validées, l'échéance est soldée.",
@@ -730,6 +730,7 @@ export const landings: Landing[] = [
       },
     ],
     faq: [
+      { q: "Comment payer son loyer par Mobile Money ?", a: "Le locataire paie par Orange Money, MTN MoMo, Moov Money ou Wave, puis déclare son paiement depuis son portail avec le montant, l'opérateur et la référence de la transaction. L'agence valide la déclaration et l'échéance est soldée." },
       { q: "Le locataire reçoit-il une quittance ?", a: "Il est prévenu de la confirmation de son paiement par e-mail ou WhatsApp, et l'agence peut générer sa quittance depuis la fiche du bail. Une quittance ponctuelle peut aussi se produire avec le [générateur gratuit](/outils/quittance-de-loyer)." },
       { q: "Qui paie les frais ?", a: "ImmoTopia ne prend aucune commission sur les loyers ; l'agence paie un abonnement mensuel en FCFA. Les éventuels frais de transaction dépendent de l'opérateur Mobile Money : renseignez-vous auprès de lui." },
       { q: "Le locataire doit-il créer un compte pour payer ?", a: "Non : depuis le lien de paiement reçu de son agence, il paie sans compte. Cette fonction est en cours de déploiement." },
