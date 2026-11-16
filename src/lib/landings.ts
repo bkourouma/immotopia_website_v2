@@ -148,9 +148,9 @@ export const landings: Landing[] = [
     slug: "logiciel-immobilier-cote-divoire",
     metaTitle: "Logiciel de gestion immobilière en Côte d'Ivoire | ImmoTopia",
     metaDescription:
-      "Logiciel immobilier en ligne pour les professionnels en Côte d'Ivoire : CRM, gestion locative, syndic, portails clients, maintenance, e-mail et WhatsApp.",
+      "Logiciel de gestion immobilière en ligne pour les professionnels en Côte d'Ivoire : CRM, gestion locative, syndic, portails clients, maintenance, WhatsApp.",
     eyebrow: "ERP immobilier",
-    h1: "Logiciel immobilier en Côte d'Ivoire : un ERP complet",
+    h1: "Logiciel de gestion immobilière en Côte d'Ivoire : un ERP complet",
     intro:
       "ImmoTopia est un logiciel de gestion immobilière en ligne, conçu à Abidjan pour les agences, gestionnaires, syndics et promoteurs. Un seul fichier de clients, un seul parc de biens, et chaque métier activé selon votre activité.",
     sections: [
