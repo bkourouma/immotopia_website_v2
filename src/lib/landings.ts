@@ -57,7 +57,7 @@ export const landings: Landing[] = [
     slug: "gestion-locative-cote-divoire",
     metaTitle: "Logiciel de gestion locative en Côte d'Ivoire | ImmoTopia",
     metaDescription:
-      "Logiciel de gestion locative en Côte d'Ivoire pour agences et administrateurs de biens : baux, échéances, Mobile Money, pénalités, cautions, quittances, portails. Prix en FCFA.",
+      "Logiciel de gestion locative en Côte d'Ivoire pour agences et administrateurs de biens : baux, échéances, Mobile Money, cautions, quittances. Prix en FCFA.",
     eyebrow: "Gestion locative",
     h1: "Logiciel de gestion locative en Côte d'Ivoire",
     intro:
