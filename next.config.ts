@@ -14,10 +14,10 @@ const legacyRedirects: [string, string][] = [
   ["/ressources/faq", "/faq"],
   ["/ressources/:slug", "/outils"],
   ["/ressources", "/outils"],
-  // Ancien blog → rubrique /guides (src/lib/guides.ts). Aucune règle sur /guides ni /guides/:slug : l'index et les
-  // articles répondent 200, et un guide inconnu répond 404 (pas de redirection générique).
+  // Anciens articles : rediriger seulement les URL ayant un équivalent identifié.
   // /blog et /blog/:slug ne sont plus redirigés : la nouvelle rubrique Blog (src/lib/blog.ts) y répond.
   ["/blog/crm-immobilier-relances", "/guides/crm-immobilier-relances"],
+  ["/guides/choisir-logiciel-immobilier-cote-divoire", "/meilleur-logiciel-immobilier-cote-divoire"],
   ["/vision/:slug", "/"],
   // Pages produit et pages métier → accueil (les pages thématiques gardent leur URL : src/lib/landings.ts)
   ["/fonctionnalites/crm-immobilier", "/crm-promoteur-immobilier-cote-divoire"],

@@ -41,6 +41,15 @@ Pièges et décisions :
 
 ---
 
+## Branche `codex/immotopia-robots-et-maillage` — 2026-11-12
+
+**État :** configuration nginx appliquée en production, modifications du site en validation.
+
+- Le journal nginx du 12 novembre à 18:43 UTC confirme un 504 pour Googlebot sur `/robots.txt` : attente de l'en-tête de Next.js sur le port 3023. Les deux tests en direct de Search Console signalaient un fichier robots inaccessible alors que les deux URL figuraient déjà dans l'index.
+- Nginx sert désormais `/robots.txt` directement sur le domaine canonique. La configuration de référence contient la même règle. En cas de changement des directives, synchroniser avec `src/app/robots.ts`.
+- Le site redirige l'ancien guide de choix vers son équivalent actuel et relie la page de gestion locative à la page ERP.
+- Reste à confirmer sur la version déployée : redirection 301, lien HTML et inspections en direct des deux URL.
+
 
 ## Branche `claude/issue-92` (PR #93) — 2026-11-04
 
