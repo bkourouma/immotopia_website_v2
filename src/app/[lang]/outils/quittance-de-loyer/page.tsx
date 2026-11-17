@@ -25,11 +25,16 @@ export default async function Page() {
       tool={getTool(SLUG, locale)}
       about={t(
         <>
-          <h2>À quoi sert une quittance de loyer ?</h2>
+          <h2>À quoi sert une quittance de loyer en Côte d&apos;Ivoire ?</h2>
           <p>
             La quittance est le reçu que le bailleur remet au locataire pour attester qu&apos;un loyer a bien été payé. Elle protège les
             deux parties : le locataire prouve qu&apos;il est à jour, le bailleur garde une trace claire de chaque encaissement. En cas de
             désaccord sur un paiement, c&apos;est la première pièce que l&apos;on demande.
+          </p>
+          <p>
+            Ce modèle de quittance de loyer pour la Côte d&apos;Ivoire est gratuit : vous remplissez le formulaire, vérifiez l&apos;aperçu
+            et téléchargez le PDF, montant en lettres inclus. Tout est calculé dans votre navigateur, sans inscription, et rien n&apos;est
+            enregistré.
           </p>
 
           <h2>Que doit contenir une quittance de loyer ivoirienne ?</h2>
@@ -44,6 +49,17 @@ export default async function Page() {
             <li>la date et le mode de paiement ;</li>
             <li>le lieu, la date d&apos;émission et la signature du bailleur.</li>
           </ul>
+
+          <h2>Comment établir une quittance de loyer en PDF</h2>
+          <ol>
+            <li>remplissez le formulaire : bailleur, locataire, logement, période, loyer, charges et mode de paiement ;</li>
+            <li>vérifiez l&apos;aperçu, où le montant total apparaît aussi en lettres ;</li>
+            <li>téléchargez la quittance de loyer au format PDF, puis remettez-la au locataire.</li>
+          </ol>
+          <p>
+            Le générateur est gratuit et sans inscription, et rien n&apos;est enregistré. Pensez à en garder un exemplaire pour votre
+            propre suivi.
+          </p>
 
           <h2>Quittance ou reçu de paiement : quelle différence ?</h2>
           <p>
@@ -91,13 +107,22 @@ export default async function Page() {
             <Link href={WIKI_QUITTANCES}>générer les quittances depuis la fiche du bail, numérotées à la suite et classées avec chaque bail</Link>{" "}
             avec ImmoTopia, sans ressaisir les informations à chaque mois.
           </p>
+          <p>
+            Autres outils gratuits utiles au bailleur : le{" "}
+            <Link href={localizeHref(locale, "/outils/etat-des-lieux")}>modèle d&apos;état des lieux</Link> et le calcul de la{" "}
+            <Link href={localizeHref(locale, "/outils/caution-et-avance")}>caution et des avances de loyer</Link>.
+          </p>
         </>,
         <>
-          <h2>What is a rent receipt for?</h2>
+          <h2>What is a rent receipt for in Côte d&apos;Ivoire?</h2>
           <p>
             A rent receipt (&quot;quittance de loyer&quot;) is the document a landlord gives the tenant to confirm that rent has been paid.
             It protects both parties: the tenant can prove they are up to date, and the landlord keeps a clear record of every payment. If a
             payment is ever disputed, it is the first document anyone will ask for.
+          </p>
+          <p>
+            This rent receipt template for Côte d&apos;Ivoire is free: fill in the form, check the preview and download the PDF, amount in
+            words included. Everything is computed in your browser, with no sign-up, and nothing is stored.
           </p>
 
           <h2>Mandatory details on a rent receipt</h2>
@@ -112,6 +137,16 @@ export default async function Page() {
             <li>the payment date and method;</li>
             <li>the place, the date of issue and the landlord&apos;s signature.</li>
           </ul>
+
+          <h2>How to make a rent receipt as a PDF</h2>
+          <ol>
+            <li>fill in the form: landlord, tenant, property, period, rent, charges and payment method;</li>
+            <li>check the preview, where the total also appears in words;</li>
+            <li>download the rent receipt as a PDF, then hand it to the tenant.</li>
+          </ol>
+          <p>
+            The generator is free, needs no sign-up, and nothing is saved. Keep a copy for your own records.
+          </p>
 
           <h2>Rent receipt or payment receipt: what is the difference?</h2>
           <p>
@@ -156,6 +191,11 @@ export default async function Page() {
             This generator is for a one-off receipt. If you manage several properties, ImmoTopia lets you{" "}
             <Link href={WIKI_QUITTANCES}>generate receipts from the lease record, numbered in sequence and filed with each lease</Link> (page
             in French), with no need to re-enter the details every month.
+          </p>
+          <p>
+            Other free tools for landlords: the{" "}
+            <Link href={localizeHref(locale, "/outils/etat-des-lieux")}>inventory of fixtures template</Link> and the{" "}
+            <Link href={localizeHref(locale, "/outils/caution-et-avance")}>deposit and advance rent calculator</Link>.
           </p>
           <p>The receipt is generated in French, the legal language in Côte d&apos;Ivoire.</p>
         </>,
