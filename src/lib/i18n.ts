@@ -23,6 +23,12 @@ export function localizeHref(locale: Locale, href: string) {
   return `/en${href}`;
 }
 
+/** Lien de navigation : comme localizeHref, mais une page française seulement garde son adresse française (« /en/… » y serait un 404). */
+export function localizeLink(locale: Locale, href: string) {
+  const path = href.split(/[#?]/)[0];
+  return isFrenchOnly(path) ? href : localizeHref(locale, href);
+}
+
 /** Retire le préfixe de langue d'un chemin visible : « /en/tarifs » → { locale: "en", path: "/tarifs" } */
 export function splitPath(pathname: string): { locale: Locale; path: string } {
   const m = pathname.match(/^\/(en|fr)(?=\/|$)(.*)$/);

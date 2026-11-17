@@ -57,6 +57,60 @@ d'e-mails (clé Resend non testée) ; passage manuel de l'administration en navi
 Pièges : `@types/node` relevé en ^24 (types de `node:sqlite`) ; `allowImportingTsExtensions` activé car `src/lib/events/*` s'importe en `.ts`
 (exécuté aussi par Node pour les tests et scripts) ; SQLite = un seul conteneur ; `/admin` est exclu du proxy des langues.
 
+## Branche `codex/immotopia-robots-et-maillage` — 2026-11-12
+
+**État :** configuration nginx appliquée en production, modifications du site en validation.
+
+- Le journal nginx du 12 novembre à 18:43 UTC confirme un 504 pour Googlebot sur `/robots.txt` : attente de l'en-tête de Next.js sur le port 3023. Les deux tests en direct de Search Console signalaient un fichier robots inaccessible alors que les deux URL figuraient déjà dans l'index.
+- Nginx sert désormais `/robots.txt` directement sur le domaine canonique. La configuration de référence contient la même règle. En cas de changement des directives, synchroniser avec `src/app/robots.ts`.
+- Le site redirige l'ancien guide de choix vers son équivalent actuel et relie la page de gestion locative à la page ERP.
+- Reste à confirmer sur la version déployée : redirection 301, lien HTML et inspections en direct des deux URL.
+
+
+## Branche `claude/issue-92` (PR #93) — 2026-11-04
+
+**État :** fusion explicitement autorisée le 2026-11-04 ; nouvelle CI à vérifier avant fusion.
+**Dernier commit :** voir git log ; resynchronisation avec main d231662 pour la résolution consolidée.
+
+- Intègre #91, #83, #79 et main, avec conservation des ajouts des quatre PR. Introduction main préservée, une seule section par sujet et aucune question FAQ en double.
+- check-landings (15 pages), npm test (30 tests), tsc, lint, check-comparatif-en (105 lignes/19 sources), npm run build (217 pages) réussis.
+- Navigateur sur build local, port 3293 : titre/H1 corrects, tableau 7 lignes, 9 FAQ uniques ; à 375 px, aucun débordement global, tableau à défilement horizontal (640 px dans 320 px).
+- /en fonctionne en anglais ; /en/meilleur-logiciel-immobilier-cote-divoire renvoie 404, conforme à cette page française uniquement. Aucun ajout de traduction non prévue.
+- Relecture indépendante : aucun blocage. Prix, consentement WhatsApp et distinction loyers/charges restent sourcés et précis.
+- #79 déjà fusionnée en squash (22988ee). #93 inclut les têtes de #83 et #91 ; fusionner #93 avec un commit de fusion permet de conserver ces historiques sans trois déploiements successifs.
+- Autorisation explicite « fusionne » reçue dans ce chat. Fusion de #93 et suivi du déploiement à effectuer après nouvelle CI verte.
+
+
+## Branche `claude/issue-90` (PR #91) — 2026-11-04
+
+**État :** conflits résolus, prêt pour la CI.
+**Dernier commit :** résolution dans le commit courant (voir git log).
+
+- Intègre #83, #79 et main ; conserve le tableau à sept critères et le title de 63 caractères. Une seule FAQ Mobile Money, distinguant enregistrement/déclaration des loyers et paiement en ligne des charges.
+- Aucun prix concurrent ni classement inventé ; prix Agence issu de pricing.ts. Validation finale prévue sur #93 et CI de chaque PR.
+- Fusion recommandée #79 → #83 → #91 → #93 ; aucun déploiement ni fusion main effectué.
+
+
+## Branche `claude/issue-82` (PR #83) — 2026-11-04
+
+**État :** conflits résolus, prêt pour la CI.
+**Dernier commit :** résolution dans le commit courant (voir git log).
+
+- Intègre la résolution #79 et main ; conserve leurs liens et précisions, ajoute la FAQ de choix sans supprimer les FAQ Mobile Money.
+- check-landings et npm test passent sur #79 ; validation complète prévue sur la chaîne consolidée #93 et CI de chaque PR.
+- Fusion recommandée #79 → #83 → #91 → #93 ; aucun déploiement ni fusion main effectué.
+
+
+## Branche `claude/issue-78` (PR #79) — 2026-11-04
+
+**État :** conflits résolus, prêt pour la CI.
+**Dernier commit :** résolution dans le commit courant (voir git log).
+
+- Main intégré ; section existante conservée avec les précisions Mobile Money et consentement, ajout des portails, usage navigateur/PWA et prix publics, deux FAQ ajoutées sans doublon.
+- Contrôles : check-landings et npm test (30 tests) passent ; build, types, lint et navigateur restent à vérifier sur la chaîne consolidée #79 → #83 → #91 → #93.
+- Aucun déploiement ni fusion dans main. Conserver les changements main et fusionner les PR dans cet ordre, ou utiliser une fusion conservant l'historique de #93 qui inclut les branches précédentes.
+
+
 ## Branche `docs/handoff-packs-patrimoine` — 2026-10-23
 
 - Fait : lien Calendly corrigé (`consultation-alliance-computer-consultants`, l'ancien `30min` était

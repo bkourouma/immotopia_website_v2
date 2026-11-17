@@ -1,10 +1,12 @@
 "use client";
 
 import { ArrowRight } from "lucide-react";
+import Link from "next/link";
 import { useI18n } from "../locale-provider";
 import { useDemo } from "../providers";
 import { SmartLink } from "../smart-link";
 
+// Les deux pages produit sont publiées en français seulement : leur lien reste sans préfixe /en (qui mènerait à une 404).
 /** Bloc « Aller plus loin » inséré dans le texte d'une page outil : trois liens vers les pages produit et un appel à la démo. */
 export function GoFurther() {
   const { t } = useI18n();
@@ -14,14 +16,14 @@ export function GoFurther() {
       <p className="mb-2 font-display text-lg font-bold text-ink-900">{t("Aller plus loin", "Go further")}</p>
       <ul className="mb-3 space-y-1.5">
         <li>
-          <SmartLink href="/gestion-locative-cote-divoire">
+          <Link href="/gestion-locative-cote-divoire">
             {t("Logiciel de gestion locative en Côte d'Ivoire", "Property management software for Côte d'Ivoire (page in French)")}
-          </SmartLink>
+          </Link>
         </li>
         <li>
-          <SmartLink href="/crm-immobilier-cote-divoire">
+          <Link href="/crm-immobilier-cote-divoire">
             {t("CRM immobilier pour agences en Côte d'Ivoire", "Real estate CRM for agencies in Côte d'Ivoire (page in French)")}
-          </SmartLink>
+          </Link>
         </li>
         <li>
           <SmartLink href="/tarifs">{t("Tarifs d'ImmoTopia", "ImmoTopia pricing")}</SmartLink>

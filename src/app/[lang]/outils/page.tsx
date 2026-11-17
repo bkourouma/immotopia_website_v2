@@ -73,6 +73,41 @@ export default async function OutilsPage() {
         <section className="mx-auto -mt-10 max-w-6xl px-4 pb-16 sm:px-5 md:pb-24">
           <ToolsGrid />
         </section>
+        <section className="mx-auto max-w-6xl px-5 pb-16 md:pb-20">
+          <h2 className="font-display text-2xl font-bold tracking-tight md:text-3xl">
+            {t("Des outils simples, utilisables tout de suite", "Simple tools, ready to use right away")}
+          </h2>
+          <div className="mt-6 grid gap-4 md:grid-cols-3">
+            {[
+              {
+                title: t("Gratuits et sans inscription", "Free, no sign-up"),
+                text: t(
+                  "Ouvrez l'outil, remplissez les champs, c'est tout : pas de compte à créer.",
+                  "Open the tool, fill in the fields, that's it: no account to create.",
+                ),
+              },
+              {
+                title: t("Calculs et PDF dans votre navigateur", "Calculations and PDFs in your browser"),
+                text: t(
+                  "Les calculs et la génération des documents PDF se font dans votre navigateur ; aucune donnée n'est conservée.",
+                  "Calculations and PDF generation run in your browser; no data is stored.",
+                ),
+              },
+              {
+                title: t("Pensés pour la Côte d'Ivoire", "Built for Côte d'Ivoire"),
+                text: t(
+                  "Baux d'habitation et commercial OHADA, quittances, états des lieux, caution, commissions et charges de copropriété.",
+                  "Residential and OHADA commercial leases, rent receipts, inventories, deposits, commissions and condominium charges.",
+                ),
+              },
+            ].map(({ title, text }) => (
+              <div key={title} className="rounded-[22px] bg-white p-6 ring-1 ring-ink-900/[0.07]">
+                <h3 className="font-semibold text-ink-900">{title}</h3>
+                <p className="mt-2 text-sm text-ink-900/65">{text}</p>
+              </div>
+            ))}
+          </div>
+        </section>
         {/* Page de destination française seulement : pas de bandeau en anglais */}
         {locale === "fr" && (
           <section className="mx-auto max-w-6xl px-5 pb-24">

@@ -765,9 +765,154 @@ const relances: Guide = {
   },
 };
 
+/* ------------------------------------------------------------------ Article 5 : fonds de roulement */
+
+const fondsDeRoulement: Guide = {
+  slug: "fonds-de-roulement-copropriete",
+  metaTitle: "Fonds de roulement en copropriété : définition, montant",
+  metaDescription:
+    "Fonds de roulement en copropriété : définition, différence avec le fonds de travaux, repères de calcul, comptabilisation et suivi dans un logiciel de syndic.",
+  h1: "Fonds de roulement en copropriété : définition, montant, comptabilisation",
+  eyebrow: "Guide syndic de copropriété",
+  summary: "Définition, différence avec le fonds de réserve ou de travaux, repères de calcul, comptabilisation et suivi dans ImmoTopia.",
+  intro:
+    "Le fonds de roulement est l'avance de trésorerie qui permet à une copropriété de payer ses dépenses courantes en attendant l'encaissement des appels de charges. Ce guide explique ce qu'il est, en quoi il diffère d'un fonds de réserve ou de travaux, comment réfléchir à son montant, comment l'inscrire dans la comptabilité de la copropriété et comment le suivre dans un logiciel. Il ne cite aucune règle légale : les conditions de constitution et d'usage dépendent du règlement de copropriété et de la réglementation applicable, à vérifier avec votre conseil juridique.",
+  published: "2026-11-04",
+  updated: "2026-11-04",
+  sections: [
+    {
+      id: "reponse-en-3-lignes",
+      title: "La réponse en 3 lignes",
+      blocks: [
+        {
+          type: "note",
+          text: "Le fonds de roulement est une avance de trésorerie constituée par les copropriétaires pour payer les dépenses courantes avant l'encaissement des charges. Il se distingue d'un fonds de réserve ou de travaux, mis de côté pour des dépenses futures. Il se suit comme un fonds propre à la copropriété, avec son solde, ses opérations et ses écritures.",
+        },
+      ],
+    },
+    {
+      id: "definition",
+      title: "Définition du fonds de roulement de copropriété",
+      blocks: [
+        {
+          type: "p",
+          text: "Le fonds de roulement est une avance de trésorerie constituée par les copropriétaires. Il sert à régler les dépenses courantes de la copropriété pendant que les appels de charges ne sont pas encore payés. Sans lui, un retard de paiement de quelques copropriétaires peut retarder le règlement des fournisseurs.",
+        },
+        {
+          type: "p",
+          text: "Ses conditions de constitution, d'usage et de restitution dépendent du règlement de copropriété et de la réglementation applicable : vérifiez-les avec votre syndic ou votre conseil juridique. Pour le détail fonction par fonction, voyez la page du wiki [Fonds de roulement et fonds travaux de copropriété](/wiki/syndic-copropriete/fonds-de-copropriete).",
+        },
+      ],
+    },
+    {
+      id: "difference",
+      title: "Différence avec le fonds de réserve ou de travaux",
+      blocks: [
+        { type: "p", text: "Les deux fonds se confondent souvent, alors que leur rôle n'est pas le même." },
+        {
+          type: "table",
+          caption: "Fonds de roulement et fonds de réserve ou de travaux",
+          head: ["", "Fonds de roulement", "Fonds de réserve ou de travaux"],
+          rows: [
+            ["Rôle", "Avance de trésorerie pour les dépenses courantes", "Réserve mise de côté pour financer des travaux futurs"],
+            ["Usage", "Payer les fournisseurs en attendant l'encaissement des charges", "Financer des travaux, une fois décidés"],
+            ["Suivi dans ImmoTopia", "Un fonds distinct, avec son solde et son journal", "Un autre fonds distinct, avec son solde et son journal"],
+          ],
+        },
+      ],
+    },
+    {
+      id: "calcul",
+      title: "Comment déterminer le montant",
+      blocks: [
+        {
+          type: "p",
+          text: "Il n'existe pas de montant universel : nous n'en donnons donc pas. Le montant et sa répartition dépendent du règlement de copropriété et des décisions de l'assemblée générale. Pour préparer cette décision, quelques points de départ :",
+        },
+        {
+          type: "ol",
+          items: [
+            { title: "Partez du budget prévisionnel.", text: "Les dépenses courantes prévues sur l'exercice indiquent l'ordre de grandeur des sommes à avancer. Voir [Budget prévisionnel de copropriété](/wiki/syndic-copropriete/budget-previsionnel)." },
+            { title: "Regardez le rythme des appels.", text: "Plus l'écart est long entre une dépense et l'encaissement des charges, plus l'avance nécessaire est importante." },
+            { title: "Tenez compte des retards.", text: "Les impayés habituels de la copropriété pèsent sur la trésorerie : la synthèse financière les fait apparaître." },
+            { title: "Répartissez selon la clé de la copropriété.", text: "La part de chaque lot suit la répartition prévue par le règlement de copropriété, à confirmer avec votre syndic ou votre conseil juridique." },
+          ],
+        },
+      ],
+    },
+    {
+      id: "comptabilisation",
+      title: "Comptabilisation dans le plan comptable de la copropriété",
+      blocks: [
+        {
+          type: "p",
+          text: "Chaque copropriété tient sa propre comptabilité en partie double : plan comptable, journaux, écritures équilibrées (total des débits égal au total des crédits), balance et grand livre. Le fonds de roulement s'y inscrit comme toute opération : une écriture dans un journal, sur des comptes du plan comptable de la copropriété.",
+        },
+        {
+          type: "p",
+          text: "Le choix des comptes et leur numérotation dépendent du plan comptable retenu pour la copropriété : ce guide n'impose pas de numéros de compte. Dans ImmoTopia, vous créez le compte voulu avec son numéro, son intitulé, sa classe et son type, éventuellement rattaché à un compte parent, puis vous saisissez l'écriture et la verrouillez une fois validée. Voir [Comptabilité de copropriété : plan comptable, journaux et grand livre](/wiki/syndic-copropriete/comptabilite-copropriete).",
+        },
+      ],
+    },
+    {
+      id: "immotopia",
+      title: "Gérer le fonds de roulement dans ImmoTopia",
+      blocks: [
+        {
+          type: "p",
+          text: "Dans le module syndic, vous ouvrez le fonds de roulement comme n'importe quel fonds de la copropriété, avec son solde de départ et sa devise (FCFA par défaut). Ensuite :",
+        },
+        {
+          type: "ul",
+          items: [
+            "vous le créditez ou le débitez avec un motif obligatoire, et vous saisissez les dépenses qu'il règle ;",
+            "chaque opération est inscrite à son journal et tracée dans le journal d'audit ;",
+            "son solde figure dans la synthèse financière, à côté du total appelé, du total payé, du restant dû et des retards ;",
+            "un poste du budget prévisionnel peut l'alimenter : le fonds reçoit alors sa part de chaque paiement de charges.",
+          ],
+        },
+        {
+          type: "p",
+          text: "Découvrez le [logiciel de syndic de copropriété](/logiciel-syndic-copropriete-cote-divoire) d'ImmoTopia.",
+        },
+      ],
+    },
+  ],
+  faq: [
+    {
+      q: "Qu'est-ce que le fonds de roulement d'une copropriété ?",
+      a: "C'est une avance de trésorerie constituée par les copropriétaires, qui permet de payer les dépenses courantes en attendant que les appels de charges soient encaissés.",
+    },
+    {
+      q: "Quelle différence entre fonds de roulement et fonds de travaux ?",
+      a: "Le fonds de roulement est une avance de trésorerie pour les dépenses courantes. Le fonds de travaux est une réserve mise de côté pour financer des travaux futurs. Dans ImmoTopia, chacun est un fonds distinct, avec son propre solde et son propre journal.",
+    },
+    {
+      q: "Quel montant fixer pour le fonds de roulement ?",
+      a: "Il n'y a pas de montant universel : il dépend du règlement de copropriété et des décisions de l'assemblée générale. Le budget prévisionnel et le rythme des appels de charges aident à préparer cette décision.",
+    },
+    {
+      q: "Comment comptabiliser le fonds de roulement ?",
+      a: "Par une écriture équilibrée dans un journal de la copropriété, sur des comptes de son plan comptable. Les comptes à utiliser dépendent du plan retenu : à définir avec votre expert-comptable ou votre syndic.",
+    },
+  ],
+  disclaimer:
+    "Ce guide est informatif et ne constitue pas un conseil juridique ou comptable. Vérifiez les règles applicables à votre copropriété avec votre conseil.",
+  related: [],
+  productLinks: [
+    { label: "Logiciel de syndic de copropriété", href: "/logiciel-syndic-copropriete-cote-divoire", text: "Lots et tantièmes, appels de charges, assemblées générales, comptabilité de copropriété." },
+    { label: "Wiki : fonds de copropriété", href: "/wiki/syndic-copropriete/fonds-de-copropriete", text: "Fonds de roulement, fonds travaux et synthèse financière, action par action." },
+    { label: "Wiki : comptabilité de copropriété", href: "/wiki/syndic-copropriete/comptabilite-copropriete", text: "Plan comptable, journaux, écritures, balance et grand livre." },
+  ],
+  cta: {
+    title: "Voyez le suivi des fonds d'ImmoTopia sur votre copropriété",
+    text: "Une démonstration de 30 minutes, sans engagement, pour suivre vos fonds et votre comptabilité de copropriété.",
+  },
+};
+
 /* ------------------------------------------------------------------ Accès */
 
-export const guides: Guide[] = [crmChoisir, relances, etatDesLieux, bailCommercial];
+export const guides: Guide[] = [crmChoisir, relances, etatDesLieux, bailCommercial, fondsDeRoulement];
 
 export const guideBySlug = (slug: string) => guides.find((g) => g.slug === slug);
 export const guideHref = (slug?: string) => (slug ? `/guides/${slug}` : "/guides");

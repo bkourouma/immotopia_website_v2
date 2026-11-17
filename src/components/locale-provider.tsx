@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, useContext, type ReactNode } from "react";
-import { defaultLocale, localizeHref, translator, type Locale } from "@/lib/i18n";
+import { defaultLocale, localizeLink, translator, type Locale } from "@/lib/i18n";
 
 const LocaleContext = createContext<Locale>(defaultLocale);
 
@@ -14,5 +14,5 @@ export const useLocale = () => useContext(LocaleContext);
 /** `const { locale, t, href } = useI18n();` puis `t("Bonjour", "Hello")` et `href("/tarifs")` */
 export function useI18n() {
   const locale = useLocale();
-  return { locale, t: translator(locale), href: (path: string) => localizeHref(locale, path) };
+  return { locale, t: translator(locale), href: (path: string) => localizeLink(locale, path) };
 }
