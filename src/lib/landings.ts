@@ -327,8 +327,11 @@ export const landings: Landing[] = [
       { q: "Les copropriétaires peuvent-ils payer leurs charges en ligne ?", a: "Oui, par Mobile Money, depuis le lien « Payer cet appel » ou leur portail. Le paiement est rattaché au bon lot, les fonds sont reversés vers le compte bancaire de la copropriété et ImmoTopia ne prend aucune commission. Inclus dans les packs Syndic et Opérateur intégré." },
       { q: "Peut-on tenir l'assemblée générale en visioconférence ?", a: `Oui. L'assemblée en direct, avec émargement et vote en ligne, est incluse dans le pack Syndic. La visio (salle, discussion modérée, enregistrement) est une option payante à ${extVisio.price.fr} HT par cabinet.` },
       { q: "Les copropriétaires reçoivent-ils les relances par WhatsApp ?", a: "Oui, par e-mail, WhatsApp ou les deux, selon les préférences et le consentement de chacun." },
+      { q: "Comment le logiciel gère-t-il le quorum et les votes d'une assemblée générale ?", a: "L'ordre du jour et les résolutions sont préparés dans le logiciel, avec les votes et les pouvoirs par lot. Pendant l'assemblée, l'émargement se fait en ligne, le quorum est calculé en temps réel et chaque copropriétaire vote par lien personnel, sans compte. Le compte rendu est archivé." },
+      { q: "Quelle comptabilité de copropriété le logiciel tient-il ?", a: "Un plan de comptes, des journaux, des écritures en partie double verrouillables, un grand livre et une balance, avec un compte par lot pour chaque copropriétaire." },
+      { q: "Les copropriétaires ont-ils un espace en ligne ?", a: "Oui. Chaque copropriétaire invité suit ses lots, ses appels de charges, ses reçus et les procès-verbaux d'assemblée depuis son portail." },
     ],
-    related: ["paiement-loyer-charges-mobile-money-cote-divoire", "maintenance-immobiliere-ticketing-cote-divoire", "tableaux-de-bord-kpi-immobilier-cote-divoire"],
+    related: ["gestion-locative-cote-divoire", "paiement-loyer-charges-mobile-money-cote-divoire", "maintenance-immobiliere-ticketing-cote-divoire", "tableaux-de-bord-kpi-immobilier-cote-divoire"],
   },
   {
     slug: "meilleur-logiciel-immobilier-cote-divoire",
