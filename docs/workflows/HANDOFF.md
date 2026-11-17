@@ -41,16 +41,16 @@ Pièges et décisions :
 
 ---
 
-## Branche `fix/blog-redirect` (module Événements, non commité) — 2026-11-17
+## Branche `feat/module-evenements` — 2026-11-17
 
-**État :** développé et vérifié en local (tsc, lint, 54 tests, build, parcours API et export CSV sur `next start`) ; rien de commité, rien de déployé.
-**Dernier commit :** aucun pour ce lot (fichiers non suivis : voir `git status`).
+**État :** prêt à relire (tsc, lint, 54 tests, build, parcours API et export CSV vérifiés en local) ; PR ouverte, rien de déployé.
+**Dernier commit :** `4919de4` module d'inscription aux événements
 
 Fait : module Événements complet (`src/lib/events/`, `/evenements`, `/admin/evenements`, `/api/events/*`, scripts `events:seed` / `events:purge`),
 politique de confidentialité FR/EN mise à jour, volume Docker et variables dans `docker-compose.yml` / `.env.example`.
 Mode d'emploi : `docs/workflows/EVENEMENTS.md`.
 
-Reste à faire : choisir la branche et commiter (la branche courante n'est pas dédiée) ; définir les secrets sur le serveur ; déployer
+Reste à faire : choisir la branche et définir les secrets sur le serveur ; déployer
 sur « oui » explicite ; exécuter l'initialisation puis publier l'événement ; visuel officiel ; confirmer l'Hôtel Tiama ; vérifier l'envoi réel
 d'e-mails (clé Resend non testée) ; passage manuel de l'administration en navigateur (seulement testée par requêtes).
 
