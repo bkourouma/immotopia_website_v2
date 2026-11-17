@@ -692,6 +692,15 @@ export const landings: Landing[] = [
         ],
       },
       {
+        title: "Paiement de loyer par Mobile Money : les bons réflexes du locataire",
+        bullets: [
+          "Payez avec l'opérateur que vous utilisez : Orange Money, MTN MoMo, Moov Money ou Wave.",
+          "Gardez le message de confirmation de l'opérateur : il porte la référence de la transaction.",
+          "Déclarez ensuite votre paiement depuis votre portail, avec le montant, l'opérateur et cette référence.",
+          "Une fois la déclaration validée par l'agence, l'échéance est soldée et vous êtes prévenu par e-mail ou WhatsApp.",
+        ],
+      },
+      {
         title: "Ce que vous y gagnez",
         bullets: [
           "Chaque paiement rattaché à son bail et à ses échéances, même partiel.",
@@ -735,6 +744,7 @@ export const landings: Landing[] = [
       { q: "Le locataire reçoit-il une quittance ?", a: "Il est prévenu de la confirmation de son paiement par e-mail ou WhatsApp, et l'agence peut générer sa quittance depuis la fiche du bail. Une quittance ponctuelle peut aussi se produire avec le [générateur gratuit](/outils/quittance-de-loyer)." },
       { q: "Qui paie les frais ?", a: "ImmoTopia ne prend aucune commission sur les loyers ; l'agence paie un abonnement mensuel en FCFA. Les éventuels frais de transaction dépendent de l'opérateur Mobile Money : renseignez-vous auprès de lui." },
       { q: "Le locataire doit-il créer un compte pour payer ?", a: "Non : depuis le lien de paiement reçu de son agence, il paie sans compte. Cette fonction est en cours de déploiement." },
+      { q: "Comment déclarer un paiement de loyer par Mobile Money ?", a: "Après avoir payé, le locataire indique depuis son portail le montant, l'opérateur et la référence de la transaction. La déclaration arrive à l'agence, qui la valide ; l'échéance est alors soldée." },
       { q: "Quels opérateurs sont pris en charge ?", a: "Orange Money, MTN Mobile Money, Moov Money et Wave, ainsi que les espèces, virements, chèques et cartes." },
       { q: "Les copropriétaires peuvent-ils payer leurs charges par Mobile Money ?", a: "Oui : depuis le lien « Payer cet appel » ou le portail copropriétaire, avec un rattachement automatique au bon lot et sans commission ImmoTopia. Inclus dans les packs Syndic et Opérateur intégré." },
       { q: "ImmoTopia prend-il une commission sur les loyers ?", a: "Non, aucune. Vous payez un abonnement mensuel en FCFA." },
