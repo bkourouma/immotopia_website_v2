@@ -41,6 +41,22 @@ Pièges et décisions :
 
 ---
 
+## Branche `fix/blog-redirect` (module Événements, non commité) — 2026-11-17
+
+**État :** développé et vérifié en local (tsc, lint, 54 tests, build, parcours API et export CSV sur `next start`) ; rien de commité, rien de déployé.
+**Dernier commit :** aucun pour ce lot (fichiers non suivis : voir `git status`).
+
+Fait : module Événements complet (`src/lib/events/`, `/evenements`, `/admin/evenements`, `/api/events/*`, scripts `events:seed` / `events:purge`),
+politique de confidentialité FR/EN mise à jour, volume Docker et variables dans `docker-compose.yml` / `.env.example`.
+Mode d'emploi : `docs/workflows/EVENEMENTS.md`.
+
+Reste à faire : choisir la branche et commiter (la branche courante n'est pas dédiée) ; définir les secrets sur le serveur ; déployer
+sur « oui » explicite ; exécuter l'initialisation puis publier l'événement ; visuel officiel ; confirmer l'Hôtel Tiama ; vérifier l'envoi réel
+d'e-mails (clé Resend non testée) ; passage manuel de l'administration en navigateur (seulement testée par requêtes).
+
+Pièges : `@types/node` relevé en ^24 (types de `node:sqlite`) ; `allowImportingTsExtensions` activé car `src/lib/events/*` s'importe en `.ts`
+(exécuté aussi par Node pour les tests et scripts) ; SQLite = un seul conteneur ; `/admin` est exclu du proxy des langues.
+
 ## Branche `docs/handoff-packs-patrimoine` — 2026-10-23
 
 - Fait : lien Calendly corrigé (`consultation-alliance-computer-consultants`, l'ancien `30min` était

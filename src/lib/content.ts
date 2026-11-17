@@ -460,11 +460,13 @@ export const navLinks: Record<Locale, NavLink[]> = {
         { label: "Outils gratuits", href: "/outils", text: "Quittance, bail, rendement locatif, commission…" },
         { label: "Blog", href: "/blog", text: "Conseils et méthodes pour la gestion immobilière" },
         { label: "Guides", href: "/guides", text: "Choisir son CRM, états des lieux, bail commercial OHADA" },
+        { label: "Événements", href: "/evenements", text: "Matinales et rencontres de l'immobilier digital" },
         { label: "FAQ", href: "/faq", text: "Les réponses aux questions fréquentes" },
         { label: "Historique des versions", href: "/versions", text: "Les nouveautés d'ImmoTopia, version par version" },
         { label: "Contact", href: "/contact", text: "Parler à l'équipe, réserver une démonstration" },
       ],
     },
+    { label: "Événements", href: "/evenements" },
     { label: "Tarifs", href: "/tarifs" },
   ],
   en: [

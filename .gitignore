@@ -55,3 +55,6 @@ repomix-output*
 .env
 .env.*
 !.env.example
+
+# base SQLite des événements (données personnelles : jamais commitée)
+/data/

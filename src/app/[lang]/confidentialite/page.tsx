@@ -25,7 +25,7 @@ export default async function ConfidentialitePage() {
 
 function ConfidentialiteFr() {
   return (
-    <LegalPage title="Politique de confidentialité" updated="23 octobre 2026">
+    <LegalPage title="Politique de confidentialité" updated="17 novembre 2026">
       <p>
         {legal.publisher}, éditeur d&apos;ImmoTopia, s&apos;engage à protéger vos données personnelles conformément à la loi ivoirienne
         n° 2013-450 du 19 juin 2013 relative à la protection des données à caractère personnel.
@@ -47,6 +47,14 @@ function ConfidentialiteFr() {
         </li>
         <li>
           <strong>Échanges par WhatsApp, téléphone ou e-mail</strong> : les informations que vous choisissez de nous transmettre.
+        </li>
+        <li>
+          <strong>Inscription à un événement</strong> (matinales, rencontres) : nom et prénom, entreprise, fonction, e-mail
+          professionnel, téléphone, activité principale, nombre de personnes, commentaire éventuel, et la date de vos consentements.
+          Ces données servent à gérer votre inscription (confirmation, liste d&apos;attente, annulation, accueil) et sont conservées
+          24 mois après l&apos;événement par défaut, puis supprimées. Vous recevrez nos communications commerciales uniquement si vous
+          cochez la case facultative prévue à cet effet. Pour accéder à vos données, les exporter ou les faire supprimer, écrivez à{" "}
+          {contact.email}.
         </li>
       </ul>
       <p>
@@ -123,7 +131,7 @@ function ConfidentialiteFr() {
 
 function PrivacyPolicyEn() {
   return (
-    <LegalPage title="Privacy policy" updated="October 23, 2026">
+    <LegalPage title="Privacy policy" updated="November 17, 2026">
       <p>
         {legal.publisher}, publisher of ImmoTopia, is committed to protecting your personal data in accordance with Ivorian Law
         No. 2013-450 of June 19, 2013 on the protection of personal data.
@@ -143,6 +151,13 @@ function PrivacyPolicyEn() {
         </li>
         <li>
           <strong>Exchanges by WhatsApp, phone or e-mail</strong>: the information you choose to send us.
+        </li>
+        <li>
+          <strong>Event registration</strong> (morning sessions, meetups; French-language pages): full name, company, job title,
+          business e-mail, phone, main activity, number of attendees, optional comment, and the date of your consents. This data is
+          used to manage your registration (confirmation, waiting list, cancellation, reception) and is kept for 24 months after the
+          event by default, then deleted. You receive marketing communications only if you tick the optional box provided. To access,
+          export or delete your data, write to {contact.email}.
         </li>
       </ul>
       <p>
