@@ -321,6 +321,7 @@ export const landings: Landing[] = [
     ],
     faq: [
       { q: "Que fait un logiciel de syndic de copropriété comme ImmoTopia ?", a: "Il tient les fiches de copropriété, les lots et les tantièmes, prépare le budget d'exercice, génère les appels de charges par lot, suit le recouvrement et les relances, organise les assemblées générales (quorum, votes, pouvoirs, compte rendu) et tient la comptabilité de copropriété." },
+      { q: "Ce logiciel de syndic est-il adapté aux cabinets de Côte d'Ivoire ?", a: "ImmoTopia est conçu à Abidjan pour les agences, gestionnaires, syndics et promoteurs. Les appels de charges et la comptabilité de copropriété sont en FCFA, les copropriétaires règlent par Mobile Money et les relances partent par e-mail et WhatsApp." },
       { q: "Combien coûte le pack Syndic ?", a: "49 900 FCFA HT par mois pour 2 copropriétés et 100 lots, puis 10 000 FCFA par copropriété et 150 FCFA par lot supplémentaires. Le premier mois est offert, sans engagement." },
       { q: "Je fais aussi de la gestion locative : dois-je payer deux fois ?", a: "Les packs Agence et Syndic se combinent avec 10 % de remise sur le moins cher des deux, et vos contacts restent communs." },
       { q: "Les copropriétaires peuvent-ils payer leurs charges en ligne ?", a: "Oui, par Mobile Money, depuis le lien « Payer cet appel » ou leur portail. Le paiement est rattaché au bon lot, les fonds sont reversés vers le compte bancaire de la copropriété et ImmoTopia ne prend aucune commission. Inclus dans les packs Syndic et Opérateur intégré." },
