@@ -5,14 +5,29 @@ import { blogHref, posts } from "@/lib/blog";
 import { guideHref, guides } from "@/lib/guides";
 import { landings } from "@/lib/landings";
 import { tools } from "@/lib/tools";
+import { listPublicEvents } from "@/lib/events/service";
 import { allFeatures, wikiDomains, wikiHref } from "@/lib/wiki";
 
 // Domaines du wiki laissés en ligne mais hors sitemap : documentation d'administration de la plateforme (réservée aux équipes
 // ImmoTopia), sans intérêt pour une recherche publique. Les pages restent indexables (pas de noindex), seulement non recommandées.
 const wikiDomainsOutOfSitemap = ["administration-plateforme"];
 
+// Lecture de la base d'événements : le sitemap est calculé à la demande (un événement publié apparaît sans redéploiement).
+export const dynamic = "force-dynamic";
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
+  // Événements publiés (jamais les brouillons) : français seulement
+  let eventEntries: MetadataRoute.Sitemap = [];
+  try {
+    const events = listPublicEvents();
+    eventEntries = [
+      { url: `${SITE_URL}/evenements`, lastModified: now, changeFrequency: "weekly", priority: 0.8 },
+      ...events.map((e) => ({ url: `${SITE_URL}/evenements/${e.slug}`, lastModified: new Date(e.updatedAt), changeFrequency: "weekly" as const, priority: 0.7 })),
+    ];
+  } catch (err) {
+    console.error("[sitemap] Événements indisponibles :", err instanceof Error ? err.message : "erreur");
+  }
   const url = (href: string) => `${SITE_URL}${href === "/" ? "" : href}`;
   // Chaque page existe en français (sans préfixe) et en anglais (/en), reliées par hreflang
   const page = (path: string, priority: number, changeFrequency: "weekly" | "monthly" | "yearly" = "monthly") =>
@@ -67,6 +82,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         alternates: { languages: { ...Object.fromEntries(locales.map((l) => [l, url(localizeHref(l, blogHref(p.slug)))])), "x-default": url(blogHref(p.slug)) } },
       })),
     ),
+    ...eventEntries,
     ...page("/mentions-legales", 0.2, "yearly"),
     ...page("/confidentialite", 0.2, "yearly"),
   ];

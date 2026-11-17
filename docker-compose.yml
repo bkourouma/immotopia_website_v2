@@ -14,8 +14,20 @@ services:
       # Assistant immotopIA (clé à placer dans /var/www/immotopia-site/.env, jamais dans le code)
       OPENROUTER_API_KEY: ${OPENROUTER_API_KEY:-}
       OPENROUTER_MODEL: ${OPENROUTER_MODEL:-deepseek/deepseek-v4.1-flash}
+      # Module Événements : base SQLite sur le volume, administration et e-mails (secrets dans le .env du serveur)
+      EVENTS_DB_PATH: /app/data/events.db
+      EVENTS_ADMIN_PASSWORD: ${EVENTS_ADMIN_PASSWORD:-}
+      EVENTS_ADMIN_SECRET: ${EVENTS_ADMIN_SECRET:-}
+      RESEND_API_KEY: ${RESEND_API_KEY:-}
+      EVENTS_EMAIL_FROM: ${EVENTS_EMAIL_FROM:-}
+      EVENTS_EMAIL_REPLY_TO: ${EVENTS_EMAIL_REPLY_TO:-}
+    volumes:
+      - immotopia-events:/app/data
     healthcheck:
       test: ["CMD", "wget", "-qO-", "http://127.0.0.1:3000/robots.txt"]
       interval: 30s
       timeout: 5s
       retries: 3
+
+volumes:
+  immotopia-events:

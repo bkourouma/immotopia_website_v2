@@ -10,6 +10,8 @@
     "start": "next start",
     "lint": "eslint",
     "test": "node --test \"tests/unit/*.test.ts\"",
+    "events:seed": "node scripts/seed-events.ts",
+    "events:purge": "node scripts/purge-events.ts",
     "prepare": "node scripts/install-git-hooks.cjs",
     "agent-bus": "node scripts/agent-bus.cjs",
     "repomix": "repomix"
@@ -26,17 +28,17 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
-    "@types/node": "^20",
+    "@types/node": "^24.19.2",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "chrome-devtools-mcp": "^0.10.1",
     "eslint": "^9",
     "eslint-config-next": "16.3.6",
-    "tailwindcss": "^4",
-    "typescript": "^5",
-    "lint-staged": "^17.5.0",
-    "chrome-devtools-mcp": "^0.10.1",
     "lefthook": "^2.1.14",
-    "repomix": "^1.14.0"
+    "lint-staged": "^17.5.0",
+    "repomix": "^1.14.0",
+    "tailwindcss": "^4",
+    "typescript": "^5"
   },
   "lint-staged": {
     "*.{js,jsx,mjs,cjs,ts,tsx,mts,cts}": [

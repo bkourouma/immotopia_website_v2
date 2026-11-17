@@ -22,5 +22,5 @@ export function proxy(request: NextRequest) {
 
 export const config = {
   // Ni l'API, ni les fichiers internes de Next, ni les fichiers statiques (avec extension), ni les routes de métadonnées racine
-  matcher: ["/((?!api|_next|robots.txt|sitemap.xml|icon.png|apple-icon.png|.*\\..*).*)"],
+  matcher: ["/((?!api|admin|_next|robots.txt|sitemap.xml|icon.png|apple-icon.png|.*\\..*).*)"],
 };
