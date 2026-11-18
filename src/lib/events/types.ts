@@ -36,6 +36,8 @@ export type EventRecord = {
   venueDistrict: string;
   venueStatus: VenueStatus;
   capacity: number;
+  /** Inscriptions actives maximum par entreprise (0 = illimité) */
+  maxPerCompany: number;
   waitlistEnabled: boolean;
   showRemaining: boolean;
   feeLabel: string;
@@ -66,6 +68,8 @@ export type RegistrationRecord = {
   seats: number;
   comment: string;
   status: RegistrationStatus;
+  /** Pourquoi la demande est en liste d'attente : événement complet ou plafond par entreprise */
+  waitlistReason: "" | "capacity" | "company";
   attendance: Attendance;
   cancelToken: string;
   marketingConsentAt: string | null;

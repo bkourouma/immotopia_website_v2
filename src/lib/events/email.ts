@@ -29,7 +29,6 @@ export function renderEmail(kind: EmailKind, event: EventRecord, reg: Registrati
     ["Horaires", hours],
     ["Lieu", venueLine(event)],
     ["Référence", reg.reference],
-    ["Personnes", String(reg.seats)],
   ];
 
   let subject: string;
@@ -43,7 +42,7 @@ export function renderEmail(kind: EmailKind, event: EventRecord, reg: Registrati
       break;
     case "waitlist":
       subject = `Liste d'attente : ${event.title}`;
-      intro = `Bonjour ${first},\n\nNous avons bien enregistré votre demande. Les places sont toutes prises : votre inscription est en liste d'attente et votre place n'est pas encore confirmée. Nous vous écrirons si une place se libère.`;
+      intro = `Bonjour ${first},\n\nNous avons bien enregistré votre demande. ${reg.waitlistReason === "company" ? "Plusieurs personnes de votre entreprise sont déjà inscrites" : "Les places sont toutes prises"} : votre inscription est en liste d'attente et votre place n'est pas encore confirmée. Nous vous écrirons si une place est disponible.`;
       outro = `Vous n'êtes plus intéressé(e) ? Annulez ici : ${cancelUrl}`;
       break;
     case "cancellation":

@@ -36,6 +36,7 @@ export async function POST(request: Request) {
         closed: ["Les inscriptions à cet événement sont closes.", 409],
         duplicate: ["Une inscription existe déjà avec cet e-mail pour cet événement.", 409],
         full: ["Cet événement est complet.", 409],
+        company_limit: ["Le nombre d'inscriptions pour votre entreprise est atteint.", 409],
       } as const;
       const [error, status] = messages[result.code];
       return jsonNoStore({ error, code: result.code }, status);
@@ -47,6 +48,7 @@ export async function POST(request: Request) {
     return jsonNoStore({
       ok: true,
       status: registration.status,
+      waitlistReason: registration.waitlistReason,
       reference: registration.reference,
       remaining: event.showRemaining ? stats.remaining : null,
       phase: eventPhase(event, stats),

@@ -15,7 +15,7 @@ import type {
   RegistrationRecord,
   RegistrationStatus,
 } from "./types.ts";
-import type { RegistrationInput } from "./validation.ts";
+import { companyKey, type RegistrationInput } from "./validation.ts";
 
 export const POLICY_VERSION = "2026-11";
 const REF_ALPHABET = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"; // sans 0/O/1/I
@@ -48,6 +48,7 @@ function toEvent(r: Row): EventRecord {
     venueDistrict: String(r.venue_district),
     venueStatus: r.venue_status as EventRecord["venueStatus"],
     capacity: Number(r.capacity),
+    maxPerCompany: Number(r.max_per_company),
     waitlistEnabled: r.waitlist_enabled === 1,
     showRemaining: r.show_remaining === 1,
     feeLabel: String(r.fee_label),
@@ -80,6 +81,7 @@ function toRegistration(r: Row): RegistrationRecord {
     seats: Number(r.seats),
     comment: String(r.comment),
     status: r.status as RegistrationStatus,
+    waitlistReason: (r.waitlist_reason as "" | "capacity" | "company") ?? "",
     attendance: r.attendance as Attendance,
     cancelToken: String(r.cancel_token),
     marketingConsentAt: (r.marketing_at as string | null) ?? null,
@@ -165,7 +167,7 @@ export function eventPhase(event: EventRecord, stats: Pick<EventStats, "remainin
 
 export type RegisterResult =
   | { ok: true; registration: RegistrationRecord; event: EventRecord }
-  | { ok: false; code: "not_found" | "closed" | "duplicate" | "full" };
+  | { ok: false; code: "not_found" | "closed" | "duplicate" | "full" | "company_limit" };
 
 function newReference(db: DatabaseSync): string {
   for (let i = 0; i < 10; i++) {
@@ -189,21 +191,28 @@ export function registerForEvent(slug: string, input: RegistrationInput, now = n
 
     // Les places déjà promises (confirmées) + celles demandées ne doivent jamais dépasser la capacité.
     const taken = seatSum(db, event.id, "confirmed");
-    const waitlistBlocked = event.waitlistEnabled && seatSum(db, event.id, "waitlist") > 0; // file d'attente existante : on ne la double pas
-    const fits = taken + input.seats <= event.capacity && !waitlistBlocked;
+    // File d'attente « complet » existante : on ne la double pas (la file « entreprise » ne bloque personne d'autre)
+    const queued = Number((db.prepare("SELECT COALESCE(SUM(seats),0) AS n FROM event_registrations WHERE event_id = ? AND status = 'waitlist' AND waitlist_reason = 'capacity'").get(event.id) as { n: number }).n);
+    const fits = taken + input.seats <= event.capacity && !(event.waitlistEnabled && queued > 0);
+    // Plafond par entreprise : nombre d'inscriptions actives (confirmées ou en attente) de la même entreprise
+    const key = companyKey(input.company);
+    const sameCompany = Number((db.prepare("SELECT COUNT(*) AS n FROM event_registrations WHERE event_id = ? AND company_key = ? AND status <> 'cancelled'").get(event.id, key) as { n: number }).n);
+    const companyFull = event.maxPerCompany > 0 && key !== "" && sameCompany >= event.maxPerCompany;
     let status: RegistrationStatus = "confirmed";
-    if (!fits) {
-      if (!event.waitlistEnabled) return { ok: false, code: "full" } as const;
+    let waitlistReason: "" | "capacity" | "company" = "";
+    if (companyFull || !fits) {
+      if (!event.waitlistEnabled) return { ok: false, code: companyFull ? "company_limit" : "full" } as const;
       status = "waitlist";
+      waitlistReason = companyFull ? "company" : "capacity";
     }
 
     const id = randomUUID();
     const ts = now.toISOString();
     const reference = newReference(db);
     db.prepare(
-      `INSERT INTO event_registrations (id, reference, event_id, full_name, company, job_title, email, phone, activity, seats, comment, status, cancel_token, created_at, updated_at)
-       VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
-    ).run(id, reference, event.id, input.fullName, input.company, input.jobTitle, input.email, input.phone, input.activity, input.seats, input.comment, status, randomBytes(18).toString("base64url"), ts, ts);
+      `INSERT INTO event_registrations (id, reference, event_id, full_name, company, job_title, email, phone, activity, seats, comment, status, waitlist_reason, company_key, cancel_token, created_at, updated_at)
+       VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
+    ).run(id, reference, event.id, input.fullName, input.company, input.jobTitle, input.email, input.phone, input.activity, input.seats, input.comment, status, waitlistReason, key, randomBytes(18).toString("base64url"), ts, ts);
     const consent = db.prepare("INSERT INTO event_consents (registration_id, kind, granted_at, policy_version) VALUES (?,?,?,?)");
     consent.run(id, "processing", ts, POLICY_VERSION);
     if (input.consentMarketing) consent.run(id, "marketing", ts, POLICY_VERSION);
@@ -280,7 +289,7 @@ export function confirmRegistration(id: string, force = false): ConfirmResult {
       if (dup) return { ok: false, code: "duplicate" } as const;
     }
     const ts = new Date().toISOString();
-    db.prepare("UPDATE event_registrations SET status = 'confirmed', cancelled_at = NULL, updated_at = ? WHERE id = ?").run(ts, id);
+    db.prepare("UPDATE event_registrations SET status = 'confirmed', waitlist_reason = '', cancelled_at = NULL, updated_at = ? WHERE id = ?").run(ts, id);
     return { ok: true, registration: toRegistration(db.prepare(`${REG_SELECT} WHERE r.id = ?`).get(id)!) } as const;
   });
 }
@@ -312,14 +321,14 @@ export type EventInput = Omit<EventRecord, "id" | "createdAt" | "updatedAt">;
 
 const COLS = [
   "slug", "title", "theme", "tagline", "description", "organizer", "solution", "starts_at", "ends_at", "timezone",
-  "venue_name", "venue_city", "venue_district", "venue_status", "capacity", "waitlist_enabled", "show_remaining", "fee_label",
+  "venue_name", "venue_city", "venue_district", "venue_status", "capacity", "max_per_company", "waitlist_enabled", "show_remaining", "fee_label",
   "publication_status", "registration_status", "cancelled", "image", "audience", "topics", "program", "practical_info", "promo", "retention_months",
 ] as const;
 
 function eventValues(e: EventInput): (string | number)[] {
   return [
     e.slug, e.title, e.theme, e.tagline, e.description, e.organizer, e.solution, e.startsAt, e.endsAt, e.timezone,
-    e.venueName, e.venueCity, e.venueDistrict, e.venueStatus, e.capacity, e.waitlistEnabled ? 1 : 0, e.showRemaining ? 1 : 0, e.feeLabel,
+    e.venueName, e.venueCity, e.venueDistrict, e.venueStatus, e.capacity, e.maxPerCompany, e.waitlistEnabled ? 1 : 0, e.showRemaining ? 1 : 0, e.feeLabel,
     e.publicationStatus, e.registrationStatus, e.cancelled ? 1 : 0, e.image, JSON.stringify(e.audience), JSON.stringify(e.topics), JSON.stringify(e.program), e.practicalInfo, JSON.stringify(e.promo), e.retentionMonths,
   ];
 }

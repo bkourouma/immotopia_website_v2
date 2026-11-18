@@ -28,7 +28,7 @@ const base = {
   consentProcessing: true,
   consentMarketing: false,
 };
-const reg = (n: number, extra: Record<string, unknown> = {}) => ({ ...base, email: `p${n}@example.ci`, ...extra });
+const reg = (n: number, extra: Record<string, unknown> = {}) => ({ ...base, email: `p${n}@example.ci`, company: `Société ${n}`, ...extra });
 
 function seed(overrides: Record<string, unknown> = {}) {
   const { event } = svc.upsertEventBySlug({ ...matinales, publicationStatus: "published", ...overrides }, true);
@@ -67,9 +67,18 @@ describe("validation", () => {
   it("accepte une inscription valide", () => assert.equal(val.validateRegistration(base).ok, true));
 
   it("rejette les champs invalides", () => {
-    const r = val.validateRegistration({ ...base, fullName: "A", email: "pas-un-mail", phone: "12", activity: "Pirate", seats: 9, consentProcessing: false, company: "", jobTitle: "" });
+    const r = val.validateRegistration({ ...base, fullName: "A", email: "pas-un-mail", phone: "12", activity: "Pirate", consentProcessing: false, company: "", jobTitle: "" });
     assert.equal(r.ok, false);
-    assert.deepEqual(Object.keys(r.errors).sort(), ["activity", "company", "consentProcessing", "email", "fullName", "jobTitle", "phone", "seats"]);
+    assert.deepEqual(Object.keys(r.errors).sort(), ["activity", "company", "consentProcessing", "email", "fullName", "jobTitle", "phone"]);
+  });
+
+  it("impose une place par inscription, quoi que le client envoie", () => {
+    assert.equal(val.validateRegistration({ ...base, seats: 4 }).data.seats, 1);
+  });
+
+  it("normalise les noms d'entreprise (casse, accents, ponctuation)", () => {
+    assert.equal(val.companyKey("  Société GÉNÉRALE-Immo. "), "societegeneraleimmo");
+    assert.equal(val.companyKey("SIGA immo"), val.companyKey("siga  Immo"));
   });
 
   it("n'accepte pas de consentement commercial implicite", () => {
@@ -152,6 +161,50 @@ describe("inscription, capacité et doublons", () => {
     const ev = seed();
     const r = svc.registerForEvent(ev.slug, { ...base, consentMarketing: true });
     assert.ok(r.registration.marketingConsentAt);
+  });
+});
+
+describe("plafond par entreprise", () => {
+  const co = (n: number, name = "Siga Immo") => ({ ...reg(n), company: name });
+
+  it("accepte 2 inscrits par entreprise puis met le 3e en liste d'attente (même avec des places libres)", () => {
+    const ev = seed();
+    assert.equal(ev.maxPerCompany, 2);
+    assert.equal(svc.registerForEvent(ev.slug, co(1)).registration.status, "confirmed");
+    assert.equal(svc.registerForEvent(ev.slug, co(2, "SIGA  immo.")).registration.status, "confirmed");
+    const third = svc.registerForEvent(ev.slug, co(3, "siga-immo")).registration;
+    assert.equal(third.status, "waitlist");
+    assert.equal(third.waitlistReason, "company");
+    assert.equal(svc.getStats(ev.id).confirmedSeats, 2);
+  });
+
+  it("la file « entreprise » ne bloque pas les autres entreprises", () => {
+    const ev = seed();
+    for (let i = 1; i <= 3; i++) svc.registerForEvent(ev.slug, co(i));
+    assert.equal(svc.registerForEvent(ev.slug, reg(10)).registration.status, "confirmed");
+  });
+
+  it("une annulation libère une place pour l'entreprise ; 0 = illimité ; refus net sans liste d'attente", () => {
+    const ev = seed();
+    const a = svc.registerForEvent(ev.slug, co(1)).registration;
+    svc.registerForEvent(ev.slug, co(2));
+    svc.cancelRegistration(a.id);
+    assert.equal(svc.registerForEvent(ev.slug, co(3)).registration.status, "confirmed");
+    const open = seed({ slug: "sans-plafond", maxPerCompany: 0 });
+    for (let i = 1; i <= 4; i++) assert.equal(svc.registerForEvent(open.slug, co(i)).registration.status, "confirmed");
+    const strict = seed({ slug: "strict", maxPerCompany: 1, waitlistEnabled: false });
+    svc.registerForEvent(strict.slug, co(1));
+    assert.equal(svc.registerForEvent(strict.slug, co(2)).code, "company_limit");
+  });
+
+  it("l'administration peut confirmer une demande bloquée par le plafond", () => {
+    const ev = seed({ maxPerCompany: 1 });
+    svc.registerForEvent(ev.slug, co(1));
+    const w = svc.registerForEvent(ev.slug, co(2)).registration;
+    assert.equal(w.status, "waitlist");
+    const c = svc.confirmRegistration(w.id);
+    assert.equal(c.registration.status, "confirmed");
+    assert.equal(c.registration.waitlistReason, "");
   });
 });
 
