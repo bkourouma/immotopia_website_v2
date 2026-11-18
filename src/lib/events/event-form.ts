@@ -27,6 +27,8 @@ export function parseEventForm(f: FormData): { ok: true; data: EventInput } | { 
 
   const capacity = Number(get("capacity", 6));
   if (!Number.isInteger(capacity) || capacity < 0 || capacity > 100000) errors.push("La capacité doit être un entier positif.");
+  const maxPerCompany = Number(get("maxPerCompany", 4) || 0);
+  if (!Number.isInteger(maxPerCompany) || maxPerCompany < 0 || maxPerCompany > 1000) errors.push("Le plafond par entreprise doit être un entier positif (0 = illimité).");
   const retentionMonths = Number(get("retentionMonths", 4) || 24);
   if (!Number.isInteger(retentionMonths) || retentionMonths < 1 || retentionMonths > 120) errors.push("La durée de conservation doit être de 1 à 120 mois.");
 
@@ -64,6 +66,7 @@ export function parseEventForm(f: FormData): { ok: true; data: EventInput } | { 
       venueDistrict: get("venueDistrict", 80),
       venueStatus: oneOf("venueStatus", ["provisional", "confirmed"] as const, "provisional"),
       capacity,
+      maxPerCompany,
       waitlistEnabled: f.get("waitlistEnabled") === "on",
       showRemaining: f.get("showRemaining") === "on",
       feeLabel: get("feeLabel", 120) || "Gratuit, sur inscription",

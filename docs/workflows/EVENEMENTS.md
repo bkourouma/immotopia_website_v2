@@ -48,6 +48,10 @@ Le visuel est provisoire (`/images/hero/syndic.jpg`) : le remplacer par le visue
    atteinte, sauf case « Forcer »), Annuler (libère les places), Présent / Absent, suppression définitive (effacement).
    La liste d'attente se traite à la main : après une annulation ou une hausse de capacité, cliquer **Confirmer** sur la
    personne concernée (un e-mail de confirmation part).
+   Une inscription = une place (le formulaire n'a plus de champ « nombre de personnes »). Plafond par entreprise
+   (réglage « Inscriptions max. par entreprise », 2 par défaut, 0 = illimité) : le nom d'entreprise est comparé sans
+   casse, accents ni ponctuation ; au-delà du plafond la demande part en liste d'attente (motif « entreprise »), que
+   vous pouvez confirmer à la main. Cette file ne bloque pas les autres entreprises.
 5. « Exporter en CSV » (séparateur `;`, UTF-8 avec BOM, ouvert directement par Excel ; respecte les filtres).
 6. Programme et offre commerciale se modifient dans le formulaire (offre affichable ou masquable). L'offre est un contenu de
    communication : elle ne touche jamais à la facturation.

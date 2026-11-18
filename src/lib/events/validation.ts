@@ -2,7 +2,6 @@
 
 import { ACTIVITIES } from "./types.ts";
 
-export const MAX_SEATS = 5;
 export const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 // Chiffres, +, espaces, points, tirets, parenthèses ; 8 à 15 chiffres (E.164)
 const PHONE_CHARS = /^[+\d\s().-]+$/;
@@ -48,14 +47,10 @@ export function validateRegistration(body: unknown): { ok: true; data: Registrat
   if (!PHONE_CHARS.test(phone) || digits.length < 8 || digits.length > 15) errors.phone = "Indiquez un numéro valide (ex. +225 01 02 03 04 05).";
   if (!(ACTIVITIES as readonly string[]).includes(activity)) errors.activity = "Choisissez votre activité principale.";
 
-  const seatsRaw = typeof b.seats === "string" ? Number(b.seats) : b.seats;
-  const seats = typeof seatsRaw === "number" && Number.isInteger(seatsRaw) ? seatsRaw : NaN;
-  if (!(seats >= 1 && seats <= MAX_SEATS)) errors.seats = `Le nombre de personnes doit être compris entre 1 et ${MAX_SEATS}.`;
-
   if (b.consentProcessing !== true) errors.consentProcessing = "Ce consentement est nécessaire pour gérer votre inscription.";
 
   if (Object.keys(errors).length > 0) return { ok: false, errors };
-  return { ok: true, data: { fullName, company, jobTitle, email, phone, activity, seats, comment, consentProcessing: true, consentMarketing: b.consentMarketing === true } };
+  return { ok: true, data: { fullName, company, jobTitle, email, phone, activity, seats: 1, comment, consentProcessing: true, consentMarketing: b.consentMarketing === true } };
 }
 
 export const SLUG_RE = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
@@ -66,4 +61,9 @@ export function safeImage(value: string): string {
   if (v === "") return "";
   if (/^\/(?!\/)[\w\-./]+$/.test(v) || /^https:\/\/[^\s"'<>]+$/.test(v)) return v;
   return "";
+}
+
+/** Clé de comparaison d'un nom d'entreprise : sans accents, casse, ponctuation ni espaces (« Siga Immo. » = « SIGA immo »). */
+export function companyKey(name: string): string {
+  return name.normalize("NFD").replace(/\p{M}/gu, "").toLowerCase().replace(/[^a-z0-9]/g, "");
 }

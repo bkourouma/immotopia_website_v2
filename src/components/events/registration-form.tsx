@@ -3,10 +3,10 @@
 import { CheckCircle2, Clock, Loader2 } from "lucide-react";
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { ACTIVITIES } from "@/lib/events/types";
-import { EMAIL_RE, MAX_SEATS } from "@/lib/events/validation";
+import { EMAIL_RE } from "@/lib/events/validation";
 
-type Fields = "fullName" | "company" | "jobTitle" | "email" | "phone" | "activity" | "seats" | "consentProcessing";
-type Done = { status: "confirmed" | "waitlist"; reference: string };
+type Fields = "fullName" | "company" | "jobTitle" | "email" | "phone" | "activity" | "consentProcessing";
+type Done = { status: "confirmed" | "waitlist"; reference: string; reason?: "capacity" | "company" | "" };
 
 const input = "mt-1.5 w-full rounded-xl border border-ink-900/15 bg-white px-4 py-3 text-base text-ink-900 outline-none transition placeholder:text-ink-900/35 focus:border-brand-500 focus:ring-4 focus:ring-brand-500/20 aria-[invalid=true]:border-red-500";
 
@@ -33,7 +33,6 @@ export function RegistrationForm({ slug, waitlist, eventTitle }: { slug: string;
       email: get("email"),
       phone: get("phone"),
       activity: get("activity"),
-      seats: Number(get("seats") || 1),
       comment: get("comment"),
       consentProcessing: f.get("consentProcessing") === "on",
       consentMarketing: f.get("consentMarketing") === "on",
@@ -62,7 +61,7 @@ export function RegistrationForm({ slug, waitlist, eventTitle }: { slug: string;
       const res = await fetch("/api/events/register", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) });
       const data = await res.json().catch(() => ({}));
       if (res.ok && data.ok) {
-        setDone({ status: data.status, reference: data.reference });
+        setDone({ status: data.status, reference: data.reference, reason: data.waitlistReason });
         return;
       }
       if (data.fields) setErrors(data.fields);
@@ -82,7 +81,9 @@ export function RegistrationForm({ slug, waitlist, eventTitle }: { slug: string;
         <h3 className="mt-4 font-display text-2xl font-bold tracking-tight">{wait ? "Vous êtes sur liste d'attente" : "Inscription confirmée"}</h3>
         <p className="mt-2 text-ink-900/70">
           {wait
-            ? `Les places sont toutes prises : votre demande pour « ${eventTitle} » est enregistrée, mais votre place n'est pas encore confirmée. Nous vous écrirons si une place se libère.`
+            ? done.reason === "company"
+              ? `Plusieurs personnes de votre entreprise sont déjà inscrites à « ${eventTitle} » : votre demande est enregistrée en liste d'attente et votre place n'est pas encore confirmée. Nous reviendrons vers vous selon les places disponibles.`
+              : `Les places sont toutes prises : votre demande pour « ${eventTitle} » est enregistrée, mais votre place n'est pas encore confirmée. Nous vous écrirons si une place se libère.`
             : `Merci ! Votre place pour « ${eventTitle} » est confirmée. Un e-mail de confirmation vous est envoyé si le service e-mail est actif.`}
         </p>
         <p className="mt-4 text-sm text-ink-900/60">Votre référence</p>
@@ -133,11 +134,6 @@ export function RegistrationForm({ slug, waitlist, eventTitle }: { slug: string;
             ))}
           </select>
           {err("activity")}
-        </label>
-        <label className="block text-sm font-medium">
-          Nombre de personnes
-          <input name="seats" type="number" min={1} max={MAX_SEATS} defaultValue={1} inputMode="numeric" className={input} {...a11y("seats")} />
-          {err("seats")}
         </label>
         <label className="block text-sm font-medium sm:col-span-2">
           Besoin particulier ou commentaire (facultatif)

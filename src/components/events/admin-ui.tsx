@@ -69,6 +69,7 @@ export function EventForm({ event }: { event?: EventRecord }) {
       <fieldset className="grid gap-4 rounded-2xl bg-white p-5 ring-1 ring-ink-900/[0.07] md:grid-cols-2">
         <legend className="px-1 font-display text-lg font-bold">Inscriptions et publication</legend>
         <Label text="Capacité (places)"><input type="number" min={0} name="capacity" defaultValue={v?.capacity ?? 30} className={field} /></Label>
+        <Label text="Inscriptions max. par entreprise (0 = illimité ; au-delà : liste d'attente)"><input type="number" min={0} name="maxPerCompany" defaultValue={v?.maxPerCompany ?? 2} className={field} /></Label>
         <Label text="Conservation des données (mois après l'événement)"><input type="number" min={1} max={120} name="retentionMonths" defaultValue={v?.retentionMonths ?? 24} className={field} /></Label>
         <Label text="Publication">
           <select name="publicationStatus" defaultValue={v?.publicationStatus ?? "draft"} className={field}>

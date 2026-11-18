@@ -86,6 +86,13 @@ const MIGRATIONS: string[] = [
     detail TEXT NOT NULL DEFAULT ''
   );
   `,
+  // 2 : plafond d'inscriptions par entreprise (0 = illimité) ; clé d'entreprise normalisée et motif de la liste d'attente
+  `
+  ALTER TABLE events ADD COLUMN max_per_company INTEGER NOT NULL DEFAULT 2 CHECK (max_per_company >= 0);
+  ALTER TABLE event_registrations ADD COLUMN company_key TEXT NOT NULL DEFAULT '';
+  ALTER TABLE event_registrations ADD COLUMN waitlist_reason TEXT NOT NULL DEFAULT '';
+  CREATE INDEX registrations_company_idx ON event_registrations (event_id, company_key);
+  `,
 ];
 
 let instance: DatabaseSync | null = null;
