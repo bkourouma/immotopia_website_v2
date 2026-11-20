@@ -149,6 +149,25 @@ export async function registrationAction(formData: FormData) {
   back(safeReturn, "Inscription mise à jour.");
 }
 
+/** Suppression définitive de plusieurs inscriptions cochées (effacement des données, sans e-mail). */
+export async function bulkDeleteRegistrations(formData: FormData) {
+  await requireAdmin();
+  const returnTo = String(formData.get("returnTo") || BASE);
+  const safeReturn = returnTo.startsWith(`${BASE}/`) ? returnTo : BASE;
+  const ids = formData.getAll("ids").map(String);
+  if (ids.length === 0) back(safeReturn, "Cochez au moins une inscription.", "err");
+  if (formData.get("confirmDelete") !== "on") back(safeReturn, "Cochez la case pour confirmer la suppression définitive.", "err");
+  let n = 0;
+  for (const id of ids) {
+    const reg = getRegistration(id);
+    if (reg && deleteRegistration(id)) {
+      n += 1;
+      audit("registration_delete", reg.reference, getEventById(reg.eventId)?.slug ?? "");
+    }
+  }
+  back(safeReturn, `${n} inscription(s) supprimée(s) définitivement.`);
+}
+
 /** Insère « Les Matinales de l'Immobilier Digital » si elle n'existe pas (idempotent ; ne touche pas à une version existante). */
 export async function seedFirstEvent() {
   await requireAdmin();

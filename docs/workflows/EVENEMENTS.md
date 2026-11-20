@@ -12,7 +12,7 @@ Le site n'avait ni base de données, ni administration, ni service e-mail. Choix
 | Stockage        | SQLite (`node:sqlite`, intégré à Node 24), fichier `EVENTS_DB_PATH`, migrations par `PRAGMA user_version` (`src/lib/events/db.ts`) |
 | Capacité        | transaction `BEGIN IMMEDIATE` : les inscriptions sont sérialisées, jamais plus de places confirmées que la capacité |
 | Administration  | mot de passe `EVENTS_ADMIN_PASSWORD` → cookie signé HMAC (`EVENTS_ADMIN_SECRET`), HttpOnly, SameSite=Strict, 8 h |
-| E-mails         | API HTTP Resend (`RESEND_API_KEY`, `EVENTS_EMAIL_FROM`) ; sans clé, aucun e-mail, l'inscription reste valide |
+| E-mails         | SMTP (`EVENTS_SMTP_*`, ex. Hostinger, via nodemailer) ou, à défaut, API Resend (`RESEND_API_KEY`) ; `EVENTS_EMAIL_FROM` obligatoire ; sans configuration, aucun e-mail, l'inscription reste valide |
 
 Limite connue : SQLite sur un volume convient à **un seul conteneur** (c'est le cas de la production). Le limiteur de débit est
 en mémoire. Passer à plusieurs instances demanderait une base partagée et un magasin de débit partagé.
@@ -20,7 +20,7 @@ en mémoire. Passer à plusieurs instances demanderait une base partagée et un 
 ## Variables d'environnement
 
 Voir `.env.example`. `EVENTS_DB_PATH`, `EVENTS_ADMIN_PASSWORD` (≥ 12 car.), `EVENTS_ADMIN_SECRET` (≥ 24 car., aléatoire),
-`RESEND_API_KEY`, `EVENTS_EMAIL_FROM` (adresse d'un domaine vérifié chez Resend), `EVENTS_EMAIL_REPLY_TO` (facultative).
+`EVENTS_EMAIL_FROM` (avec Hostinger : l'adresse de la boîte `EVENTS_SMTP_USER`), `EVENTS_SMTP_HOST` (`smtp.hostinger.com`), `EVENTS_SMTP_PORT` (465 SSL par défaut), `EVENTS_SMTP_USER`, `EVENTS_SMTP_PASSWORD`, ou `RESEND_API_KEY` en alternative (domaine vérifié chez Resend) ; `EVENTS_EMAIL_REPLY_TO` facultative. Le SMTP prime s'il est complet.
 Secrets lus côté serveur seulement. Sans les deux variables d'administration, `/admin/evenements` reste fermé.
 
 ## Premier événement
@@ -45,7 +45,7 @@ Le visuel est provisoire (`/images/hero/syndic.jpg`) : le remplacer par le visue
 3. Tableau de bord : inscrits, places confirmées / disponibles, liste d'attente, annulations, présents / absents,
    répartition par activité.
 4. Inscriptions : recherche (nom, entreprise, e-mail), filtres activité et statut, Confirmer (refusé si la capacité est
-   atteinte, sauf case « Forcer »), Annuler (libère les places), Présent / Absent, suppression définitive (effacement).
+   atteinte, sauf case « Forcer »), Annuler (libère les places), Présent / Absent, suppression définitive (effacement), à l'unité (menu « Plus ») ou en groupe (cases à cocher puis « Supprimer la sélection »).
    La liste d'attente se traite à la main : après une annulation ou une hausse de capacité, cliquer **Confirmer** sur la
    personne concernée (un e-mail de confirmation part).
    Une inscription = une place (le formulaire n'a plus de champ « nombre de personnes »). Plafond par entreprise

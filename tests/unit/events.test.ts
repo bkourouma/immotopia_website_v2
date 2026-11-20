@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { describe, it, beforeEach } from "node:test";
+import { describe, it, beforeEach, after } from "node:test";
 
 process.env.EVENTS_DB_PATH = ":memory:";
 process.env.EVENTS_ADMIN_PASSWORD = "mot-de-passe-de-test-long";
@@ -302,5 +302,25 @@ describe("fuseaux, authentification, e-mails, débit", () => {
     assert.equal(rl.allow("k", 2, 1000, 1), true);
     assert.equal(rl.allow("k", 2, 1000, 2), false);
     assert.equal(rl.allow("k", 2, 1000, 2000), true);
+  });
+});
+
+describe("choix du transport d'e-mail", () => {
+  const keys = ["EVENTS_EMAIL_FROM", "EVENTS_SMTP_HOST", "EVENTS_SMTP_USER", "EVENTS_SMTP_PASSWORD", "RESEND_API_KEY"];
+  const saved = Object.fromEntries(keys.map((k) => [k, process.env[k]]));
+  const reset = () => keys.forEach((k) => delete process.env[k]);
+  after(() => keys.forEach((k) => (saved[k] === undefined ? delete process.env[k] : (process.env[k] = saved[k]))));
+
+  it("aucun envoi sans adresse d'expédition, SMTP prioritaire sur Resend", () => {
+    reset();
+    assert.equal(mail.emailTransport(), null);
+    process.env.RESEND_API_KEY = "re_test";
+    assert.equal(mail.emailTransport(), null);
+    process.env.EVENTS_EMAIL_FROM = "evenements@example.ci";
+    assert.equal(mail.emailTransport(), "resend");
+    Object.assign(process.env, { EVENTS_SMTP_HOST: "smtp.example.ci", EVENTS_SMTP_USER: "evenements@example.ci", EVENTS_SMTP_PASSWORD: "x" });
+    assert.equal(mail.emailTransport(), "smtp");
+    delete process.env.EVENTS_SMTP_PASSWORD;
+    assert.equal(mail.emailTransport(), "resend");
   });
 });
