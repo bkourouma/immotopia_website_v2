@@ -1,60 +1,28 @@
 import { prepareBusinessSubmission, confirmBusinessSubmission, submissionDevice } from '@/lib/seo-business-outbox.mjs';
+import { createLeadHandler } from '@/lib/lead-reception-server.mjs';
 
-// Reçoit les demandes de démonstration et les transmet au webhook n8n (qui alimente Airtable
-// et envoie l'e-mail de préparation). L'URL du webhook reste côté serveur : N8N_WEBHOOK_URL.
+export const dynamic = 'force-dynamic';
+export const runtime = 'nodejs';
 
-const FIELDS = ["structure", "volume", "role", "name", "company", "email", "phone"] as const;
-const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+const environment = () => ({
+  N8N_WEBHOOK_URL: process.env.N8N_WEBHOOK_URL,
+  N8N_WEBHOOK_SECRET: process.env.N8N_WEBHOOK_SECRET,
+  N8N_WEBHOOK_TEST_URL: process.env.N8N_WEBHOOK_TEST_URL,
+  N8N_WEBHOOK_TEST_SECRET: process.env.N8N_WEBHOOK_TEST_SECRET,
+  FORM_RECIPE_AUTH_TOKEN: process.env.FORM_RECIPE_AUTH_TOKEN,
+  MC_FORM_SOURCE_ID: process.env.MC_FORM_SOURCE_ID,
+});
+const receive = createLeadHandler({
+  source: 'site-vitrine',
+  sourceId: 'site-form-immotopia-v1',
+  siteOrigin: 'https://immotopia.cloud',
+  fields: ['structure', 'volume', 'role', 'name', 'company', 'email', 'phone'],
+}, {
+  env: environment,
+  measure: async (receipt, { request, locale }) => {
+    const ticket = await prepareBusinessSubmission({ language: locale, device: submissionDevice(request.headers.get('user-agent')) });
+    await confirmBusinessSubmission(ticket, receipt.receiptId);
+  },
+});
 
-export async function POST(request: Request) {
-  let body: Record<string, unknown>;
-  try {
-    body = await request.json();
-  } catch {
-    return Response.json({ error: "Requête invalide" }, { status: 400 });
-  }
-
-  // Champ piège rempli = robot : on répond « ok » sans rien transmettre
-  if (typeof body.website === "string" && body.website.trim() !== "") {
-    return Response.json({ ok: true });
-  }
-
-  const lead: Record<string, string> = {};
-  for (const f of FIELDS) {
-    const v = body[f];
-    if (typeof v !== "string" || v.trim() === "" || v.length > 200) {
-      return Response.json({ error: `Champ manquant ou invalide : ${f}` }, { status: 400 });
-    }
-    lead[f] = v.trim();
-  }
-  if (!EMAIL.test(lead.email)) {
-    return Response.json({ error: "E-mail invalide" }, { status: 400 });
-  }
-
-  // Langue du site au moment de la demande (facultative) : permet de répondre au prospect dans sa langue
-  const locale = body.locale === "en" ? "en" : "fr";
-
-  const webhook = process.env.N8N_WEBHOOK_URL;
-  if (!webhook) {
-    console.warn("[lead] N8N_WEBHOOK_URL non défini : demande reçue mais non transmise.");
-    return Response.json({ ok: true, forwarded: false });
-  }
-
-  const measurement = await prepareBusinessSubmission({ language: locale, device: submissionDevice(request.headers.get('user-agent')) });
-  try {
-    const res = await fetch(webhook, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ ...lead, locale, source: "site-vitrine", receivedAt: new Date().toISOString() }),
-      signal: AbortSignal.timeout(8000),
-    });
-    if (!res.ok) throw new Error(`n8n a répondu ${res.status}`);
-  } catch (err) {
-    console.error("[lead] Échec de transmission à n8n :", err);
-    return Response.json({ error: "Transmission impossible" }, { status: 502 });
-  }
-
-  await confirmBusinessSubmission(measurement);
-  return Response.json({ ok: true, forwarded: true });
-}
-
+export async function POST(request: Request) { return receive(request); }

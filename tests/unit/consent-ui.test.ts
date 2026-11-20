@@ -107,7 +107,8 @@ describe("politique de confidentialité", () => {
     assert.doesNotMatch(full, /26 mois|14 mois|26 months|14 months/);
   });
   it("affiche la date de mise à jour du jour de la modification, dans les deux langues", () => {
-    assert.match(fr, /updated="17 novembre 2026"/);
-    assert.match(en, /updated="November 17, 2026"/);
+    assert.match(fr, /updated="20 novembre 2026"/);
+    assert.match(en, /updated="November 20, 2026"/);
   });
 });
+

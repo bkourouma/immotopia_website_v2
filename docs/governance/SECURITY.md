@@ -58,11 +58,14 @@ publiques. Les PDF des outils sont générés dans le navigateur (jsPDF,
 
 ## 6. Paiements et webhooks
 
-Aucun paiement. Un seul webhook, **sortant** : `lead/route.ts` poste en JSON
-vers `N8N_WEBHOOK_URL` (délai 8 s) les champs validés, plus `locale`,
-`source: "site-vitrine"` et `receivedAt`. Pas de signature partagée : le
-secret est l'URL elle-même. Sans URL, la demande est acceptée et non
-transmise (`forwarded: false`, avertissement dans les journaux).
+Aucun paiement. Le formulaire utilise deux entrées sortantes N8N dédiées (production et recette),
+authentifiées par HeaderAuth serveur distinct, puis une réception durable dans Mission Control. Les clés et URL restent serveur.
+La route vérifie le reçu corrélé (source, UUID, receiptId, mode) avant tout succès. Trois essais de16s maximum ; même UUID/corps,
+sans créer de doublon. Sans configuration :503 ; sans reçu :502, jamais forwarded:false présenté comme réception.
+
+La recette exige le header x-mc-form-test authentifié par FORM_RECIPE_AUTH_TOKEN ; aucun champ public ne peut la choisir.
+Ses demandes sont marquées côté serveur et exclues des mesures SEO, qualifications et notifications. Les demandes réelles
+restent NOUVELLES/À TRAITER dans la boîte dédiée ; leur simple réception ne qualifie pas un contact et n'envoie pas de message externe.
 
 ## 7. Assainissement des entrées et des sorties
 
@@ -87,7 +90,10 @@ transmise (`forwarded: false`, avertissement dans les journaux).
 - sept champs obligatoires (`structure`, `volume`, `role`, `name`,
   `company`, `email`, `phone`), chaînes non vides ≤ 200 caractères, e-mail
   vérifié par expression régulière ; seuls ces champs sont retransmis ;
-- champ piège `website` rempli → réponse `ok` sans transmission.
+- champ piège `website` rempli → réponse `ok` sans transmission ;
+- Origin exact, corps16KiB, JSON strict, délai minimal2s et8tentatives/10min par clé IP hachée en mémoire ;
+- UUID canonique, date et champs attendus uniquement ; le mode recette est authentifié avant le honeypot ;
+- ACKstrict après persistance MC, jamais un simple2xx N8N.
 
 **Pages** : `dangerouslySetInnerHTML` réservé au JSON-LD
 (`src/components/json-ld.tsx` échappe `<` en `<`). Tout le contenu vient
@@ -119,7 +125,7 @@ Contrôle : `grep -rn "process\.env" src` ne doit montrer
   HSTS, `X-Frame-Options: SAMEORIGIN`, `X-Content-Type-Options`,
   `Referrer-Policy`, `Permissions-Policy`. Pas de Content-Security-Policy.
   `next.config.ts` retire `X-Powered-By` et ne pose aucun autre en-tête.
-- Limite de débit : `/api/chat` seulement, 25 requêtes par IP sur 10 minutes,
+- Limite de débit : `/api/lead` est limité à8tentatives/10min avec clé IP hachée et buckets recette/production séparés. `/api/chat` : 25 requêtes par IP sur 10 minutes,
   en mémoire du processus (IP lue dans `x-real-ip` posé par nginx, puis
   `x-forwarded-for`). Le conteneur n'écoute que sur `127.0.0.1:3023`.
 - `robots.ts` interdit `/api/` aux robots d'indexation.
@@ -127,8 +133,7 @@ Contrôle : `grep -rn "process\.env" src` ne doit montrer
 
 ## 10. Données personnelles
 
-- Collectées : champs du formulaire de démonstration (transmis à n8n puis
-  Airtable) et contenu des conversations (transmis à OpenRouter / DeepSeek).
+- Collectées : champs du formulaire de démonstration (transmis via N8N à la boîte interne Mission Control) et contenu des conversations (transmis à OpenRouter / DeepSeek).
 - Journalisation : les routes ne journalisent que des erreurs techniques
   (`[chat]`, `[lead]`), jamais le contenu d'un message ni les champs d'un
   prospect. Exception à surveiller : `chat/route.ts` journalise le corps de la
@@ -162,3 +167,9 @@ Relevés le 2026-09-27, non corrigés :
 | Basse    | JSON-LD sérialisé sans échapper `<` (contenu statique aujourd'hui, mais incohérent avec `json-ld.tsx`). | `src/components/faq-page.tsx`, `src/components/landing-page.tsx` |
 | Basse    | Pas de Content-Security-Policy (ni nginx ni `next.config.ts`). | `deploy/nginx-immotopia.cloud.conf` |
 | Basse    | Journalisation du corps d'erreur d'OpenRouter (peut contenir un extrait de la requête). | `src/app/api/chat/route.ts` |
+
+## Réception de demandes — mise à jour du 20 novembre 2026
+
+Voir [FORM-RECEPTION.md](../FORM-RECEPTION.md). Les lectures process.env des credentials sont dans la route API seulement.
+Le client conserve UUID/date/empreinte24h maximum, sans recopier les champs de contact. Aucun corps, credential ou champ
+personnel n'est écrit dans les logs du relais ; seule une erreur générique de mesure peut être journalisée après reçu durable.

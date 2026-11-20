@@ -1,4 +1,4 @@
-﻿# Passation de session — site
+# Passation de session — site
 
 Carnet de reprise entre sessions d'agents. **Lire en premier** en début de
 session ; **mettre à jour sans l'annoncer** avant de conclure tout tour en
@@ -40,6 +40,18 @@ Pièges et décisions :
 ```
 
 ---
+
+## Branche `codex/reception-formulaires-n8n` — 2026-11-20
+
+**État :** prêt à livrer après revue indépendante ; configuration et recette E2E production restent au coordinateur.
+**Base auditée :** `bc14f1fb12834914be6113dc09cf09d299b237b4` ; commit final et SHA déployé à renseigner après CI/fusion.
+
+- UI conserve le calendrier et rend le formulaire accessible ; succès uniquement sur reçu corrélé, référence affichée et réessai sans perdre les champs.
+- Route authentifie les workflows production/recette, refuse l'ancien faux succès sans N8N, borne les essais et réutilise un UUID canonique.
+- Recette serveur distincte, aucun événement SEO ou contact qualifié ; sessions navigateur ne gardent que UUID/date/empreinte24h.
+- Variables compose et exemple, confidentialité FR/EN et modèle de menace mis à jour ; aucune clé, payload prospect ou modification du volume événements.
+- Contrôles locaux : génération des types Next, TypeScript et lint réussis ; npm test 93/93 ; routes/outboxes/inscriptions 15/15 ; revue indépendante des 23 régressions de contrat réussie.
+- Restent : CI sur SHA final, configuration privée des workflows/MC par le coordinateur, E2E UI→N8N→réception retrouvable et contrôle SHA.
 
 ## Branche `codex/public-build-sha` — 2026-11-20
 
@@ -503,3 +515,5 @@ Pièges et décisions :
 - Fait : socle (navbar/menu, modales, chat, flottants, globals.css), accueil (hero, maquettes, tarifs, rôles, écosystème), outils/comparatif/wiki/FAQ/légal. Principe : mobile d'abord, desktop (≥ md) inchangé (préfixes `max-md:`, `md:min-h-0`…).
 - Vérifié : `tsc`, `lint`, `build`, `check-comparatif-en` OK. **Non vérifié** : aucun rendu navigateur (360/390 px, 768 px, desktop) — recette visuelle à faire.
 - À surveiller : règle `font-size:16px !important` des champs sous 640 px ; maquettes du hero en mode compact (hauteur < 300) ; carte tarifaire recommandée non remontée en premier sur mobile (décision éditoriale).
+
+

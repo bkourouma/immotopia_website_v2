@@ -20,7 +20,7 @@ Surfaces sensibles du site. Détail et points ouverts :
 - Corps lu dans un `try/catch` → 400 si JSON invalide ; chaque champ vérifié
   (type, non vide, longueur bornée) ; seuls les champs attendus sont
   retransmis (`FIELDS` de `lead/route.ts`).
-- Appel sortant avec `AbortSignal.timeout` (8 s pour n8n, 60 s pour
+- Appel sortant avec `AbortSignal.timeout` (16 s par essai, trois essais maximum pour N8N ; 60 s pour
   OpenRouter) ; échec → 502 et `console.error("[nom] …")`, sans renvoyer le
   détail au client.
 - Route publique = protection contre l'abus (limite de débit de
@@ -30,7 +30,7 @@ Surfaces sensibles du site. Détail et points ouverts :
 
 - `OPENROUTER_API_KEY`, `OPENROUTER_MODEL`, `N8N_WEBHOOK_URL` : lus par
   `process.env` dans la route seulement. Variable absente → fonction
-  désactivée proprement (503 pour l'assistant, `forwarded: false` pour le
+  désactivée proprement (503 pour l'assistant et pour le
   formulaire), jamais de valeur par défaut pour un secret.
 - Rien de secret dans `src/components/**` ni sous `NEXT_PUBLIC_*`.
 - Nouvelle variable → `.env.example` et `docker-compose.yml`.
@@ -56,6 +56,10 @@ Surfaces sensibles du site. Détail et points ouverts :
 
 ## Vérifier
 
-Pas de tests automatisés : `npm run build`, puis `curl -X POST` sur
+`npm test` et `node --test scripts/test-seo-business-hooks.mjs` vérifient le contrat de réception et les exclusions statistiques. Puis `npm run build` et, en environnement isolé, `curl -X POST` sur
 `http://localhost:3000/api/<nom>` avec un corps valide et un corps invalide
 (compétence `run-site`), sans secret de production.
+
+
+Réception durable (20 novembre 2026) : seules une authentification serveur et une réponse ACK corrélée autorisent le succès. La recette utilise des URL et credentials distincts, sans mesure SEO ni notification. Voir docs/FORM-RECEPTION.md.
+
