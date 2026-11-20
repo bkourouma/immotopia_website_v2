@@ -29,6 +29,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       NEXT_TELEMETRY_DISABLED: "1"
+      GIT_COMMIT_SHA: ${{ github.sha }}
     steps:
       - uses: actions/checkout@v4
 
@@ -70,3 +71,15 @@ jobs:
       # prebuild génère src/lib/assistant/knowledge.generated.ts
       - name: Build
         run: npm run build
+
+      # Exécuter le serveur réellement construit avec une valeur runtime
+      # différente prouve que l'attestation est figée dans l'artefact.
+      - name: Vérifier le SHA du serveur standalone construit
+        shell: bash
+        run: |
+          set -euo pipefail
+          GIT_COMMIT_SHA=ffffffffffffffffffffffffffffffffffffffff HOSTNAME=127.0.0.1 PORT=3099 \
+            node .next/standalone/server.js > "$RUNNER_TEMP/immotopia-sha-server.log" 2>&1 &
+          SERVER_PID=$!
+          trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
+          node scripts/check-deployed-sha.mjs http://127.0.0.1:3099/ "$GITHUB_SHA"

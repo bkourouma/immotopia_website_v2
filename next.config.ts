@@ -1,5 +1,10 @@
 import type { NextConfig } from "next";
 
+// Next sérialise ces règles dans le serveur standalone pendant le build.
+// Ne jamais attribuer une version inconnue ou fournie seulement à l'exécution.
+const buildSha = process.env.GIT_COMMIT_SHA;
+const commitSha = buildSha?.length === 40 && /^[a-f0-9]{40}$/.test(buildSha) ? buildSha : undefined;
+
 // Redirections 301 des adresses de l'ancien site (Astro) vers leur équivalent le plus proche,
 // pour conserver le référencement acquis. Les règles précises passent avant les règles génériques.
 const legacyRedirects: [string, string][] = [
@@ -38,6 +43,11 @@ const legacyRedirects: [string, string][] = [
 const nextConfig: NextConfig = {
   output: "standalone",
   poweredByHeader: false,
+  async headers() {
+    return commitSha
+      ? [{ source: "/:path*", headers: [{ key: "x-commit-sha", value: commitSha }] }]
+      : [];
+  },
   async redirects() {
     return legacyRedirects.map(([source, destination]) => ({ source, destination, statusCode: 301 as const }));
   },
