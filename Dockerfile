@@ -15,10 +15,14 @@ COPY . .
 # Les variables NEXT_PUBLIC_* sont figées dans le code au moment du build
 ARG NEXT_PUBLIC_BOOKING_URL
 ENV NEXT_PUBLIC_BOOKING_URL=$NEXT_PUBLIC_BOOKING_URL
+ARG GIT_COMMIT_SHA
+ENV GIT_COMMIT_SHA=$GIT_COMMIT_SHA
 ENV NEXT_TELEMETRY_DISABLED=1
 RUN npm run build
 
 FROM node:24-alpine AS runner
+ARG GIT_COMMIT_SHA
+LABEL org.opencontainers.image.revision=$GIT_COMMIT_SHA
 WORKDIR /app
 ENV NODE_ENV=production NEXT_TELEMETRY_DISABLED=1 PORT=3000 HOSTNAME=0.0.0.0
 RUN addgroup -S nextjs && adduser -S nextjs -G nextjs && mkdir -p /app/data && chown nextjs:nextjs /app/data

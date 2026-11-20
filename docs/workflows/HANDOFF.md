@@ -41,6 +41,17 @@ Pièges et décisions :
 
 ---
 
+## Branche `codex/public-build-sha` — 2026-11-20
+
+**État :** prêt à relire ; aucune fusion ni intervention serveur.
+**Base :** `afab1e1` ; dernier commit de la branche : voir `git log -1`.
+
+- `x-commit-sha` contient uniquement un SHA complet de 40 caractères hexadécimaux minuscules, capturé pendant le build Next ; aucune valeur inconnue ou invalide n'est publiée.
+- Le workflow passe explicitement `GITHUB_SHA` à Docker avant le build et contrôle le label OCI de l'image, puis le header exact sur `/` en local et sur `https://immotopia.cloud/`. Le retour arrière existant reste actif si ces contrôles échouent.
+- La CI démarre le serveur standalone construit avec une autre valeur de SHA à l'exécution : le header doit conserver le SHA du build. Tests supplémentaires : SHA absent/invalide, valeur runtime ignorée, réponse HTTP réelle absente/différente/doublée et erreur HTTP.
+- Contrôles locaux : `npm test` (70 tests), lint, typecheck, build (230 pages) et contrôle HTTP du standalone sur `/` et `/en` réussis avec un SHA runtime différent. La CI Linux rejoue le build et le contrôle standalone.
+- `/robots.txt` public est servi directement par nginx et n'atteste pas la version Next. Aucun header ajouté à nginx, aucun secret ni contenu métier modifié. Une construction manuelle sans argument SHA reste possible et n'expose aucune attestation.
+
 ## Branche `feat/module-evenements` — 2026-11-17
 
 **État :** prêt à relire (tsc, lint, 54 tests, build, parcours API et export CSV vérifiés en local) ; PR ouverte, rien de déployé.
