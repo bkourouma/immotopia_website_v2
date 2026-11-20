@@ -1,5 +1,5 @@
-// E-mails transactionnels des événements. Envoi par l'API HTTP de Resend si RESEND_API_KEY et EVENTS_EMAIL_FROM sont définies ;
-// sinon l'envoi est ignoré (journal sans donnée personnelle) et l'inscription reste valide.
+// E-mails transactionnels des événements. Envoi par SMTP (EVENTS_SMTP_*, ex. Hostinger) ou, à défaut, par l'API Resend,
+// avec EVENTS_EMAIL_FROM ; sinon l'envoi est ignoré (journal sans donnée personnelle) et l'inscription reste valide.
 // Aucune campagne commerciale n'est envoyée ici : seuls des messages liés à l'inscription de la personne.
 
 import { formatDateFr, formatTimeFr } from "./time.ts";
@@ -74,34 +74,69 @@ ${outro.split("\n").map((l) => `<p style="line-height:1.55;font-size:14px">${esc
   return { to: reg.email, subject, html, text };
 }
 
+function smtpConfig() {
+  const host = process.env.EVENTS_SMTP_HOST?.trim();
+  const user = process.env.EVENTS_SMTP_USER?.trim();
+  const pass = process.env.EVENTS_SMTP_PASSWORD;
+  if (!host || !user || !pass) return null;
+  const port = Number(process.env.EVENTS_SMTP_PORT) || 465;
+  return { host, port, secure: port === 465, auth: { user, pass } };
+}
+
+/** Transport utilisé : SMTP (ex. Hostinger) s'il est configuré, sinon Resend, sinon aucun. */
+export function emailTransport(): "smtp" | "resend" | null {
+  if (!process.env.EVENTS_EMAIL_FROM?.trim()) return null;
+  if (smtpConfig()) return "smtp";
+  return process.env.RESEND_API_KEY?.trim() ? "resend" : null;
+}
+
 export function emailConfigured(): boolean {
-  return !!process.env.RESEND_API_KEY?.trim() && !!process.env.EVENTS_EMAIL_FROM?.trim();
+  return emailTransport() !== null;
+}
+
+async function sendViaSmtp(msg: EmailMessage): Promise<void> {
+  const { default: nodemailer } = await import("nodemailer");
+  const transport = nodemailer.createTransport({ ...smtpConfig()!, connectionTimeout: 8000, greetingTimeout: 8000, socketTimeout: 15000 });
+  await transport.sendMail({
+    from: process.env.EVENTS_EMAIL_FROM!.trim(),
+    to: msg.to,
+    replyTo: process.env.EVENTS_EMAIL_REPLY_TO?.trim() || undefined,
+    subject: msg.subject,
+    html: msg.html,
+    text: msg.text,
+  });
+}
+
+async function sendViaResend(msg: EmailMessage): Promise<void> {
+  const res = await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: { Authorization: `Bearer ${process.env.RESEND_API_KEY!.trim()}`, "Content-Type": "application/json" },
+    body: JSON.stringify({
+      from: process.env.EVENTS_EMAIL_FROM!.trim(),
+      to: [msg.to],
+      reply_to: process.env.EVENTS_EMAIL_REPLY_TO?.trim() || undefined,
+      subject: msg.subject,
+      html: msg.html,
+      text: msg.text,
+    }),
+    signal: AbortSignal.timeout(8000),
+  });
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
 }
 
 /** Envoie le message ; ne lève jamais d'exception (l'inscription ne doit pas échouer à cause du courriel). Renvoie true si envoyé. */
 export async function sendEmail(msg: EmailMessage): Promise<boolean> {
-  if (!emailConfigured()) {
-    console.warn("[evenements] Service e-mail non configuré (RESEND_API_KEY / EVENTS_EMAIL_FROM) : e-mail non envoyé.");
+  const transport = emailTransport();
+  if (!transport) {
+    console.warn("[evenements] E-mail non configuré (EVENTS_EMAIL_FROM + EVENTS_SMTP_* ou RESEND_API_KEY) : e-mail non envoyé.");
     return false;
   }
   try {
-    const res = await fetch("https://api.resend.com/emails", {
-      method: "POST",
-      headers: { Authorization: `Bearer ${process.env.RESEND_API_KEY!.trim()}`, "Content-Type": "application/json" },
-      body: JSON.stringify({
-        from: process.env.EVENTS_EMAIL_FROM!.trim(),
-        to: [msg.to],
-        reply_to: process.env.EVENTS_EMAIL_REPLY_TO?.trim() || undefined,
-        subject: msg.subject,
-        html: msg.html,
-        text: msg.text,
-      }),
-      signal: AbortSignal.timeout(8000),
-    });
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    await (transport === "smtp" ? sendViaSmtp(msg) : sendViaResend(msg));
     return true;
   } catch (err) {
-    console.error("[evenements] Échec d'envoi d'e-mail :", err instanceof Error ? err.message : "erreur");
+    // Message d'erreur seulement : ni destinataire, ni identifiants
+    console.error(`[evenements] Échec d'envoi d'e-mail (${transport}) :`, err instanceof Error ? err.message : "erreur");
     return false;
   }
 }

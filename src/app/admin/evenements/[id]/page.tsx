@@ -6,7 +6,7 @@ import { ACTIVITIES } from "@/lib/events/types";
 import { ADMIN_COOKIE, verifySessionToken } from "@/lib/events/auth";
 import { getEventById, getStats, listRegistrations } from "@/lib/events/service";
 import { formatDateFr } from "@/lib/events/time";
-import { quickEvent, registrationAction } from "../actions";
+import { bulkDeleteRegistrations, quickEvent, registrationAction } from "../actions";
 
 export const dynamic = "force-dynamic";
 
@@ -106,12 +106,13 @@ export default async function AdminEvent({ params, searchParams }: { params: Pro
       <div className="mt-4 overflow-x-auto rounded-2xl bg-white ring-1 ring-ink-900/[0.07]">
         <table className="w-full text-left text-sm">
           <thead className="border-b border-ink-900/10 text-xs uppercase text-ink-900/60">
-            <tr><th className="p-3">Participant</th><th className="p-3">Contact</th><th className="p-3">Activité</th><th className="p-3">Statut</th><th className="p-3">Actions</th></tr>
+            <tr><th className="p-3"><span className="sr-only">Sélection</span></th><th className="p-3">Participant</th><th className="p-3">Contact</th><th className="p-3">Activité</th><th className="p-3">Statut</th><th className="p-3">Actions</th></tr>
           </thead>
           <tbody>
-            {regs.length === 0 && <tr><td colSpan={5} className="p-6 text-center text-ink-900/60">Aucune inscription.</td></tr>}
+            {regs.length === 0 && <tr><td colSpan={6} className="p-6 text-center text-ink-900/60">Aucune inscription.</td></tr>}
             {regs.map((r) => (
               <tr key={r.id} className="border-b border-ink-900/5 align-top last:border-0">
+                <td className="p-3"><input type="checkbox" name="ids" value={r.id} form="bulk-delete" aria-label={`Sélectionner ${r.fullName}`} className="size-4" /></td>
                 <td className="p-3"><p className="font-semibold">{r.fullName}{r.seats > 1 ? ` (+${r.seats - 1})` : ""}</p><p className="text-ink-900/60">{r.company} · {r.jobTitle}</p><p className="font-mono text-xs text-ink-900/50">{r.reference}</p></td>
                 <td className="p-3"><p>{r.email}</p><p>{r.phone}</p>{r.comment && <p className="mt-1 text-ink-900/60">« {r.comment} »</p>}</td>
                 <td className="p-3">{r.activity}{r.marketingConsentAt ? <p className="text-xs text-emerald-700">Accepte les communications</p> : null}</td>
@@ -139,6 +140,14 @@ export default async function AdminEvent({ params, searchParams }: { params: Pro
           </tbody>
         </table>
       </div>
+
+      {regs.length > 0 && (
+        <form id="bulk-delete" action={bulkDeleteRegistrations} className="mt-3 flex flex-wrap items-center gap-3 text-sm">
+          <input type="hidden" name="returnTo" value={returnTo} />
+          <label className="flex items-center gap-1"><input type="checkbox" name="confirmDelete" /> Je confirme la suppression définitive des inscriptions cochées (effacement des données)</label>
+          <button className={btnDanger}>Supprimer la sélection</button>
+        </form>
+      )}
 
       <h2 className="mt-12 font-display text-xl font-bold">Modifier l&apos;événement</h2>
       <div className="mt-4"><EventForm event={event} /></div>
