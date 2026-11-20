@@ -1,3 +1,6 @@
+import { recordConfirmedPublicRegistration } from '@/lib/seo-registration-outbox.mjs';
+import { submissionDevice } from '@/lib/seo-business-outbox.mjs';
+
 // Inscription publique à un événement : POST { slug, … }. Sans compte. Protections : même origine, champ piège, délai minimal
 // de remplissage, limite de débit par IP et par e-mail, validation serveur, capacité contrôlée en transaction.
 
@@ -42,6 +45,9 @@ export async function POST(request: Request) {
       return jsonNoStore({ error, code: result.code }, status);
     }
     const { registration, event } = result;
+    if (registration.status === 'confirmed') {
+      await recordConfirmedPublicRegistration({ id: registration.id, status: registration.status, createdAt: registration.createdAt }, { device: submissionDevice(request.headers.get('user-agent')) });
+    }
     // L'e-mail ne bloque pas la réponse : son échec n'invalide jamais l'inscription
     void sendEmail(renderEmail(registration.status === "waitlist" ? "waitlist" : "confirmation", event, registration, SITE_URL));
     const stats = getStats(event.id);
@@ -58,3 +64,4 @@ export async function POST(request: Request) {
     return jsonNoStore({ error: "Une erreur est survenue. Réessayez dans un instant." }, 500);
   }
 }
+
