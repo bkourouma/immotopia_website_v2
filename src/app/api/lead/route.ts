@@ -1,3 +1,5 @@
+import { prepareBusinessSubmission, confirmBusinessSubmission, submissionDevice } from '@/lib/seo-business-outbox.mjs';
+
 // Reçoit les demandes de démonstration et les transmet au webhook n8n (qui alimente Airtable
 // et envoie l'e-mail de préparation). L'URL du webhook reste côté serveur : N8N_WEBHOOK_URL.
 
@@ -38,6 +40,7 @@ export async function POST(request: Request) {
     return Response.json({ ok: true, forwarded: false });
   }
 
+  const measurement = await prepareBusinessSubmission({ language: locale, device: submissionDevice(request.headers.get('user-agent')) });
   try {
     const res = await fetch(webhook, {
       method: "POST",
@@ -51,5 +54,7 @@ export async function POST(request: Request) {
     return Response.json({ error: "Transmission impossible" }, { status: 502 });
   }
 
+  await confirmBusinessSubmission(measurement);
   return Response.json({ ok: true, forwarded: true });
 }
+
