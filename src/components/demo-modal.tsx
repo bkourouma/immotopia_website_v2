@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { CalendarCheck, Loader2, X } from "lucide-react";
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { BookingFrame, Thanks } from "./booking-frame";
+import { getSubmissionMetadata, readLeadReceipt, type LeadReceipt } from "@/lib/lead-reception-client.mjs";
 import { useI18n } from "./locale-provider";
 
 // Lien public de réservation Calendly ou Cal.com (ex. https://calendly.com/immotopia).
@@ -12,6 +13,7 @@ const BOOKING_URL = process.env.NEXT_PUBLIC_BOOKING_URL;
 
 export function DemoModal({ open, onClose }: { open: boolean; onClose: () => void }) {
   const dialogRef = useRef<HTMLDivElement>(null);
+  const [callback, setCallback] = useState(false);
   const { t } = useI18n();
 
   useEffect(() => {
@@ -65,8 +67,15 @@ export function DemoModal({ open, onClose }: { open: boolean; onClose: () => voi
               </button>
             </div>
             <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain pb-[env(safe-area-inset-bottom)]">
-              {BOOKING_URL ? (
-                <BookingFrame url={BOOKING_URL} onDone={onClose} />
+              {BOOKING_URL && !callback ? (
+                <>
+                  <BookingFrame url={BOOKING_URL} onDone={onClose} />
+                  <div className="border-t border-white/10 p-5 text-center">
+                    <button type="button" data-testid="lead-callback-open" onClick={() => setCallback(true)} className="cursor-pointer rounded-full border border-white/30 px-5 py-3 text-sm font-semibold text-white underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-4">
+                      {t("Préférer être recontacté", "Request a callback instead")}
+                    </button>
+                  </div>
+                </>
               ) : (
                 <LeadForm onDone={onClose} />
               )}
@@ -101,33 +110,42 @@ const roles: Option[] = [
 
 function LeadForm({ onDone }: { onDone: () => void }) {
   const [state, setState] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const [receipt, setReceipt] = useState<LeadReceipt | null>(null);
+  const startedAt = useRef(0);
+  useEffect(() => { startedAt.current = Date.now(); }, []);
   const { locale, t } = useI18n();
 
   async function submit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    if (state === "sending") return;
     setState("sending");
     const data = Object.fromEntries(new FormData(e.currentTarget));
     try {
+      const metadata = await getSubmissionMetadata("site-vitrine", data, locale);
       const res = await fetch("/api/lead", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...data, locale }),
+        body: JSON.stringify({ ...data, ...metadata, locale: locale, elapsedMs: startedAt.current ? Date.now() - startedAt.current : 0 }),
       });
-      setState(res.ok ? "sent" : "error");
+      const result: unknown = await res.json();
+      const mode = res.headers.get("x-mc-form-recipe");
+      const accepted = res.ok && (mode === "0" || mode === "1")
+        ? readLeadReceipt(result, { sourceId: "site-form-immotopia-v1", submissionId: metadata.submissionId, isTest: mode === "1" })
+        : null;
+      if (!accepted) throw new Error("Receipt not confirmed");
+      setReceipt(accepted);
+      setState("sent");
     } catch {
+      // The form and its non-personal idempotency metadata are retained for a safe retry.
       setState("error");
     }
   }
 
-  if (state === "sent") {
+  if (state === "sent" && receipt) {
     return (
-      <Thanks
-        onDone={onDone}
-        text={t(
-          "Un expert ImmoTopia vous recontacte sous 24 h ouvrées pour fixer le créneau de votre démonstration.",
-          "An ImmoTopia expert will get back to you within one business day to schedule your demo.",
-        )}
-      />
+      <div role="status" data-testid="lead-receipt" data-submission-id={receipt.submissionId} data-receipt-id={receipt.receiptId} data-is-test={String(receipt.isTest)} className="min-w-0 break-words">
+        <Thanks onDone={onDone} text={`${receipt.isTest ? t("Demande de recette enregistrée.", "Test request recorded.") : t("Votre demande est enregistrée.", "Your request has been recorded.")} ${t("Référence", "Reference")}: ${receipt.receiptId}`} />
+      </div>
     );
   }
 
@@ -153,7 +171,7 @@ function LeadForm({ onDone }: { onDone: () => void }) {
         </button>
         {state === "error" && (
           <p role="alert" className="mt-3 text-center text-sm text-rose-300">
-            {t("L'envoi a échoué. Vérifiez votre connexion et réessayez.", "Something went wrong. Please check your connection and try again.")}
+            {t("L'enregistrement n'a pas pu être confirmé. Réessayez sans modifier la demande.", "We could not confirm receipt. Please retry without changing your request.")}
           </p>
         )}
         <p className="mt-3 text-center text-xs text-white/55">

@@ -25,7 +25,7 @@ export default async function ConfidentialitePage() {
 
 function ConfidentialiteFr() {
   return (
-    <LegalPage title="Politique de confidentialité" updated="17 novembre 2026">
+    <LegalPage title="Politique de confidentialité" updated="20 novembre 2026">
       <p>
         {legal.publisher}, éditeur d&apos;ImmoTopia, s&apos;engage à protéger vos données personnelles conformément à la loi ivoirienne
         n° 2013-450 du 19 juin 2013 relative à la protection des données à caractère personnel.
@@ -87,10 +87,16 @@ function ConfidentialiteFr() {
         également des données de navigation pour notre compte. Certains de ces prestataires peuvent être situés hors de Côte d&apos;Ivoire.
       </p>
 
+      <p>
+        Le formulaire transmet votre demande par un workflow N8N dédié vers notre outil interne de réception Mission Control,
+        pour permettre à notre équipe de la traiter et de vous répondre. Cet enregistrement ne vous inscrit pas à des communications marketing.
+      </p>
+
       <h2>Durée de conservation</h2>
       <p>
-        Les données des prospects sont conservées au maximum 3 ans après le dernier contact, puis supprimées. Les données des
-        clients sont conservées pendant la durée de la relation contractuelle et les délais légaux qui s&apos;y appliquent.
+        Les demandes de ce formulaire restent dans notre boîte de réception pendant leur traitement. Une demande clôturée est supprimée
+        90 jours après sa dernière modification. Les autres dossiers de prospection sont conservés au maximum 3 ans après le dernier contact,
+        puis supprimés. Les données des clients sont conservées pendant la durée de la relation contractuelle et les délais légaux qui s&apos;y appliquent.
       </p>
 
       <h2 id="cookies">Cookies</h2>
@@ -118,6 +124,11 @@ function ConfidentialiteFr() {
         nécessaires à son fonctionnement.
       </p>
 
+      <p>
+        Pour réessayer un envoi sans créer de doublon, un identifiant technique et une empreinte du formulaire sont conservés
+        dans votre onglet pendant 24 heures au plus. Les coordonnées saisies ne sont pas recopiées dans ce stockage.
+      </p>
+
       <h2>Vos droits</h2>
       <p>
         Vous disposez d&apos;un droit d&apos;accès, de rectification, d&apos;opposition et de suppression de vos données. Pour les
@@ -131,7 +142,7 @@ function ConfidentialiteFr() {
 
 function PrivacyPolicyEn() {
   return (
-    <LegalPage title="Privacy policy" updated="November 17, 2026">
+    <LegalPage title="Privacy policy" updated="November 20, 2026">
       <p>
         {legal.publisher}, publisher of ImmoTopia, is committed to protecting your personal data in accordance with Ivorian Law
         No. 2013-450 of June 19, 2013 on the protection of personal data.
@@ -189,10 +200,16 @@ function PrivacyPolicyEn() {
         of these providers may be located outside Côte d&apos;Ivoire.
       </p>
 
+      <p>
+        The form sends your request through a dedicated N8N workflow to our internal Mission Control request inbox,
+        so our team can process it and reply to you. Recording the request does not subscribe you to marketing communications.
+      </p>
+
       <h2>Retention period</h2>
       <p>
-        Prospect data is kept for a maximum of 3 years after the last contact, then deleted. Customer data is kept for the duration of
-        the contractual relationship and the applicable legal periods.
+        Requests from this form remain in our inbox while they are being handled. A closed request is deleted
+        90 days after its last update. Other prospect records are kept for a maximum of 3 years after the last contact,
+        then deleted. Customer data is kept for the duration of the contractual relationship and the applicable legal periods.
       </p>
 
       <h2 id="cookies">Cookies</h2>
@@ -214,6 +231,11 @@ function PrivacyPolicyEn() {
       <p>
         Your choice is remembered in your browser for 6 months (strictly necessary storage, used only to remember this choice).
         The Calendly booking calendar embedded in the page may set its own cookies required for it to work.
+      </p>
+
+      <p>
+        To retry a submission without creating a duplicate, a technical identifier and a fingerprint of the form are kept
+        in your browser tab for up to 24 hours. Your contact details are not copied into this storage.
       </p>
 
       <h2>Your rights</h2>
