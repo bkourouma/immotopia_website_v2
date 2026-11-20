@@ -29,6 +29,8 @@ RUN addgroup -S nextjs && adduser -S nextjs -G nextjs && mkdir -p /app/data && c
 COPY --from=build --chown=nextjs:nextjs /app/.next/standalone ./
 COPY --from=build --chown=nextjs:nextjs /app/.next/static ./.next/static
 COPY --from=build --chown=nextjs:nextjs /app/public ./public
+RUN mkdir -p /app/data/seo-business-outbox && chown nextjs:nextjs /app/data/seo-business-outbox
 USER nextjs
 EXPOSE 3000
 CMD ["node", "server.js"]
+

@@ -52,6 +52,8 @@ jobs:
           node scripts/build-knowledge.mjs
           npx next typegen
 
+      - name: Durable business measurement regressions
+        run: node --test scripts/test-seo-business-outbox.mjs scripts/test-seo-business-hooks.mjs scripts/test-ghcr-deployment.mjs scripts/test-seo-registration.mjs scripts/test-ghcr-deployment.mjs scripts/test-ghcr-deployment.mjs
       - name: Tests unitaires
         run: npm test
 
@@ -83,3 +85,4 @@ jobs:
           SERVER_PID=$!
           trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
           node scripts/check-deployed-sha.mjs http://127.0.0.1:3099/ "$GITHUB_SHA"
+
