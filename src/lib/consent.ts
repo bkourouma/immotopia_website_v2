@@ -26,7 +26,7 @@ export function readConsent(storage: StorageLike | null, now: number = Date.now(
     if (!data || (data.choice !== "accepted" && data.choice !== "refused")) return "unset";
     if (typeof data.at !== "number" || !Number.isFinite(data.at)) return "unset";
     const age = now - data.at;
-    if (age < 0 || age >= CONSENT_TTL_MS) return "unset";
+    if (age < 0 || age > CONSENT_TTL_MS) return "unset";
     return data.choice;
   } catch {
     return "unset";
