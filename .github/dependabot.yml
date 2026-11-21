@@ -1,0 +1,11 @@
+# Mises à jour hebdomadaires des dépendances npm, relues par l'agent pr-agent.
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    open-pull-requests-limit: 3
+    commit-message:
+      prefix: "deps"
