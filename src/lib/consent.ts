@@ -5,7 +5,7 @@
 
 export const CONSENT_KEY = "im_consent";
 /** Durée de validité du choix : 6 mois (182 jours). */
-export const CONSENT_TTL_MS = 182 * 24 * 60 * 60 * 1000;
+export const CONSENT_TTL_MS = 180 * 24 * 60 * 60 * 1000;
 /** Évènement émis à chaque changement de choix. */
 export const CONSENT_EVENT = "im-consent-change";
 /** Évènement demandant la réouverture du bandeau (bouton « Gérer mes cookies »). */
