@@ -322,6 +322,14 @@ export const landings: Landing[] = [
           { title: "Parties communes", text: "Incidents avec imputation des coûts, prestataires, contrats de maintenance et équipements." },
         ],
       },
+      {
+        title: "Un logiciel de syndic conçu pour les cabinets de Côte d'Ivoire",
+        items: [
+          { title: "En FCFA, avec Mobile Money", text: "Budgets, appels de charges et comptabilité de copropriété sont tenus en FCFA ; les copropriétaires règlent leurs charges par Mobile Money, sans commission ImmoTopia." },
+          { title: "Relances sur WhatsApp et par e-mail", text: "Les relances de charges impayées partent par e-mail, WhatsApp ou les deux, selon les préférences et le consentement de chaque copropriétaire." },
+          { title: "Un seul fichier avec vos autres métiers", text: "Si vous gérez aussi des locations, les contacts, les biens et les documents sont communs avec la [gestion locative](/gestion-locative-cote-divoire) : un propriétaire saisi une fois est aussi copropriétaire." },
+        ],
+      },
     ],
     faq: [
       { q: "Que fait un logiciel de syndic de copropriété comme ImmoTopia ?", a: "Il tient les fiches de copropriété, les lots et les tantièmes, prépare le budget d'exercice, génère les appels de charges par lot, suit le recouvrement et les relances, organise les assemblées générales (quorum, votes, pouvoirs, compte rendu) et tient la comptabilité de copropriété." },
