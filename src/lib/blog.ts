@@ -356,8 +356,173 @@ const loyersImpayes: BlogPost = {
   },
 };
 
+/* ------------------------------------------------------------------ Article 3 : contrat de bail d'habitation */
+
+const contratBailHabitation: BlogPost = {
+  slug: "guide-contrat-de-bail-habitation-loi-ivoirienne",
+  published: "2026-11-24",
+  updated: "2026-11-24",
+  related: ["loyers-impayes-methode-relance", "rendement-locatif-brut-net-calcul"],
+  fr: {
+    metaTitle: "Contrat de bail habitation et loi ivoirienne : le guide",
+    metaDescription:
+      "Conseils d'experts et méthodes éprouvées sur : contrat de bail habitation loi ivoirienne. Solutions concrètes et accompagnement par ImmoTopia.",
+    h1: "Guide pratique : comment optimiser votre contrat de bail habitation (loi ivoirienne)",
+    category: "Gestion locative",
+    summary: "Les erreurs fréquentes, une méthode en 4 étapes et les bénéfices d'un contrat de bail d'habitation bien tenu en Côte d'Ivoire.",
+    intro:
+      "Le contrat de bail est le document sur lequel repose toute la relation entre un bailleur et son locataire. Pour les propriétaires bailleurs, les agences immobilières, les gestionnaires de patrimoine et les syndics d'Abidjan et de Côte d'Ivoire, un contrat de bail d'habitation clair et bien suivi évite la plupart des litiges. Ce guide présente les difficultés courantes, une méthode en quatre étapes et les bénéfices à long terme. Il ne remplace pas un conseil juridique : les règles applicables en droit ivoirien se vérifient auprès d'un professionnel du droit.",
+    sections: [
+      {
+        id: "defis",
+        title: "1. Les défis majeurs rencontrés sur le terrain",
+        blocks: [
+          { type: "p", text: "Les difficultés autour du bail d'habitation viennent rarement d'un seul point : elles s'accumulent quand le contrat est rédigé vite et rarement relu." },
+          {
+            type: "ul",
+            items: [
+              { title: "Un contrat incomplet", text: "parties, logement, loyer, charges, durée et dépôt de garantie mal précisés ouvrent la porte aux désaccords." },
+              { title: "Des modèles recopiés", text: "un modèle ancien ou copié d'un autre bail ne correspond pas toujours au logement ni à la réglementation en vigueur." },
+              { title: "Un état des lieux négligé", text: "sans état des lieux d'entrée et de sortie, la restitution du dépôt de garantie devient difficile à justifier." },
+              { title: "Un suivi dispersé", text: "baux, avenants, quittances et paiements éparpillés entre classeurs, tableurs et messages font perdre l'historique." },
+              { title: "Des échéances oubliées", text: "fin de bail, révision du loyer ou renouvellement non anticipés." },
+            ],
+          },
+          { type: "note", text: "Les démarches légales dépendent du bail et de la réglementation applicable : en cas de doute, rapprochez-vous d'un avocat, d'un notaire ou d'un professionnel du droit avant de signer." },
+        ],
+      },
+      {
+        id: "methode",
+        title: "2. La méthode en 4 étapes clés",
+        blocks: [
+          {
+            type: "ol",
+            items: [
+              { title: "Audit et état des lieux des besoins", text: "relisez vos baux en cours, listez les clauses manquantes ou floues et repérez les échéances à venir (fins de bail, révisions)." },
+              { title: "Choix de la solution ou des outils adaptés", text: "retenez un modèle de contrat validé par un professionnel du droit et un outil de suivi des baux. Le [modèle de bail d'habitation](/outils/bail-habitation) d'ImmoTopia est gratuit ; faites-le valider avant usage." },
+              { title: "Mise en place pratique et formation des équipes", text: "rédigez chaque contrat à partir du même modèle, joignez l'état des lieux, enregistrez le bail avec son échéancier et expliquez la marche à suivre à chacun." },
+              { title: "Mesure du retour sur investissement et optimisation continue", text: "contrôlez régulièrement les loyers encaissés, les retards et les litiges, puis ajustez votre modèle et vos pratiques." },
+            ],
+          },
+          { type: "p", text: "Un logiciel de gestion locative aide à tenir ces étapes : chaque bail génère son échéancier, et son renouvellement, son avenant ou sa résiliation se font depuis l'application, avec l'historique conservé. Voir la [gestion locative d'ImmoTopia](/gestion-locative-cote-divoire)." },
+        ],
+      },
+      {
+        id: "avantages",
+        title: "3. Les avantages compétitifs à long terme",
+        blocks: [
+          { type: "p", text: "Une bonne maîtrise du contrat de bail d'habitation transforme l'efficacité de l'organisation :" },
+          {
+            type: "ul",
+            items: [
+              { title: "Moins de litiges", text: "des engagements clairs et des preuves conservées réduisent les contestations." },
+              { title: "Un suivi plus rapide", text: "les loyers attendus et les paiements se comparent bail par bail." },
+              { title: "Une image plus professionnelle", text: "propriétaires et locataires retrouvent leurs documents et leur historique." },
+              { title: "Du temps pour se développer", text: "moins de ressaisies et de recherches, plus de temps pour de nouveaux mandats." },
+            ],
+          },
+        ],
+      },
+      {
+        id: "conclusion",
+        title: "Conclusion",
+        blocks: [
+          { type: "p", text: "Optimiser son contrat de bail d'habitation, c'est d'abord un modèle clair et validé, ensuite un suivi rigoureux dans la durée. Pour voir comment ImmoTopia organise vos baux, vos échéances et vos quittances, contactez l'équipe ou demandez une démonstration." },
+        ],
+      },
+    ],
+    faq: [
+      { q: "Combien de temps faut-il pour optimiser sa démarche ?", a: "Avec une approche structurée et les outils d'ImmoTopia, les premiers résultats concrets sont généralement visibles dès les premières semaines." },
+      { q: "Quelle est la première étape recommandée ?", a: "Réaliser un diagnostic initial de vos processus actuels afin d'identifier les priorités à fort impact : relisez vos baux en cours et listez les clauses ou échéances à reprendre." },
+    ],
+    productLinks: [
+      { label: "Modèle de bail d'habitation", href: "/outils/bail-habitation", text: "Générez un modèle de contrat, gratuitement et sans inscription." },
+      { label: "Gestion locative avec ImmoTopia", href: "/gestion-locative-cote-divoire", text: "Baux, échéancier, quittances et historique au même endroit." },
+    ],
+    cta: { title: "Mettez vos baux sous contrôle", text: "Une démonstration de 30 minutes, sans engagement, pour voir le suivi des baux dans ImmoTopia." },
+  },
+  en: {
+    metaTitle: "Residential lease agreement in Côte d'Ivoire: a guide",
+    metaDescription:
+      "Practical advice on your residential lease agreement under Ivorian law: common pitfalls, a 4-step method and long-term benefits, with ImmoTopia.",
+    h1: "Practical guide: how to optimise your residential lease agreement (Ivorian law)",
+    category: "Property management",
+    summary: "Common pitfalls, a 4-step method and the benefits of a well-kept residential lease in Côte d'Ivoire.",
+    intro:
+      "The lease agreement is the document on which the whole relationship between a landlord and a tenant rests. For landlords, estate agencies, asset managers and property managers in Abidjan and across Côte d'Ivoire, a clear and well-tracked residential lease prevents most disputes. This guide covers common difficulties, a four-step method and the long-term benefits. It does not replace legal advice: the rules that apply under Ivorian law should be checked with a legal professional.",
+    sections: [
+      {
+        id: "challenges",
+        title: "1. The main challenges on the ground",
+        blocks: [
+          { type: "p", text: "Lease problems rarely come from a single point: they pile up when the contract is drafted quickly and seldom reviewed." },
+          {
+            type: "ul",
+            items: [
+              { title: "An incomplete contract", text: "parties, property, rent, charges, term and deposit left vague open the door to disagreements." },
+              { title: "Copied templates", text: "an old template, or one copied from another lease, may not fit the property or the regulations in force." },
+              { title: "A neglected inventory", text: "without entry and exit inventories, returning the deposit is hard to justify." },
+              { title: "Scattered tracking", text: "leases, amendments, receipts and payments spread across folders, spreadsheets and messages lose the history." },
+              { title: "Forgotten deadlines", text: "lease end, rent review or renewal not anticipated." },
+            ],
+          },
+          { type: "note", text: "Legal steps depend on the lease and the applicable regulations: if in doubt, consult a lawyer, notary or legal professional before signing." },
+        ],
+      },
+      {
+        id: "method",
+        title: "2. The 4-step method",
+        blocks: [
+          {
+            type: "ol",
+            items: [
+              { title: "Audit and needs assessment", text: "review your current leases, list missing or vague clauses and spot upcoming deadlines (lease ends, rent reviews)." },
+              { title: "Choose the right solution or tools", text: "pick a contract template validated by a legal professional and a tool to track leases. ImmoTopia's [residential lease template](/outils/bail-habitation) is free; have it validated before use." },
+              { title: "Practical setup and team training", text: "draft each contract from the same template, attach the inventory, record the lease with its schedule and explain the process to everyone." },
+              { title: "Measure the return and keep improving", text: "regularly check rent collected, delays and disputes, then adjust your template and practices." },
+            ],
+          },
+          { type: "p", text: "Property management software helps keep to these steps: each lease generates its schedule, and renewal, amendment or termination are handled from the application with the history kept. See the [pricing](/tarifs) for the plans." },
+        ],
+      },
+      {
+        id: "benefits",
+        title: "3. The long-term competitive advantages",
+        blocks: [
+          { type: "p", text: "Mastering the residential lease agreement transforms the organisation's efficiency:" },
+          {
+            type: "ul",
+            items: [
+              { title: "Fewer disputes", text: "clear commitments and kept evidence reduce challenges." },
+              { title: "Faster tracking", text: "expected rent and payments are compared lease by lease." },
+              { title: "A more professional image", text: "owners and tenants find their documents and history." },
+              { title: "Time to grow", text: "less re-entry and searching, more time for new mandates." },
+            ],
+          },
+        ],
+      },
+      {
+        id: "conclusion",
+        title: "Conclusion",
+        blocks: [
+          { type: "p", text: "Optimising a residential lease starts with a clear, validated template, then rigorous tracking over time. To see how ImmoTopia organises your leases, schedules and receipts, contact the team or request a demo." },
+        ],
+      },
+    ],
+    faq: [
+      { q: "How long does it take to optimise your approach?", a: "With a structured approach and ImmoTopia's tools, the first concrete results are generally visible within the first weeks." },
+      { q: "What is the recommended first step?", a: "Run an initial review of your current processes to identify high-impact priorities: review your current leases and list the clauses or deadlines to revisit." },
+    ],
+    productLinks: [
+      { label: "Residential lease template", href: "/outils/bail-habitation", text: "Generate a lease template, free and with no sign-up." },
+      { label: "Pricing", href: "/tarifs", text: "See the ImmoTopia plans." },
+    ],
+    cta: { title: "Get your leases under control", text: "A 30-minute demo, no commitment, to see lease tracking in ImmoTopia." },
+  },
+};
+
 /** Le plus récent en premier */
-export const posts: BlogPost[] = [loyersImpayes, rendementLocatif];
+export const posts: BlogPost[] = [contratBailHabitation, loyersImpayes, rendementLocatif];
 
 export const postBySlug = (slug: string) => posts.find((p) => p.slug === slug);
 export const blogHref = (slug?: string) => (slug ? `/blog/${slug}` : "/blog");
