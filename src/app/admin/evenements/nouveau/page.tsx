@@ -1,7 +1,7 @@
 import { cookies } from "next/headers";
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { EventForm, Flash } from "@/components/events/admin-ui";
+import { AdminBar, EventForm, Flash, Hero } from "@/components/events/admin-ui";
 import { ADMIN_COOKIE, verifySessionToken } from "@/lib/events/auth";
 
 export const dynamic = "force-dynamic";
@@ -10,11 +10,17 @@ export default async function NewEvent({ searchParams }: { searchParams: Promise
   if (!verifySessionToken((await cookies()).get(ADMIN_COOKIE)?.value)) redirect("/admin/evenements");
   const sp = await searchParams;
   return (
-    <main className="mx-auto max-w-4xl px-4 py-10">
-      <Link href="/admin/evenements" className="text-sm text-brand-600 hover:underline">← Événements</Link>
-      <h1 className="mt-2 mb-6 font-display text-3xl font-bold">Nouvel événement</h1>
-      <Flash ok={sp.ok} err={sp.err} />
-      <EventForm />
-    </main>
+    <>
+      <AdminBar />
+      <Hero lead="pb-14">
+        <Link href="/admin/evenements" className="text-sm text-brand-300 hover:text-white">← Retour aux événements</Link>
+        <h1 className="mt-3 font-display text-3xl font-bold tracking-tight md:text-4xl">Nouvel événement</h1>
+        <p className="mt-2 text-sm text-white/65">Il sera créé selon le statut de publication choisi (brouillon par défaut, donc non visible).</p>
+      </Hero>
+      <main className="relative z-10 mx-auto -mt-8 max-w-4xl px-4 pb-16">
+        <Flash ok={sp.ok} err={sp.err} />
+        <EventForm />
+      </main>
+    </>
   );
 }
