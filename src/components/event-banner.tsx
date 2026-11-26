@@ -19,7 +19,7 @@ function EventBannerContent() {
   const href = `/evenements/${e.slug}`;
   const facts = [
     { Icon: CalendarDays, text: "Jeudi 10 décembre 2026 · 9h00 – 11h00" },
-    { Icon: MapPin, text: "Hôtel Tiama, Abidjan-Plateau (lieu à confirmer)" },
+    { Icon: MapPin, text: "Hôtel Tiama, Abidjan-Plateau" },
     { Icon: Users, text: "Gratuit, sans frais d'entrée · 30 places · sur inscription", strong: true },
   ];
   return (
