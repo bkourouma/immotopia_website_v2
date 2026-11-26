@@ -3,6 +3,7 @@
 
 export const featuredEvent = {
   slug: "matinales-immobilier-digital-2026",
+  startsAt: "2026-12-10T09:00:00.000Z", // 9h00 à Abidjan (UTC+0)
   endsAt: "2026-12-10T11:00:00.000Z",
   poster: "/images/events/matinales-affiche.webp",
   posterWidth: 1122,

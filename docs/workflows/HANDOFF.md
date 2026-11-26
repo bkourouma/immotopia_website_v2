@@ -517,3 +517,13 @@ Pi√®ges et d√©cisions :
 - √Ä surveiller : r√®gle `font-size:16px !important` des champs sous 640 px ; maquettes du hero en mode compact (hauteur < 300) ; carte tarifaire recommand√©e non remont√©e en premier sur mobile (d√©cision √©ditoriale).
 
 
+
+## 2026-11-26 ‚Äî UI/UX de l'administration des √©v√©nements
+
+- Fait : refonte visuelle de `/admin/evenements` (liste, d√©tail, nouveau, connexion) : barre d'administration, KPI, badges de statut, jauge de remplissage, navigation par ancres, aides sous les champs, barre d'enregistrement collante. Fichiers : `src/components/events/admin-ui.tsx`, `src/app/admin/evenements/**`.
+- V√©rifi√© : `tsc` et `eslint` √† 0 erreur. Non v√©rifi√© : rendu navigateur (acc√®s prot√©g√© par mot de passe), `npm run build`.
+- Branche `fix/accueil-lieu`, rien de commit√©.
+
+- 2026-11-26 (suite) : 2e passe visuelle admin ÈvÈnements : barre sombre, bandeau Hero en dÈgradÈ, indicateurs chevauchant le bandeau, sections de formulaire numÈrotÈes. VÈrifiÈ en local (port 3111, mot de passe de test, base temporaire) ; tsc et eslint ‡ 0 erreur. Non dÈployÈ.
+
+- 2026-11-26 (accueil) : bandeau ÈvÈnement : compte ‡ rebours (jours/heures/min/s) + places restantes rÈelles. Fichiers : src/components/event-live.tsx (client), src/app/api/events/places/route.ts (GET, 60/min/IP, null si brouillon ou showRemaining dÈsactivÈ), featured.ts (startsAt). Le chiffre est la vraie capacitÈ moins les inscrits : pour afficher 16/20, mettre la capacitÈ ‡ 20 dans l'admin (pas de faux chiffre dans le code). VÈrifiÈ en local ; tsc et eslint OK ; non dÈployÈ, non commitÈ.
