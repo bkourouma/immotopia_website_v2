@@ -22,7 +22,7 @@ function offsetOf(i: number, active: number) {
   return ((i - active + N + half) % N) - half;
 }
 
-export function Hero() {
+export function Hero({ afterBanner = false }: { afterBanner?: boolean }) {
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
   const dragging = useRef(false);
@@ -75,7 +75,7 @@ export function Hero() {
     <section
       ref={root}
       id="top"
-      className="relative isolate overflow-hidden bg-ink-950 pt-24 pb-12 text-white sm:pt-28 sm:pb-16 md:pt-32 md:pb-20"
+      className={`relative isolate overflow-hidden bg-ink-950 pb-12 text-white sm:pb-16 md:pb-20 ${afterBanner ? "pt-14 sm:pt-16 md:pt-20" : "pt-24 sm:pt-28 md:pt-32"}`}
       onKeyDown={(e) => {
         if (e.key === "ArrowRight") go(1);
         if (e.key === "ArrowLeft") go(-1);

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { EventBanner, showEventBanner } from "@/components/event-banner";
 import { ComparatifTeaser } from "@/components/comparatif/comparatif-teaser";
 import { Ecosystem } from "@/components/ecosystem";
 import { FinalCta } from "@/components/final-cta";
@@ -16,13 +17,15 @@ export async function generateMetadata({ params }: PageProps<"/[lang]">): Promis
   return hasLocale(lang) ? { alternates: alternates(lang, "/") } : {};
 }
 
-export default function Home() {
+export default async function Home() {
+  const banner = await showEventBanner();
   return (
     <>
       <Navbar />
       <SoftwareJsonLd />
       <main>
-        <Hero />
+        <EventBanner show={banner} />
+        <Hero afterBanner={banner} />
         <Marquee />
         <Roles />
         <Ecosystem />
