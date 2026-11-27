@@ -93,6 +93,11 @@ const MIGRATIONS: string[] = [
   ALTER TABLE event_registrations ADD COLUMN waitlist_reason TEXT NOT NULL DEFAULT '';
   CREATE INDEX registrations_company_idx ON event_registrations (event_id, company_key);
   `,
+  // 3 : inscriptions reçues directement hors site (téléphone…), déduites des places restantes
+  `
+  ALTER TABLE events ADD COLUMN direct_seats INTEGER NOT NULL DEFAULT 0 CHECK (direct_seats >= 0);
+  UPDATE events SET direct_seats = 10 WHERE slug = 'matinales-immobilier-digital-2026';
+  `,
 ];
 
 let instance: DatabaseSync | null = null;

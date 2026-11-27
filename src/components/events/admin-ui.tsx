@@ -141,6 +141,7 @@ export function EventForm({ event }: { event?: EventRecord }) {
 
       <Section n="3" title="Inscriptions et publication" desc="Capacité, règles d'inscription et visibilité.">
         <Label text="Capacité (places)"><input type="number" min={0} name="capacity" defaultValue={v?.capacity ?? 30} className={field} /></Label>
+        <Label text="Inscrits directs (hors site)" hint="Personnes inscrites par téléphone ou en direct, déduites des places restantes."><input type="number" min={0} name="directSeats" defaultValue={v?.directSeats ?? 0} className={field} /></Label>
         <Label text="Inscriptions max. par entreprise" hint="0 = illimité ; au-delà, les inscrits passent en liste d'attente."><input type="number" min={0} name="maxPerCompany" defaultValue={v?.maxPerCompany ?? 2} className={field} /></Label>
         <Label text="Conservation des données (mois)" hint="Durée après l'événement avant effacement."><input type="number" min={1} max={120} name="retentionMonths" defaultValue={v?.retentionMonths ?? 24} className={field} /></Label>
         <Label text="Publication">

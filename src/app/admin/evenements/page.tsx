@@ -43,7 +43,7 @@ export default async function AdminEvents({ searchParams }: { searchParams: Prom
   const events = listAllEvents();
   const log = listAudit(15);
   const rows = events.map((e) => ({ e, s: getStats(e.id) }));
-  const totalSeats = rows.reduce((n, r) => n + r.s.confirmedSeats, 0);
+  const totalSeats = rows.reduce((n, r) => n + r.s.confirmedSeats + r.s.directSeats, 0);
   const totalWait = rows.reduce((n, r) => n + r.s.waitlistSeats, 0);
   const published = events.filter((e) => e.publicationStatus === "published" && !e.cancelled).length;
   const kpi = (label: string, value: number) => (
@@ -105,7 +105,7 @@ export default async function AdminEvents({ searchParams }: { searchParams: Prom
                       <td className="min-w-48 p-3 font-semibold"><Link href={`/admin/evenements/${e.id}`} className="text-ink-900 hover:text-brand-600 hover:underline">{e.title}</Link></td>
                       <td className="whitespace-nowrap p-3">{formatDateFr(e.startsAt, e.timezone)}</td>
                       <td className="p-3"><div className="flex flex-wrap gap-1">{statusBadge(e)}{e.registrationStatus === "closed" && <Badge tone="gray">Inscriptions closes</Badge>}</div></td>
-                      <td className="p-3"><Gauge value={s.confirmedSeats} max={e.capacity} /></td>
+                      <td className="p-3"><Gauge value={s.confirmedSeats + s.directSeats} max={e.capacity} /></td>
                       <td className="p-3 tabular-nums">{s.waitlistSeats}</td>
                       <td className="hidden p-3 text-right lg:table-cell"><Link href={`/admin/evenements/${e.id}`} className={btnGhost}>Gérer</Link></td>
                     </tr>
