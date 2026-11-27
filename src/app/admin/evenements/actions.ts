@@ -107,6 +107,14 @@ export async function quickEvent(formData: FormData) {
       back(path, "Capacité mise à jour.");
       break;
     }
+    case "direct_seats": {
+      const n = Number(formData.get("directSeats"));
+      if (!Number.isInteger(n) || n < 0 || n > 100000) back(path, "Nombre d'inscrits directs invalide.", "err");
+      setEventFlag(id, { directSeats: n });
+      audit("event_direct_seats", ev!.slug, `inscrits directs : ${ev!.directSeats} → ${n}`);
+      back(path, "Inscrits directs mis à jour.");
+      break;
+    }
     default: back(path, "Action inconnue.", "err");
   }
   audit(`event_${op}`, ev!.slug);

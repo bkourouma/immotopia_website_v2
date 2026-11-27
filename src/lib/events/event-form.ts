@@ -27,6 +27,8 @@ export function parseEventForm(f: FormData): { ok: true; data: EventInput } | { 
 
   const capacity = Number(get("capacity", 6));
   if (!Number.isInteger(capacity) || capacity < 0 || capacity > 100000) errors.push("La capacité doit être un entier positif.");
+  const directSeats = Number(get("directSeats", 6) || 0);
+  if (!Number.isInteger(directSeats) || directSeats < 0 || directSeats > 100000) errors.push("Le nombre d'inscrits directs doit être un entier positif.");
   const maxPerCompany = Number(get("maxPerCompany", 4) || 0);
   if (!Number.isInteger(maxPerCompany) || maxPerCompany < 0 || maxPerCompany > 1000) errors.push("Le plafond par entreprise doit être un entier positif (0 = illimité).");
   const retentionMonths = Number(get("retentionMonths", 4) || 24);
@@ -66,6 +68,7 @@ export function parseEventForm(f: FormData): { ok: true; data: EventInput } | { 
       venueDistrict: get("venueDistrict", 80),
       venueStatus: oneOf("venueStatus", ["provisional", "confirmed"] as const, "provisional"),
       capacity,
+      directSeats,
       maxPerCompany,
       waitlistEnabled: f.get("waitlistEnabled") === "on",
       showRemaining: f.get("showRemaining") === "on",

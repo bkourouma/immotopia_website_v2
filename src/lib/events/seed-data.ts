@@ -28,6 +28,7 @@ export const matinales: EventInput = {
   venueDistrict: "Plateau",
   venueStatus: "provisional", // cotation en cours : à passer en « confirmé » après validation administrative
   capacity: 30,
+  directSeats: 10, // 10 inscrits directs par téléphone déduits des 30 places
   maxPerCompany: 2, // une place par inscription ; au-delà de 2 par entreprise, liste d'attente
   waitlistEnabled: true,
   showRemaining: true,

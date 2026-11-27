@@ -36,6 +36,8 @@ export type EventRecord = {
   venueDistrict: string;
   venueStatus: VenueStatus;
   capacity: number;
+  /** Places déjà retenues hors du site (téléphone, invitation directe…) */
+  directSeats: number;
   /** Inscriptions actives maximum par entreprise (0 = illimité) */
   maxPerCompany: number;
   waitlistEnabled: boolean;
@@ -81,6 +83,7 @@ export type RegistrationRecord = {
 
 export type EventStats = {
   confirmedSeats: number;
+  directSeats: number;
   waitlistSeats: number;
   remaining: number;
   registrations: number; // inscriptions actives (hors annulées)

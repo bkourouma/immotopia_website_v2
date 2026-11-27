@@ -31,7 +31,7 @@ const base = {
 const reg = (n: number, extra: Record<string, unknown> = {}) => ({ ...base, email: `p${n}@example.ci`, company: `Société ${n}`, ...extra });
 
 function seed(overrides: Record<string, unknown> = {}) {
-  const { event } = svc.upsertEventBySlug({ ...matinales, publicationStatus: "published", ...overrides }, true);
+  const { event } = svc.upsertEventBySlug({ ...matinales, directSeats: 0, publicationStatus: "published", ...overrides }, true);
   return event;
 }
 
@@ -51,9 +51,10 @@ describe("initialisation du premier événement", () => {
     assert.equal(svc.listAllEvents().length, 1);
   });
 
-  it("enregistre les valeurs attendues (30 places, 10 décembre 2026, lieu provisoire, brouillon)", () => {
+  it("enregistre les valeurs attendues (30 places, 10 inscrits directs, 10 décembre 2026, lieu provisoire, brouillon)", () => {
     const e = svc.upsertEventBySlug(matinales).event;
     assert.equal(e.capacity, 30);
+    assert.equal(e.directSeats, 10);
     assert.equal(e.venueStatus, "provisional");
     assert.equal(e.publicationStatus, "draft");
     assert.equal(time.formatDateFr(e.startsAt, e.timezone), "Jeudi 10 décembre 2026");
@@ -124,6 +125,18 @@ describe("inscription, capacité et doublons", () => {
     assert.equal(s.confirmedSeats, 30);
     assert.equal(s.remaining, 0);
     assert.equal(s.waitlistRegistrations, 1);
+  });
+
+  it("déduit les inscrits directs (30 - x - 10 = 16/30) et bascule en liste d'attente à 30 au total", () => {
+    const ev = seed({ directSeats: 10 });
+    for (let i = 1; i <= 4; i++) assert.equal(svc.registerForEvent(ev.slug, reg(i)).registration.status, "confirmed");
+    const s4 = svc.getStats(ev.id);
+    assert.equal(s4.confirmedSeats, 4);
+    assert.equal(s4.directSeats, 10);
+    assert.equal(s4.remaining, 16);
+    for (let i = 5; i <= 20; i++) assert.equal(svc.registerForEvent(ev.slug, reg(i)).registration.status, "confirmed");
+    assert.equal(svc.registerForEvent(ev.slug, reg(21)).registration.status, "waitlist");
+    assert.equal(svc.getStats(ev.id).remaining, 0);
   });
 
   it("n'accorde pas une réservation de 3 places quand il n'en reste qu'une", () => {

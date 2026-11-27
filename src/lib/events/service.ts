@@ -48,6 +48,7 @@ function toEvent(r: Row): EventRecord {
     venueDistrict: String(r.venue_district),
     venueStatus: r.venue_status as EventRecord["venueStatus"],
     capacity: Number(r.capacity),
+    directSeats: Number(r.direct_seats ?? 0),
     maxPerCompany: Number(r.max_per_company),
     waitlistEnabled: r.waitlist_enabled === 1,
     showRemaining: r.show_remaining === 1,
@@ -128,7 +129,8 @@ function seatSum(db: DatabaseSync, eventId: string, status: RegistrationStatus):
 
 export function getStats(eventId: string): EventStats {
   const db = getDb();
-  const ev = db.prepare("SELECT capacity FROM events WHERE id = ?").get(eventId) as { capacity: number } | undefined;
+  const ev = db.prepare("SELECT capacity, direct_seats FROM events WHERE id = ?").get(eventId) as { capacity: number; direct_seats: number } | undefined;
+  const directSeats = Number(ev?.direct_seats ?? 0);
   const confirmedSeats = seatSum(db, eventId, "confirmed");
   const waitlistSeats = seatSum(db, eventId, "waitlist");
   const count = (status: string) => Number((db.prepare("SELECT COUNT(*) AS n FROM event_registrations WHERE event_id = ? AND status = ?").get(eventId, status) as { n: number }).n);
@@ -142,8 +144,9 @@ export function getStats(eventId: string): EventStats {
   const waitlistRegistrations = count("waitlist");
   return {
     confirmedSeats,
+    directSeats,
     waitlistSeats,
-    remaining: Math.max(0, (ev?.capacity ?? 0) - confirmedSeats),
+    remaining: Math.max(0, (ev?.capacity ?? 0) - confirmedSeats - directSeats),
     registrations: confirmedRegistrations + waitlistRegistrations,
     confirmedRegistrations,
     waitlistRegistrations,
@@ -189,8 +192,8 @@ export function registerForEvent(slug: string, input: RegistrationInput, now = n
     const dup = db.prepare("SELECT 1 FROM event_registrations WHERE event_id = ? AND email = ? AND status <> 'cancelled'").get(event.id, input.email);
     if (dup) return { ok: false, code: "duplicate" } as const;
 
-    // Les places déjà promises (confirmées) + celles demandées ne doivent jamais dépasser la capacité.
-    const taken = seatSum(db, event.id, "confirmed");
+    // Les places déjà promises (confirmées sur le site + inscrites en direct) + celles demandées ne doivent jamais dépasser la capacité.
+    const taken = seatSum(db, event.id, "confirmed") + event.directSeats;
     // File d'attente « complet » existante : on ne la double pas (la file « entreprise » ne bloque personne d'autre)
     const queued = Number((db.prepare("SELECT COALESCE(SUM(seats),0) AS n FROM event_registrations WHERE event_id = ? AND status = 'waitlist' AND waitlist_reason = 'capacity'").get(event.id) as { n: number }).n);
     const fits = taken + input.seats <= event.capacity && !(event.waitlistEnabled && queued > 0);
@@ -282,8 +285,8 @@ export function confirmRegistration(id: string, force = false): ConfirmResult {
     const r = db.prepare("SELECT * FROM event_registrations WHERE id = ?").get(id);
     if (!r) return { ok: false, code: "not_found" } as const;
     if (r.status === "confirmed") return { ok: true, registration: toRegistration(db.prepare(`${REG_SELECT} WHERE r.id = ?`).get(id)!) } as const;
-    const ev = db.prepare("SELECT capacity FROM events WHERE id = ?").get(r.event_id) as { capacity: number };
-    if (!force && seatSum(db, String(r.event_id), "confirmed") + Number(r.seats) > ev.capacity) return { ok: false, code: "no_capacity" } as const;
+    const ev = db.prepare("SELECT capacity, direct_seats FROM events WHERE id = ?").get(r.event_id) as { capacity: number; direct_seats: number };
+    if (!force && seatSum(db, String(r.event_id), "confirmed") + Number(ev.direct_seats) + Number(r.seats) > ev.capacity) return { ok: false, code: "no_capacity" } as const;
     if (r.status === "cancelled") {
       const dup = db.prepare("SELECT 1 FROM event_registrations WHERE event_id = ? AND email = ? AND status <> 'cancelled' AND id <> ?").get(r.event_id, r.email, id);
       if (dup) return { ok: false, code: "duplicate" } as const;
@@ -317,18 +320,18 @@ export function exportPersonalData(email: string): unknown[] {
 
 // ---------- Administration des événements ----------
 
-export type EventInput = Omit<EventRecord, "id" | "createdAt" | "updatedAt">;
+export type EventInput = Omit<EventRecord, "id" | "createdAt" | "updatedAt" | "directSeats"> & { directSeats?: number };
 
 const COLS = [
   "slug", "title", "theme", "tagline", "description", "organizer", "solution", "starts_at", "ends_at", "timezone",
-  "venue_name", "venue_city", "venue_district", "venue_status", "capacity", "max_per_company", "waitlist_enabled", "show_remaining", "fee_label",
+  "venue_name", "venue_city", "venue_district", "venue_status", "capacity", "direct_seats", "max_per_company", "waitlist_enabled", "show_remaining", "fee_label",
   "publication_status", "registration_status", "cancelled", "image", "audience", "topics", "program", "practical_info", "promo", "retention_months",
 ] as const;
 
 function eventValues(e: EventInput): (string | number)[] {
   return [
     e.slug, e.title, e.theme, e.tagline, e.description, e.organizer, e.solution, e.startsAt, e.endsAt, e.timezone,
-    e.venueName, e.venueCity, e.venueDistrict, e.venueStatus, e.capacity, e.maxPerCompany, e.waitlistEnabled ? 1 : 0, e.showRemaining ? 1 : 0, e.feeLabel,
+    e.venueName, e.venueCity, e.venueDistrict, e.venueStatus, e.capacity, e.directSeats ?? 0, e.maxPerCompany, e.waitlistEnabled ? 1 : 0, e.showRemaining ? 1 : 0, e.feeLabel,
     e.publicationStatus, e.registrationStatus, e.cancelled ? 1 : 0, e.image, JSON.stringify(e.audience), JSON.stringify(e.topics), JSON.stringify(e.program), e.practicalInfo, JSON.stringify(e.promo), e.retentionMonths,
   ];
 }
@@ -355,7 +358,7 @@ export function upsertEventBySlug(input: EventInput, overwrite = false): { event
   return { event: updateEvent(existing.id, input)!, action: "updated" };
 }
 
-export function setEventFlag(id: string, patch: Partial<Pick<EventRecord, "publicationStatus" | "registrationStatus" | "cancelled" | "capacity" | "venueStatus">>): void {
+export function setEventFlag(id: string, patch: Partial<Pick<EventRecord, "publicationStatus" | "registrationStatus" | "cancelled" | "capacity" | "directSeats" | "venueStatus">>): void {
   const sets: string[] = [];
   const args: (string | number)[] = [];
   if (patch.publicationStatus) {
@@ -373,6 +376,10 @@ export function setEventFlag(id: string, patch: Partial<Pick<EventRecord, "publi
   if (patch.capacity !== undefined) {
     sets.push("capacity = ?");
     args.push(patch.capacity);
+  }
+  if (patch.directSeats !== undefined) {
+    sets.push("direct_seats = ?");
+    args.push(patch.directSeats);
   }
   if (patch.venueStatus) {
     sets.push("venue_status = ?");

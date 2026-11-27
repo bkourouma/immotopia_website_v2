@@ -83,11 +83,12 @@ export default async function AdminEvent({ params, searchParams }: { params: Pro
         <h2 id="tableau" className={`${h2} mt-10`}>Tableau de bord</h2>
         <div className={`${card} mt-3`}>
           <p className="text-xs font-medium uppercase tracking-wide text-ink-900/55">Remplissage</p>
-          <div className="mt-1"><Gauge value={stats.confirmedSeats} max={event.capacity} /></div>
+          <div className="mt-1"><Gauge value={stats.confirmedSeats + stats.directSeats} max={event.capacity} /></div>
         </div>
         <div className="mt-3 grid grid-cols-2 gap-3 md:grid-cols-4">
-          {tile("Inscrits (actifs)", stats.registrations)}
-          {tile("Places confirmées", `${stats.confirmedSeats} / ${event.capacity}`)}
+          {tile("Inscrits site (actifs)", stats.registrations)}
+          {tile("Places retenues", `${stats.confirmedSeats + stats.directSeats} / ${event.capacity}`)}
+          {tile("Inscrits directs", stats.directSeats)}
           {tile("Places disponibles", stats.remaining)}
           {tile("En attente (personnes)", stats.waitlistSeats)}
           {tile("Annulations", stats.cancelledRegistrations)}
@@ -99,6 +100,12 @@ export default async function AdminEvent({ params, searchParams }: { params: Pro
             <input type="hidden" name="id" value={id} />
             <input type="hidden" name="op" value="capacity" />
             <label className="text-sm font-medium">Capacité<input type="number" min={0} name="capacity" defaultValue={event.capacity} className={`${fieldInput} w-28`} /></label>
+            <button className={btnGhost}>Modifier</button>
+          </form>
+          <form action={quickEvent} className="flex items-end gap-2">
+            <input type="hidden" name="id" value={id} />
+            <input type="hidden" name="op" value="direct_seats" />
+            <label className="text-sm font-medium">Inscrits directs<input type="number" min={0} name="directSeats" defaultValue={event.directSeats} className={`${fieldInput} w-28`} /></label>
             <button className={btnGhost}>Modifier</button>
           </form>
           <p className="text-sm text-ink-900/70">
