@@ -170,7 +170,8 @@ export const landings: Landing[] = [
         a: "Oui. Journal, grand livre et balance sont consultables sur la période de votre choix, avec les écritures de la gestion locative (loyers, honoraires, dépenses et reversements), et exportables en CSV ou en Excel pour votre cabinet comptable.",
       },
     ],
-    related: ["paiement-loyer-charges-mobile-money-cote-divoire", "gestion-locative-vs-excel", "maintenance-immobiliere-ticketing-cote-divoire"],  },
+    related: ["paiement-loyer-charges-mobile-money-cote-divoire", "gestion-locative-vs-excel", "maintenance-immobiliere-ticketing-cote-divoire"],
+  },
   {
     slug: "logiciel-immobilier-cote-divoire",
     metaTitle: "Logiciel de gestion immobilière en Côte d'Ivoire | ImmoTopia",
