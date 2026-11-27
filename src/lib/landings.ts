@@ -981,7 +981,7 @@ export const landings: Landing[] = [
     eyebrow: "Gestion de patrimoine",
     h1: "Logiciel de gestion de patrimoine immobilier en Côte d'Ivoire",
     intro:
-      "Biens, baux, loyers, emprunts, travaux, assurances, titres de propriété : ImmoTopia réunit dans une seule application le suivi du patrimoine immobilier que vous détenez en propre. Il s'adresse aux propriétaires bailleurs, aux familles qui détiennent des biens en société civile immobilière (SCI) et à la diaspora ivoirienne qui suit ses biens depuis l'étranger.",
+      "Biens, baux, loyers, emprunts, travaux, assurances, titres de propriété : ImmoTopia réunit dans une seule application le suivi du patrimoine immobilier que vous détenez en propre. Il s'adresse aux propriétaires bailleurs, aux familles qui détiennent des biens en société civile immobilière (SCI) et à la diaspora ivoirienne qui suit ses biens depuis l'étranger. Voir les [tarifs des packs Patrimoine](/tarifs) ou [réservez une démonstration](/contact).",
     sections: [
       {
         title: "Les difficultés d'un patrimoine immobilier suivi sans outil",
@@ -1100,6 +1100,10 @@ export const landings: Landing[] = [
       {
         q: "Combien coûte le pack Patrimoine Essentiel ?",
         a: `${fcfa(patrimoineEssentiel.monthly)} HT par mois pour ${patrimoineEssentiel.included}. Chaque bloc de 10 biens détenus de plus coûte ${extBiens.price.fr} HT. Le premier mois est offert, sans engagement. Le pack Patrimoine Pro est à ${fcfa(patrimoinePro.monthly)} HT par mois pour ${patrimoinePro.included}. Voir les [tarifs](/tarifs).`,
+      },
+      {
+        q: "Le logiciel me prévient-il des échéances d'assurance et d'entretien ?",
+        a: "Oui : un rappel part par e-mail 30 jours avant la fin d'une police d'assurance, une échéance d'entretien ou la fin d'une garantie de travaux. Voir les [alertes d'assurance et d'entretien](/wiki/patrimoine-multi-actifs/alertes-assurance-et-entretien).",
       },
       {
         q: "Puis-je reprendre mes biens depuis un fichier Excel ?",
