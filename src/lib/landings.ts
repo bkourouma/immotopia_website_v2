@@ -157,6 +157,18 @@ export const landings: Landing[] = [
         q: "Les propriétaires et les locataires ont-ils accès à l'application ?",
         a: "Oui, par des portails dédiés où chacun consulte ses baux, échéances, paiements et documents. Le propriétaire y voit aussi son compte courant. Les comptes propriétaires et locataires ne sont pas facturés.",
       },
+      {
+        q: "Comment un logiciel de gestion locative gère-t-il les honoraires et les reversements aux propriétaires ?",
+        a: "Les honoraires de gestion se règlent à trois niveaux : le bail l'emporte sur le propriétaire, qui l'emporte sur l'agence, en pourcentage ou en forfait. Chaque propriétaire voit son compte courant dans son portail, et les reversements sont numérotés et plafonnés au solde dû. Voir les [baux](/wiki/gestion-locative/gestion-des-baux).",
+      },
+      {
+        q: "Que devient le bail en fin de contrat : révision, renouvellement, solde de tout compte ?",
+        a: "Le bail se renouvelle, se modifie par avenant ou se résilie depuis l'application, avec l'historique conservé. Une révision de loyer recalcule les échéances non réglées à partir du mois choisi, et le solde de tout compte estime la somme à rendre au locataire : dépôt détenu, arriérés et retenues de l'état des lieux de sortie.",
+      },
+      {
+        q: "La gestion locative s'exporte-t-elle vers la comptabilité ?",
+        a: "Oui. Journal, grand livre et balance sont consultables sur la période de votre choix, avec les écritures de la gestion locative (loyers, honoraires, dépenses et reversements), et exportables en CSV ou en Excel pour votre cabinet comptable.",
+      },
     ],
     related: ["paiement-loyer-charges-mobile-money-cote-divoire", "gestion-locative-vs-excel", "maintenance-immobiliere-ticketing-cote-divoire"],
   },
