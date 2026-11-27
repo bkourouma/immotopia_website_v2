@@ -1093,6 +1093,18 @@ export const landings: Landing[] = [
         q: "Puis-je reprendre mes biens depuis un fichier Excel ?",
         a: "Oui : un gabarit Excel guide l'import de vos biens et de leurs valorisations, avec un aperçu ligne par ligne avant enregistrement et un rapport final. Les baux et les locataires ne s'importent pas par cet écran.",
       },
+      {
+        q: "Que peut-on suivre dans un logiciel de gestion de patrimoine immobilier ?",
+        a: "Pour chaque bien : sa valeur et l'historique de ses estimations, son rendement brut, net et net-net, sa plus-value latente, ses emprunts, ses charges et dépenses, ses travaux, ses polices d'assurance, son carnet d'entretien et ses documents (titre de propriété, acte notarié, diagnostic). Un plan de trésorerie sur 12 ou 24 mois complète le suivi.",
+      },
+      {
+        q: "Serai-je prévenu des échéances d'assurance et d'entretien ?",
+        a: "Oui. Un rappel part par e-mail 30 jours avant la fin d'une police d'assurance, d'une échéance d'entretien ou d'une garantie de travaux. Une alerte par e-mail est aussi envoyée avant l'expiration d'un document patrimonial, et les étapes en retard d'un dossier de régularisation foncière sont relancées par e-mail.",
+      },
+      {
+        q: "Puis-je partager l'état de mon patrimoine avec un banquier ou un notaire ?",
+        a: "Oui. Une synthèse PDF ou un classeur Excel de tout le patrimoine immobilier, ou d'un seul bien, peut être téléchargé pour être partagé avec un banquier, un notaire ou un associé. Voir l'[export du patrimoine](/wiki/patrimoine-multi-actifs/export-du-patrimoine).",
+      },
     ],
     related: ["gestion-locative-cote-divoire", "logiciel-immobilier-cote-divoire", "tableaux-de-bord-kpi-immobilier-cote-divoire"],
   },
