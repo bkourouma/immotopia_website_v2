@@ -145,6 +145,18 @@ export const landings: Landing[] = [
         q: "Est-ce adapté à une petite agence ?",
         a: "Oui. Le pack Agence inclut 100 logements sous mandat, et le premier mois est offert, sans engagement.",
       },
+      {
+        q: "Comment suivre les loyers impayés et relancer les locataires ?",
+        a: "Chaque bail génère son échéancier, avec le statut et le reste à encaisser de chaque échéance. Les paiements partiels sont suivis, les pénalités de retard se calculent automatiquement (montant fixe ou pourcentage, avec période de grâce), et des rappels partent par e-mail et WhatsApp selon le consentement de chaque destinataire. WhatsApp est facturé à la consommation.",
+      },
+      {
+        q: "Peut-on utiliser le logiciel sur téléphone, sans rien installer ?",
+        a: "Oui. ImmoTopia s'utilise depuis un navigateur, sur ordinateur, tablette ou téléphone, et peut s'ajouter à l'écran d'accueil du téléphone. Il n'existe pas d'application dans les magasins d'applications.",
+      },
+      {
+        q: "Les propriétaires et les locataires ont-ils accès à l'application ?",
+        a: "Oui, par des portails dédiés où chacun consulte ses baux, échéances, paiements et documents. Le propriétaire y voit aussi son compte courant. Les comptes propriétaires et locataires ne sont pas facturés.",
+      },
     ],
     related: ["paiement-loyer-charges-mobile-money-cote-divoire", "gestion-locative-vs-excel", "maintenance-immobiliere-ticketing-cote-divoire"],
   },
