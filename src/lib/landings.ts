@@ -156,7 +156,7 @@ export const landings: Landing[] = [
     eyebrow: "ERP immobilier",
     h1: "Logiciel de gestion immobilière en Côte d'Ivoire : un ERP complet",
     intro:
-      "ImmoTopia est un logiciel de gestion immobilière en ligne, conçu à Abidjan pour les agences, gestionnaires, syndics et promoteurs. Un seul fichier de clients, un seul parc de biens, et chaque métier activé selon votre activité.",
+      "ImmoTopia est un logiciel de gestion immobilière en ligne, conçu à Abidjan pour les agences, gestionnaires, syndics et promoteurs. Un seul fichier de clients, un seul parc de biens, et chaque métier activé selon votre activité. Découvrez les [tarifs en FCFA](/tarifs) ou [contactez l'équipe](/contact).",
     sections: [
       {
         title: "Logiciel de gestion immobilière : ce que couvre ImmoTopia",
@@ -234,6 +234,8 @@ export const landings: Landing[] = [
       },
     ],
     faq: [
+      { q: "Que fait un logiciel de gestion immobilière en Côte d'Ivoire ?", a: "Il réunit dans une seule application les métiers de l'immobilier professionnel : CRM et transaction, annonces, [gestion locative](/gestion-locative-cote-divoire), [syndic de copropriété](/logiciel-syndic-copropriete-cote-divoire), [promotion](/logiciel-promoteur-immobilier-cote-divoire), patrimoine et maintenance. ImmoTopia, conçu à Abidjan, partage les mêmes contacts, biens et documents entre tous ces métiers, avec des prix en FCFA, le Mobile Money et WhatsApp." },
+      { q: "Quels professionnels utilisent un logiciel de gestion immobilière ?", a: "Les agences et administrateurs de biens (pack Agence), les syndics de copropriété (pack Syndic) et les promoteurs (pack Promoteur). Un groupe qui construit, vend, loue et gère peut choisir le pack Opérateur intégré. Voir les [tarifs](/tarifs)." },
       { q: "Faut-il installer quelque chose ?", a: "Non. ImmoTopia s'utilise depuis un navigateur, sur ordinateur, tablette ou téléphone, et peut aussi s'installer sur l'écran d'accueil du téléphone comme une application, sans passer par un magasin d'applications." },
       { q: "Combien coûte ImmoTopia ?", a: "Le pack Agence commence à 29 900 FCFA HT par mois et le pack Syndic à 49 900 FCFA HT. Le premier mois est offert, sans engagement. Le détail et un simulateur sont sur la page Tarifs." },
       { q: "Puis-je reprendre mes fichiers Excel ?", a: "Oui : la mise en route accompagnée comprend la reprise de vos biens, contacts, baux ou copropriétés. Elle est facultative si vous saisissez vous-même vos données." },
